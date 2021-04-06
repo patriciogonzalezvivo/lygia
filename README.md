@@ -20,7 +20,7 @@ Tire of reimplementing or researching the same shader functions I start building
 
 ```
 #ifndef SAMPLER_FNC
-#define SAMPLER_FNC(POS_UV) texture(tex,POS_UV).r
+#define SAMPLER_FNC(POS_UV) texture(tex,POS_UV)
 #endif
 ```
 
