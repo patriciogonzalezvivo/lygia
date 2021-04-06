@@ -2,6 +2,7 @@
 author: Jamie Owen
 description: Photoshop Add blend mode mplementations sourced from this article on https://mouaif.wordpress.com/2009/01/05/photoshop-math-with-glsl-shaders/
 use: blendAdd(<float|vec3> base, <float|vec3> blend [, <float> opacity])
+licence: TODO
 */
 
 #ifndef FNC_BLENDADD
