@@ -23,4 +23,4 @@ vec3 hueShift(in vec3 color, in float amount) {
 vec4 hueShift(in vec4 color, in float amount) {
     return vec4(hueShift(color.rgb, amount), color.a);
 }
-#endif
+#endif`

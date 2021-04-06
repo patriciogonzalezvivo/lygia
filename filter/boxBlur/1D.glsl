@@ -1,39 +1,40 @@
 /*
 author: Patricio Gonzalez Vivo
-description: convert from gamma to linear color space.
-use: gamma2linear(<float|vec3|vec4> color)
+description: simple one dimentional box blur, to be applied in two passes
+use: boxBlur1D(<sampler2D> texture, <vec2> st, <vec2> pixel_offset, <int> kernelSize)
+options:
+  BOXBLUR1D_TYPE: default is vec4
+  BOXBLUR1D_SAMPLER_FNC(POS_UV): default texture2D(tex, POS_UV)
+  BOXBLUR1D_KERNELSIZE: Use only for WebGL 1.0 and OpenGL ES 2.0 . For example RaspberryPis is not happy with dynamic loops. Default is 'kernelSize'
 license: |
   Copyright (c) 2017 Patricio Gonzalez Vivo.
   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
   The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
-
-#if !defined(TARGET_MOBILE) && !defined(GAMMA)
-#define GAMMA 2.2
+#ifndef BOXBLUR1D_TYPE
+#define BOXBLUR1D_TYPE vec4
 #endif
 
-#ifndef FNC_GAMMA2LINEAR
-#define FNC_GAMMA2LINEAR
-float gamma2linear(in float v) {
-#ifdef GAMMA
-  return pow(v, GAMMA);
-#else
-  // assume gamma 2.0
-  return v * v;
+#ifndef BOXBLUR1D_SAMPLER_FNC
+#define BOXBLUR1D_SAMPLER_FNC(POS_UV) texture2D(tex, POS_UV)
 #endif
-}
 
-vec3 gamma2linear(in vec3 v) {
-#ifdef GAMMA
-  return pow(v, vec3(GAMMA));
-#else
-  // assume gamma 2.0
-  return v * v;
-#endif
-}
+#ifndef FNC_BOXBLUR1D
+#define FNC_BOXBLUR1D
+BOXBLUR1D_TYPE boxBlur1D(in sampler2D tex, in vec2 st, in vec2 offset, const int kernelSize) {
+  BOXBLUR1D_TYPE color = BOXBLUR1D_TYPE(0.);
+  #ifndef BOXBLUR1D_KERNELSIZE
+  #define BOXBLUR1D_KERNELSIZE kernelSize
+  #endif
 
-vec4 gamma2linear(in vec4 v) {
-  return vec4(gamma2linear(v.rgb), v.a);
+  float f_kernelSize = float(BOXBLUR1D_KERNELSIZE);
+  float weight = 1. / f_kernelSize;
+
+  for (int i = 0; i < BOXBLUR1D_KERNELSIZE; i++) {
+    float x = -.5 * (f_kernelSize - 1.) + float(i);
+    color += BOXBLUR1D_SAMPLER_FNC(st + offset * x ) * weight;
+  }
+  return color;
 }
 #endif
