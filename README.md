@@ -1,4 +1,4 @@
-# SLIB: a flexible shader library of common operations 
+# SLIB: a flexible shader library of common functions 
 
 Tire of reimplementing or researching the same shader functions I start building my own shader library. This library have build over the years of my profesional carreer and is building on top of the work people smarter than me. I have tried to give according credits and correct license to each file. It's not perfect but it could be, please if you see something odd let me know.
 
