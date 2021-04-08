@@ -10,6 +10,10 @@ license: |
 
 #ifndef FNC_FADE
 #define FNC_FADE
+float fade(in float t) {
+  return t * t * t * (t * (t * 6. - 15.) + 10.);
+}
+
 float2 fade(in float2 t) {
   return t * t * t * (t * (t * 6. - 15.) + 10.);
 }

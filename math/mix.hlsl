@@ -1,7 +1,7 @@
 /*
 author: Patricio Gonzalez Vivo
 description: expands mix to linearly mix more than two values
-use: mix(<float|vec2|vec3|vec4> a, <float|vec2|vec3|vec4> b, <float|vec2|vec3|vec4> c [, <float|vec2|vec3|vec4> d], <float> pct)
+use: mix(<float|float2|float3|float4> a, <float|float2|float3|float4> b, <float|float2|float3|float4> c [, <float|float2|float3|float4> d], <float> pct)
 license: |
   Copyright (c) 2017 Patricio Gonzalez Vivo.
   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
@@ -11,6 +11,8 @@ license: |
 
 #ifndef FNC_MIX
 #define FNC_MIX
+#define mix(a, b, c) lerp(a, b, c)
+
 float mix(float a , float b, float c, float pct) {
      return mix(
          mix(a, b, 2. * pct),
@@ -19,7 +21,7 @@ float mix(float a , float b, float c, float pct) {
      );
 }
 
-vec2 mix(vec2 a , vec2 b, vec2 c, float pct) {
+float2 mix(float2 a , float2 b, float2 c, float pct) {
      return mix(
          mix(a, b, 2. * pct),
          mix(b, c, 2. * (max(pct, .5) - .5)),
@@ -27,7 +29,7 @@ vec2 mix(vec2 a , vec2 b, vec2 c, float pct) {
      );
 }
 
-vec2 mix(vec2 a , vec2 b, vec2 c, vec2 pct) {
+float2 mix(float2 a , float2 b, float2 c, float2 pct) {
      return mix(
          mix(a, b, 2. * pct),
          mix(b, c, 2. * (max(pct, .5) - .5)),
@@ -35,7 +37,7 @@ vec2 mix(vec2 a , vec2 b, vec2 c, vec2 pct) {
      );
 }
 
-vec3 mix(vec3 a , vec3 b, vec3 c, float pct) {
+float3 mix(float3 a , float3 b, float3 c, float pct) {
      return mix(
          mix(a, b, 2. * pct),
          mix(b, c, 2. * (max(pct, .5) - .5)),
@@ -43,7 +45,7 @@ vec3 mix(vec3 a , vec3 b, vec3 c, float pct) {
      );
 }
 
-vec3 mix(vec3 a , vec3 b, vec3 c, vec3 pct) {
+float3 mix(float3 a , float3 b, float3 c, float3 pct) {
      return mix(
          mix(a, b, 2. * pct),
          mix(b, c, 2. * (max(pct, .5) - .5)),
@@ -51,7 +53,7 @@ vec3 mix(vec3 a , vec3 b, vec3 c, vec3 pct) {
      );
 }
 
-vec4 mix(vec4 a , vec4 b, vec4 c, float pct) {
+float4 mix(float4 a , float4 b, float4 c, float pct) {
      return mix(
          mix(a, b, 2. * pct),
          mix(b, c, 2. * (max(pct, .5) - .5)),
@@ -59,7 +61,7 @@ vec4 mix(vec4 a , vec4 b, vec4 c, float pct) {
      );
 }
 
-vec4 mix(vec4 a , vec4 b, vec4 c, vec4 pct) {
+float4 mix(float4 a , float4 b, float4 c, float4 pct) {
      return mix(
          mix(a, b, 2. * pct),
          mix(b, c, 2. * (max(pct, .5) - .5)),
@@ -80,7 +82,7 @@ float mix(in float a , in float b, in float c, in float d, in float pct) {
      );
 }
 
-vec2 mix(in vec2 a , in vec2 b, in vec2 c, in vec2 d, in float pct) {
+float2 mix(in float2 a , in float2 b, in float2 c, in float2 d, in float pct) {
      return mix(
          mix(a, b, 3. * pct),
          mix(b,
@@ -93,7 +95,7 @@ vec2 mix(in vec2 a , in vec2 b, in vec2 c, in vec2 d, in float pct) {
      );
 }
 
-vec2 mix(in vec2 a , in vec2 b, in vec2 c, in vec2 d, in vec2 pct) {
+float2 mix(in float2 a , in float2 b, in float2 c, in float2 d, in float2 pct) {
      return mix(
          mix(a, b, 3. * pct),
          mix(b,
@@ -106,7 +108,7 @@ vec2 mix(in vec2 a , in vec2 b, in vec2 c, in vec2 d, in vec2 pct) {
      );
 }
 
-vec3 mix(in vec3 a , in vec3 b, in vec3 c, in vec3 d, in float pct) {
+float3 mix(in float3 a , in float3 b, in float3 c, in float3 d, in float pct) {
      return mix(
          mix(a, b, 3. * pct),
          mix(b,
@@ -119,7 +121,7 @@ vec3 mix(in vec3 a , in vec3 b, in vec3 c, in vec3 d, in float pct) {
      );
 }
 
-vec3 mix(in vec3 a , in vec3 b, in vec3 c, in vec3 d, in vec3 pct) {
+float3 mix(in float3 a , in float3 b, in float3 c, in float3 d, in float3 pct) {
      return mix(
          mix(a, b, 3. * pct),
          mix(b,
@@ -132,7 +134,7 @@ vec3 mix(in vec3 a , in vec3 b, in vec3 c, in vec3 d, in vec3 pct) {
      );
 }
 
-vec4 mix(in vec4 a , in vec4 b, in vec4 c, in vec4 d, in float pct) {
+float4 mix(in float4 a , in float4 b, in float4 c, in float4 d, in float pct) {
      return mix(
          mix(a, b, 3. * pct),
          mix(b,
@@ -145,7 +147,7 @@ vec4 mix(in vec4 a , in vec4 b, in vec4 c, in vec4 d, in float pct) {
      );
 }
 
-vec4 mix(in vec4 a , in vec4 b, in vec4 c, in vec4 d, in vec4 pct) {
+float4 mix(in float4 a , in float4 b, in float4 c, in float4 d, in float4 pct) {
      return mix(
          mix(a, b, 3. * pct),
          mix(b,
