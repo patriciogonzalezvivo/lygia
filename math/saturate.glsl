@@ -11,5 +11,5 @@ license: |
 
 #ifndef FNC_SATURATE
 #define FNC_SATURATE
-#define saturate(x)        clamp(x, 0.0, 1.0)
+#define saturate(x) clamp(x, 0.0, 1.0)
 #endif
