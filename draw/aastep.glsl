@@ -17,16 +17,15 @@ license: |
 #extension GL_OES_standard_derivatives : enable
 #endif
 
-#ifndef AA_EDGE
-#define AA_EDGE .007
-#endif
-
 float aastep(float threshold, float value) {
     #ifdef GL_OES_standard_derivatives
     float afwidth = 0.7 * length(vec2(dFdx(value), dFdy(value)));
-    #else
-    float afwidth = AA_EDGE;
-    #endif
     return smoothstep(threshold-afwidth, threshold+afwidth, value);
+    #elif defined(AA_EDGE)
+    float afwidth = AA_EDGE;
+    return smoothstep(threshold-afwidth, threshold+afwidth, value);
+    #else 
+    return step(threshold, value);
+    #endif
 }
 #endif
