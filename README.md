@@ -1,4 +1,6 @@
-# SLIB: The Shader Library  
+![](https://artpil.com/wp-content/uploads/Lygia-Clark-banner.jpg)
+
+# Lygia: multi-language shader library
 
 Tire of reimplementing and searching for the same functions over and over, started compiling and building a shader library. It's very granular, with interdependencies, designed for reusability, performance and flexibility. 
 
