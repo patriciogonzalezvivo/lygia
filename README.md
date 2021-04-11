@@ -13,6 +13,7 @@ This library:
 * Relays on `#include "file"` which is defined by Khornos GLSL standard and suported by most engines and enviroments. It follows a tipical C-like pre-compiler MACRO which is easy to implement with simple string operations to resolve dependencies. Probably the most important thing to solve while implementing is avoiding dependency loops, and if it's possible prevent duplication. If you need some example code of how to resolve this in:
     * C++: https://github.com/patriciogonzalezvivo/glslViewer/blob/master/src/io/fs.cpp#L104
     * Python: https://gist.github.com/patriciogonzalezvivo/9a50569c2ef9b08058706443a39d838e
+    * JS: https://github.com/actarian/vscode-glsl-canvas/blob/91ff09bf6cec35e73d1b64e50b56ef3299d2fe6b/src/glsl/export.ts#L351
 
 * it's very granular. One file, one function. Ex: `myFunc.glsl` contains `myFunct()`.
 
