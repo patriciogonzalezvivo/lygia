@@ -19,7 +19,7 @@ This library:
 
 * There are some files that just include a collection of files inside a folder with the same name. For example:
 
-```
+```glsl
 color/blend.glsl
 // which includes
 color/blend/*.glsl
@@ -27,14 +27,14 @@ color/blend/*.glsl
 
 * It's multi language. Right now most of it is on GLSL (`*.glsl`) but the goal is to have duplicate files for HLSL (`*.hlsl`) and Metal (`*.metal`).
 
-```
+```glsl
 math/mix.glsl
 math/mix.hlsl
 ```
 
 * Have embedded description, use, authorship and license in YAML style so eventually could be parsed easily. If you add new functions please use this template:
 
-```
+```glsl
 /*
 author: <FULL NAME>
 description: [DESCRIPTION + URL]
@@ -50,7 +50,7 @@ license: |
 
 * Check for name collisions using the following pattern where `FNC_` is followed with the function name:
 
-```
+```glsl
 #ifndef FNC_MYFUNC
 #define FNC_MYFUNC
 
@@ -63,7 +63,7 @@ float myFunc(float in) {
 
 * If the function have dependencies to other files, add them on the first lines of the file, before the authorship/description/license header and outside the `#ifndef` flag check. So once pre-compiled things are use/description/license are cristal clear and nicelly separated.
 
-```
+```glsl
 #include "../this/other/function.glsl"
 
 /*
@@ -77,7 +77,7 @@ author: <FULL NAME>
 
 * Have some templeting capabilities also through `#defines` probably the most frequent one is templeting the sampling function for reusability. The `#define` options start with the name of the function, in this example `MYFUNC_`. They are added as `options:` in the header.
  
-```
+```glsl
 /*
 author: <FULL NAME>
 description: [DESCRIPTION + URL]
@@ -108,7 +108,7 @@ MYFUNC_TYPE myFunc(sampler2D tex, vec2 st) {
 
 * Utilize function overloading. For that please sort your arguments accordingly so it default gracefully. When it's possible sort them in the following order: `sampler2D, mat4, mat3, mat2, vec4, vec3, vec2, float, ivec4, ivec3, ivec2, int, bool`
 
-```
+```glsl
 /*
 author: <FULL NAME>
 description: [DESCRIPTION + URL]
