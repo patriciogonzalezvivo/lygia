@@ -66,6 +66,7 @@ There are some functions that are "templeted" using `#defines`. You can change h
 void main(void) {
 
     ...
+    
     vec2 pixel = 1./u_resolution;
     color = gaussianBlur(u_tex0, uv, pixel, 9);
 
