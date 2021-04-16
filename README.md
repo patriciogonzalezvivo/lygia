@@ -1,33 +1,45 @@
 ![](https://artpil.com/wp-content/uploads/Lygia-Clark-banner.jpg)
 
-# Lygia: multi-language shader library
+# Lygia: a multi-language shader library
 
 Tire of reimplementing and searching for the same functions over and over, started compiling and building a shader library of reusable assets (mostly functions) that can be include over and over. It's very granular, designed for reusability, performance and flexibility. 
 
 ## How it works?
 
-You just include the functions you need:
+1. Clone this repository on your project. Where your shaders are.
 
+```bash
+git clone https://github.com/patriciogonzalezvivo/lygia.git
 ```
-#include "lygia/space/ratio.glsl"
-#include "lygia/draw/fill.glsl"
-#include "lygia/draw/stroke.glsl"
-#include "lygia/sdf/circleSDF.glsl"
-#include "lygia/sdf/triSDF.glsl"
-#include "lygia/sdf/flowerSDF.glsl"
+
+2. On your shader `#include` the functions you need:
+
+```glsl
+#ifdef GL_ES
+precision mediump float;
+#endif
+
+uniform vec2    u_resolution;
+uniform float   u_time;
+
+#include "space/ratio.glsl"
+#include "math/decimation.glsl"
+#include "draw/circle.glsl"
 
 void main(void) {
     vec3 color = vec3(0.0);
     vec2 st = gl_FragCoord.xy/u_resolution.xy;
     st = ratio(st, u_resolution);
     
-    color += stroke(circleSDF(st),.9,.1);
-    color += fill(flowerSDF(st.yx,3),.2);
-    color -= fill(triSDF(vec2(st.x,.98-st.y)),.15);
+    color = vec3(st.x,st.y,abs(sin(u_time)));
+    color = decimation(color, 20.);
+    color += circle(st, .5, .1);
     
     gl_FragColor = vec4(color, 1.0);
 }
 ```
+
+## How it's organized?
 
 The functions are divided in different categories:
 
@@ -43,18 +55,19 @@ The functions are divided in different categories:
 * `draw/`: functions that draw shapes, numbers, lines, etc. Most of them ported from [PixelSpiritDeck](https://patriciogonzalezvivo.github.io/PixelSpiritDeck/)
 * `filters/`: typical filter operations like different kind of blurs, mean and median filters.
 
+## Flexible how?
 
 There are some functions that are "templeted" using `#defines`. You can change how it behaves by defining a keyword before including it. For examples, [gaussian blurs](filter/gaussianBlur.glsl) usually are done in two passes (and it defaults), but let's say you are in a rush you can specify to use 
 
-```
+```glsl
 #define GAUSSIANBLUR_2D
 #include "filter/gaussianBlur.glsl"
 
 void main(void) {
 
     ...
-
-    color = gaussianBlur(u_tex0, uv, 1./u_resolution, 9);
+    vec2 pixel = 1./u_resolution;
+    color = gaussianBlur(u_tex0, uv, pixel, 9);
 
     ...
 }
@@ -72,7 +85,7 @@ Lygia is open sourced under the terms of the [BSD license](LICENSE). You are fre
 
 This library:
 
-* Relays on `#include "file"` which is defined by Khornos GLSL standard and suported by most engines and enviroments. It follows a tipical C-like pre-compiler MACRO which is easy to implement with simple string operations to resolve dependencies. Probably the most important thing to solve while implementing is avoiding dependency loops, and if it's possible prevent duplication. If you need some example code of how to resolve this in:
+* Relays on `#include "file"` which is defined by Khornos GLSL standard and suported by most engines and enviroments ( like [glslViewer](https://github.com/patriciogonzalezvivo/glslViewer/wiki/Compiling), [glsl-canvas VS Code pluging](https://marketplace.visualstudio.com/items?itemName=circledev.glsl-canvas), Unity, etc. ). It requires a tipical C-like pre-compiler MACRO which is easy to implement with just basic string operations to resolve dependencies. Here you can find some implementations on different languages:
     * C++: https://github.com/patriciogonzalezvivo/glslViewer/blob/master/src/io/fs.cpp#L104
     * Python: https://gist.github.com/patriciogonzalezvivo/9a50569c2ef9b08058706443a39d838e
     * JS: https://github.com/actarian/vscode-glsl-canvas/blob/91ff09bf6cec35e73d1b64e50b56ef3299d2fe6b/src/glsl/export.ts#L351
