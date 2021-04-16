@@ -2,11 +2,73 @@
 
 # Lygia: multi-language shader library
 
-Tire of reimplementing and searching for the same functions over and over, started compiling and building a shader library. It's very granular, with interdependencies, designed for reusability, performance and flexibility. 
+Tire of reimplementing and searching for the same functions over and over, started compiling and building a shader library of reusable assets (mostly functions) that can be include over and over. It's very granular, designed for reusability, performance and flexibility. 
 
-This library have build over years, most often than not on top of the work of smarter people. Tried to give according credits and correct license to each file. It's not perfect but it could be with your help! Please if you see something odd or missing sumit a PR.
+## How it works?
 
-## Principles
+You just include the functions you need:
+
+```
+#include "lygia/space/ratio.glsl"
+#include "lygia/draw/fill.glsl"
+#include "lygia/draw/stroke.glsl"
+#include "lygia/sdf/circleSDF.glsl"
+#include "lygia/sdf/triSDF.glsl"
+#include "lygia/sdf/flowerSDF.glsl"
+
+void main(void) {
+    vec3 color = vec3(0.0);
+    vec2 st = gl_FragCoord.xy/u_resolution.xy;
+    st = ratio(st, u_resolution);
+    
+    color += stroke(circleSDF(st),.9,.1);
+    color += fill(flowerSDF(st.yx,3),.2);
+    color -= fill(triSDF(vec2(st.x,.98-st.y)),.15);
+    
+    gl_FragColor = vec4(color, 1.0);
+}
+```
+
+The functions are divided in different categories:
+
+* `math/`: general math functions and constants. 
+* `space/`: general spatial operations like `scale()`, `rotate()`, etc.
+* `color/`: general color operations like `luma()`, `saturation()`, etc.
+    * `blend/`: typical blend photoshop operations
+    * `space/`: color space conversions 
+* `animation/`: animation operations
+    * `easing/`: easing functions
+* `generative/`: generative functions like `random()`, `noise()`, etc. 
+* `sdf/`: signed distance field generation functions. Most of them ported from [PixelSpiritDeck](https://patriciogonzalezvivo.github.io/PixelSpiritDeck/)
+* `draw/`: functions that draw shapes, numbers, lines, etc. Most of them ported from [PixelSpiritDeck](https://patriciogonzalezvivo.github.io/PixelSpiritDeck/)
+* `filters/`: typical filter operations like different kind of blurs, mean and median filters.
+
+
+There are some functions that are "templeted" using `#defines`. You can change how it behaves by defining a keyword before including it. For examples, [gaussian blurs](filter/gaussianBlur.glsl) usually are done in two passes (and it defaults), but let's say you are in a rush you can specify to use 
+
+```
+#define GAUSSIANBLUR_2D
+#include "filter/gaussianBlur.glsl"
+
+void main(void) {
+
+    ...
+
+    color = gaussianBlur(u_tex0, uv, 1./u_resolution, 9);
+
+    ...
+}
+```
+
+# Acknowledgements
+
+This library have been build over years, and most often than not on top of the work of brillant generous people like: [Inigo Quiles](https://www.iquilezles.org/), [Morgan McGuire](https://casual-effects.com/), [Hugh Kennedy](https://github.com/hughsk), [Matt DesLauriers](https://www.mattdesl.com/).
+I have tried to give according credits and correct license to each file. It's not perfect but it could be with your help! Please if you see something, say somthing.
+
+Lygia is open sourced under the terms of the [BSD license](LICENSE). You are free to use it, extend it and redistribute without charge, but I really appreciate if you can support improving it. That could be adding new functions, testing it, fixing bugs, translating the GLSL files to HLSL and Metal or just [sponsoring me through GitHub](https://github.com/sponsors/patriciogonzalezvivo) to do it for you.  
+
+
+# Design Principles
 
 This library:
 
