@@ -25,14 +25,14 @@ license: |
 vec3 normalMap(sampler2D tex, vec2 st, vec2 pixel) {
   float center = NORMALMAP_SAMPLER_FNC(st);
 
-  float topLeft	= NORMALMAP_SAMPLER_FNC(st - pixel);
+  float topLeft    = NORMALMAP_SAMPLER_FNC(st - pixel);
 
   float left = NORMALMAP_SAMPLER_FNC(st - vec2(pixel.x, .0));
   float bottomLeft = NORMALMAP_SAMPLER_FNC(st + vec2(-pixel.x, pixel.y));
-  float top	= NORMALMAP_SAMPLER_FNC(st - vec2(.0, pixel.y));
+  float top    = NORMALMAP_SAMPLER_FNC(st - vec2(.0, pixel.y));
   float bottom = NORMALMAP_SAMPLER_FNC(st + vec2(.0, pixel.y));
   float topRight = NORMALMAP_SAMPLER_FNC(st + vec2(pixel.x, -pixel.y));
-  float right	= NORMALMAP_SAMPLER_FNC(st + vec2(pixel.x, .0));
+  float right    = NORMALMAP_SAMPLER_FNC(st + vec2(pixel.x, .0));
   float bottomRight = NORMALMAP_SAMPLER_FNC(st + pixel);
   
   float dX = topRight + 2. * right + bottomRight - topLeft - 2. * left - bottomLeft;

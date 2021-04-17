@@ -1,7 +1,7 @@
 /*
 author: Jamie Owen
 description: Photoshop Soft Light blend mode mplementations sourced from this article on https://mouaif.wordpress.com/2009/01/05/photoshop-math-with-glsl-shaders/
-use: blendSubtract(<float|vec3> base, <float|vec3> blend [, <float> opacity])
+use: blendSubtract(<float|float3> base, <float|float3> blend [, <float> opacity])
 licence: TODO
 */
 
@@ -11,11 +11,11 @@ float blendSubtract(in float base, in float blend) {
     return max(base + blend - 1., 0.);
 }
 
-vec3 blendSubtract(in vec3 base, in vec3 blend) {
-    return max(base + blend - vec3(1.), vec3(0.));
+float3 blendSubtract(in float3 base, in float3 blend) {
+    return max(base + blend - float3(1., 1., 1.), float3(0., 0., 0.));
 }
 
-vec3 blendSubtract(in vec3 base, in vec3 blend, in float opacity) {
+float3 blendSubtract(in float3 base, in float3 blend, in float opacity) {
     return (blendSubtract(base, blend) * opacity + base * (1. - opacity));
 }
 #endif

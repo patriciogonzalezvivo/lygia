@@ -4,7 +4,7 @@
 /*
 author: Jamie Owen
 description: Photoshop Vivid Light blend mode mplementations sourced from this article on https://mouaif.wordpress.com/2009/01/05/photoshop-math-with-glsl-shaders/
-use: blendVividLight(<float|vec3> base, <float|vec3> blend [, <float> opacity])
+use: blendVividLight(<float|float3> base, <float|float3> blend [, <float> opacity])
 licence: TODO
 */
 
@@ -14,13 +14,13 @@ float blendVividLight(in float base, in float blend) {
     return (blend < .5)? blendColorBurn(base, (2.*blend)): blendColorDodge(base, (2. * (blend - .5)));
 }
 
-vec3 blendVividLight(in vec3 base, in vec3 blend) {
-    return vec3(blendVividLight(base.r, blend.r),
-                            blendVividLight(base.g, blend.g),
-                            blendVividLight(base.b, blend.b));
+float3 blendVividLight(in float3 base, in float3 blend) {
+    return float3(  blendVividLight(base.r, blend.r),
+                    blendVividLight(base.g, blend.g),
+                    blendVividLight(base.b, blend.b) );
 }
 
-vec3 blendVividLight(in vec3 base, in vec3 blend, in float opacity) {
+float3 blendVividLight(in float3 base, in float3 blend, in float opacity) {
     return (blendVividLight(base, blend) * opacity + base * (1. - opacity));
 }
 #endif

@@ -39,7 +39,7 @@ float4 noised( in float3 x ) {
     float k6 =  a - b - e + f;
     float k7 = -a + b + c - d + e - f - g + h;
 
-    return float4(	-1.0 + 2.0 * (k0 + k1*u.x + k2*u.y + k3*u.z + k4*u.x*u.y + k5*u.y*u.z + k6*u.z*u.x + k7*u.x*u.y*u.z), 
+    return float4(    -1.0 + 2.0 * (k0 + k1*u.x + k2*u.y + k3*u.z + k4*u.x*u.y + k5*u.y*u.z + k6*u.z*u.x + k7*u.x*u.y*u.z), 
                     2.0* du * float3( k1 + k4*u.y + k6*u.z + k7*u.y*u.z,
                                       k2 + k5*u.z + k4*u.x + k7*u.z*u.x,
                                       k3 + k6*u.x + k5*u.y + k7*u.x*u.y ) );

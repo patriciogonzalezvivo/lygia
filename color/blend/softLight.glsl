@@ -8,11 +8,11 @@ licence: TODO
 #ifndef FNC_BLENDSOFTLIGHT
 #define FNC_BLENDSOFTLIGHT
 float blendSoftLight(in float base, in float blend) {
-	return (blend < .5)? (2. * base * blend + base * base * (1. - 2.*blend)): (sqrt(base) * (2. * blend - 1.) + 2. * base * (1. - blend));
+    return (blend < .5)? (2. * base * blend + base * base * (1. - 2.*blend)): (sqrt(base) * (2. * blend - 1.) + 2. * base * (1. - blend));
 }
 
 vec3 blendSoftLight(in vec3 base, in vec3 blend) {
-	return vec3(blendSoftLight(base.r, blend.r),
+    return vec3(blendSoftLight(base.r, blend.r),
                 blendSoftLight(base.g, blend.g),
                 blendSoftLight(base.b, blend.b));
 }
@@ -26,6 +26,6 @@ vec4 blendSoftLight(in vec4 base, in vec4 blend) {
 }
 
 vec3 blendSoftLight(in vec3 base, in vec3 blend, in float opacity) {
-	return (blendSoftLight(base, blend) * opacity + base * (1. - opacity));
+    return (blendSoftLight(base, blend) * opacity + base * (1. - opacity));
 }
 #endif

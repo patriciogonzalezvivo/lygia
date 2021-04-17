@@ -1,7 +1,7 @@
 /*
 author: Jamie Owen
 description: Photoshop Exclusion blend mode mplementations sourced from this article on https://mouaif.wordpress.com/2009/01/05/photoshop-math-with-glsl-shaders/
-use: blendExclusion(<float|vec3> base, <float|vec3> blend [, <float> opacity])
+use: blendExclusion(<float|float3> base, <float|float3> blend [, <float> opacity])
 licence: TODO
 */
 
@@ -11,11 +11,11 @@ float blendExclusion(in float base, in float blend) {
     return base + blend - 2. * base * blend;
 }
 
-vec3 blendExclusion(in vec3 base, in vec3 blend) {
+float3 blendExclusion(in float3 base, in float3 blend) {
     return base + blend - 2. * base * blend;
 }
 
-vec3 blendExclusion(in vec3 base, in vec3 blend, in float opacity) {
+float3 blendExclusion(in float3 base, in float3 blend, in float opacity) {
     return (blendExclusion(base, blend) * opacity + base * (1. - opacity));
 }
 #endif

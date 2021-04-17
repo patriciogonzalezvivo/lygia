@@ -3,7 +3,7 @@
 /*
 author: Jamie Owen
 description: Photoshop HardLight blend mode mplementations sourced from this article on https://mouaif.wordpress.com/2009/01/05/photoshop-math-with-glsl-shaders/
-use: blendHardLight(<float|vec3> base, <float|vec3> blend [, <float> opacity])
+use: blendHardLight(<float|float3> base, <float|float3> blend [, <float> opacity])
 licence: TODO
 */
 
@@ -13,11 +13,11 @@ float blendHardLight(in float base, in float blend) {
     return blendOverlay(blend, base);
 }
 
-vec3 blendHardLight(in vec3 base, in vec3 blend) {
+float3 blendHardLight(in float3 base, in float3 blend) {
     return blendOverlay(blend, base);
 }
 
-vec3 blendHardLight(in vec3 base, in vec3 blend, in float opacity) {
+float3 blendHardLight(in float3 base, in float3 blend, in float opacity) {
     return (blendHardLight(base, blend) * opacity + base * (1. - opacity));
 }
 #endif
