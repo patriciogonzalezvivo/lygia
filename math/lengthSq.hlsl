@@ -1,7 +1,7 @@
 /*
 author: Patricio Gonzalez Vivo
 description: Squared length
-use: lengthSq(<vec2|float2> st)
+use: lengthSq(<float2|float3> st)
 license: |
   Copyright (c) 2017 Patricio Gonzalez Vivo.
   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
@@ -12,11 +12,11 @@ license: |
 
 #ifndef FNC_LENGTHSQ
 #define FNC_LENGTHSQ
-float lengthSq(in vec2 st) {
+float lengthSq(in float2 st) {
     return dot(st, st);
 }
 
-float lengthSq(in vec3 pos) {
+float lengthSq(in float3 pos) {
     return dot(pos, pos);
 }
 #endif
