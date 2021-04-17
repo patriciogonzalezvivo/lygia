@@ -1,7 +1,7 @@
 /*
 author: Patricio Gonzalez Vivo
 description: Returns a circle-shaped SDF.
-use: circleSDF(vec2 st[, vec2 center])
+use: circleSDF(float2 st[, float2 center])
 options:
   CIRCLESDF_FNC(POS_UV) : function used to calculate the SDF, defaults to GLSL length function, use lengthSq for a different slope
 license: |
@@ -17,12 +17,12 @@ license: |
 #ifndef FNC_CIRCLESDF
 #define FNC_CIRCLESDF
 
-float circleSDF(in vec2 st, in vec2 center) {
+float circleSDF(in float2 st, in float2 center) {
     return CIRCLESDF_FNC(st - center) * 2.;
 }
 
-float circleSDF(in vec2 st) {
-    return circleSDF(st, vec2(.5));
+float circleSDF(in float2 st) {
+    return circleSDF(st, float2(.5));
 }
 
 #endif
