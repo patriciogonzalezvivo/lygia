@@ -1,7 +1,7 @@
 /*
 author: Jamie Owen
 description: Photoshop Screen blend mode mplementations sourced from this article on https://mouaif.wordpress.com/2009/01/05/photoshop-math-with-glsl-shaders/
-use: blendScreen(<float|vec3> base, <float|vec3> blend [, <float> opacity])
+use: blendScreen(<float|float3> base, <float|float3> blend [, <float> opacity])
 licence: TODO
 */
 
@@ -11,13 +11,13 @@ float blendScreen(in float base, in float blend) {
     return 1. - ((1. - base) * (1. - blend));
 }
 
-vec3 blendScreen(in vec3 base, in vec3 blend) {
-    return vec3(blendScreen(base.r, blend.r),
-                blendScreen(base.g, blend.g),
-                blendScreen(base.b, blend.b));
+float3 blendScreen(in float3 base, in float3 blend) {
+    return float3(  blendScreen(base.r, blend.r),
+                    blendScreen(base.g, blend.g),
+                    blendScreen(base.b, blend.b) );
 }
 
-vec3 blendScreen(in vec3 base, in vec3 blend, float opacity) {
+float3 blendScreen(in float3 base, in float3 blend, float opacity) {
     return (blendScreen(base, blend) * opacity + base * (1. - opacity));
 }
 #endif

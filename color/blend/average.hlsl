@@ -1,7 +1,7 @@
 /*
 author: Jamie Owen
 description: Photoshop Average blend mode mplementations sourced from this article on https://mouaif.wordpress.com/2009/01/05/photoshop-math-with-glsl-shaders/
-use: blendAverage(<float|vec3> base, <float|vec3> blend [, <float> opacity])
+use: blendAverage(<float|float3> base, <float|float3> blend [, <float> opacity])
 licence: TODO
 */
 
@@ -11,11 +11,11 @@ float blendAverage(in float base, in float blend) {
     return (base + blend) * .5;
 }
 
-vec3 blendAverage(in vec3 base, in vec3 blend) {
+float3 blendAverage(in float3 base, in float3 blend) {
     return (base + blend) * .5;
 }
 
-vec3 blendAverage(in vec3 base, in vec3 blend, float opacity) {
+float3 blendAverage(in float3 base, in float3 blend, float opacity) {
     return (blendAverage(base, blend) * opacity + base * (1. - opacity));
 }
 #endif

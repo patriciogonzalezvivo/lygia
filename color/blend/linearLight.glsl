@@ -21,6 +21,6 @@ vec3 blendLinearLigth(in vec3 base, in vec3 blend) {
 }
 
 vec3 blendLinearLigth(in vec3 base, in vec3 blend, in float opacity) {
-	return (blendLinearLigth(base, blend) * opacity + base * (1. - opacity));
+    return (blendLinearLigth(base, blend) * opacity + base * (1. - opacity));
 }
 #endif
