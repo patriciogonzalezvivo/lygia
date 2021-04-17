@@ -1,7 +1,9 @@
 /*
 author: Patricio Gonzalez Vivo
-description: Squared length
-use: lengthSq(<vec2|float2> st)
+description: extend HLSL min function to add more arguments
+use: 
+  - min(<float> A, <float> B, <float> C[, <float> D])
+  - min(<float2|float3|float4> A)
 license: |
   Copyright (c) 2017 Patricio Gonzalez Vivo.
   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
@@ -10,13 +12,25 @@ license: |
 
 */
 
-#ifndef FNC_LENGTHSQ
-#define FNC_LENGTHSQ
-float lengthSq(in vec2 st) {
-    return dot(st, st);
+#ifndef FNC_MIN
+#define FNC_MIN
+float min(in float a, in float b, in float c) {
+  return min(a, min(b, c));
 }
 
-float lengthSq(in vec3 pos) {
-    return dot(pos, pos);
+float min(in float a, in float b, in float c, in float d) {
+  return min(min(a,b), min(c, d));
+}
+
+float min(const float2 v) {
+    return min(v.x, v.y));
+}
+
+float min(const float3 v) {
+    return min(v.x, v.y, v.z);
+}
+
+float min(const float4 v) {
+    return min(v.x, v.y, v.z, v.w);
 }
 #endif
