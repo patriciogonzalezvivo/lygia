@@ -16,13 +16,13 @@ license: |
 #define FNC_RGB2YIQ
 // https://en.wikipedia.org/wiki/YIQ
 const mat3 rgb2yiq_mat = mat3(
-  .299,  .596,  .211,
-  .587, -.274, -.523,
-  .114, -.322,  .0312
+    .299,  .596,  .211,
+    .587, -.274, -.523,
+    .114, -.322,  .0312
 );
 
 vec3 rgb2yiq(in vec3 rgb) {
-  return rgb2yiq_mat * rgb;
+    return rgb2yiq_mat * rgb;
 }
 
 vec4 rgb2yiq(in vec4 rgb) {
