@@ -14,10 +14,10 @@ license: |
 #ifndef FNC_LUMA
 #define FNC_LUMA
 float luma(in vec3 color) {
-  return rgb2luma(color);
+    return rgb2luma(color);
 }
 
 float luma(in vec4 color) {
-  return rgb2luma(color);
+    return rgb2luma(color.rgb);
 }
 #endif
