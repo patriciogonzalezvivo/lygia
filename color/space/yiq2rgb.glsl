@@ -13,13 +13,13 @@ license: |
 #define FNC_YIQ2RGB
 
 const mat3 yiq2rgb_mat = mat3(
-  1.,     1.,     1.,
-   .956,  -.272, -1.106,
-   .621,  -.647,  1.703
+    1.,     1.,     1.,
+    .956,  -.272, -1.106,
+    .621,  -.647,  1.703
 );
 
 vec3 yiq2rgb(in vec3 yiq) {
-  return yiq2rgb_mat * yiq;
+    return yiq2rgb_mat * yiq;
 }
 
 vec4 yiq2rgb(in vec4 yiq) {

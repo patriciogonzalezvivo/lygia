@@ -1,7 +1,7 @@
 /*
 author: Patricio Gonzalez Vivo
-description: pass a color in RGB and get it in YPbPr from http://www.equasys.de/colorconversion.html
-use: rgb2YPbPr(<vec3|vec4> color)
+description: convert from gamma to linear color space.
+use: gamma2linear(<float|float3|float4> color)
 license: |
   Copyright (c) 2017 Patricio Gonzalez Vivo.
   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
@@ -9,28 +9,31 @@ license: |
   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef FNC_RGB2YPBPR
-#define FNC_RGB2YPBPR
-
-#ifdef YPBPR_SDTV
-const mat3 rgb2YPbPr_mat = mat3( 
-    .299, -.169,  .5,
-    .587, -.331, -.419,
-    .114,  .5,   -.081
-);
-#else
-const mat3 rgb2YPbPr_mat = mat3( 
-    0.2126, -0.1145721060573399,   0.5,
-    0.7152, -0.3854278939426601,  -0.4541529083058166,
-    0.0722,  0.5,                 -0.0458470916941834
-);
+#if !defined(TARGET_MOBILE) && !defined(GAMMA)
+#define GAMMA 2.2
 #endif
 
-vec3 rgb2YPbPr(in vec3 rgb) {
-    return rgb2YPbPr_mat * rgb;
+#ifndef FNC_GAMMA2LINEAR
+#define FNC_GAMMA2LINEAR
+float gamma2linear(in float v) {
+#ifdef GAMMA
+    return pow(v, GAMMA);
+#else
+    // assume gamma 2.0
+    return v * v;
+#endif
 }
 
-vec4 rgb2YPbPr(in vec4 rgb) {
-    return vec4(rgb2YPbPr(rgb.rgb),rgb.a);
+float3 gamma2linear(in float3 v) {
+#ifdef GAMMA
+    return pow(v, float3(GAMMA, GAMMA, GAMMA));
+#else
+    // assume gamma 2.0
+    return v * v;
+#endif
+}
+
+float4 gamma2linear(in float4 v) {
+    return float4(gamma2linear(v.rgb), v.a);
 }
 #endif

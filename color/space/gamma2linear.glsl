@@ -17,23 +17,23 @@ license: |
 #define FNC_GAMMA2LINEAR
 float gamma2linear(in float v) {
 #ifdef GAMMA
-  return pow(v, GAMMA);
+    return pow(v, GAMMA);
 #else
-  // assume gamma 2.0
-  return v * v;
+    // assume gamma 2.0
+    return v * v;
 #endif
 }
 
 vec3 gamma2linear(in vec3 v) {
 #ifdef GAMMA
-  return pow(v, vec3(GAMMA));
+    return pow(v, vec3(GAMMA));
 #else
-  // assume gamma 2.0
-  return v * v;
+    // assume gamma 2.0
+    return v * v;
 #endif
 }
 
 vec4 gamma2linear(in vec4 v) {
-  return vec4(gamma2linear(v.rgb), v.a);
+    return vec4(gamma2linear(v.rgb), v.a);
 }
 #endif
