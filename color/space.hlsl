@@ -19,3 +19,6 @@ description: Include all available color spaces conversions
 
 #include "space/linear2gamma.hlsl"
 #include "space/gamma2linear.hlsl"
+
+#include "space/rgb2cmyk.hlsl"
+#include "space/cmyk2rgb.hlsl"

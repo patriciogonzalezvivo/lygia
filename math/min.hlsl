@@ -23,7 +23,7 @@ float min(in float a, in float b, in float c, in float d) {
 }
 
 float min(const float2 v) {
-    return min(v.x, v.y));
+    return min(v.x, v.y);
 }
 
 float min(const float3 v) {
