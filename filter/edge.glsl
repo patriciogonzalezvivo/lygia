@@ -3,7 +3,7 @@ author: Patricio Gonzalez Vivo
 description: Wrapper around three different edge detection algorithms Sobel, Prewitt, and directional Sobel
 use: edge(<sampler2D> texture, <vec2> st, <vec2> pixels_scale)
 options:
-    EDGE_ALGO: Edge detection algorithm, defaults to edgeSobel, edgePrewitt & edgeSobel_directional also available
+    EDGE_FNC: Edge detection algorithm, defaults to edgeSobel, edgePrewitt & edgeSobel_directional also available
     EDGE_TYPE: Return type, defaults to float
     EDGE_SAMPLER_FNC: Function used to sample the input texture, defaults to texture2D(tex,POS_UV).r
 license: |
@@ -13,8 +13,8 @@ license: |
     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.    
 */
 
-#ifndef EDGE_ALGO
-#define EDGE_ALGO edgeSobel
+#ifndef EDGE_FNC
+#define EDGE_FNC edgeSobel
 #endif
 
 #ifndef EDGE_TYPE
@@ -32,6 +32,6 @@ license: |
 #ifndef FNC_EDGE
 #define FNC_EDGE
 EDGE_TYPE edge(in sampler2D tex, in vec2 st, in vec2 offset) {
-  return EDGE_ALGO(tex, st, offset);
+  return EDGE_FNC(tex, st, offset);
 }
 #endif
