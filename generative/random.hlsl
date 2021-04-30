@@ -25,7 +25,7 @@ float random(in float4 pos) {
 
 // Hash function from https://www.shadertoy.com/view/4djSRW
 #define RANDOM_SCALE3 float3(.1031, .1030, .0973)
-#define FANDOM_SCALE4 float4(1031, .1030, .0973, .1099)
+#define FANDOM_SCALE4 float4(.1031, .1030, .0973, .1099)
 float2 random2(float p) {
     float3 p3 = frac(float3(p) * RANDOM_SCALE3);
     p3 += dot(p3, p3.yzx + 19.19);
