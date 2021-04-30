@@ -1,5 +1,5 @@
-#include "math/saturate.glsl"
-#include "math/max.glsl"
+#include "../../math/saturate.glsl"
+#include "../../math/max.glsl"
 
 /*
 author: bacondither
