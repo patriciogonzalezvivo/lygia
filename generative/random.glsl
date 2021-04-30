@@ -25,7 +25,7 @@ float random(in vec4 pos) {
 
 // Hash function from https://www.shadertoy.com/view/4djSRW
 #define RANDOM_SCALE3 vec3(.1031, .1030, .0973)
-#define FANDOM_SCALE4 vec4(1031, .1030, .0973, .1099)
+#define FANDOM_SCALE4 vec4(.1031, .1030, .0973, .1099)
 vec2 random2(float p) {
     vec3 p3 = fract(vec3(p) * RANDOM_SCALE3);
     p3 += dot(p3, p3.yzx + 19.19);
