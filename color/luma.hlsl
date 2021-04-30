@@ -13,6 +13,10 @@ license: |
 
 #ifndef FNC_LUMA
 #define FNC_LUMA
+float luma(in float color) {
+    return float(color);
+}
+
 float luma(in float3 color) {
     return rgb2luma(color);
 }
