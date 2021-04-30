@@ -1,0 +1,296 @@
+#include "math/saturate.glsl"
+#include "math/max.glsl"
+
+/*
+author: bacondither
+description: adaptive sharpening. For strenght values between 0.3 <-> 2.0 are a reasonable range 
+use: sharpen(<sampler2D> texture, <vec2> st, <vec2> renderSize [, float streanght])
+options:
+    SHARPEN_KERNELSIZE: Defaults 2
+    SHARPEN_TYPE: defaults to vec3
+    SHARPEN_SAMPLER_FNC(POS_UV): defaults to texture2D(tex, POS_UV).rgb
+    SHARPEN_FNC: defaults to sharpenFast
+    SHARPENADAPTIVE_ANIME: only darken edges. Defaults to: false
+license: |
+    Copyright (c) 2015-2020, bacondither
+    All rights reserved.
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions
+    are met:
+    1. Redistributions of source code must retain the above copyright
+       notice, this list of conditions and the following disclaimer
+       in this position and unchanged.
+    2. Redistributions in binary form must reproduce the above copyright
+       notice, this list of conditions and the following disclaimer in the
+       documentation and/or other materials provided with the distribution.
+    THIS SOFTWARE IS PROVIDED BY THE AUTHORS ``AS IS'' AND ANY EXPRESS OR
+    IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+    OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+    IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
+    INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+    NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+    DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+    THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+    (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+    THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
+
+
+
+#ifndef SHARPEN_TYPE
+#define SHARPEN_TYPE vec3
+#endif
+
+#ifndef SHARPEN_SAMPLER_FNC
+#define SHARPEN_SAMPLER_FNC(POS_UV) texture2D(tex, POS_UV).rgb
+#endif
+
+#ifndef SHARPENADAPTIVE_ANIME
+#define SHARPENADAPTIVE_ANIME      false    // Only darken edges
+#endif
+
+#ifndef FNC_SHARPENAPTIVE
+#define FNC_SHARPENAPTIVE
+
+// Soft limit, modified tanh approx
+#define SHARPENADAPTIVE_SOFT_LIM(v,s)  ( saturate(abs(v/s)*(27.0 + pow(v/s, 2.0))/(27.0 + 9.0*pow(v/s, 2.0)))*s )
+
+// Weighted power mean
+#define SHARPENADAPTIVE_WPMEAN(a,b,w)  ( pow(w*pow(abs(a), 0.5) + abs(1.0-w)*pow(abs(b), 0.5), 2.0) )
+
+// Get destination pixel values
+#define SHARPENADAPTIVE_DXDY(val)   ( length(fwidth(val)) ) // edgemul = 2.2
+
+#define SHARPENADAPTIVE_CTRL(RGB)   ( dot(RGB*RGB, vec3(0.212655, 0.715158, 0.072187)) )
+
+#define SHARPENADAPTIVE_DIFF(pix)   ( abs(blur-c[pix]) )
+
+SHARPEN_TYPE sharpenAdaptive(sampler2D tex, vec2 st, vec2 pixel, float strenght) {
+
+    //-------------------------------------------------------------------------------------------------
+// Defined values under this row are "optimal" DO NOT CHANGE IF YOU DO NOT KNOW WHAT YOU ARE DOING!
+    const float curveslope  = 0.5  ;                // Sharpening curve slope, high edge values
+
+    const float L_overshoot = 0.003;                // Max light overshoot before compression [>0.001]
+    const float L_compr_low = 0.167;                // Light compression, default (0.167=~6x)
+
+    const float D_overshoot = 0.009;                // Max dark overshoot before compression [>0.001]
+    const float D_compr_low = 0.250;                // Dark compression, default (0.250=4x)
+
+    const float scale_lim   = 0.1  ;                // Abs max change before compression [>0.01]
+    const float scale_cs    = 0.056;                // Compression slope above scale_lim
+
+
+    // [                c22               ]
+    // [           c24, c9,  c23          ]
+    // [      c21, c1,  c2,  c3, c18      ]
+    // [ c19, c10, c4,  c0,  c5, c11, c16 ]
+    // [      c20, c6,  c7,  c8, c17      ]
+    // [           c15, c12, c14          ]
+    // [                c13               ]
+    vec3 c[25];
+    c[0] = SHARPEN_SAMPLER_FNC(st + vec2(0.0, 0.0) * pixel);
+    c[1] = SHARPEN_SAMPLER_FNC(st + vec2(-1., -1.) * pixel);
+    c[2] = SHARPEN_SAMPLER_FNC(st + vec2(0.0, -1.) * pixel);
+    c[3] = SHARPEN_SAMPLER_FNC(st + vec2(1.0, -1.) * pixel);
+    c[4] = SHARPEN_SAMPLER_FNC(st + vec2(-1., 1.0) * pixel);
+    c[5] = SHARPEN_SAMPLER_FNC(st + vec2(1.0, 0.0) * pixel);
+    c[6] = SHARPEN_SAMPLER_FNC(st + vec2(-1., 1.0) * pixel);
+    c[7] = SHARPEN_SAMPLER_FNC(st + vec2(0.0, 1.0) * pixel);
+    c[8] = SHARPEN_SAMPLER_FNC(st + vec2(1.0, 1.0) * pixel);
+    c[9] = SHARPEN_SAMPLER_FNC(st + vec2(0.0, -2.) * pixel);
+    c[10] = SHARPEN_SAMPLER_FNC(st + vec2(-2., 0.0) * pixel);
+    c[11] = SHARPEN_SAMPLER_FNC(st + vec2( 2., 0.0) * pixel);
+    c[12] = SHARPEN_SAMPLER_FNC(st + vec2( 0., 2.0) * pixel);
+    c[13] = SHARPEN_SAMPLER_FNC(st + vec2( 0., 3.0) * pixel);
+    c[14] = SHARPEN_SAMPLER_FNC(st + vec2( 1., 2.0) * pixel);
+    c[15] = SHARPEN_SAMPLER_FNC(st + vec2(-1., 2.0) * pixel);
+    c[16] = SHARPEN_SAMPLER_FNC(st + vec2( 3., 0.0) * pixel);
+    c[17] = SHARPEN_SAMPLER_FNC(st + vec2( 2., 1.0) * pixel);
+    c[18] = SHARPEN_SAMPLER_FNC(st + vec2( 2.,-1.0) * pixel);
+    c[19] = SHARPEN_SAMPLER_FNC(st + vec2(-3., 0.0) * pixel);
+    c[20] = SHARPEN_SAMPLER_FNC(st + vec2(-2., 1.0) * pixel);
+    c[21] = SHARPEN_SAMPLER_FNC(st + vec2(-2.,-1.0) * pixel);
+    c[22] = SHARPEN_SAMPLER_FNC(st + vec2( 0.,-3.0) * pixel);
+    c[23] = SHARPEN_SAMPLER_FNC(st + vec2( 1.,-2.0) * pixel);
+    c[24] = SHARPEN_SAMPLER_FNC(st + vec2(-1.,-2.0) * pixel);
+
+    float e[13];
+    e[0] = SHARPENADAPTIVE_DXDY(c[0]);
+    e[1] = SHARPENADAPTIVE_DXDY(c[1]);
+    e[2] = SHARPENADAPTIVE_DXDY(c[2]);
+    e[3] = SHARPENADAPTIVE_DXDY(c[3]);
+    e[4] = SHARPENADAPTIVE_DXDY(c[4]);
+
+    e[5] = SHARPENADAPTIVE_DXDY(c[5]);
+    e[6] = SHARPENADAPTIVE_DXDY(c[6]);
+    e[7] = SHARPENADAPTIVE_DXDY(c[7]);
+    e[8] = SHARPENADAPTIVE_DXDY(c[8]);
+    e[9] = SHARPENADAPTIVE_DXDY(c[9]);
+
+    e[10] = SHARPENADAPTIVE_DXDY(c[10]);
+    e[11] = SHARPENADAPTIVE_DXDY(c[11]);
+    e[12] = SHARPENADAPTIVE_DXDY(c[12]);
+
+    // Blur, gauss 3x3
+    vec3  blur   = (2.0 * (c[2]+c[4]+c[5]+c[7]) + (c[1]+c[3]+c[6]+c[8]) + 4.0 * c[0]) / 16.0;
+
+    // Contrast compression, center = 0.5, scaled to 1/3
+    float c_comp = saturate(0.266666681 + 0.9*exp2(dot(blur, vec3(-7.4/3.0))));
+
+    // Edge detection
+    // Relative matrix weights
+    // [          1          ]
+    // [      4,  5,  4      ]
+    // [  1,  5,  6,  5,  1  ]
+    // [      4,  5,  4      ]
+    // [          1          ]
+    float edge = length( 1.38*SHARPENADAPTIVE_DIFF(0)
+                       + 1.15*(SHARPENADAPTIVE_DIFF(2) + SHARPENADAPTIVE_DIFF(4) + SHARPENADAPTIVE_DIFF(5) + SHARPENADAPTIVE_DIFF(7))
+                       + 0.92*(SHARPENADAPTIVE_DIFF(1) + SHARPENADAPTIVE_DIFF(3) + SHARPENADAPTIVE_DIFF(6) + SHARPENADAPTIVE_DIFF(8))
+                       + 0.23*(SHARPENADAPTIVE_DIFF(9) + SHARPENADAPTIVE_DIFF(10) + SHARPENADAPTIVE_DIFF(11) + SHARPENADAPTIVE_DIFF(12)) ) * c_comp;
+
+    vec2 cs = vec2(L_compr_low,  D_compr_low);
+
+    // RGB to luma
+    float luma[25];
+    luma[0] = SHARPENADAPTIVE_CTRL(c[0]);
+    luma[1] = SHARPENADAPTIVE_CTRL(c[1]);
+    luma[2] = SHARPENADAPTIVE_CTRL(c[2]);
+    luma[3] = SHARPENADAPTIVE_CTRL(c[3]);
+    luma[4] = SHARPENADAPTIVE_CTRL(c[4]);
+    luma[5] = SHARPENADAPTIVE_CTRL(c[5]);
+    luma[6] = SHARPENADAPTIVE_CTRL(c[6]);
+    luma[7] = SHARPENADAPTIVE_CTRL(c[7]);
+    luma[8] = SHARPENADAPTIVE_CTRL(c[8]);
+    luma[9] = SHARPENADAPTIVE_CTRL(c[9]);
+    luma[10] = SHARPENADAPTIVE_CTRL(c[10]);
+    luma[11] = SHARPENADAPTIVE_CTRL(c[11]);
+    luma[12] = SHARPENADAPTIVE_CTRL(c[12]);
+    luma[13] = SHARPENADAPTIVE_CTRL(c[13]);
+    luma[14] = SHARPENADAPTIVE_CTRL(c[14]);
+    luma[15] = SHARPENADAPTIVE_CTRL(c[15]);
+    luma[16] = SHARPENADAPTIVE_CTRL(c[16]);
+    luma[17] = SHARPENADAPTIVE_CTRL(c[17]);
+    luma[18] = SHARPENADAPTIVE_CTRL(c[18]);
+    luma[19] = SHARPENADAPTIVE_CTRL(c[19]);
+    luma[20] = SHARPENADAPTIVE_CTRL(c[20]);
+    luma[21] = SHARPENADAPTIVE_CTRL(c[21]);
+    luma[22] = SHARPENADAPTIVE_CTRL(c[22]);
+    luma[23] = SHARPENADAPTIVE_CTRL(c[23]);
+    luma[24] = SHARPENADAPTIVE_CTRL(c[24]);
+
+
+    float c0_Y = sqrt(luma[0]);
+
+    // Precalculated default squared kernel weights
+    const vec3 w1 = vec3(0.5,           1.0, 1.41421356237); // 0.25, 1.0, 2.0
+    const vec3 w2 = vec3(0.86602540378, 1.0, 0.54772255751); // 0.75, 1.0, 0.3
+
+    // Transition to a concave kernel if the center edge val is above thr
+    vec3 dW = pow(mix( w1, w2, saturate(2.4*edge - 0.82)), vec3(2.0));
+
+    // Use lower weights for pixels in a more active area relative to center pixel area
+    // This results in narrower and less visible overshoots around sharp edges
+    float modif_e0 = 3.0 * e[0] + 0.0090909;
+
+    float weights[12];
+    weights[0] = min(modif_e0/e[1],  dW.y);
+    weights[1] = dW.x;
+    weights[2] = min(modif_e0/e[3],  dW.y);
+    weights[3] = dW.x;
+    weights[4] = dW.x;
+    weights[5] = min(modif_e0/e[6],  dW.y);
+    weights[6] = dW.x;
+    weights[7] = min(modif_e0/e[8],  dW.y);
+    weights[8] = min(modif_e0/e[9],  dW.z);
+    weights[9] = min(modif_e0/e[10], dW.z);
+    weights[10] = min(modif_e0/e[11], dW.z);
+    weights[11] = min(modif_e0/e[12], dW.z);
+
+    weights[0] = (max(max((weights[8]  + weights[9])/4.0,  weights[0]), 0.25) + weights[0])/2.0;
+    weights[2] = (max(max((weights[8]  + weights[10])/4.0, weights[2]), 0.25) + weights[2])/2.0;
+    weights[5] = (max(max((weights[9]  + weights[11])/4.0, weights[5]), 0.25) + weights[5])/2.0;
+    weights[7] = (max(max((weights[10] + weights[11])/4.0, weights[7]), 0.25) + weights[7])/2.0;
+
+    // Calculate the negative part of the laplace kernel and the low threshold weight
+    float lowthrsum   = 0.0;
+    float weightsum   = 0.0;
+    float neg_laplace = 0.0;
+
+    for (int pix = 0; pix < 12; ++pix) {
+        float lowthr = clamp((29.04*e[pix + 1] - 0.221), 0.01, 1.0);
+
+        neg_laplace += luma[pix+1] * weights[pix] * lowthr;
+        weightsum   += weights[pix] * lowthr;
+        lowthrsum   += lowthr / 12.0;
+    }
+
+    neg_laplace = inversesqrt(weightsum / neg_laplace);
+
+    // Compute sharpening magnitude function
+    float sharpen_val = strenght/(strenght*curveslope*pow(edge, 3.5) + 0.625);
+
+    // Calculate sharpening diff and scale
+    float sharpdiff = (c0_Y - neg_laplace)*(lowthrsum*sharpen_val + 0.01);
+
+    // Calculate local near min & max, partial sort
+    float temp;
+
+    for (int i1 = 0; i1 < 24; i1 += 2) {
+        temp = luma[i1];
+        luma[i1]   = min(luma[i1], luma[i1+1]);
+        luma[i1+1] = max(temp, luma[i1+1]);
+    }
+
+    for (int i2 = 24; i2 > 0; i2 -= 2) {
+        temp = luma[0];
+        luma[0]    = min(luma[0], luma[i2]);
+        luma[i2]   = max(temp, luma[i2]);
+
+        temp = luma[24];
+        luma[24] = max(luma[24], luma[i2-1]);
+        luma[i2-1] = min(temp, luma[i2-1]);
+    }
+
+    for (int i1 = 1; i1 < 24-1; i1 += 2) {
+        temp = luma[i1];
+        luma[i1]   = min(luma[i1], luma[i1+1]);
+        luma[i1+1] = max(temp, luma[i1+1]);
+    }
+
+    for (int i2 = 24-1; i2 > 1; i2 -= 2) {
+        temp = luma[1];
+        luma[1]    = min(luma[1], luma[i2]);
+        luma[i2]   = max(temp, luma[i2]);
+
+        temp = luma[24-1];
+        luma[24-1] = max(luma[24-1], luma[i2-1]);
+        luma[i2-1] = min(temp, luma[i2-1]);
+    }
+
+    float nmax = (max(sqrt(luma[23]), c0_Y)*2.0 + sqrt(luma[24]))/3.0;
+    float nmin = (min(sqrt(luma[1]),  c0_Y)*2.0 + sqrt(luma[0]))/3.0;
+
+    float min_dist  = min(abs(nmax - c0_Y), abs(c0_Y - nmin));
+    float pos_scale = min_dist + L_overshoot;
+    float neg_scale = min_dist + D_overshoot;
+
+    pos_scale = min(pos_scale, scale_lim*(1.0 - scale_cs) + pos_scale*scale_cs);
+    neg_scale = min(neg_scale, scale_lim*(1.0 - scale_cs) + neg_scale*scale_cs);
+
+    // Soft limited anti-ringing with tanh, SHARPENADAPTIVE_WPMEAN to control compression slope
+    sharpdiff = (SHARPENADAPTIVE_ANIME ? 0. :
+                SHARPENADAPTIVE_WPMEAN(max(sharpdiff, 0.0), SHARPENADAPTIVE_SOFT_LIM( max(sharpdiff, 0.0), pos_scale ), cs.x ))
+              - SHARPENADAPTIVE_WPMEAN(min(sharpdiff, 0.0), SHARPENADAPTIVE_SOFT_LIM( min(sharpdiff, 0.0), neg_scale ), cs.y );
+
+    float sharpdiff_lim = saturate(c0_Y + sharpdiff) - c0_Y;
+    float satmul = (c0_Y + max(sharpdiff_lim*0.9, sharpdiff_lim)*1.03 + 0.03)/(c0_Y + 0.03);
+    return c0_Y + (sharpdiff_lim*3.0 + sharpdiff)/4.0 + (c[0] - c0_Y)*satmul;
+}
+
+SHARPEN_TYPE sharpenAdaptive(sampler2D tex, vec2 st, vec2 pixel) {
+    return sharpenAdaptive(tex, st, pixel, 1.0);
+}
+
+#endif
