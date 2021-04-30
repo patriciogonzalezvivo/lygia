@@ -22,7 +22,7 @@ float max(in float a, in float b, in float c, in float d) {
 }
 
 float max(const vec2 v) {
-    return max(v.x, v.y));
+    return max(v.x, v.y);
 }
 
 float max(const vec3 v) {
