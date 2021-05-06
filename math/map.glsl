@@ -1,3 +1,5 @@
+#include "saturate.glsl"
+
 /*
 author: Johan Ismael
 description: Map a value between one range to another.
@@ -11,6 +13,22 @@ license: |
 
 #ifndef FNC_MAP
 #define FNC_MAP
+
+float map( float value, float inMin, float inMax ) {
+    return saturate( (value-inMin)/(inMax-inMin));
+}
+
+vec2 map( vec2 value, vec2 inMin, vec2 inMax ) {
+    return saturate( (value-inMin)/(inMax-inMin));
+}
+
+vec3 map( vec3 value, vec3 inMin, vec3 inMax ) {
+    return saturate( (value-inMin)/(inMax-inMin));
+}
+
+vec4 map( vec4 value, vec4 inMin, vec4 inMax ) {
+    return saturate( (value-inMin)/(inMax-inMin));
+}
 
 float map(in float value, in float inMin, in float inMax, in float outMin, in float outMax) {
   return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);

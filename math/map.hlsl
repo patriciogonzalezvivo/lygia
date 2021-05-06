@@ -12,6 +12,22 @@ license: |
 #ifndef FNC_MAP
 #define FNC_MAP
 
+float map( float value, float inMin, float inMax ) {
+    return saturate( (value-inMin)/(inMax-inMin));
+}
+
+float2 map( float2 value, float2 inMin, float2 inMax ) {
+    return saturate( (value-inMin)/(inMax-inMin));
+}
+
+float3 map( float3 value, float3 inMin, float3 inMax ) {
+    return saturate( (value-inMin)/(inMax-inMin));
+}
+
+float4 map( float4 value, float4 inMin, float4 inMax ) {
+    return saturate( (value-inMin)/(inMax-inMin));
+}
+
 float map(in float value, in float inMin, in float inMax, in float outMin, in float outMax) {
   return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);
 }
