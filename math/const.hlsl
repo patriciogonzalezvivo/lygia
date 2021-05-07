@@ -25,6 +25,9 @@
 #ifndef GOLDEN_RATIO
 #define GOLDEN_RATIO 1.6180339887
 #endif
+#ifndef GOLDEN_RATIO_CONJUGATE 
+#define GOLDEN_RATIO_CONJUGATE 0.61803398875
+#endif
 #ifndef GOLDEN_ANGLE // (3.-sqrt(5.0))*PI radians
 #define GOLDEN_ANGLE 2.39996323
 #endif
