@@ -3,7 +3,7 @@ author: Patricio Gonzalez Vivo
 description: one dimension Gaussian Blur to be applied in two passes
 use: gaussianBlur1D(<sampler2D> texture, <vec2> st, <vec2> pixel_direction , const int kernelSize)
 options:
-    GAUSSIANBLUR1D_TYPE: 
+    GAUSSIANBLUR1D_TYPE:
     GAUSSIANBLUR1D_SAMPLER_FNC(POS_UV):
     GAUSSIANBLUR1D_KERNELSIZE: Use only for WebGL 1.0 and OpenGL ES 2.0 . For example RaspberryPis is not happy with dynamic loops. Default is 'kernelSize'
 license: |
@@ -18,27 +18,51 @@ license: |
 #endif
 
 #ifndef GAUSSIANBLUR1D_SAMPLER_FNC
-#define GAUSSIANBLUR1D_SAMPLER_FNC(POS_UV) texture2D(tex, POS_UV)
+#define GAUSSIANBLUR1D_SAMPLER_FNC(POS_UV)texture2D(tex,POS_UV)
 #endif
 
 #ifndef FNC_GAUSSIANBLUR1D
 #define FNC_GAUSSIANBLUR1D
-GAUSSIANBLUR1D_TYPE gaussianBlur1D(in sampler2D tex, in vec2 st, in vec2 offset, const int kernelSize) {
-    GAUSSIANBLUR1D_TYPE accumColor = GAUSSIANBLUR1D_TYPE(0.);
-    #ifndef GAUSSIANBLUR1D_KERNELSIZE
-    #define GAUSSIANBLUR1D_KERNELSIZE kernelSize
-    #endif
 
-    float accumWeight = 0.;
-    const float k = .39894228; // 1 / sqrt(2*PI)
-    float kernelSize2 = float(GAUSSIANBLUR1D_KERNELSIZE) * float(GAUSSIANBLUR1D_KERNELSIZE);
-    for (int i = 0; i < GAUSSIANBLUR1D_KERNELSIZE; i++) {
-        float x = -.5 * (float(GAUSSIANBLUR1D_KERNELSIZE) - 1.) + float(i);
-        float weight = (k / float(GAUSSIANBLUR1D_KERNELSIZE)) * exp(-(x * x) / (2. * kernelSize2));
+#ifdef GAUSSIANBLUR1D_DYNAMIC
+
+GAUSSIANBLUR1D_TYPE gaussianBlur1D(in sampler2D tex,in vec2 st,in vec2 offset,const int kernelSize){
+    GAUSSIANBLUR1D_TYPE accumColor = GAUSSIANBLUR1D_TYPE(0.0);
+    
+    float accumWeight = 0.0;
+    const float k = 0.39894228;// 1 / sqrt(2*PI)
+    float kernelSize2 = float(kernelSize)*float(kernelSize);
+    for(int i = 0; i < 16; i++){
+        if( kernelSize >= kernelSize)
+            break;
+        float x = -0.5 * (float(kernelSize) - 1.0)+float(i);
+        float weight = (k/float(kernelSize)) * exp(-(x*x)/(2.0*kernelSize2));
         GAUSSIANBLUR1D_TYPE tex = GAUSSIANBLUR1D_SAMPLER_FNC(st + x * offset);
         accumColor += weight * tex;
         accumWeight += weight;
     }
-    return accumColor / accumWeight;
+    return accumColor/accumWeight;
 }
+
+#else
+GAUSSIANBLUR1D_TYPE gaussianBlur1D(in sampler2D tex,in vec2 st,in vec2 offset,const int kernelSize){
+    GAUSSIANBLUR1D_TYPE accumColor=GAUSSIANBLUR1D_TYPE(0.);
+    #ifndef GAUSSIANBLUR1D_KERNELSIZE
+    #define GAUSSIANBLUR1D_KERNELSIZE kernelSize
+    #endif
+    
+    float accumWeight = 0.0;
+    const float k = 0.39894228;// 1 / sqrt(2*PI)
+    float kernelSize2=float(GAUSSIANBLUR1D_KERNELSIZE)*float(GAUSSIANBLUR1D_KERNELSIZE);
+    for(int i = 0; i < GAUSSIANBLUR1D_KERNELSIZE; i++){
+        float x = -0.5 * (float(GAUSSIANBLUR1D_KERNELSIZE) -1.0) + float(i);
+        float weight = (k/float(GAUSSIANBLUR1D_KERNELSIZE)) * exp(-(x*x)/(2.0*kernelSize2));
+        GAUSSIANBLUR1D_TYPE tex = GAUSSIANBLUR1D_SAMPLER_FNC(st + x * offset);
+        accumColor += weight * tex;
+        accumWeight += weight;
+    }
+    return accumColor/accumWeight;
+}
+#endif
+
 #endif
