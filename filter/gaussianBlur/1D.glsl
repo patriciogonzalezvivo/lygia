@@ -33,7 +33,7 @@ GAUSSIANBLUR1D_TYPE gaussianBlur1D(in sampler2D tex,in vec2 st,in vec2 offset,co
     const float k = 0.39894228;// 1 / sqrt(2*PI)
     float kernelSize2 = float(kernelSize)*float(kernelSize);
     for(int i = 0; i < 16; i++){
-        if( kernelSize >= kernelSize)
+        if( i >= kernelSize)
             break;
         float x = -0.5 * (float(kernelSize) - 1.0)+float(i);
         float weight = (k/float(kernelSize)) * exp(-(x*x)/(2.0*kernelSize2));

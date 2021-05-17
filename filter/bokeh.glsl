@@ -6,9 +6,10 @@ author: Dennis Gustafsson
 description:  http://blog.tuxedolabs.com/2018/05/04/bokeh-depth-of-field-in-single-pass.html
 use: bokeh(<sampler2D> texture, <sampler2D> depth, <vec2> st, <float> focusPoint, <float> focusScale)
 options:
+    BOKEH_TYPE:
     BOKEH_BLUR_SIZE:
-    EDGE_SAMPLER_FNC:
-    BOKEH_DEPTH_FNC(UV): 
+    BOKEH_RAD_SCALE:
+    BOKEH_DEPTH_FNC(UV):
     BOKEH_COLOR_FNC(UV):
 */
 
@@ -16,12 +17,12 @@ options:
 #define FNC_BOKEH
 
 #ifndef BOKEH_BLUR_SIZE
-#define BOKEH_BLUR_SIZE 6.0
+#define BOKEH_BLUR_SIZE 6.
 #endif
 
 // Smaller = nicer blur, larger = faster
 #ifndef BOKEH_RAD_SCALE
-#define BOKEH_RAD_SCALE 0.5
+#define BOKEH_RAD_SCALE .5
 #endif
 
 #ifndef GOLDEN_ANGLE
@@ -29,27 +30,31 @@ options:
 #endif
 
 #ifndef BOKEH_DEPTH_FNC
-#define BOKEH_DEPTH_FNC(UV) texture2D(texDepth, UV).r
+#define BOKEH_DEPTH_FNC(UV)texture2D(texDepth,UV).r
 #endif
 
 #ifndef BOKEH_COLOR_FNC
-#define BOKEH_COLOR_FNC(UV) texture2D(tex, UV)
+#define BOKEH_COLOR_FNC(UV)texture2D(tex,UV).rgb
 #endif
 
-float getBlurSize(float depth, float focusPoint, float focusScale) {
-    float coc = clamp((1.0 / focusPoint - 1.0 / depth)*focusScale, -1.0, 1.0);
+#ifndef BOKEH_TYPE
+#define BOKEH_TYPE vec3
+#endif
+
+float getBlurSize(float depth,float focusPoint,float focusScale){
+    float coc = clamp((1./focusPoint-1./depth)*focusScale,-1.,1.);
     return abs(coc) * BOKEH_BLUR_SIZE;
 }
 
 #ifdef PLATFORM_WEBGL
 
-vec3 bokeh(sampler2D tex,sampler2D texDepth,vec2 texCoord,float focusPoint,float focusScale){
+BOKEH_TYPE bokeh(sampler2D tex,sampler2D texDepth,vec2 texCoord,float focusPoint,float focusScale){
     float pct=0.;
     
     float centerDepth = BOKEH_DEPTH_FNC(texCoord);
     float centerSize = getBlurSize(centerDepth, focusPoint, focusScale);
     vec2 pixelSize = 1.0/u_resolution.xy;
-    vec3 color = BOKEH_COLOR_FNC(texCoord).rgb;
+    BOKEH_TYPE color = BOKEH_COLOR_FNC(texCoord);
     
     float total = 1.0;
     float radius = BOKEH_RAD_SCALE;
@@ -63,9 +68,9 @@ vec3 bokeh(sampler2D tex,sampler2D texDepth,vec2 texCoord,float focusPoint,float
         if (sampleDepth > centerDepth)
             sampleSize=clamp(sampleSize, 0.0, centerSize*2.0);
         pct = smoothstep(radius-0.5, radius+0.5, sampleSize);
-        vec3 sampleColor = BOKEH_COLOR_FNC(tc).rgb;
+        BOKEH_TYPE sampleColor = BOKEH_COLOR_FNC(tc);
         #ifdef BOKEH_DEBUG
-        sampleColor = heatmap(pct*0.5+(angle/BOKEH_BLUR_SIZE)*0.1);
+        sampleColor.rgb = heatmap(pct*0.5+(angle/BOKEH_BLUR_SIZE)*0.1);
         #endif
         color += mix(color/total, sampleColor, pct);
         total += 1.0;
@@ -76,14 +81,14 @@ vec3 bokeh(sampler2D tex,sampler2D texDepth,vec2 texCoord,float focusPoint,float
 
 #else
 
-vec3 bokeh(sampler2D tex, sampler2D texDepth, vec2 texCoord, float focusPoint, float focusScale) {
+BOKEH_TYPE bokeh(sampler2D tex, sampler2D texDepth, vec2 texCoord, float focusPoint, float focusScale) {
     float pct = 0.0;
     float ang = 0.0;
 
     float centerDepth = BOKEH_DEPTH_FNC(texCoord);
     float centerSize = getBlurSize(centerDepth, focusPoint, focusScale);
     vec2 pixelSize = 1./u_resolution.xy;
-    vec3 color = BOKEH_COLOR_FNC(texCoord).rgb;
+    BOKEH_TYPE color = BOKEH_COLOR_FNC(texCoord);
 
     float tot = 1.0;
     float radius = BOKEH_RAD_SCALE;
@@ -94,9 +99,9 @@ vec3 bokeh(sampler2D tex, sampler2D texDepth, vec2 texCoord, float focusPoint, f
         if (sampleDepth > centerDepth)
             sampleSize = clamp(sampleSize, 0.0, centerSize*2.0);
         pct = smoothstep(radius-0.5, radius+0.5, sampleSize);
-        vec3 sampleColor = BOKEH_COLOR_FNC(tc).rgb;
+        BOKEH_TYPE sampleColor = BOKEH_COLOR_FNC(tc);
         #ifdef BOKEH_DEBUG
-        sampleColor = heatmap(pct * 0.5 + (ang/BOKEH_BLUR_SIZE) * 0.1);
+        sampleColor.rgb = heatmap(pct * 0.5 + (ang/BOKEH_BLUR_SIZE) * 0.1);
         #endif
         color += mix(color/tot, sampleColor, pct);
         tot += 1.0;
