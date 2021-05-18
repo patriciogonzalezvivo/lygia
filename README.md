@@ -4,6 +4,7 @@
 
 Tire of reimplementing and searching for the same functions over and over, started compiling and building a shader library of reusable assets (mostly functions) that can be include over and over. It's very granular, designed for reusability, performance and flexibility. 
 
+Joing [#Lygia channel on shader.zone discord](https://shader.zone/) to learn how to use it, share work or get help.
 ## How it works?
 
 1. Clone this repository on your project. Where your shaders are.
