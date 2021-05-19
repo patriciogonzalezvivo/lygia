@@ -12,14 +12,10 @@ license: |
 #ifndef FNC_YIQ2RGB
 #define FNC_YIQ2RGB
 
-const mat3 yiq2rgb_mat = mat3(
-    1.,     1.,     1.,
-    .956,  -.272, -1.106,
-    .621,  -.647,  1.703
-);
+const mat3 yiq2rgb_mat = mat3(1.0, 0.956, 0.621, 1.0, -0.272, -0.647, 1.0, -1.105, 1.702);
 
 vec3 yiq2rgb(in vec3 yiq) {
-    return yiq2rgb_mat * yiq;
+  return yiq2rgb_mat * yiq;
 }
 
 vec4 yiq2rgb(in vec4 yiq) {

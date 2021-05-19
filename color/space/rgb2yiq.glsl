@@ -1,9 +1,6 @@
 /*
 author: Patricio Gonzalez Vivo
-description: |
-  Convert from RGB to YIQ which was the followin range
-  Y [0,.1], I [-0.5957, 0.5957], Q [-0.5226, 0.5226]
-  From https://en.wikipedia.org/wiki/YIQ
+description: Convert from RGB to YIQ which was the followin range
 use: rgb2yiq(<vec3|vec4> color)
 license: |
   Copyright (c) 2017 Patricio Gonzalez Vivo.
@@ -14,15 +11,10 @@ license: |
 
 #ifndef FNC_RGB2YIQ
 #define FNC_RGB2YIQ
-// https://en.wikipedia.org/wiki/YIQ
-const mat3 rgb2yiq_mat = mat3(
-    .299,  .596,  .211,
-    .587, -.274, -.523,
-    .114, -.322,  .0312
-);
+const mat3 rgb2yiq_mat = mat3(0.299, 0.587, 0.114, 0.596, -0.274, -0.322, 0.212, -0.523, 0.311);
 
 vec3 rgb2yiq(in vec3 rgb) {
-    return rgb2yiq_mat * rgb;
+  return rgb2yiq_mat * rgb;
 }
 
 vec4 rgb2yiq(in vec4 rgb) {
