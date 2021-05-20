@@ -2,18 +2,19 @@
 
 # Lygia: a multi-language shader library
 
-Tire of reimplementing and searching for the same functions over and over, started compiling and building a shader library of reusable assets (mostly functions) that can be include over and over. It's very granular, designed for reusability, performance and flexibility. 
+Tired of reimplementing and searching for the same functions over and over, I started compiling and building a shader library of reusable assets (mostly functions) that can be include over and over. It's very granular, designed for reusability, performance and flexibility. 
 
-Joing [#Lygia channel on shader.zone discord](https://shader.zone/) to learn how to use it, share work or get help.
-## How it works?
+Join [#Lygia channel on shader.zone discord](https://shader.zone/) to learn how to use it, share work or get help.
 
-1. Clone this repository on your project. Where your shaders are.
+## How does it work?
+
+1. Clone this repository in your project, where your shaders are.
 
 ```bash
 git clone https://github.com/patriciogonzalezvivo/lygia.git
 ```
 
-2. On your shader `#include` the functions you need:
+2. In your shader `#include` the functions you need:
 
 ```glsl
 #ifdef GL_ES
@@ -40,7 +41,7 @@ void main(void) {
 }
 ```
 
-## How it's organized?
+## How is it organized?
 
 The functions are divided in different categories:
 
@@ -58,7 +59,7 @@ The functions are divided in different categories:
 
 ## Flexible how?
 
-There are some functions that are "templeted" using `#defines`. You can change how it behaves by defining a keyword before including it. For examples, [gaussian blurs](filter/gaussianBlur.glsl) usually are done in two passes (and it defaults), but let's say you are in a rush you can specify to use 
+There are some functions that are "templated" using `#defines`. You can change how it behaves by defining a keyword before including it. For examples, [gaussian blurs](filter/gaussianBlur.glsl) are usually done in two passes (and it defaults), but let's say you are in a rush you can specify to use 
 
 ```glsl
 #define GAUSSIANBLUR_2D
@@ -77,7 +78,7 @@ void main(void) {
 
 # Acknowledgements
 
-This library have been build over years, and most often than not on top of the work of brillant generous people like: [Inigo Quiles](https://www.iquilezles.org/), [Morgan McGuire](https://casual-effects.com/), [Hugh Kennedy](https://github.com/hughsk), [Matt DesLauriers](https://www.mattdesl.com/).
+This library has been built over years, and most often than not on top of the work of brillant generous people like: [Inigo Quiles](https://www.iquilezles.org/), [Morgan McGuire](https://casual-effects.com/), [Hugh Kennedy](https://github.com/hughsk), [Matt DesLauriers](https://www.mattdesl.com/).
 I have tried to give according credits and correct license to each file. It's not perfect but it could be with your help! Please if you see something, say somthing.
 
 Lygia is open sourced under the terms of the [BSD license](LICENSE). You are free to use it, extend it and redistribute without charge, but I really appreciate if you can support improving it. That could be adding new functions, testing it, fixing bugs, translating the GLSL files to HLSL and Metal or just [sponsoring me through GitHub](https://github.com/sponsors/patriciogonzalezvivo) to do it for you.  
@@ -87,7 +88,7 @@ Lygia is open sourced under the terms of the [BSD license](LICENSE). You are fre
 
 This library:
 
-* Relays on `#include "file"` which is defined by Khornos GLSL standard and suported by most engines and enviroments ( like [glslViewer](https://github.com/patriciogonzalezvivo/glslViewer/wiki/Compiling), [glsl-canvas VS Code pluging](https://marketplace.visualstudio.com/items?itemName=circledev.glsl-canvas), Unity, etc. ). It requires a tipical C-like pre-compiler MACRO which is easy to implement with just basic string operations to resolve dependencies. Here you can find some implementations on different languages:
+* Relays on `#include "file"` which is defined by Khronos GLSL standard and suported by most engines and enviroments ( like [glslViewer](https://github.com/patriciogonzalezvivo/glslViewer/wiki/Compiling), [glsl-canvas VS Code pluging](https://marketplace.visualstudio.com/items?itemName=circledev.glsl-canvas), Unity, etc. ). It requires a tipical C-like pre-compiler MACRO which is easy to implement with just basic string operations to resolve dependencies. Here you can find some implementations on different languages:
     * C++: https://github.com/patriciogonzalezvivo/glslViewer/blob/master/src/io/fs.cpp#L104
     * Python: https://gist.github.com/patriciogonzalezvivo/9a50569c2ef9b08058706443a39d838e
     * JS: https://github.com/actarian/vscode-glsl-canvas/blob/91ff09bf6cec35e73d1b64e50b56ef3299d2fe6b/src/glsl/export.ts#L351
@@ -152,7 +153,7 @@ author: <FULL NAME>
 ...
 ```
 
-* Have some templeting capabilities also through `#defines` probably the most frequent one is templeting the sampling function for reusability. The `#define` options start with the name of the function, in this example `MYFUNC_`. They are added as `options:` in the header.
+* Have some templeting capabilities also through `#defines` probably the most frequent one is templating the sampling function for reusability. The `#define` options start with the name of the function, in this example `MYFUNC_`. They are added as `options:` in the header.
  
 ```glsl
 /*
@@ -183,7 +184,7 @@ MYFUNC_TYPE myFunc(sampler2D tex, vec2 st) {
 #endif
 ```
 
-* Utilize function overloading. For that please sort your arguments accordingly so it default gracefully. When it's possible sort them in the following order: `sampler2D, mat4, mat3, mat2, vec4, vec3, vec2, float, ivec4, ivec3, ivec2, int, bool`
+* Utilize function overloading. For that please sort your arguments accordingly so it defaults gracefully. When possible sort them in the following order: `sampler2D, mat4, mat3, mat2, vec4, vec3, vec2, float, ivec4, ivec3, ivec2, int, bool`
 
 ```glsl
 /*
