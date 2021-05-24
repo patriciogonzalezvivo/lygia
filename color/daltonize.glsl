@@ -159,6 +159,8 @@ vec4 daltonize( vec4 rgba ) {
     return DALTONIZE_FNC(rgba);
 }
 
+// From https://gist.github.com/jcdickinson/580b7fb5cc145cee8740
+//
 vec3 daltonizeCorrection(vec3 rgb) {
     // Isolate invisible rgbs to rgb vision deficiency (calculate error matrix)
     vec3 error = (rgb - daltonize(rgb));
