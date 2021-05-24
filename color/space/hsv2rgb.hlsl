@@ -12,7 +12,7 @@ license: |
 #ifndef FNC_HSV2RGB
 #define FNC_HSV2RGB
 float3 hsv2rgb(in float3 hsb) {
-    float3 rgb = clamp(abs(mod(hsb.x * 6. + float3(0., 4., 2.), 
+    float3 rgb = clamp(abs(fmod(hsb.x * 6. + float3(0., 4., 2.), 
                             6.) - 3.) - 1.,
                       0.,
                       1.);
