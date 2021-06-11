@@ -32,6 +32,6 @@ license: |
 #ifndef FNC_EDGE
 #define FNC_EDGE
 EDGE_TYPE edge(in sampler2D tex, in vec2 st, in vec2 offset) {
-  return EDGE_FNC(tex, st, offset);
+    return EDGE_FNC(tex, st, offset);
 }
 #endif
