@@ -44,17 +44,17 @@ license:
 #ifndef FNC_EDGESOBEL
 #define FNC_EDGESOBEL
 EDGESOBEL_TYPE edgeSobel(in sampler2D tex, in vec2 st, in vec2 offset) {
-  // get samples around pixel
-  EDGESOBEL_TYPE tleft = EDGESOBEL_SAMPLER_FNC(st + vec2(-offset.x, offset.y));
-  EDGESOBEL_TYPE left = EDGESOBEL_SAMPLER_FNC(st + vec2(-offset.x, 0.));
-  EDGESOBEL_TYPE bleft = EDGESOBEL_SAMPLER_FNC(st + vec2(-offset.x, -offset.y));
-  EDGESOBEL_TYPE top = EDGESOBEL_SAMPLER_FNC(st + vec2(0., offset.y));
-  EDGESOBEL_TYPE bottom = EDGESOBEL_SAMPLER_FNC(st + vec2(0., -offset.y));
-  EDGESOBEL_TYPE tright = EDGESOBEL_SAMPLER_FNC(st + offset);
-  EDGESOBEL_TYPE right = EDGESOBEL_SAMPLER_FNC(st + vec2(offset.x, 0.));
-  EDGESOBEL_TYPE bright = EDGESOBEL_SAMPLER_FNC(st + vec2(offset.x, -offset.y));
-  EDGESOBEL_TYPE x = tleft + 2. * left + bleft - tright - 2. * right - bright;
-  EDGESOBEL_TYPE y = -tleft - 2. * top - tright + bleft + 2. * bottom + bright;
-  return sqrt((x * x) + (y * y));
+    // get samples around pixel
+    EDGESOBEL_TYPE tleft = EDGESOBEL_SAMPLER_FNC(st + vec2(-offset.x, offset.y));
+    EDGESOBEL_TYPE left = EDGESOBEL_SAMPLER_FNC(st + vec2(-offset.x, 0.));
+    EDGESOBEL_TYPE bleft = EDGESOBEL_SAMPLER_FNC(st + vec2(-offset.x, -offset.y));
+    EDGESOBEL_TYPE top = EDGESOBEL_SAMPLER_FNC(st + vec2(0., offset.y));
+    EDGESOBEL_TYPE bottom = EDGESOBEL_SAMPLER_FNC(st + vec2(0., -offset.y));
+    EDGESOBEL_TYPE tright = EDGESOBEL_SAMPLER_FNC(st + offset);
+    EDGESOBEL_TYPE right = EDGESOBEL_SAMPLER_FNC(st + vec2(offset.x, 0.));
+    EDGESOBEL_TYPE bright = EDGESOBEL_SAMPLER_FNC(st + vec2(offset.x, -offset.y));
+    EDGESOBEL_TYPE x = tleft + 2. * left + bleft - tright - 2. * right - bright;
+    EDGESOBEL_TYPE y = -tleft - 2. * top - tright + bleft + 2. * bottom + bright;
+    return sqrt((x * x) + (y * y));
 }
 #endif

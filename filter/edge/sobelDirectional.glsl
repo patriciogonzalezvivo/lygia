@@ -38,22 +38,22 @@ license: |
 #ifndef FNC_EDGESOBEL_DIRECTIONAL
 #define FNC_EDGESOBEL_DIRECTIONAL
 vec3 edgeSobelDirectional(in sampler2D tex, in vec2 st, in vec2 offset) {
-  // get samples around pixel
-  float tleft = EDGESOBEL_DIRECTIONAL_SAMPLER_FNC(st + vec2(-offset.x, offset.y));
-  float left = EDGESOBEL_DIRECTIONAL_SAMPLER_FNC(st + vec2(-offset.x, 0.));
-  float bleft = EDGESOBEL_DIRECTIONAL_SAMPLER_FNC(st + vec2(-offset.x, -offset.y));
-  float top = EDGESOBEL_DIRECTIONAL_SAMPLER_FNC(st + vec2(0., offset.y));
-  float bottom = EDGESOBEL_DIRECTIONAL_SAMPLER_FNC(st + vec2(0., -offset.y));
-  float tright = EDGESOBEL_DIRECTIONAL_SAMPLER_FNC(st + offset);
-  float right = EDGESOBEL_DIRECTIONAL_SAMPLER_FNC(st + vec2(offset.x, 0.));
-  float bright = EDGESOBEL_DIRECTIONAL_SAMPLER_FNC(st + vec2(offset.x, -offset.y));
-  vec2 gradientDirection = vec2(0.);
-  gradientDirection.x = -bleft - 2. * left - tleft + bright + 2. * right + tright;
-  gradientDirection.y = -tleft - 2. * top - tright + bleft + 2. * bottom + bright;
-  float gradientMagnitude = length(gradientDirection);
-  vec2 normalizedDirection = normalize(gradientDirection);
-  normalizedDirection = sign(normalizedDirection) * floor(abs(normalizedDirection) + .617316); // Offset by 1-sin(pi/8) to set to 0 if near axis, 1 if away
-  normalizedDirection = (normalizedDirection + 1.) * .5; // Place -1.0 - 1.0 within 0 - 1.0
-  return vec3(gradientMagnitude, normalizedDirection.x, normalizedDirection.y);
+    // get samples around pixel
+    float tleft = EDGESOBEL_DIRECTIONAL_SAMPLER_FNC(st + vec2(-offset.x, offset.y));
+    float left = EDGESOBEL_DIRECTIONAL_SAMPLER_FNC(st + vec2(-offset.x, 0.));
+    float bleft = EDGESOBEL_DIRECTIONAL_SAMPLER_FNC(st + vec2(-offset.x, -offset.y));
+    float top = EDGESOBEL_DIRECTIONAL_SAMPLER_FNC(st + vec2(0., offset.y));
+    float bottom = EDGESOBEL_DIRECTIONAL_SAMPLER_FNC(st + vec2(0., -offset.y));
+    float tright = EDGESOBEL_DIRECTIONAL_SAMPLER_FNC(st + offset);
+    float right = EDGESOBEL_DIRECTIONAL_SAMPLER_FNC(st + vec2(offset.x, 0.));
+    float bright = EDGESOBEL_DIRECTIONAL_SAMPLER_FNC(st + vec2(offset.x, -offset.y));
+    vec2 gradientDirection = vec2(0.);
+    gradientDirection.x = -bleft - 2. * left - tleft + bright + 2. * right + tright;
+    gradientDirection.y = -tleft - 2. * top - tright + bleft + 2. * bottom + bright;
+    float gradientMagnitude = length(gradientDirection);
+    vec2 normalizedDirection = normalize(gradientDirection);
+    normalizedDirection = sign(normalizedDirection) * floor(abs(normalizedDirection) + .617316); // Offset by 1-sin(pi/8) to set to 0 if near axis, 1 if away
+    normalizedDirection = (normalizedDirection + 1.) * .5; // Place -1.0 - 1.0 within 0 - 1.0
+    return vec3(gradientMagnitude, normalizedDirection.x, normalizedDirection.y);
 }
 #endif
