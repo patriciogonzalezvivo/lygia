@@ -11,5 +11,31 @@ license: |
 
 #ifndef FNC_DECIMATION
 #define FNC_DECIMATION
-#define decimation(value, presicion) (floor(value * presicion)/presicion)
+float decimation(float value, float presicion) {
+    return floor(value * presicion)/presicion;
+}
+
+vec2 decimation(vec2 value, float presicion) {
+    return floor(value * presicion)/presicion;
+}
+
+vec3 decimation(vec3 value, float presicion) {
+    return floor(value * presicion)/presicion;
+}
+
+vec4 decimation(vec4 value, float presicion) {
+    return floor(value * presicion)/presicion;
+}
+
+vec2 decimation(vec2 value, vec2 presicion) {
+    return floor(value * presicion)/presicion;
+}
+
+vec3 decimation(vec3 value, vec3 presicion) {
+    return floor(value * presicion)/presicion;
+}
+
+vec4 decimation(vec4 value, vec4 presicion) {
+    return floor(value * presicion)/presicion;
+}
 #endif
