@@ -3,7 +3,7 @@
 /*
 author: [Ian McEwan, Ashima Arts]
 description: permute
-use: permute(<float|vec2|vec3|vec4> x)
+use: permute(<float|float2|float3|float4> x)
 license : |
   Copyright (C) 2011 Ashima Arts. All rights reserved.
   Distributed under the MIT License. See LICENSE file.
