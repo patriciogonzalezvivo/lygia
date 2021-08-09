@@ -1,4 +1,4 @@
-#include "../../math/min.glsl"
+#include "../../math/min.hlsl"
 
 /*
 author: Patricio Gonzalez Vivo
