@@ -6,7 +6,7 @@
 /*
 author: [Ian McEwan, Ashima Arts]
 description: Simplex Noise https://github.com/ashima/webgl-noise
-use: snoise(<vec2|vec3|vec4> pos)
+use: snoise(<float2|float3|float4> pos)
 license: |
   Copyright (C) 2011 Ashima Arts. All rights reserved.
   Copyright (C) 2011-2016 by Stefan Gustavson (Classic noise and others)
