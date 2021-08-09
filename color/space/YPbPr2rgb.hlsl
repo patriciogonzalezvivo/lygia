@@ -30,7 +30,7 @@ float3 YPbPr2rgb(in float3 rgb) {
     return mul(YPbPr2rgb_mat, rgb);
 }
 
-vec4 YPbPr2rgb(in vec4 rgb) {
-    return vec4(YPbPr2rgb(rgb.rgb),rgb.a);
+float4 YPbPr2rgb(in float4 rgb) {
+    return float4(YPbPr2rgb(rgb.rgb),rgb.a);
 }
 #endif

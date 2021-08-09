@@ -2,7 +2,7 @@
 
 /*
 description: Returns a rhomb-shaped sdf
-use: rhombSDF(<vec2> st)
+use: rhombSDF(<float2> st)
 author: Patricio Gonzalez Vivo
 license: |
     Copyright (c) 2017 Patricio Gonzalez Vivo. All rights reserved.
