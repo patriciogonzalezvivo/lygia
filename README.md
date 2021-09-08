@@ -91,7 +91,7 @@ This library:
 * Relays on `#include "file"` which is defined by Khronos GLSL standard and suported by most engines and enviroments ( like [glslViewer](https://github.com/patriciogonzalezvivo/glslViewer/wiki/Compiling), [glsl-canvas VS Code pluging](https://marketplace.visualstudio.com/items?itemName=circledev.glsl-canvas), Unity, etc. ). It requires a tipical C-like pre-compiler MACRO which is easy to implement with just basic string operations to resolve dependencies. Here you can find some implementations on different languages:
     * C++: https://github.com/patriciogonzalezvivo/glslViewer/blob/master/src/io/fs.cpp#L104
     * Python: https://gist.github.com/patriciogonzalezvivo/9a50569c2ef9b08058706443a39d838e
-    * JS: 
+    * JavaScript: 
         - esbuid: https://github.com/ricardomatias/esbuild-plugin-glsl-include
         - webpack: https://github.com/grieve/webpack-glsl-loader
         - observable: https://observablehq.com/d/e4e8a96f64a6bf81
