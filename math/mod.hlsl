@@ -12,7 +12,7 @@ license: |
 
 #ifndef FNC_MOD
 #define FNC_MOD
-float2 mod(float x, float y) {
+float mod(float x, float y) {
     return x - y * floor(x / y);
 }
 
