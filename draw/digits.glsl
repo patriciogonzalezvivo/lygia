@@ -99,9 +99,15 @@ float digits(in vec2 st, in float value, in float nDecDigit) {
 float digits(in vec2 st, in float value, in float nDecDigit, in float nIntDigits) {
     vec2 st2 = st;
     float result = 0.0;
-    for (float i = nIntDigits - 1.0; i > 0. ; --i) {
-        if (value < i * 10.) {
-            result += digits(st2, 0.0, nDecDigit);
+    float dig = nDecDigit;
+
+    #ifndef DIGITS_LEADING_INT
+    #define DIGITS_LEADING_INT nIntDigits
+    #endif
+
+    for (float i = DIGITS_LEADING_INT - 1.0; i > 0.0 ; i--) {
+        if (i * 10.0 > value) {
+            result += digits(st2, 0.0, 0.0);
             st2.x -= DIGITS_SIZE.x;
         }
     }

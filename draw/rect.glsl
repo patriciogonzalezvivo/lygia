@@ -17,11 +17,21 @@ license: |
 
 #ifndef FNC_RECT
 #define FNC_RECT
-float rect(vec2 st, vec2 size) {
-    return fill(rectSDF(st, size), 1.0);
-}
 
 float rect(vec2 st, vec2 size, float strokeWidth) {
     return stroke(rectSDF(st, size), 1.0, strokeWidth);
 }
+
+float rect(vec2 st, float size, float strokeWidth) {
+    return stroke(rectSDF(st, vec2(size)), 1.0, strokeWidth);
+}
+
+float rect(vec2 st, vec2 size) {
+    return fill(rectSDF(st, size), 1.0);
+}
+
+float rect(vec2 st, float size) {
+    return fill(rectSDF(st, vec2(size)), 1.0);
+}
+
 #endif
