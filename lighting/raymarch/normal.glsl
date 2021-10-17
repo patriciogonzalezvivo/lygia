@@ -1,3 +1,5 @@
+#include "map.glsl"
+
 /*
 author:  Inigo Quiles
 description: calculate normals http://iquilezles.org/www/articles/normalsSDF/normalsSDF.htm

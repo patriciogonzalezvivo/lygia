@@ -111,6 +111,7 @@ KUWAHARA_TYPE kuwahara(in sampler2D tex, in vec2 st, in vec2 pixel, in int radiu
 
     return rta;
 }
+
 #else
 
 KUWAHARA_TYPE kuwahara(in sampler2D tex, in vec2 st, in vec2 pixel, in int radius) {

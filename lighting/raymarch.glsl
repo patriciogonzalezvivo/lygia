@@ -9,19 +9,28 @@ license: |
     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.    
 */
 
+
+#ifndef RAYMARCH_CAMERA_MATRIX_FNC
+#define RAYMARCH_CAMERA_MATRIX_FNC(RO, TA) raymarchCamera(RO, TA)
+#endif
+
 #ifndef ENG_RAYMARCHING
 #define ENG_RAYMARCHING
-
-vec4 raymarchMap( in vec3 pos );
 
 #include "raymarch/camera.glsl"
 #include "raymarch/render.glsl"
 
-vec4 raymarch(vec3 camera, vec2 st) {
-    mat3 ca = raymarchCamera(camera);
+vec4 raymarch(vec3 camera, vec3 ta, vec2 st) {
+    mat3 ca = RAYMARCH_CAMERA_MATRIX_FNC(camera, ta);
     vec3 rd = ca * normalize(vec3(st*2.0-1.0, 3.0));
     
     return raymarchRender( camera * 0.11, rd );
 }
+
+
+vec4 raymarch(vec3 camera, vec2 st) {
+    return raymarch(camera, vec3(0.0), st);
+}
+
 
 #endif
