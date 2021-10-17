@@ -1,3 +1,5 @@
+#include "map.glsl"
+
 /*
 author:  Inigo Quiles
 description: calculare Ambient Occlusion

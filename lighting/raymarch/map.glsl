@@ -1,9 +1,7 @@
-#include "map.glsl"
-
 /*
 author:  Inigo Quiles
-description: cast a ray
-use: <float> castRay( in <vec3> pos, in <vec3> nor ) 
+description: map of SDF functions to be declare
+use: <vec4> raymarchMap( in <vec3> pos ) 
 license: |
     The MIT License
     Copyright © 2013 Inigo Quilez
@@ -23,38 +21,9 @@ license: |
        http://iquilezles.org/www/articles/distfunctions/distfunctions.htm
 */
 
-#ifndef RAYMARCH_SAMPLES
-#define RAYMARCH_SAMPLES 64
-#endif
+#ifndef FNC_RAYMARCHMAP
+#define FNC_RAYMARCHMAP
 
-#ifndef FNC_RAYMARCHCAST
-#define FNC_RAYMARCHCAST
-
-vec4 raymarchCast( in vec3 ro, in vec3 rd ) {
-    float tmin = 1.0;
-    float tmax = 20.0;
-   
-// #if defined(RAYMARCH_FLOOR)
-//     float tp1 = (0.0-ro.y)/rd.y; if( tp1>0.0 ) tmax = min( tmax, tp1 );
-//     float tp2 = (1.6-ro.y)/rd.y; if( tp2>0.0 ) { if( ro.y>1.6 ) tmin = max( tmin, tp2 );
-//                                                  else           tmax = min( tmax, tp2 ); }
-// #endif
-    
-    float t = tmin;
-    vec3 m = vec3(-1.0);
-    for ( int i = 0; i < RAYMARCH_SAMPLES; i++ ) {
-        float precis = 0.0004*t;
-        vec4 res = raymarchMap( ro+rd*t );
-        if ( res.a < precis || t>tmax ) break;
-        t += res.a;
-        m = res.rgb;
-    }
-
-    #if defined(RAYMARCH_BACKGROUND) || defined(RAYMARCH_FLOOR)
-    if ( t>tmax ) m = vec3(-1.0);
-    #endif
-
-    return vec4( m, t );
-}
+vec4 raymarchMap( in vec3 pos );
 
 #endif

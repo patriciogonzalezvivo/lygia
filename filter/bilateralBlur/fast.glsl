@@ -40,7 +40,7 @@ license: |
 #ifndef FNC_BILATERALBLURFAST
 #define FNC_BILATERALBLURFAST
 
-#ifndef PLATFORM_RPI
+#if define(PLATFORM_RPI)
 BILATERALBLURFAST_TYPE bilateralBlurFast(in sampler2D tex, in vec2 st, in vec2 pixel, in float smoothingFactor, const float sigma_s) {
   BILATERALBLURFAST_TYPE colorRef = BILATERALBLURFAST_SAMPLER_FNC(st);
   BILATERALBLURFAST_TYPE accumColor = BILATERALBLURFAST_TYPE(0.);

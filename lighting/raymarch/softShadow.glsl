@@ -1,3 +1,5 @@
+#include "map.glsl"
+
 /*
 author:  Inigo Quiles
 description: calculate soft shadows http://iquilezles.org/www/articles/rmshadows/rmshadows.htm

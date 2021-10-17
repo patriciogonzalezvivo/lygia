@@ -1,3 +1,9 @@
+#include "cast.glsl"
+#include "ao.glsl"
+#include "normal.glsl"
+#include "softShadow.glsl"
+#include "../../math/saturate.glsl"
+
 /*
 author:  Inigo Quiles
 description: raymarching renderer
@@ -20,13 +26,6 @@ license: |
     and
        http://iquilezles.org/www/articles/distfunctions/distfunctions.htm
 */
-
-// #include "checkersGradBox.glsl"
-#include "ao.glsl"
-#include "normal.glsl"
-#include "softShadow.glsl"
-#include "cast.glsl"
-#include "../../math/saturate.glsl"
 
 #ifndef RAYMARCH_AMBIENT
 #define RAYMARCH_AMBIENT vec3(1.0)
