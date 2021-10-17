@@ -10,6 +10,7 @@ description: Material Constructor. Designed to integrate with GlslViewer's defin
 use: 
     - void raymarchMaterial(in <vec3> ro, in <vec3> rd, out material _mat)
     - material raymarchMaterial(in <vec3> ro, in <vec3> rd)
+    - LIGHT_POSITION: in glslViewer is u_light
 license: |
     The MIT License
     Copyright © 2013 Inigo Quilez
@@ -29,18 +30,14 @@ license: |
        http://iquilezles.org/www/articles/distfunctions/distfunctions.htm
 */
 
-#ifndef RAYMARCH_LIGHT
-#ifdef GLSLVIEWER
-#define RAYMARCH_LIGHT u_light
-#else
-#define RAYMARCH_LIGHT vec3(-1.0, 1.0, -1.0)
-#endif
+#ifndef LIGHT_POSITION
+#define LIGHT_POSITION u_light
 #endif
 
 #ifndef FNC_RAYMARCHMATERIAL
 #define FNC_RAYMARCHMATERIAL
 
-void raymarchMaterial( in vec3 ro, in vec3 rd, inout material mat) { 
+void raymarchMaterial( in vec3 ro, in vec3 rd, inout Material mat) { 
     vec4 res = raymarchCast(ro, rd);
 
     vec3 col = vec3(0.0);
@@ -57,7 +54,7 @@ void raymarchMaterial( in vec3 ro, in vec3 rd, inout material mat) {
 
     #if defined(SHADING_SHADOWS)
     vec3 ref = reflect( rd, nor );
-    vec3 lig = normalize( RAYMARCH_LIGHT );
+    vec3 lig = normalize( LIGHT_POSITION );
 
     vec3  hal = normalize( lig-rd );
     float amb = clamp( 0.5+0.5*nor.y, 0.0, 1.0 );
@@ -77,8 +74,8 @@ void raymarchMaterial( in vec3 ro, in vec3 rd, inout material mat) {
     #endif
 }
 
-material raymarchMaterial( in vec3 ro, in vec3 rd) { 
-    material mat;
+Material raymarchMaterial( in vec3 ro, in vec3 rd) { 
+    Material mat;
     raymarchMaterial( ro, rd, mat);
     return mat;
 }

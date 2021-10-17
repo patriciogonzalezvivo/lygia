@@ -1,7 +1,7 @@
 /*
 author:  Inigo Quiles
-description: generate the SDF of a plane
-use: <float> planeSDF( in <vec3> pos, in <vec2> h ) 
+description: generate the SDF of a cylinder
+use: <float> cylinderSDF( in <vec3> pos, in <vec2|float> h [, <float> r] ) 
 license: |
     The MIT License
     Copyright © 2013 Inigo Quilez
@@ -20,8 +20,21 @@ license: |
     and
        http://iquilezles.org/www/articles/distfunctions/distfunctions.htm
 */
+#ifndef FNC_CYLINDERSDF
+#define FNC_CYLINDERSDF
 
-#ifndef FNC_PLANESDF
-#define FNC_PLANESDF
-float planeSDF( vec3 p ) { return p.y; }
+float cylinderSDF( vec3 p, vec2 h ) {
+    vec2 d = abs(vec2(length(p.xz),p.y)) - h;
+    return min(max(d.x,d.y),0.0) + length(max(d,0.0));
+}
+
+float cylinderSDF( vec3 p, float h ) {
+    return cylinderSDF( p, vec2(h) );
+}
+
+float cylinderSDF( vec3 p, float h, float r ) {
+    vec2 d = abs(vec2(length(p.xz),p.y)) - vec2(h,r);
+    return min(max(d.x,d.y),0.0) + length(max(d,0.0));
+}
+
 #endif

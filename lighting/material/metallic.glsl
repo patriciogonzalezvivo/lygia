@@ -1,4 +1,3 @@
-#include "../../color/space/gamma2linear.glsl"
 #include "../toMetallic.glsl"
 #include "specular.glsl"
 

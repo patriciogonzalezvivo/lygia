@@ -25,7 +25,7 @@ license: |
 #ifndef FNC_MATERIAL_NEW
 #define FNC_MATERIAL_NEW
 
-void materialNew(out material _mat) {
+void materialNew(out Material _mat) {
     _mat.baseColor = materialBaseColor();
     _mat.emissive = materialEmissive();
     _mat.normal = materialNormal();
@@ -67,8 +67,8 @@ void materialNew(out material _mat) {
 #endif
 }
 
-material materialNew() {
-    material mat;
+Material materialNew() {
+    Material mat;
     materialNew(mat);
     return mat;
 }

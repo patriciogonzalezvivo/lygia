@@ -1,7 +1,7 @@
 /*
 author:  Inigo Quiles
-description: generate the SDF of a plane
-use: <float> planeSDF( in <vec3> pos, in <vec2> h ) 
+description: generate the SDF of a torus
+use: <float> torusSDF( in <vec3> pos, in <vec2> h ) 
 license: |
     The MIT License
     Copyright © 2013 Inigo Quilez
@@ -20,8 +20,7 @@ license: |
     and
        http://iquilezles.org/www/articles/distfunctions/distfunctions.htm
 */
-
-#ifndef FNC_PLANESDF
-#define FNC_PLANESDF
-float planeSDF( vec3 p ) { return p.y; }
+#ifndef FNC_TORUSSDF
+#define FNC_TORUSSDF
+float torusSDF( vec3 p, vec2 t ) { return length( vec2(length(p.xz)-t.x,p.y) )-t.y; }
 #endif

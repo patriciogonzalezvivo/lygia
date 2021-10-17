@@ -1,7 +1,7 @@
 /*
 author:  Inigo Quiles
-description: generate the SDF of a plane
-use: <float> planeSDF( in <vec3> pos, in <vec2> h ) 
+description: Union operation of two SDFs 
+use: <float> opUnion( in <float|vec4> d1, in <float|vec4> d2 [, <float> smooth_factor] ) 
 license: |
     The MIT License
     Copyright © 2013 Inigo Quilez
@@ -21,7 +21,21 @@ license: |
        http://iquilezles.org/www/articles/distfunctions/distfunctions.htm
 */
 
-#ifndef FNC_PLANESDF
-#define FNC_PLANESDF
-float planeSDF( vec3 p ) { return p.y; }
+#ifndef FNC_OPUNION
+#define FNC_OPUNION
+
+float opUnion( float d1, float d2 ) { return min(d1, d2); }
+vec4  opUnion( vec4 d1, vec4 d2 ) { return (d1.a < d2.a) ? d1 : d2; }
+
+// Soft union
+float opUnion( float d1, float d2, float k ) {
+    float h = clamp( 0.5 + 0.5*(d2-d1)/k, 0.0, 1.0 );
+    return mix( d2, d1, h ) - k*h*(1.0-h); 
+}
+
+vec4 opUnion( vec4 d1, vec4 d2, float k ) {
+    float h = clamp( 0.5 + 0.5*(d2.a - d1.a)/k, 0.0, 1.0 );
+    return mix( d2, d1, h ) - k*h*(1.0-h); 
+}
+
 #endif
