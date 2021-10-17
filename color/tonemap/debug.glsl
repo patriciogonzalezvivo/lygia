@@ -1,4 +1,4 @@
-#include "luminance.glsl"
+#include "../luminance.glsl"
 
 /**
  * Converts the input HDR RGB color into one of 16 debug colors that represent

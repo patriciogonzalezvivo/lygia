@@ -1,7 +1,7 @@
 /*
 author:  Inigo Quiles
-description: generate the SDF of a plane
-use: <float> planeSDF( in <vec3> pos, in <vec2> h ) 
+description: intersection operation of two SDFs 
+use: <float> opIntersection( in <float> d1, in <float> d2 [, <float> smooth_factor] ) 
 license: |
     The MIT License
     Copyright © 2013 Inigo Quilez
@@ -21,7 +21,14 @@ license: |
        http://iquilezles.org/www/articles/distfunctions/distfunctions.htm
 */
 
-#ifndef FNC_PLANESDF
-#define FNC_PLANESDF
-float planeSDF( vec3 p ) { return p.y; }
+#ifndef FNC_OPINTERSECTION
+#define FNC_OPINTERSECTION
+
+float opIntersection( float d1, float d2 ) { return max(d1,d2); }
+
+float opIntersection( float d1, float d2, float k ) {
+    float h = clamp( 0.5 - 0.5*(d2-d1)/k, 0.0, 1.0 );
+    return mix( d2, d1, h ) + k*h*(1.0-h); 
+}
+
 #endif

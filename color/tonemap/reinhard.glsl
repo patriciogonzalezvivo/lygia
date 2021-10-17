@@ -1,4 +1,4 @@
-#include "luminance.glsl"
+#include "../luminance.glsl"
 
 /*
 Author: [Erik Reinhard, Michael Stark, Peter Shirley, James Ferwerda]

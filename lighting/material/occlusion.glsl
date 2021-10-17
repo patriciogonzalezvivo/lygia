@@ -1,5 +1,3 @@
-#include "../../color/space/gamma2linear.glsl"
-
 /*
 author: Patricio Gonzalez Vivo
 description: get material normal property from GlslViewer's defines https://github.com/patriciogonzalezvivo/glslViewer/wiki/GlslViewer-DEFINES#material-defines 

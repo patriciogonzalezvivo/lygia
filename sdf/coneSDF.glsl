@@ -1,7 +1,7 @@
 /*
 author:  Inigo Quiles
-description: generate the SDF of a plane
-use: <float> planeSDF( in <vec3> pos, in <vec2> h ) 
+description: generate the SDF of a cone
+use: <float> coneSDF( in <vec3> pos, in <vec3> c ) 
 license: |
     The MIT License
     Copyright © 2013 Inigo Quilez
@@ -20,8 +20,14 @@ license: |
     and
        http://iquilezles.org/www/articles/distfunctions/distfunctions.htm
 */
+#ifndef FNC_CONESDF
+#define FNC_CONESDF
 
-#ifndef FNC_PLANESDF
-#define FNC_PLANESDF
-float planeSDF( vec3 p ) { return p.y; }
+float coneSDF( in vec3 p, in vec3 c ) {
+    vec2 q = vec2( length(p.xz), p.y );
+    float d1 = -q.y-c.z;
+    float d2 = max( dot(q,c.xy), q.y);
+    return length(max(vec2(d1,d2),0.0)) + min(max(d1,d2), 0.);
+}
+
 #endif

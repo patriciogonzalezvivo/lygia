@@ -1,7 +1,7 @@
 /*
 author:  Inigo Quiles
-description: generate the SDF of a plane
-use: <float> planeSDF( in <vec3> pos, in <vec2> h ) 
+description: generate a SDF of a capsule
+use: <float> capusleSDF( in <vec3> pos, in <vec3> a, <vec3> b, <float> r ) 
 license: |
     The MIT License
     Copyright © 2013 Inigo Quilez
@@ -20,8 +20,13 @@ license: |
     and
        http://iquilezles.org/www/articles/distfunctions/distfunctions.htm
 */
+#ifndef FNC_CAPSULESDF
+#define FNC_CAPSULESDF
 
-#ifndef FNC_PLANESDF
-#define FNC_PLANESDF
-float planeSDF( vec3 p ) { return p.y; }
+float capsuleSDF( vec3 p, vec3 a, vec3 b, float r ) {
+    vec3 pa = p-a, ba = b-a;
+    float h = clamp( dot(pa,ba)/dot(ba,ba), 0.0, 1.0 );
+    return length( pa - ba*h ) - r;
+}
+
 #endif

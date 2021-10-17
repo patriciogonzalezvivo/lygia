@@ -1,7 +1,7 @@
 /*
 author:  Inigo Quiles
-description: generate the SDF of a plane
-use: <float> planeSDF( in <vec3> pos, in <vec2> h ) 
+description: generate the SDF of a triangular prism
+use: <float> triPrismSDF( in <vec3> pos, in <vec2> h ) 
 license: |
     The MIT License
     Copyright © 2013 Inigo Quilez
@@ -20,8 +20,12 @@ license: |
     and
        http://iquilezles.org/www/articles/distfunctions/distfunctions.htm
 */
+#ifndef FNC_TRIPRISMSDF
+#define FNC_TRIPRISMSDF
 
-#ifndef FNC_PLANESDF
-#define FNC_PLANESDF
-float planeSDF( vec3 p ) { return p.y; }
+float triPrismSDF( vec3 p, vec2 h ) {
+    vec3 q = abs(p);
+    return max(q.z-h.y,max(q.x*0.866025+p.y*0.5,-p.y)-h.x*0.5);
+}
+
 #endif

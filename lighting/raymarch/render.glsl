@@ -27,6 +27,14 @@ license: |
        http://iquilezles.org/www/articles/distfunctions/distfunctions.htm
 */
 
+#ifndef LIGHT_POSITION
+#define LIGHT_POSITION  u_light
+#endif
+
+#ifndef LIGHT_COLOR
+#define LIGHT_COLOR     u_lightColor
+#endif
+
 #ifndef RAYMARCH_AMBIENT
 #define RAYMARCH_AMBIENT vec3(1.0)
 #endif
@@ -34,22 +42,6 @@ license: |
 #ifndef RAYMARCH_BACKGROUND
 #define RAYMARCH_BACKGROUND vec3(0.0)
 // #define RAYMARCH_BACKGROUND ( vec3(0.7, 0.9, 1.0) +rd.y*0.8 )
-#endif
-
-#ifndef RAYMARCH_LIGHT
-#ifdef GLSLVIEWER
-#define RAYMARCH_LIGHT u_light
-#else
-#define RAYMARCH_LIGHT vec3(1., 0.0, 0.0)
-#endif
-#endif
-
-#ifndef RAYMARCH_LIGHT_COLOR
-#ifdef GLSLVIEWER
-#define RAYMARCH_LIGHT_COLOR u_lightColor
-#else
-#define RAYMARCH_LIGHT_COLOR vec3(1.00,0.80,0.55)
-#endif
 #endif
 
 #ifndef FNC_RAYMARCHRENDER
@@ -70,15 +62,15 @@ vec4 raymarchRender( in vec3 ro, in vec3 rd ) {
         vec3 ref = reflect( rd, nor );
         col = m;
         
-        // #if defined(RAYMARCH_FLOOR)
-        // if ( m.y < 0.0) {
-        //     col = RAYMARCH_FLOOR;
-        // }
-        // #endif
+        #if defined(RAYMARCH_FLOOR)
+        if ( m.y < 0.0) {
+            col = RAYMARCH_FLOOR;
+        }
+        #endif
 
         // lighitng        
         float occ = raymarchAO( pos, nor );
-        vec3  lig = normalize( RAYMARCH_LIGHT );
+        vec3  lig = normalize( LIGHT_POSITION );
         vec3  hal = normalize( lig-rd );
         float amb = clamp( 0.5+0.5*nor.y, 0.0, 1.0 );
         float dif = clamp( dot( nor, lig ), 0.0, 1.0 );
@@ -90,7 +82,7 @@ vec4 raymarchRender( in vec3 ro, in vec3 rd ) {
         dom *= raymarchSoftShadow( pos, ref, 0.02, 2.5 );
 
         vec3 lin = vec3(0.0);
-        lin += 1.30 * dif * RAYMARCH_LIGHT_COLOR;
+        lin += 1.30 * dif * LIGHT_COLOR;
         lin += 0.40 * amb * occ * RAYMARCH_AMBIENT;
         lin += 0.50 * dom * occ * RAYMARCH_AMBIENT;
         lin += 0.50 * bac * occ * 0.25;
