@@ -28,11 +28,11 @@ license: |
 */
 
 #ifndef LIGHT_POSITION
-#define LIGHT_POSITION  u_light
+#define LIGHT_POSITION  vec3(0.0, 10.0, -50.0)
 #endif
 
 #ifndef LIGHT_COLOR
-#define LIGHT_COLOR     u_lightColor
+#define LIGHT_COLOR     vec3(0.5)
 #endif
 
 #ifndef RAYMARCH_AMBIENT
@@ -95,7 +95,6 @@ vec4 raymarchRender( in vec3 ro, in vec3 rd ) {
         // col += 10.00*spe*vec3(1.00,0.90,0.70);
 
         // col = mix( col, vec3(0.8,0.9,1.0), 1.0-exp( -0.0002*t*t*t ) );
-
         // col = vec3(1.) * amb;
         // col = vec3(1.) * dif;
         // col = vec3(1.) * bac;
