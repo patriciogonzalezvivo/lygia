@@ -15,6 +15,7 @@ description: simple PBR shading model
 use: <vec4> pbrLittle(<vec4> baseColor, <vec3> normal, <float> roughness, <float> metallic ) 
 options:
     - DIFFUSE_FNC: diffuseOrenNayar, diffuseBurley, diffuseLambert (default)
+    - SPECULAR_FNC: specularGaussian, specularBeckmann, specularCookTorrance (default), specularPhongRoughness, specularBlinnPhongRoughnes (default on mobile)
     - LIGHT_POSITION: in GlslViewer is u_light
     - CAMERA_POSITION: in GlslViewer is u_camera
     - SURFACE_POSITION: in glslViewer is v_position
