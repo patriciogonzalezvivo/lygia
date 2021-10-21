@@ -9,7 +9,9 @@
 author: Patricio Gonzalez Vivo
 description: calculate specular contribution
 use: 
-    - specular(<vec3> L, <vec3> N, <vec3> V, <float> roughness [, <float> fresnel])
+    - specular(<vec3> L, <vec3> N, <vec3> V, <float> roughne#ifndef TONEMAP_FNC
+#define TONEMAP_FNC tonemapReinhard
+#endifss [, <float> fresnel])
     - specular(<vec3> L, <vec3> N, <vec3> V, <float> NoV, <float> NoL, <float> roughness, <float> fresnel)
 options:
     - SPECULAR_FNC: specularGaussian, specularBeckmann, specularCookTorrance (default), specularPhongRoughness, specularBlinnPhongRoughnes (default on mobile)
