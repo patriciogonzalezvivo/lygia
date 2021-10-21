@@ -1,7 +1,7 @@
 /*
 author:  Inigo Quiles
-description: generate the SDF of a hexagonal prism
-use: <float> hexPrismSDF( in <vec3> pos, in <vec2> h ) 
+description: generate the SDF of a octahedron
+use: <float> octahedronSDF(<vec3> p, <float> s)
 license: |
     The MIT License
     Copyright © 2013 Inigo Quilez
@@ -20,26 +20,35 @@ license: |
     and
        http://iquilezles.org/www/articles/distfunctions/distfunctions.htm
 */
-#ifndef FNC_HEXPRISMSDF
-#define FNC_HEXPRISMSDF
+#ifndef FNC_OCTAHEDRONSDF
+#define FNC_OCTAHEDRONSDF
 
-float hexPrismSDF( vec3 p, vec2 h ) {
-    vec3 q = abs(p);
-    float d1 = q.z-h.y;
-    float d2 = max((q.x*0.866025+q.y*0.5),q.y)-h.x;
-    return length(max(vec2(d1,d2),0.0)) + min(max(d1,d2), 0.);
+float octahedronSDF(vec3 p, float s) {
+    p = abs(p);
+    float m = p.x + p.y + p.z - s;
+
+    // exact distance
+    #if 0
+    vec3 o = min(3.0*p - m, 0.0);
+    o = max(6.0*p - m*2.0 - o*3.0 + (o.x+o.y+o.z), 0.0);
+    return length(p - s*o/(o.x+o.y+o.z));
+    #endif
+    
+    // exact distance
+    #if 1
+ 	vec3 q;
+         if( 3.0*p.x < m ) q = p.xyz;
+    else if( 3.0*p.y < m ) q = p.yzx;
+    else if( 3.0*p.z < m ) q = p.zxy;
+    else return m*0.57735027;
+    float k = clamp(0.5*(q.z-q.y+s),0.0,s); 
+    return length(vec3(q.x,q.y-s+k,q.z-k)); 
+    #endif
+    
+    // bound, not exact
+    #if 0
+	return m*0.57735027;
+    #endif
 }
-
-// float hexPrismSDF( vec3 p, vec2 h ) {
-//     vec3 q = abs(p);
-
-//     const vec3 k = vec3(-0.8660254, 0.5, 0.57735);
-//     p = abs(p);
-//     p.xy -= 2.0*min(dot(k.xy, p.xy), 0.0)*k.xy;
-//     vec2 d = vec2(
-//        length(p.xy - vec2(clamp(p.x, -k.z*h.x, k.z*h.x), h.x))*sign(p.y - h.x),
-//        p.z-h.y );
-//     return min(max(d.x,d.y),0.0) + length(max(d,0.0));
-// }
 
 #endif

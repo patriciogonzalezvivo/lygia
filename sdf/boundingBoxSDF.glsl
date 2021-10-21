@@ -1,7 +1,7 @@
 /*
 author:  Inigo Quiles
-description: generate the SDF of a hexagonal prism
-use: <float> hexPrismSDF( in <vec3> pos, in <vec2> h ) 
+description: generate the SDF of a bounding box
+use: <float> boundingBoxSDF( <vec3> p, <vec3> b, <float> e )
 license: |
     The MIT License
     Copyright © 2013 Inigo Quilez
@@ -20,26 +20,18 @@ license: |
     and
        http://iquilezles.org/www/articles/distfunctions/distfunctions.htm
 */
-#ifndef FNC_HEXPRISMSDF
-#define FNC_HEXPRISMSDF
 
-float hexPrismSDF( vec3 p, vec2 h ) {
-    vec3 q = abs(p);
-    float d1 = q.z-h.y;
-    float d2 = max((q.x*0.866025+q.y*0.5),q.y)-h.x;
-    return length(max(vec2(d1,d2),0.0)) + min(max(d1,d2), 0.);
+#ifndef FNC_BOUNDINGBOXSDF
+#define FNC_BOUNDINGBOXSDF
+
+float boundingBoxSDF( vec3 p, vec3 b, float e ) {
+    p = abs(p) - b;
+    vec3 q = abs(p + e) - e;
+
+    return min(min(
+        length(max(vec3(p.x,q.y,q.z),0.0))+min(max(p.x,max(q.y,q.z)),0.0),
+        length(max(vec3(q.x,p.y,q.z),0.0))+min(max(q.x,max(p.y,q.z)),0.0)),
+        length(max(vec3(q.x,q.y,p.z),0.0))+min(max(q.x,max(q.y,p.z)),0.0));
 }
-
-// float hexPrismSDF( vec3 p, vec2 h ) {
-//     vec3 q = abs(p);
-
-//     const vec3 k = vec3(-0.8660254, 0.5, 0.57735);
-//     p = abs(p);
-//     p.xy -= 2.0*min(dot(k.xy, p.xy), 0.0)*k.xy;
-//     vec2 d = vec2(
-//        length(p.xy - vec2(clamp(p.x, -k.z*h.x, k.z*h.x), h.x))*sign(p.y - h.x),
-//        p.z-h.y );
-//     return min(max(d.x,d.y),0.0) + length(max(d,0.0));
-// }
 
 #endif
