@@ -1,7 +1,7 @@
 /*
 author:  Inigo Quiles
-description: generate the SDF of a hexagonal prism
-use: <float> hexPrismSDF( in <vec3> pos, in <vec2> h ) 
+description: generate the SDF of s rhombus
+use: <float> rhombusSDF(<vec3> p, <float> la, <float> lb, <float> h, <float> ra)
 license: |
     The MIT License
     Copyright © 2013 Inigo Quilez
@@ -20,26 +20,16 @@ license: |
     and
        http://iquilezles.org/www/articles/distfunctions/distfunctions.htm
 */
-#ifndef FNC_HEXPRISMSDF
-#define FNC_HEXPRISMSDF
+#ifndef FNC_RHOMBUSSDF
+#define FNC_RHOMBUSSDF
 
-float hexPrismSDF( vec3 p, vec2 h ) {
-    vec3 q = abs(p);
-    float d1 = q.z-h.y;
-    float d2 = max((q.x*0.866025+q.y*0.5),q.y)-h.x;
-    return length(max(vec2(d1,d2),0.0)) + min(max(d1,d2), 0.);
+// la,lb=semi axis, h=height, ra=corner
+float rhombusSDF(vec3 p, float la, float lb, float h, float ra) {
+    p = abs(p);
+    vec2 b = vec2(la,lb);
+    float f = clamp( (ndot(b,b-2.0*p.xz))/dot(b,b), -1.0, 1.0 );
+	vec2 q = vec2(length(p.xz-0.5*b*vec2(1.0-f,1.0+f))*sign(p.x*b.y+p.z*b.x-b.x*b.y)-ra, p.y-h);
+    return min(max(q.x,q.y),0.0) + length(max(q,0.0));
 }
-
-// float hexPrismSDF( vec3 p, vec2 h ) {
-//     vec3 q = abs(p);
-
-//     const vec3 k = vec3(-0.8660254, 0.5, 0.57735);
-//     p = abs(p);
-//     p.xy -= 2.0*min(dot(k.xy, p.xy), 0.0)*k.xy;
-//     vec2 d = vec2(
-//        length(p.xy - vec2(clamp(p.x, -k.z*h.x, k.z*h.x), h.x))*sign(p.y - h.x),
-//        p.z-h.y );
-//     return min(max(d.x,d.y),0.0) + length(max(d,0.0));
-// }
 
 #endif

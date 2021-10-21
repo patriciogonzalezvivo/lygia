@@ -1,7 +1,7 @@
 /*
 author:  Inigo Quiles
-description: generate the SDF of a hexagonal prism
-use: <float> hexPrismSDF( in <vec3> pos, in <vec2> h ) 
+description: generate the SDF of a octogon prism
+use: <float> octogonPrismSDF( in <vec3> p, in <float> r, <float> h )
 license: |
     The MIT License
     Copyright © 2013 Inigo Quilez
@@ -20,26 +20,21 @@ license: |
     and
        http://iquilezles.org/www/articles/distfunctions/distfunctions.htm
 */
-#ifndef FNC_HEXPRISMSDF
-#define FNC_HEXPRISMSDF
+#ifndef FNC_OCTOGONPRISMSDF
+#define FNC_OCTOGONPRISMSDF
 
-float hexPrismSDF( vec3 p, vec2 h ) {
-    vec3 q = abs(p);
-    float d1 = q.z-h.y;
-    float d2 = max((q.x*0.866025+q.y*0.5),q.y)-h.x;
-    return length(max(vec2(d1,d2),0.0)) + min(max(d1,d2), 0.);
+float octogonPrismSDF( in vec3 p, in float r, float h ) {
+  const vec3 k = vec3(-0.9238795325,   // sqrt(2+sqrt(2))/2 
+                       0.3826834323,   // sqrt(2-sqrt(2))/2
+                       0.4142135623 ); // sqrt(2)-1 
+  // reflections
+  p = abs(p);
+  p.xy -= 2.0*min(dot(vec2( k.x,k.y),p.xy),0.0)*vec2( k.x,k.y);
+  p.xy -= 2.0*min(dot(vec2(-k.x,k.y),p.xy),0.0)*vec2(-k.x,k.y);
+  // polygon side
+  p.xy -= vec2(clamp(p.x, -k.z*r, k.z*r), r);
+  vec2 d = vec2( length(p.xy)*sign(p.y), p.z-h );
+  return min(max(d.x,d.y),0.0) + length(max(d,0.0));
 }
-
-// float hexPrismSDF( vec3 p, vec2 h ) {
-//     vec3 q = abs(p);
-
-//     const vec3 k = vec3(-0.8660254, 0.5, 0.57735);
-//     p = abs(p);
-//     p.xy -= 2.0*min(dot(k.xy, p.xy), 0.0)*k.xy;
-//     vec2 d = vec2(
-//        length(p.xy - vec2(clamp(p.x, -k.z*h.x, k.z*h.x), h.x))*sign(p.y - h.x),
-//        p.z-h.y );
-//     return min(max(d.x,d.y),0.0) + length(max(d,0.0));
-// }
 
 #endif
