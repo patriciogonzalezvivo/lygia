@@ -79,9 +79,10 @@ void main(void) {
 # Acknowledgements
 
 This library has been built over years, and most often than not on top of the work of brillant generous people like: [Inigo Quiles](https://www.iquilezles.org/), [Morgan McGuire](https://casual-effects.com/), [Hugh Kennedy](https://github.com/hughsk), [Matt DesLauriers](https://www.mattdesl.com/).
-I have tried to give according credits and correct license to each file. It's not perfect but it could be with your help! Please if you see something, say somthing.
+I have tried to give according credits and correct license to each one of the function. Most of them are under MIT but if you are using LYGIA for commercial use, please double check all the functions comply to the terms. Also consider supporting their author through the channels they provide.
+It's not perfect but it could be with your help!
 
-Lygia is open sourced under the terms of the [BSD license](LICENSE). You are free to use it, extend it and redistribute without charge, but I really appreciate if you can support improving it. That could be adding new functions, testing it, fixing bugs, translating the GLSL files to HLSL and Metal or just [sponsoring me through GitHub](https://github.com/sponsors/patriciogonzalezvivo) to do it for you.  
+Keeping LYGIA in growing healthy require works and dedication, I really appreciate your support improving it. That could be adding new functions, testing it, fixing bugs, translating the GLSL files to HLSL and Metal or just [sponsoring me through GitHub](https://github.com/sponsors/patriciogonzalezvivo).
 
 
 # Design Principles
