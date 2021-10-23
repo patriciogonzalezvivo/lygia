@@ -1,5 +1,3 @@
-#include "cast.glsl"
-
 /*
 author:  Inigo Quiles
 description: set a camera for raymarching 
@@ -35,10 +33,10 @@ mat3 raymarchCamera( in vec3 ro, in vec3 ta, in vec3 up ) {
 }
 
 mat3 raymarchCamera( in vec3 ro, in vec3 ta, float cr ) {
-	vec3 cw = normalize(ta-ro);
-	vec3 cp = vec3(sin(cr), cos(cr),0.0);
-	vec3 cu = normalize( cross(cw,cp) );
-	vec3 cv =          ( cross(cu,cw) );
+    vec3 cw = normalize(ta-ro);
+    vec3 cp = vec3(sin(cr), cos(cr),0.0);
+    vec3 cu = normalize( cross(cw,cp) );
+    vec3 cv =          ( cross(cu,cw) );
     return mat3( cu, cv, cw );
 }
 

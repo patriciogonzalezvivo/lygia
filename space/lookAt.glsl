@@ -25,7 +25,7 @@ mat3 lookAt(vec3 forward, vec3 up) {
 
 mat3 lookAt(vec3 target, vec3 eye, vec3 up) {
     vec3 zaxis = normalize(target - eye);
-    vec3 xaxis = normalize(cross(up, zaxis));
+    vec3 xaxis = normalize(cross(zaxis, up));
     vec3 yaxis = cross(zaxis, xaxis);
     return mat3(xaxis, yaxis, zaxis);
 }
