@@ -70,7 +70,7 @@ float coneSDF(vec3 p, vec3 a, vec3 b, float r1, float r2) {
     vec3 pa = p - a;
     float y = dot(pa,ba);
     float z = y - l2;
-    float x2 = dot2( pa*l2 - ba*y );
+    float x2 = dot( pa*l2 - ba*y );
     float y2 = y*y*l2;
     float z2 = z*z*l2;
 
