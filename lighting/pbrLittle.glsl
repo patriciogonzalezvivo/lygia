@@ -17,6 +17,7 @@ options:
     - DIFFUSE_FNC: diffuseOrenNayar, diffuseBurley, diffuseLambert (default)
     - SPECULAR_FNC: specularGaussian, specularBeckmann, specularCookTorrance (default), specularPhongRoughness, specularBlinnPhongRoughnes (default on mobile)
     - LIGHT_POSITION: in GlslViewer is u_light
+    - LIGHT_COLOR in GlslViewer is u_lightColor
     - CAMERA_POSITION: in GlslViewer is u_camera
     - SURFACE_POSITION: in glslViewer is v_position
 license: |
@@ -36,6 +37,10 @@ license: |
 
 #ifndef LIGHT_POSITION
 #define LIGHT_POSITION  u_light
+#endif
+
+#ifndef LIGHT_COLOR
+#define LIGHT_COLOR  u_lightColor
 #endif
 
 #ifndef FNC_PBR_LITTLE

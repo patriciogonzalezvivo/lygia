@@ -9,10 +9,9 @@
 float specularGGX(vec3 _L, vec3 _N, vec3 _V, float _NoV, float _NoL, float _roughness, float _fresnel) {
     float NoV = max(_NoV, 0.0);
     float NoL = max(_NoL, 0.0);
-    vec3 s = normalize(u_light - v_position.xyz);
 
-    vec3 H = normalize(s + _V);
-    float LoH = saturate(dot(s, H));
+    vec3 H = normalize(_L + _V);
+    float LoH = saturate(dot(_L, H));
     float NoH = saturate(dot(_N, H));
 
     // float NoV, float NoL, float roughness
