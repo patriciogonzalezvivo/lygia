@@ -21,7 +21,7 @@ license: |
 */
 
 #ifndef ENVMAP_MAX_MIP_LEVEL
-#define ENVMAP_MAX_MIP_LEVEL 8.0
+#define ENVMAP_MAX_MIP_LEVEL 3.0
 #endif
 
 #ifndef FNC_ENVMAP
