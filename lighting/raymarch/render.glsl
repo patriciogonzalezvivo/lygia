@@ -58,13 +58,13 @@ license: |
 #endif
 
 #ifndef RAYMARCH_MATERIAL_FNC
-#define RAYMARCH_MATERIAL_FNC raymarchDefaultRender
+#define RAYMARCH_MATERIAL_FNC raymarchRender
 #endif
 
 #ifndef FNC_RAYMARCHRENDER
 #define FNC_RAYMARCHRENDER
 
-vec3 raymarchDefaultRender(vec3 ray, vec3 pos, vec3 nor, vec3 alb) {
+vec3 raymarchRender(vec3 ray, vec3 pos, vec3 nor, vec3 alb) {
     if ( alb.r + alb.g + alb.b <= 0.0 ) 
         return RAYMARCH_BACKGROUND;
 
@@ -92,16 +92,15 @@ vec3 raymarchDefaultRender(vec3 ray, vec3 pos, vec3 nor, vec3 alb) {
     return color * lin;
 }
 
-vec4 raymarchRender( in vec3 ro, in vec3 rd ) { 
+vec4 raymarchRender( in vec3 ray_origin, in vec3 ray_direction ) { 
     vec3 col = vec3(0.0);
     
-
-    vec4 res = raymarchCast(ro, rd);
+    vec4 res = raymarchCast(ray_origin, ray_direction);
     float t = res.a;
 
-    vec3 pos = ro + t * rd;
+    vec3 pos = ray_origin + t * ray_direction;
     vec3 nor = raymarchNormal( pos );
-    col = RAYMARCH_MATERIAL_FNC(rd, pos, nor, res.rgb);
+    col = RAYMARCH_MATERIAL_FNC(ray_direction, pos, nor, res.rgb);
 
     return vec4( saturate(col), t );
 }
