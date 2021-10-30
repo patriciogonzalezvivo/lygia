@@ -57,7 +57,7 @@ license: |
 #define FNC_RAYMARCHRENDER
 
 vec3 raymarchRender(vec3 rd, vec3 pos, vec3 nor, vec3 alb) {
-    if ( alb.r + alb.g + alb.b > 0.0 ) 
+    if ( alb.r + alb.g + alb.b <= 0.0 ) 
         return alb;
 
     vec3 color = alb;
