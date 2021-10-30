@@ -31,7 +31,11 @@ license: |
 */
 
 #ifndef LIGHT_POSITION
+#if defined(GLSLVIEWER)
 #define LIGHT_POSITION u_light
+#else
+#define LIGHT_POSITION vec3(0.0, 10.0, -50.0)
+#endif
 #endif
 
 #ifndef FNC_RAYMARCHMATERIAL

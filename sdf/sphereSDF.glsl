@@ -23,5 +23,5 @@ license: |
 #ifndef FNC_SPHERESDF
 #define FNC_SPHERESDF
 float sphereSDF(vec3 p) { return length(p); }
-float sphereSDF( vec3 p, float s ) { return sphereSDF(p) - s; }
+float sphereSDF(vec3 p, float s) { return sphereSDF(p) - s; }
 #endif

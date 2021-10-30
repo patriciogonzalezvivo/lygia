@@ -34,11 +34,19 @@ license: |
 */
 
 #ifndef LIGHT_POSITION
-#define LIGHT_POSITION  vec3(0.0, 10.0, -50.0)
+#if defined(GLSLVIEWER)
+#define LIGHT_POSITION u_light
+#else
+#define LIGHT_POSITION vec3(0.0, 10.0, -50.0)
+#endif
 #endif
 
 #ifndef LIGHT_COLOR
-#define LIGHT_COLOR     vec3(0.5)
+#if defined(GLSLVIEWER)
+#define LIGHT_COLOR u_lightColor
+#else
+#define LIGHT_COLOR vec3(0.5)
+#endif
 #endif
 
 #ifndef RAYMARCH_AMBIENT
@@ -50,26 +58,26 @@ license: |
 #endif
 
 #ifndef RAYMARCH_MATERIAL_FNC
-#define RAYMARCH_MATERIAL_FNC raymarchRender
+#define RAYMARCH_MATERIAL_FNC raymarchDefaultRender
 #endif
 
 #ifndef FNC_RAYMARCHRENDER
 #define FNC_RAYMARCHRENDER
 
-vec3 raymarchRender(vec3 rd, vec3 pos, vec3 nor, vec3 alb) {
+vec3 raymarchDefaultRender(vec3 ray, vec3 pos, vec3 nor, vec3 alb) {
     if ( alb.r + alb.g + alb.b <= 0.0 ) 
-        return alb;
+        return RAYMARCH_BACKGROUND;
 
     vec3 color = alb;
-    vec3 ref = reflect( rd, nor );
+    vec3 ref = reflect( ray, nor );
     float occ = raymarchAO( pos, nor );
     vec3  lig = normalize( LIGHT_POSITION );
-    vec3  hal = normalize( lig-rd );
-    float amb = clamp( 0.5+0.5*nor.y, 0.0, 1.0 );
-    float dif = clamp( dot( nor, lig ), 0.0, 1.0 );
-    float bac = clamp( dot( nor, normalize(vec3(-lig.x,0.0,-lig.z))), 0.0, 1.0 )*clamp( 1.0-pos.y,0.0,1.0);
+    vec3  hal = normalize( lig-ray );
+    float amb = saturate( 0.5+0.5*nor.y );
+    float dif = saturate( dot( nor, lig ) );
+    float bac = saturate( dot( nor, normalize(vec3(-lig.x,0.0,-lig.z))) ) * saturate( 1.0-pos.y );
     float dom = smoothstep( -0.1, 0.1, ref.y );
-    float fre = pow( clamp(1.0+dot(nor,rd),0.0,1.0), 2.0 );
+    float fre = pow( saturate(1.0+dot(nor,ray) ), 2.0 );
     
     dif *= raymarchSoftShadow( pos, lig, 0.02, 2.5 );
     dom *= raymarchSoftShadow( pos, ref, 0.02, 2.5 );
@@ -86,17 +94,14 @@ vec3 raymarchRender(vec3 rd, vec3 pos, vec3 nor, vec3 alb) {
 
 vec4 raymarchRender( in vec3 ro, in vec3 rd ) { 
     vec3 col = vec3(0.0);
-    col = RAYMARCH_BACKGROUND;
+    
 
     vec4 res = raymarchCast(ro, rd);
     float t = res.a;
 
-    // if ( res.r + res.g + res.b > 0.0 ) 
-    {
-        vec3 pos = ro + t * rd;
-        vec3 nor = raymarchNormal( pos );
-        col = RAYMARCH_MATERIAL_FNC(rd, pos, nor, res.rgb);
-    }
+    vec3 pos = ro + t * rd;
+    vec3 nor = raymarchNormal( pos );
+    col = RAYMARCH_MATERIAL_FNC(rd, pos, nor, res.rgb);
 
     return vec4( saturate(col), t );
 }
