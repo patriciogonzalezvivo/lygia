@@ -1,23 +1,35 @@
+#include "tonemap/aces.glsl"
+#include "tonemap/debug.glsl"
+#include "tonemap/linear.glsl"
+#include "tonemap/reinhard.glsl"
+#include "tonemap/uncharted.glsl"
+#include "tonemap/unreal.glsl"
+
 /*
 author: Patricio Gonzalez Vivo  
-description: convert LST to RGB. LMS (long, medium, short), is a color space which represents the response of the three types of cones of the human eye, named for their responsivity (sensitivity) peaks at long, medium, and short wavelengths. https://en.wikipedia.org/wiki/LMS_color_space
-use: <vec3\vec4> lms2rgb(<vec3|vec4> lms)
+description: Tone maps the specified RGB color (meaning convert from HDR to LDR) inside the range [0..~8] to [0..1]. The input must be in linear HDR pre-exposed.
+use: tonemap(<float3|float4> rgb)
+options:
+    TONEMAP_FNC: tonemapLinear, tonemapReinhard, tonemapUnreal, tonemapACES, tonemapDebug, tonemapUncharter
 license: |
     Copyright (c) 2021 Patricio Gonzalez Vivo.
     Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
     The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
 */
 
-#ifndef FNC_LMS2RGB
-#define FNC_LMS2RGB
-vec3 lms2rgb(vec3 lms) {
-    return vec3( 
-        (0.0809444479 * lms.x) + (-0.130504409 * lms.y) + (0.116721066 * lms.z),
-        (-0.0102485335 * lms.x) + (0.0540193266 * lms.y) + (-0.113614708 * lms.z),
-        (-0.000365296938 * lms.x) + (-0.00412161469 * lms.y) + (0.693511405 * lms.z)
-    );
-}
-vec4 lms2rgb(vec4 lms) { return vec4( lms2rgb(lms.xyz), lms.a ); }
+#ifndef TONEMAP_FNC
+#if defined(TARGET_MOBILE) || defined(PLATFORM_RPI) || defined(PLATFORM_WEBGL)
+    #define TONEMAP_FNC     tonemapUnreal
+#else
+    #define TONEMAP_FNC     tonemapACES
+#endif
+#endif
+
+#ifndef FNC_TONEMAP
+#define FNC_TONEMAP
+
+float3 tonemap(const float3 color) { return TONEMAP_FNC(color); }
+float4 tonemap(const float4 color) { return TONEMAP_FNC(color); }
+
 #endif
