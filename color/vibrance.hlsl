@@ -1,7 +1,7 @@
 /*
 author: Brad Larson
 description: vibrance from https://github.com/BradLarson/GPUImage/blob/master/framework/Source/GPUImageVibranceFilter.m Vibrance is a smart-tool which cleverly increases the intensity of the more muted colors and leaves the already well-saturated colors alone. Prevents skin tones from becoming overly saturated and unnatural. 
-use: <vec3|vec4> vibrance(<vec3|vec4> color, <float> v) 
+use: <float3|float4> vibrance(<float3|float4> color, <float> v) 
 license: |
     Copyright (c) 2012, Brad Larson, Ben Cochran, Hugues Lismonde, Keitaroh Kobayashi, Alaric Cole, Matthew Clark, Jacob Gundersen, Chris Williams.
     All rights reserved.
@@ -14,11 +14,11 @@ license: |
 
 #ifndef FNC_VIBRANCE
 #define FNC_VIBRANCE
-vec3 vibrance(in vec3 color, in float v) {
+float3 vibrance(in float3 color, in float v) {
     float average = (color.r + color.g + color.b) / 3.0;
     float mx = max(color.r, max(color.g, color.b));
     float amt = (mx - average) * (-v * 3.0);
-    return mix(color.rgb, vec3(mx), amt);
+    return mix(color.rgb, float3(mx), amt);
 }
-vec4 vibrance(in vec4 color, in float v) { return vec4( vibrance(color.rgb, v), color.a); }
+float4 vibrance(in float4 color, in float v) { return float4( vibrance(color.rgb, v), color.a); }
 #endif
