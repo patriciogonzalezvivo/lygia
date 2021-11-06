@@ -25,5 +25,5 @@ vec3 tonemapUncharted(const vec3 x) {
     return curr * whiteScale;
 }
 
-vec4 tonemapUncharted(const vec4 x) { vec4( tonemapUncharted(x.rgb), x.a); }
+vec4 tonemapUncharted(const vec4 x) { return vec4( tonemapUncharted(x.rgb), x.a); }
 #endif

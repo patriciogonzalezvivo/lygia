@@ -9,5 +9,5 @@ use: <float3|float4> tonemapReinhard(<float3|float4> x)
 #ifndef FNC_TONEMAPREINHARD
 #define FNC_TONEMAPREINHARD
 float3 tonemapReinhard(const float3 x) { return x / (1.0 + luminance(x)); }
-float4 tonemapReinhard(const float4 x) { return float4( tonemapReinhard(x.rgb), r.a ); }
+float4 tonemapReinhard(const float4 x) { return float4( tonemapReinhard(x.rgb), x.a ); }
 #endif
