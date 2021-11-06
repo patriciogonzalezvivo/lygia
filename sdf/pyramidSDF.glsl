@@ -1,7 +1,7 @@
 /*
 author:  Inigo Quiles
 description: generate the SDF of s pyramid
-use: <float> pyramidSDF( in <vec3> p, in <float> r, <float> h )
+use: <float> pyramidSDF(<vec3> p, <float> h )
 license: |
     The MIT License
     Copyright © 2013 Inigo Quilez
@@ -23,18 +23,28 @@ license: |
 #ifndef FNC_PYRAMIDSDF
 #define FNC_PYRAMIDSDF
 
-float pyramidSDF( in vec3 p, in float r, float h ) {
-  const vec3 k = vec3(-0.9238795325,   // sqrt(2+sqrt(2))/2 
-                       0.3826834323,   // sqrt(2-sqrt(2))/2
-                       0.4142135623 ); // sqrt(2)-1 
-  // reflections
-  p = abs(p);
-  p.xy -= 2.0*min(dot(vec2( k.x,k.y),p.xy),0.0)*vec2( k.x,k.y);
-  p.xy -= 2.0*min(dot(vec2(-k.x,k.y),p.xy),0.0)*vec2(-k.x,k.y);
-  // polygon side
-  p.xy -= vec2(clamp(p.x, -k.z*r, k.z*r), r);
-  vec2 d = vec2( length(p.xy)*sign(p.y), p.z-h );
-  return min(max(d.x,d.y),0.0) + length(max(d,0.0));
+float pyramidSDF( in vec3 p, in float h )  {
+   float m2 = h*h + 0.25;
+   
+   // symmetry
+   p.xz = abs(p.xz);
+   p.xz = (p.z>p.x) ? p.zx : p.xz;
+   p.xz -= 0.5;
+
+   // project into face plane (2D)
+   vec3 q = vec3( p.z, h*p.y - 0.5*p.x, h*p.x + 0.5*p.y);
+
+   float s = max(-q.x,0.0);
+   float t = clamp( (q.y-0.5*p.z)/(m2+0.25), 0.0, 1.0 );
+   
+   float a = m2*(q.x+s)*(q.x+s) + q.y*q.y;
+   float b = m2*(q.x+0.5*t)*(q.x+0.5*t) + (q.y-m2*t)*(q.y-m2*t);
+   
+   float d2 = min(q.y,-q.x*m2-q.y*0.5) > 0.0 ? 0.0 : min(a,b);
+   
+   // recover 3D and scale, and add sign
+   return sqrt( (d2+q.z*q.z)/m2 ) * sign(max(q.z,-p.y));;
 }
+
 
 #endif
