@@ -13,12 +13,12 @@ license: |
 #ifndef FNC_PALETTE_HUE
 #define FNC_PALETTE_HUE
 
-vec3 hue(float hue, float ratio) {
+vec3 hue(float x, float ratio) {
     return smoothstep(  vec3(0.9059, 0.8745, 0.8745),
                         vec3(1.0), 
-                        abs( mod(hue + vec3(0.0,1.0,2.0) * ratio, 1.0) * 2.0 - 1.0));
+                        abs( mod(x + vec3(0.0,1.0,2.0) * ratio, 1.0) * 2.0 - 1.0));
 }
 
-vec3 hue(float hue) { return hue(hue, 0.33333); }
+vec3 hue(float x) { return hue(x, 0.33333); }
 
 #endif
