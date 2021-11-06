@@ -1,30 +1,34 @@
 #include "../luminance.glsl"
 
-/**
- * Converts the input HDR RGB color into one of 16 debug colors that represent
- * the pixel's exposure. When the output is cyan, the input color represents
- * middle gray (18% exposure). Every exposure stop above or below middle gray
- * causes a color shift.
- *
- * The relationship between exposures and colors is:
- *
- * -5EV  - black
- * -4EV  - darkest blue
- * -3EV  - darker blue
- * -2EV  - dark blue
- * -1EV  - blue
- *  OEV  - cyan
- * +1EV  - dark green
- * +2EV  - green
- * +3EV  - yellow
- * +4EV  - yellow-orange
- * +5EV  - orange
- * +6EV  - bright red
- * +7EV  - red
- * +8EV  - magenta
- * +9EV  - purple
- * +10EV - white
- */
+/*
+Author:
+description: |
+    Converts the input HDR RGB color into one of 16 debug colors that represent
+    the pixel's exposure. When the output is cyan, the input color represents
+    middle gray (18% exposure). Every exposure stop above or below middle gray
+    causes a color shift.
+ 
+    The relationship between exposures and colors is:
+ 
+    -5EV  - black
+    -4EV  - darkest blue
+    -3EV  - darker blue
+    -2EV  - dark blue
+    -1EV  - blue
+     OEV  - cyan
+    +1EV  - dark green
+    +2EV  - green
+    +3EV  - yellow
+    +4EV  - yellow-orange
+    +5EV  - orange
+    +6EV  - bright red
+    +7EV  - red
+    +8EV  - magenta
+    +9EV  - purple
+    +10EV - white
+
+use: <vec3|vec4> tonemapDebug(<vec3|vec4> x)
+*/
 
 #ifndef FNC_TONEMAPDEBUG
 #define FNC_TONEMAPDEBUG
@@ -59,6 +63,7 @@ vec3 tonemapDebug(const vec3 x) {
     int index = int(v);
     return mix(debugColors[index], debugColors[index + 1], v - float(index));
 }
+vec4 tonemapDebug(const vec4 x) { return vec4(tonemapDebug(x.rgb), x.a); }
 #endif
 
 #endif
