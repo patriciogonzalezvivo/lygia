@@ -95,16 +95,8 @@ vec4 lut(in sampler2D tex_lut, in vec4 color, in int offset) {
 }
 #endif
 
-vec4 lut(in sampler2D tex_lut, in vec4 color) {
-  return lut(tex_lut, color, 0);
-}
-
-vec3 lut(in sampler2D tex_lut, in vec3 color, in int offset) {
-  return lut(tex_lut, vec4(color, 1.), offset).rgb;
-}
-
-vec3 lut(in sampler2D tex_lut, in vec3 color) {
-  return lut(tex_lut, color, 0).rgb;
-}
+vec4 lut(in sampler2D tex_lut, in vec4 color) { return lut(tex_lut, color, 0); }
+vec3 lut(in sampler2D tex_lut, in vec3 color, in int offset) { return lut(tex_lut, vec4(color, 1.), offset).rgb; }
+vec3 lut(in sampler2D tex_lut, in vec3 color) { return lut(tex_lut, color, 0).rgb; }
 
 #endif

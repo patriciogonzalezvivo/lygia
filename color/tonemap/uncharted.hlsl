@@ -1,13 +1,13 @@
 /*
 Author: [
 description: 
-use: <vec3|vec4> tonemapUncharted(<vec3|vec4> x)
+use: <float3|float4> tonemapUncharted(<float3|float4> x)
 */
 
 #ifndef FNC_TONEMAPUNCHARTED
 #define FNC_TONEMAPUNCHARTED
 
-vec3 uncharted2Tonemap(const vec3 x) {
+float3 uncharted2Tonemap(const float3 x) {
     const float A = 0.15;
     const float B = 0.50;
     const float C = 0.10;
@@ -17,13 +17,13 @@ vec3 uncharted2Tonemap(const vec3 x) {
     return ((x * (A * x + C * B) + D * E) / (x * (A * x + B) + D * F)) - E / F;
 }
 
-vec3 tonemapUncharted(const vec3 x) {
+float3 tonemapUncharted(const float3 x) {
     const float W = 11.2;
     const float exposureBias = 2.0;
-    vec3 curr = uncharted2Tonemap(exposureBias * x);
-    vec3 whiteScale = 1.0 / uncharted2Tonemap(vec3(W));
+    float3 curr = uncharted2Tonemap(exposureBias * x);
+    float3 whiteScale = 1.0 / uncharted2Tonemap(float3(W, W, W));
     return curr * whiteScale;
 }
 
-vec4 tonemapUncharted(const vec4 x) { vec4( tonemapUncharted(x.rgb), x.a); }
+float4 tonemapUncharted(const float4 x) { float4( tonemapUncharted(x.rgb), x.a); }
 #endif
