@@ -9,11 +9,11 @@ author:  Inigo Quiles
 description: default raymarching renderer
 use: <vec4> raymarchDefaultRender( in <vec3> ro, in <vec3> rd ) 
 options:
-    - RAYMARCH_MATERIAL_FNC(RGB) vec3(RGB)
-    - #define RAYMARCH_BACKGROUND vec3(0.0)
-    - RAYMARCH_AMBIENT vec3(1.0)
-    - LIGHT_COLOR     vec3(0.5)
-    - LIGHT_POSITION  vec3(0.0, 10.0, -50.0)
+    - LIGHT_COLOR: vec3(0.5) or u_lightColor in GlslViewer
+    - LIGHT_POSITION: vec3(0.0, 10.0, -50.0) or u_light in GlslViewer
+    - RAYMARCH_BACKGROUND: vec3(0.0)
+    - RAYMARCH_AMBIENT: vec3(1.0)
+    - RAYMARCH_MATERIAL_FNC raymarchDefaultMaterial
 license: |
     The MIT License
     Copyright © 2013 Inigo Quilez
