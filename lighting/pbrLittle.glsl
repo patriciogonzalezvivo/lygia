@@ -32,15 +32,28 @@ license: |
 #endif
 
 #ifndef CAMERA_POSITION
+#if defined(GLSLVIEWER)
 #define CAMERA_POSITION u_camera
+#else
+#define CAMERA_POSITION vec3(0.0, 0.0, -10.0);
+#endif
 #endif
 
+
 #ifndef LIGHT_POSITION
-#define LIGHT_POSITION  u_light
+#if defined(GLSLVIEWER)
+#define LIGHT_POSITION u_light
+#else
+#define LIGHT_POSITION vec3(0.0, 10.0, -50.0)
+#endif
 #endif
 
 #ifndef LIGHT_COLOR
-#define LIGHT_COLOR  u_lightColor
+#if defined(GLSLVIEWER)
+#define LIGHT_COLOR u_lightColor
+#else
+#define LIGHT_COLOR vec3(0.5)
+#endif
 #endif
 
 #ifndef FNC_PBR_LITTLE
