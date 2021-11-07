@@ -44,8 +44,8 @@ vec4 raymarchCast( in vec3 ro, in vec3 rd ) {
     vec3 m = vec3(-1.0);
     for ( int i = 0; i < RAYMARCH_SAMPLES; i++ ) {
         float precis = 0.0004*t;
-        vec4 res = raymarchMap( ro+rd*t );
-        if ( res.a < precis || t>tmax ) break;
+        vec4 res = raymarchMap( ro + rd * t );
+        if ( res.a < precis || t > tmax ) break;
         t += res.a;
         m = res.rgb;
     }

@@ -6,8 +6,8 @@
 
 /*
 author:  Inigo Quiles
-description: raymarching renderer
-use: <vec4> raymarchRender( in <vec3> ro, in <vec3> rd ) 
+description: default raymarching renderer
+use: <vec4> raymarchDefaultRender( in <vec3> ro, in <vec3> rd ) 
 options:
     - RAYMARCH_MATERIAL_FNC(RGB) vec3(RGB)
     - #define RAYMARCH_BACKGROUND vec3(0.0)
@@ -58,13 +58,13 @@ license: |
 #endif
 
 #ifndef RAYMARCH_MATERIAL_FNC
-#define RAYMARCH_MATERIAL_FNC raymarchRender
+#define RAYMARCH_MATERIAL_FNC raymarchDefaultMaterial
 #endif
 
-#ifndef FNC_RAYMARCHRENDER
-#define FNC_RAYMARCHRENDER
+#ifndef FNC_RAYMARCHDEFAULT
+#define FNC_RAYMARCHDEFAULT
 
-vec3 raymarchRender(vec3 ray, vec3 pos, vec3 nor, vec3 alb) {
+vec3 raymarchDefaultMaterial(vec3 ray, vec3 pos, vec3 nor, vec3 alb) {
     if ( alb.r + alb.g + alb.b <= 0.0 ) 
         return RAYMARCH_BACKGROUND;
 
@@ -92,7 +92,7 @@ vec3 raymarchRender(vec3 ray, vec3 pos, vec3 nor, vec3 alb) {
     return color * lin;
 }
 
-vec4 raymarchRender( in vec3 ray_origin, in vec3 ray_direction ) { 
+vec4 raymarchDefaultRender( in vec3 ray_origin, in vec3 ray_direction ) { 
     vec3 col = vec3(0.0);
     
     vec4 res = raymarchCast(ray_origin, ray_direction);
