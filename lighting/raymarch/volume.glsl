@@ -49,13 +49,25 @@ license: |
 #define RAYMARCH_SAMPLES 64
 #endif
 
+#ifndef RAYMARCH_MIN_DIST
+#define RAYMARCH_MIN_DIST 1.0
+#endif
+
+#ifndef RAYMARCH_MAX_DIST
+#define RAYMARCH_MAX_DIST 10.0
+#endif
+
+#ifndef RAYMARCH_VOLUME_COLOR_FNC
+#define RAYMARCH_VOLUME_COLOR_FNC vec3
+#endif
+
 #ifndef FNC_RAYMARCHVOLUMERENDER
 #define FNC_RAYMARCHVOLUMERENDER
 
 vec4 raymarchVolume( in vec3 ro, in vec3 rd ) {
 
-    const float tmin        = 1.0;
-    const float tmax        = 10.0;
+    const float tmin        = RAYMARCH_MIN_DIST;
+    const float tmax        = RAYMARCH_MAX_DIST;
     const float fSamples    = float(RAYMARCH_SAMPLES);
     const float tstep       = tmax/fSamples;
     const float absorption  = 100.;
@@ -70,9 +82,9 @@ vec4 raymarchVolume( in vec3 ro, in vec3 rd ) {
     float T = 1.;
     float t = tmin;
     vec3 col = vec3(0.0);
-    vec3 p = ro;
+    vec3 pos = ro;
     for(int i = 0; i < RAYMARCH_SAMPLES; i++) {
-        vec4 res    = raymarchMap(p);
+        vec4 res    = raymarchMap(pos);
         float density = (0.1 - res.a);
         if (density > 0.0) {
             float tmp = density / fSamples;
@@ -80,14 +92,14 @@ vec4 raymarchVolume( in vec3 ro, in vec3 rd ) {
             if( T <= 0.001)
                 break;
 
-            col += res.rgb * fSamples * tmp * T;
+            col += RAYMARCH_VOLUME_COLOR_FNC(res.rgb) * fSamples * tmp * T;
                 
             //Light scattering
             #ifdef LIGHT_POSITION
             float Tl = 1.0;
-            for(int j = 0; j < nbSampleLight; j++) {
-                float densityLight = raymarchMap( p + sun_direction * float(j) * tstepl ).a;
-                if(densityLight>0.)
+            for (int j = 0; j < nbSampleLight; j++) {
+                float densityLight = raymarchMap( pos + sun_direction * float(j) * tstepl ).a;
+                if (densityLight>0.)
                     Tl *= 1. - densityLight * absorption/fSamples;
                 if (Tl <= 0.01)
                     break;
@@ -95,7 +107,7 @@ vec4 raymarchVolume( in vec3 ro, in vec3 rd ) {
             col += LIGHT_COLOR * 80. * tmp * T * Tl;
             #endif
         }
-        p += rd * tstep;
+        pos += rd * tstep;
     }
 
     return vec4(saturate(col), t);
