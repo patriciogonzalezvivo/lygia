@@ -3,7 +3,7 @@ author: Brad Larson
 description: Adapted version of directional Sobel edge detection from https://github.com/BradLarson/GPUImage2
 use: edgeSobel_directional(<sampler2D> texture, <vec2> st, <vec2> pixels_scale)
 options:
-  EDGESOBEL_DIRECTIONAL_SAMPLER_FNC: Function used to sample the input texture, defaults to texture2D(tex,POS_UV).r
+  EDGESOBELDIRECTIONAL_SAMPLER_FNC: Function used to sample the input texture, defaults to texture2D(tex,POS_UV).r
 license: |
   Copyright (c) 2015, Brad Larson.
   All rights reserved.
@@ -31,22 +31,26 @@ license: |
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef EDGESOBEL_DIRECTIONAL_SAMPLER_FNC
-#define EDGESOBEL_DIRECTIONAL_SAMPLER_FNC(POS_UV) texture2D(tex,POS_UV).r
+#ifndef EDGESOBELDIRECTIONAL_SAMPLER_FNC
+#ifdef EDGE_SAMPLER_FNC
+#define EDGESOBELDIRECTIONAL_SAMPLER_FNC(POS_UV) EDGE_SAMPLER_FNC(POS_UV)
+#else
+#define EDGESOBELDIRECTIONAL_SAMPLER_FNC(POS_UV) texture2D(tex, POS_UV).r
+#endif
 #endif
 
 #ifndef FNC_EDGESOBEL_DIRECTIONAL
 #define FNC_EDGESOBEL_DIRECTIONAL
 vec3 edgeSobelDirectional(in sampler2D tex, in vec2 st, in vec2 offset) {
     // get samples around pixel
-    float tleft = EDGESOBEL_DIRECTIONAL_SAMPLER_FNC(st + vec2(-offset.x, offset.y));
-    float left = EDGESOBEL_DIRECTIONAL_SAMPLER_FNC(st + vec2(-offset.x, 0.));
-    float bleft = EDGESOBEL_DIRECTIONAL_SAMPLER_FNC(st + vec2(-offset.x, -offset.y));
-    float top = EDGESOBEL_DIRECTIONAL_SAMPLER_FNC(st + vec2(0., offset.y));
-    float bottom = EDGESOBEL_DIRECTIONAL_SAMPLER_FNC(st + vec2(0., -offset.y));
-    float tright = EDGESOBEL_DIRECTIONAL_SAMPLER_FNC(st + offset);
-    float right = EDGESOBEL_DIRECTIONAL_SAMPLER_FNC(st + vec2(offset.x, 0.));
-    float bright = EDGESOBEL_DIRECTIONAL_SAMPLER_FNC(st + vec2(offset.x, -offset.y));
+    float tleft = EDGESOBELDIRECTIONAL_SAMPLER_FNC(st + vec2(-offset.x, offset.y));
+    float left = EDGESOBELDIRECTIONAL_SAMPLER_FNC(st + vec2(-offset.x, 0.));
+    float bleft = EDGESOBELDIRECTIONAL_SAMPLER_FNC(st + vec2(-offset.x, -offset.y));
+    float top = EDGESOBELDIRECTIONAL_SAMPLER_FNC(st + vec2(0., offset.y));
+    float bottom = EDGESOBELDIRECTIONAL_SAMPLER_FNC(st + vec2(0., -offset.y));
+    float tright = EDGESOBELDIRECTIONAL_SAMPLER_FNC(st + offset);
+    float right = EDGESOBELDIRECTIONAL_SAMPLER_FNC(st + vec2(offset.x, 0.));
+    float bright = EDGESOBELDIRECTIONAL_SAMPLER_FNC(st + vec2(offset.x, -offset.y));
     vec2 gradientDirection = vec2(0.);
     gradientDirection.x = -bleft - 2. * left - tleft + bright + 2. * right + tright;
     gradientDirection.y = -tleft - 2. * top - tright + bleft + 2. * bottom + bright;

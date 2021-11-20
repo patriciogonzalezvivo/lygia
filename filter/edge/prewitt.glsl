@@ -33,11 +33,19 @@ license: |
 */
 
 #ifndef EDGEPREWITT_TYPE
+#ifdef EDGE_TYPE
+#define EDGEPREWITT_TYPE EDGE_TYPE
+#else
 #define EDGEPREWITT_TYPE float
+#endif
 #endif
 
 #ifndef EDGEPREWITT_SAMPLER_FNC
-#define EDGEPREWITT_SAMPLER_FNC(POS_UV) texture2D(tex,POS_UV).r
+#ifdef EDGE_SAMPLER_FNC
+#define EDGEPREWITT_SAMPLER_FNC(POS_UV) EDGE_SAMPLER_FNC(POS_UV)
+#else
+#define EDGEPREWITT_SAMPLER_FNC(POS_UV) texture2D(tex, POS_UV).r
+#endif
 #endif
 
 #ifndef FNC_EDGEPREWITT

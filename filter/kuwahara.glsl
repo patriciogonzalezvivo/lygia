@@ -17,11 +17,11 @@ licence:
 */
 
 #ifndef KUWAHARA_TYPE
-#define KUWAHARA_TYPE vec3
+#define KUWAHARA_TYPE vec4
 #endif
 
 #ifndef KUWAHARA_SAMPLER_FNC
-#define KUWAHARA_SAMPLER_FNC(POS_UV) texture2D(tex, POS_UV).rgb
+#define KUWAHARA_SAMPLER_FNC(POS_UV) texture2D(tex, POS_UV)
 #endif
 
 #ifndef KUWAHARA_RADIUS

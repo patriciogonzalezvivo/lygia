@@ -11,8 +11,8 @@ description: |
 use: sharpenContrastAdaptive(<sampler2D> texture, <vec2> st, <vec2> pixel, <float> strenght)
 options:
     SHARPEN_KERNELSIZE: Defaults 2
-    SHARPEN_TYPE: defaults to vec3
-    SHARPEN_SAMPLER_FNC(POS_UV): defaults to texture2D(tex, POS_UV).rgb
+    SHARPENCONTRASTADAPTIVE_TYPE: defaults to vec3
+    SHARPENCONTRASTADAPTIVE_SAMPLER_FNC(POS_UV): defaults to texture2D(tex, POS_UV).rgb
 license: |
     Copyright (c) 2020 Advanced Micro Devices, Inc. All rights reserved.
 
@@ -35,62 +35,70 @@ license: |
     THE SOFTWARE.
 */
 
-#ifndef SHARPEN_TYPE
-#define SHARPEN_TYPE vec3
+#ifndef SHARPENCONTRASTADAPTIVE_TYPE
+#ifdef SHARPEN_TYPE
+#define SHARPENCONTRASTADAPTIVE_TYPE SHARPEN_TYPE
+#else
+#define SHARPENCONTRASTADAPTIVE_TYPE vec3
+#endif
 #endif
 
-#ifndef SHARPEN_SAMPLER_FNC
-#define SHARPEN_SAMPLER_FNC(POS_UV) texture2D(tex, POS_UV).rgb
+#ifndef SHARPENCONTRASTADAPTIVE_SAMPLER_FNC
+#ifdef SHARPEN_SAMPLER_FNC
+#define SHARPENCONTRASTADAPTIVE_SAMPLER_FNC(POS_UV) SHARPEN_SAMPLER_FNC(POS_UV)
+#else
+#define SHARPENCONTRASTADAPTIVE_SAMPLER_FNC(POS_UV) texture2D(tex, POS_UV).rgb
+#endif
 #endif
 
 #ifndef FNC_SHARPENADCONTRASTAPTIVE
 #define FNC_SHARPENADCONTRASTAPTIVE
-SHARPEN_TYPE sharpenContrastAdaptive(sampler2D tex, vec2 st, vec2 pixel, float strenght) {
+SHARPENCONTRASTADAPTIVE_TYPE sharpenContrastAdaptive(sampler2D tex, vec2 st, vec2 pixel, float strenght) {
     float peak = -1.0 / mix(8.0, 5.0, saturate(strenght));
     
     // fetch a 3x3 neighborhood around the pixel 'e',
     //  a b c
     //  d(e)f
     //  g h i
-    SHARPEN_TYPE a = SHARPEN_SAMPLER_FNC(st + vec2(-1., -1.) * pixel);
-    SHARPEN_TYPE b = SHARPEN_SAMPLER_FNC(st + vec2( 0., -1.) * pixel);
-    SHARPEN_TYPE c = SHARPEN_SAMPLER_FNC(st + vec2( 1., -1.) * pixel);
-    SHARPEN_TYPE d = SHARPEN_SAMPLER_FNC(st + vec2(-1.,  0.) * pixel);
-    SHARPEN_TYPE e = SHARPEN_SAMPLER_FNC(st + vec2( 0.,  0.) * pixel);
-    SHARPEN_TYPE f = SHARPEN_SAMPLER_FNC(st + vec2( 1.,  0.) * pixel);
-    SHARPEN_TYPE g = SHARPEN_SAMPLER_FNC(st + vec2(-1.,  1.) * pixel);
-    SHARPEN_TYPE h = SHARPEN_SAMPLER_FNC(st + vec2( 0.,  1.) * pixel);
-    SHARPEN_TYPE i = SHARPEN_SAMPLER_FNC(st + vec2( 1.,  1.) * pixel);
+    SHARPENCONTRASTADAPTIVE_TYPE a = SHARPENCONTRASTADAPTIVE_SAMPLER_FNC(st + vec2(-1., -1.) * pixel);
+    SHARPENCONTRASTADAPTIVE_TYPE b = SHARPENCONTRASTADAPTIVE_SAMPLER_FNC(st + vec2( 0., -1.) * pixel);
+    SHARPENCONTRASTADAPTIVE_TYPE c = SHARPENCONTRASTADAPTIVE_SAMPLER_FNC(st + vec2( 1., -1.) * pixel);
+    SHARPENCONTRASTADAPTIVE_TYPE d = SHARPENCONTRASTADAPTIVE_SAMPLER_FNC(st + vec2(-1.,  0.) * pixel);
+    SHARPENCONTRASTADAPTIVE_TYPE e = SHARPENCONTRASTADAPTIVE_SAMPLER_FNC(st + vec2( 0.,  0.) * pixel);
+    SHARPENCONTRASTADAPTIVE_TYPE f = SHARPENCONTRASTADAPTIVE_SAMPLER_FNC(st + vec2( 1.,  0.) * pixel);
+    SHARPENCONTRASTADAPTIVE_TYPE g = SHARPENCONTRASTADAPTIVE_SAMPLER_FNC(st + vec2(-1.,  1.) * pixel);
+    SHARPENCONTRASTADAPTIVE_TYPE h = SHARPENCONTRASTADAPTIVE_SAMPLER_FNC(st + vec2( 0.,  1.) * pixel);
+    SHARPENCONTRASTADAPTIVE_TYPE i = SHARPENCONTRASTADAPTIVE_SAMPLER_FNC(st + vec2( 1.,  1.) * pixel);
 
 	// Soft min and max.
 	//	a b c			  b
 	//	d e f * 0.5	 +	d e f * 0.5
 	//	g h i			  h
 	// These are 2.0x bigger (factored out the extra multiply).
-    SHARPEN_TYPE mnRGB = min(min(min(d, e), min(f, b)), h);
-    SHARPEN_TYPE mnRGB2 = min(mnRGB, min(min(a, c), min(g, i)));
+    SHARPENCONTRASTADAPTIVE_TYPE mnRGB = min(min(min(d, e), min(f, b)), h);
+    SHARPENCONTRASTADAPTIVE_TYPE mnRGB2 = min(mnRGB, min(min(a, c), min(g, i)));
     mnRGB += mnRGB2;
 
-    SHARPEN_TYPE mxRGB = max(max(max(d, e), max(f, b)), h);
-    SHARPEN_TYPE mxRGB2 = max(mxRGB, max(max(a, c), max(g, i)));
+    SHARPENCONTRASTADAPTIVE_TYPE mxRGB = max(max(max(d, e), max(f, b)), h);
+    SHARPENCONTRASTADAPTIVE_TYPE mxRGB2 = max(mxRGB, max(max(a, c), max(g, i)));
     mxRGB += mxRGB2;
 
 	// Smooth minimum distance to signal limit divided by smooth max.
-	SHARPEN_TYPE ampRGB = saturate(min(mnRGB, 2.0 - mxRGB) / mxRGB);
+	SHARPENCONTRASTADAPTIVE_TYPE ampRGB = saturate(min(mnRGB, 2.0 - mxRGB) / mxRGB);
 	
 	// Shaping amount of sharpening.
-	SHARPEN_TYPE wRGB = sqrt(ampRGB) * peak;
+	SHARPENCONTRASTADAPTIVE_TYPE wRGB = sqrt(ampRGB) * peak;
 	
 	// Filter shape.
 	//  0 w 0
 	//  w 1 w
 	//  0 w 0  
-	SHARPEN_TYPE weightRGB = 1.0 + 4.0 * wRGB;
-	SHARPEN_TYPE window = (b + d) + (f + h);
+	SHARPENCONTRASTADAPTIVE_TYPE weightRGB = 1.0 + 4.0 * wRGB;
+	SHARPENCONTRASTADAPTIVE_TYPE window = (b + d) + (f + h);
 	return saturate((window * wRGB + e) / weightRGB);
 }
 
-SHARPEN_TYPE sharpenContrastAdaptive(sampler2D tex, vec2 st, vec2 pixel) {
+SHARPENCONTRASTADAPTIVE_TYPE sharpenContrastAdaptive(sampler2D tex, vec2 st, vec2 pixel) {
     return sharpenContrastAdaptive(tex, st, pixel, 1.0);
 }
 #endif

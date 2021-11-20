@@ -34,11 +34,19 @@ license:
 */
 
 #ifndef EDGESOBEL_TYPE
+#ifdef EDGE_TYPE
+#define EDGESOBEL_TYPE EDGE_TYPE
+#else
 #define EDGESOBEL_TYPE float
+#endif
 #endif
 
 #ifndef EDGESOBEL_SAMPLER_FNC
-#define EDGESOBEL_SAMPLER_FNC(POS_UV) texture2D(tex,POS_UV).r
+#ifdef EDGE_SAMPLER_FNC
+#define EDGESOBEL_SAMPLER_FNC(POS_UV) EDGE_SAMPLER_FNC(POS_UV)
+#else
+#define EDGESOBEL_SAMPLER_FNC(POS_UV) texture2D(tex, POS_UV).r
+#endif
 #endif
 
 #ifndef FNC_EDGESOBEL

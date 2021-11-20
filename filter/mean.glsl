@@ -23,7 +23,7 @@ licence:
 #endif
 
 #ifndef MEAN_SAMPLER_FNC
-#define MEAN_SAMPLER_FNC(POS_UV) texture2D(tex,POS_UV)
+#define MEAN_SAMPLER_FNC(POS_UV) texture2D(tex, POS_UV)
 #endif
 
 #ifndef FNC_AVERAGE
