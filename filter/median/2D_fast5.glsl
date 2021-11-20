@@ -17,11 +17,19 @@ license:
 */
 
 #ifndef MEDIAN2D_FAST5_TYPE
+#ifdef MEDIAN2D_TYPE
+#define MEDIAN2D_FAST5_TYPE MEDIAN2D_TYPE
+#else
 #define MEDIAN2D_FAST5_TYPE vec4
+#endif
 #endif
 
 #ifndef MEDIAN2D_FAST5_SAMPLER_FNC
+#ifdef MEDIAN_SAMPLER_FNC
+#define MEDIAN2D_FAST5_SAMPLER_FNC(POS_UV) MEDIAN_SAMPLER_FNC(POS_UV)
+#else
 #define MEDIAN2D_FAST5_SAMPLER_FNC(POS_UV) texture2D(tex, POS_UV)
+#endif
 #endif
 
 #ifndef MEDIAN_S2

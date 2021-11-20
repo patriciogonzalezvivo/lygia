@@ -33,17 +33,17 @@ license: |
 #ifndef FNC_RADIALBLUR
 #define FNC_RADIALBLUR
 RADIALBLUR_TYPE radialBlur(in sampler2D tex, in vec2 st, in vec2 dir, in float strength) {
-  RADIALBLUR_TYPE color = RADIALBLUR_TYPE(0.);
-  float f_samples = float(RADIALBLUR_KERNELSIZE);
-  float f_factor = 1./f_samples;
-  for (int i = 0; i < RADIALBLUR_KERNELSIZE; i += 2) {
-      color += RADIALBLUR_SAMPLER_FNC(st + float(i) * f_factor * dir * strength);
-      color += RADIALBLUR_SAMPLER_FNC(st + float(i+1) * f_factor * dir * strength);
-  }
-  return color * f_factor;
+    RADIALBLUR_TYPE color = RADIALBLUR_TYPE(0.);
+    float f_samples = float(RADIALBLUR_KERNELSIZE);
+    float f_factor = 1./f_samples;
+    for (int i = 0; i < RADIALBLUR_KERNELSIZE; i += 2) {
+        color += RADIALBLUR_SAMPLER_FNC(st + float(i) * f_factor * dir * strength);
+        color += RADIALBLUR_SAMPLER_FNC(st + float(i+1) * f_factor * dir * strength);
+    }
+    return color * f_factor;
 }
 
 RADIALBLUR_TYPE radialBlur(in sampler2D tex, in vec2 st, in vec2 dir) {
-  return radialBlur(tex, st, dir, RADIALBLUR_STRENGTH);
+    return radialBlur(tex, st, dir, RADIALBLUR_STRENGTH);
 }
 #endif
