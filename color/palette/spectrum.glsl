@@ -25,10 +25,10 @@ vec3 spectrum(float x) {
 }
 
 vec3 spectrum(float x, float blur) {
-	vec4 a = vec4(  1.,   .61,   .78,  .09),
-    	 o = vec4(-.57, -.404, -.176, -.14),
-    	 f = vec4(223.,  165.,  321., 764.) / blur,
-    	 c = a*pow(cos(x + o), f);
+    vec4 a = vec4(  1.,   .61,   .78,  .09),
+         o = vec4(-.57, -.404, -.176, -.14),
+         f = vec4(223.,  165.,  321., 764.) / blur,
+         c = a*pow(cos(x + o), f);
     c.r += c.w;
     return c.rgb;
 }
