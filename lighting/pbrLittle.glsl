@@ -93,7 +93,7 @@ vec4 pbrLittle(vec4 baseColor, vec3 normal, float roughness, float metallic ) {
     ambientSpecular += fresnel(R, vec3(0.04), dot(N,V)) * metallic;
 
     baseColor.rgb = baseColor.rgb * notMetal + ( ambientSpecular 
-                    + u_lightColor * 2.0 * specular
+                    + LIGHT_COLOR * 2.0 * specular
                     ) * (notMetal * smooth + baseColor.rgb * metallic);
 
     return linear2gamma(baseColor);
