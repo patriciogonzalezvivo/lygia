@@ -1,4 +1,6 @@
 #include "../toShininess.glsl"
+#include "roughness.glsl"
+#include "metallic.glsl"
 
 /*
 author: Patricio Gonzalez Vivo
