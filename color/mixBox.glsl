@@ -1,7 +1,7 @@
 #include "space/srgb2rgb.glsl"
 #include "space/rgb2srgb.glsl"
 /*
-author: Ondrej Jamriska (Secret Weapons), Patricio Gonzalez Vivo
+author: Secret Weapons (@scrtwpns), ported to GLSL by Patricio Gonzalez Vivo (@patriciogv)
 description: mix using mixbox pigment algo https://github.com/scrtwpns/pigment-mixing and converted to GLSL by Patricio Gonzalez Vivo
 use: <vec3\vec4> mixBox(<vec3|vec4> rgbA, <vec3|vec4> rgbB, float pct)
 license: |
