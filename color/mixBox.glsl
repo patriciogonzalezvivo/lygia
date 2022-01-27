@@ -1,7 +1,10 @@
 /*
-author: Secret Weapons (@scrtwpns), ported to GLSL by Patricio Gonzalez Vivo (@patriciogv)
-description: mix using mixbox pigment algo https://github.com/scrtwpns/pigment-mixing and converted to GLSL by Patricio Gonzalez Vivo
+author: Ondrej Jamriska (@jezeqster) from Secret Weapons (@scrtwpns)
+description: mix using mixbox pigment algorithm https://github.com/scrtwpns/pigment-mixing and converted to GLSL by Patricio Gonzalez Vivo
 use: <vec3\vec4> mixBox(<vec3|vec4> rgbA, <vec3|vec4> rgbB, float pct)
+options:
+    - MIXBOX_LUT: name of the texture uniform which you can find here https://github.com/scrtwpns/pigment-mixing or contacting mixbox@scrtwpns.com 
+    - MIXBOX_LUT_SAMPLER_FNC: sampler function. Default: texture2D(MIXBOX_LUT, POS_UV).rgb
 license: |
     Copyright (c) 2022, Secret Weapons. All rights reserved.
     This code is for non-commercial use only. It is provided for research and evaluation purposes.
@@ -11,8 +14,12 @@ license: |
 #ifndef FNC_MIXBOX
 #define FNC_MIXBOX
 
+#ifndef MIXBOX_LUT 
+#define MIXBOX_LUT u_tex0
+#endif
+
 #ifndef MIXBOX_LUT_SAMPLER_FNC
-#define MIXBOX_LUT_SAMPLER_FNC(POS_UV) texture2D(u_tex0, POS_UV).rgb
+#define MIXBOX_LUT_SAMPLER_FNC(POS_UV) texture2D(MIXBOX_LUT, POS_UV).rgb
 #endif
 
 #define MIXBOX_NUMLATENTS 7
