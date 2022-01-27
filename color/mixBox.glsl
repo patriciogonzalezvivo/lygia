@@ -1,5 +1,3 @@
-#include "space/srgb2rgb.glsl"
-#include "space/rgb2srgb.glsl"
 /*
 author: Secret Weapons (@scrtwpns), ported to GLSL by Patricio Gonzalez Vivo (@patriciogv)
 description: mix using mixbox pigment algo https://github.com/scrtwpns/pigment-mixing and converted to GLSL by Patricio Gonzalez Vivo
