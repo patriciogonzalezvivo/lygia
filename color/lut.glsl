@@ -1,4 +1,5 @@
 #include "../math/saturate.glsl"
+
 /*
 Author: [Matt DesLauriers, Johan Ismael, Patricio Gonzalez Vivo]
 description: Use LUT textures to modify colors (vec4 and vec3) or a position in a gradient (vec2 and floats)
