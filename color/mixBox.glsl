@@ -108,7 +108,6 @@ mixBox_latent mixBox_srgb_to_latent(vec3 rgb) {
     vec4 c = vec4(0.0);
     vec2 lutRes = 1./vec2(4096.0);
     for (int j = 0; j<8; j++) {
-        // float i = XYZ + offsets[j];
         vec2 uv = vec2(0.0);
         uv.x = mod(xyz_i.b, 16.0) * 256.0 + xyz_i.r;
         uv.y = (xyz_i.b / 16.0) * 256.0 + xyz_i.g;
