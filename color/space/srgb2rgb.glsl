@@ -24,7 +24,7 @@ license: |
 
 float srgb2rgb(float channel) {
     if (channel <= 0.04045)
-        return channel / 12.92;
+        return channel * 0.08333333333; // 1.0 / 12.92;
     else
         return pow((channel + SRGB_ALPHA) / (1.0 + SRGB_ALPHA), 2.4);
 }

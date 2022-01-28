@@ -1,23 +1,46 @@
-#include "../../math/min.hlsl"
-
 /*
-author: Patricio Gonzalez Vivo
-description: convert CMYK to RGB
-use: rgb2cmyk(<float3|float4> rgba)
+author: Patricio Gonzalez Vivo  
+description: 
+use: <float|float3\float4> srgb2rgb(<float|float3|float4> srgb)
 license: |
     Copyright (c) 2021 Patricio Gonzalez Vivo.
     Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
     The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 */
 
-#ifndef FNC_RGB2CMYK
-#define FNC_RGB2CMYK
-float4 rgb2cmyk(float3 rgb) {
-    float k = min(1.0 - rgb);
-    float invK = 1.0 - k;
-    float3 cmy = (1.0 - rgb - k) / invK;
-    cmy *= step(0.0, invK);
-    return saturate(float4(cmy, k));
+
+#ifndef SRGB_INVERSE_GAMMA
+#define SRGB_INVERSE_GAMMA 2.2
+#endif
+
+#ifndef SRGB_ALPHA
+#define SRGB_ALPHA 0.055
+#endif
+
+#ifndef FNC_SRGB2RGB
+#define FNC_SRGB2RGB
+
+float srgb2rgb(float channel) {
+    if (channel <= 0.04045)
+        return channel * 0.08333333333; // 1. / 12.92;
+    else
+        return pow((channel + SRGB_ALPHA) / (1.0 + SRGB_ALPHA), 2.4);
 }
+
+float3 srgb2rgb(float3 srgb) {
+    #if defined(TARGET_MOBILE) || defined(PLATFORM_RPI) | defined(PLATFORM_WEBGL)
+        return pow(srgb, float3(SRGB_INVERSE_GAMMA));
+    #else 
+        float3 srgb_lo = srgb / 12.92;
+        float3 srgb_hi = pow((srgb + SRGB_ALPHA)/(1.0 + SRGB_ALPHA), float3(2.4, 2.4, 2.4));
+        return mix(srgb_lo, srgb_hi, step(float3(0.04045, 0.04045, 0.04045), srgb));
+    #endif
+}
+
+float4 srgb2rgb(float4 srgb) {
+    return float4(srgb2rgb(srgb.rgb), srgb.a);
+}
+
 #endif

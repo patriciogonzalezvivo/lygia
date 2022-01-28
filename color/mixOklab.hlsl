@@ -38,8 +38,8 @@ float3 mixOklab( float3 colA, float3 colB, float h ) {
     
     float factor = 1.0/3.0;
     // rgb to cone (arg of pow can't be negative)
-    float3 lmsA = pow( kCONEtoLMS * colA, float3(factor, factor, factor) );
-    float3 lmsB = pow( kCONEtoLMS * colB, float3(factor, factor, factor) );
+    float3 lmsA = pow( mul(kCONEtoLMS, colA), float3(factor, factor, factor) );
+    float3 lmsB = pow( mul(kCONEtoLMS, colB), float3(factor, factor, factor) );
     // lerp
     float3 lms = lerp( lmsA, lmsB, h );
     
@@ -47,7 +47,7 @@ float3 mixOklab( float3 colA, float3 colB, float h ) {
     // lms *= 1.0+0.2*h*(1.0-h);
 
     // cone to rgb
-    return kLMStoCONE*(lms*lms*lms);
+    return mul(kLMStoCONE, lms*lms*lms);
 }
 
 float4 mixOklab( float4 colA, float4 colB, float h ) {
