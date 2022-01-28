@@ -4,7 +4,9 @@ description: mix using mixbox pigment algorithm https://github.com/scrtwpns/pigm
 use: <vec3\vec4> mixBox(<vec3|vec4> rgbA, <vec3|vec4> rgbB, float pct)
 options:
     - MIXBOX_LUT: name of the texture uniform which you can find here https://github.com/scrtwpns/pigment-mixing or contacting mixbox@scrtwpns.com 
+    - MIXBOX_LUT_FLIP_Y: when defined it expects a vertically flipled texture  
     - MIXBOX_LUT_SAMPLER_FNC: sampler function. Default: texture2D(MIXBOX_LUT, POS_UV).rgb
+
 license: |
     Copyright (c) 2022, Secret Weapons. All rights reserved.
     This code is for non-commercial use only. It is provided for research and evaluation purposes.
@@ -104,14 +106,17 @@ mixBox_latent mixBox_srgb_to_latent(vec3 rgb) {
     weights[7] = (    t.x)*(    t.y)*(    t.z);
 
     vec4 c = vec4(0.0);
-    vec2 lutRes = vec2(4096.0);
+    vec2 lutRes = 1./vec2(4096.0);
     for (int j = 0; j<8; j++) {
         // float i = XYZ + offsets[j];
         vec2 uv = vec2(0.0);
         uv.x = mod(xyz_i.b, 16.0) * 256.0 + xyz_i.r;
         uv.y = (xyz_i.b / 16.0) * 256.0 + xyz_i.g;
+        uv *= lutRes;
+        #ifndef MIXBOX_LUT_FLIP_Y
         uv.y = 1.0 - uv.y;
-        c.rgb += weights[j] * MIXBOX_LUT_SAMPLER_FNC(uv / lutRes);
+        #endif
+        c.rgb += weights[j] * MIXBOX_LUT_SAMPLER_FNC(uv);
     }
 
     c[3] = 1.0 - (c[0]+c[1]+c[2]);
