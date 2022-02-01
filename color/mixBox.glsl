@@ -1,11 +1,11 @@
 #include "../math/saturate.glsl"
 
 /*
-author: Ondrej Jamriska (@jezeqster) from Secret Weapons (@scrtwpns)
+author: Secret Weapons (@scrtwpns)
 description: mix using mixbox pigment algorithm https://github.com/scrtwpns/pigment-mixing and converted to GLSL by Patricio Gonzalez Vivo
 use: <vec3\vec4> mixBox(<vec3|vec4> rgbA, <vec3|vec4> rgbB, float pct)
 options:
-    - MIXBOX_LUT: name of the texture uniform which you can find here https://github.com/scrtwpns/pigment-mixing or contacting mixbox@scrtwpns.com 
+    - MIXBOX_LUT: name of the texture uniform which you can find here https://github.com/scrtwpns/pigment-mixing
     - MIXBOX_LUT_FLIP_Y: when defined it expects a vertically flipled texture  
     - MIXBOX_LUT_SAMPLER_FNC: sampler function. Default: texture2D(MIXBOX_LUT, POS_UV).rgb
     - MIXBOX_LUT_CELL_SIZE: Default 256
