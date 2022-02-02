@@ -10,17 +10,17 @@ licence: TODO
 
 #ifndef FNC_BLENDLINEARLIGHT
 #define FNC_BLENDLINEARLIGHT
-float blendLinearLigth(in float base, in float blend) {
+float blendLinearLight(in float base, in float blend) {
   return blend < .5? blendLinearBurn(base, (2. * blend)): blendLinearDodge(base, (2. * (blend- .5)));
 }
 
-vec3 blendLinearLigth(in vec3 base, in vec3 blend) {
-  return vec3(blendLinearLigth(base.r, blend.r),
-              blendLinearLigth(base.g, blend.g),
-              blendLinearLigth(base.b, blend.b));
+vec3 blendLinearLight(in vec3 base, in vec3 blend) {
+  return vec3(blendLinearLight(base.r, blend.r),
+              blendLinearLight(base.g, blend.g),
+              blendLinearLight(base.b, blend.b));
 }
 
-vec3 blendLinearLigth(in vec3 base, in vec3 blend, in float opacity) {
-    return (blendLinearLigth(base, blend) * opacity + base * (1. - opacity));
+vec3 blendLinearLight(in vec3 base, in vec3 blend, in float opacity) {
+    return (blendLinearLight(base, blend) * opacity + base * (1. - opacity));
 }
 #endif
