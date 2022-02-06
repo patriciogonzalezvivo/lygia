@@ -1,5 +1,3 @@
-#include "../space/rgb2srgb.glsl"
-
 /*
 Author:John Hable
 description: tonemapping function from presentation "Uncharted 2 HDR Lighting", Page 142-143
@@ -19,7 +17,7 @@ vec3 tonemapUncharted2(vec3 color) {
     
     vec4 x = vec4(color, W);
     x = ((x*(A*x+C*B)+D*E)/(x*(A*x+B)+D*F))-E/F;
-    return rgb2srgb(x.xyz / x.w);
+    return x.xyz / x.w;
 }
 
 vec4 tonemapUncharted2(const vec4 x) { return vec4( tonemapUncharted2(x.rgb), x.a); }
