@@ -1,4 +1,3 @@
-#include ""
 /*
 author: Patricio Gonzalez Vivo  
 description: 
@@ -43,7 +42,14 @@ vec3 rgb2srgb(vec3 rgb) {
 
         vec3 rgb_lo = 12.92 * rgb;
         vec3 rgb_hi = (1.0 + SRGB_ALPHA) * pow(rgb, vec3(0.4166666666666667)) - SRGB_ALPHA;
-        return mix(rgb_lo, rgb_hi, step(vec3(0.0031308), rgb));
+
+        vec3 color = vec3(0.0);
+        color.r = color.r < 0.0031308 ? rgb_lo.x : rgb_hi.x;
+        color.g = color.g < 0.0031308 ? rgb_lo.y : rgb_hi.y;
+        color.b = color.b < 0.0031308 ? rgb_lo.z : rgb_hi.z;
+        return color;
+
+        // return mix(rgb_lo, rgb_hi, step(vec3(0.0031308), rgb));
 
     #endif
 }
