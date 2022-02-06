@@ -1,5 +1,5 @@
 /*
-Author: [
+Author:
 description: 
 use: <vec3|vec4> tonemapUncharted(<vec3|vec4> x)
 */
