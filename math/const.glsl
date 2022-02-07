@@ -16,6 +16,9 @@
 #ifndef ONE_OVER_PI
 #define ONE_OVER_PI 0.31830988618
 #endif
+#ifndef SQRT_HALF_PI
+#define SQRT_HALF_PI 1.25331413732
+#endif
 #ifndef PHI
 #define PHI 1.618033988749894848204586834
 #endif
