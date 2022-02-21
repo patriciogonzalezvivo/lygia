@@ -30,7 +30,6 @@ license: |
 
 #include "raymarch/default.glsl"
 #include "raymarch/camera.glsl"
-#include "../space/lookAt.glsl"
 
 vec4 raymarch(vec3 camera, vec3 ta, vec2 st) {
     mat3 ca = RAYMARCH_CAMERA_MATRIX_FNC(camera, ta);

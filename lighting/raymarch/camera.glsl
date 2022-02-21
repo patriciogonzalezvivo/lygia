@@ -1,3 +1,5 @@
+#include "../../space/lookAt.glsl"
+
 /*
 author:  Inigo Quiles
 description: set a camera for raymarching 
