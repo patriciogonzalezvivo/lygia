@@ -1,4 +1,5 @@
 #include "../toMetallic.glsl"
+#include "baseColor.glsl"
 #include "specular.glsl"
 
 /*
