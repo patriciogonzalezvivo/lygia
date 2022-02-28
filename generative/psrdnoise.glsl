@@ -221,7 +221,7 @@ float psrdnoise(vec2 x, vec2 period) {
 }
 
 float psrdnoise(vec2 x) {
-    return psrdnoise(x, vec2(1.0));
+    return psrdnoise(x, vec2(0.0));
 }
 
 float psrdnoise(vec3 x, vec3 period, float alpha, out vec3 gradient) {
@@ -643,6 +643,6 @@ float psrdnoise(vec3 x, vec3 period) {
 }
 
 float psrdnoise(vec3 x) {
-    return psrdnoise(x, vec3(1.0));
+    return psrdnoise(x, vec3(0.0));
 }
 #endif
