@@ -93,7 +93,7 @@ This library:
     * C++: https://github.com/patriciogonzalezvivo/glslViewer/blob/master/src/io/fs.cpp#L104
     * Python: https://gist.github.com/patriciogonzalezvivo/9a50569c2ef9b08058706443a39d838e
     * JavaScript: 
-        - esbuid: https://github.com/ricardomatias/esbuild-plugin-glsl-include
+        - esbuild: https://github.com/ricardomatias/esbuild-plugin-glsl-include
         - webpack: https://github.com/grieve/webpack-glsl-loader
         - observable: https://observablehq.com/d/e4e8a96f64a6bf81
         - vanilla: https://github.com/actarian/vscode-glsl-canvas/blob/91ff09bf6cec35e73d1b64e50b56ef3299d2fe6b/src/glsl/export.ts#L351
