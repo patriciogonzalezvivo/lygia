@@ -85,7 +85,7 @@ vec4 fluidSolver(sampler2D tex, vec2 st, vec2 pixel, vec2 force) {
     #endif
     
     #ifdef FLUIDSOLVER_VELOCITY_DECAY
-    d.xy = max(vec2(0.), abs(d.xy) - FLUIDSOLVER_VELOCITY_DECAY)*sign(d.xy);
+    d.xy = max(vec2(0.), abs(d.xy) - FLUIDSOLVER_VELOCITY_DECAY) * sign(d.xy);
     #endif
     
     // Vorticity confinement
@@ -101,7 +101,7 @@ vec4 fluidSolver(sampler2D tex, vec2 st, vec2 pixel, vec2 force) {
 
     // Pack XY, Z and W data
     d.xy = clamp(d.xy, -0.999, 0.999) * 0.5 + 0.5;
-    d.zw = clamp(d.zw, 0.0, 1.0);
+    d.zw = saturate(d.zw);
     return d;
 }
 
