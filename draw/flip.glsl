@@ -11,6 +11,14 @@ license: |
 #ifndef FNC_FLIP
 #define FNC_FLIP
 float flip(in float v, in float pct) {
-    return mix(v, 1. - v, pct);
+    return mix(v, 1.0 - v, pct);
+}
+
+vec3 flip(in vec3 v, in float pct) {
+    return mix(v, 1.0 - v, pct);
+}
+
+vec4 flip(in vec4 v, in float pct) {
+    return mix(v, 1.0 - v, pct);
 }
 #endif
