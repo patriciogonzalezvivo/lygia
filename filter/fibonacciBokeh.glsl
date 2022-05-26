@@ -1,9 +1,16 @@
 #include "../color/space/linear2gamma.glsl"
 #include "../color/space/gamma2linear.glsl"
 
-#ifndef FIBONACCIBOKEH_ITERATIONS
-#define FIBONACCIBOKEH_ITERATIONS 3
-#endif
+/*
+author: Xor 
+description: Fibonacci Bokeh ( https://www.shadertoy.com/view/fljyWd )
+use: <vec4> fibonacciBokeh(<sampler2D> tex, <vec2> st, <vec2> pixel, <float> amount) 
+options:
+    - FIBONACCIBOKEH_TYPE:
+    - FIBONACCIBOKEH_SAMPLER_FNC():
+    
+license: NONE
+*/
 
 #ifndef FIBONACCIBOKEH_TYPE
 #define FIBONACCIBOKEH_TYPE vec4
@@ -24,7 +31,7 @@ FIBONACCIBOKEH_TYPE fibonacciBokeh(sampler2D tex, vec2 st, vec2 pixel, float amo
     mat2 m = mat2(0.0, 0.061, 1.413, 0.0) - 0.737;
 
     vec2 st2 = vec2( dot(uv + uv - r, vec2(.0002,-0.001)), 0.0 );
-    
+
     float counter = 0.0;
     for (float i = 1.0; i < 16.0; i += 1.0/i) {
         st2 *= m;
