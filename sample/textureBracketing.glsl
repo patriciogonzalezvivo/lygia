@@ -1,9 +1,9 @@
 #include "../space/rotate.glsl"
 
 /*
-author: Huw Bowles
+author: Huw Bowles ( @hdb1 )
 description: 'Bracketing' technique maps a texture to a plane using any arbitrary 2D vector field to give orientatio. From https://www.shadertoy.com/view/NddcDr
-use: textureDoF(<sampler2D> texture, <sampler2D> depth, <vec2> st, <float> focusPoint, <float> focusScale)
+use: textureBracketing(<sampler2D> texture, <vec2> st, <vec2> direction [, <float> scale] )
 options:
     TEXTUREBRACKETING_TYPE:
     TEXTUREBRACKETING_SAMPLE_FNC(UV):
