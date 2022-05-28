@@ -1,3 +1,6 @@
+#include "../sdf/lineSDF.glsl"
+#include "../math/saturate.glsl"
+
 /*
 author: Morgan McGuire, @morgan3d, http://casual-effects.com
 description: Draw arrows for vector fields from https://www.shadertoy.com/view/4s23DG
@@ -56,7 +59,6 @@ float arrows(vec2 p, vec2 v, vec2 resolution) {
         
     if (mag_v > 0.0) {
         // Non-zero velocity case
-        vec2 dir_p = p / mag_p;
         vec2 dir_v = v / mag_v;
         
         // We can't draw arrows larger than the tile radius, so clamp magnitude.
@@ -66,39 +68,42 @@ float arrows(vec2 p, vec2 v, vec2 resolution) {
         // Arrow tip location
         v = dir_v * mag_v;
         
-        // Define a 2D implicit surface so that the arrow is antialiased.
-        // In each line, the left expression defines a shape and the right controls
-        // how quickly it fades in or out.
+        #if defined(ARROWS_STYLE_LINE)
 
-        float dist = 0.0;
-        #ifdef ARROWS_LINE_STYLE
+            // Signed distance from shaft
+            float shaft = lineSDF(p, v, -v);
+
+            // Signed distance from head
+            float head = min(   lineSDF(p, v, 0.4*v + 0.2*vec2(-v.y, v.x)),
+                                lineSDF(p, v, 0.4*v + 0.2*vec2(v.y, -v.x)));
+
+            return step(min(shaft, head), 1.);
+
+        #elif defined(ARROWS_STYLE_LINE_TRIANGLE)
             // Signed distance from a line segment based on https://www.shadertoy.com/view/ls2GWG by 
             // Matthias Reitinger, @mreitinger
-            
+
             // Line arrow style
-            dist = 
-                max(
-                    // Shaft
-                    ARROWS_SHAFT_THICKNESS / 4.0 - 
+            return saturate(1.0 + 
+                    max( ARROWS_SHAFT_THICKNESS / 4.0 - 
                         max(abs(dot(p, vec2(dir_v.y, -dir_v.x))), // Width
                             abs(dot(p, dir_v)) - mag_v + ARROWS_HEAD_LENGTH / 2.0), // Length
-                        
-                     // Arrow head
-                     min(0.0, dot(v - p, dir_v) - cos(ARROWS_HEAD_ANGLE / 2.0) * length(v - p)) * 2.0 + // Front sides
-                     min(0.0, dot(p, dir_v) + ARROWS_HEAD_LENGTH - mag_v)); // Back
+
+                        // Arrow head
+                        min(0.0, 
+                            dot(v - p, dir_v) - cos(ARROWS_HEAD_ANGLE / 2.0) * length(v - p)) * 2.0 + // Front sides
+                        min(0.0, 
+                            dot(p, dir_v) + ARROWS_HEAD_LENGTH - mag_v) ) ); // Back
         #else
             // V arrow style
-            dist = min(0.0, mag_v - mag_p) * 2.0 + // length
-                   min(0.0, dot(normalize(v - p), dir_v) - cos(ARROWS_HEAD_ANGLE / 2.0)) * 2.0 * length(v - p) + // head sides
-                   min(0.0, dot(p, dir_v) + 1.0) + // head back
-                   min(0.0, cos(ARROWS_HEAD_ANGLE / 2.0) - dot(normalize(v * 0.33 - p), dir_v)) * mag_v * 0.8; // cutout
+            return saturate(1.0 + 
+                            // min(0.0, mag_v - mag_p) * 2.0 + // length
+                            min(0.0, dot(normalize(v - p), dir_v) - cos(ARROWS_HEAD_ANGLE / 2.0)) * 2.0 * length(v - p) + // head sides
+                            min(0.0, dot(p, dir_v) + 1.0) + // head back
+                            min(0.0, cos(ARROWS_HEAD_ANGLE / 2.0) - dot(normalize(v * 0.33 - p), dir_v)) * mag_v * 0.8 ); // cutout
         #endif
-        
-        return clamp(1.0 + dist, 0.0, 1.0);
     } 
-    else
-        // Center of the pixel is always on the arrow
-        return max(0.0, 1.2 - mag_p);
+    return 0.0;
 }
 
 float arrows(vec2 p, vec2 v) { return arrows(p, v, vec2(1.0)); }

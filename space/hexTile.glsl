@@ -41,6 +41,17 @@ vec3 hexTile(in vec2 st, in float scl) {
     return vec3(coord, dist);
 }
 
-vec3 hexTile(in vec2 st) { return hexTile(st, 1.0); }
+vec4 hexTile(vec2 st) {
+    vec2 s = vec2(1., 1.7320508);
+    vec2 o = vec2(.5, 1.);
+    st = st.yx;
+    
+    vec4 i = floor(vec4(st,st-o)/s.xyxy)+.5;
+    vec4 f = vec4(st-i.xy*s, st-(i.zw+.5)*s);
+    
+    return dot(f.xy,f.xy) < dot(f.zw,f.zw) ? 
+            vec4(f.yx+.5, i.xy):
+            vec4(f.wz+.5, i.zw+o);
+}
 
 #endif
