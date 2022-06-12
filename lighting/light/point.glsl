@@ -26,17 +26,17 @@ license: |
 
 #ifndef LIGHT_POSITION
 #if defined(GLSLVIEWER)
-#define LIGHT_POSITION u_light
+#define LIGHT_POSITION  u_light
 #else
-#define LIGHT_POSITION vec3(0.0, 10.0, -50.0)
+#define LIGHT_POSITION  vec3(0.0, 10.0, -50.0)
 #endif
 #endif
 
 #ifndef LIGHT_COLOR
 #if defined(GLSLVIEWER)
-#define LIGHT_COLOR u_lightColor
+#define LIGHT_COLOR     u_lightColor
 #else
-#define LIGHT_COLOR vec3(0.5)
+#define LIGHT_COLOR    vec3(0.5)
 #endif
 #endif
 
@@ -52,32 +52,35 @@ license: |
 #if defined(GLSLVIEWER)
 #define LIGHT_FALLOFF   u_lightFalloff
 #else
-#define LIGHT_FALLOFF 1.0
+#define LIGHT_FALLOFF   0.0
 #endif
 #endif
 
 #ifndef FNC_LIGHT_POINT
 #define FNC_LIGHT_POINT
 
-void lightPoint(vec3 _diffuseColor, vec3 _specularColor, vec3 _N, vec3 _V, float _NoV, float _roughness, float _f0, inout vec3 _diffuse, inout vec3 _specular) {
+void lightPoint(vec3 _diffuseColor, vec3 _specularColor, vec3 _N, vec3 _V, float _NoV, float _roughness, float _f0, float _shadow, inout vec3 _diffuse, inout vec3 _specular) {
     vec3 toLight = LIGHT_POSITION - (SURFACE_POSITION).xyz;
     float toLightLength = length(toLight);
     vec3 s = toLight/toLightLength;
 
     float NoL = dot(_N, s);
 
-    float dif = diffuse(s, _N, _V, _NoV, NoL, _roughness) * ONE_OVER_PI;
+    float dif = diffuse(s, _N, _V, _NoV, NoL, _roughness);// * ONE_OVER_PI;
     float spec = specular(s, _N, _V, _NoV, NoL, _roughness, _f0);
 
-    float fall = 1.0;
-    
+    vec3 lightContribution = LIGHT_COLOR * LIGHT_INTENSITY * _shadow;
     #ifdef LIGHT_FALLOFF
     if (LIGHT_FALLOFF > 0.0)
-        fall = falloff(toLightLength, LIGHT_FALLOFF);
+        lightContribution *= falloff(toLightLength, LIGHT_FALLOFF);
     #endif
-    
-    _diffuse = LIGHT_INTENSITY * (_diffuseColor * LIGHT_COLOR * dif * fall);
-    _specular = LIGHT_INTENSITY * (_specularColor * LIGHT_COLOR * spec * fall);
+
+    _diffuse +=  _diffuseColor * lightContribution * dif;
+    _specular += _specularColor * lightContribution * spec;
+}
+
+void lightPoint(vec3 _diffuseColor, vec3 _specularColor, vec3 _N, vec3 _V, float _NoV, float _roughness, float _f0, inout vec3 _diffuse, inout vec3 _specular) {
+    lightPoint(_diffuseColor, _specularColor, _N, _V,  _NoV, _roughness, _f0, 1.0, _diffuse, _specular);
 }
 
 #endif

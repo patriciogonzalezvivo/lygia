@@ -30,7 +30,7 @@ vec4 materialBaseColor() {
     uv *= (MATERIAL_BASECOLORMAP_SCALE).xy;
     #endif
     base = gamma2linear( texture2D(MATERIAL_BASECOLORMAP, uv) );
-
+    
 #elif defined(MATERIAL_BASECOLOR)
     base = MATERIAL_BASECOLOR;
 
