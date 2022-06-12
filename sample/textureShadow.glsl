@@ -21,7 +21,7 @@ float textureShadow(in sampler2D _shadowMap, in vec3 _coord) {
     return textureShadow(_shadowMap, vec4(_coord, 1.0));
 }
 
-float textureShadow(in sampler2D depths, in vec2 uv, in float compare){
+float textureShadow(in sampler2D depths, in vec2 uv, in float compare) {
     return step(compare, texture2D(depths, uv).r );
 }
 
