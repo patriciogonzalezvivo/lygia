@@ -27,7 +27,7 @@ uniform sampler2D MATERIAL_OCCLUSIONROUGHNESSMETALLICMAP;
 #endif
 
 float materialRoughness() {
-    float roughness = 0.1;
+    float roughness = 0.001;
 
 #if defined(MATERIAL_ROUGHNESSMAP) && defined(MODEL_VERTEX_TEXCOORD)
     vec2 uv = v_texcoord.xy;
@@ -37,15 +37,15 @@ float materialRoughness() {
     #if defined(MATERIAL_ROUGHNESSMAP_SCALE)
     uv *= (MATERIAL_ROUGHNESSMAP_SCALE).xy;
     #endif
-    roughness = texture2D(MATERIAL_ROUGHNESSMAP, uv).g;
+    roughness = max(roughness, texture2D(MATERIAL_ROUGHNESSMAP, uv).g);
 
 #elif defined(MATERIAL_ROUGHNESSMETALLICMAP) && defined(MODEL_VERTEX_TEXCOORD)
     vec2 uv = v_texcoord.xy;
-    roughness = texture2D(MATERIAL_ROUGHNESSMETALLICMAP, uv).g;
+    roughness = max(roughness, texture2D(MATERIAL_ROUGHNESSMETALLICMAP, uv).g);
 
 #elif defined(MATERIAL_OCCLUSIONROUGHNESSMETALLICMAP) && defined(MODEL_VERTEX_TEXCOORD)
     vec2 uv = v_texcoord.xy;
-    roughness = texture2D(MATERIAL_OCCLUSIONROUGHNESSMETALLICMAP, uv).g;
+    roughness = max(roughness, texture2D(MATERIAL_OCCLUSIONROUGHNESSMETALLICMAP, uv).g);
 
 #elif defined(MATERIAL_ROUGHNESS)
     roughness = MATERIAL_ROUGHNESS;

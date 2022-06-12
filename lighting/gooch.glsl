@@ -5,8 +5,9 @@
 #include "diffuse.glsl"
 #include "specular.glsl"
 
+#include "material.glsl"
+
 #include "../sample/textureShadowPCF.glsl"
-#include "../color/space/linear2gamma.glsl"
 
 /*
 author: Patricio Gonzalez Vivo
@@ -27,6 +28,28 @@ license: |
     The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.    
 */
+
+#ifndef SURFACE_POSITION
+#define SURFACE_POSITION v_position
+#endif
+
+#ifndef CAMERA_POSITION
+#if defined(GLSLVIEWER)
+#define CAMERA_POSITION u_camera
+#else
+#define CAMERA_POSITION vec3(0.0, 0.0, -10.0);
+#endif
+#endif
+
+
+#ifndef LIGHT_POSITION
+#if defined(GLSLVIEWER)
+#define LIGHT_POSITION u_light
+#else
+#define LIGHT_POSITION vec3(0.0, 10.0, -50.0)
+#endif
+#endif
+
 
 #ifndef GOOCH_WARM 
 #define GOOCH_WARM vec3(0.25, 0.15, 0.0)
@@ -62,7 +85,11 @@ vec4 gooch(vec4 baseColor, vec3 normal, vec3 light, vec3 view, float roughness) 
     diffuse *= shadow;
 #endif
 
-    return linear2gamma( vec4(mix(mix(cold, warm, diffuse), GOOCH_SPECULAR, specular), baseColor.a) );
+    return vec4(mix(mix(cold, warm, diffuse), GOOCH_SPECULAR, specular), baseColor.a);
+}
+
+vec4 gooch(Material material) {
+    return gooch(material.baseColor, material.normal, LIGHT_POSITION, (CAMERA_POSITION - SURFACE_POSITION.xyz), material.roughness);
 }
 
 #endif
