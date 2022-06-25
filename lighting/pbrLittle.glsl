@@ -105,6 +105,8 @@ vec4 pbrLittle(vec4 baseColor, vec3 normal, float roughness, float metallic, vec
                     + LIGHT_COLOR * 2.0 * specular
                     ) * (notMetal * smooth + baseColor.rgb * metallic);
 
+    baseColor = linear2gamma( baseColor );
+
     return baseColor;
 }
 
