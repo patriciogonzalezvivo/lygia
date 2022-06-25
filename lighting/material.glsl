@@ -1,3 +1,15 @@
+#include "material/baseColor.glsl"
+#include "material/specular.glsl"
+#include "material/emissive.glsl"
+#include "material/occlusion.glsl"
+
+#include "material/normal.glsl"
+
+#include "material/metallic.glsl"
+#include "material/roughness.glsl"
+
+#include "material/shininess.glsl"
+
 /*
 author: Patricio Gonzalez Vivo
 description: Generic Material Structure
