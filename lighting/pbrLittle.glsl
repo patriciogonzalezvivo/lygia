@@ -1,8 +1,9 @@
 #include "../math/powFast.glsl"
 #include "../math/saturate.glsl"
 #include "../color/tonemap.glsl"
-#include "../color/space/linear2gamma.glsl"
 #include "../sample/textureShadowPCF.glsl"
+#include "material.glsl"
+#include "fresnel.glsl"
 
 #include "envMap.glsl"
 #include "sphericalHarmonics.glsl"
@@ -12,7 +13,9 @@
 /*
 author: Patricio Gonzalez Vivo
 description: simple PBR shading model
-use: <vec4> pbrLittle(<vec4> baseColor, <vec3> normal, <float> roughness, <float> metallic ) 
+use: 
+    - <vec4> pbrLittle(<Material> material) 
+    - <vec4> pbrLittle(<vec4> baseColor, <vec3> normal, <float> roughness, <float> metallic [, <vec3> f0] ) 
 options:
     - DIFFUSE_FNC: diffuseOrenNayar, diffuseBurley, diffuseLambert (default)
     - SPECULAR_FNC: specularGaussian, specularBeckmann, specularCookTorrance (default), specularPhongRoughness, specularBlinnPhongRoughnes (default on mobile)
@@ -50,16 +53,16 @@ license: |
 
 #ifndef LIGHT_COLOR
 #if defined(GLSLVIEWER)
-#define LIGHT_COLOR u_lightColor
+#define LIGHT_COLOR     u_lightColor
 #else
-#define LIGHT_COLOR vec3(0.5)
+#define LIGHT_COLOR     vec3(0.5)
 #endif
 #endif
 
 #ifndef FNC_PBR_LITTLE
 #define FNC_PBR_LITTLE
 
-vec4 pbrLittle(vec4 baseColor, vec3 normal, float roughness, float metallic ) {
+vec4 pbrLittle(vec4 baseColor, vec3 normal, float roughness, float metallic, vec3 f0 ) {
     vec3 L = normalize(LIGHT_POSITION - (SURFACE_POSITION).xyz);
     vec3 N = normalize(normal);
     vec3 V = normalize(CAMERA_POSITION - (SURFACE_POSITION).xyz);
@@ -71,7 +74,7 @@ vec4 pbrLittle(vec4 baseColor, vec3 normal, float roughness, float metallic ) {
     float diffuse = diffuse(L, N, V, roughness);
     float specular = specular(L, N, V, roughness);
 
-#if defined(LIGHT_SHADOWMAP) && defined(LIGHT_SHADOWMAP_SIZE) && defined(LIGHT_COORD) && !defined(PLATFORM_RPI) && !defined(PLATFORM_WEBGL)
+#if defined(LIGHT_SHADOWMAP) && defined(LIGHT_SHADOWMAP_SIZE) && defined(LIGHT_COORD) && !defined(PLATFORM_RPI)
     float bias = 0.005;
     float shadow = textureShadowPCF(LIGHT_SHADOWMAP, vec2(LIGHT_SHADOWMAP_SIZE), (LIGHT_COORD).xy, (LIGHT_COORD).z - bias);
     specular *= shadow;
@@ -83,20 +86,36 @@ vec4 pbrLittle(vec4 baseColor, vec3 normal, float roughness, float metallic ) {
     baseColor.rgb *= tonemapReinhard( sphericalHarmonics(N) );
 #endif
 
+    float NoV = dot(N, V); 
+    vec3 F = fresnel(f0, NoV);
+
     // SPECULAR
-    float specIntensity =   (0.04 * notMetal + 2.0 * metallic) * 
-                            saturate(1.1 + dot(N, V) + metallic) * // Fresnel
+    vec3 specIntensity =    vec3(1.0) *
+                            (0.04 * notMetal + 2.0 * metallic) * 
+                            F *
+                            // saturate(-1.1 + NoV + metallic) * // Fresnel
                             (metallic + smooth * 4.0); // make smaller highlights brighter
 
     vec3 R = reflect(-V, N);
-    vec3 ambientSpecular = tonemapReinhard( envMap(R, roughness, metallic) ) * specIntensity;
-    ambientSpecular += fresnel(R, vec3(0.04), dot(N,V)) * metallic;
+    vec3 ambientSpecular = vec3(0.0);
+    ambientSpecular += tonemapReinhard( envMap(R, roughness, metallic) ) * specIntensity;
+    ambientSpecular += F * metallic;
 
     baseColor.rgb = baseColor.rgb * notMetal + ( ambientSpecular 
                     + LIGHT_COLOR * 2.0 * specular
                     ) * (notMetal * smooth + baseColor.rgb * metallic);
 
-    return linear2gamma(baseColor);
+    baseColor = linear2gamma( baseColor );
+
+    return baseColor;
+}
+
+vec4 pbrLittle(vec4 baseColor, vec3 normal, float roughness, float metallic) {
+    return pbrLittle(baseColor, normal, roughness, metallic, vec3(0.04));
+}
+
+vec4 pbrLittle(Material material) {
+    return pbrLittle(material.baseColor, material.normal, material.roughness, material.metallic) + vec4(material.emissive, 0.0);
 }
 
 #endif
