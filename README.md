@@ -90,7 +90,7 @@ Keeping LYGIA in growing healthy require works and dedication, I really apprecia
 This library:
 
 * Relays on `#include "file"` which is defined by Khronos GLSL standard and suported by most engines and enviroments ( like [glslViewer](https://github.com/patriciogonzalezvivo/glslViewer/wiki/Compiling), [glsl-canvas VS Code pluging](https://marketplace.visualstudio.com/items?itemName=circledev.glsl-canvas), Unity, etc. ). It requires a tipical C-like pre-compiler MACRO which is easy to implement with just basic string operations to resolve dependencies. Here you can find some implementations on different languages:
-    * C++: https://github.com/patriciogonzalezvivo/glslViewer/blob/master/src/io/fs.cpp#L104
+    * C++: https://github.com/patriciogonzalezvivo/ada/blob/main/src/fs.cpp#L88-L171
     * Python: https://gist.github.com/patriciogonzalezvivo/9a50569c2ef9b08058706443a39d838e
     * JavaScript: 
         - vite: https://github.com/UstymUkhman/vite-plugin-glsl
