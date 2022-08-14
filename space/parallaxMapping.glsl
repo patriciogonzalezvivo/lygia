@@ -1,5 +1,5 @@
 /*
-author: Patricio Gonzalez Vivp
+author: Patricio Gonzalez Vivo
 description: get parallax mapping coordinates
 use: parallaxMapping(<sampler2D> heightTex, <vec3> V, <vec2> T, <float> parallaxHeight) 
 license: |
