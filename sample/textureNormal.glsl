@@ -1,5 +1,5 @@
 /*
-author: Patricio Gonzalez Vivp
+author: Patricio Gonzalez Vivo
 description: Standar way to get normals from a normal map
 use: textureNormal(<sampler2D> tex, <vec2> st)
 license: |
