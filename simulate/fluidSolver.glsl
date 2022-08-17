@@ -47,7 +47,7 @@ vec4 fluidSolver_sampler(sampler2D tex, vec2 st) {
     // XY velocity  -1.0 to 1.0
     // Z density     0.0 to 1.0
     // W vorticity   0.0 to 1.0
-    data.xyw = data.xyw * 2.0 - 1.0;
+    data.xy = data.xy * 2.0 - 1.0;
     return data;
 }
 
