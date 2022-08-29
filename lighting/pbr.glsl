@@ -146,8 +146,6 @@ vec4 pbr(const Material _mat) {
     color.rgb += _mat.emissive;
     color.a = _mat.baseColor.a;
 
-    color = linear2gamma( color );
-
     return color;
 }
 #endif
