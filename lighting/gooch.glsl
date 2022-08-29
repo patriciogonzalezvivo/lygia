@@ -78,7 +78,7 @@ vec4 gooch(vec4 baseColor, vec3 normal, vec3 light, vec3 view, float roughness) 
     // Phong Specular
     float specular = specular(l, n, v, roughness);
 
-#if defined(LIGHT_SHADOWMAP) && defined(LIGHT_SHADOWMAP_SIZE) && defined(LIGHT_COORD) && !defined(PLATFORM_RPI) && !defined(PLATFORM_WEBGL)
+#if defined(LIGHT_SHADOWMAP) && defined(LIGHT_SHADOWMAP_SIZE) && defined(LIGHT_COORD)
     float bias = 0.005;
     float shadow = textureShadowPCF(u_lightShadowMap, vec2(LIGHT_SHADOWMAP_SIZE), (LIGHT_COORD).xy, (LIGHT_COORD).z - bias);
     specular *= shadow;

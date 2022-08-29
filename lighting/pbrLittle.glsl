@@ -87,25 +87,20 @@ vec4 pbrLittle(vec4 baseColor, vec3 normal, float roughness, float metallic, vec
 #endif
 
     float NoV = dot(N, V); 
-    vec3 F = fresnel(f0, NoV);
 
     // SPECULAR
     vec3 specIntensity =    vec3(1.0) *
                             (0.04 * notMetal + 2.0 * metallic) * 
-                            F *
-                            // saturate(-1.1 + NoV + metallic) * // Fresnel
+                            saturate(-1.1 + NoV + metallic) * // Fresnel
                             (metallic + smooth * 4.0); // make smaller highlights brighter
 
     vec3 R = reflect(-V, N);
-    vec3 ambientSpecular = vec3(0.0);
-    ambientSpecular += tonemapReinhard( envMap(R, roughness, metallic) ) * specIntensity;
-    ambientSpecular += F * metallic;
+    vec3 ambientSpecular = tonemapReinhard( envMap(R, roughness, metallic) ) * specIntensity;
+    ambientSpecular += fresnel(R, vec3(0.04), NoV) * metallic;
 
     baseColor.rgb = baseColor.rgb * notMetal + ( ambientSpecular 
                     + LIGHT_COLOR * 2.0 * specular
                     ) * (notMetal * smooth + baseColor.rgb * metallic);
-
-    baseColor = linear2gamma( baseColor );
 
     return baseColor;
 }
