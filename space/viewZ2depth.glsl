@@ -5,9 +5,9 @@ use:
 license: 
 */
 
-#ifndef FNC_VIEWZ2ORTHOGRAPHICDEPTH
-#define FNC_VIEWZ2ORTHOGRAPHICDEPTH
-float viewZ2orthographicDepth( const in float viewZ, const in float near, const in float far ) {
+#ifndef FNC_VIEWZ2DEPTH
+#define FNC_VIEWZ2DEPTH
+float viewZ2depth( const in float viewZ, const in float near, const in float far ) {
     return ( viewZ + near ) / ( near - far );
 }
 #endif

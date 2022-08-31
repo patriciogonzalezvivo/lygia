@@ -23,5 +23,11 @@ license: |
 
 #ifndef FNC_PLANESDF
 #define FNC_PLANESDF
-float planeSDF( vec3 p ) { return p.y; }
+float planeSDF( vec3 p ) { 
+   return p.y; 
+}
+
+float planeSDF(vec3 p, vec3 planePoint, vec3 planeNormal) {
+    return (dot(planeNormal, p) + dot(planeNormal, planePoint)) / length(planeNormal);
+}
 #endif

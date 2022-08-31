@@ -18,4 +18,9 @@ float lineSDF( in vec2 st, in vec2 a, in vec2 b ) {
     float h = saturate(dot(to_a, b_to_a)/dot(b_to_a, b_to_a));
     return length(to_a - h * b_to_a );
 }
+
+float lineSDF(vec3 p, vec3 a, vec3 b) {
+    //https://mathworld.wolfram.com/Point-LineDistance3-Dimensional.html
+    return length(cross(p - a, p - b))/length(b - a);
+}
 #endif
