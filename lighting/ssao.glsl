@@ -1,3 +1,20 @@
+/*
+author: Patricio Gonzalez Vivo
+description: ScreenSpace Ambient Occlusion
+use: <float> ssao(<sampler2D> texPosition, <sampler2D> texNormal, vec2 <st> [, <float> radius, float <bias>])
+options:
+    - SSAO_SAMPLES_NUM: number of half-sphere offsets samples
+    - SSAO_SAMPLES_ARRAY: array of weighted vec3 half-sphere offsets   
+    - SSAO_NOISE_NUM: number of vec3 noise offsets
+    - SSAO_NOISE_ARRAY: array of vec3 noise offsets
+    - PROJECTION_MATRIX: camera projection mat4 matrix
+
+license: |
+    Copyright (c) 2022 Patricio Gonzalez Vivo.
+    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+    The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.    
+*/
 
 #ifndef SSAO_SAMPLES_NUM
 #define SSAO_SAMPLES_NUM 16
@@ -35,6 +52,7 @@ uniform vec3 u_ssaoNoise[SSAO_NOISE_NUM];
 
 #ifndef FNC_SSAO
 #define FNC_SSAO
+
 float ssao(sampler2D texPosition, sampler2D texNormal, vec2 st, float radius, float bias) {
     vec4 position   = texture2D(texPosition, st);
     vec3 normal     = texture2D(texNormal, st).rgb;
