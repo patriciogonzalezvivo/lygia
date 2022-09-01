@@ -218,20 +218,24 @@ float snoise(in vec4 v) {
                 + dot(m1*m1, vec2( dot( p3, x3 ), dot( p4, x4 ) ) ) ) ;
 }
 
+vec2 snoise2( vec2 x ){
+    float s  = snoise(vec2( x ));
+    float s1 = snoise(vec2( x.y - 19.1, x.x + 47.2 ));
+    return vec2( s , s1 );
+}
+
 vec3 snoise3( vec3 x ){
     float s  = snoise(vec3( x ));
     float s1 = snoise(vec3( x.y - 19.1 , x.z + 33.4 , x.x + 47.2 ));
     float s2 = snoise(vec3( x.z + 74.2 , x.x - 124.5 , x.y + 99.4 ));
-    vec3 c = vec3( s , s1 , s2 );
-    return c;
+    return vec3( s , s1 , s2 );
 }
 
 vec3 snoise3( vec4 x ){
     float s  = snoise(vec4( x ));
     float s1 = snoise(vec4( x.y - 19.1 , x.z + 33.4 , x.x + 47.2, x.w ));
     float s2 = snoise(vec4( x.z + 74.2 , x.x - 124.5 , x.y + 99.4, x.w ));
-    vec3 c = vec3( s , s1 , s2 );
-    return c;
+    return vec3( s , s1 , s2 );
 }
 
 #endif

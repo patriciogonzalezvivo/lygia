@@ -43,10 +43,10 @@ vec2 random2(float p) {
     return fract((p3.xx+p3.yz)*p3.zy);
 }
 
-vec2 random2(in vec2 st) {
-    const vec2 k = vec2(.3183099, .3678794);
-    st = st * k + k.yx;
-    return -1. + 2. * fract(16. * k * fract(st.x * st.y * (st.x + st.y)));
+vec2 random2(vec2 p) {
+    vec3 p3 = fract(p.xyx * RANDOM_SCALE3);
+    p3 += dot(p3, p3.yzx + 19.19);
+    return fract((p3.xx+p3.yz)*p3.zy);
 }
 
 vec2 random2(vec3 p3) {
@@ -67,11 +67,10 @@ vec3 random3(vec2 p) {
     return fract((p3.xxy+p3.yzz)*p3.zyx);
 }
 
-vec3 random3(in vec3 p) {
-    p = vec3( dot(p, vec3(127.1, 311.7, 74.7)),
-            dot(p, vec3(269.5, 183.3, 246.1)),
-            dot(p, vec3(113.5, 271.9, 124.6)));
-    return -1. + 2. * fract(sin(p) * 43758.5453123);
+vec3 random3(vec3 p) {
+    p = fract(p * RANDOM_SCALE3);
+    p += dot(p, p.yxz+19.19);
+    return fract((p.xxy + p.yzz)*p.zyx);
 }
 
 vec4 random4(float p) {
