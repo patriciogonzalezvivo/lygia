@@ -11,6 +11,23 @@ license: NONE
 #ifndef FNC_CURL
 #define FNC_CURL
 
+vec2 curl( vec2 p ){
+    const float e = .1;
+    vec2 dx = vec2( e   , 0.0 );
+    vec2 dy = vec2( 0.0 , e   );
+
+    vec2 p_x0 = snoise2( p - dx );
+    vec2 p_x1 = snoise2( p + dx );
+    vec2 p_y0 = snoise2( p - dy );
+    vec2 p_y1 = snoise2( p + dy );
+
+    float x = p_x1.y + p_x0.y;
+    float y = p_y1.x - p_y0.x;
+
+    const float divisor = 1.0 / ( 2.0 * e );
+    return normalize( vec2(x , y) * divisor );
+}
+
 vec3 curl( vec3 p ){
     const float e = .1;
     vec3 dx = vec3( e   , 0.0 , 0.0 );

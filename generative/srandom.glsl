@@ -1,13 +1,7 @@
-
-#include "../math/const.glsl"
-#include "random.glsl"
-
 /*
 author: Patricio Gonzalez Vivo
-description: Voronoi positions and distance to centroids
-use: <vec3> voronoi(<vec2> pos, <float> time)
-options:
-    VORONOI_RANDOM_FNC: 
+description: Signed Random 
+use: srandomX(<vec2|vec3> x)
 license: |
     Copyright (c) 2022 Patricio Gonzalez Vivo.
     Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
@@ -15,32 +9,20 @@ license: |
     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.    
 */
 
-#ifndef VORONOI_RANDOM_FNC 
-#define VORONOI_RANDOM_FNC(UV) ( 0.5 + 0.5 * sin(time + TAU * random2(UV) ) ); 
-#endif
+#ifndef FNC_SRANDOM
+#define FNC_SRANDOM
 
-#ifndef FNC_VORONOI
-#define FNC_VORONOI
-vec3 voronoi(vec2 uv, float time) {
-    vec2 i_uv = floor(uv);
-    vec2 f_uv = fract(uv);
-    vec3 rta = vec3(0.0, 0.0, 10.0);
-    for (int j=-1; j<=1; j++ ) {
-        for (int i=-1; i<=1; i++ ) {
-            vec2 neighbor = vec2(float(i),float(j));
-            vec2 point = VORONOI_RANDOM_FNC(i_uv + neighbor);
-            point = 0.5 + 0.5 * sin(time + TAU * point);
-            vec2 diff = neighbor + point - f_uv;
-            float dist = length(diff);
-            if ( dist < rta.z ) {
-                rta.xy = point;
-                rta.z = dist;
-            }
-        }
-    }
-    return rta;
+vec2 srandom2(in vec2 st) {
+    const vec2 k = vec2(.3183099, .3678794);
+    st = st * k + k.yx;
+    return -1. + 2. * fract(16. * k * fract(st.x * st.y * (st.x + st.y)));
 }
 
-vec3 voronoi(vec2 p)  { return voronoi(p, 0.0); }
-vec3 voronoi(vec3 p)  { return voronoi(p.xy, p.z); }
+vec3 srandom3(in vec3 p) {
+    p = vec3( dot(p, vec3(127.1, 311.7, 74.7)),
+            dot(p, vec3(269.5, 183.3, 246.1)),
+            dot(p, vec3(113.5, 271.9, 124.6)));
+    return -1. + 2. * fract(sin(p) * 43758.5453123);
+}
+
 #endif

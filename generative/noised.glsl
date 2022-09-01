@@ -1,4 +1,4 @@
-#include "random.glsl"
+#include "srandom.glsl"
 
 /*
 author: Inigo Quilez
@@ -30,10 +30,10 @@ vec3 noised (in vec2 p) {
   vec2 du = 6. * f * (1. - f);
 #endif
 
-  vec2 ga = random2(i + vec2(0., 0.));
-  vec2 gb = random2(i + vec2(1., 0.));
-  vec2 gc = random2(i + vec2(0., 1.));
-  vec2 gd = random2(i + vec2(1., 1.));
+  vec2 ga = srandom2(i + vec2(0., 0.));
+  vec2 gb = srandom2(i + vec2(1., 0.));
+  vec2 gc = srandom2(i + vec2(0., 1.));
+  vec2 gd = srandom2(i + vec2(1., 1.));
 
   float va = dot(ga, f - vec2(0., 0.));
   float vb = dot(gb, f - vec2(1., 0.));
@@ -63,14 +63,14 @@ vec4 noised (in vec3 pos) {
 #endif
 
   // gradients
-  vec3 ga = random3(p + vec3(0., 0., 0.));
-  vec3 gb = random3(p + vec3(1., 0., 0.));
-  vec3 gc = random3(p + vec3(0., 1., 0.));
-  vec3 gd = random3(p + vec3(1., 1., 0.));
-  vec3 ge = random3(p + vec3(0., 0., 1.));
-  vec3 gf = random3(p + vec3(1., 0., 1.));
-  vec3 gg = random3(p + vec3(0., 1., 1.));
-  vec3 gh = random3(p + vec3(1., 1., 1.));
+  vec3 ga = srandom3(p + vec3(0., 0., 0.));
+  vec3 gb = srandom3(p + vec3(1., 0., 0.));
+  vec3 gc = srandom3(p + vec3(0., 1., 0.));
+  vec3 gd = srandom3(p + vec3(1., 1., 0.));
+  vec3 ge = srandom3(p + vec3(0., 0., 1.));
+  vec3 gf = srandom3(p + vec3(1., 0., 1.));
+  vec3 gg = srandom3(p + vec3(0., 1., 1.));
+  vec3 gh = srandom3(p + vec3(1., 1., 1.));
 
   // projections
   float va = dot(ga, w - vec3(0., 0., 0.));
