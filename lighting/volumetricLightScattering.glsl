@@ -12,13 +12,12 @@ options:
     - CAMERA_FAR_CLIP: camera far clip distance
     - INVERSE_VIEW_MATRIX
     - INVERSE_PROJECTION_MATRIX
-    - LIGHT_POSITION
-    - LIGHT_COLOR
-    - LIGHT_MAtriX
+    - LIGHT_POSITION (optional)
+    - LIGHT_MATRIX
     - LIGHT_SHADOWMAP
     - VOLUMETRICLIGHTSCATTERING_FACTOR
     - VOLUMETRICLIGHTSCATTERING_STEPS
-    - VOLUMETRICLIGHTSCATTERING_NOISE
+    - VOLUMETRICLIGHTSCATTERING_NOISE_FNC
 
 license: |
     Copyright (c) 2022 Patricio Gonzalez Vivo.
@@ -57,11 +56,7 @@ license: |
 #endif
 
 #ifndef LIGHT_POSITION
-#define LIGHT_POSITION      u_light
-#endif
-
-#ifndef LIGHT_COLOR
-#define LIGHT_COLOR         u_lightColor
+#define LIGHT_POSITION     (LIGHT_MATRIX * vec4(0.0,0.0,-1.0,1.0)).xyz
 #endif
 
 // https://www.alexandre-pestana.com/volumetric-lights/
@@ -102,8 +97,8 @@ vec3 volumetricLightScattering(sampler2D texDepth, vec2 st) {
     float depth = texture2D(texDepth, st).r;
     depth = min(depth, 0.997);
     float viewZ = depth2viewZ(depth, CAMERA_NEAR_CLIP, CAMERA_FAR_CLIP);
-    #ifdef VOLUMETRICLIGHTSCATTERING_NOISE
-    viewZ += random(vec3(st, u_time*0.0001)) * VOLUMETRICLIGHTSCATTERING_NOISE;
+    #ifdef VOLUMETRICLIGHTSCATTERING_NOISE_FNC
+    viewZ += VOLUMETRICLIGHTSCATTERING_NOISE_FNC;
     #endif
     vec3 viewPos = screen2viewPosition(st, depth, viewZ);
     // vec3 viewPos = texture2D(u_scenePosition, st).xyz;
