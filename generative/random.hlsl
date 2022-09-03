@@ -43,9 +43,9 @@ float2 random2(in float2 st) {
     return -1. + 2. * frac(16. * k * frac(st.x * st.y * (st.x + st.y)));
 }
 
-float2 random2(float3 p3) {
-    p3 = frac(p3 * RANDOM_SCALE3);
-    p3 += dot(p3, p3.yzx+19.19);
+float2 random2(float2 p) {
+    float3 p3 = frac(p.xyx * RANDOM_SCALE3);
+    p3 += dot(p3, p3.yzx + 19.19);
     return frac((p3.xx+p3.yz)*p3.zy);
 }
 
@@ -61,11 +61,10 @@ float3 random3(float2 p) {
     return frac((p3.xxy+p3.yzz)*p3.zyx);
 }
 
-float3 random3(in float3 p) {
-    p = float3( dot(p, float3(127.1, 311.7, 74.7)),
-            dot(p, float3(269.5, 183.3, 246.1)),
-            dot(p, float3(113.5, 271.9, 124.6)));
-    return -1. + 2. * frac(sin(p) * 43758.5453123);
+float3 random3(float3 p) {
+    p = frac(p * RANDOM_SCALE3);
+    p += dot(p, p.yxz+19.19);
+    return frac((p.xxy + p.yzz)*p.zyx);
 }
 
 float4 random4(float p) {
