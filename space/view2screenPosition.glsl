@@ -17,10 +17,6 @@ license: |
 #define PROJECTION_MATRIX u_projectionMatrix
 #endif
 
-#ifndef RESOLUTION_SCREEN
-#define RESOLUTION_SCREEN u_resolution
-#endif
-
 #ifndef FNC_VIEW2SCREENPOSITION
 #define FNC_VIEW2SCREENPOSITION
 vec2 view2screenPosition(vec3 viewPosition){
@@ -28,6 +24,6 @@ vec2 view2screenPosition(vec3 viewPosition){
     vec2 xy = clip.xy;
     xy /= clip.w;
     xy = (xy + 1.0) * 0.5;
-    return xy;// * RESOLUTION_SCREEN;
+    return xy;
 }
 #endif
