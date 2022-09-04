@@ -19,7 +19,7 @@ license: |
 
 #ifndef INVERSE_PROJECTION_MATRIX
 // #define INVERSE_PROJECTION_MATRIX u_inverseProjectionMatrix
-#define INVERSE_PROJECTION_MATRIX inverse(u_projectionMatrix)
+#define INVERSE_PROJECTION_MATRIX inverse(PROJECTION_MATRIX)
 #endif
 
 #ifndef FNC_SCREEN2VIEWPOSITION
