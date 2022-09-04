@@ -25,12 +25,8 @@ license: |
 
 // #define SSR_FRESNEL
 
-#ifndef SSR_MAX_STEP
-#define SSR_MAX_STEP 500
-#endif
-
-#ifndef SSR_MAX_DISTANCE
-#define SSR_MAX_DISTANCE 180.0
+#ifndef SAMPLE_FNC
+#define SAMPLE_FNC(TEX, UV) texture2D(TEX, UV)
 #endif
 
 #ifndef CAMERA_NEAR_CLIP
@@ -41,11 +37,19 @@ license: |
 #define CAMERA_FAR_CLIP u_cameraFarClip
 #endif
 
+#ifndef SSR_MAX_STEP
+#define SSR_MAX_STEP 500
+#endif
+
+#ifndef SSR_MAX_DISTANCE
+#define SSR_MAX_DISTANCE 180.0
+#endif
+
 #ifndef FNC_SSR
 #define FNC_SSR
 
 vec2 ssr(sampler2D texPosition, sampler2D texNormal, vec2 st, vec2 pixel, inout float op, inout float dist) {
-    vec3 viewPosition = texture2D(texPosition, st).xyz;
+    vec3 viewPosition = SAMPLE_FNC(texPosition, st).xyz;
     // if (-viewPosition.z >= CAMERA_FAR_CLIP)
         // return st;
 
@@ -55,7 +59,7 @@ vec2 ssr(sampler2D texPosition, sampler2D texNormal, vec2 st, vec2 pixel, inout 
     op = 0.0;
     dist = 0.0;
 
-    vec3 viewNormal = texture2D(texNormal, st).xyz;
+    vec3 viewNormal = SAMPLE_FNC(texNormal, st).xyz;
 
     vec3 viewIncidentDir = normalize(viewPosition);
     vec3 viewReflectDir = reflect(viewIncidentDir, viewNormal);
@@ -67,8 +71,9 @@ vec2 ssr(sampler2D texPosition, sampler2D texNormal, vec2 st, vec2 pixel, inout 
         float t = (-CAMERA_NEAR_CLIP - viewPosition.z)/viewReflectDir.z;
         d1viewPosition = viewPosition + viewReflectDir * t;
     }
-    vec2 d0 = st * u_resolution;// / pixel;
-    vec2 d1 = view2screenPosition(d1viewPosition) * u_resolution;
+    vec2 resolution = 1.0 / pixel;
+    vec2 d0 = st * resolution;
+    vec2 d1 = view2screenPosition(d1viewPosition) * resolution;
 
     float totalLen = length(d1-d0);
     float xLen = d1.x-d0.x;
@@ -84,7 +89,7 @@ vec2 ssr(sampler2D texPosition, sampler2D texNormal, vec2 st, vec2 pixel, inout 
         vec2 xy = vec2(d0.x + i*xSpan, d0.y + i*ySpan);
         vec2 uv = xy * pixel;
 
-        vec3 vP = texture2D(texPosition, uv).xyz;
+        vec3 vP = SAMPLE_FNC(texPosition, uv).xyz;
         // if (-vP.z >= CAMERA_FAR_CLIP) 
         //     continue;
 
@@ -95,7 +100,7 @@ vec2 ssr(sampler2D texPosition, sampler2D texNormal, vec2 st, vec2 pixel, inout 
 
         if (viewReflectRayZ <= vP.z) {
             if (lineSDF(vP, viewPosition, d1viewPosition) <= max(0.0, thickness)) {
-                vec3 vN = texture2D(texNormal, uv).xyz;
+                vec3 vN = SAMPLE_FNC(texNormal, uv).xyz;
 
                 if (dot(viewReflectDir, vN) >= 0.0) 
                     continue;
@@ -127,10 +132,10 @@ vec2 ssr(sampler2D texPosition, sampler2D texNormal, vec2 st, vec2 pixel, inout 
 }
 
 vec3 ssr(sampler2D tex, sampler2D texPosition, sampler2D texNormal, vec2 st, vec2 pixel, float opacity) {
-    vec3 color = texture2D(tex, st).rgb;
+    vec3 color = SAMPLE_FNC(tex, st).rgb;
     float dist = 0.0;
     vec2 uv = ssr(texPosition, texNormal, st, pixel, opacity, dist);
-    return mix(color, texture2D(tex, uv).rgb, opacity);
+    return mix(color, SAMPLE_FNC(tex, uv).rgb, opacity);
 }
 
 vec3 ssr(sampler2D tex, sampler2D texPosition, sampler2D texNormal, vec2 st, vec2 pixel) {

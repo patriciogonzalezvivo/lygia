@@ -86,8 +86,9 @@ vec4 pbr(const Material _mat) {
     // Ambient Occlusion
     // ------------------------
     float ssao = 1.0;
-#ifdef SCENE_SSAO
-    ssao = texture2D(SCENE_SSAO, gl_FragCoord.xy/u_resolution).r;
+#if defined(FNC_SSAO) && defined(SCENE_DEPTH) && defined(RESOLUTION) && defined(CAMERA_NEAR_CLIP) && defined(CAMERA_FAR_CLIP)
+    vec2 pixel = 1.0/RESOLUTION;
+    ssao = ssao(SCENE_DEPTH, gl_FragCoord.xy*pixel, pixel, 1.);
 #endif 
     float diffuseAO = min(_mat.ambientOcclusion, ssao);
     float specularAO = specularAO(NoV, diffuseAO, roughness);

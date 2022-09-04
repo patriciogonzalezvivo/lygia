@@ -18,6 +18,7 @@ options:
     - VOLUMETRICLIGHTSCATTERING_FACTOR
     - VOLUMETRICLIGHTSCATTERING_STEPS
     - VOLUMETRICLIGHTSCATTERING_NOISE_FNC
+    - SAMPLE_FNC(TEX, UV): optional
 
 license: |
     Copyright (c) 2022 Patricio Gonzalez Vivo.
@@ -25,6 +26,10 @@ license: |
     The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.    
 */
+
+#ifndef SAMPLE_FNC
+#define SAMPLE_FNC(TEX, UV) texture2D(TEX, UV)
+#endif
 
 #ifndef VOLUMETRICLIGHTSCATTERING_FACTOR
 #define VOLUMETRICLIGHTSCATTERING_FACTOR 0.25
@@ -84,7 +89,7 @@ float volumetricLightScattering(sampler2D lightShadowMap, mat4 lightMatrix, vec3
 
         vec4 worldInShadowCameraSpace = lightMatrix * vec4(rayCurrPos, 1.0);
         worldInShadowCameraSpace /= worldInShadowCameraSpace.w;
-        float shadowMapValue = texture2D(lightShadowMap, worldInShadowCameraSpace.xy ).r;
+        float shadowMapValue = SAMPLE_FNC(lightShadowMap, worldInShadowCameraSpace.xy ).r;
         L += step(worldInShadowCameraSpace.z, shadowMapValue) * scattering;
 
         rayCurrPos += rayStep; 
@@ -94,7 +99,7 @@ float volumetricLightScattering(sampler2D lightShadowMap, mat4 lightMatrix, vec3
 }
 
 float volumetricLightScattering(sampler2D texDepth, vec2 st) {
-    float depth = texture2D(texDepth, st).r;
+    float depth = SAMPLE_FNC(texDepth, st).r;
     depth = min(depth, 0.997);
     float viewZ = depth2viewZ(depth, CAMERA_NEAR_CLIP, CAMERA_FAR_CLIP);
     #ifdef VOLUMETRICLIGHTSCATTERING_NOISE_FNC
