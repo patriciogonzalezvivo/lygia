@@ -62,7 +62,7 @@ vec2 ssr(sampler2D texPosition, sampler2D texNormal, vec2 st, vec2 pixel, inout 
     float maxReflectRayLen = SSR_MAX_DISTANCE / dot(-viewIncidentDir, viewNormal);
 
     vec3 d1viewPosition = viewPosition + viewReflectDir * maxReflectRayLen;
-    if (d1viewPosition.z > -CAMERA_NEAR_CLIP){
+    if (d1viewPosition.z > -CAMERA_NEAR_CLIP) {
         //https://tutorial.math.lamar.edu/Classes/CalcIII/EqnsOfLines.aspx
         float t = (-CAMERA_NEAR_CLIP - viewPosition.z)/viewReflectDir.z;
         d1viewPosition = viewPosition + viewReflectDir * t;

@@ -64,7 +64,7 @@ license: |
 
 #ifndef FNC_VOLUMETRICLIGHTSCATTERING
 #define FNC_VOLUMETRICLIGHTSCATTERING
-vec3 volumetricLightScattering(sampler2D lightShadowMap, mat4 lightMatrix, vec3 lightPos, vec3 rayOrigin, vec3 rayEnd) {
+float volumetricLightScattering(sampler2D lightShadowMap, mat4 lightMatrix, vec3 lightPos, vec3 rayOrigin, vec3 rayEnd) {
     vec3  rayVector     = rayEnd - rayOrigin;
     float rayLength     = length(rayVector);
     vec3  rayDirection  = rayVector / rayLength;
@@ -77,7 +77,7 @@ vec3 volumetricLightScattering(sampler2D lightShadowMap, mat4 lightMatrix, vec3 
     float scattering    = 1.0 - scattering_g;
     scattering /= (4.0 * PI * pow(1.0 + scattering_g - (2.0 * VOLUMETRICLIGHTSCATTERING_FACTOR) * lightDotView, 1.5));
 
-    vec3  L             = vec3(0.0);
+    float L             = 0.0;
     vec3  rayCurrPos    = rayOrigin;
 
     for (int i = 0; i < VOLUMETRICLIGHTSCATTERING_STEPS; i ++) {
@@ -93,7 +93,7 @@ vec3 volumetricLightScattering(sampler2D lightShadowMap, mat4 lightMatrix, vec3 
     return L * stepLength;
 }
 
-vec3 volumetricLightScattering(sampler2D texDepth, vec2 st) {
+float volumetricLightScattering(sampler2D texDepth, vec2 st) {
     float depth = texture2D(texDepth, st).r;
     depth = min(depth, 0.997);
     float viewZ = depth2viewZ(depth, CAMERA_NEAR_CLIP, CAMERA_FAR_CLIP);
@@ -109,7 +109,7 @@ vec3 volumetricLightScattering(sampler2D texDepth, vec2 st) {
     #ifdef LIGHT_SHADOWMAP
     return volumetricLightScattering(LIGHT_SHADOWMAP, LIGHT_MATRIX, LIGHT_POSITION, CAMERA_POSITION, worldPos);
     #else 
-    return vec3(0.0);
+    return 0.0;
     #endif
 }
 #endif

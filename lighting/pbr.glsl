@@ -57,14 +57,6 @@ license: |
 #endif
 #endif
 
-#ifndef LIGHT_COORD
-#if defined(GLSLVIEWER)
-#define LIGHT_COLOR     u_lightColor
-#else
-#define LIGHT_COLOR     vec3(0.5)
-#endif
-#endif
-
 #ifndef IBL_LUMINANCE
 #if defined(GLSLVIEWER)
 #define IBL_LUMINANCE   u_iblLuminance
