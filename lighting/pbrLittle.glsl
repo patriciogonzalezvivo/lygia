@@ -1,7 +1,8 @@
 #include "../math/powFast.glsl"
 #include "../math/saturate.glsl"
 #include "../color/tonemap.glsl"
-#include "../sample/textureShadowPCF.glsl"
+
+#include "shadow.glsl"
 #include "material.glsl"
 #include "fresnel.glsl"
 
@@ -74,9 +75,8 @@ vec4 pbrLittle(vec4 baseColor, vec3 normal, float roughness, float metallic, vec
     float diffuse = diffuse(L, N, V, roughness);
     float specular = specular(L, N, V, roughness);
 
-#if defined(LIGHT_SHADOWMAP) && defined(LIGHT_SHADOWMAP_SIZE) && defined(LIGHT_COORD) && !defined(PLATFORM_RPI)
-    float bias = 0.005;
-    float shadow = textureShadowPCF(LIGHT_SHADOWMAP, vec2(LIGHT_SHADOWMAP_SIZE), (LIGHT_COORD).xy, (LIGHT_COORD).z - bias);
+#if defined(LIGHT_SHADOWMAP) && defined(LIGHT_SHADOWMAP_SIZE) && defined(LIGHT_COORD) //&& !defined(PLATFORM_RPI)
+    float shadow = shadow(LIGHT_SHADOWMAP, vec2(LIGHT_SHADOWMAP_SIZE), (LIGHT_COORD).xy, (LIGHT_COORD).z);
     specular *= shadow;
     diffuse *= shadow;
 #endif
