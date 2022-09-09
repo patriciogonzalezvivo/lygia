@@ -122,9 +122,7 @@ vec4 pbr(const Material _mat) {
 
         float shadow = 1.0;
     #if defined(LIGHT_SHADOWMAP) && defined(LIGHT_SHADOWMAP_SIZE) && defined(LIGHT_COORD) && !defined(PLATFORM_RPI)
-        // shadow = shadow();
-        // shadosw = textureShadowPCF();
-        shadow = textureShadowPCF(LIGHT_COORD.xyz);
+        shadow = shadow(LIGHT_SHADOWMAP, vec2(LIGHT_SHADOWMAP_SIZE), (LIGHT_COORD).xy, (LIGHT_COORD).z);
     #endif
 
         lightPoint(diffuseColor, specularColor, N, V, NoV, roughness, f0, shadow, lightDiffuse, lightSpecular);

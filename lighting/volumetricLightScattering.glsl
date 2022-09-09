@@ -1,3 +1,4 @@
+#include "lygia/math/const.glsl"
 #include "lygia/math/inverse.glsl"
 #include "lygia/space/screen2viewPosition.glsl"
 #include "lygia/space/depth2viewZ.glsl"
@@ -39,6 +40,9 @@ license: |
 #define VOLUMETRICLIGHTSCATTERING_STEPS 50
 #endif
 
+#ifndef VOLUMETRICLIGHTSCATTERING_TYPE
+#define VOLUMETRICLIGHTSCATTERING_TYPE float
+#endif
 
 #ifndef INVERSE_VIEW_MATRIX
 #define INVERSE_VIEW_MATRIX inverse(u_viewMatrix)
@@ -69,7 +73,7 @@ license: |
 
 #ifndef FNC_VOLUMETRICLIGHTSCATTERING
 #define FNC_VOLUMETRICLIGHTSCATTERING
-float volumetricLightScattering(sampler2D lightShadowMap, mat4 lightMatrix, vec3 lightPos, vec3 rayOrigin, vec3 rayEnd) {
+VOLUMETRICLIGHTSCATTERING_TYPE volumetricLightScattering(sampler2D lightShadowMap, mat4 lightMatrix, vec3 lightPos, vec3 rayOrigin, vec3 rayEnd) {
     vec3  rayVector     = rayEnd - rayOrigin;
     float rayLength     = length(rayVector);
     vec3  rayDirection  = rayVector / rayLength;
@@ -82,15 +86,18 @@ float volumetricLightScattering(sampler2D lightShadowMap, mat4 lightMatrix, vec3
     float scattering    = 1.0 - scattering_g;
     scattering /= (4.0 * PI * pow(1.0 + scattering_g - (2.0 * VOLUMETRICLIGHTSCATTERING_FACTOR) * lightDotView, 1.5));
 
-    float L             = 0.0;
+    VOLUMETRICLIGHTSCATTERING_TYPE L = VOLUMETRICLIGHTSCATTERING_TYPE(0.0);
     vec3  rayCurrPos    = rayOrigin;
 
     for (int i = 0; i < VOLUMETRICLIGHTSCATTERING_STEPS; i ++) {
-
         vec4 worldInShadowCameraSpace = lightMatrix * vec4(rayCurrPos, 1.0);
         worldInShadowCameraSpace /= worldInShadowCameraSpace.w;
         float shadowMapValue = SAMPLE_FNC(lightShadowMap, worldInShadowCameraSpace.xy ).r;
-        L += step(worldInShadowCameraSpace.z, shadowMapValue) * scattering;
+        L +=    step(worldInShadowCameraSpace.z, shadowMapValue) * 
+                #ifdef VOLUMETRICLIGHTSCATTERING_MASK_FNC
+                VOLUMETRICLIGHTSCATTERING_MASK_FNC(worldInShadowCameraSpace) *
+                #endif
+                scattering;
 
         rayCurrPos += rayStep; 
     }
@@ -98,23 +105,22 @@ float volumetricLightScattering(sampler2D lightShadowMap, mat4 lightMatrix, vec3
     return L * stepLength;
 }
 
-float volumetricLightScattering(sampler2D texDepth, vec2 st) {
+VOLUMETRICLIGHTSCATTERING_TYPE volumetricLightScattering(sampler2D texDepth, vec2 st) {
     float depth = SAMPLE_FNC(texDepth, st).r;
     depth = min(depth, 0.997);
     float viewZ = depth2viewZ(depth, CAMERA_NEAR_CLIP, CAMERA_FAR_CLIP);
+    
     #ifdef VOLUMETRICLIGHTSCATTERING_NOISE_FNC
     viewZ += VOLUMETRICLIGHTSCATTERING_NOISE_FNC;
     #endif
-    vec3 viewPos = screen2viewPosition(st, depth, viewZ);
-    // vec3 viewPos = texture2D(u_scenePosition, st).xyz;
 
+    vec3 viewPos = screen2viewPosition(st, depth, viewZ);
     vec3 worldPos = (INVERSE_VIEW_MATRIX * vec4(viewPos, 1.0)).xyz;
-    // worldPos = (u_inverseViewMatrix * vec4(viewPos, 1.0)).xyz;
 
     #ifdef LIGHT_SHADOWMAP
     return volumetricLightScattering(LIGHT_SHADOWMAP, LIGHT_MATRIX, LIGHT_POSITION, CAMERA_POSITION, worldPos);
     #else 
-    return 0.0;
+    return VOLUMETRICLIGHTSCATTERING_TYPE(0.0);
     #endif
 }
 #endif

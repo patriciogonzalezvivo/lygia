@@ -14,9 +14,9 @@ license: |
 #ifndef FNC_TEXTUREYUV
 #define FNC_TEXTUREYUV
 vec4 textureYUV(in sampler2D tex_Y, in sampler2D tex_UV, in vec2 st) {
-  vec4 yuv = vec4(0.);
-  yuv.xw = texture2D(tex_Y, st).ra;
-  yuv.yz = texture2D(tex_UV, st).rg;
-  return YCbCr2rgb(yuv);
+    vec4 yuv = vec4(0.);
+    yuv.xw = texture2D(tex_Y, st).ra;
+    yuv.yz = texture2D(tex_UV, st).rg;
+    return YCbCr2rgb(yuv);
 }
 #endif
