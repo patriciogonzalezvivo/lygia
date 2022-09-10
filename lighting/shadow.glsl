@@ -1,11 +1,11 @@
-#include "../sample/textureShadowPCF.glsl"
+#include "../sample/shadowPCF.glsl"
 
 /*
 author: Patricio Gonzalez Vivo
 description: sample shadow map using PCF
 use:
-    - <float> textureShadowPCF(<sampler2D> depths, <vec2> size, <vec2> uv, <float> compare)
-    - <float> textureShadowPCF(<vec3> lightcoord)
+    - <float> sampleShadowPCF(<sampler2D> depths, <vec2> size, <vec2> uv, <float> compare)
+    - <float> sampleShadowPCF(<vec3> lightcoord)
 options:
     - SHADOWMAP_BIAS
 license: |
@@ -20,7 +20,7 @@ license: |
 #endif
 
 #ifndef SHADOW_SAMPLER_FNC
-#define SHADOW_SAMPLER_FNC textureShadowPCF
+#define SHADOW_SAMPLER_FNC sampleShadowPCF
 #endif
 
 #ifndef FNC_SHADOW
@@ -30,7 +30,7 @@ float shadow(sampler2D shadoMap, vec2 size, vec2 uv, float compare) {
     #ifdef SHADOWMAP_BIAS
     compare -= SHADOWMAP_BIAS;
     #endif
-    return textureShadowPCF(shadoMap, size, uv, compare);
+    return sampleShadowPCF(shadoMap, size, uv, compare);
 }
 
 #endif 
