@@ -22,7 +22,7 @@ options:
     - VOLUMETRICLIGHTSCATTERING_FACTOR
     - VOLUMETRICLIGHTSCATTERING_STEPS
     - VOLUMETRICLIGHTSCATTERING_NOISE_FNC
-    - SAMPLE_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 
 license: |
     Copyright (c) 2022 Patricio Gonzalez Vivo.
@@ -31,8 +31,8 @@ license: |
     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.    
 */
 
-#ifndef SAMPLE_FNC
-#define SAMPLE_FNC(TEX, UV) texture2D(TEX, UV)
+#ifndef SAMPLER_FNC
+#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
 #endif
 
 #ifndef VOLUMETRICLIGHTSCATTERING_FACTOR
@@ -109,7 +109,7 @@ VOLUMETRICLIGHTSCATTERING_TYPE volumetricLightScattering(sampler2D lightShadowMa
     for (int i = 0; i < VOLUMETRICLIGHTSCATTERING_STEPS; i ++) {
         vec4 worldInShadowCameraSpace = lightMatrix * rayCurrPos;
         worldInShadowCameraSpace /= worldInShadowCameraSpace.w;
-        float shadowMapValue = SAMPLE_FNC(lightShadowMap, worldInShadowCameraSpace.xy ).r;
+        float shadowMapValue = SAMPLER_FNC(lightShadowMap, worldInShadowCameraSpace.xy ).r;
         L +=    step(worldInShadowCameraSpace.z, shadowMapValue) * 
                 #ifdef VOLUMETRICLIGHTSCATTERING_MASK_FNC
                 VOLUMETRICLIGHTSCATTERING_MASK_FNC(worldInShadowCameraSpace) *
@@ -123,7 +123,7 @@ VOLUMETRICLIGHTSCATTERING_TYPE volumetricLightScattering(sampler2D lightShadowMa
 }
 
 VOLUMETRICLIGHTSCATTERING_TYPE volumetricLightScattering(sampler2D texDepth, vec2 st) {
-    float depth = SAMPLE_FNC(texDepth, st).r;
+    float depth = SAMPLER_FNC(texDepth, st).r;
     depth = min(depth, 0.997);
     float viewZ = depth2viewZ(depth, CAMERA_NEAR_CLIP, CAMERA_FAR_CLIP);
     

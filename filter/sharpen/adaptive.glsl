@@ -6,11 +6,10 @@ author: bacondither
 description: adaptive sharpening. For strenght values between 0.3 <-> 2.0 are a reasonable range 
 use: sharpen(<sampler2D> texture, <vec2> st, <vec2> renderSize [, float streanght])
 options:
-    SHARPEN_KERNELSIZE: Defaults 2
-    SHARPEN_TYPE: defaults to vec3
-    SHARPEN_SAMPLER_FNC(POS_UV): defaults to texture2D(tex, POS_UV).rgb
-    SHARPEN_FNC: defaults to sharpenFast
-    SHARPENADAPTIVE_ANIME: only darken edges. Defaults to: false
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
+    - SHARPENADAPTIVE_TYPE: defaults to vec3
+    - SHARPENDADAPTIVE_SAMPLER_FNC(POS_UV): defaults to texture2D(tex, POS_UV).rgb
+    - SHARPENADAPTIVE_ANIME: only darken edges. Defaults to: false
 license: |
     Copyright (c) 2015-2020, bacondither
     All rights reserved.
@@ -35,14 +34,25 @@ license: |
     THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-
-
-#ifndef SHARPEN_TYPE
-#define SHARPEN_TYPE vec3
+#ifndef SAMPLER_FNC
+#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
 #endif
 
-#ifndef SHARPEN_SAMPLER_FNC
-#define SHARPEN_SAMPLER_FNC(POS_UV) texture2D(tex, POS_UV).rgb
+
+#ifndef SHARPENADAPTIVE_TYPE
+#ifdef SHARPEN_TYPE
+#define SHARPENADAPTIVE_TYPE SHARPEN_TYPE
+#else
+#define SHARPENADAPTIVE_TYPE vec4
+#endif
+#endif
+
+#ifndef SHARPENDADAPTIVE_SAMPLER_FNC
+#ifdef SHARPEN_SAMPLER_FNC
+#define SHARPENDADAPTIVE_SAMPLER_FNC(POS_UV) SHARPEN_SAMPLER_FNC(POS_UV)
+#else
+#define SHARPENDADAPTIVE_SAMPLER_FNC(POS_UV) SAMPLER_FNC(tex, POS_UV)
+#endif
 #endif
 
 #ifndef SHARPENADAPTIVE_ANIME
@@ -71,7 +81,7 @@ float sharpendAdaptiveControl(in vec4 rgba) { return dot(rgba*rgba, vec4(0.21265
 
 #define SHARPENADAPTIVE_DIFF(pix)   ( abs(blur-c[pix]) )
 
-SHARPEN_TYPE sharpenAdaptive(sampler2D tex, vec2 st, vec2 pixel, float strenght) {
+SHARPENADAPTIVE_TYPE sharpenAdaptive(sampler2D tex, vec2 st, vec2 pixel, float strenght) {
 
     //-------------------------------------------------------------------------------------------------
 // Defined values under this row are "optimal" DO NOT CHANGE IF YOU DO NOT KNOW WHAT YOU ARE DOING!
@@ -94,32 +104,32 @@ SHARPEN_TYPE sharpenAdaptive(sampler2D tex, vec2 st, vec2 pixel, float strenght)
     // [      c20, c6,  c7,  c8, c17      ]
     // [           c15, c12, c14          ]
     // [                c13               ]
-    SHARPEN_TYPE c[25];
-    c[0] = SHARPEN_SAMPLER_FNC(st + vec2(0.0, 0.0) * pixel);
-    c[1] = SHARPEN_SAMPLER_FNC(st + vec2(-1., -1.) * pixel);
-    c[2] = SHARPEN_SAMPLER_FNC(st + vec2(0.0, -1.) * pixel);
-    c[3] = SHARPEN_SAMPLER_FNC(st + vec2(1.0, -1.) * pixel);
-    c[4] = SHARPEN_SAMPLER_FNC(st + vec2(-1., 1.0) * pixel);
-    c[5] = SHARPEN_SAMPLER_FNC(st + vec2(1.0, 0.0) * pixel);
-    c[6] = SHARPEN_SAMPLER_FNC(st + vec2(-1., 1.0) * pixel);
-    c[7] = SHARPEN_SAMPLER_FNC(st + vec2(0.0, 1.0) * pixel);
-    c[8] = SHARPEN_SAMPLER_FNC(st + vec2(1.0, 1.0) * pixel);
-    c[9] = SHARPEN_SAMPLER_FNC(st + vec2(0.0, -2.) * pixel);
-    c[10] = SHARPEN_SAMPLER_FNC(st + vec2(-2., 0.0) * pixel);
-    c[11] = SHARPEN_SAMPLER_FNC(st + vec2( 2., 0.0) * pixel);
-    c[12] = SHARPEN_SAMPLER_FNC(st + vec2( 0., 2.0) * pixel);
-    c[13] = SHARPEN_SAMPLER_FNC(st + vec2( 0., 3.0) * pixel);
-    c[14] = SHARPEN_SAMPLER_FNC(st + vec2( 1., 2.0) * pixel);
-    c[15] = SHARPEN_SAMPLER_FNC(st + vec2(-1., 2.0) * pixel);
-    c[16] = SHARPEN_SAMPLER_FNC(st + vec2( 3., 0.0) * pixel);
-    c[17] = SHARPEN_SAMPLER_FNC(st + vec2( 2., 1.0) * pixel);
-    c[18] = SHARPEN_SAMPLER_FNC(st + vec2( 2.,-1.0) * pixel);
-    c[19] = SHARPEN_SAMPLER_FNC(st + vec2(-3., 0.0) * pixel);
-    c[20] = SHARPEN_SAMPLER_FNC(st + vec2(-2., 1.0) * pixel);
-    c[21] = SHARPEN_SAMPLER_FNC(st + vec2(-2.,-1.0) * pixel);
-    c[22] = SHARPEN_SAMPLER_FNC(st + vec2( 0.,-3.0) * pixel);
-    c[23] = SHARPEN_SAMPLER_FNC(st + vec2( 1.,-2.0) * pixel);
-    c[24] = SHARPEN_SAMPLER_FNC(st + vec2(-1.,-2.0) * pixel);
+    SHARPENADAPTIVE_TYPE c[25];
+    c[0] = SHARPENDADAPTIVE_SAMPLER_FNC(st + vec2(0.0, 0.0) * pixel);
+    c[1] = SHARPENDADAPTIVE_SAMPLER_FNC(st + vec2(-1., -1.) * pixel);
+    c[2] = SHARPENDADAPTIVE_SAMPLER_FNC(st + vec2(0.0, -1.) * pixel);
+    c[3] = SHARPENDADAPTIVE_SAMPLER_FNC(st + vec2(1.0, -1.) * pixel);
+    c[4] = SHARPENDADAPTIVE_SAMPLER_FNC(st + vec2(-1., 1.0) * pixel);
+    c[5] = SHARPENDADAPTIVE_SAMPLER_FNC(st + vec2(1.0, 0.0) * pixel);
+    c[6] = SHARPENDADAPTIVE_SAMPLER_FNC(st + vec2(-1., 1.0) * pixel);
+    c[7] = SHARPENDADAPTIVE_SAMPLER_FNC(st + vec2(0.0, 1.0) * pixel);
+    c[8] = SHARPENDADAPTIVE_SAMPLER_FNC(st + vec2(1.0, 1.0) * pixel);
+    c[9] = SHARPENDADAPTIVE_SAMPLER_FNC(st + vec2(0.0, -2.) * pixel);
+    c[10] = SHARPENDADAPTIVE_SAMPLER_FNC(st + vec2(-2., 0.0) * pixel);
+    c[11] = SHARPENDADAPTIVE_SAMPLER_FNC(st + vec2( 2., 0.0) * pixel);
+    c[12] = SHARPENDADAPTIVE_SAMPLER_FNC(st + vec2( 0., 2.0) * pixel);
+    c[13] = SHARPENDADAPTIVE_SAMPLER_FNC(st + vec2( 0., 3.0) * pixel);
+    c[14] = SHARPENDADAPTIVE_SAMPLER_FNC(st + vec2( 1., 2.0) * pixel);
+    c[15] = SHARPENDADAPTIVE_SAMPLER_FNC(st + vec2(-1., 2.0) * pixel);
+    c[16] = SHARPENDADAPTIVE_SAMPLER_FNC(st + vec2( 3., 0.0) * pixel);
+    c[17] = SHARPENDADAPTIVE_SAMPLER_FNC(st + vec2( 2., 1.0) * pixel);
+    c[18] = SHARPENDADAPTIVE_SAMPLER_FNC(st + vec2( 2.,-1.0) * pixel);
+    c[19] = SHARPENDADAPTIVE_SAMPLER_FNC(st + vec2(-3., 0.0) * pixel);
+    c[20] = SHARPENDADAPTIVE_SAMPLER_FNC(st + vec2(-2., 1.0) * pixel);
+    c[21] = SHARPENDADAPTIVE_SAMPLER_FNC(st + vec2(-2.,-1.0) * pixel);
+    c[22] = SHARPENDADAPTIVE_SAMPLER_FNC(st + vec2( 0.,-3.0) * pixel);
+    c[23] = SHARPENDADAPTIVE_SAMPLER_FNC(st + vec2( 1.,-2.0) * pixel);
+    c[24] = SHARPENDADAPTIVE_SAMPLER_FNC(st + vec2(-1.,-2.0) * pixel);
 
     float e[13];
     e[0] = SHARPENADAPTIVE_DXDY(c[0]);
@@ -139,10 +149,10 @@ SHARPEN_TYPE sharpenAdaptive(sampler2D tex, vec2 st, vec2 pixel, float strenght)
     e[12] = SHARPENADAPTIVE_DXDY(c[12]);
 
     // Blur, gauss 3x3
-    SHARPEN_TYPE  blur   = (2.0 * (c[2]+c[4]+c[5]+c[7]) + (c[1]+c[3]+c[6]+c[8]) + 4.0 * c[0]) / 16.0;
+    SHARPENADAPTIVE_TYPE  blur   = (2.0 * (c[2]+c[4]+c[5]+c[7]) + (c[1]+c[3]+c[6]+c[8]) + 4.0 * c[0]) / 16.0;
 
     // Contrast compression, center = 0.5, scaled to 1/3
-    float c_comp = saturate(0.266666681 + 0.9*exp2(dot(blur, SHARPEN_TYPE(-7.4/3.0))));
+    float c_comp = saturate(0.266666681 + 0.9*exp2(dot(blur, SHARPENADAPTIVE_TYPE(-7.4/3.0))));
 
     // Edge detection
     // Relative matrix weights
@@ -241,7 +251,7 @@ SHARPEN_TYPE sharpenAdaptive(sampler2D tex, vec2 st, vec2 pixel, float strenght)
     float sharpdiff = (c0_Y - neg_laplace)*(lowthrsum*sharpen_val + 0.01);
 
     // Calculate local near min & max, partial sort
-    float temp;
+    float temp = 0.0;
 
     for (int i1 = 0; i1 < 24; i1 += 2) {
         temp = luma[i1];
@@ -295,7 +305,7 @@ SHARPEN_TYPE sharpenAdaptive(sampler2D tex, vec2 st, vec2 pixel, float strenght)
     return c0_Y + (sharpdiff_lim*3.0 + sharpdiff)/4.0 + (c[0] - c0_Y)*satmul;
 }
 
-SHARPEN_TYPE sharpenAdaptive(sampler2D tex, vec2 st, vec2 pixel) {
+SHARPENADAPTIVE_TYPE sharpenAdaptive(sampler2D tex, vec2 st, vec2 pixel) {
     return sharpenAdaptive(tex, st, pixel, 1.0);
 }
 

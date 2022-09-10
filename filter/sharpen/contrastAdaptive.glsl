@@ -10,9 +10,10 @@ description: |
     Reshade: https://gist.github.com/martymcmodding/30304c4bffa6e2bd2eb59ff8bb09d135
 use: sharpenContrastAdaptive(<sampler2D> texture, <vec2> st, <vec2> pixel, <float> strenght)
 options:
-    SHARPEN_KERNELSIZE: Defaults 2
-    SHARPENCONTRASTADAPTIVE_TYPE: defaults to vec3
-    SHARPENCONTRASTADAPTIVE_SAMPLER_FNC(POS_UV): defaults to texture2D(tex, POS_UV).rgb
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
+    - SHARPEN_KERNELSIZE: Defaults 2
+    - SHARPENCONTRASTADAPTIVE_TYPE: defaults to vec3
+    - SHARPENCONTRASTADAPTIVE_SAMPLER_FNC(POS_UV): defaults to texture2D(tex, POS_UV).rgb
 license: |
     Copyright (c) 2020 Advanced Micro Devices, Inc. All rights reserved.
 
@@ -35,6 +36,10 @@ license: |
     THE SOFTWARE.
 */
 
+#ifndef SAMPLER_FNC
+#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
+#endif
+
 #ifndef SHARPENCONTRASTADAPTIVE_TYPE
 #ifdef SHARPEN_TYPE
 #define SHARPENCONTRASTADAPTIVE_TYPE SHARPEN_TYPE
@@ -47,7 +52,7 @@ license: |
 #ifdef SHARPEN_SAMPLER_FNC
 #define SHARPENCONTRASTADAPTIVE_SAMPLER_FNC(POS_UV) SHARPEN_SAMPLER_FNC(POS_UV)
 #else
-#define SHARPENCONTRASTADAPTIVE_SAMPLER_FNC(POS_UV) texture2D(tex, POS_UV).rgb
+#define SHARPENCONTRASTADAPTIVE_SAMPLER_FNC(POS_UV) SAMPLER_FNC(tex, POS_UV).rgb
 #endif
 #endif
 

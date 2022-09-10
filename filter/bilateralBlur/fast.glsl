@@ -5,17 +5,22 @@ author: Patricio Gonzalez Vivo
 description: one dimensional bilateral Blur that use a blue noise texture to sample a kernel with out introducing biases
 use: bilateralBlurFast(<sampler2D> texture, <vec2> st, <vec2> pixelSize, <float> smoothingFactor,  <float> kernelSize)
 options:
-    BILATERALBLURFAST_TYPE: default is vec4
-    BILATERALBLURFAST_SAMPLER_FNC(POS_UV): default texture2D(tex, POS_UV)
-    BILATERALBLURFAST_NOISE_TEX_SIZE: blue noise texture size. Default 64.0
-    BILATERALBLURFAST_SIGMA_R: sigma defualt .075
-    BILATERALBLURFAST_NOISE_FNC: functions use to sample the blue noise texture
+    - BILATERALBLURFAST_TYPE: default is vec4
+    - BILATERALBLURFAST_SAMPLER_FNC(POS_UV): default texture2D(tex, POS_UV)
+    - BILATERALBLURFAST_NOISE_TEX_SIZE: blue noise texture size. Default 64.0
+    - BILATERALBLURFAST_SIGMA_R: sigma defualt .075
+    - BILATERALBLURFAST_NOISE_FNC: functions use to sample the blue noise texture
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 license: |
     Copyright (c) 2017 Patricio Gonzalez Vivo.
     Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
     The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
+
+#ifndef SAMPLER_FNC
+#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
+#endif
 
 #ifndef BILATERALBLURFAST_TYPE
 #ifdef BILATERALBLUR_TYPE
@@ -29,7 +34,7 @@ license: |
 #ifdef BILATERALBLUR_SAMPLER_FNC
 #define BILATERALBLURFAST_SAMPLER_FNC(POS_UV) BILATERALBLUR_SAMPLER_FNC(POS_UV)
 #else
-#define BILATERALBLURFAST_SAMPLER_FNC(POS_UV) texture2D(tex, POS_UV)
+#define BILATERALBLURFAST_SAMPLER_FNC(POS_UV) SAMPLER_FNC(tex, POS_UV)
 #endif
 #endif
 
@@ -42,7 +47,7 @@ license: |
 #endif
 
 #ifndef BILATERALBLURFAST_NOISE_FNC
-#define BILATERALBLURFAST_NOISE_FNC(POS_UV) texture2D(poissonNoise, nearest(fract(POS_UV),vec2(BILATERALBLURFAST_NOISE_TEX_SIZE))).xy
+#define BILATERALBLURFAST_NOISE_FNC(POS_UV) SAMPLER_FNC(poissonNoise, nearest(fract(POS_UV),vec2(BILATERALBLURFAST_NOISE_TEX_SIZE))).xy
 #endif
 
 #ifndef FNC_BILATERALBLURFAST

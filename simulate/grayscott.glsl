@@ -5,6 +5,7 @@ author: Patricio Gonzalez Vivo
 description: Grayscott Reaction-Diffusion
 use: <vec3> grayscott(<sampler2D> tex, <vec2> st, <vec2> pixel, <float> src [, <float> diffU, <float> diffV, <float> f, <float> k ])
 options:
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - GRAYSCOTT_ITERATIONS
 license: |
   Copyright (c) 2022 Patricio Gonzalez Vivo.
@@ -12,6 +13,10 @@ license: |
   The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.    
 */
+
+#ifndef SAMPLER_FNC
+#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
+#endif
 
 #ifndef GRAYSCOTT_ITERATIONS
 #define GRAYSCOTT_ITERATIONS 9
@@ -46,11 +51,11 @@ vec3 grayscott(sampler2D tex, vec2 st, vec2 pixel, float src, float diffU, float
     offset[7] = pixel * vec2( 0.0,1.0);
     offset[8] = pixel * vec2( 1.0,1.0);
 
-    vec2 current = texture2D(tex, st).rb;
+    vec2 current = SAMPLER_FNC(tex, st).rb;
 
     vec2 lap = vec2(0.0);
     for (int i=0; i < GRAYSCOTT_ITERATIONS; i++){
-        vec2 tmp = texture2D(tex, st + offset[i]).rb;
+        vec2 tmp = SAMPLER_FNC(tex, st + offset[i]).rb;
         lap += tmp * kernel[i];
     }
 

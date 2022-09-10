@@ -2,6 +2,12 @@
 author: Patricio Gonzalez Vivo
 description: get parallax mapping coordinates
 use: parallaxMapping(<sampler2D> heightTex, <vec3> V, <vec2> T, <float> parallaxHeight) 
+options:
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
+    - PARALLAXMAPPING_FNC()
+    - PARALLAXMAPPING_SAMPLER_FNC(UV)
+    - PARALLAXMAPPING_SCALE
+    - PARALLAXMAPPING_NUMSEARCHES
 license: |
     Copyright (c) 2021 Patricio Gonzalez Vivo.
     Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
@@ -9,34 +15,34 @@ license: |
     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.    
 */
 
-#ifndef FNC_PARALLAXMAPPING
-#define FNC_PARALLAXMAPPING
+#ifndef SAMPLER_FNC
+#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
+#endif
 
 #ifndef PARALLAXMAPPING_SAMPLER_FNC
-#define PARALLAXMAPPING_SAMPLER_FNC(POS_UV) texture2D(heightTex, POS_UV).r
+#define PARALLAXMAPPING_SAMPLER_FNC(POS_UV) SAMPLER_FNC(heightTex, POS_UV).r
 #endif
 
 #if defined(PARALLAXMAPPING_SEETP)
 #define PARALLAXMAPPING_FNC parallaxMapping_steep
-
 #elif defined(PARALLAXMAPPING_RELIEF)
 #define PARALLAXMAPPING_FNC parallaxMapping_relief
-
 #elif defined(PARALLAXMAPPING_OCCLUSION)
 #define PARALLAXMAPPING_FNC parallaxMapping_occlusion
-
 #else
 #define PARALLAXMAPPING_FNC parallaxMapping_simple
 #endif
 
-#ifndef PARALLAX_SCALE
-#define PARALLAX_SCALE 0.01
+#ifndef PARALLAXMAPPING_SCALE
+#define PARALLAXMAPPING_SCALE 0.01
 #endif
 
-#ifndef PARALLAX_NUMSEARCHES
-#define PARALLAX_NUMSEARCHES 10.0
+#ifndef PARALLAXMAPPING_NUMSEARCHES
+#define PARALLAXMAPPING_NUMSEARCHES 10.0
 #endif
 
+#ifndef FNC_PARALLAXMAPPING
+#define FNC_PARALLAXMAPPING
 
 //////////////////////////////////////////////////////
 //  Implements Parallax Mapping technique
@@ -50,10 +56,10 @@ vec2 parallaxMapping_simple(in sampler2D heightTex, in vec3 V, in vec2 T, out fl
     float initialHeight = PARALLAXMAPPING_SAMPLER_FNC(T);
 
     // calculate amount of offset for Parallax Mapping
-    vec2 texCoordOffset = PARALLAX_SCALE * V.xy / V.z * initialHeight;
+    vec2 texCoordOffset = PARALLAXMAPPING_SCALE * V.xy / V.z * initialHeight;
 
     // calculate amount of offset for Parallax Mapping With Offset Limiting
-    texCoordOffset = PARALLAX_SCALE * V.xy * initialHeight;
+    texCoordOffset = PARALLAXMAPPING_SCALE * V.xy * initialHeight;
 
     // retunr modified texture coordinates
     return T - texCoordOffset;
@@ -63,7 +69,7 @@ vec2 parallaxMapping_simple(in sampler2D heightTex, in vec3 V, in vec2 T, out fl
 vec2 parallaxMapping_steep(in sampler2D heightTex, in vec3 V, in vec2 T, out float parallaxHeight) {
 
     // determine number of layers from angle between V and N
-    const float minLayers = PARALLAX_NUMSEARCHES * 0.5;
+    const float minLayers = PARALLAXMAPPING_NUMSEARCHES * 0.5;
     const float maxLayers = 15.0;
     float numLayers = mix(maxLayers, minLayers, abs(dot(vec3(0.0, 0.0, 1.0), V)));
 
@@ -72,7 +78,7 @@ vec2 parallaxMapping_steep(in sampler2D heightTex, in vec3 V, in vec2 T, out flo
     // depth of current layer
     float currentLayerHeight = 0.0;
     // shift of texture coordinates for each iteration
-    vec2 dtex = PARALLAX_SCALE * V.xy / V.z / numLayers;
+    vec2 dtex = PARALLAXMAPPING_SCALE * V.xy / V.z / numLayers;
 
     // current texture coordinates
     vec2 currentTextureCoords = T;
@@ -97,7 +103,7 @@ vec2 parallaxMapping_steep(in sampler2D heightTex, in vec3 V, in vec2 T, out flo
 
 vec2 parallaxMapping_relief(in sampler2D heightTex, in vec3 V, in vec2 T, out float parallaxHeight) {
     // determine required number of layers
-    const float minLayers = PARALLAX_NUMSEARCHES;
+    const float minLayers = PARALLAXMAPPING_NUMSEARCHES;
     const float maxLayers = 15.0;
     float numLayers = mix(maxLayers, minLayers, abs(dot(vec3(0.0, 0.0, 1.0), V)));
 
@@ -106,7 +112,7 @@ vec2 parallaxMapping_relief(in sampler2D heightTex, in vec3 V, in vec2 T, out fl
     // depth of current layer
     float currentLayerHeight = 0.0;
     // shift of texture coordinates for each iteration
-    vec2 dtex = PARALLAX_SCALE * V.xy / V.z / numLayers;
+    vec2 dtex = PARALLAXMAPPING_SCALE * V.xy / V.z / numLayers;
 
     // current texture coordinates
     vec2 currentTextureCoords = T;
@@ -167,7 +173,7 @@ vec2 parallaxMapping_relief(in sampler2D heightTex, in vec3 V, in vec2 T, out fl
 #if defined(PARALLAXMAPPING_OCCLUSION)
 vec2 parallaxMapping_occlusion(in sampler2D heightTex, in vec3 V, in vec2 T, out float parallaxHeight) {
     // determine optimal number of layers
-    const float minLayers = PARALLAX_NUMSEARCHES;
+    const float minLayers = PARALLAXMAPPING_NUMSEARCHES;
     const float maxLayers = 15.0;
 
     float numLayers = mix(maxLayers, minLayers, abs(dot(vec3(0.0, 0.0, 1.0), V)));
@@ -177,7 +183,7 @@ vec2 parallaxMapping_occlusion(in sampler2D heightTex, in vec3 V, in vec2 T, out
     // current depth of the layer
     float curLayerHeight = 0.0;
     // shift of texture coordinates for each layer
-    vec2 dtex = PARALLAX_SCALE * V.xy / V.z / numLayers;
+    vec2 dtex = PARALLAXMAPPING_SCALE * V.xy / V.z / numLayers;
 
     // current texture coordinates
     vec2 currentTextureCoords = T;
@@ -197,7 +203,7 @@ vec2 parallaxMapping_occlusion(in sampler2D heightTex, in vec3 V, in vec2 T, out
 
     ///////////////////////////////////////////////////////////
     // vec3 L = normalize(v_toLightInTangentSpace);
-    // vec2 texStep	= PARALLAX_SCALE * L.xy / L.z / numLayers;
+    // vec2 texStep	= PARALLAXMAPPING_SCALE * L.xy / L.z / numLayers;
 
     // previous texture coordinates
     vec2 prevTCoords = currentTextureCoords;// + texStep;
