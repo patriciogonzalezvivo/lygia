@@ -11,15 +11,18 @@ options:
     - CAMERA_POSITION
     - CAMERA_NEAR_CLIP: camera near clip distance
     - CAMERA_FAR_CLIP: camera far clip distance
-    - INVERSE_VIEW_MATRIX
-    - INVERSE_PROJECTION_MATRIX
+    - CAMERA_ORTHOGRAPHIC_PROJECTION, if it's not present is consider a PERECPECTIVE camera
+    - CAMERA_PROJECTION_MATRIX: mat4 matrix with camera projection
+    - CAMERA_VIEW_MATRIX
+    - INVERSE_CAMERA_VIEW_MATRIX
+    - INVERSE_CAMERA_PROJECTION_MATRIX: mat4 matrix with the inverse camara projection
     - LIGHT_POSITION (optional)
     - LIGHT_MATRIX
     - LIGHT_SHADOWMAP
     - VOLUMETRICLIGHTSCATTERING_FACTOR
     - VOLUMETRICLIGHTSCATTERING_STEPS
     - VOLUMETRICLIGHTSCATTERING_NOISE_FNC
-    - SAMPLE_FNC(TEX, UV): optional
+    - SAMPLE_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 
 license: |
     Copyright (c) 2022 Patricio Gonzalez Vivo.
@@ -44,10 +47,6 @@ license: |
 #define VOLUMETRICLIGHTSCATTERING_TYPE float
 #endif
 
-#ifndef INVERSE_VIEW_MATRIX
-#define INVERSE_VIEW_MATRIX inverse(u_viewMatrix)
-#endif
-
 #ifndef CAMERA_POSITION
 #define CAMERA_POSITION     u_camera
 #endif
@@ -58,6 +57,24 @@ license: |
 
 #ifndef CAMERA_FAR_CLIP
 #define CAMERA_FAR_CLIP     u_cameraFarClip
+#endif
+
+#ifndef CAMERA_PROJECTION_MATRIX
+#define CAMERA_PROJECTION_MATRIX u_projectionMatrix
+#endif
+
+#ifndef INVERSE_CAMERA_PROJECTION_MATRIX
+// #define INVERSE_CAMERA_PROJECTION_MATRIX u_inverseProjectionMatrix
+#define INVERSE_CAMERA_PROJECTION_MATRIX inverse(CAMERA_PROJECTION_MATRIX)
+#endif
+
+#ifndef CAMERA_VIEW_MATRIX
+#define CAMERA_VIEW_MATRIX u_viewMatrix
+#endif
+
+#ifndef INVERSE_CAMERA_VIEW_MATRIX
+// #define INVERSE_CAMERA_VIEW_MATRIX u_inverseViewMatrix
+#define INVERSE_CAMERA_VIEW_MATRIX inverse(CAMERA_VIEW_MATRIX)
 #endif
 
 #ifndef LIGHT_MATRIX
@@ -73,7 +90,7 @@ license: |
 
 #ifndef FNC_VOLUMETRICLIGHTSCATTERING
 #define FNC_VOLUMETRICLIGHTSCATTERING
-VOLUMETRICLIGHTSCATTERING_TYPE volumetricLightScattering(sampler2D lightShadowMap, mat4 lightMatrix, vec3 lightPos, vec3 rayOrigin, vec3 rayEnd) {
+VOLUMETRICLIGHTSCATTERING_TYPE volumetricLightScattering(sampler2D lightShadowMap, const in mat4 lightMatrix, const in vec3 lightPos, const in vec3 rayOrigin, const in vec3 rayEnd) {
     vec3  rayVector     = rayEnd - rayOrigin;
     float rayLength     = length(rayVector);
     vec3  rayDirection  = rayVector / rayLength;
@@ -87,10 +104,10 @@ VOLUMETRICLIGHTSCATTERING_TYPE volumetricLightScattering(sampler2D lightShadowMa
     scattering /= (4.0 * PI * pow(1.0 + scattering_g - (2.0 * VOLUMETRICLIGHTSCATTERING_FACTOR) * lightDotView, 1.5));
 
     VOLUMETRICLIGHTSCATTERING_TYPE L = VOLUMETRICLIGHTSCATTERING_TYPE(0.0);
-    vec3  rayCurrPos    = rayOrigin;
+    vec4  rayCurrPos    = vec4(rayOrigin, 1.0);
 
     for (int i = 0; i < VOLUMETRICLIGHTSCATTERING_STEPS; i ++) {
-        vec4 worldInShadowCameraSpace = lightMatrix * vec4(rayCurrPos, 1.0);
+        vec4 worldInShadowCameraSpace = lightMatrix * rayCurrPos;
         worldInShadowCameraSpace /= worldInShadowCameraSpace.w;
         float shadowMapValue = SAMPLE_FNC(lightShadowMap, worldInShadowCameraSpace.xy ).r;
         L +=    step(worldInShadowCameraSpace.z, shadowMapValue) * 
@@ -99,7 +116,7 @@ VOLUMETRICLIGHTSCATTERING_TYPE volumetricLightScattering(sampler2D lightShadowMa
                 #endif
                 scattering;
 
-        rayCurrPos += rayStep; 
+        rayCurrPos.xyz += rayStep; 
     }
 
     return L * stepLength;
@@ -114,13 +131,13 @@ VOLUMETRICLIGHTSCATTERING_TYPE volumetricLightScattering(sampler2D texDepth, vec
     viewZ += VOLUMETRICLIGHTSCATTERING_NOISE_FNC;
     #endif
 
-    vec3 viewPos = screen2viewPosition(st, depth, viewZ);
-    vec3 worldPos = (INVERSE_VIEW_MATRIX * vec4(viewPos, 1.0)).xyz;
+    vec4 worldPos = INVERSE_CAMERA_VIEW_MATRIX * screen2viewPosition(st, depth, viewZ);
 
     #ifdef LIGHT_SHADOWMAP
-    return volumetricLightScattering(LIGHT_SHADOWMAP, LIGHT_MATRIX, LIGHT_POSITION, CAMERA_POSITION, worldPos);
+    return volumetricLightScattering(LIGHT_SHADOWMAP, LIGHT_MATRIX, LIGHT_POSITION, CAMERA_POSITION, worldPos.xyz);
     #else 
     return VOLUMETRICLIGHTSCATTERING_TYPE(0.0);
     #endif
 }
+
 #endif

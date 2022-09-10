@@ -5,12 +5,17 @@ author: Huw Bowles ( @hdb1 )
 description: 'Bracketing' technique maps a texture to a plane using any arbitrary 2D vector field to give orientatio. From https://www.shadertoy.com/view/NddcDr
 use: textureBracketing(<sampler2D> texture, <vec2> st, <vec2> direction [, <float> scale] )
 options:
-    TEXTUREBRACKETING_TYPE:
-    TEXTUREBRACKETING_SAMPLE_FNC(UV):
-    TEXTUREBRACKETING_ANGLE_DELTA:
-    TEXTUREBRACKETING_REPLACE_DIVERGENCE
+    - TEXTUREBRACKETING_TYPE:
+    - TEXTUREBRACKETING_SAMPLE_FNC(UV):
+    - TEXTUREBRACKETING_ANGLE_DELTA:
+    - TEXTUREBRACKETING_REPLACE_DIVERGENCE
+    - SAMPLE_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 license: Copyright Huw Bowles May 2022 on MIT license
 */
+
+#ifndef SAMPLE_FNC
+#define SAMPLE_FNC(TEX, UV) texture2D(TEX, UV)
+#endif
 
 // Parameter for bracketing - bracket size in radians. Large values create noticeable linear structure,
 // small values prone to simply replicating the issues with the brute force approach. In my use cases it

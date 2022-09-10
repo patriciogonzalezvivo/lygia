@@ -12,12 +12,16 @@ license: |
     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+#ifndef SAMPLE_FNC
+#define SAMPLE_FNC(TEX, UV) texture2D(TEX, UV)
+#endif
+
 #ifndef FNC_TEXTURESHADOW
 #define FNC_TEXTURESHADOW
 
 float textureShadow(in sampler2D shadowMap, in vec4 _coord) {
     vec3 shadowCoord = _coord.xyz / _coord.w;
-    return texture2D(shadowMap, shadowCoord.xy).r;
+    return SAMPLE_FNC(shadowMap, shadowCoord.xy).r;
 }
 
 float textureShadow(in sampler2D shadowMap, in vec3 _coord) {
@@ -25,7 +29,7 @@ float textureShadow(in sampler2D shadowMap, in vec3 _coord) {
 }
 
 float textureShadow(in sampler2D shadowMap, in vec2 uv, in float compare) {
-    return step(compare, texture2D(shadowMap, uv).r );
+    return step(compare, SAMPLE_FNC(shadowMap, uv).r );
 }
 
 float textureShadow(in sampler2D shadowMap, in vec2 size, in vec2 uv, in float compare) {
