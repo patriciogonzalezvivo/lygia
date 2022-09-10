@@ -13,10 +13,10 @@ options:
     - SSAO_NOISE_ARRAY: array of vec3 noise offsets
     - SSAO_NOISE2_FNC(ST): (random2(ST * 100.) * 0.1)
     - SSAO_NOISE3_FNC(POS): (random3(POS) * 0.3)
-    - PROJECTION_MATRIX: camera projection mat4 matrix
+    - CAMERA_PROJECTION_MATRIX: camera projection mat4 matrix
     - CAMERA_NEAR_CLIP: required for depth only SSAO
     - CAMERA_FAR_CLIP: required for depth only SSAO
-    - SAMPLE_FNC(TEX, UV)
+    - SAMPLE_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 
 license: |
     Copyright (c) 2022 Patricio Gonzalez Vivo.
@@ -55,11 +55,11 @@ uniform vec3 u_ssaoNoise[SSAO_NOISE_NUM];
 #endif
 #endif
 
-#ifndef PROJECTION_MATRIX
+#ifndef CAMERA_PROJECTION_MATRIX
 #if defined(GLSLVIEWER)
-#define PROJECTION_MATRIX u_projectionMatrix
+#define CAMERA_PROJECTION_MATRIX u_projectionMatrix
 #else
-#define PROJECTION_MATRIX u_projection
+#define CAMERA_PROJECTION_MATRIX u_projection
 #endif
 #endif
 
@@ -136,7 +136,7 @@ float ssao(sampler2D texPosition, sampler2D texNormal, vec2 st, float radius) {
         samplePosition = position.xyz + samplePosition * radius;
 
         vec4 offsetUV = vec4(samplePosition, 1.0);
-        offsetUV = PROJECTION_MATRIX * offsetUV;
+        offsetUV = CAMERA_PROJECTION_MATRIX * offsetUV;
         offsetUV.xy /= offsetUV.w;
         offsetUV.xy = offsetUV.xy * 0.5 + 0.5;
 

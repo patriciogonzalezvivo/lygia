@@ -5,12 +5,18 @@ author: Dennis Gustafsson
 description:  http://blog.tuxedolabs.com/2018/05/04/bokeh-depth-of-field-in-single-pass.html
 use: textureDoF(<sampler2D> texture, <sampler2D> depth, <vec2> st, <float> focusPoint, <float> focusScale)
 options:
-    TEXTUREDOF_TYPE:
-    TEXTUREDOF_BLUR_SIZE:
-    TEXTUREDOF_RAD_SCALE:
-    TEXTUREDOF_DEPTH_FNC(UV):
-    TEXTUREDOF_COLOR_FNC(UV):
+    - SAMPLE_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
+    - TEXTUREDOF_TYPE:
+    - TEXTUREDOF_BLUR_SIZE:
+    - TEXTUREDOF_RAD_SCALE:
+    - TEXTUREDOF_DEPTH_FNC(UV):
+    - TEXTUREDOF_COLOR_FNC(UV):
+    
 */
+
+#ifndef SAMPLE_FNC
+#define SAMPLE_FNC(TEX, UV) texture2D(TEX, UV)
+#endif
 
 #ifndef FNC_TEXTUREDOF
 #define FNC_TEXTUREDOF
@@ -29,11 +35,11 @@ options:
 #endif
 
 #ifndef TEXTUREDOF_DEPTH_FNC
-#define TEXTUREDOF_DEPTH_FNC(UV)texture2D(texDepth,UV).r
+#define TEXTUREDOF_DEPTH_FNC(UV) SAMPLE_FNC(texDepth,UV).r
 #endif
 
 #ifndef TEXTUREDOF_COLOR_FNC
-#define TEXTUREDOF_COLOR_FNC(UV)texture2D(tex,UV).rgb
+#define TEXTUREDOF_COLOR_FNC(UV) SAMPLE_FNC(tex,UV).rgb
 #endif
 
 #ifndef TEXTUREDOF_TYPE

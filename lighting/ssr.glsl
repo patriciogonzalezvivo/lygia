@@ -10,7 +10,7 @@ use: <float> ssao(<sampler2D> texPosition, <sampler2D> texNormal, vec2 <st> [, <
 options:
     - SSR_MAX_STEP: number max number of raymarching steps (int)
     - SSR_MAX_DISTANCE: max distance (float)
-    - PROJECTION_MATRIX: camera projection mat4 matrix
+    - CAMERA_PROJECTION_MATRIX: camera projection mat4 matrix
     - RESOLUTION_SCREEN: vec2 with screen resolution
     - CAMERA_NEAR_CLIP: camera near clip distance
     - CAMERA_FAR_CLIP: camera far clip distance
@@ -91,7 +91,7 @@ vec2 ssr(sampler2D texPosition, sampler2D texNormal, vec2 st, vec2 pixel, inout 
 
         vec3 vP = SAMPLE_FNC(texPosition, uv).xyz;
         // if (-vP.z >= CAMERA_FAR_CLIP) 
-        //     continue;
+            // continue;
 
         // https://comp.nus.edu.sg/~lowkl/publications/lowk_persp_interp_techrep.pdf
         float recipVPZ = 1.0/viewPosition.z;
