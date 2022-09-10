@@ -4,8 +4,9 @@ description: |
     Adapted version of Sobel edge detection from https://github.com/BradLarson/GPUImage2.
 use: edgeSobel(<sampler2D> texture, <vec2> st, <vec2> pixels_scale)
 options:
-    EDGESOBEL_TYPE: Return type, defaults to float
-    EDGESOBEL_SAMPLER_FNC: Function used to sample the input texture, defaults to texture2D(tex,POS_UV).r
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
+    - EDGESOBEL_TYPE: Return type, defaults to float
+    - EDGESOBEL_SAMPLER_FNC: Function used to sample the input texture, defaults to texture2D(tex,POS_UV).r
 license:
     Copyright (c) 2015, Brad Larson.
     All rights reserved.
@@ -33,6 +34,10 @@ license:
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#ifndef SAMPLER_FNC
+#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
+#endif
+
 #ifndef EDGESOBEL_TYPE
 #ifdef EDGE_TYPE
 #define EDGESOBEL_TYPE EDGE_TYPE
@@ -45,7 +50,7 @@ license:
 #ifdef EDGE_SAMPLER_FNC
 #define EDGESOBEL_SAMPLER_FNC(POS_UV) EDGE_SAMPLER_FNC(POS_UV)
 #else
-#define EDGESOBEL_SAMPLER_FNC(POS_UV) texture2D(tex, POS_UV).r
+#define EDGESOBEL_SAMPLER_FNC(POS_UV) SAMPLER_FNC(tex, POS_UV).r
 #endif
 #endif
 

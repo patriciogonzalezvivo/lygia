@@ -7,17 +7,22 @@ description: Fibonacci Bokeh ( https://www.shadertoy.com/view/fljyWd )
 use: <vec4> fibonacciBokeh(<sampler2D> tex, <vec2> st, <vec2> pixel, <float> amount) 
 options:
     - FIBONACCIBOKEH_TYPE:
-    - FIBONACCIBOKEH_SAMPLER_FNC():
+    - FIBONACCIBOKEH_SAMPLER_FNC(UV):
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     
 license: NONE
 */
+
+#ifndef SAMPLER_FNC
+#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
+#endif
 
 #ifndef FIBONACCIBOKEH_TYPE
 #define FIBONACCIBOKEH_TYPE vec4
 #endif
 
 #ifndef FIBONACCIBOKEH_SAMPLER_FNC
-#define FIBONACCIBOKEH_SAMPLER_FNC(POS_UV) texture2D(tex, POS_UV)
+#define FIBONACCIBOKEH_SAMPLER_FNC(POS_UV) SAMPLER_FNC(tex, POS_UV)
 #endif
 
 #ifndef FNC_FIBONACCIBOKEH

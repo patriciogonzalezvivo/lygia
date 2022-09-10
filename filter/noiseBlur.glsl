@@ -1,21 +1,26 @@
+#include "../math/const.glsl"
+
+#define RANDOM_SCALE3 vec3(443.897, 441.423, .0973)
+#include "../generative/random.glsl"
+
 /*
 author: Alan Wolfe
 description:  white noise blur based on this shader https://www.shadertoy.com/view/XsVBDR
 use: noiseBlur(<sampler2D> texture, <vec2> st, <vec2> pixel, <float> radius)
 options:
-    NOISEBLUR_TYPE: default to vec3
-    NOISEBLUR_GAUSSIAN_K: no gaussian by default
-    NOISEBLUR_RANDOM23_FNC(UV): defaults to random2(UV)
-    NOISEBLUR_SAMPLER_FNC(UV): defualts to texture2D(tex, UV).rgb
-    NOISEBLUR_SAMPLES: default to 4
+    - NOISEBLUR_TYPE: default to vec3
+    - NOISEBLUR_GAUSSIAN_K: no gaussian by default
+    - NOISEBLUR_RANDOM23_FNC(UV): defaults to random2(UV)
+    - NOISEBLUR_SAMPLER_FNC(UV): defualts to texture2D(tex, UV).rgb
+    - NOISEBLUR_SAMPLES: default to 4
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 licence: |
     TODO
 */
 
-#include "../math/const.glsl"
-
-#define RANDOM_SCALE3 vec3(443.897, 441.423, .0973)
-#include "../generative/random.glsl"
+#ifndef SAMPLER_FNC
+#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
+#endif
 
 #ifndef NOISEBLUR_SAMPLES
 #define NOISEBLUR_SAMPLES 4.0
@@ -26,7 +31,7 @@ licence: |
 #endif
 
 #ifndef NOISEBLUR_SAMPLER_FNC
-#define NOISEBLUR_SAMPLER_FNC(UV) texture2D(tex, UV)
+#define NOISEBLUR_SAMPLER_FNC(UV) SAMPLER_FNC(tex, UV)
 #endif
 
 #ifndef NOISEBLUR_RANDOM23_FNC

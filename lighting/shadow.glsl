@@ -19,8 +19,8 @@ license: |
 #define SHADOWMAP_BIAS 0.005
 #endif
 
-#ifndef SHADOW_SAMPLE_FNC
-#define SHADOW_SAMPLE_FNC textureShadowPCF
+#ifndef SHADOW_SAMPLER_FNC
+#define SHADOW_SAMPLER_FNC textureShadowPCF
 #endif
 
 #ifndef FNC_SHADOW

@@ -5,16 +5,16 @@ author: Huw Bowles ( @hdb1 )
 description: 'Bracketing' technique maps a texture to a plane using any arbitrary 2D vector field to give orientatio. From https://www.shadertoy.com/view/NddcDr
 use: textureBracketing(<sampler2D> texture, <vec2> st, <vec2> direction [, <float> scale] )
 options:
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - TEXTUREBRACKETING_TYPE:
-    - TEXTUREBRACKETING_SAMPLE_FNC(UV):
+    - TEXTUREBRACKETING_SAMPLER_FNC(UV):
     - TEXTUREBRACKETING_ANGLE_DELTA:
     - TEXTUREBRACKETING_REPLACE_DIVERGENCE
-    - SAMPLE_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 license: Copyright Huw Bowles May 2022 on MIT license
 */
 
-#ifndef SAMPLE_FNC
-#define SAMPLE_FNC(TEX, UV) texture2D(TEX, UV)
+#ifndef SAMPLER_FNC
+#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
 #endif
 
 // Parameter for bracketing - bracket size in radians. Large values create noticeable linear structure,
@@ -28,8 +28,8 @@ license: Copyright Huw Bowles May 2022 on MIT license
 #define TEXTUREBRACKETING_TYPE vec4
 #endif
 
-#ifndef TEXTUREBRACKETING_SAMPLE_FNC
-#define TEXTUREBRACKETING_SAMPLE_FNC(UV) texture2D(tex, UV)
+#ifndef TEXTUREBRACKETING_SAMPLER_FNC
+#define TEXTUREBRACKETING_SAMPLER_FNC(UV) SAMPLER_FNC(tex, UV)
 #endif
 
 #ifndef FNC_TEXTUREBRACKETING
@@ -74,15 +74,15 @@ TEXTUREBRACKETING_TYPE textureBracketing(sampler2D tex, vec2 st, vec2 dir, float
     vec2 uv1 = scale * rotate(st, vAxis1);
     
     // Now sample function/texture
-    TEXTUREBRACKETING_TYPE sample0 = TEXTUREBRACKETING_SAMPLE_FNC(uv0);
-    TEXTUREBRACKETING_TYPE sample1 = TEXTUREBRACKETING_SAMPLE_FNC(uv1);
+    TEXTUREBRACKETING_TYPE sample0 = TEXTUREBRACKETING_SAMPLER_FNC(uv0);
+    TEXTUREBRACKETING_TYPE sample1 = TEXTUREBRACKETING_SAMPLER_FNC(uv1);
 
     // Blend to get final result, based on how close the vector was to the first snapped angle
     TEXTUREBRACKETING_TYPE result = mix( sample0, sample1, blendAlpha);
 
 #ifdef TEXTUREBRACKETING_REPLACE_DIVERGENCE
     float strength = smoothstep(0.0, 0.2, dot(dir, dir)*6.0);
-    result = mix(   TEXTUREBRACKETING_SAMPLE_FNC(scale * rotate(st, -vec2(cos(0.5),sin(0.5)))), 
+    result = mix(   TEXTUREBRACKETING_SAMPLER_FNC(scale * rotate(st, -vec2(cos(0.5),sin(0.5)))), 
                     result, 
                     strength);
 #endif

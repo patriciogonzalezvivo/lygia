@@ -3,9 +3,10 @@ author: Brad Larson
 description: Kuwahara image abstraction, drawn from the work of Kyprianidis, et. al. in their publication "Anisotropic Kuwahara Filtering on the GPU" within the GPU Pro collection. This produces an oil-painting-like image, but it is extremely computationally expensive, so it can take seconds to render a frame on an iPad 2. This might be best used for still images.
 use: kuwahara(<sampler2D> texture, <vec2> st, <vec2> pixel)
 options:
-    KUWAHARA_TYPE: defaults to vec3
-    KUWAHARA_SAMPLER_FNC(POS_UV): defaults to texture2D(tex, POS_UV).rgb
-    KUWAHARA_RADIUS radius
+    - KUWAHARA_TYPE: defaults to vec3
+    - KUWAHARA_SAMPLER_FNC(POS_UV): defaults to texture2D(tex, POS_UV).rgb
+    - KUWAHARA_RADIUS radius
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 licence:
     Copyright (c) 2012, Brad Larson, Ben Cochran, Hugues Lismonde, Keitaroh Kobayashi, Alaric Cole, Matthew Clark, Jacob Gundersen, Chris Williams.
     All rights reserved.
@@ -16,12 +17,16 @@ licence:
     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#ifndef SAMPLER_FNC
+#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
+#endif
+
 #ifndef KUWAHARA_TYPE
 #define KUWAHARA_TYPE vec4
 #endif
 
 #ifndef KUWAHARA_SAMPLER_FNC
-#define KUWAHARA_SAMPLER_FNC(POS_UV) texture2D(tex, POS_UV)
+#define KUWAHARA_SAMPLER_FNC(POS_UV) SAMPLER_FNC(tex, POS_UV)
 #endif
 
 #ifndef KUWAHARA_RADIUS

@@ -4,6 +4,8 @@
 Author: [Matt DesLauriers, Johan Ismael, Patricio Gonzalez Vivo]
 description: Use LUT textures to modify colors (vec4 and vec3) or a position in a gradient (vec2 and floats)
 use: lut(<sampler2D> texture, <vec4|vec3|vec2|float> value [, int row])
+options:
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - LUT_N_ROWS: only useful on row LUTs to stack several of those one on top of each other 
     - LUT_CELL_SIZE: cell side. DEfault. 32
     - LUT_SQUARE: the LUT have a SQQUARE shape and not just a long row
@@ -19,6 +21,10 @@ license: |
     The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
+
+#ifndef SAMPLER_FNC
+#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
+#endif
 
 #ifndef LUT_N_ROWS
 #define LUT_N_ROWS 1
@@ -59,8 +65,8 @@ vec4 lut(in sampler2D tex_lut, in vec4 color, in int offset) {
     texPos2.y = 1.0-texPos2.y;
     #endif
     
-    vec4 b0 = texture2D(tex_lut, texPos1);
-    vec4 b1 = texture2D(tex_lut, texPos2);
+    vec4 b0 = SAMPLER_FNC(tex_lut, texPos1);
+    vec4 b1 = SAMPLER_FNC(tex_lut, texPos2);
 
     return mix(b0, b1, fract(blueColor));
 }
@@ -90,8 +96,8 @@ vec4 lut(in sampler2D tex_lut, in vec4 color, in int offset) {
     #endif
 
     // sample the 2 adjacent blue slices
-    vec4 b0 = texture2D(tex_lut, texc);
-    vec4 b1 = texture2D(tex_lut, vec2(texc.x + LUT_SIZE.w, texc.y));
+    vec4 b0 = SAMPLER_FNC(tex_lut, texc);
+    vec4 b1 = SAMPLER_FNC(tex_lut, vec2(texc.x + LUT_SIZE.w, texc.y));
 
     // blend between the 2 adjacent blue slices
     color = mix(b0, b1, bFrac);

@@ -5,6 +5,7 @@ author: Patricio Gonzalez Vivo
 description: Simple single pass fluid simlation from the book GPU Pro 2, "Simple and Fast Fluids"
 use: <vec2> fluidSolver(<sampler2D> tex, <vec2> st, <vec2> pixel, <vec2> force)
 options:
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - FLUIDSOLVER_DT: Default 0.15
     - FLUIDSOLVER_DX: Defailt 1.0
     - FLUIDSOLVER_VORTICITY: lower value for vorticity threshold means higher viscosity and vice versa (max .3)
@@ -17,6 +18,10 @@ license: |
   The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.    
 */
+
+#ifndef SAMPLER_FNC
+#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
+#endif
 
 #ifndef FLUIDSOLVER_DT
 #define FLUIDSOLVER_DT 0.15
@@ -36,7 +41,7 @@ license: |
 // #endif 
 
 #ifndef FLUIDSOLVER_SAMPLER_FNC
-#define FLUIDSOLVER_SAMPLER_FNC(UV) texture2D(tex, UV)
+#define FLUIDSOLVER_SAMPLER_FNC(UV) SAMPLER_FNC(tex, UV)
 #endif
 
 #ifndef FNC_FLUIDSOLVER

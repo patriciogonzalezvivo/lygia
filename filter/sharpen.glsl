@@ -3,10 +3,11 @@ author: Patricio Gonzalez Vivo
 description: sharpening filter
 use: sharpen(<sampler2D> texture, <vec2> st, <vec2> renderSize [, float streanght])
 options:
-    SHARPEN_KERNELSIZE: Defaults 2
-    SHARPEN_TYPE: defaults to vec3
-    SHARPEN_SAMPLER_FNC(POS_UV): defaults to texture2D(tex, POS_UV).rgb
-    SHARPEN_FNC: defaults to sharpenFast
+    - SHARPEN_KERNELSIZE: Defaults 2
+    - SHARPEN_TYPE: defaults to vec3
+    - SHARPEN_SAMPLER_FNC(POS_UV): defaults to texture2D(tex, POS_UV).rgb
+    - SHARPEN_FNC: defaults to sharpenFast
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 license: |
     Copyright (c) 2021 Patricio Gonzalez Vivo
     Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
@@ -15,12 +16,20 @@ license: |
 
 */
 
+#ifndef SAMPLER_FNC
+#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
+#endif
+
+#ifndef RADIALBLUR_SAMPLER_FNC
+#define RADIALBLUR_SAMPLER_FNC(POS_UV) SAMPLER_FNC(tex, POS_UV)
+#endif
+
 #ifndef SHARPEN_TYPE
 #define SHARPEN_TYPE vec3
 #endif
 
 #ifndef SHARPEN_SAMPLER_FNC
-#define SHARPEN_SAMPLER_FNC(POS_UV) texture2D(tex, POS_UV).rgb
+#define SHARPEN_SAMPLER_FNC(POS_UV) SAMPLER_FNC(tex, POS_UV).rgb
 #endif
 
 #ifndef SHARPEN_FNC

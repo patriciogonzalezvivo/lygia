@@ -5,16 +5,20 @@ description: |
     by Morgan McGuire in ShaderX6 https://casual-effects.com/research/McGuire2008Median/index.html
 use: median2D_fast3(<sampler2D> texture, <vec2> st, <vec2> pixel)
 options:
-    MEDIAN2D_FAST3_TYPE: default vec4
-    MEDIAN2D_FAST3_SAMPLER_FNC(POS_UV): default texture2D(tex, POS_UV)
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
+    - MEDIAN2D_FAST3_TYPE: default vec4
+    - MEDIAN2D_FAST3_SAMPLER_FNC(POS_UV): default texture2D(tex, POS_UV)
 license:
     Copyright (c) Morgan McGuire and Williams College, 2006. All rights reserved.
     Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
     Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
     Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
 */
+
+#ifndef SAMPLER_FNC
+#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
+#endif
 
 #ifndef MEDIAN2D_FAST3_TYPE
 #ifdef MEDIAN2D_TYPE
@@ -28,7 +32,7 @@ license:
 #ifdef MEDIAN_SAMPLER_FNC
 #define MEDIAN2D_FAST3_SAMPLER_FNC(POS_UV) MEDIAN_SAMPLER_FNC(POS_UV)
 #else
-#define MEDIAN2D_FAST3_SAMPLER_FNC(POS_UV) texture2D(tex, POS_UV)
+#define MEDIAN2D_FAST3_SAMPLER_FNC(POS_UV) SAMPLER_FNC(tex, POS_UV)
 #endif
 #endif
 

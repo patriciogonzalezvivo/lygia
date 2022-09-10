@@ -6,7 +6,7 @@ author: Patricio Gonzalez Vivo
 description: sampler the view Positiong from depthmap texture 
 use: <vec4> textureViewPosition(<sampler2D> texDepth, <vec2> st [, <float> near, <float> far])
 options:
-    - SAMPLE_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - CAMERA_NEAR_CLIP: required
     - CAMERA_FAR_CLIP: required
     - CAMERA_ORTHOGRAPHIC_PROJECTION, if it's not present is consider a PERECPECTIVE camera
@@ -20,15 +20,15 @@ license: |
     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef SAMPLE_FNC
-#define SAMPLE_FNC(TEX, UV) texture2D(TEX, UV)
+#ifndef SAMPLER_FNC
+#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
 #endif
 
 #ifndef FNC_VIEWPOSITION
 #define FNC_VIEWPOSITION
 
 vec4 textureViewPosition(sampler2D texDepth, const in vec2 st, const in float near, const in float far) {
-    float depth = SAMPLE_FNC(texDepth, st).r;
+    float depth = SAMPLER_FNC(texDepth, st).r;
     float viewZ = depth2viewZ(depth, near, far);
     return screen2viewPosition(st, depth, viewZ);
 }

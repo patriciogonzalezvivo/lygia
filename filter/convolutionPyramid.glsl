@@ -1,3 +1,16 @@
+// POISSON FILL (DEFAULT)
+// #define CONVOLUTIONPYRAMID_H1 1.0334, 0.6836, 0.1507
+// #define CONVOLUTIONPYRAMID_H2 0.0270
+// #define CONVOLUTIONPYRAMID_G 0.7753, 0.0312
+
+// LAPLACIAN INTEGRATOR
+// #define CONVOLUTIONPYRAMID_H1 0.7, 0.5, 0.15
+// #define CONVOLUTIONPYRAMID_H2 1.0
+// #define CONVOLUTIONPYRAMID_G  0.547, 0.175
+
+#include "convolutionPyramid/downscale.glsl"
+#include "convolutionPyramid/upscale.glsl"
+
 /*
 author: Patricio Gonzalez Vivo
 description: down and up scaling functions for convolution pyramid  https://www.cs.huji.ac.il/labs/cglab/projects/convpyr/data/convpyr-small.pdf
@@ -13,19 +26,6 @@ license: |
     The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
-
-// POISSON FILL (DEFAULT)
-// #define CONVOLUTIONPYRAMID_H1 1.0334, 0.6836, 0.1507
-// #define CONVOLUTIONPYRAMID_H2 0.0270
-// #define CONVOLUTIONPYRAMID_G 0.7753, 0.0312
-
-// LAPLACIAN INTEGRATOR
-// #define CONVOLUTIONPYRAMID_H1 0.7, 0.5, 0.15
-// #define CONVOLUTIONPYRAMID_H2 1.0
-// #define CONVOLUTIONPYRAMID_G  0.547, 0.175
-
-#include "convolutionPyramid/downscale.glsl"
-#include "convolutionPyramid/upscale.glsl"
 
 #ifndef FNC_CONVOLUTIONPYRAMID
 #define FNC_CONVOLUTIONPYRAMID
