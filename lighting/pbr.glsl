@@ -1,8 +1,9 @@
 #include "../math/saturate.glsl"
-#include "../sample/textureShadowPCF.glsl"
+#include "../sample/shadowPCF.glsl"
 
 #include "material.glsl"
 #include "light/point.glsl"
+#include "shadow.glsl"
 
 #include "common/reflection.glsl"
 #include "common/specularAO.glsl"

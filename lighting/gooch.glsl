@@ -7,7 +7,7 @@
 
 #include "material.glsl"
 
-#include "../sample/textureShadowPCF.glsl"
+#include "../sample/shadowPCF.glsl"
 
 /*
 author: Patricio Gonzalez Vivo
@@ -80,7 +80,7 @@ vec4 gooch(vec4 baseColor, vec3 normal, vec3 light, vec3 view, float roughness) 
 
 #if defined(LIGHT_SHADOWMAP) && defined(LIGHT_SHADOWMAP_SIZE) && defined(LIGHT_COORD)
     float bias = 0.005;
-    float shadow = textureShadowPCF(u_lightShadowMap, vec2(LIGHT_SHADOWMAP_SIZE), (LIGHT_COORD).xy, (LIGHT_COORD).z - bias);
+    float shadow = sampleShadowPCF(u_lightShadowMap, vec2(LIGHT_SHADOWMAP_SIZE), (LIGHT_COORD).xy, (LIGHT_COORD).z - bias);
     specular *= shadow;
     diffuse *= shadow;
 #endif
