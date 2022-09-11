@@ -22,17 +22,12 @@ options:
     - LIGHT_COLOR in GlslViewer is u_lightColor
     - CAMERA_POSITION: in GlslViewer is u_camera
     - SURFACE_POSITION: in glslViewer is v_position
-    - SURFACE_POSITION: in glslViewer is v_position
 license: |
     Copyright (c) 2021 Patricio Gonzalez Vivo.
     Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
     The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.    
 */
-
-#ifndef SURFACE_POSITION
-#define SURFACE_POSITION v_position
-#endif
 
 #ifndef CAMERA_POSITION
 #if defined(GLSLVIEWER)
@@ -71,14 +66,13 @@ license: |
 
 vec4 pbr(const Material _mat) {
     // Calculate Color
-
     vec3    diffuseColor = _mat.baseColor.rgb * (vec3(1.0) - _mat.f0) * (1.0 - _mat.metallic);
     vec3    specularColor = mix(_mat.f0, _mat.baseColor.rgb, _mat.metallic);
 
-    vec3    N = _mat.normal;                             // Normal
-    vec3    V = normalize(u_camera - v_position.xyz);   // View
-    float NoV = dot(N, V);                            // Normal . View
-    float f0  = max(_mat.f0.r, max(_mat.f0.g, _mat.f0.b));
+    vec3    N       = _mat.normal;                             // Normal
+    vec3    V       = normalize(CAMERA_POSITION - _mat.position);   // View
+    float NoV       = dot(N, V);                            // Normal . View
+    float f0        = max(_mat.f0.r, max(_mat.f0.g, _mat.f0.b));
     float roughness = _mat.roughness;
     
     // Reflect
@@ -131,12 +125,12 @@ vec4 pbr(const Material _mat) {
     
     // Final Sum
     // ------------------------
-    vec4 color = vec4(0.0);
-    color.rgb += Fd * IBL_LUMINANCE + lightDiffuse;     // Diffuse
-    color.rgb += Fr * IBL_LUMINANCE + lightSpecular;    // Specular
-    color.rgb *= _mat.ambientOcclusion;
-    color.rgb += _mat.emissive;
-    color.a = _mat.baseColor.a;
+    vec4 color  = vec4(0.0);
+    color.rgb  += Fd * IBL_LUMINANCE + lightDiffuse;     // Diffuse
+    color.rgb  += Fr * IBL_LUMINANCE + lightSpecular;    // Specular
+    color.rgb  *= _mat.ambientOcclusion;
+    color.rgb  += _mat.emissive;
+    color.a     = _mat.baseColor.a;
 
     return color;
 }
