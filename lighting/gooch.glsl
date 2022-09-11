@@ -89,7 +89,7 @@ vec4 gooch(vec4 baseColor, vec3 normal, vec3 light, vec3 view, float roughness) 
 }
 
 vec4 gooch(Material material) {
-    return gooch(material.baseColor, material.normal, LIGHT_POSITION, (CAMERA_POSITION - SURFACE_POSITION.xyz), material.roughness);
+    return gooch(material.baseColor, material.normal, LIGHT_POSITION, (CAMERA_POSITION - material.position), material.roughness);
 }
 
 #endif
