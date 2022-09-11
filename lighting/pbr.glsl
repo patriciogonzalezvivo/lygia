@@ -21,7 +21,6 @@ options:
     - LIGHT_POSITION: in GlslViewer is u_light
     - LIGHT_COLOR in GlslViewer is u_lightColor
     - CAMERA_POSITION: in GlslViewer is u_camera
-    - SURFACE_POSITION: in glslViewer is v_position
 license: |
     Copyright (c) 2021 Patricio Gonzalez Vivo.
     Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
@@ -69,14 +68,12 @@ vec4 pbr(const Material _mat) {
     vec3    diffuseColor = _mat.baseColor.rgb * (vec3(1.0) - _mat.f0) * (1.0 - _mat.metallic);
     vec3    specularColor = mix(_mat.f0, _mat.baseColor.rgb, _mat.metallic);
 
-    vec3    N       = _mat.normal;                             // Normal
+    vec3    N       = _mat.normal;                                  // Normal
     vec3    V       = normalize(CAMERA_POSITION - _mat.position);   // View
-    float NoV       = dot(N, V);                            // Normal . View
-    float f0        = max(_mat.f0.r, max(_mat.f0.g, _mat.f0.b));
+    float   NoV     = dot(N, V);                                    // Normal . View
+    float   f0      = max(_mat.f0.r, max(_mat.f0.g, _mat.f0.b));
     float roughness = _mat.roughness;
-    
-    // Reflect
-    vec3    R = reflection(V, N, roughness);
+    vec3    R       = reflection(V, N, roughness);
 
     // Ambient Occlusion
     // ------------------------
@@ -115,12 +112,12 @@ vec4 pbr(const Material _mat) {
         // calcPointLight(_comp, lightDiffuse, lightSpecular);
         // calcDirectionalLight(_comp, lightDiffuse, lightSpecular);
 
-        float shadow = 1.0;
-    #if defined(LIGHT_SHADOWMAP) && defined(LIGHT_SHADOWMAP_SIZE) && defined(LIGHT_COORD) && !defined(PLATFORM_RPI)
-        shadow = shadow(LIGHT_SHADOWMAP, vec2(LIGHT_SHADOWMAP_SIZE), (LIGHT_COORD).xy, (LIGHT_COORD).z);
-    #endif
+        // float shadow = 1.0;
+    // #if defined(LIGHT_SHADOWMAP) && defined(LIGHT_SHADOWMAP_SIZE) && defined(LIGHT_COORD) && !defined(PLATFORM_RPI)
+    //     shadow = shadow(LIGHT_SHADOWMAP, vec2(LIGHT_SHADOWMAP_SIZE), (LIGHT_COORD).xy, (LIGHT_COORD).z);
+    // #endif
 
-        lightPoint(diffuseColor, specularColor, N, V, NoV, roughness, f0, shadow, lightDiffuse, lightSpecular);
+        lightPoint(diffuseColor, specularColor, N, V, NoV, roughness, f0, _mat.shadow, lightDiffuse, lightSpecular);
     }
     
     // Final Sum
