@@ -11,7 +11,6 @@ options:
     - SAMPLEDOF_RAD_SCALE:
     - SAMPLEDOF_DEPTH_FNC(UV):
     - SAMPLEDOF_COLOR_FNC(UV):
-    
 */
 
 #ifndef SAMPLER_FNC
