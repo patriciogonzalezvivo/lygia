@@ -1,6 +1,8 @@
 #include "../math/const.glsl"
 
+#ifndef RANDOM_SCALE3
 #define RANDOM_SCALE3 vec3(443.897, 441.423, .0973)
+#endif
 #include "../generative/random.glsl"
 
 /*
@@ -67,7 +69,7 @@ NOISEBLUR_TYPE noiseBlur(in sampler2D tex, in vec2 st, in vec2 pixel, float radi
     return result;
 }
 
-NOISEBLUR_TYPE softBlur(sampler2D tex, vec2 st, vec2 pixel) {
+NOISEBLUR_TYPE noiseBlur(sampler2D tex, vec2 st, vec2 pixel) {
     NOISEBLUR_TYPE rta = NOISEBLUR_TYPE(0.0);
     float total = 0.0;
     float offset = random(vec3(12.9898 + st.x, 78.233 + st.y, 151.7182));

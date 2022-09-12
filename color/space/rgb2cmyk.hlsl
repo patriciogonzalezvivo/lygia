@@ -1,4 +1,4 @@
-#include "../../math/min.hlsl"
+#include "../../math/mmin.hlsl"
 
 /*
 author: Patricio Gonzalez Vivo
@@ -14,7 +14,7 @@ license: |
 #ifndef FNC_RGB2CMYK
 #define FNC_RGB2CMYK
 float4 rgb2cmyk(float3 rgb) {
-    float k = min(1.0 - rgb);
+    float k = mmin(1.0 - rgb);
     float invK = 1.0 - k;
     float3 cmy = (1.0 - rgb - k) / invK;
     cmy *= step(0.0, invK);
