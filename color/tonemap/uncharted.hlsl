@@ -1,5 +1,5 @@
 /*
-Author: [
+original_author:
 description: 
 use: <float3|float4> tonemapUncharted(<float3|float4> x)
 */

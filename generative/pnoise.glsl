@@ -4,7 +4,7 @@
 #include "../math/fade.glsl"
 
 /*
-author: [Ian McEwan, Ashima Arts]
+original_author: [Ian McEwan, Ashima Arts]
 description: Classic Perlin Noise with periodic variant https://github.com/ashima/webgl-noise
 use: pnoise(<vec2|vec3|vec4> pos, <vec2|vec3|vec4> periodic)
 license: |

@@ -1,7 +1,7 @@
 #include "mod289.glsl"
 
 /*
-author: [Ian McEwan, Ashima Arts]
+original_author: [Ian McEwan, Ashima Arts]
 description: permute
 use: permute(<float|vec2|vec3|vec4> x)
 license : |

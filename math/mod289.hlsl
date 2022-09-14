@@ -1,11 +1,8 @@
 /*
-author: [Ian McEwan, Ashima Arts]
+original_author: [Ian McEwan, Ashima Arts]
 description: modulus of 289
 use: mod289(<float|float2|float3|float4> x)
-license: |
-  Copyright (C) 2011 Ashima Arts. All rights reserved.
-  Distributed under the MIT License. See LICENSE file.
-  https://github.com/ashima/webgl-noise
+
 */
 #ifndef FNC_MOD289
 #define FNC_MOD289

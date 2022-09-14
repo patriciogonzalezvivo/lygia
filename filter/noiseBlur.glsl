@@ -6,7 +6,7 @@
 #include "../generative/random.glsl"
 
 /*
-author: Alan Wolfe
+original_author: Alan Wolfe
 description:  white noise blur based on this shader https://www.shadertoy.com/view/XsVBDR
 use: noiseBlur(<sampler2D> texture, <vec2> st, <vec2> pixel, <float> radius)
 options:
@@ -16,8 +16,6 @@ options:
     - NOISEBLUR_SAMPLER_FNC(UV): defualts to texture2D(tex, UV).rgb
     - NOISEBLUR_SAMPLES: default to 4
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
-licence: |
-    TODO
 */
 
 #ifndef SAMPLER_FNC

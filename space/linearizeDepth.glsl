@@ -1,5 +1,5 @@
 /*
-author: Patricio Gonzalez Vivo
+original_author: Patricio Gonzalez Vivo
 description: linearize depth
 use: linearizeDepth(<float> depth, <float> near, <float> far)
 options:

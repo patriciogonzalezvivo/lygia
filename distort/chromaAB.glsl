@@ -1,7 +1,7 @@
 #include "../math/lengthSq.glsl"
 
 /*
-author: Patricio Gonzalez Vivo, Johan Ismael
+original_author: Patricio Gonzalez Vivo, Johan Ismael
 description: Chroma Aberration inspired by https://www.shadertoy.com/view/4sX3z4
 use: chromaAB(<sampler2D> texture, <vec2> st [, <float|vec2> sdf|offset, <float> pct])
 options:
@@ -9,11 +9,6 @@ options:
     CHROMAAB_PCT: amount of aberration, defaults to 1.5
     CHROMAAB_SAMPLER_FNC: function used to sample the input texture, defaults to texture2D(tex, POS_UV)
     CHROMAAB_CENTER_BUFFER: scalar to attenuate the sdf passed in   
-license: |
-    Copyright (c) 2021 Patricio Gonzalez Vivo and Johan Ismael
-    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-    The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.    
 */
 
 #ifndef SAMPLER_FNC

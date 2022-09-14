@@ -1,5 +1,5 @@
 /*
-author: Patricio Gonzalez Vivo
+original_author: Patricio Gonzalez Vivo
 description: return the spherical harmonic value facing a normal direction
 use: sphericalHarmonics( <vec3> normal)
 options:

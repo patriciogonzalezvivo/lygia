@@ -1,5 +1,5 @@
 /*
-author: Brad Larson
+original_author: Brad Larson
 description: adapted version of mean average sampling on four coorners of a sampled point from https://github.com/BradLarson/GPUImage2
 use: mean(<sampler2D> texture, <vec2> st, <vec2> pixel)
 options:

@@ -2,15 +2,13 @@
 #include "../color/space/gamma2linear.glsl"
 
 /*
-author: Xor 
+original_author: Xor 
 description: Fibonacci Bokeh ( https://www.shadertoy.com/view/fljyWd )
 use: <vec4> fibonacciBokeh(<sampler2D> tex, <vec2> st, <vec2> pixel, <float> amount) 
 options:
     - FIBONACCIBOKEH_TYPE:
     - FIBONACCIBOKEH_SAMPLER_FNC(UV):
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
-    
-license: NONE
 */
 
 #ifndef SAMPLER_FNC

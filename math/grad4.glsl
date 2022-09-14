@@ -1,12 +1,9 @@
 /*
-author: [Ian McEwan, Ashima Arts]
+original_author: [Ian McEwan, Ashima Arts]
 description: grad4, used for snoise(vec4 v)
 use: grad4(<float> j, <vec4> ip)
-license: |
-  Copyright (C) 2011 Ashima Arts. All rights reserved.
-  Distributed under the MIT License. See LICENSE file.
-  https://github.com/ashima/webgl-noise
 */
+
 #ifndef FNC_GRAD4
 #define FNC_GRAD4
 vec4 grad4(float j, vec4 ip) {

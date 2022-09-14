@@ -4,7 +4,7 @@
 #include "../math/fade.glsl"
 
 /*
-author: [Ian McEwan, Ashima Arts]
+original_author: [Ian McEwan, Ashima Arts]
 description: Classic Perlin Noise https://github.com/ashima/webgl-noise
 use: cnoise(<vec2|vec3|vec4> pos)
 license: |

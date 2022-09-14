@@ -2,7 +2,7 @@
 #include "../../math/mmax.glsl"
 
 /*
-author: bacondither
+original_author: bacondither
 description: adaptive sharpening. For strenght values between 0.3 <-> 2.0 are a reasonable range 
 use: sharpen(<sampler2D> texture, <vec2> st, <vec2> renderSize [, float streanght])
 options:

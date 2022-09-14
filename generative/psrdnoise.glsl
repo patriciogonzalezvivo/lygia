@@ -4,7 +4,7 @@
 #include "../math/grad4.glsl"
 
 /*
-author: [Stefan Gustavson, Ian McEwan, Ashima Arts]
+original_author: [Stefan Gustavson, Ian McEwan, Ashima Arts]
 description:  |
     Tiling simplex flow noise in 2-D and 3-D https://github.com/stegu/psrdnoise
     "vec2/3 x" is the point to evaluate,
@@ -18,11 +18,6 @@ use: <float> psrdnoise(<vec2|vec3> x, <vec2|vec3> period, <float> alpha, out <ve
 Options:
     - PSRDNOISE_PERLIN_GRID
     - PSRDNOISE_FAST_ROTATION
-license: |
-    Copyright 2021, Stefan Gustavson and Ian MacEwan (stefan.gustavson@gmail.com, ijm567@gmail.com)
-    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-    The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
 #ifndef FNC_PSRFNOISE

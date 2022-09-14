@@ -79,10 +79,8 @@ void main(void) {
 # Acknowledgements
 
 This library has been built over years, and most often than not on top of the work of brillant generous people like: [Inigo Quiles](https://www.iquilezles.org/), [Morgan McGuire](https://casual-effects.com/), [Hugh Kennedy](https://github.com/hughsk), [Matt DesLauriers](https://www.mattdesl.com/).
-I have tried to give according credits and correct license to each one of the function. Most of them are under MIT but if you are using LYGIA for commercial use, please double check all the functions comply to the terms. Also consider supporting their author through the channels they provide.
-It's not perfect but it could be with your help!
 
-Keeping LYGIA in growing healthy require works and dedication, I really appreciate your support improving it. That could be adding new functions, testing it, fixing bugs, translating the GLSL files to HLSL and Metal or just [sponsoring me through GitHub](https://github.com/sponsors/patriciogonzalezvivo).
+Keeping LYGIA in growing healthy require works and dedication, I really appreciate your support improving it. That could be adding new functions, testing it, fixing bugs, translating the GLSL files to HLSL and Metal or just [sponsoring through GitHub](https://github.com/sponsors/patriciogonzalezvivo).
 
 
 # Design Principles
@@ -116,22 +114,6 @@ math/mix.glsl
 math/mix.hlsl
 ```
 
-* Have embedded description, use, authorship and license in YAML style so eventually could be parsed easily. If you add new functions please use this template:
-
-```glsl
-/*
-author: <FULL NAME>
-description: [DESCRIPTION + URL]
-use: myFunc(<float> input)
-options: none
-license: |
-  This software is released under the MIT license:
-  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.    
-*/
-```
-
 * Check for name collisions using the following pattern where `FNC_` is followed with the function name:
 
 ```glsl
@@ -145,31 +127,16 @@ float myFunc(float in) {
 #endif
 ```
 
-* If the function have dependencies to other files, add them on the first lines of the file, before the authorship/description/license header and outside the `#ifndef` flag check. So once pre-compiled things are use/description/license are cristal clear and nicelly separated.
-
-```glsl
-#include "../this/other/function.glsl"
-
-/*
-author: <FULL NAME>
-...
-
-#ifndef FNC_MYFUNC
-#define FNC_MYFUNC
-...
-```
-
 * Have some templeting capabilities also through `#defines` probably the most frequent one is templating the sampling function for reusability. The `#define` options start with the name of the function, in this example `MYFUNC_`. They are added as `options:` in the header.
  
 ```glsl
 /*
-author: <FULL NAME>
+original_author: <FULL NAME>
 description: [DESCRIPTION + URL]
 use: myFunc(<sampler2D> texture, <vec2> st)
 options: |
    MYFUNC_TYPE: return type
    MYFUNC_SAMPLER_FNC: function use to texture sample 
-license: ...
 */
 
 #ifndef FNC_MYFUNC
@@ -194,10 +161,9 @@ MYFUNC_TYPE myFunc(sampler2D tex, vec2 st) {
 
 ```glsl
 /*
-author: <FULL NAME>
+original_author: <FULL NAME>
 description: [DESCRIPTION + URL]
 use: myFunc(<vec2> st, <vec2|float> x[, <float> y])
-license: ...
 */
 
 #ifndef FNC_MYFUNC

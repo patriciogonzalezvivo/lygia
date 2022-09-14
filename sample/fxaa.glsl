@@ -1,5 +1,6 @@
+
 /*
-author: Armin Ronacher
+original_author: Armin Ronacher
 description: Basic FXAA implementation based on the code on geeks3d.com with the modification that the texture2DLod stuff was removed since it's unsupported by WebGL from https://github.com/mitsuhiko/webgl-meincraft
 use: sampleFXAA(<sampler2D> tex, <vec2> st, <vec2> pixel)
 options:

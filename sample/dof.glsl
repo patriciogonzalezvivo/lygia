@@ -1,7 +1,7 @@
 #include "../color/palette/heatmap.glsl"
 
 /*
-author: Dennis Gustafsson
+original_author: Dennis Gustafsson
 description:  http://blog.tuxedolabs.com/2018/05/04/bokeh-depth-of-field-in-single-pass.html
 use: sampleDoF(<sampler2D> texture, <sampler2D> depth, <vec2> st, <float> focusPoint, <float> focusScale)
 options:

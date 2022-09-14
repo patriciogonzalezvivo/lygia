@@ -2,7 +2,7 @@
 #include "../math/saturate.glsl"
 
 /*
-author: Morgan McGuire, @morgan3d, http://casual-effects.com
+original_author: Morgan McGuire, @morgan3d, http://casual-effects.com
 description: Draw arrows for vector fields from https://www.shadertoy.com/view/4s23DG
 use: <float> arrows(<vec2> position, <vec2> velocity [, <vec2> resolution] )
 options:
@@ -11,9 +11,6 @@ options:
     - ARROWS_HEAD_ANGLE
     - ARROWS_HEAD_LENGTH
     - ARROWS_SHAFT_THICKNESS
-
-license: unkown
-
 */
 
 // #ifndef ARROWS_LINE_STYLE

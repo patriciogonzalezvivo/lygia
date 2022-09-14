@@ -1,5 +1,5 @@
 /*
-author: [Ian McEwan, Ashima Arts]
+original_author: [Ian McEwan, Ashima Arts]
 description: fade
 use: fade(<vec2|vec3|vec4> t)
 license: |

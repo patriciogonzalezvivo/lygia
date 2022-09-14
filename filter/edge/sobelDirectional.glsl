@@ -1,5 +1,5 @@
 /*
-author: Brad Larson
+original_author: Brad Larson
 description: Adapted version of directional Sobel edge detection from https://github.com/BradLarson/GPUImage2
 use: edgeSobel_directional(<sampler2D> texture, <vec2> st, <vec2> pixels_scale)
 options:
