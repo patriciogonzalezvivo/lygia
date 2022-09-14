@@ -47,15 +47,16 @@ The functions are divided in different categories:
 
 * `math/`: general math functions and constants. 
 * `space/`: general spatial operations like `scale()`, `rotate()`, etc.
-* `color/`: general color operations like `luma()`, `saturation()`, etc.
-    * `blend/`: typical blend photoshop operations
-    * `space/`: color space conversions 
-* `animation/`: animation operations
-    * `easing/`: easing functions
+* `color/`: general color operations like `luma()`, `saturation()`, blend modes, palettes, color space conversion and tonemaps.
+* `animation/`: animation operations, like easing
 * `generative/`: generative functions like `random()`, `noise()`, etc. 
 * `sdf/`: signed distance field generation functions. Most of them ported from [PixelSpiritDeck](https://patriciogonzalezvivo.github.io/PixelSpiritDeck/)
 * `draw/`: functions that draw shapes, numbers, lines, etc. Most of them ported from [PixelSpiritDeck](https://patriciogonzalezvivo.github.io/PixelSpiritDeck/)
+* `sample/`: sample operations
 * `filters/`: typical filter operations like different kind of blurs, mean and median filters.
+* `distort/`: distort sampling operations
+* `simulate/`: simulate sampling operations
+* `lighting/`: different foward/deferred/raymarching lighting models and functions
 
 ## Flexible how?
 
