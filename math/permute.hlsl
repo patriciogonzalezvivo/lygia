@@ -1,13 +1,9 @@
 #include "mod289.hlsl"
 
 /*
-author: [Ian McEwan, Ashima Arts]
+original_author: [Ian McEwan, Ashima Arts]
 description: permute
 use: permute(<float|float2|float3|float4> x)
-license : |
-  Copyright (C) 2011 Ashima Arts. All rights reserved.
-  Distributed under the MIT License. See LICENSE file.
-  https://github.com/ashima/webgl-noise
 */
 
 #ifndef FNC_PERMUTE

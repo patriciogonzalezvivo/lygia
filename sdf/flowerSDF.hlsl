@@ -1,11 +1,7 @@
 /*
-author: Patricio Gonzalez Vivo
+original_author: Patricio Gonzalez Vivo
 description: Returns a flower shaped SDF
 use: flowerSDF(<float2> st, <int> n_sides)
-license: |
-    Copyright (c) 2017 Patricio Gonzalez Vivo. All rights reserved.
-    Distributed under BSD 3-clause "New" or "Revised" License. See LICENSE file at
-    https://github.com/patriciogonzalezvivo/PixelSpiritDeck
 */
 
 #ifndef FNC_FLOWERSDF

@@ -1,13 +1,9 @@
 #include "../math/const.glsl"
 
 /*
-author: Patricio Gonzalez Vivo
+original_author: Patricio Gonzalez Vivo
 description: Returns a sdf for a regular polygon with V sides.
 use: polySDF(<vec2> st, int V)
-license: |
-  Copyright (c) 2017 Patricio Gonzalez Vivo. All rights reserved.
-  Distributed under BSD 3-clause "New" or "Revised" License. See LICENSE file at
-  https://github.com/patriciogonzalezvivo/PixelSpiritDeck
 */
 
 #ifndef FNC_POLYSDF

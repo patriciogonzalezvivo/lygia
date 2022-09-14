@@ -4,7 +4,7 @@
 #include "../math/grad4.hlsl"
 
 /*
-author: [Ian McEwan, Ashima Arts]
+original_author: [Ian McEwan, Ashima Arts]
 description: Simplex Noise https://github.com/ashima/webgl-noise
 use: snoise(<float2|float3|float4> pos)
 license: |

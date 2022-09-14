@@ -1,5 +1,5 @@
 /*
-author: Patricio Gonzalez Vivo, Johan Ismael
+original_author: [Patricio Gonzalez Vivo, Johan Ismael]
 description: Samples multiple times a texture in the specified direction
 use: stretch(<sampler2D> tex, <vec2> st, <vec2> direction [, int samples])
 options:
@@ -8,12 +8,8 @@ options:
     - STRETCH_TYPE: return type, defauls to vec4
     - STRETCH_SAMPLER_FNC(POS_UV): function used to sample the input texture, defaults to texture2D(tex, POS_UV)
     - STRETCH_WEIGHT: shaping equation to multiply the sample weight.
-license: |
-    Copyright (c) 2021 Patricio Gonzalez Vivo and Johan Ismael
-    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-    The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-    THE SOF
 */
+
 #ifndef SAMPLER_FNC
 #define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
 #endif

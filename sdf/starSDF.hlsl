@@ -1,13 +1,9 @@
 #include "../math/const.hlsl"
 
 /*
-author: Patricio Gonzalez Vivo
+original_author: Patricio Gonzalez Vivo
 description: Returns a star-shaped sdf with V branches
 use: starSDF(<float2> st, <int> V, <float> scale)
-license: |
-  Copyright (c) 2017 Patricio Gonzalez Vivo. All rights reserved.
-  Distributed under BSD 3-clause "New" or "Revised" License. See LICENSE file at
-  https://github.com/patriciogonzalezvivo/PixelSpiritDeck
 */
 
 #ifndef FNC_STARSDF

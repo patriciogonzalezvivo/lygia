@@ -1,13 +1,9 @@
 #include "stroke.glsl"
 
 /*
-author: Patricio Gonzalez Vivo
+original_author: Patricio Gonzalez Vivo
 description: create a bridge on a given in_value and draw a stroke inside that gap
 use: bridge(<float|vec2|vec3|vec4> in_value, <float> sdf, <float> size, <float> width)
-license: |
-  Copyright (c) 2017 Patricio Gonzalez Vivo. All rights reserved.
-  Distributed under BSD 3-clause "New" or "Revised" License. See LICENSE file at
-  https://github.com/patriciogonzalezvivo/PixelSpiritDeck
 */
 
 #ifndef FNC_BRIDGE

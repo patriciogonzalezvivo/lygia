@@ -1,5 +1,5 @@
 /*
-author: Secret Weapons (@scrtwpns)
+original_author: Secret Weapons (@scrtwpns)
 description: mix using mixbox pigment algorithm https://github.com/scrtwpns/pigment-mixing and converted to GLSL by Patricio Gonzalez Vivo
 use: <float3\float4> mixBox(<float3|float4> rgbA, <float3|float4> rgbB, float pct)
 options:

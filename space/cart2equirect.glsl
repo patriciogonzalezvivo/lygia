@@ -1,7 +1,7 @@
 #include "../math/const.glsl"
 
 /*
-author: Patricio Gonzalez Vivo
+original_author: Patricio Gonzalez Vivo
 description: UV to equirect 3D projected vector 
 use: <vec3> cart2equirect(<vec2> uv)
 license: |

@@ -1,5 +1,5 @@
 /*
-author: Brad Larson
+original_author: Brad Larson
 description: vibrance from https://github.com/BradLarson/GPUImage/blob/master/framework/Source/GPUImageVibranceFilter.m Vibrance is a smart-tool which cleverly increases the intensity of the more muted colors and leaves the already well-saturated colors alone. Prevents skin tones from becoming overly saturated and unnatural. 
 use: <float3|float4> vibrance(<float3|float4> color, <float> v) 
 license: |

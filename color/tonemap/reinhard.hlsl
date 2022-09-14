@@ -1,7 +1,7 @@
 #include "../luminance.hlsl"
 
 /*
-Author: [Erik Reinhard, Michael Stark, Peter Shirley, James Ferwerda]
+original_author: [Erik Reinhard, Michael Stark, Peter Shirley, James Ferwerda]
 description: Photographic Tone Reproduction for Digital Images. http://www.cmap.polytechnique.fr/~peyre/cours/x2005signal/hdr_photographic.pdf
 use: <float3|float4> tonemapReinhard(<float3|float4> x)
 */

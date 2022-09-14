@@ -1,5 +1,5 @@
 /*
-author: Patricio Gonzalez Vivo
+original_author: Patricio Gonzalez Vivo
 description: sampler shadowMap 
 use: 
     - sampleShadow(<sampler2D> shadowMap, <vec4|vec3> _coord)

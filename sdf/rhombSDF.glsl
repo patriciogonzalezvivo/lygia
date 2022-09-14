@@ -3,11 +3,7 @@
 /*
 description: Returns a rhomb-shaped sdf
 use: rhombSDF(<vec2> st)
-author: Patricio Gonzalez Vivo
-license: |
-    Copyright (c) 2017 Patricio Gonzalez Vivo. All rights reserved.
-    Distributed under BSD 3-clause "New" or "Revised" License. See LICENSE file at
-    https://github.com/patriciogonzalezvivo/PixelSpiritDeck
+original_author: Patricio Gonzalez Vivo
 */
 
 #ifndef FNC_RHOMBSDF

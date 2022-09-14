@@ -1,5 +1,5 @@
 /*
-author: Patricio Gonzalez Vivo
+original_author: Patricio Gonzalez Vivo
 description: given a Spherical Map texture and a normal direction returns the right pixel
 use: spheremap(<sampler2D> texture, <vec3> normal)
 options:
