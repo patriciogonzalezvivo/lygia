@@ -46,8 +46,7 @@ GAUSSIANBLUR2D_TYPE gaussianBlur2D(in sampler2D tex, in vec2 st, in vec2 offset,
         for (int i = 0; i < GAUSSIANBLUR2D_KERNELSIZE; i++) {
             float x = -.5 * (float(GAUSSIANBLUR2D_KERNELSIZE) - 1.) + float(i);
             float weight = (k / float(GAUSSIANBLUR2D_KERNELSIZE)) * exp(-(x * x + y * y) / (2. * kernelSize2));
-            GAUSSIANBLUR2D_TYPE tex = GAUSSIANBLUR2D_SAMPLER_FNC(st + vec2(x, y) * offset);
-            accumColor += weight * tex;
+            accumColor += weight * GAUSSIANBLUR2D_SAMPLER_FNC(st + vec2(x, y) * offset);
             accumWeight += weight;
         }
     }

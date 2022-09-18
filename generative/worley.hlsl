@@ -1,24 +1,24 @@
-#include "random.glsl"
+#include "random.hlsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
 description: Worley noise
-use: <vec2> worley(<vec2|vec3> pos)
+use: <float2> worley(<float2|float3> pos)
 */
 
 #ifndef FNC_WORLEY
 #define FNC_WORLEY
 
-float worley(vec2 p){
-    vec2 n = floor( p );
-    vec2 f = fract( p );
+float worley(float2 p){
+    float2 n = floor( p );
+    float2 f = frac( p );
 
     float dis = 1.0;
     for( int j= -1; j <= 1; j++ )
         for( int i=-1; i <= 1; i++ ) {	
-                vec2  g = vec2(i,j);
-                vec2  o = random2( n + g );
-                vec2  delta = g + o - f;
+                float2  g = float2(i,j);
+                float2  o = random2( n + g );
+                float2  delta = g + o - f;
                 float d = length(delta);
                 dis = min(dis,d);
     }
@@ -26,17 +26,17 @@ float worley(vec2 p){
     return 1.0-dis;
 }
 
-float worley(vec3 p){
-    vec3 n = floor( p );
-    vec3 f = fract( p );
+float worley(float3 p){
+    float3 n = floor( p );
+    float3 f = frac( p );
 
     float dis = 1.0;
     for( int k = -1; k <= 1; k++ )
         for( int j= -1; j <= 1; j++ )
             for( int i=-1; i <= 1; i++ ) {	
-                vec3  g = vec3(i,j,k);
-                vec3  o = random3( n + g );
-                vec3  delta = g+o-f;
+                float3  g = float3(i,j,k);
+                float3  o = random3( n + g );
+                float3  delta = g+o-f;
                 float d = length(delta);
                 dis = min(dis,d);
     }

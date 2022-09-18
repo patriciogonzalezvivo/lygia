@@ -32,12 +32,6 @@ float2 random2(float p) {
     return frac((p3.xx+p3.yz)*p3.zy);
 }
 
-float2 random2(in float2 st) {
-    const float2 k = float2(.3183099, .3678794);
-    st = st * k + k.yx;
-    return -1. + 2. * frac(16. * k * frac(st.x * st.y * (st.x + st.y)));
-}
-
 float2 random2(float2 p) {
     float3 p3 = frac(p.xyx * RANDOM_SCALE3);
     p3 += dot(p3, p3.yzx + 19.19);
