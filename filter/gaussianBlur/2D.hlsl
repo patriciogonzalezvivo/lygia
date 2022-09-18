@@ -1,0 +1,62 @@
+/*
+original_author: Patricio Gonzalez Vivo
+description: two dimension Gaussian Blur to be applied in only one passes
+use: gaussianBlur2D(<sampler2D> texture, <float2> st, <float2> pixel_direction , const int kernelSize)
+options:
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
+    - GAUSSIANBLUR2D_TYPE: Default `float4`
+    - GAUSSIANBLUR2D_SAMPLER_FNC(POS_UV): Default `texture2D(tex, POS_UV)`
+    - GAUSSIANBLUR2D_KERNELSIZE: Use only for WebGL 1.0 and OpenGL ES 2.0 . For example RaspberryPis is not happy with dynamic loops. Default is 'kernelSize'
+*/
+
+#ifndef SAMPLER_FNC
+#define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
+#endif
+
+#ifndef GAUSSIANBLUR2D_TYPE
+#ifdef GAUSSIANBLUR_TYPE
+#define GAUSSIANBLUR2D_TYPE GAUSSIANBLUR_TYPE
+#else
+#define GAUSSIANBLUR2D_TYPE float4
+#endif
+#endif
+
+#ifndef GAUSSIANBLUR2D_SAMPLER_FNC
+#ifdef GAUSSIANBLUR_SAMPLER_FNC
+#define GAUSSIANBLUR2D_SAMPLER_FNC(POS_UV) GAUSSIANBLUR_SAMPLER_FNC(POS_UV)
+#else
+#define GAUSSIANBLUR2D_SAMPLER_FNC(POS_UV) SAMPLER_FNC(tex, POS_UV)
+#endif
+#endif
+
+#ifndef GAUSSIANBLUR2D_KERNEL_MAXSIZE
+#define GAUSSIANBLUR2D_KERNEL_MAXSIZE 20
+#endif
+
+#ifndef FNC_GAUSSIANBLUR2D
+#define FNC_GAUSSIANBLUR2D
+GAUSSIANBLUR2D_TYPE gaussianBlur2D(in sampler2D tex, in float2 st, in float2 offset, const int kernelSize) {
+    GAUSSIANBLUR2D_TYPE accumColor = GAUSSIANBLUR2D_SAMPLER_FNC(st) * 0.0;
+
+    float accumWeight = 0.;
+    const float k = .15915494; // 1 / (2*PI)
+    float kernelSizef = float(kernelSize);
+    float kernelSize2 = kernelSizef * kernelSizef;
+
+    for (int j = 0; j < GAUSSIANBLUR2D_KERNEL_MAXSIZE; j++) {
+        if (j >= kernelSize)
+            break;
+        float y = -.5 * (kernelSize2 - 1.) + float(j);
+        for (int i = 0; i < GAUSSIANBLUR2D_KERNEL_MAXSIZE; i++) {
+            if (i >= kernelSize)
+                break;
+            float x = -.5 * (kernelSize2 - 1.) + float(i);
+            float weight = (k / kernelSize2) * exp(-(x * x + y * y) / (2. * kernelSize2));
+            
+            accumColor += weight * GAUSSIANBLUR2D_SAMPLER_FNC(st + float2(x, y) * offset);
+            accumWeight += weight;
+        }
+    }
+    return accumColor / accumWeight;
+}
+#endif

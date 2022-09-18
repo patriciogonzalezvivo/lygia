@@ -1,15 +1,15 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: given a texture return a simple box blured pixel
-use: boxBlur(<sampler2D> texture, <vec2> st, <vec2> pixel_offset)
+use: boxBlur(<sampler2D> texture, <float2> st, <float2> pixel_offset)
 options:
     - BOXBLUR_2D: default to 1D
     - BOXBLUR_ITERATIONS: default 3
-    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of HLSL (tex2D(...) or texture(...))
 */
 
 #ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
+#define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
 #endif
 
 #ifndef BOXBLUR_ITERATIONS
@@ -17,20 +17,20 @@ options:
 #endif
 
 #ifndef BOXBLUR_TYPE
-#define BOXBLUR_TYPE vec4
+#define BOXBLUR_TYPE float4
 #endif
 
 #ifndef BOXBLUR_SAMPLER_FNC
 #define BOXBLUR_SAMPLER_FNC(POS_UV) SAMPLER_FNC(tex, POS_UV)
 #endif
 
-#include "boxBlur/1D.glsl"
-#include "boxBlur/2D.glsl"
-#include "boxBlur/2D_fast9.glsl"
+#include "boxBlur/1D.hlsl"
+#include "boxBlur/2D.hlsl"
+#include "boxBlur/2D_fast9.hlsl"
 
 #ifndef FNC_BOXBLUR
 #define FNC_BOXBLUR
-BOXBLUR_TYPE boxBlur13(in sampler2D tex, in vec2 st, in vec2 offset) {
+BOXBLUR_TYPE boxBlur13(in sampler2D tex, in float2 st, in float2 offset) {
 #ifdef BOXBLUR_2D
   return boxBlur2D(tex, st, offset, 7);
 #else
@@ -38,7 +38,7 @@ BOXBLUR_TYPE boxBlur13(in sampler2D tex, in vec2 st, in vec2 offset) {
 #endif
 }
 
-BOXBLUR_TYPE boxBlur9(in sampler2D tex, in vec2 st, in vec2 offset) {
+BOXBLUR_TYPE boxBlur9(in sampler2D tex, in float2 st, in float2 offset) {
 #ifdef BOXBLUR_2D
   return boxBlur2D_fast9(tex, st, offset);
 #else
@@ -46,7 +46,7 @@ BOXBLUR_TYPE boxBlur9(in sampler2D tex, in vec2 st, in vec2 offset) {
 #endif
 }
 
-BOXBLUR_TYPE boxBlur5(in sampler2D tex, in vec2 st, in vec2 offset) {
+BOXBLUR_TYPE boxBlur5(in sampler2D tex, in float2 st, in float2 offset) {
 #ifdef BOXBLUR_2D
   return boxBlur2D(tex, st, offset, 3);
 #else
@@ -54,7 +54,7 @@ BOXBLUR_TYPE boxBlur5(in sampler2D tex, in vec2 st, in vec2 offset) {
 #endif
 }
 
-BOXBLUR_TYPE boxBlur(in sampler2D tex, in vec2 st, vec2 offset, const int kernelSize) {
+BOXBLUR_TYPE boxBlur(in sampler2D tex, in float2 st, float2 offset, const int kernelSize) {
 #ifdef BOXBLUR_2D
   return boxBlur2D(tex, st, offset, kernelSize);
 #else
@@ -62,7 +62,7 @@ BOXBLUR_TYPE boxBlur(in sampler2D tex, in vec2 st, vec2 offset, const int kernel
 #endif
 }
 
-BOXBLUR_TYPE boxBlur(in sampler2D tex, in vec2 st, vec2 offset) {
+BOXBLUR_TYPE boxBlur(in sampler2D tex, in float2 st, float2 offset) {
   #ifdef BOXBLUR_2D
     return boxBlur2D(tex, st, offset, BOXBLUR_ITERATIONS);
   #else

@@ -2,7 +2,7 @@
 original_author: Brad Larson
 description: |
     Adapted version of Sobel edge detection from https://github.com/BradLarson/GPUImage2.
-use: edgeSobel(<sampler2D> texture, <vec2> st, <vec2> pixels_scale)
+use: edgeSobel(<sampler2D> texture, <float2> st, <float2> pixels_scale)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - EDGESOBEL_TYPE: Return type, defaults to float
@@ -10,7 +10,7 @@ options:
 */
 
 #ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
+#define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
 #endif
 
 #ifndef EDGESOBEL_TYPE
@@ -31,16 +31,16 @@ options:
 
 #ifndef FNC_EDGESOBEL
 #define FNC_EDGESOBEL
-EDGESOBEL_TYPE edgeSobel(in sampler2D tex, in vec2 st, in vec2 offset) {
+EDGESOBEL_TYPE edgeSobel(in sampler2D tex, in float2 st, in float2 offset) {
     // get samples around pixel
-    EDGESOBEL_TYPE tleft = EDGESOBEL_SAMPLER_FNC(st + vec2(-offset.x, offset.y));
-    EDGESOBEL_TYPE left = EDGESOBEL_SAMPLER_FNC(st + vec2(-offset.x, 0.));
-    EDGESOBEL_TYPE bleft = EDGESOBEL_SAMPLER_FNC(st + vec2(-offset.x, -offset.y));
-    EDGESOBEL_TYPE top = EDGESOBEL_SAMPLER_FNC(st + vec2(0., offset.y));
-    EDGESOBEL_TYPE bottom = EDGESOBEL_SAMPLER_FNC(st + vec2(0., -offset.y));
+    EDGESOBEL_TYPE tleft = EDGESOBEL_SAMPLER_FNC(st + float2(-offset.x, offset.y));
+    EDGESOBEL_TYPE left = EDGESOBEL_SAMPLER_FNC(st + float2(-offset.x, 0.));
+    EDGESOBEL_TYPE bleft = EDGESOBEL_SAMPLER_FNC(st + float2(-offset.x, -offset.y));
+    EDGESOBEL_TYPE top = EDGESOBEL_SAMPLER_FNC(st + float2(0., offset.y));
+    EDGESOBEL_TYPE bottom = EDGESOBEL_SAMPLER_FNC(st + float2(0., -offset.y));
     EDGESOBEL_TYPE tright = EDGESOBEL_SAMPLER_FNC(st + offset);
-    EDGESOBEL_TYPE right = EDGESOBEL_SAMPLER_FNC(st + vec2(offset.x, 0.));
-    EDGESOBEL_TYPE bright = EDGESOBEL_SAMPLER_FNC(st + vec2(offset.x, -offset.y));
+    EDGESOBEL_TYPE right = EDGESOBEL_SAMPLER_FNC(st + float2(offset.x, 0.));
+    EDGESOBEL_TYPE bright = EDGESOBEL_SAMPLER_FNC(st + float2(offset.x, -offset.y));
     EDGESOBEL_TYPE x = tleft + 2. * left + bleft - tright - 2. * right - bright;
     EDGESOBEL_TYPE y = -tleft - 2. * top - tright + bleft + 2. * bottom + bright;
     return sqrt((x * x) + (y * y));
