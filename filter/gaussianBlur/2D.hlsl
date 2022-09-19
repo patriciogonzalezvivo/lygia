@@ -30,13 +30,13 @@ options:
 #endif
 
 #ifndef GAUSSIANBLUR2D_KERNEL_MAXSIZE
-#define GAUSSIANBLUR2D_KERNEL_MAXSIZE 20
+#define GAUSSIANBLUR2D_KERNEL_MAXSIZE 12
 #endif
 
 #ifndef FNC_GAUSSIANBLUR2D
 #define FNC_GAUSSIANBLUR2D
 GAUSSIANBLUR2D_TYPE gaussianBlur2D(in sampler2D tex, in float2 st, in float2 offset, const int kernelSize) {
-    GAUSSIANBLUR2D_TYPE accumColor = GAUSSIANBLUR2D_SAMPLER_FNC(st) * 0.0;
+    GAUSSIANBLUR2D_TYPE accumColor = float4(0.0, 0.0, 0.0, 0.0);
 
     float accumWeight = 0.;
     const float k = .15915494; // 1 / (2*PI)
@@ -50,6 +50,7 @@ GAUSSIANBLUR2D_TYPE gaussianBlur2D(in sampler2D tex, in float2 st, in float2 off
         for (int i = 0; i < GAUSSIANBLUR2D_KERNEL_MAXSIZE; i++) {
             if (i >= kernelSize)
                 break;
+                
             float x = -.5 * (kernelSize2 - 1.) + float(i);
             float weight = (k / kernelSize2) * exp(-(x * x + y * y) / (2. * kernelSize2));
             

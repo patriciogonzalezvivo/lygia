@@ -28,8 +28,8 @@ float random(in vec4 pos) {
 #define RANDOM_SCALE3 vec3(.1031, .1030, .0973)
 #endif
 
-#ifndef FANDOM_SCALE4
-#define FANDOM_SCALE4 vec4(1031, .1030, .0973, .1099)
+#ifndef RANDOM_SCALE4
+#define RANDOM_SCALE4 vec4(1031, .1030, .0973, .1099)
 #endif
 vec2 random2(float p) {
     vec3 p3 = fract(vec3(p) * RANDOM_SCALE3);
@@ -68,25 +68,25 @@ vec3 random3(vec3 p) {
 }
 
 vec4 random4(float p) {
-    vec4 p4 = fract(vec4(p) * FANDOM_SCALE4);
+    vec4 p4 = fract(vec4(p) * RANDOM_SCALE4);
     p4 += dot(p4, p4.wzxy+19.19);
     return fract((p4.xxyz+p4.yzzw)*p4.zywx);   
 }
 
 vec4 random4(vec2 p) {
-    vec4 p4 = fract(vec4(p.xyxy) * FANDOM_SCALE4);
+    vec4 p4 = fract(vec4(p.xyxy) * RANDOM_SCALE4);
     p4 += dot(p4, p4.wzxy+19.19);
     return fract((p4.xxyz+p4.yzzw)*p4.zywx);
 }
 
 vec4 random4(vec3 p) {
-    vec4 p4 = fract(vec4(p.xyzx)  * FANDOM_SCALE4);
+    vec4 p4 = fract(vec4(p.xyzx)  * RANDOM_SCALE4);
     p4 += dot(p4, p4.wzxy+19.19);
     return fract((p4.xxyz+p4.yzzw)*p4.zywx);
 }
 
 vec4 random4(vec4 p4) {
-    p4 = fract(p4  * FANDOM_SCALE4);
+    p4 = fract(p4  * RANDOM_SCALE4);
     p4 += dot(p4, p4.wzxy+19.19);
     return fract((p4.xxyz+p4.yzzw)*p4.zywx);
 }

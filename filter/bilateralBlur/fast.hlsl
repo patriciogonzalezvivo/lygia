@@ -51,7 +51,7 @@ options:
 #if define(PLATFORM_RPI)
 BILATERALBLURFAST_TYPE bilateralBlurFast(in sampler2D tex, in float2 st, in float2 pixel, in float smoothingFactor, const float sigma_s) {
     BILATERALBLURFAST_TYPE colorRef = BILATERALBLURFAST_SAMPLER_FNC(st);
-    BILATERALBLURFAST_TYPE accumColor = BILATERALBLURFAST_TYPE(0.);
+    BILATERALBLURFAST_TYPE accumColor = float4(0.0, 0.0, 0.0, 0.0);
     float accumWeight = 0.;
 
     float scaleY2 = (BILATERALBLURFAST_NOISE_TEX_SIZE * pixel.y);

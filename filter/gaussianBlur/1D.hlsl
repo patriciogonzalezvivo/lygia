@@ -33,7 +33,7 @@ options:
 #define FNC_GAUSSIANBLUR1D
 
 GAUSSIANBLUR1D_TYPE gaussianBlur1D(in sampler2D tex,in float2 st,in float2 offset,const int kernelSize){
-    GAUSSIANBLUR1D_TYPE accumColor = GAUSSIANBLUR1D_SAMPLER_FNC(st) * 0.0;
+    GAUSSIANBLUR1D_TYPE accumColor = float4(0.0, 0.0, 0.0, 0.0);
     
     float accumWeight = 0.0;
     const float k = 0.39894228;// 1 / sqrt(2*PI)
