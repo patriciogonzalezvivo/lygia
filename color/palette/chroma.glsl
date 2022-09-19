@@ -11,7 +11,7 @@ use: <vec3> chroma(<float> value)
 vec3 chroma(float x) {
     float delta = 0.5;
     vec3 color = vec3(1.0);
-    float freq = x * -PI;
+    float freq = x * PI;
     color.r = sin(freq - delta);
     color.g = sin(freq);
     color.b = sin(freq + delta);

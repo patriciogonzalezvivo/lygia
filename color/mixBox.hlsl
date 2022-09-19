@@ -106,10 +106,10 @@ mixBox_latent mixBox_srgb_to_latent(float3 rgb) {
     weights[7] = (    t.x)*(    t.y)*(    t.z);
 
     float4 c = float4(0.0, 0.0, 0.0, 0.0);
-    vec2 lutRes = 1./vec2(4096.0, 4096.0);
+    float2 lutRes = 1./float2(4096.0, 4096.0);
     for (int j = 0; j<8; j++) {
-        vec2 uv = vec2(0.0);
-        uv.x = mod(xyz_i.b, 16.0) * 256.0 + xyz_i.r;
+        float2 uv = float2(0.0, 0.0);
+        uv.x = (xyz_i.b % 16.0) * 256.0 + xyz_i.r;
         uv.y = (xyz_i.b / 16.0) * 256.0 + xyz_i.g;
         uv *= lutRes;
         #ifndef MIXBOX_LUT_FLIP_Y
