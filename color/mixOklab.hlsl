@@ -32,6 +32,6 @@ float3 mixOklab( float3 colA, float3 colB, float h ) {
 }
 
 float4 mixOklab( float4 colA, float4 colB, float h ) {
-    return vec4( mixOklab(colA.rgb, colB.rgb, h), lerp(colA.a, colB.a, h) );
+    return float4( mixOklab(colA.rgb, colB.rgb, h), lerp(colA.a, colB.a, h) );
 }
 #endif
