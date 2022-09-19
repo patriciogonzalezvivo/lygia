@@ -3,22 +3,22 @@ original_author: [Morgan McGuire, Kyle Whitson]
 description: |
     3x3 median filter, adapted from "A Fast, Small-Radius GPU Median Filter" 
     by Morgan McGuire in ShaderX6 https://casual-effects.com/research/McGuire2008Median/index.html
-use: median2D_fast5(<sampler2D> texture, <vec2> st, <vec2> pixel)
+use: median2D_fast5(<sampler2D> texture, <float2> st, <float2> pixel)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
-    - MEDIAN2D_FAST5_TYPE: default vec4
+    - MEDIAN2D_FAST5_TYPE: default float4
     - MEDIAN2D_FAST5_SAMPLER_FNC(POS_UV): default texture2D(tex, POS_UV)
 */
 
 #ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
+#define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
 #endif
 
 #ifndef MEDIAN2D_FAST5_TYPE
 #ifdef MEDIAN2D_TYPE
 #define MEDIAN2D_FAST5_TYPE MEDIAN2D_TYPE
 #else
-#define MEDIAN2D_FAST5_TYPE vec4
+#define MEDIAN2D_FAST5_TYPE float4
 #endif
 #endif
 
@@ -46,11 +46,11 @@ options:
 #define MEDIAN_24(a, b, c, d, e, f, g, h) MEDIAN_2(a, b); MEDIAN_2(c, d); MEDIAN_2(e, f); MEDIAN_2(g, h);
 #define MEDIAN_25(a, b, c, d, e, f, g, h, i, j) MEDIAN_24(a, b, c, d, e, f, g, h); MEDIAN_2(i, j);
 
-MEDIAN2D_FAST5_TYPE median2D_fast5(in sampler2D tex, in vec2 st, in vec2 radius) {
+MEDIAN2D_FAST5_TYPE median2D_fast5(in sampler2D tex, in float2 st, in float2 radius) {
     MEDIAN2D_FAST5_TYPE v[25];
     for (int dX = -2; dX <= 2; ++dX) {
         for (int dY = -2; dY <= 2; ++dY) {
-            vec2 offset = vec2(float(dX), float(dY));
+            float2 offset = float2(float(dX), float(dY));
             // If a pixel in the window is located at (x+dX, y+dY), put it at index (dX + R)(2R + 1) + (dY + R) of the
             // pixel array. This will fill the pixel array, with the top left pixel of the window at pixel[0] and the
             // bottom right pixel of the window at pixel[N-1].

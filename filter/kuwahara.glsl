@@ -7,14 +7,6 @@ options:
     - KUWAHARA_SAMPLER_FNC(POS_UV): defaults to texture2D(tex, POS_UV).rgb
     - KUWAHARA_RADIUS radius
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
-licence:
-    Copyright (c) 2012, Brad Larson, Ben Cochran, Hugues Lismonde, Keitaroh Kobayashi, Alaric Cole, Matthew Clark, Jacob Gundersen, Chris Williams.
-    All rights reserved.
-    Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
-    Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
-    Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
-    Neither the name of the GPUImage framework nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
-    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 #ifndef SAMPLER_FNC
@@ -43,7 +35,7 @@ KUWAHARA_TYPE kuwahara(in sampler2D tex, in vec2 st, in vec2 pixel, in int radiu
     KUWAHARA_TYPE m0 = KUWAHARA_TYPE(0.0); KUWAHARA_TYPE m1 = KUWAHARA_TYPE(0.0); KUWAHARA_TYPE m2 = KUWAHARA_TYPE(0.0); KUWAHARA_TYPE m3 = KUWAHARA_TYPE(0.0);
     KUWAHARA_TYPE s0 = KUWAHARA_TYPE(0.0); KUWAHARA_TYPE s1 = KUWAHARA_TYPE(0.0); KUWAHARA_TYPE s2 = KUWAHARA_TYPE(0.0); KUWAHARA_TYPE s3 = KUWAHARA_TYPE(0.0);
     KUWAHARA_TYPE rta = KUWAHARA_TYPE(0.0);
-    KUWAHARA_TYPE c;
+    KUWAHARA_TYPE c = KUWAHARA_TYPE(0.0);
 
     for (j = -KUWAHARA_RADIUS; j <= 0; ++j)  {
         for (i = -KUWAHARA_RADIUS; i <= 0; ++i)  {
@@ -126,7 +118,7 @@ KUWAHARA_TYPE kuwahara(in sampler2D tex, in vec2 st, in vec2 pixel, in int radiu
     KUWAHARA_TYPE m0 = KUWAHARA_TYPE(0.0); KUWAHARA_TYPE m1 = KUWAHARA_TYPE(0.0); KUWAHARA_TYPE m2 = KUWAHARA_TYPE(0.0); KUWAHARA_TYPE m3 = KUWAHARA_TYPE(0.0);
     KUWAHARA_TYPE s0 = KUWAHARA_TYPE(0.0); KUWAHARA_TYPE s1 = KUWAHARA_TYPE(0.0); KUWAHARA_TYPE s2 = KUWAHARA_TYPE(0.0); KUWAHARA_TYPE s3 = KUWAHARA_TYPE(0.0);
     KUWAHARA_TYPE rta = KUWAHARA_TYPE(0.0);
-    KUWAHARA_TYPE c;
+    KUWAHARA_TYPE c = KUWAHARA_TYPE(0.0);
     
     for (j = -KUWAHARA_RADIUS; j <= 0; ++j)  {
         for (i = -KUWAHARA_RADIUS; i <= 0; ++i)  {

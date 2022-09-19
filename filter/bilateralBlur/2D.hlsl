@@ -41,15 +41,14 @@ options:
 
 #ifndef FNC_BILATERALBLUR2D
 #define FNC_BILATERALBLUR2D
-float4 bilateralBlur2D(sampler2D tex, float2 st, float2 offset, const int kernelSize) {
-    float4 accumColor = float4(0.0, 0.0, 0.0, 0.0);
-    
+BILATERALBLUR2D_TYPE bilateralBlur2D(sampler2D tex, float2 st, float2 offset, const int kernelSize) {
+    BILATERALBLUR2D_TYPE accumColor = float4(0.0, 0.0, 0.0, 0.0);
     float accumWeight = 0.;
     const float k = .15915494; // 1. / (2.*PI)
     const float k2 = k * k;
     float kernelSizef = float(kernelSize);
     float kernelSize2f = kernelSizef * kernelSizef;
-    float4 tex0 = BILATERALBLUR2D_SAMPLER_FNC(st);
+    BILATERALBLUR2D_TYPE tex0 = BILATERALBLUR2D_SAMPLER_FNC(st);
     float lum0 = BILATERALBLUR2D_LUMA(tex0);
 
     for (int j = 0; j < BILATERALBLUR2D_KERNEL_MAXSIZE; j++) {
@@ -61,7 +60,7 @@ float4 bilateralBlur2D(sampler2D tex, float2 st, float2 offset, const int kernel
                 break;
             float dx = -.5 * (kernelSizef - 1.0) + float(i);
 
-            float4 t = BILATERALBLUR2D_SAMPLER_FNC( st + float2(dx, dy) * offset );
+            BILATERALBLUR2D_TYPE t = BILATERALBLUR2D_SAMPLER_FNC( st + float2(dx, dy) * offset );
             float lum = BILATERALBLUR2D_LUMA(t);
             float dl = 255. * (lum - lum0);
             float weight = (k2 / kernelSize2f) * exp(-(dx * dx + dy * dy + dl * dl) / (2. * kernelSize2f));

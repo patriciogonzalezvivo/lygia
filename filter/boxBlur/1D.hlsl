@@ -32,7 +32,7 @@ options:
 #ifndef FNC_BOXBLUR1D
 #define FNC_BOXBLUR1D
 BOXBLUR1D_TYPE boxBlur1D(in sampler2D tex, in float2 st, in float2 offset, const int kernelSize) {
-    BOXBLUR1D_TYPE color = BOXBLUR1D_SAMPLER_FNC(st) * 0.0;
+    BOXBLUR1D_TYPE color = float4(0.0, 0.0, 0.0, 0.0);
     #ifndef BOXBLUR1D_KERNELSIZE
     #define BOXBLUR1D_KERNELSIZE kernelSize
     #endif

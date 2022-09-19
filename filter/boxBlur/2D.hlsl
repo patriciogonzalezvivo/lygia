@@ -36,7 +36,7 @@ options:
 #ifndef FNC_BOXBLUR2D
 #define FNC_BOXBLUR2D
 BOXBLUR2D_TYPE boxBlur2D(in sampler2D tex, in float2 st, in float2 pixel, const int kernelSize) {
-    BOXBLUR2D_TYPE color = BOXBLUR2D_SAMPLER_FNC(st) * 0.0;
+    BOXBLUR2D_TYPE color = float4(0.0, 0.0, 0.0, 0.0);
     
 
     float accumWeight = 0.;
