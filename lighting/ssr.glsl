@@ -11,11 +11,9 @@ options:
     - SSR_MAX_STEP: number max number of raymarching steps (int)
     - SSR_MAX_DISTANCE: max distance (float)
     - CAMERA_PROJECTION_MATRIX: camera projection mat4 matrix
-    - RESOLUTION_SCREEN: vec2 with screen resolution
     - CAMERA_NEAR_CLIP: camera near clip distance
     - CAMERA_FAR_CLIP: camera far clip distance
     - SSR_FRESNEL: if define scale the opacity based on the fresnel angle 
-
 */
 
 // #define SSR_FRESNEL

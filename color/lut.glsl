@@ -30,7 +30,10 @@ options:
 #ifdef LUT_SQUARE 
 vec4 lut(in sampler2D tex_lut, in vec4 color, in int offset) {
     float blueColor = color.b * 63.0;
-    
+
+    const float pixel = 1.0/512.0;
+    const float halt_pixel = pixel * 0.5;
+
     vec2 quad1 = vec2(0.0);
     quad1.y = floor(floor(blueColor) / 8.0);
     quad1.x = floor(blueColor) - (quad1.y * 8.0);
@@ -40,16 +43,16 @@ vec4 lut(in sampler2D tex_lut, in vec4 color, in int offset) {
     quad2.x = ceil(blueColor) - (quad2.y * 8.0);
     
     vec2 texPos1 = vec2(0.0);
-    texPos1.x = (quad1.x * 0.125) + 0.5/512.0 + ((0.125 - 1.0/512.0) * color.r);
-    texPos1.y = (quad1.y * 0.125) + 0.5/512.0 + ((0.125 - 1.0/512.0) * color.g);
+    texPos1.x = (quad1.x * 0.125) + halt_pixel + ((0.125 - pixel) * color.r);
+    texPos1.y = (quad1.y * 0.125) + halt_pixel + ((0.125 - pixel) * color.g);
 
     #ifdef LUT_FLIP_Y
     texPos1.y = 1.0-texPos1.y;
     #endif
     
     vec2 texPos2 = vec2(0.0);
-    texPos2.x = (quad2.x * 0.125) + 0.5/512.0 + ((0.125 - 1.0/512.0) * color.r);
-    texPos2.y = (quad2.y * 0.125) + 0.5/512.0 + ((0.125 - 1.0/512.0) * color.g);
+    texPos2.x = (quad2.x * 0.125) + halt_pixel + ((0.125 - pixel) * color.r);
+    texPos2.y = (quad2.y * 0.125) + halt_pixel + ((0.125 - pixel) * color.g);
 
     #ifdef LUT_FLIP_Y
     texPos2.y = 1.0-texPos2.y;
