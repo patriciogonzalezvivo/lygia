@@ -41,7 +41,7 @@ const float2 blueNoiseTexturePixel = 1.0/BLUENOISE_TEXTURE_RESOLUTION;
 
 float ditherBlueNoise(sampler2D tex, in float b, float2 fragcoord, const in float time) {
     #ifdef DITHER_BLUENOISE_ANIMATED 
-    fragcoord += 1337.0*fract(time);
+    fragcoord += 1337.0 * frac(time);
     #endif
     float bn = SAMPLER_FNC(tex, fragcoord * blueNoiseTexturePixel).r;
     float bn_tri = remap_pdf_tri_unity(bn);
@@ -50,7 +50,7 @@ float ditherBlueNoise(sampler2D tex, in float b, float2 fragcoord, const in floa
 
 float3 ditherBlueNoise(sampler2D tex, in float3 rgb, float2 fragcoord, const in float time) {
     #ifdef DITHER_BLUENOISE_ANIMATED
-    fragcoord += 1337.0*fract(time * 0.1);
+    fragcoord += 1337.0 * frac(time * 0.1);
     #endif
         
     #ifdef DITHER_BLUENOISE_CHROMATIC
