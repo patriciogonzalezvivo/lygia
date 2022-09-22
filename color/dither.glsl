@@ -3,8 +3,14 @@ original_author: Patricio Gonzalez Vivo
 description: set of dither methods
 use: <vec4|vec3|float> dither(<vec4|vec3|float> value[, <float> time])
 Options:
+    - DITHER_FNC
     - TIME_SECS: elapsed time in seconds
     - RESOLUTION: view port resolution
+    - BLUENOISE_TEXTURE_RESOLUTION
+    - BLUENOISE_TEXTURE
+    - DITHER_ANIMATED
+    - DITHER_CHROMATIC
+    - SAMPLER_FNC
 */
 
 #ifndef TIME_SECS
@@ -22,7 +28,8 @@ Options:
 #include "dither/interleavedGradientNoise.glsl"
 #include "dither/vlachos.glsl"
 #include "dither/triangleNoise.glsl"
-#include "dither/triangleNoiseRGB.glsl"
+#include "dither/blueNoise.glsl"
+#include "dither/shift.glsl"
 
 #ifndef DITHER_FNC
 #ifdef TARGET_MOBILE
@@ -49,15 +56,15 @@ vec4 dither(vec4 rgba, const HIGHP in float time) {
 
 #ifdef TIME_SECS
 float dither(float b) {
-    return DITHER_FNC(b, TIME_SECS);
+    return dither(b, TIME_SECS);
 }
 
 vec3 dither(vec3 rgb) {
-    return DITHER_FNC(rgb, TIME_SECS);
+    return dither(rgb, TIME_SECS);
 }
 
 vec4 dither(vec4 rgba) {
-    return DITHER_FNC(rgba, TIME_SECS);
+    return dither(rgba, TIME_SECS);
 }
 #endif
 
