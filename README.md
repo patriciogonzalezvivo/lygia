@@ -79,7 +79,16 @@ void main(void) {
 
 # Acknowledgements
 
-This library has been built over years, and most often than not on top of the work of brillant generous people like: [Inigo Quiles](https://www.iquilezles.org/), [Morgan McGuire](https://casual-effects.com/), [Hugh Kennedy](https://github.com/hughsk), [Matt DesLauriers](https://www.mattdesl.com/).
+This library has been built over years, and in many cases on top of the work of brillant generous people like: [Inigo Quiles](https://www.iquilezles.org/), [Morgan McGuire](https://casual-effects.com/), [Hugh Kennedy](https://github.com/hughsk) and [Matt DesLauriers](https://www.mattdesl.com/).
+
+# License 
+
+LYGIA is dual-licensed under [the Prosperity License](https://prosperitylicense.com/versions/3.0.0) and the Patron License for individual cases.
+
+A Patron License can be obtained by making regular payments through [GitHub Sponsorships](https://github.com/sponsors/patriciogonzalezvivo), in amounts qualifying for a tier of rewards that includes “patron licenses”. A Patron License grants qualifying patrons permission to ignore any noncommercial or copyleft rules in all of my License Zero Prosperity licensed software.
+
+By becoming a Patron, you'll be helping to ensure I can spend the time not just fixing bugs, adding features, releasing new versions, but also keeping projects afloat and growing. Think of investing in me not just for the output of my code but my continued role in the open-source ecosystem. If open software producers and maintainers like me aren't supported then communities won't grow and there may not be a fresh package when you need a bug fixed.
+
 
 Keeping LYGIA in growing healthy require works and dedication, I really appreciate your support improving it. That could be adding new functions, testing it, fixing bugs, translating the GLSL files to HLSL and Metal or just [sponsoring through GitHub](https://github.com/sponsors/patriciogonzalezvivo).
 
