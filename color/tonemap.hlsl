@@ -1,9 +1,9 @@
-#include "tonemap/aces.glsl"
-#include "tonemap/debug.glsl"
-#include "tonemap/linear.glsl"
-#include "tonemap/reinhard.glsl"
-#include "tonemap/uncharted.glsl"
-#include "tonemap/unreal.glsl"
+#include "tonemap/aces.hlsl"
+#include "tonemap/debug.hlsl"
+#include "tonemap/linear.hlsl"
+#include "tonemap/reinhard.hlsl"
+#include "tonemap/uncharted.hlsl"
+#include "tonemap/unreal.hlsl"
 
 /*
 original_author: Patricio Gonzalez Vivo  

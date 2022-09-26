@@ -8,7 +8,7 @@ use: desaturate(<float|float3|float4> color, float amount)
 #define FNC_DESATURATE
 float3 desaturate(in float3 color, in float amount ) {
     float l = dot(float3(.3, .59, .11), color);
-    return mix(color, float3(l, l, l), amount);
+    return lerp(color, float3(l, l, l), amount);
 }
 
 float4 desaturate(in float4 color, in float amount ) {

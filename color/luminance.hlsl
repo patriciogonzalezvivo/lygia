@@ -6,6 +6,6 @@ use: luminance(<float3|float4> color)
 
 #ifndef FNC_LUMINANCE
 #define FNC_LUMINANCE
-float luminance(in float3 linear) { return dot(linear, float3(0.2126, 0.7152, 0.0722)); }
-float luminance(in float4 linear) { return luminance( linear.rgb ); }
+float luminance(in float3 _linear) { return dot(_linear, float3(0.2126, 0.7152, 0.0722)); }
+float luminance(in float4 _linear) { return luminance( _linear.rgb ); }
 #endif
