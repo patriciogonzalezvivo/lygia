@@ -19,9 +19,9 @@ float4x4 saturationMatrix(in float amount) {
     float3 blue = float3(1.0, 1.0, 1.0) * lum.z * invAmount;
     blue += float3( .0, .0, amount);
 
-    return float4x4(red,        .0,
-                    green,      .0,
-                    blue,       .0,
+    return float4x4(red.x, green.x, blue.x, .0,
+                    red.y, green.y, blue.y, .0,
+                    red.z, green.z, blue.z, .0,
                     .0, .0, .0, 1.);
 }
 #endif
