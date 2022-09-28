@@ -1,4 +1,5 @@
 #include "srandom.hlsl"
+#include "srandom.hlsl"
 
 /*
 original_author: Inigo Quilez
@@ -6,74 +7,88 @@ description: returns 2D/3D value noise in the first channel and in the rest the 
 use: noised(<float2|float3> space)
 options:
     NOISED_QUINTIC_INTERPOLATION: Quintic interpolation on/off. Default is off.
-license: |
-    Copyright © 2017 Inigo Quilez
-    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
+
+#ifndef NOISED_RANDOM2_FNC
+#define NOISED_RANDOM2_FNC srandom2
+#endif
+
+#ifndef NOISED_RANDOM3_FNC
+#define NOISED_RANDOM3_FNC srandom3
+#endif
 
 #ifndef FNC_NOISED
 #define FNC_NOISED
 
-// return gradient noise (in x) and its derivatives (in yz)
-float3 noised (in float2 p) {
-  // grid
-  float2 i = floor( p );
-  float2 f = frac( p );
+float3 noised(in float2 p) {
+    // grid
+    float2 i = floor( p );
+    float2 f = frac( p );
 
-#ifdef NOISED_QUINTIC_INTERPOLATION
-  // quintic interpolation
-  float2 u = f * f * f * (f * (f * 6. - 15.) + 10.);
-  float2 du = 30. * f * f * (f * (f - 2.) + 1.);
-#else
-  // cubic interpolation
-  float2 u = f * f * (3. - 2. * f);
-  float2 du = 6. * f * (1. - f);
-#endif
+    #ifdef NOISED_QUINTIC_INTERPOLATION
+    // quintic interpolation
+    float2 u = f * f * f * (f * (f * 6. - 15.) + 10.);
+    float2 du = 30. * f * f * (f * (f - 2.) + 1.);
+    #else
+    // cubic interpolation
+    float2 u = f * f * (3. - 2. * f);
+    float2 du = 6. * f * (1. - f);
+    #endif
 
-  float2 ga = srandom2(i + float2(0., 0.));
-  float2 gb = srandom2(i + float2(1., 0.));
-  float2 gc = srandom2(i + float2(0., 1.));
-  float2 gd = srandom2(i + float2(1., 1.));
+    float2 ga = NOISED_RANDOM2_FNC(i + float2(0., 0.));
+    float2 gb = NOISED_RANDOM2_FNC(i + float2(1., 0.));
+    float2 gc = NOISED_RANDOM2_FNC(i + float2(0., 1.));
+    float2 gd = NOISED_RANDOM2_FNC(i + float2(1., 1.));
 
-  float va = dot(ga, f - float2(0., 0.));
-  float vb = dot(gb, f - float2(1., 0.));
-  float vc = dot(gc, f - float2(0., 1.));
-  float vd = dot(gd, f - float2(1., 1.));
+    float va = dot(ga, f - float2(0., 0.));
+    float vb = dot(gb, f - float2(1., 0.));
+    float vc = dot(gc, f - float2(0., 1.));
+    float vd = dot(gd, f - float2(1., 1.));
 
-  return float3(va + u.x*(vb-va) + u.y*(vc-va) + u.x*u.y*(va-vb-vc+vd),   // value
-                ga + u.x*(gb-ga) + u.y*(gc-ga) + u.x*u.y*(ga-gb-gc+gd) +  // derivatives
-                du * (u.yx*(va-vb-vc+vd) + float2(vb,vc) - va));
+    return float3(va + u.x*(vb-va) + u.y*(vc-va) + u.x*u.y*(va-vb-vc+vd),   // value
+                    ga + u.x*(gb-ga) + u.y*(gc-ga) + u.x*u.y*(ga-gb-gc+gd) +  // derivatives
+                    du * (u.yx*(va-vb-vc+vd) + float2(vb,vc) - va));
 }
 
+float4 noised(in float3 pos) {
+    // grid
+    float3 p = floor(pos);
+    float3 w = frac(pos);
 
-float4 noised( in float3 x ) {
-    float3 p = floor(x);
-    float3 w = frac(x);
-    
-    float3 u = w*w*w*(w*(w*6.0-15.0)+10.0);
-    float3 du = 30.0*w*w*(w*(w-2.0)+1.0);
+    #ifdef NOISED_QUINTIC_INTERPOLATION
+    // quintic interpolant
+    float3 u = w * w * w * ( w * (w * 6. - 15.) + 10. );
+    float3 du = 30.0 * w * w * ( w * (w - 2.) + 1.);
+    #else
+    // cubic interpolant
+    float3 u = w * w * (3. - 2. * w);
+    float3 du = 6. * w * (1. - w);
+    #endif
 
-    float a = srandom3( p + float3(0.0, 0.0, 0.0) );
-    float b = srandom3( p + float3(1.0, 0.0, 0.0) );
-    float c = srandom3( p + float3(0.0, 1.0, 0.0) );
-    float d = srandom3( p + float3(1.0, 1.0, 0.0) );
-    float e = srandom3( p + float3(0.0, 0.0, 1.0) );
-    float f = srandom3( p + float3(1.0, 0.0, 1.0) );
-    float g = srandom3( p + float3(0.0, 1.0, 1.0) );
-    float h = srandom3( p + float3(1.0, 1.0, 1.0) );
+    // gradients
+    float3 ga = NOISED_RANDOM3_FNC(p + float3(0., 0., 0.));
+    float3 gb = NOISED_RANDOM3_FNC(p + float3(1., 0., 0.));
+    float3 gc = NOISED_RANDOM3_FNC(p + float3(0., 1., 0.));
+    float3 gd = NOISED_RANDOM3_FNC(p + float3(1., 1., 0.));
+    float3 ge = NOISED_RANDOM3_FNC(p + float3(0., 0., 1.));
+    float3 gf = NOISED_RANDOM3_FNC(p + float3(1., 0., 1.));
+    float3 gg = NOISED_RANDOM3_FNC(p + float3(0., 1., 1.));
+    float3 gh = NOISED_RANDOM3_FNC(p + float3(1., 1., 1.));
 
-    float k0 =  a;
-    float k1 =  b - a;
-    float k2 =  c - a;
-    float k3 =  e - a;
-    float k4 =  a - b - c + d;
-    float k5 =  a - c - e + g;
-    float k6 =  a - b - e + f;
-    float k7 = -a + b + c - d + e - f - g + h;
+    // projections
+    float va = dot(ga, w - float3(0., 0., 0.));
+    float vb = dot(gb, w - float3(1., 0., 0.));
+    float vc = dot(gc, w - float3(0., 1., 0.));
+    float vd = dot(gd, w - float3(1., 1., 0.));
+    float ve = dot(ge, w - float3(0., 0., 1.));
+    float vf = dot(gf, w - float3(1., 0., 1.));
+    float vg = dot(gg, w - float3(0., 1., 1.));
+    float vh = dot(gh, w - float3(1., 1., 1.));
 
-    return float4(  -1.0 + 2.0 * (k0 + k1*u.x + k2*u.y + k3*u.z + k4*u.x*u.y + k5*u.y*u.z + k6*u.z*u.x + k7*u.x*u.y*u.z), 
-                    2.0* du * float3( k1 + k4*u.y + k6*u.z + k7*u.y*u.z,
-                                      k2 + k5*u.z + k4*u.x + k7*u.z*u.x,
-                                      k3 + k6*u.x + k5*u.y + k7*u.x*u.y ) );
+    // interpolations
+    return float4( va + u.x*(vb-va) + u.y*(vc-va) + u.z*(ve-va) + u.x*u.y*(va-vb-vc+vd) + u.y*u.z*(va-vc-ve+vg) + u.z*u.x*(va-vb-ve+vf) + (-va+vb+vc-vd+ve-vf-vg+vh)*u.x*u.y*u.z,    // value
+                ga + u.x*(gb-ga) + u.y*(gc-ga) + u.z*(ge-ga) + u.x*u.y*(ga-gb-gc+gd) + u.y*u.z*(ga-gc-ge+gg) + u.z*u.x*(ga-gb-ge+gf) + (-ga+gb+gc-gd+ge-gf-gg+gh)*u.x*u.y*u.z +   // derivatives
+                du * (float3(vb,vc,ve) - va + u.yzx*float3(va-vb-vc+vd,va-vc-ve+vg,va-vb-ve+vf) + u.zxy*float3(va-vb-ve+vf,va-vb-vc+vd,va-vc-ve+vg) + u.yzx*u.zxy*(-va+vb+vc-vd+ve-vf-vg+vh) ));
 }
+
 #endif

@@ -21,6 +21,19 @@ options:
 #define FBM_NOISE_FNC(POS_UV) snoise(POS_UV)
 #endif
 
+#ifndef FBM_NOISE2_FNC
+#define FBM_NOISE2_FNC(POS_UV) FBM_NOISE_FNC(POS_UV)
+#endif
+
+#ifndef FBM_NOISE3_FNC
+#define FBM_NOISE3_FNC(POS_UV) FBM_NOISE_FNC(POS_UV)
+#endif
+
+#ifndef FBM_NOISE_TYPE
+#define FBM_NOISE_TYPE float
+#endif
+
+
 #ifndef FBM_VALUE_INITIAL
 #define FBM_VALUE_INITIAL 0.0
 #endif
@@ -39,28 +52,28 @@ options:
 
 #ifndef FNC_FBM
 #define FNC_FBM
-float fbm(in float2 st) {
+FBM_NOISE_TYPE fbm(in float2 st) {
     // Initial values
-    float value = FBM_VALUE_INITIAL;
+    FBM_NOISE_TYPE value = FBM_VALUE_INITIAL;
     float amplitud = FBM_AMPLITUD_INITIAL;
 
     // Loop of octaves
     for (int i = 0; i < FBM_OCTAVES; i++) {
-        value += amplitud * FBM_NOISE_FNC(st);
+        value += amplitud * FBM_NOISE2_FNC(st);
         st *= FBM_SCALE_SCALAR;
         amplitud *= FBM_AMPLITUD_SCALAR;
     }
     return value;
 }
 
-float fbm(in float3 pos) {
+FBM_NOISE_TYPE fbm(in float3 pos) {
     // Initial values
-    float value = FBM_VALUE_INITIAL;
+    FBM_NOISE_TYPE value = FBM_VALUE_INITIAL;
     float amplitud = FBM_AMPLITUD_INITIAL;
 
     // Loop of octaves
     for (int i = 0; i < FBM_OCTAVES; i++) {
-        value += amplitud * FBM_NOISE_FNC(pos);
+        value += amplitud * FBM_NOISE3_FNC(pos);
         pos *= FBM_SCALE_SCALAR;
         amplitud *= FBM_AMPLITUD_SCALAR;
     }
