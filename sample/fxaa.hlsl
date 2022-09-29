@@ -10,9 +10,8 @@ options:
     - SAMPLEFXAA_SPAN_MAX
     - SAMPLEFXAA_SAMPLE_FNC
 */
-
 #ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
+#define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
 #endif
 
 #ifndef SAMPLEFXAA_REDUCE_MIN
@@ -33,14 +32,14 @@ options:
 
 #ifndef FNC_SAMPLEFXAA
 #define FNC_SAMPLEFXAA 
-vec4 sampleFXAA(sampler2D tex, vec2 uv, vec2 pixel) {
-    vec3 rgbNW  = SAMPLEFXAA_SAMPLE_FNC(uv.xy + vec2( -1.0, -1.0 ) * pixel).xyz;
-    vec3 rgbNE  = SAMPLEFXAA_SAMPLE_FNC(uv.xy + vec2( 1.0, -1.0 ) * pixel).xyz;
-    vec3 rgbSW  = SAMPLEFXAA_SAMPLE_FNC(uv.xy + vec2( -1.0, 1.0 ) * pixel).xyz;
-    vec3 rgbSE  = SAMPLEFXAA_SAMPLE_FNC(uv.xy + vec2( 1.0, 1.0 ) * pixel).xyz;
-    vec4 rgbaM  = SAMPLEFXAA_SAMPLE_FNC(uv.xy  * pixel);
-    vec3 rgbM   = rgbaM.xyz;
-    vec3 luma   = vec3( 0.299, 0.587, 0.114 );
+float4 sampleFXAA(sampler2D tex, vec2 uv, vec2 pixel) {
+    float3 rgbNW  = SAMPLEFXAA_SAMPLE_FNC(uv.xy + vec2( -1.0, -1.0 ) * pixel).xyz;
+    float3 rgbNE  = SAMPLEFXAA_SAMPLE_FNC(uv.xy + vec2( 1.0, -1.0 ) * pixel).xyz;
+    float3 rgbSW  = SAMPLEFXAA_SAMPLE_FNC(uv.xy + vec2( -1.0, 1.0 ) * pixel).xyz;
+    float3 rgbSE  = SAMPLEFXAA_SAMPLE_FNC(uv.xy + vec2( 1.0, 1.0 ) * pixel).xyz;
+    float4 rgbaM  = SAMPLEFXAA_SAMPLE_FNC(uv.xy  * pixel);
+    float3 rgbM   = rgbaM.xyz;
+    float3 luma   = float3( 0.299, 0.587, 0.114 );
     float lumaNW    = dot( rgbNW, luma );
     float lumaNE    = dot( rgbNE, luma );
     float lumaSW    = dot( rgbSW, luma );
@@ -58,13 +57,12 @@ vec4 sampleFXAA(sampler2D tex, vec2 uv, vec2 pixel) {
                 max(vec2(-SAMPLEFXAA_SPAN_MAX, -SAMPLEFXAA_SPAN_MAX),
                     dir * rcpDirMin)) * pixel;
 
-    vec4 rgbA = 0.5 * ( SAMPLEFXAA_SAMPLE_FNC( uv.xy + dir * (1.0/3.0 - 0.5)) +
-                        SAMPLEFXAA_SAMPLE_FNC( uv.xy + dir * (2.0/3.0 - 0.5)) );
-    vec4 rgbB = rgbA * 0.5 + 0.25 * (
-                        SAMPLEFXAA_SAMPLE_FNC( uv.xy + dir * -0.5) +
-                        SAMPLEFXAA_SAMPLE_FNC( uv.xy + dir * 0.5) );
+    float4 rgbA = 0.5 * (   SAMPLEFXAA_SAMPLE_FNC( uv.xy + dir * (1.0/3.0 - 0.5)) +
+                            SAMPLEFXAA_SAMPLE_FNC( uv.xy + dir * (2.0/3.0 - 0.5)) );
+    float4 rgbB = rgbA * 0.5 + 0.25 * ( SAMPLEFXAA_SAMPLE_FNC( uv.xy + dir * -0.5) +
+                                        SAMPLEFXAA_SAMPLE_FNC( uv.xy + dir * 0.5) );
 
-    float lumaB = dot(rgbB, vec4(luma, 0.0));
+    float lumaB = dot(rgbB, float4(luma, 0.0));
     if ( ( lumaB < lumaMin ) || ( lumaB > lumaMax ) )
         return rgbA;
     else

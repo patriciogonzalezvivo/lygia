@@ -1,0 +1,36 @@
+#include "../space/depth2viewZ.hlsl"
+#include "../space/screen2viewPosition.hlsl"
+
+/*
+original_author: Patricio Gonzalez Vivo
+description: sampler the view Positiong from depthmap texture 
+use: <float4> sampleViewPosition(<sampler2D> texDepth, <float2> st [, <float> near, <float> far])
+options:
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
+    - CAMERA_NEAR_CLIP: required
+    - CAMERA_FAR_CLIP: required
+    - CAMERA_ORTHOGRAPHIC_PROJECTION, if it's not present is consider a PERECPECTIVE camera
+    - CAMERA_PROJECTION_MATRIX: mat4 matrix with camera projection
+    - INVERSE_CAMERA_PROJECTION_MATRIX: mat4 matrix with the inverse camara projection
+*/
+
+#ifndef SAMPLER_FNC
+#define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
+#endif
+
+#ifndef FNC_SAMPLEVIEWPOSITION
+#define FNC_SAMPLEVIEWPOSITION
+
+float4 sampleViewPosition(sampler2D texDepth, const in float2 st, const in float near, const in float far) {
+    float depth = SAMPLER_FNC(texDepth, st).r;
+    float viewZ = depth2viewZ(depth, near, far);
+    return screen2viewPosition(st, depth, viewZ);
+}
+
+#if defined(CAMERA_NEAR_CLIP) && defined(CAMERA_FAR_CLIP)
+float sampleViewPosition(sampler2D texDepth, const in float2 st) {
+    return sampleViewPosition( texDepth, st, CAMERA_NEAR_CLIP, CAMERA_FAR_CLIP); 
+}
+#endif
+
+#endif
