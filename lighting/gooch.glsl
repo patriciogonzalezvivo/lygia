@@ -1,6 +1,6 @@
 #include "material/roughness.glsl"
 #include "material/normal.glsl"
-#include "material/baseColor.glsl"
+#include "material/albedo.glsl"
 
 #include "diffuse.glsl"
 #include "specular.glsl"
@@ -12,7 +12,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: render with a gooch stylistic shading model
-use: <vec4> gooch(<vec4> baseColor, <vec3> normal, <vec3> light, <vec3> view, <float> roughness)
+use: <vec4> gooch(<vec4> albedo, <vec3> normal, <vec3> light, <vec3> view, <float> roughness)
 options:
     - GOOCH_WARM: defualt vec3(0.25, 0.15, 0.0)
     - GOOCH_COLD: defualt vec3(0.0, 0.0, 0.2)
@@ -59,9 +59,9 @@ options:
 
 #ifndef FNC_GOOCH
 #define FNC_GOOCH
-vec4 gooch(vec4 baseColor, vec3 normal, vec3 light, vec3 view, float roughness) {
-    vec3 warm = GOOCH_WARM + baseColor.rgb * 0.6;
-    vec3 cold = GOOCH_COLD + baseColor.rgb * 0.1;
+vec4 gooch(vec4 albedo, vec3 normal, vec3 light, vec3 view, float roughness) {
+    vec3 warm = GOOCH_WARM + albedo.rgb * 0.6;
+    vec3 cold = GOOCH_COLD + albedo.rgb * 0.1;
 
     vec3 l = normalize(light);
     vec3 n = normalize(normal);
@@ -79,11 +79,11 @@ vec4 gooch(vec4 baseColor, vec3 normal, vec3 light, vec3 view, float roughness) 
     diffuse *= shadow;
 #endif
 
-    return vec4(mix(mix(cold, warm, diffuse), GOOCH_SPECULAR, specular), baseColor.a);
+    return vec4(mix(mix(cold, warm, diffuse), GOOCH_SPECULAR, specular), albedo.a);
 }
 
 vec4 gooch(Material material) {
-    return gooch(material.baseColor, material.normal, LIGHT_POSITION, (CAMERA_POSITION - material.position), material.roughness);
+    return gooch(material.albedo, material.normal, LIGHT_POSITION, (CAMERA_POSITION - material.position), material.roughness);
 }
 
 #endif

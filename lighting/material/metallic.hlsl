@@ -1,6 +1,6 @@
-#include "../toMetallic.glsl"
-#include "albedo.glsl"
-#include "specular.glsl"
+#include "../toMetallic.hlsl"
+#include "albedo.hlsl"
+#include "specular.hlsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
@@ -11,7 +11,7 @@ options:
 */
 
 #ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
+#define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
 #endif
 
 #ifndef FNC_MATERIAL_METALLIC
@@ -35,7 +35,7 @@ float materialMetallic() {
     float metallic = 0.0;
 
 #if defined(MATERIAL_METALLICMAP) && defined(MODEL_VERTEX_TEXCOORD)
-    vec2 uv = v_texcoord.xy;
+    float2 uv = v_texcoord.xy;
     #if defined(MATERIAL_METALLICMAP_OFFSET)
     uv += (MATERIAL_METALLICMAP_OFFSET).xy;
     #endif
@@ -45,19 +45,19 @@ float materialMetallic() {
     metallic = SAMPLER_FNC(MATERIAL_METALLICMAP, uv).b;
 
 #elif defined(MATERIAL_ROUGHNESSMETALLICMAP) && defined(MODEL_VERTEX_TEXCOORD)
-    vec2 uv = v_texcoord.xy;
+    float2 uv = v_texcoord.xy;
     metallic = SAMPLER_FNC(MATERIAL_ROUGHNESSMETALLICMAP, uv).b;
 
 #elif defined(MATERIAL_OCCLUSIONROUGHNESSMETALLICMAP) && defined(MODEL_VERTEX_TEXCOORD)
-    vec2 uv = v_texcoord.xy;
+    float2 uv = v_texcoord.xy;
     metallic = SAMPLER_FNC(MATERIAL_OCCLUSIONROUGHNESSMETALLICMAP, uv).b;
 
 #elif defined(MATERIAL_METALLIC)
     metallic = MATERIAL_METALLIC;
 
 #else
-    vec3 diffuse = materialAlbedo().rgb;
-    vec3 specular = materialSpecular();
+    float3 diffuse = materialAlbedo().rgb;
+    float3 specular = materialSpecular();
     metallic = toMetallic(diffuse, specular);
 #endif
 

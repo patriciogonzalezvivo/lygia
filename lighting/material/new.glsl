@@ -1,4 +1,4 @@
-#include "baseColor.glsl"
+#include "albedo.glsl"
 #include "specular.glsl"
 #include "emissive.glsl"
 #include "occlusion.glsl"
@@ -52,7 +52,7 @@ void materialNew(out Material _mat) {
     _mat.normal             = materialNormal();
 
     // PBR Properties
-    _mat.baseColor          = materialBaseColor();
+    _mat.albedo          = materialAlbedo();
     _mat.emissive           = materialEmissive();
     _mat.roughness          = materialRoughness();
     _mat.metallic           = materialMetallic();
@@ -91,7 +91,7 @@ void materialNew(out Material _mat) {
 
     // Cloath Model
 #if defined(SHADING_MODEL_CLOTH)
-    _mat.sheenColor         = sqrt(_mat.baseColor.rgb);
+    _mat.sheenColor         = sqrt(_mat.albedo.rgb);
 #endif
 }
 
