@@ -24,7 +24,7 @@ uniform sampler2D MATERIAL_ALBEDOMAP;
 #endif
 
 float4 materialAlbedo() {
-    float4 base = float4(1.0, 1.0, 1.0, 1.0);
+    float4 base = float4(0.5, 0.5, 0.5, 1.0);
     
 #if defined(MATERIAL_BASECOLORMAP) && defined(MODEL_VERTEX_TEXCOORD)
     vec2 uv = v_texcoord.xy;

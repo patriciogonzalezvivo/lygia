@@ -25,9 +25,12 @@ options:
 */
 
 #ifndef CAMERA_POSITION
+#if defined(UNITY_COMPILER_HLSL)
+#define CAMERA_POSITION _WorldSpaceCameraPos
+#else
 #define CAMERA_POSITION float3(0.0, 0.0, -10.0)
 #endif
-
+#endif
 
 #ifndef LIGHT_POSITION
 #define LIGHT_POSITION  float3(0.0, 10.0, -50.0)
