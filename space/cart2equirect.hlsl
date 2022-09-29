@@ -1,9 +1,9 @@
-#include "../math/const.glsl"
+#include "../math/const.hlsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
 description: UV to equirect 3D projected vector 
-use: <vec3> cart2equirect(<vec2> uv)
+use: <float3> cart2equirect(<float2> uv)
 license: |
   Copyright (c) 2022 Patricio Gonzalez Vivo.
   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
@@ -13,10 +13,10 @@ license: |
 
 #ifndef FNC_CART2EQUIRECT
 #define FNC_CART2EQUIRECT
-vec3 cart2equirect(vec2 uv) {
+float3 cart2equirect(float2 uv) {
     float Phi = PI - uv.y * PI;
     float Theta = uv.x * TWO_PI;
-    vec3 dir = vec3(cos(Theta), 0.0, sin(Theta));
+    float3 dir = float3(cos(Theta), 0.0, sin(Theta));
     dir.y   = cos(Phi);//clamp(cos(Phi), MinCos, 1.0);
     dir.xz *= sqrt(1.0 - dir.y * dir.y);
     return dir;
