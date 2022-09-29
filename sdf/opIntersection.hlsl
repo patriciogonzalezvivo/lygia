@@ -1,5 +1,3 @@
-#include "../math/saturate.glsl"
-
 /*
 original_author:  Inigo Quiles
 description: intersection operation of two SDFs 

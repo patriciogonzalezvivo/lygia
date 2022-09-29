@@ -1,15 +1,13 @@
-#include "../math/saturate.glsl"
-
 /*
 original_author:  Inigo Quiles
 description: generate the SDF of s pyramid
-use: <float> pyramidSDF(<vec3> p, <float> h )
+use: <float> pyramidSDF(<float3> p, <float> h )
 */
 
 #ifndef FNC_PYRAMIDSDF
 #define FNC_PYRAMIDSDF
 
-float pyramidSDF( in vec3 p, in float h )  {
+float pyramidSDF( in float3 p, in float h )  {
    float m2 = h*h + 0.25;
    
    // symmetry
@@ -18,7 +16,7 @@ float pyramidSDF( in vec3 p, in float h )  {
    p.xz -= 0.5;
 
    // project into face plane (2D)
-   vec3 q = vec3( p.z, h*p.y - 0.5*p.x, h*p.x + 0.5*p.y);
+   float3 q = float3( p.z, h*p.y - 0.5*p.x, h*p.x + 0.5*p.y);
 
    float s = max(-q.x,0.0);
    float t = saturate( (q.y-0.5*p.z)/(m2+0.25) );
