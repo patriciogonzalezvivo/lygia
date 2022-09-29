@@ -3,16 +3,11 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: Displace UV space into a XYZ space using an heightmap
-use: <vec3> displace(<sampler2D> tex, <vec3> ro, <vec3|vec2> rd) 
-options:
-    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
-    - BILATERALBLUR_AMOUNT
-    - BILATERALBLUR_TYPE
-    - BILATERALBLUR_SAMPLER_FNC
+use: <float3> displace(<sampler2D> tex, <float3> ro, <float3|vec2> rd) 
 */
 
 #ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
+#define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
 #endif
 
 #ifndef DISPLACE_DEPTH
@@ -24,7 +19,7 @@ options:
 #endif
 
 #ifndef DISPLACE_SAMPLER
-#define DISPLACE_SAMPLER(UV) SAMPLER_FNC(tex, UV).r
+#define DISPLACE_SAMPLER(UV) tex2D(tex, UV).r
 #endif
 
 #ifndef DISPLACE_MAX_ITERATIONS
@@ -33,20 +28,20 @@ options:
 
 #ifndef FNC_DISPLACE
 #define FNC_DISPLACE
-vec3 displace(sampler2D tex, vec3 ro, vec3 rd) {
+float3 displace(sampler2D tex, float3 ro, float3 rd) {
 
     // the z length of the target vector
     float dz = ro.z - DISPLACE_DEPTH;
     float t = dz / rd.z;
 
     // the intersection point between the ray and the hightest point on the plane
-    vec3 prev = vec3(
+    float3 prev = float3(
         ro.x - rd.x * t,
         ro.y - rd.y * t,
         ro.z - rd.z * t
     );
     
-    vec3 curr = prev;
+    float3 curr = prev;
     float lastD = prev.z;
     float hmap = 0.;
     float df = 0.;
@@ -63,17 +58,17 @@ vec3 displace(sampler2D tex, vec3 ro, vec3 rd) {
         if (df < 0.0) {
             // linear interpolation to find more precise df
             float t = lastD / (abs(df)+lastD);
-            return (prev + t * (curr - prev)) + vec3(0.5, 0.5, 0.0);
+            return (prev + t * (curr - prev)) + float3(0.5, 0.5, 0.0);
         } 
         else
             lastD = df;
     }
     
-    return vec3(0.0, 0.0, 1.0);
+    return float3(0.0, 0.0, 1.0);
 }
 
-vec3 displace(sampler2D tex, vec3 ro, vec2 uv) {
-    vec3 rd = raymarchCamera(ro) * normalize(vec3(uv - 0.5, 1.0));
+float3 displace(sampler2D tex, float3 ro, vec2 uv) {
+    float3 rd = raymarchCamera(ro) * normalize(float3(uv - 0.5, 1.0));
     return displace(u_tex0Depth, ro, rd);
 }
 #endif
