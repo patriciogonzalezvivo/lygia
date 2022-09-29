@@ -35,7 +35,7 @@ void raymarchMaterial( in vec3 ro, in vec3 rd, inout Material mat) {
     vec3 nor = raymarchNormal( pos );
     float occ = raymarchAO( pos, nor );
 
-    mat.baseColor = res;
+    mat.albedo = res;
     mat.normal = nor;
     mat.ambientOcclusion = occ;
 

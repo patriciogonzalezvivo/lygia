@@ -1,24 +1,21 @@
-#include "../math/powFast.glsl"
-#include "../math/saturate.glsl"
-#include "../color/tonemap.glsl"
+#include "../math/powFast.hlsl"
+#include "../color/tonemap.hlsl"
 
-#include "shadow.glsl"
-#include "material.glsl"
-#include "fresnel.glsl"
+#include "shadow.hlsl"
+#include "material.hlsl"
+#include "fresnel.hlsl"
 
-#include "envMap.glsl"
-#include "sphericalHarmonics.glsl"
-#include "diffuse.glsl"
-#include "specular.glsl"
-
-#include "../math/saturate.glsl"
+#include "envMap.hlsl"
+#include "sphericalHarmonics.hlsl"
+#include "diffuse.hlsl"
+#include "specular.hlsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
 description: simple PBR shading model
 use: 
-    - <vec4> pbrLittle(<Material> material) 
-    - <vec4> pbrLittle(<vec4> albedo, <vec3> normal, <float> roughness, <float> metallic [, <vec3> f0] ) 
+    - <float4> pbrLittle(<Material> material) 
+    - <float4> pbrLittle(<float4> albedo, <float3> normal, <float> roughness, <float> metallic [, <float3> f0] ) 
 options:
     - DIFFUSE_FNC: diffuseOrenNayar, diffuseBurley, diffuseLambert (default)
     - SPECULAR_FNC: specularGaussian, specularBeckmann, specularCookTorrance (default), specularPhongRoughness, specularBlinnPhongRoughnes (default on mobile)
@@ -31,7 +28,7 @@ options:
 #if defined(GLSLVIEWER)
 #define CAMERA_POSITION u_camera
 #else
-#define CAMERA_POSITION vec3(0.0, 0.0, -10.0);
+#define CAMERA_POSITION float3(0.0, 0.0, -10.0);
 #endif
 #endif
 
@@ -40,7 +37,7 @@ options:
 #if defined(GLSLVIEWER)
 #define LIGHT_POSITION  u_light
 #else
-#define LIGHT_POSITION  vec3(0.0, 10.0, -50.0)
+#define LIGHT_POSITION  float3(0.0, 10.0, -50.0)
 #endif
 #endif
 
@@ -48,17 +45,17 @@ options:
 #if defined(GLSLVIEWER)
 #define LIGHT_COLOR     u_lightColor
 #else
-#define LIGHT_COLOR     vec3(0.5)
+#define LIGHT_COLOR     float3(0.5, 0.5, 0.5)
 #endif
 #endif
 
 #ifndef FNC_PBR_LITTLE
 #define FNC_PBR_LITTLE
 
-vec4 pbrLittle(vec4 albedo, vec3 position, vec3 normal, float roughness, float metallic, vec3 f0, float shadow ) {
-    vec3 L = normalize(LIGHT_POSITION - position);
-    vec3 N = normalize(normal);
-    vec3 V = normalize(CAMERA_POSITION - position);
+float4 pbrLittle(float4 albedo, float3 position, float3 normal, float roughness, float metallic, float3 f0, float shadow ) {
+    float3 L = normalize(LIGHT_POSITION - position);
+    float3 N = normalize(normal);
+    float3 V = normalize(CAMERA_POSITION - position);
 
     float notMetal = 1. - metallic;
     float smooth = .95 - saturate(roughness);
@@ -78,14 +75,14 @@ vec4 pbrLittle(vec4 albedo, vec3 position, vec3 normal, float roughness, float m
     float NoV = dot(N, V); 
 
     // SPECULAR
-    vec3 specIntensity =    vec3(1.0) *
+    float3 specIntensity =  float3(1.0, 1.0, 1.0) *
                             (0.04 * notMetal + 2.0 * metallic) * 
                             saturate(-1.1 + NoV + metallic) * // Fresnel
                             (metallic + smooth * 4.0); // make smaller highlights brighter
 
-    vec3 R = reflect(-V, N);
-    vec3 ambientSpecular = tonemapReinhard( envMap(R, roughness, metallic) ) * specIntensity;
-    ambientSpecular += fresnel(R, vec3(0.04), NoV) * metallic;
+    float3 R = reflect(-V, N);
+    float3 ambientSpecular = tonemapReinhard( envMap(R, roughness, metallic) ) * specIntensity;
+    ambientSpecular += fresnel(R, float3(0.04, 0.04, 0.04), NoV) * metallic;
 
     albedo.rgb = albedo.rgb * notMetal + ( ambientSpecular 
                     + LIGHT_COLOR * 2.0 * specular
@@ -94,12 +91,12 @@ vec4 pbrLittle(vec4 albedo, vec3 position, vec3 normal, float roughness, float m
     return albedo;
 }
 
-vec4 pbrLittle(vec4 albedo, vec3 position, vec3 normal, float roughness, float metallic, float shadow) {
-    return pbrLittle(albedo, position, normal, roughness, metallic, vec3(0.04), shadow);
+float4 pbrLittle(float4 albedo, float3 position, float3 normal, float roughness, float metallic, float shadow) {
+    return pbrLittle(albedo, position, normal, roughness, metallic, float3(0.04, 0.04, 0.04), shadow);
 }
 
-vec4 pbrLittle(Material material) {
-    return pbrLittle(material.albedo, material.position, material.normal, material.roughness, material.metallic, material.ambientOcclusion * material.shadow) + vec4(material.emissive, 0.0);
+float4 pbrLittle(Material material) {
+    return pbrLittle(material.albedo, material.position, material.normal, material.roughness, material.metallic, material.ambientOcclusion * material.shadow) + float4(material.emissive, 0.0);
 }
 
 #endif

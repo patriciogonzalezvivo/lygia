@@ -60,8 +60,8 @@ options:
 
 vec4 pbr(const Material _mat) {
     // Calculate Color
-    vec3    diffuseColor = _mat.baseColor.rgb * (vec3(1.0) - _mat.f0) * (1.0 - _mat.metallic);
-    vec3    specularColor = mix(_mat.f0, _mat.baseColor.rgb, _mat.metallic);
+    vec3    diffuseColor = _mat.albedo.rgb * (vec3(1.0) - _mat.f0) * (1.0 - _mat.metallic);
+    vec3    specularColor = mix(_mat.f0, _mat.albedo.rgb, _mat.metallic);
 
     vec3    N       = _mat.normal;                                  // Normal
     vec3    V       = normalize(CAMERA_POSITION - _mat.position);   // View
@@ -122,7 +122,7 @@ vec4 pbr(const Material _mat) {
     color.rgb  += Fr * IBL_LUMINANCE + lightSpecular;    // Specular
     color.rgb  *= _mat.ambientOcclusion;
     color.rgb  += _mat.emissive;
-    color.a     = _mat.baseColor.a;
+    color.a     = _mat.albedo.a;
 
     return color;
 }

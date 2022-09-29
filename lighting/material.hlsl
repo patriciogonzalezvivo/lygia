@@ -1,4 +1,4 @@
-#include "material/albedo.glsl"
+#include "material/albedo.hlsl"
 #include "material/specular.glsl"
 #include "material/emissive.glsl"
 #include "material/occlusion.glsl"
@@ -28,13 +28,13 @@ options:
 #ifndef STR_MATERIAL
 #define STR_MATERIAL
 struct Material {
-    vec4    albedo;
-    vec3    emissive;
+    float4  albedo;
+    float3  emissive;
 
-    vec3    position;       // world position of the surface
-    vec3    normal;         // world normal of the surface
+    float3  position;       // world position of the surface
+    float3  normal;         // world normal of the surface
     
-    vec3    f0;             // = vec3(0.04);
+    float3  f0;             // = float3(0.04);
     float   reflectance;    // = 0.5;
 
     float   roughness;
@@ -46,7 +46,7 @@ struct Material {
     float   clearCoat;
     float   clearCoatRoughness;
     #if defined(MATERIAL_CLEARCOAT_THICKNESS_NORMAL)
-    vec3    clearCoatNormal;// = vec3(0.0, 0.0, 1.0);
+    float3  clearCoatNormal;// = float3(0.0, 0.0, 1.0);
     #endif
 #endif
 
@@ -56,15 +56,15 @@ struct Material {
 #endif
 
 #if defined(SHADING_MODEL_CLOTH)
-    vec3    sheenColor;
+    float3  sheenColor;
 #endif
 
 #if defined(MATERIAL_SUBSURFACE_COLOR)
-    vec3    subsurfaceColor;// = vec3(1.0);
+    float3  subsurfaceColor;// = float3(1.0);
 #endif
 
 #if defined(SHADING_MODEL_SPECULAR_GLOSSINESS)
-    vec3    specularColor;
+    float3  specularColor;
     float   glossiness;
 #endif
 

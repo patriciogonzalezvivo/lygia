@@ -5,6 +5,15 @@
 #include "tonemap/uncharted.hlsl"
 #include "tonemap/unreal.hlsl"
 
+#include "tonemap/aces.hlsl"
+#include "tonemap/debug.hlsl"
+#include "tonemap/filmic.hlsl"
+#include "tonemap/linear.hlsl"
+#include "tonemap/reinhard.hlsl"
+#include "tonemap/reinhardJodie.hlsl"
+#include "tonemap/uncharted.hlsl"
+#include "tonemap/uncharted2.hlsl"
+#include "tonemap/unreal.hlsl"
 /*
 original_author: Patricio Gonzalez Vivo  
 description: Tone maps the specified RGB color (meaning convert from HDR to LDR) inside the range [0..~8] to [0..1]. The input must be in linear HDR pre-exposed.

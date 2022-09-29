@@ -1,26 +1,30 @@
-#include "../../color/space/gamma2linear.glsl"
+#include "../../color/space/gamma2linear.hlsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
 description: get material BaseColor from GlslViewer's defines https://github.com/patriciogonzalezvivo/glslViewer/wiki/GlslViewer-DEFINES#material-defines 
-use: vec4 materialBaseColor()
+use: float4 materialAlbedo()
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 */
 
 #ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
+#define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
 #endif
 
-#ifndef FNC_MATERIAL_BASECOLOR
-#define FNC_MATERIAL_BASECOLOR
+#ifndef FNC_MATERIAL_ALBEDO
+#define FNC_MATERIAL_ALBEDO
 
 #ifdef MATERIAL_BASECOLORMAP
 uniform sampler2D MATERIAL_BASECOLORMAP;
 #endif
 
-vec4 materialBaseColor() {
-    vec4 base = vec4(1.0);
+#ifdef MATERIAL_ALBEDOMAP
+uniform sampler2D MATERIAL_ALBEDOMAP;
+#endif
+
+float4 materialAlbedo() {
+    float4 base = float4(1.0, 1.0, 1.0, 1.0);
     
 #if defined(MATERIAL_BASECOLORMAP) && defined(MODEL_VERTEX_TEXCOORD)
     vec2 uv = v_texcoord.xy;
@@ -31,9 +35,22 @@ vec4 materialBaseColor() {
     uv *= (MATERIAL_BASECOLORMAP_SCALE).xy;
     #endif
     base = gamma2linear( SAMPLER_FNC(MATERIAL_BASECOLORMAP, uv) );
-    
+
+#elif defined(MATERIAL_ALBEDOMAP) && defined(MODEL_VERTEX_TEXCOORD)
+    vec2 uv = v_texcoord.xy;
+    #if defined(MATERIAL_ALBEDOMAP_OFFSET)
+    uv += (MATERIAL_ALBEDOMAP_OFFSET).xy;
+    #endif
+    #if defined(MATERIAL_ALBEDOMAP_SCALE)
+    uv *= (MATERIAL_ALBEDOMAP_SCALE).xy;
+    #endif
+    base = gamma2linear( SAMPLER_FNC(MATERIAL_ALBEDOMAP, uv) );
+
 #elif defined(MATERIAL_BASECOLOR)
     base = MATERIAL_BASECOLOR;
+
+#elif defined(MATERIAL_ALBEDO)
+    base = MATERIAL_ALBEDO;
 
 #endif
 

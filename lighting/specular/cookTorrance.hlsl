@@ -1,6 +1,7 @@
-#include "../common/beckmann.glsl"
-#include "../../math/powFast.glsl"
-#include "../../math/const.glsl"
+#include "../common/beckmann.hlsl"
+#include "../../math/powFast.hlsl"
+#include "../../math/const.hlsl"
+
 
 #ifndef SPECULAR_POW
 #if defined(TARGET_MOBILE) || defined(PLATFORM_RPI) || defined(PLATFORM_WEBGL)
@@ -14,12 +15,12 @@
 #define FNC_SPECULAR_COOKTORRANCE
 
 // https://github.com/stackgl/glsl-specular-cook-torrance
-float specularCookTorrance(vec3 _L, vec3 _N, vec3 _V, float _NoV, float _NoL, float _roughness, float _fresnel) {
+float specularCookTorrance(float3 _L, float3 _N, float3 _V, float _NoV, float _NoL, float _roughness, float _fresnel) {
     float NoV = max(_NoV, 0.0);
     float NoL = max(_NoL, 0.0);
 
     //Half angle vector
-    vec3 H = normalize(_L + _V);
+    float3 H = normalize(_L + _V);
 
     //Geometric term
     float NoH = max(dot(_N, H), 0.0);
@@ -40,13 +41,13 @@ float specularCookTorrance(vec3 _L, vec3 _N, vec3 _V, float _NoV, float _NoL, fl
 }
 
 // https://github.com/glslify/glsl-specular-cook-torrance
-float specularCookTorrance(vec3 L, vec3 N, vec3 V, float roughness, float fresnel) {
+float specularCookTorrance(float3 L, float3 N, float3 V, float roughness, float fresnel) {
     float NoV = max(dot(N, V), 0.0);
     float NoL = max(dot(N, L), 0.0);
     return specularCookTorrance(L, N, V, NoV, NoL, roughness, fresnel);
 }
 
-float specularCookTorrance(vec3 L, vec3 N, vec3 V, float roughness) {
+float specularCookTorrance(float3 L, float3 N, float3 V, float roughness) {
     return specularCookTorrance(L, N, V, roughness, 0.04);
 }
 
