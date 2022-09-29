@@ -10,6 +10,6 @@ use: raysSDF(<float2> st, <int> N)
 #define FNC_RAYSSDF
 float raysSDF(in float2 st, in int N) {
     st -= .5;
-    return fract(atan2(st.y, st.x) / TAU * float(N));
+    return frac( atan2(st.y, st.x) / TAU * float(N));
 }
 #endif
