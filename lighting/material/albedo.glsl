@@ -24,7 +24,7 @@ uniform sampler2D MATERIAL_ALBEDOMAP;
 #endif
 
 vec4 materialAlbedo() {
-    vec4 base = vec4(1.0);
+    vec4 albedo = vec4(0.5, 0.5, 0.5, 1.0);
     
 #if defined(MATERIAL_BASECOLORMAP) && defined(MODEL_VERTEX_TEXCOORD)
     vec2 uv = v_texcoord.xy;
@@ -34,7 +34,7 @@ vec4 materialAlbedo() {
     #if defined(MATERIAL_BASECOLORMAP_SCALE)
     uv *= (MATERIAL_BASECOLORMAP_SCALE).xy;
     #endif
-    base = gamma2linear( SAMPLER_FNC(MATERIAL_BASECOLORMAP, uv) );
+    albedo = gamma2linear( SAMPLER_FNC(MATERIAL_BASECOLORMAP, uv) );
 
 #elif defined(MATERIAL_ALBEDOMAP) && defined(MODEL_VERTEX_TEXCOORD)
     vec2 uv = v_texcoord.xy;
@@ -44,21 +44,21 @@ vec4 materialAlbedo() {
     #if defined(MATERIAL_ALBEDOMAP_SCALE)
     uv *= (MATERIAL_ALBEDOMAP_SCALE).xy;
     #endif
-    base = gamma2linear( SAMPLER_FNC(MATERIAL_ALBEDOMAP, uv) );
+    albedo = gamma2linear( SAMPLER_FNC(MATERIAL_ALBEDOMAP, uv) );
 
 #elif defined(MATERIAL_BASECOLOR)
-    base = MATERIAL_BASECOLOR;
+    albedo = MATERIAL_BASECOLOR;
 
 #elif defined(MATERIAL_ALBEDO)
-    base = MATERIAL_ALBEDO;
+    albedo = MATERIAL_ALBEDO;
 
 #endif
 
 #if defined(MODEL_VERTEX_COLOR)
-    base *= v_color;
+    albedo *= v_color;
 #endif
 
-    return base;
+    return albedo;
 }
 
 #endif
