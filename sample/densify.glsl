@@ -10,10 +10,10 @@ options:
 #define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
 #endif
 
-#ifndef FNC_DENSIFY
-#define FNC_DENSIFY
+#ifndef FNC_SAMPLEDENSIFY
+#define FNC_SAMPLEDENSIFY
 
-vec3 densifyBox(sampler2D tex, vec2 st, vec2 pixel, int passes) {
+vec3 sampleDensifyBox(sampler2D tex, vec2 st, vec2 pixel, int passes) {
     vec3 color = SAMPLER_FNC(tex, st).rgb;
 
     if (color == vec3(0.0)) {
@@ -43,7 +43,7 @@ vec3 densifyBox(sampler2D tex, vec2 st, vec2 pixel, int passes) {
     return color;
 }
 
-vec3 densifyGaussian(sampler2D tex, vec2 st, vec2 pixel, int passes) {
+vec3 sampleDensifyGaussian(sampler2D tex, vec2 st, vec2 pixel, int passes) {
     vec3 color = SAMPLER_FNC(tex, st).rgb;
 
     if (dot(color,color) == 0.0) {
@@ -79,8 +79,8 @@ vec3 densifyGaussian(sampler2D tex, vec2 st, vec2 pixel, int passes) {
     return color;
 }
 
-vec3 densify(sampler2D tex, vec2 st, vec2 pixel, int passes) {
-    return densifyGaussian(tex, st, pixel, passes);
+vec3 sampleDensify(sampler2D tex, vec2 st, vec2 pixel, int passes) {
+    return sampleDensifyGaussian(tex, st, pixel, passes);
 }
 
 #endif
