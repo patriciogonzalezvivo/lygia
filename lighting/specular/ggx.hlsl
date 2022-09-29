@@ -1,9 +1,17 @@
-#include "../common/ggx.hlsl"
+// #include "../common/ggx.hlsl"
 #include "../common/smithGGXCorrelated.hlsl"
 #include "../fresnel.hlsl"
 
 #ifndef FNC_SPECULAR_GGX
 #define FNC_SPECULAR_GGX
+
+float commonGGX(float NoH, float linearRoughness) {
+    float oneMinusNoHSquared = 1.0 - NoH * NoH;
+    float a = NoH * linearRoughness;
+    float k = linearRoughness / (oneMinusNoHSquared + a * a);
+    float d = k * k * ONE_OVER_PI;
+    return saturateMediump(d);
+}
 
 float specularGGX(float3 _L, float3 _N, float3 _V, float _NoV, float _NoL, float _roughness, float _fresnel) {
     float NoV = max(_NoV, 0.0);
@@ -15,9 +23,9 @@ float specularGGX(float3 _L, float3 _N, float3 _V, float _NoV, float _NoL, float
 
     // float NoV, float NoL, float roughness
     float linearRoughness =  _roughness * _roughness;
-    float D = GGX(NoH, linearRoughness);
+    float D = commonGGX(NoH, linearRoughness);
     float V = smithGGXCorrelated(_NoV, NoL,linearRoughness);
-    float F = fresnel(float3(_fresnel), LoH).r;
+    float F = fresnel(float3(_fresnel, _fresnel, _fresnel), LoH).r;
 
     return (D * V) * F;
 }

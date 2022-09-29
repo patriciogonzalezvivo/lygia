@@ -1,4 +1,4 @@
-#include "shadow.glsl"
+#include "shadow.hlsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
