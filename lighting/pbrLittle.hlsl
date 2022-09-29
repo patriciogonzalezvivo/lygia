@@ -25,28 +25,16 @@ options:
 */
 
 #ifndef CAMERA_POSITION
-#if defined(GLSLVIEWER)
-#define CAMERA_POSITION u_camera
-#else
-#define CAMERA_POSITION float3(0.0, 0.0, -10.0);
-#endif
+#define CAMERA_POSITION float3(0.0, 0.0, -10.0)
 #endif
 
 
 #ifndef LIGHT_POSITION
-#if defined(GLSLVIEWER)
-#define LIGHT_POSITION  u_light
-#else
 #define LIGHT_POSITION  float3(0.0, 10.0, -50.0)
-#endif
 #endif
 
 #ifndef LIGHT_COLOR
-#if defined(GLSLVIEWER)
-#define LIGHT_COLOR     u_lightColor
-#else
 #define LIGHT_COLOR     float3(0.5, 0.5, 0.5)
-#endif
 #endif
 
 #ifndef FNC_PBR_LITTLE
@@ -61,13 +49,13 @@ float4 pbrLittle(float4 albedo, float3 position, float3 normal, float roughness,
     float smooth = .95 - saturate(roughness);
 
     // DIFFUSE
-    float diffuse = diffuse(L, N, V, roughness);
-    float specular = specular(L, N, V, roughness);
+    float diff = diffuse(L, N, V, roughness);
+    float spec = specular(L, N, V, roughness);
 
-    specular *= shadow;
-    diffuse *= shadow;
+    spec *= shadow;
+    diff *= shadow;
     
-    albedo.rgb = albedo.rgb * diffuse;
+    albedo.rgb = albedo.rgb * diff;
 #ifdef SCENE_SH_ARRAY
     albedo.rgb *= tonemapReinhard( sphericalHarmonics(N) );
 #endif
@@ -84,8 +72,8 @@ float4 pbrLittle(float4 albedo, float3 position, float3 normal, float roughness,
     float3 ambientSpecular = tonemapReinhard( envMap(R, roughness, metallic) ) * specIntensity;
     ambientSpecular += fresnel(R, float3(0.04, 0.04, 0.04), NoV) * metallic;
 
-    albedo.rgb = albedo.rgb * notMetal + ( ambientSpecular 
-                    + LIGHT_COLOR * 2.0 * specular
+    albedo.rgb =    albedo.rgb * notMetal + ( ambientSpecular 
+                    + LIGHT_COLOR * 2.0 * spec
                     ) * (notMetal * smooth + albedo.rgb * metallic);
 
     return albedo;

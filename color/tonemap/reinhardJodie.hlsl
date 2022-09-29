@@ -12,7 +12,7 @@ use: <float3|float4> tonemapReinhardJodie(<float3|float4> x)
 float3 tonemapReinhardJodie(const float3 x) { 
     float l = luminance(x);
     float3 tc = x / (x + 1.0);
-    return mix(x / (l + 1.0), tc, tc); 
+    return lerp(x / (l + 1.0), tc, tc); 
 }
 float4 tonemapReinhardJodie(const float4 x) { return float4( tonemapReinhardJodie(x.rgb), x.a ); }
 #endif

@@ -13,7 +13,7 @@ float diffuseOrenNayar(float3 L, float3 N, float3 V, float NoV, float NoL, float
     float LoV = dot(L, V);
     
     float s = LoV - NoL * NoV;
-    float t = mix(1.0, max(NoL, NoV), step(0.0, s));
+    float t = lerp(1.0, max(NoL, NoV), step(0.0, s));
 
     float sigma2 = roughness * roughness;
     float A = 1.0 + sigma2 * (1.0 / (sigma2 + 0.13) + 0.5 / (sigma2 + 0.33));

@@ -40,7 +40,7 @@ float3 sphericalHarmonics(const float3 n) {
 #endif
         , 0.0);
 #else
-    return float3(1.0);
+    return float3(1.0, 1.0, 1.0);
 #endif
 }
 

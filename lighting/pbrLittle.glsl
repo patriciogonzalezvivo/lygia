@@ -64,13 +64,13 @@ vec4 pbrLittle(vec4 albedo, vec3 position, vec3 normal, float roughness, float m
     float smooth = .95 - saturate(roughness);
 
     // DIFFUSE
-    float diffuse = diffuse(L, N, V, roughness);
-    float specular = specular(L, N, V, roughness);
+    float diff = diffuse(L, N, V, roughness);
+    float spec = specular(L, N, V, roughness);
 
-    specular *= shadow;
-    diffuse *= shadow;
+    spec *= shadow;
+    diff *= shadow;
     
-    albedo.rgb = albedo.rgb * diffuse;
+    albedo.rgb = albedo.rgb * diff;
 #ifdef SCENE_SH_ARRAY
     albedo.rgb *= tonemapReinhard( sphericalHarmonics(N) );
 #endif
@@ -88,7 +88,7 @@ vec4 pbrLittle(vec4 albedo, vec3 position, vec3 normal, float roughness, float m
     ambientSpecular += fresnel(R, vec3(0.04), NoV) * metallic;
 
     albedo.rgb = albedo.rgb * notMetal + ( ambientSpecular 
-                    + LIGHT_COLOR * 2.0 * specular
+                    + LIGHT_COLOR * 2.0 * spec
                     ) * (notMetal * smooth + albedo.rgb * metallic);
 
     return albedo;

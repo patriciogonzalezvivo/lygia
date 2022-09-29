@@ -12,7 +12,8 @@ use: <float3> fakeCube(<float3> _normal [, <float> _shininnes])
 
 float3 fakeCube(float3 _normal, float _shininnes) {
     float3 rAbs = abs(_normal);
-    return float3( powFast(max(max(rAbs.x, rAbs.y), rAbs.z) + 0.005, _shininnes) );
+    float v = powFast(max(max(rAbs.x, rAbs.y), rAbs.z) + 0.005, _shininnes );
+    return float3(v, v, v);
 }
 
 float3 fakeCube(float3 _normal) {

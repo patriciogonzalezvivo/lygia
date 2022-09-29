@@ -1,14 +1,14 @@
 #include "material/albedo.hlsl"
-#include "material/specular.glsl"
-#include "material/emissive.glsl"
-#include "material/occlusion.glsl"
+#include "material/specular.hlsl"
+#include "material/emissive.hlsl"
+#include "material/occlusion.hlsl"
 
-#include "material/normal.glsl"
+#include "material/normal.hlsl"
 
-#include "material/metallic.glsl"
-#include "material/roughness.glsl"
+#include "material/metallic.hlsl"
+#include "material/roughness.hlsl"
 
-#include "material/shininess.glsl"
+#include "material/shininess.hlsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
