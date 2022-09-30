@@ -32,6 +32,12 @@ vec4 sample2DCube(in sampler2D tex_lut, in vec3 xyz) {
     vec2 uvA = (cellA * cells_factor) + halt_pixel + ((cells_factor - pixel) * xyz.xy);
     vec2 uvB = (cellB * cells_factor) + halt_pixel + ((cells_factor - pixel) * xyz.xy);
 
+
+    #ifdef SAMPLE_2DCUBE_FLIP_Y
+    uvA.y = 1.0-uvA.y;
+    uvB.y = 1.0-uvB.y;
+    #endif
+
     vec4 b0 = SAMPLER_FNC(tex_lut, saturate(uvA));
     vec4 b1 = SAMPLER_FNC(tex_lut, saturate(uvB));
 
