@@ -10,5 +10,6 @@ description: Include all available easing animations
 #include "easing/exponential.glsl"
 #include "easing/linear.glsl"
 #include "easing/quadratic.glsl"
+#include "easing/quartic.glsl"
 #include "easing/quintic.glsl"
 #include "easing/sine.glsl"
