@@ -8,6 +8,7 @@
 #include "shininess.glsl"
 
 #include "../material.glsl"
+#include "../shadow.glsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
