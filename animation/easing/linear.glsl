@@ -6,7 +6,15 @@ use: linear(<float> x)
 
 #ifndef FNC_LINEAR
 #define FNC_LINEAR
-float linear(in float t) {
+float linearIn(in float t) {
+    return t;
+}
+
+float linearOut(in float t) {
+    return t;
+}
+
+float linearInOUT(in float t) {
     return t;
 }
 #endif
