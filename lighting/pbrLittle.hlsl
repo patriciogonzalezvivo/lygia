@@ -61,12 +61,9 @@ float4 pbrLittle(float4 albedo, float3 position, float3 normal, float roughness,
     float smooth = .95 - saturate(roughness);
 
     // DIFFUSE
-    float diff = diffuse(L, N, V, roughness);
-    float spec = specular(L, N, V, roughness);
+    float diff = diffuse(L, N, V, roughness) * shadow;
+    float spec = specular(L, N, V, roughness) * shadow;
 
-    spec *= shadow;
-    diff *= shadow;
-    
     albedo.rgb = albedo.rgb * diff;
     #if defined(UNITY_COMPILER_HLSL)
     albedo.rgb *= ShadeSH9(half4(N,1));

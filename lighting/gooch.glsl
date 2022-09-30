@@ -59,7 +59,7 @@ options:
 
 #ifndef FNC_GOOCH
 #define FNC_GOOCH
-vec4 gooch(vec4 albedo, vec3 normal, vec3 light, vec3 view, float roughness) {
+vec4 gooch(vec4 albedo, vec3 normal, vec3 light, vec3 view, float roughness, float shadow) {
     vec3 warm = GOOCH_WARM + albedo.rgb * 0.6;
     vec3 cold = GOOCH_COLD + albedo.rgb * 0.1;
 
@@ -68,18 +68,16 @@ vec4 gooch(vec4 albedo, vec3 normal, vec3 light, vec3 view, float roughness) {
     vec3 v = normalize(view);
 
     // Lambert Diffuse
-    float diffuse = diffuse(l, n, v, roughness);
+    float diff = diffuse(l, n, v, roughness) * shadow;
     // Phong Specular
-    float specular = specular(l, n, v, roughness);
+    float spec = specular(l, n, v, roughness) * shadow;
 
-#if defined(LIGHT_SHADOWMAP) && defined(LIGHT_SHADOWMAP_SIZE) && defined(LIGHT_COORD)
-    float bias = 0.005;
-    float shadow = sampleShadowPCF(u_lightShadowMap, vec2(LIGHT_SHADOWMAP_SIZE), (LIGHT_COORD).xy, (LIGHT_COORD).z - bias);
-    specular *= shadow;
-    diffuse *= shadow;
-#endif
+    return vec4(mix(mix(cold, warm, diff), GOOCH_SPECULAR, spec), albedo.a);
+}
 
-    return vec4(mix(mix(cold, warm, diffuse), GOOCH_SPECULAR, specular), albedo.a);
+
+vec4 gooch(vec4 albedo, vec3 normal, vec3 light, vec3 view, float roughness) {
+    return gooch(albedo, normal, light, view, roughness, 1.0);
 }
 
 vec4 gooch(Material material) {
