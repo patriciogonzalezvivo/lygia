@@ -1,7 +1,6 @@
 #include "../math/powFast.hlsl"
 #include "../color/tonemap.hlsl"
 
-#include "shadow.hlsl"
 #include "material.hlsl"
 #include "fresnel.hlsl"
 
