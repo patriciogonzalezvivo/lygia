@@ -7,8 +7,6 @@
 
 #include "material.hlsl"
 
-#include "../sample/shadowPCF.hlsl"
-
 /*
 original_author: Patricio Gonzalez Vivo
 description: render with a gooch stylistic shading model
