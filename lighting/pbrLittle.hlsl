@@ -33,11 +33,20 @@ options:
 #endif
 
 #ifndef LIGHT_POSITION
+#if defined(UNITY_COMPILER_HLSL)
+#define LIGHT_POSITION _WorldSpaceLightPos0.xyz
+#else
 #define LIGHT_POSITION  float3(0.0, 10.0, -50.0)
+#endif
 #endif
 
 #ifndef LIGHT_COLOR
+#if defined(UNITY_COMPILER_HLSL)
+#include <UnityLightingCommon.cginc>
+#define LIGHT_COLOR     _LightColor0.rgb
+#else
 #define LIGHT_COLOR     float3(0.5, 0.5, 0.5)
+#endif
 #endif
 
 #ifndef FNC_PBR_LITTLE
@@ -59,9 +68,11 @@ float4 pbrLittle(float4 albedo, float3 position, float3 normal, float roughness,
     diff *= shadow;
     
     albedo.rgb = albedo.rgb * diff;
-#ifdef SCENE_SH_ARRAY
+    #if defined(UNITY_COMPILER_HLSL)
+    albedo.rgb *= ShadeSH9(half4(N,1));
+    #elif defined(SCENE_SH_ARRAY)
     albedo.rgb *= tonemapReinhard( sphericalHarmonics(N) );
-#endif
+    #endif
 
     float NoV = dot(N, V); 
 
