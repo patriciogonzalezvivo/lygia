@@ -46,7 +46,7 @@ struct sphere_t {
     int material;
 };
 
-bool isect_sphere( const in ray_t ray, const in sphere_t sphere, inout float t0, inout float t1) {
+bool isect_sphere(const in sphere_t sphere, const in ray_t ray, inout float t0, inout float t1) {
     float3 rc = sphere.origin - ray.origin;
     float radius2 = sphere.radius * sphere.radius;
     float tca = dot(rc, ray.direction);
@@ -81,86 +81,10 @@ float henyey_greenstein_phase(float mu) {
     return (1.0 - henyey_greenstein_g*henyey_greenstein_g) / ((4. + PI) * pow(1.0 + henyey_greenstein_g*henyey_greenstein_g - 2.0 * henyey_greenstein_g * mu, 1.5));
 }
 
-sphere_t atmos;
-
-// #ifdef ATMOSPHERE_FAST
-// const float BIG = 1e20;
-// const float SMALL = 1e-20;
-
-// float approx_air_column_density_ratio_through_atmosphere(
-//     in float a,
-//     in float b,
-//     in float z2,
-//     in float r0
-// ){
-//     // GUIDE TO VARIABLE NAMES:
-//     //  "x*" distance along the ray from closest approach
-//     //  "z*" distance from the center of the world at closest approach
-//     //  "r*" distance ("radius") from the center of the world
-//     //  "*0" variable at reference point
-//     //  "*2" the square of a variable
-//     //  "ch" a nudge we give to prevent division by zero, analogous to the Chapman function
-//     float SQRT_HALF_PI = sqrt(HALF_PI);
-//     const float k = 0.6; // "k" is an empirically derived constant
-//     float x0 = sqrt(max(r0*r0 - z2, SMALL));
-//     // if obstructed by the world, approximate answer by using a ludicrously large number
-//     if (a < x0 && -x0 < b && z2 < r0*r0) { return BIG; }
-//     float abs_a  = abs(a);
-//     float abs_b  = abs(b);
-//     float z      = sqrt(z2);
-//     float sqrt_z = sqrt(z);
-//     float ra     = sqrt(a*a+z2);
-//     float rb     = sqrt(b*b+z2);
-//     float ch0    = (1. - 1./(2.*r0)) * SQRT_HALF_PI * sqrt_z + k*x0;
-//     float cha    = (1. - 1./(2.*ra)) * SQRT_HALF_PI * sqrt_z + k*abs_a;
-//     float chb    = (1. - 1./(2.*rb)) * SQRT_HALF_PI * sqrt_z + k*abs_b;
-//     float s0     = min(exp(r0- z),1.) / (x0/r0 + 1./ch0);
-//     float sa     = exp(r0-ra) / max(abs_a/ra + 1./cha, 0.01);
-//     float sb     = exp(r0-rb) / max(abs_b/rb + 1./chb, 0.01);
-//     return max( sign(b)*(s0-sb) - sign(a)*(s0-sa), 0.0 );
-// }
-
-// // "approx_air_column_density_ratio_along_3d_ray_for_curved_world" is just a convenience wrapper 
-// //   for the above function that works with 3d vectors.
-// float approx_air_column_density_ratio_along_3d_ray_for_curved_world (
-//     float3  P, // position of viewer
-//     float3  V, // direction of viewer (unit vector)
-//     float x, // distance from the viewer at which we stop the "raymarch"
-//     float r, // radius of the planet
-//     float H  // scale height of the planet's atmosphere
-// ){
-//     float xz = dot(-P,V);           // distance ("radius") from the ray to the center of the world at closest approach, squared
-//     float z2 = dot( P,P) - xz * xz; // distance from the origin at which closest approach occurs
-//     return approx_air_column_density_ratio_through_atmosphere( 0.-xz, x-xz, z2, r/H );
-// }
-// #endif
-
-
-bool get_sun_light(const in ray_t ray, inout float optical_depthR, inout float optical_depthM) {
+bool get_sun_light(const in sphere_t atmos, const in ray_t ray, inout float optical_depthR, inout float optical_depthM) {
     float t0 = 0.0;
     float t1 = 0.0;
-    isect_sphere(ray, atmos, t0, t1);
-
-    // #ifdef ATMOSPHERE_FAST
-    //     // this is the implementation using a fast closed form approximation
-    // optical_depthR = 
-    //     approx_air_column_density_ratio_along_3d_ray_for_curved_world (
-    //         ray.origin,    // position of viewer
-    //         ray.direction, // direction of viewer (unit vector)
-    //         t1, // distance from the viewer at which we stop the "raymarch"
-    //         ATMOSPHERE_RADIUS_MIN, // radius of the planet
-    //         hR  // scale height of the planet's atmosphere
-    //     );
-    // optical_depthM = 
-    //     approx_air_column_density_ratio_along_3d_ray_for_curved_world (
-    //         ray.origin,    // position of viewer
-    //         ray.direction, // direction of viewer (unit vector)
-    //         t1, // distance from the viewer at which we stop the "raymarch"
-    //         ATMOSPHERE_RADIUS_MIN, // radius of the planet
-    //         hM  // scale height of the planet's atmosphere
-    //     );
-
-    // #else
+    isect_sphere(atmos, ray, t0, t1);
 
     // this is the implementation using classical raymarching 
     float march_pos = 0.;
@@ -178,16 +102,15 @@ bool get_sun_light(const in ray_t ray, inout float optical_depthR, inout float o
     
         march_pos += march_step;
     }
-    // #endif
 
     return true;
 }
 
-float3 get_incident_light(const in ray_t ray, float3 sun_dir) {
+float3 get_incident_light(inout sphere_t atmos, const in ray_t ray, float3 sun_dir) {
     // "pierce" the atmosphere with the viewing ray
     float t0 = 0.0;
     float t1 = 0.0;
-    if (!isect_sphere(ray, atmos, t0, t1))
+    if (!isect_sphere(atmos, ray, t0, t1))
         return float3(0.0, 0.0, 0.0);
 
     float march_step = t1 / float(ATMOSPHERE_SAMPLES);
@@ -233,6 +156,7 @@ float3 get_incident_light(const in ray_t ray, float3 sun_dir) {
         float optical_depth_lightR = 0.;
         float optical_depth_lightM = 0.;
         bool overground = get_sun_light(
+            atmos,
             light_ray,
             optical_depth_lightR,
             optical_depth_lightM);
@@ -257,10 +181,11 @@ float3 atmosphere(float3 eye_dir, float3 sun_dir) {
     ray.origin = float3(0., ATMOSPHERE_RADIUS_MIN + 1., 0.);
     ray.direction = eye_dir;
 
+    sphere_t atmos;
     atmos.origin = float3(0.0, 0.0, 0.0);
     atmos.radius = ATMOSPHERE_RADIUS_MAX;
     atmos.material = 0.0;
-    return get_incident_light(ray, sun_dir);
+    return get_incident_light(atmos, ray, sun_dir);
 }
 
 #endif
