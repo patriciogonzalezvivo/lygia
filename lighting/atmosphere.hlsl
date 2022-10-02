@@ -81,7 +81,7 @@ float henyey_greenstein_phase(float mu) {
     return (1.0 - henyey_greenstein_g*henyey_greenstein_g) / ((4. + PI) * pow(1.0 + henyey_greenstein_g*henyey_greenstein_g - 2.0 * henyey_greenstein_g * mu, 1.5));
 }
 
-const sphere_t atmos = sphere_t( float3(0.0, 0.0, 0.0), ATMOSPHERE_RADIUS_MAX, 0.0);
+sphere_t atmos;
 
 // #ifdef ATMOSPHERE_FAST
 // const float BIG = 1e20;
@@ -188,7 +188,7 @@ float3 get_incident_light(const in ray_t ray, float3 sun_dir) {
     float t0 = 0.0;
     float t1 = 0.0;
     if (!isect_sphere(ray, atmos, t0, t1))
-        return float3(0.0);
+        return float3(0.0, 0.0, 0.0);
 
     float march_step = t1 / float(ATMOSPHERE_SAMPLES);
 
@@ -226,7 +226,9 @@ float3 get_incident_light(const in ray_t ray, float3 sun_dir) {
         optical_depthM += hm;
 
         // gather the sunlight
-        ray_t light_ray = ray_t(s, sun_dir);
+        ray_t light_ray;// = ray_t(s, sun_dir);
+        light_ray.origin = s;
+        light_ray.direction = sun_dir;
 
         float optical_depth_lightR = 0.;
         float optical_depth_lightM = 0.;
@@ -251,7 +253,13 @@ float3 get_incident_light(const in ray_t ray, float3 sun_dir) {
 }
 
 float3 atmosphere(float3 eye_dir, float3 sun_dir) {
-    ray_t ray = ray_t(float3(0., ATMOSPHERE_RADIUS_MIN + 1., 0.), eye_dir);
+    ray_t ray;
+    ray.origin = float3(0., ATMOSPHERE_RADIUS_MIN + 1., 0.);
+    ray.direction = eye_dir;
+
+    atmos.origin = float3(0.0, 0.0, 0.0);
+    atmos.radius = ATMOSPHERE_RADIUS_MAX;
+    atmos.material = 0.0;
     return get_incident_light(ray, sun_dir);
 }
 
