@@ -109,7 +109,7 @@ This library:
         - esbuild: https://github.com/ricardomatias/esbuild-plugin-glsl-include
         - webpack: https://github.com/grieve/webpack-glsl-loader
         - observable: https://observablehq.com/d/e4e8a96f64a6bf81
-        - vanilla: https://github.com/actarian/vscode-glsl-canvas/blob/91ff09bf6cec35e73d1b64e50b56ef3299d2fe6b/src/glsl/export.ts#L351
+        - implement your own vanilla JS include dependency resolver like [this](https://github.com/actarian/vscode-glsl-canvas/blob/91ff09bf6cec35e73d1b64e50b56ef3299d2fe6b/src/glsl/export.ts#L351)
 
 * it's very granular. One file, one function. Ex: `myFunc.glsl` contains `myFunct()`.
 
