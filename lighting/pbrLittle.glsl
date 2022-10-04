@@ -95,6 +95,14 @@ vec4 pbrLittle(vec4 albedo, vec3 position, vec3 normal, float roughness, float m
     return pbrLittle(albedo, position, normal, roughness, metallic, vec3(0.04), shadow);
 }
 
+vec4 pbrLittle(vec4 albedo, vec3 position, vec3 normal, float roughness, float metallic) {
+    return pbrLittle(albedo, position, normal, roughness, metallic, vec3(0.04), 1.0);
+}
+
+vec4 pbrLittle(vec4 albedo, vec3 normal, float roughness, float metallic) {
+    return pbrLittle(albedo, vec3(0.0), normal, roughness, metallic, vec3(0.04), 1.0);
+}
+
 vec4 pbrLittle(Material material) {
     return pbrLittle(material.albedo, material.position, material.normal, material.roughness, material.metallic, material.ambientOcclusion * material.shadow) + vec4(material.emissive, 0.0);
 }
