@@ -59,7 +59,7 @@ FBM_NOISE_TYPE fbm(in vec2 st) {
 
     // Loop of octaves
     for (int i = 0; i < FBM_OCTAVES; i++) {
-        value += amplitud * FBM_NOISE_FNC2(st);
+        value += amplitud * FBM_NOISE2_FNC(st);
         st *= FBM_SCALE_SCALAR;
         amplitud *= FBM_AMPLITUD_SCALAR;
     }
@@ -73,7 +73,7 @@ FBM_NOISE_TYPE fbm(in vec3 pos) {
 
     // Loop of octaves
     for (int i = 0; i < FBM_OCTAVES; i++) {
-        value += amplitud * FBM_NOISE_FNC3(pos);
+        value += amplitud * FBM_NOISE3_FNC(pos);
         pos *= FBM_SCALE_SCALAR;
         amplitud *= FBM_AMPLITUD_SCALAR;
     }
