@@ -4,7 +4,7 @@
 
 Tired of reimplementing and searching for the same functions over and over, I started compiling and building a shader library of reusable assets (mostly functions) that can be include over and over. It's very granular, designed for reusability, performance and flexibility. 
 
-Learn how to use it with this examples for:
+Learn how to use it with this **examples** for:
 
 * [Unity3D (HLSL)](https://github.com/patriciogonzalezvivo/lygia_unity_examples)
 * [GlslViewer (GLSL)](https://github.com/patriciogonzalezvivo/lygia_examples)
