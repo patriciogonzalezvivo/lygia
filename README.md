@@ -50,13 +50,13 @@ void main(void) {
 
 The functions are divided in different categories:
 
-* `math/`: general math functions and constants. 
+* `math/`: general math functions and constants like `PI`, `SqrtLength()`, etc. 
 * `space/`: general spatial operations like `scale()`, `rotate()`, etc.
 * `color/`: general color operations like `luma()`, `saturation()`, blend modes, palettes, color space conversion and tonemaps.
 * `animation/`: animation operations, like easing
 * `generative/`: generative functions like `random()`, `noise()`, etc. 
-* `sdf/`: signed distance field generation functions from [PixelSpirit](https://patriciogonzalezvivo.github.io/PixelSpiritDeck/)
-* `draw/`: functions that draw shapes, numbers, lines, etc. Ported from [PixelSpirit](https://patriciogonzalezvivo.github.io/PixelSpiritDeck/)
+* `sdf/`: signed distance field functions.
+* `draw/`: drawing functions like `digits()`, `stroke()`, `fill`, etc/.
 * `sample/`: sample operations
 * `filters/`: typical filter operations like different kind of blurs, mean and median filters.
 * `distort/`: distort sampling operations
