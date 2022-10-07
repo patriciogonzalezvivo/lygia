@@ -38,8 +38,9 @@ void main(void) {
 
 Learn more about how to use it on this repositories with **examples**:
 
-* [Unity3D (HLSL)](https://github.com/patriciogonzalezvivo/lygia_unity_examples)
-* [GlslViewer (GLSL)](https://github.com/patriciogonzalezvivo/lygia_examples)
+* [2D examples for Processing](https://github.com/patriciogonzalezvivo/lygia_p5_examples)
+* [2D/3D examples for Unity3D (HLSL)](https://github.com/patriciogonzalezvivo/lygia_unity_examples)
+* [2D/3D examples on GlslViewer (GLSL)](https://github.com/patriciogonzalezvivo/lygia_examples)
 
 Join [#Lygia channel on shader.zone discord](https://shader.zone/) to learn how to use it, share work or get help.
 
