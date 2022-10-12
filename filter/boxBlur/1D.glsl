@@ -38,23 +38,23 @@ BOXBLUR1D_TYPE boxBlur1D(in sampler2D tex, in vec2 st, in vec2 offset, const int
     
     #if defined(PLATFORM_WEBGL)
     #define BOXBLUR1D_KERNELSIZE 20
-    float f_kernelSize = float(kernelSize);
+    float kernelSizef = float(kernelSize);
     #else
     #define BOXBLUR1D_KERNELSIZE kernelSize
-    float f_kernelSize = float(BOXBLUR1D_KERNELSIZE);
+    float kernelSizef = float(BOXBLUR1D_KERNELSIZE);
     #endif
 
     #else
-    float f_kernelSize = float(BOXBLUR1D_KERNELSIZE);
+    float kernelSizef = float(BOXBLUR1D_KERNELSIZE);
     #endif
 
-    float weight = 1. / f_kernelSize;
+    float weight = 1. / kernelSizef;
     for (int i = 0; i < BOXBLUR1D_KERNELSIZE; i++) {
         #if defined(PLATFORM_WEBGL)
         if (i >= kernelSize)
             break;
         #endif
-        float x = -.5 * (f_kernelSize - 1.) + float(i);
+        float x = -.5 * (kernelSizef - 1.) + float(i);
         color += BOXBLUR1D_SAMPLER_FNC(st + offset * x ) * weight;
     }
     return color;
