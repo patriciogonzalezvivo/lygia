@@ -33,7 +33,9 @@ options:
 #define FNC_BOXBLUR2D
 BOXBLUR2D_TYPE boxBlur2D(in sampler2D tex, in vec2 st, in vec2 pixel, const int kernelSize) {
     BOXBLUR2D_TYPE color = BOXBLUR2D_TYPE(0.);
+
     #ifndef BOXBLUR2D_KERNELSIZE
+    
     #if defined(PLATFORM_WEBGL)
     #define BOXBLUR2D_KERNELSIZE 20
     float f_kernelSize = float(kernelSize);
@@ -41,6 +43,8 @@ BOXBLUR2D_TYPE boxBlur2D(in sampler2D tex, in vec2 st, in vec2 pixel, const int 
     #define BOXBLUR2D_KERNELSIZE kernelSize
     float f_kernelSize = float(BOXBLUR2D_KERNELSIZE);
     #endif
+
+    #else
     float f_kernelSize = float(BOXBLUR2D_KERNELSIZE);
     #endif
 

@@ -57,6 +57,7 @@ GAUSSIANBLUR1D_TYPE gaussianBlur1D(in sampler2D tex,in vec2 st,in vec2 offset,co
     GAUSSIANBLUR1D_TYPE accumColor=GAUSSIANBLUR1D_TYPE(0.);
 
     #ifndef GAUSSIANBLUR1D_KERNELSIZE
+    
     #if defined(PLATFORM_WEBGL)
     #define GAUSSIANBLUR1D_KERNELSIZE 20
     float kernelSizef = float(kernelSize);
@@ -64,6 +65,8 @@ GAUSSIANBLUR1D_TYPE gaussianBlur1D(in sampler2D tex,in vec2 st,in vec2 offset,co
     #define GAUSSIANBLUR1D_KERNELSIZE kernelSize
     float kernelSizef = float(GAUSSIANBLUR1D_KERNELSIZE);
     #endif
+
+    #else
     float kernelSizef = float(GAUSSIANBLUR1D_KERNELSIZE);
     #endif
     
