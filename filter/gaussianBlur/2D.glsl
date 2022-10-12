@@ -42,12 +42,12 @@ GAUSSIANBLUR2D_TYPE gaussianBlur2D(in sampler2D tex, in vec2 st, in vec2 offset,
     #define GAUSSIANBLUR2D_KERNELSIZE kernelSize
     float kernelSizef = float(GAUSSIANBLUR2D_KERNELSIZE);
     #endif
+    #else
     float kernelSizef = float(GAUSSIANBLUR2D_KERNELSIZE);
     #endif
 
     float accumWeight = 0.;
     const float k = .15915494; // 1 / (2*PI)
-    
     float kernelSize2 = kernelSizef * kernelSizef;
 
     for (int j = 0; j < GAUSSIANBLUR2D_KERNELSIZE; j++) {
