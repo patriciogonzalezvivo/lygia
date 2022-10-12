@@ -34,7 +34,11 @@ options:
 BOXBLUR2D_TYPE boxBlur2D(in sampler2D tex, in vec2 st, in vec2 pixel, const int kernelSize) {
     BOXBLUR2D_TYPE color = BOXBLUR2D_TYPE(0.);
     #ifndef BOXBLUR2D_KERNELSIZE
+    #if defined(PLATFORM_WEBGL)
+    #define BOXBLUR2D_KERNELSIZE 20
+    #else
     #define BOXBLUR2D_KERNELSIZE kernelSize
+    #endif
     #endif
 
     float accumWeight = 0.;
@@ -43,8 +47,16 @@ BOXBLUR2D_TYPE boxBlur2D(in sampler2D tex, in vec2 st, in vec2 pixel, const int 
     float weight = 1. / kernelSize2;
 
     for (int j = 0; j < BOXBLUR2D_KERNELSIZE; j++) {
+        #if defined(PLATFORM_WEBGL)
+        if (j >= kernelSize)
+            break;
+        #endif
         float y = -.5 * (f_kernelSize - 1.) + float(j);
         for (int i = 0; i < BOXBLUR2D_KERNELSIZE; i++) {
+            #if defined(PLATFORM_WEBGL)
+            if (i >= kernelSize)
+                break;
+            #endif
             float x = -.5 * (f_kernelSize - 1.) + float(i);
             color += BOXBLUR2D_SAMPLER_FNC(st + vec2(x, y) * pixel) * weight;
         }
