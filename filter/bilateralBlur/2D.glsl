@@ -38,29 +38,41 @@ options:
 #ifndef FNC_BILATERALBLUR2D
 #define FNC_BILATERALBLUR2D
 BILATERALBLUR2D_TYPE bilateralBlur2D(in sampler2D tex, in vec2 st, in vec2 offset, const int kernelSize) {
-  BILATERALBLUR2D_TYPE accumColor = BILATERALBLUR2D_TYPE(0.);
-  #ifndef BILATERALBLUR2D_KERNELSIZE
-  #define BILATERALBLUR2D_KERNELSIZE kernelSize
-  #endif
-  float accumWeight = 0.;
-  const float k = .15915494; // 1. / (2.*PI)
-  const float k2 = k * k;
-  float kernelSize2 = float(BILATERALBLUR2D_KERNELSIZE) * float(BILATERALBLUR2D_KERNELSIZE);
-  BILATERALBLUR2D_TYPE tex0 = BILATERALBLUR2D_SAMPLER_FNC(st);
-  float lum0 = BILATERALBLUR2D_LUMA(tex0);
+    BILATERALBLUR2D_TYPE accumColor = BILATERALBLUR2D_TYPE(0.);
+    #ifndef BILATERALBLUR2D_KERNELSIZE
+    #if defined(PLATFORM_WEBGL)
+    #define BILATERALBLUR2D_KERNELSIZE 20
+    #else
+    #define BILATERALBLUR2D_KERNELSIZE kernelSize
+    #endif
+    #endif
+    float accumWeight = 0.;
+    const float k = .15915494; // 1. / (2.*PI)
+    const float k2 = k * k;
+    float kernelSize2 = float(BILATERALBLUR2D_KERNELSIZE) * float(BILATERALBLUR2D_KERNELSIZE);
+    BILATERALBLUR2D_TYPE tex0 = BILATERALBLUR2D_SAMPLER_FNC(st);
+    float lum0 = BILATERALBLUR2D_LUMA(tex0);
 
-  for (int j = 0; j < BILATERALBLUR2D_KERNELSIZE; j++) {
-    float dy = -.5 * (float(BILATERALBLUR2D_KERNELSIZE) - 1.0) + float(j);
-    for (int i = 0; i < BILATERALBLUR2D_KERNELSIZE; i++) {
-        float dx = -.5 * (float(BILATERALBLUR2D_KERNELSIZE) - 1.0) + float(i);
-        BILATERALBLUR2D_TYPE t = BILATERALBLUR2D_SAMPLER_FNC(st + vec2(dx, dy) * offset);
-        float lum = BILATERALBLUR2D_LUMA(t);
-        float dl = 255. * (lum - lum0);
-        float weight = (k2 / kernelSize2) * exp(-(dx * dx + dy * dy + dl * dl) / (2. * kernelSize2));
-        accumColor += weight * t;
-        accumWeight += weight;
+    for (int j = 0; j < BILATERALBLUR2D_KERNELSIZE; j++) {
+        #if defined(PLATFORM_WEBGL)
+        if (j >= kernelSize)
+            break;
+        #endif
+        float dy = -.5 * (float(BILATERALBLUR2D_KERNELSIZE) - 1.0) + float(j);
+        for (int i = 0; i < BILATERALBLUR2D_KERNELSIZE; i++) {
+            #if defined(PLATFORM_WEBGL)
+            if (i >= kernelSize)
+                break;
+            #endif
+            float dx = -.5 * (float(BILATERALBLUR2D_KERNELSIZE) - 1.0) + float(i);
+            BILATERALBLUR2D_TYPE t = BILATERALBLUR2D_SAMPLER_FNC(st + vec2(dx, dy) * offset);
+            float lum = BILATERALBLUR2D_LUMA(t);
+            float dl = 255. * (lum - lum0);
+            float weight = (k2 / kernelSize2) * exp(-(dx * dx + dy * dy + dl * dl) / (2. * kernelSize2));
+            accumColor += weight * t;
+            accumWeight += weight;
+        }
     }
-  }
-  return accumColor / accumWeight;
+    return accumColor / accumWeight;
 }
 #endif
