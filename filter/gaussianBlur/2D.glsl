@@ -34,7 +34,7 @@ options:
 GAUSSIANBLUR2D_TYPE gaussianBlur2D(in sampler2D tex, in vec2 st, in vec2 offset, const int kernelSize) {
     GAUSSIANBLUR2D_TYPE accumColor = GAUSSIANBLUR2D_TYPE(0.);
     
-    #ifndef BOXBLUR2D_KERNELSIZE
+    #ifndef GAUSSIANBLUR2D_KERNELSIZE
     #if defined(PLATFORM_WEBGL)
     #define GAUSSIANBLUR2D_KERNELSIZE 20
     #else
