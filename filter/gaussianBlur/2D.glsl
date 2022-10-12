@@ -37,28 +37,32 @@ GAUSSIANBLUR2D_TYPE gaussianBlur2D(in sampler2D tex, in vec2 st, in vec2 offset,
     #ifndef GAUSSIANBLUR2D_KERNELSIZE
     #if defined(PLATFORM_WEBGL)
     #define GAUSSIANBLUR2D_KERNELSIZE 20
+    float kernelSizef = float(kernelSize);
     #else
     #define GAUSSIANBLUR2D_KERNELSIZE kernelSize
+    float kernelSizef = float(GAUSSIANBLUR2D_KERNELSIZE);
     #endif
+    float kernelSizef = float(GAUSSIANBLUR2D_KERNELSIZE);
     #endif
 
     float accumWeight = 0.;
     const float k = .15915494; // 1 / (2*PI)
-    float kernelSize2 = float(GAUSSIANBLUR2D_KERNELSIZE) * float(GAUSSIANBLUR2D_KERNELSIZE);
+    
+    float kernelSize2 = kernelSizef * kernelSizef;
 
     for (int j = 0; j < GAUSSIANBLUR2D_KERNELSIZE; j++) {
         #if defined(PLATFORM_WEBGL)
         if (j >= kernelSize)
             break;
         #endif
-        float y = -.5 * (float(GAUSSIANBLUR2D_KERNELSIZE) - 1.) + float(j);
+        float y = -.5 * (kernelSizef - 1.) + float(j);
         for (int i = 0; i < GAUSSIANBLUR2D_KERNELSIZE; i++) {
             #if defined(PLATFORM_WEBGL)
             if (i >= kernelSize)
                 break;
             #endif
-            float x = -.5 * (float(GAUSSIANBLUR2D_KERNELSIZE) - 1.) + float(i);
-            float weight = (k / float(GAUSSIANBLUR2D_KERNELSIZE)) * exp(-(x * x + y * y) / (2. * kernelSize2));
+            float x = -.5 * (kernelSizef - 1.) + float(i);
+            float weight = (k / kernelSizef) * exp(-(x * x + y * y) / (2. * kernelSize2));
             accumColor += weight * GAUSSIANBLUR2D_SAMPLER_FNC(st + vec2(x, y) * offset);
             accumWeight += weight;
         }

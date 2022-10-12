@@ -36,13 +36,15 @@ BOXBLUR2D_TYPE boxBlur2D(in sampler2D tex, in vec2 st, in vec2 pixel, const int 
     #ifndef BOXBLUR2D_KERNELSIZE
     #if defined(PLATFORM_WEBGL)
     #define BOXBLUR2D_KERNELSIZE 20
+    float f_kernelSize = float(kernelSize);
     #else
     #define BOXBLUR2D_KERNELSIZE kernelSize
+    float f_kernelSize = float(BOXBLUR2D_KERNELSIZE);
     #endif
+    float f_kernelSize = float(BOXBLUR2D_KERNELSIZE);
     #endif
 
     float accumWeight = 0.;
-    float f_kernelSize = float(BOXBLUR2D_KERNELSIZE);
     float kernelSize2 = f_kernelSize * f_kernelSize;
     float weight = 1. / kernelSize2;
 
