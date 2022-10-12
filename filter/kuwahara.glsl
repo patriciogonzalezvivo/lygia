@@ -21,15 +21,16 @@ options:
 #define KUWAHARA_SAMPLER_FNC(POS_UV) SAMPLER_FNC(tex, POS_UV)
 #endif
 
-#ifndef KUWAHARA_RADIUS
-#define KUWAHARA_RADIUS radius
-#endif
-
 #ifndef FNC_KUWAHARA
 #define FNC_KUWAHARA
 
 #ifdef TARGET_MOBILE
 KUWAHARA_TYPE kuwahara(in sampler2D tex, in vec2 st, in vec2 pixel, in int radius) {
+
+    #ifndef KUWAHARA_RADIUS
+    #define KUWAHARA_RADIUS radius
+    #endif
+
     float n = float((KUWAHARA_RADIUS + 1) * (KUWAHARA_RADIUS + 1));
     int i; int j;
     KUWAHARA_TYPE m0 = KUWAHARA_TYPE(0.0); KUWAHARA_TYPE m1 = KUWAHARA_TYPE(0.0); KUWAHARA_TYPE m2 = KUWAHARA_TYPE(0.0); KUWAHARA_TYPE m3 = KUWAHARA_TYPE(0.0);
@@ -113,14 +114,27 @@ KUWAHARA_TYPE kuwahara(in sampler2D tex, in vec2 st, in vec2 pixel, in int radiu
 
 KUWAHARA_TYPE kuwahara(in sampler2D tex, in vec2 st, in vec2 pixel, in int radius) {
 
+    #ifndef KUWAHARA_RADIUS
+
+    #if defined(PLATFORM_WEBGL)
+    #define KUWAHARA_RADIUS 20
+    float n = float((radius + 1) * (radius + 1));
+    #else
+    #define KUWAHARA_RADIUS radius
     float n = float((KUWAHARA_RADIUS + 1) * (KUWAHARA_RADIUS + 1));
+    #endif
+
+    #else
+    float n = float((KUWAHARA_RADIUS + 1) * (KUWAHARA_RADIUS + 1));
+    #endif
+
     int i; int j;
     KUWAHARA_TYPE m0 = KUWAHARA_TYPE(0.0); KUWAHARA_TYPE m1 = KUWAHARA_TYPE(0.0); KUWAHARA_TYPE m2 = KUWAHARA_TYPE(0.0); KUWAHARA_TYPE m3 = KUWAHARA_TYPE(0.0);
     KUWAHARA_TYPE s0 = KUWAHARA_TYPE(0.0); KUWAHARA_TYPE s1 = KUWAHARA_TYPE(0.0); KUWAHARA_TYPE s2 = KUWAHARA_TYPE(0.0); KUWAHARA_TYPE s3 = KUWAHARA_TYPE(0.0);
     KUWAHARA_TYPE rta = KUWAHARA_TYPE(0.0);
     KUWAHARA_TYPE c = KUWAHARA_TYPE(0.0);
     
-    for (j = -KUWAHARA_RADIUS; j <= 0; ++j)  {
+    for (j = -KUWAHARA_RADIUS; j <= 0; ++j)  { 
         for (i = -KUWAHARA_RADIUS; i <= 0; ++i)  {
             c = KUWAHARA_SAMPLER_FNC(st + vec2(i,j) * pixel);
             m0 += c;
@@ -130,6 +144,10 @@ KUWAHARA_TYPE kuwahara(in sampler2D tex, in vec2 st, in vec2 pixel, in int radiu
     
     for (j = -KUWAHARA_RADIUS; j <= 0; ++j)  {
         for (i = 0; i <= KUWAHARA_RADIUS; ++i)  {
+            #if defined(PLATFORM_WEBGL)
+            if (i > radius)
+                break;
+            #endif
             c = KUWAHARA_SAMPLER_FNC(st + vec2(i,j) * pixel);
             m1 += c;
             s1 += c * c;
@@ -137,7 +155,15 @@ KUWAHARA_TYPE kuwahara(in sampler2D tex, in vec2 st, in vec2 pixel, in int radiu
     }
     
     for (j = 0; j <= KUWAHARA_RADIUS; ++j)  {
+        #if defined(PLATFORM_WEBGL)
+        if (j > radius)
+            break;
+        #endif
         for (i = 0; i <= KUWAHARA_RADIUS; ++i)  {
+            #if defined(PLATFORM_WEBGL)
+            if (i > radius)
+                break;
+            #endif
             c = KUWAHARA_SAMPLER_FNC(st + vec2(i,j) * pixel);
             m2 += c;
             s2 += c * c;
