@@ -33,7 +33,7 @@ options:
 #define FNC_BOXBLUR1D
 BOXBLUR1D_TYPE boxBlur1D(in sampler2D tex, in vec2 st, in vec2 offset, const int kernelSize) {
     BOXBLUR1D_TYPE color = BOXBLUR1D_TYPE(0.);
-    #ifndef BOXBLUR2D_KERNELSIZE
+    #ifndef BOXBLUR1D_KERNELSIZE
     #if defined(PLATFORM_WEBGL)
     #define BOXBLUR1D_KERNELSIZE 20
     #else

@@ -40,7 +40,7 @@ GAUSSIANBLUR1D_TYPE gaussianBlur1D(in sampler2D tex,in vec2 st,in vec2 offset,co
     float accumWeight = 0.0;
     const float k = 0.39894228;// 1 / sqrt(2*PI)
     float kernelSize2 = float(kernelSize)*float(kernelSize);
-    for(int i = 0; i < 16; i++){
+    for (int i = 0; i < 16; i++) {
         if( i >= kernelSize)
             break;
         float x = -0.5 * (float(kernelSize) - 1.0)+float(i);
@@ -62,7 +62,7 @@ GAUSSIANBLUR1D_TYPE gaussianBlur1D(in sampler2D tex,in vec2 st,in vec2 offset,co
     float accumWeight = 0.0;
     const float k = 0.39894228;// 1 / sqrt(2*PI)
     float kernelSize2=float(GAUSSIANBLUR1D_KERNELSIZE)*float(GAUSSIANBLUR1D_KERNELSIZE);
-    for(int i = 0; i < GAUSSIANBLUR1D_KERNELSIZE; i++){
+    for (int i = 0; i < GAUSSIANBLUR1D_KERNELSIZE; i++) {
         float x = -0.5 * (float(GAUSSIANBLUR1D_KERNELSIZE) -1.0) + float(i);
         float weight = (k/float(GAUSSIANBLUR1D_KERNELSIZE)) * exp(-(x*x)/(2.0*kernelSize2));
         GAUSSIANBLUR1D_TYPE tex = GAUSSIANBLUR1D_SAMPLER_FNC(st + x * offset);
