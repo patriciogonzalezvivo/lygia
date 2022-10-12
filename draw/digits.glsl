@@ -102,7 +102,11 @@ float digits(in vec2 st, in float value, in float nDecDigit, in float nIntDigits
     float dig = nDecDigit;
 
     #ifndef DIGITS_LEADING_INT
+    #if defined(PLATFORM_WEBGL)
+    #define DIGITS_LEADING_INT 1.0
+    #else
     #define DIGITS_LEADING_INT nIntDigits
+    #endif
     #endif
 
     for (float i = DIGITS_LEADING_INT - 1.0; i > 0.0 ; i--) {
