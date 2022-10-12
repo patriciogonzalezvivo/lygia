@@ -39,6 +39,7 @@ void main(void) {
 Learn more about how to use it on this repositories with **examples**:
 
 * [2D examples for Processing (GLSL)](https://github.com/patriciogonzalezvivo/lygia_p5_examples)
+* [2D examples for P5.js](https://editor.p5js.org/patriciogonzalezvivo/sketches/XCkTzoyB3)
 * [2D examples for Three.js (GLSL)](https://github.com/patriciogonzalezvivo/lygia_threejs_examples) 
 * [2D/3D examples for Unity3D (HLSL)](https://github.com/patriciogonzalezvivo/lygia_unity_examples)
 * [2D/3D examples on GlslViewer (GLSL)](https://github.com/patriciogonzalezvivo/lygia_examples)
