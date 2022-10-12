@@ -32,7 +32,7 @@ options:
 #ifndef FNC_GAUSSIANBLUR1D
 #define FNC_GAUSSIANBLUR1D
 
-#ifdef GAUSSIANBLUR1D_DYNAMIC
+#ifdef PLATFORM_WEBGL
 
 GAUSSIANBLUR1D_TYPE gaussianBlur1D(in sampler2D tex,in vec2 st,in vec2 offset,const int kernelSize){
     GAUSSIANBLUR1D_TYPE accumColor = GAUSSIANBLUR1D_TYPE(0.0);
