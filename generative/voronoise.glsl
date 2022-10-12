@@ -25,13 +25,13 @@ float voronoise( in vec2 p, in float u, float v) {
     
     #if defined(PLATFORM_WEBGL)
     for ( float y = -2.0; y <= 2.0; y++ )
-    for ( float x = -2.0; x <= 2.0 ; x++ ) {
+    for ( float x = -2.0; x <= 2.0; x++ ) {
         vec2 g = vec2(x, y);
 
     #else
     vec2 g = vec2(-2.0);
     for ( g.y = -2.0; g.y <= 2.0; g.y++ )
-    for ( g.x = -2.0; g.x <= 2.0 ; g.x++ ) {
+    for ( g.x = -2.0; g.x <= 2.0; g.x++ ) {
         
     #endif
         vec3  o = VORONOI_RANDOM_FNC(i + g) * vec3(u, u, 1.0);
