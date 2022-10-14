@@ -68,7 +68,7 @@ The functions are divided in different categories:
 
 ## Flexible how?
 
-There are some functions which behaviour can be change using `#defines` keyword before including it. For examples, [gaussian blurs](filter/gaussianBlur.glsl) are usually are done in two passes, so by default perform only 1D kernerls, but in the case you are interested on performing a 2D kernel all in the same pass you will need to add the `GAUSSIANBLUR_2D` keyword in the following way. 
+There are some functions whose behaviour can be changed using the `#defines` keyword before including it. For example, [gaussian blurs](filter/gaussianBlur.glsl) are usually are done in two passes. By default, these are performed on their 1D version, but in the case you are interested on using a 2D kernel, all in the same pass, you will need to add the `GAUSSIANBLUR_2D` keyword this way:
 
 ```glsl
 
@@ -89,7 +89,7 @@ There are some functions which behaviour can be change using `#defines` keyword 
 
 This library:
 
-* Relays on `#include "path/to/file.*lsl"` which is defined by Khronos GLSL standard and suported by most engines and enviroments ( like [glslViewer](https://github.com/patriciogonzalezvivo/glslViewer/wiki/Compiling), [glsl-canvas VS Code pluging](https://marketplace.visualstudio.com/items?itemName=circledev.glsl-canvas), Unity, etc. ). It requires a tipical C-like pre-compiler MACRO which is easy to implement with just basic string operations to resolve dependencies. Here you can find some implementations on different languages:
+* Relies on `#include "path/to/file.*lsl"` which is defined by Khronos GLSL standard and suported by most engines and enviroments ( like [glslViewer](https://github.com/patriciogonzalezvivo/glslViewer/wiki/Compiling), [glsl-canvas VS Code pluging](https://marketplace.visualstudio.com/items?itemName=circledev.glsl-canvas), Unity, etc...). It requires a typical C-like pre-compiler MACRO which is easy to implement with just basic string operations to resolve dependencies. Here you can find some implementations on different languages:
     * [C++](https://github.com/patriciogonzalezvivo/ada/blob/main/src/fs.cpp#L88-L171)
     * [Python](https://gist.github.com/patriciogonzalezvivo/9a50569c2ef9b08058706443a39d838e)
     * JavaScript: 
@@ -99,7 +99,7 @@ This library:
         - [observable](https://observablehq.com/d/e4e8a96f64a6bf81)
         - [vanilla](https://github.com/actarian/vscode-glsl-canvas/blob/91ff09bf6cec35e73d1b64e50b56ef3299d2fe6b/src/glsl/export.ts#L351)
 
-* it's **very granular**. One function per file. Where the file and the function share the same name. Ex: `myFunc.glsl` contains `myFunct()`. There are some files that just include a collection of files inside a folder with the same name. For example:
+* It's **very granular**. One function per file. The file and the function share the same name, namely: `myFunc.glsl` contains `myFunct()`. There are some files that just include a collection of files inside a folder with the same name. For example:
 
 ```glsl
 
@@ -109,7 +109,7 @@ This library:
 
 ```
 
-* It's **multi language**. Right now most of it is on GLSL (`*.glsl`) and HLSL (`*.hlsl`), but there is plans to extend it to Metal (`*.metal`).
+* It's **multi language**. Right now most of is GLSL (`*.glsl`) and HLSL (`*.hlsl`), but there are plans to extend it to Metal (`*.metal`).
 
 ```
 
@@ -118,7 +118,7 @@ This library:
 
 ```
 
-* **Self documentation** each file contain a structured comment (in YAML) at the top of the file. This one contain the name of the original author, description, use and `#define` options
+* **Self documented**. Each file contains a structured comment (in YAML) at the top of the file. This one contains the name of the original author, description, use and `#define` options
 
 ```glsl
 
@@ -148,7 +148,7 @@ This library:
 
 ```
 
-* **Templeting capabilities through `#defines`**,  probably the most frequent one is templating the sampling function for reusability. The `#define` options start with the name of the function, in this example `MYFUNC_`. They are added as `options:` in the header.
+* **Templating capabilities through `#defines`**. Probably the most frequent use is templating the sampling function for reusability. The `#define` options start with the name of the function, in this example `MYFUNC_`. They are added as `options:` in the header.
  
 ```glsl
 
@@ -169,7 +169,7 @@ This library:
 
 ```
 
-* Utilize **function overloading**. where arguments are arrange in such a way that optional elements are at the back. When possible sort them according their memory size (except textures that reamin at the top). Ex.: `sampler2D, mat4, mat3, mat2, vec4, vec3, vec2, float, ivec4, ivec3, ivec2, int, bool`
+* **Function Overloading**. Arguments are arranged in such a way that optional elements are at the back. When possible sort them according their memory size (except textures that reamin at the top). Ex.: `sampler2D, mat4, mat3, mat2, vec4, vec3, vec2, float, ivec4, ivec3, ivec2, int, bool`
 
 ```glsl
 
@@ -197,7 +197,7 @@ This library:
 
 # Acknowledgements
 
-This library has been built over years, and in many cases on top of the work of brillant generous people like: [Inigo Quiles](https://www.iquilezles.org/), [Morgan McGuire](https://casual-effects.com/), [Hugh Kennedy](https://github.com/hughsk) and [Matt DesLauriers](https://www.mattdesl.com/).
+This library has been built over years, and in many cases on top of the work of brillant, generous people like: [Inigo Quiles](https://www.iquilezles.org/), [Morgan McGuire](https://casual-effects.com/), [Hugh Kennedy](https://github.com/hughsk) and [Matt DesLauriers](https://www.mattdesl.com/).
 
 # License 
 
@@ -205,6 +205,6 @@ LYGIA is dual-licensed under [the Prosperity License](https://prosperitylicense.
 
 A [Patron License](https://lygia.xyz/license) can be obtained by making regular payments through [GitHub Sponsorships](https://github.com/sponsors/patriciogonzalezvivo), in amounts qualifying for a tier of rewards that includes “patron licenses”. A Patron License grants qualifying patrons permission to ignore any noncommercial or copyleft rules in all of [the Prosperity Licensed](https://prosperitylicense.com/versions/3.0.0) software.
 
-Keeping LYGIA healthy require works and dedication, I will really appreciate your support. That could by contributing new code (functions or examples in new enviroments like Processing, TouchDesigner, Three.js, OpenFrameworks, etc), or fixing bugs and translating the GLSL/HLSL to Metal. 
+Keeping LYGIA healthy requires work and dedication. Your support will be greatly appreciated, whether it is by contributing with new code (functions or examples in new enviroments like Processing, TouchDesigner, Three.js, OpenFrameworks, etc), or fixing bugs and translating the GLSL/HLSL to Metal. 
 
-Another way to support is by [sponsoring through GitHub](https://github.com/sponsors/patriciogonzalezvivo). By becoming a Sponsor, you'll be helping to ensure I can spend more time fixing bugs, adding features, releasing new versions, and making more examples and expanding the support for new frameworks.
+Another way to support is by [sponsoring through GitHub](https://github.com/sponsors/patriciogonzalezvivo). By becoming a Sponsor, you'll be helping to ensure I can spend more time fixing bugs, adding features, releasing new versions and making more examples, as well as expanding the support for new frameworks.
