@@ -201,9 +201,9 @@ This library has been built over years, and in many cases on top of the work of 
 
 # License 
 
-LYGIA is dual-licensed under [the Prosperity License](https://prosperitylicense.com/versions/3.0.0) and the [Patron License](https://patronlicense.com/versions/1.0.0.html) for individual cases.
+LYGIA is dual-licensed under [the Prosperity License](https://prosperitylicense.com/versions/3.0.0) and the [Patron License](https://lygia.xyz/license) for individual cases.
 
-A [Patron License](https://patronlicense.com/versions/1.0.0.html) can be obtained by making regular payments through [GitHub Sponsorships](https://github.com/sponsors/patriciogonzalezvivo), in amounts qualifying for a tier of rewards that includes “patron licenses”. A Patron License grants qualifying patrons permission to ignore any noncommercial or copyleft rules in all of [the Prosperity Licensed](https://prosperitylicense.com/versions/3.0.0) software.
+A [Patron License](https://lygia.xyz/license) can be obtained by making regular payments through [GitHub Sponsorships](https://github.com/sponsors/patriciogonzalezvivo), in amounts qualifying for a tier of rewards that includes “patron licenses”. A Patron License grants qualifying patrons permission to ignore any noncommercial or copyleft rules in all of [the Prosperity Licensed](https://prosperitylicense.com/versions/3.0.0) software.
 
 Keeping LYGIA healthy require works and dedication, I will really appreciate your support. That could by contributing new code (functions or examples in new enviroments like Processing, TouchDesigner, Three.js, OpenFrameworks, etc), or fixing bugs and translating the GLSL/HLSL to Metal. 
 
