@@ -22,6 +22,10 @@ options:
 #define ENVMAP_MAX_MIP_LEVEL 3.0
 #endif
 
+#ifndef ENVMAP_FNC
+#define ENVMAP_FNC(NORMAL, ROUGHNESS) fakeCube(NORMAL, ROUGHNESS);
+#endif
+
 #ifndef FNC_ENVMAP
 #define FNC_ENVMAP
 vec3 envMap(vec3 _normal, float _roughness, float _metallic) {
@@ -29,7 +33,8 @@ vec3 envMap(vec3 _normal, float _roughness, float _metallic) {
     float lod = ENVMAP_MAX_MIP_LEVEL * _roughness;
     return SAMPLE_CUBE_FNC( SCENE_CUBEMAP, _normal, lod).rgb;
 #else
-    return fakeCube(_normal, toShininess(_roughness, _metallic));
+    return ENVMAP_FNC(_normal, _roughness);
+    // return fakeCube(_normal, toShininess(_roughness, _metallic));
 #endif
 }
 
