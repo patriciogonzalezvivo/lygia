@@ -52,7 +52,11 @@ options:
 #define FNC_PBR_LITTLE
 
 float4 pbrLittle(float4 albedo, float3 position, float3 normal, float roughness, float metallic, float3 f0, float shadow ) {
+    #ifdef LIGHT_DIRECTION
+    float3 L = normalize(LIGHT_DIRECTION);
+    #else
     float3 L = normalize(LIGHT_POSITION - position);
+    #endif
     float3 N = normalize(normal);
     float3 V = normalize(CAMERA_POSITION - position);
 
