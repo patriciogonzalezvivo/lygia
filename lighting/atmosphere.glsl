@@ -34,7 +34,7 @@ OPTIONS:
 #endif
 
 #ifndef FNC_ATMOSPHERE
-#define FNC_ATMOSHPERE
+#define FNC_ATMOSPHERE
 
 struct ray_t {
     vec3 origin;
