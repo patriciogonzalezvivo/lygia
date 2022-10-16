@@ -43,9 +43,9 @@ options:
 
 void lightDirectional(vec3 _diffuseColor, vec3 _specularColor, vec3 _N, vec3 _V, float _NoV, float _roughness, float _f0, float _shadow, inout vec3 _diffuse, inout vec3 _specular) {
     #ifdef LIGHT_DIRECTION
-    float3 s = normalize(LIGHT_DIRECTION);
+    vec3 s = normalize(LIGHT_DIRECTION);
     #else 
-    float3 s = normalize(LIGHT_POSITION);
+    vec3 s = normalize(LIGHT_POSITION);
     #endif
     float NoL = dot(_N, s);
     float dif = diffuseOrenNayar(s, _N, _V, _NoV, NoL, _roughness);
