@@ -1,5 +1,5 @@
-#include "lygia/math/const.glsl"
-#include "lygia/math/saturate.glsl"
+#include "../math/const.glsl"
+#include "../math/saturate.glsl"
 
 /*
 description: Rayleigh and Mie scattering atmosphere system. Implementation of the techniques described here: https://www.scratchapixel.com/lessons/procedural-generation-virtual-worlds/simulating-sky/simulating-colors-of-the-sky
