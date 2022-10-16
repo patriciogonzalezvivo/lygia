@@ -9,6 +9,7 @@ use: lightDirectional(<float3> _diffuseColor, <float3> _specularColor, <float3> 
 options:
     - DIFFUSE_FNC: diffuseOrenNayar, diffuseBurley, diffuseLambert (default)
     - LIGHT_POSITION: Position
+    - LIGHT_DIRECTION
     - LIGHT_COLOR: Color
     - LIGHT_INTENSITY: Intensity
 */
@@ -38,7 +39,11 @@ options:
 #define FNC_LIGHT_DIRECTIONAL
 
 void lightDirectional(float3 _diffuseColor, float3 _specularColor, float3 _N, float3 _V, float _NoV, float _roughness, float _f0, float _shadow, inout float3 _diffuse, inout float3 _specular) {
-    float3 s = LIGHT_POSITION;
+    #ifdef LIGHT_DIRECTION
+    float3 s = normalize(LIGHT_DIRECTION);
+    #else 
+    float3 s = normalize(LIGHT_POSITION);
+    #endif
     float NoL = dot(_N, s);
     float dif = diffuseOrenNayar(s, _N, _V, _NoV, NoL, _roughness);
     float spec = specularCookTorrance(s, _N, _V, _NoV, NoL, _roughness, _f0);

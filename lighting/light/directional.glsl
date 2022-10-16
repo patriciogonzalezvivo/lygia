@@ -9,6 +9,7 @@ use: lightDirectional(<vec3> _diffuseColor, <vec3> _specularColor, <vec3> _N, <v
 options:
     - DIFFUSE_FNC: diffuseOrenNayar, diffuseBurley, diffuseLambert (default)
     - LIGHT_POSITION: in GlslViewer is u_light
+    - LIGHT_DIRECTION
     - LIGHT_COLOR: in GlslViewer is u_lightColor
     - LIGHT_INTENSITY: in GlslViewer is u_lightIntensity
 */
@@ -41,7 +42,11 @@ options:
 #define FNC_LIGHT_DIRECTIONAL
 
 void lightDirectional(vec3 _diffuseColor, vec3 _specularColor, vec3 _N, vec3 _V, float _NoV, float _roughness, float _f0, float _shadow, inout vec3 _diffuse, inout vec3 _specular) {
-    vec3 s = LIGHT_POSITION;
+    #ifdef LIGHT_DIRECTION
+    float3 s = normalize(LIGHT_DIRECTION);
+    #else 
+    float3 s = normalize(LIGHT_POSITION);
+    #endif
     float NoL = dot(_N, s);
     float dif = diffuseOrenNayar(s, _N, _V, _NoV, NoL, _roughness);
     float spec = specularCookTorrance(s, _N, _V, _NoV, NoL, _roughness, _f0);

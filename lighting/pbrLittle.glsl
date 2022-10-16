@@ -56,7 +56,11 @@ options:
 #define FNC_PBR_LITTLE
 
 vec4 pbrLittle(vec4 albedo, vec3 position, vec3 normal, float roughness, float metallic, vec3 f0, float shadow ) {
+    #ifdef LIGHT_DIRECTION
+    vec3 L = normalize(LIGHT_DIRECTION);
+    #else
     vec3 L = normalize(LIGHT_POSITION - position);
+    #endif
     vec3 N = normalize(normal);
     vec3 V = normalize(CAMERA_POSITION - position);
 
