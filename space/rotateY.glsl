@@ -10,6 +10,18 @@ options:
 
 #ifndef FNC_ROTATEY
 #define FNC_ROTATEY
+vec4 rotateY(in vec4 pos, in float radian, in vec4 center) {
+    return rotate4dY(radian) * (pos - center) + center;
+}
+
+vec4 rotateY(in vec4 pos, in float radian) {
+    #ifdef CENTER_4D
+    return rotateY(pos, radian, CENTER_4D);
+    #else
+    return rotateY(pos, radian, vec4(.0));
+    #endif
+}
+
 vec3 rotateY(in vec3 pos, in float radian, in vec3 center) {
     return (rotate4dY(radian) * vec4((pos - center), 1.)).xyz + center;
 }

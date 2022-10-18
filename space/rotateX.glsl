@@ -10,6 +10,18 @@ options:
 
 #ifndef FNC_ROTATEX
 #define FNC_ROTATEX
+vec4 rotateX(in vec4 pos, in float radian, in vec4 center) {
+    return rotate4dX(radian) * (pos - center) + center;
+}
+
+vec4 rotateX(in vec4 pos, in float radian) {
+    #ifdef CENTER_4D
+    return rotateX(pos, radian, CENTER_4D);
+    #else
+    return rotateX(pos, radian, vec4(.0));
+    #endif
+}
+
 vec3 rotateX(in vec3 pos, in float radian, in vec3 center) {
     return (rotate4dX(radian) * vec4(pos - center, 1.)).xyz + center;
 }

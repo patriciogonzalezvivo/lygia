@@ -11,7 +11,7 @@ options:
 #ifndef FNC_ROTATEX
 #define FNC_ROTATEX
 float3 rotateX(in float3 pos, in float radian, in float3 center) {
-    return (rotate4dX(radian) * vec4(pos - center, 1.)).xyz + center;
+    return mul(rotate4dX(radian), vec4(pos - center, 1.)).xyz + center;
 }
 
 float3 rotateX(in float3 pos, in float radian) {
