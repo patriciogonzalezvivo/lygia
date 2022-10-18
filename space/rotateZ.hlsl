@@ -12,7 +12,7 @@ options:
 #ifndef FNC_ROTATEZ
 #define FNC_ROTATEZ
 float3 rotateZ(in float3 pos, in float radian, in float3 center) {
-    return (rotate4dZ(radian) * vec4(pos - center, 0.) ).xyz + center;
+    return mul(rotate4dZ(radian), vec4(pos - center, 0.) ).xyz + center;
 }
 
 float3 rotateZ(in float3 pos, in float radian) {
