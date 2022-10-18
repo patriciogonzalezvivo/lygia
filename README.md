@@ -115,11 +115,11 @@ This library:
     * [C++](https://github.com/patriciogonzalezvivo/ada/blob/main/src/fs.cpp#L88-L171)
     * [Python](https://gist.github.com/patriciogonzalezvivo/9a50569c2ef9b08058706443a39d838e)
     * JavaScript: 
+        - [vanilla JS online resolver](https://lygia.xyz/resolve.js)
         - [vite](https://github.com/UstymUkhman/vite-plugin-glsl)
         - [esbuild](https://github.com/ricardomatias/esbuild-plugin-glsl-include)
         - [webpack](https://github.com/grieve/webpack-glsl-loader)
         - [observable](https://observablehq.com/d/e4e8a96f64a6bf81)
-        - [vanilla](https://github.com/actarian/vscode-glsl-canvas/blob/91ff09bf6cec35e73d1b64e50b56ef3299d2fe6b/src/glsl/export.ts#L351)
 
 * it's **very granular**. One function per file. Where the file and the function share the same name. Ex: `myFunc.glsl` contains `myFunct()`. There are some files that just include a collection of files inside a folder with the same name. For example:
 
