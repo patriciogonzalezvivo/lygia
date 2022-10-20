@@ -2,17 +2,11 @@
 
 # LYGIA: a multi-language shader library
 
-Tired of reimplementing and searching for the same functions over and over, I started compiling and building a shader library of reusable assets (mostly functions) that can be include over and over. It's very granular, designed for reusability, performance and flexibility. 
+Tired of searching for the same functions over and over? or to port and reimplementing them between platforms and shader languages? LYGIA is shader library of reusable functions that can be include easily on your projects. Doesn't matter the shader language, if they run local or on the cloud. LYGIA is very granular, designed for reusability, performance and flexibility. 
 
 ## How does it work?
 
-* Clone this repository in your project, where your shaders are.
-
-```bash
-    git clone https://github.com/patriciogonzalezvivo/lygia.git
-```
-
-* In your shader `#include` the functions you need:
+In your shader `#include` the functions you need:
 
 ```glsl
 
@@ -36,16 +30,41 @@ Tired of reimplementing and searching for the same functions over and over, I st
     }
 ```
 
+If you are working **locally** on an ecosystem that can resolve `#include` dependencies, just clone LYGIA in your project relative to the shader you are loading:
 
-Learn more about how to use it on this repositories with **examples**:
+```bash
+    git clone https://github.com/patriciogonzalezvivo/lygia.git
+```
+
+or as a submodule:
+
+```bash
+    git submodule add https://github.com/patriciogonzalezvivo/lygia.git
+```
+
+If you are working on a **cloud platform** probably you want to resolve the dependencies without needing to install anything. Just add a link to `https://lygia.xyz/resolve.js`: 
+
+```html
+<script src="https://lygia.xyz/resolve.js"></script>
+```
+
+To then resolve the dependencies by passing a `string` or `strings[]` to `resolveLygia()`:
+
+```js
+    vertSource = resolveLygia(vertSource);
+    fragSource = resolveLygia(fragSource);
+    shdr = createShader(vertSource, fragSource);
+```
+
+Learn more about how to use it from this **examples**:
 
 * [2D examples for Processing (GLSL)](https://github.com/patriciogonzalezvivo/lygia_p5_examples)
-* [2D examples for P5.js (GLSL)](https://editor.p5js.org/patriciogonzalezvivo/sketches/91GUDp7Te)
+* [2D/3D examples for P5.js (GLSL)](https://editor.p5js.org/patriciogonzalezvivo/sketches)
 * [2D examples for Three.js (GLSL)](https://github.com/patriciogonzalezvivo/lygia_threejs_examples) 
 * [2D/3D examples for Unity3D (HLSL)](https://github.com/patriciogonzalezvivo/lygia_unity_examples)
 * [2D/3D examples on GlslViewer (GLSL)](https://github.com/patriciogonzalezvivo/lygia_examples)
 
-Join [#Lygia channel on shader.zone discord](https://shader.zone/) to learn how to use it, share work or get help.
+For more information, guidance or feedback about using LYGIA, join [#Lygia channel on shader.zone discord](https://shader.zone/).
 
 
 ## How is it organized?
@@ -63,7 +82,7 @@ The functions are divided in different categories:
 * `filters/`: typical filter operations like different kind of blurs, mean and median filters.
 * `distort/`: distort sampling operations
 * `simulate/`: simulate sampling operations
-* `lighting/`: different foward/deferred/raymarching lighting models and functions
+* `lighting/`: different lighting models and functions for foward/deferred/raymarching rendering
 
 
 ## Flexible how?
@@ -89,15 +108,15 @@ There are some functions whose behaviour can be changed using the `#defines` key
 
 This library:
 
-* Relies on `#include "path/to/file.*lsl"` which is defined by Khronos GLSL standard and suported by most engines and enviroments ( like [glslViewer](https://github.com/patriciogonzalezvivo/glslViewer/wiki/Compiling), [glsl-canvas VS Code pluging](https://marketplace.visualstudio.com/items?itemName=circledev.glsl-canvas), Unity, etc...). It requires a typical C-like pre-compiler MACRO which is easy to implement with just basic string operations to resolve dependencies. Here you can find some implementations on different languages:
-    * [C++](https://github.com/patriciogonzalezvivo/ada/blob/main/src/fs.cpp#L88-L171)
+* Relies on `#include "path/to/file.*lsl"` which is defined by Khronos GLSL standard and suported by most engines and enviroments ( like Unity3D, [OpenFrameworks](https://github.com/openframeworks/openFrameworks), [glslViewer](https://github.com/patriciogonzalezvivo/glslViewer/wiki/Compiling), [glsl-canvas VS Code pluging](https://marketplace.visualstudio.com/items?itemName=circledev.glsl-canvas), etc. ). It requires a tipical C-like pre-compiler MACRO which is easy to implement with just basic string operations to resolve dependencies. Here you can find some implementations on different languages:
+    * [C++](https://github.com/patriciogonzalezvivo/vera/blob/main/src/ops/fs.cpp#L110-L171)
     * [Python](https://gist.github.com/patriciogonzalezvivo/9a50569c2ef9b08058706443a39d838e)
     * JavaScript: 
-        - [vite](https://github.com/UstymUkhman/vite-plugin-glsl)
-        - [esbuild](https://github.com/ricardomatias/esbuild-plugin-glsl-include)
-        - [webpack](https://github.com/grieve/webpack-glsl-loader)
-        - [observable](https://observablehq.com/d/e4e8a96f64a6bf81)
-        - [vanilla](https://github.com/actarian/vscode-glsl-canvas/blob/91ff09bf6cec35e73d1b64e50b56ef3299d2fe6b/src/glsl/export.ts#L351)
+        - [vanilla JS online resolver](https://lygia.xyz/resolve.js) This small file brings `resolveLygia()` which takes a `string` or `string[]` and parse it solving all the `#include` dependencies into a single `string` you can load on your shaders.
+        - [vite glsl plugin](https://github.com/UstymUkhman/vite-plugin-glsl) by Ustym Ukhman. Imports `.glsl` local dependencies, or load inline shaders through vite
+        - [esbuild glsl plugin](https://github.com/ricardomatias/esbuild-plugin-glsl-include) by Ricardo Matias. Import local `.glsl` dependencies through esbuild.
+        - [webpack glsl plugin](https://github.com/grieve/webpack-glsl-loader) by Ryan Grieve. Import local `.glsl` dependencies through webpack.
+        - [observable](https://observablehq.com/d/e4e8a96f64a6bf81) by Radamés Ajna. It's an series of examples on how to load LYGIA inside [Observable](https://observablehq.com).
 
 * It's **very granular**. One function per file. The file and the function share the same name, namely: `myFunc.glsl` contains `myFunct()`. There are some files that just include a collection of files inside a folder with the same name. For example:
 
@@ -195,16 +214,18 @@ This library:
 
 ```
 
+# Contributions
+
+LYGIA have a long way to go. Your support will be appreciated and rewarded. It can take many forms like: fixing bugs, expanding the crosscompatibility between GLSL/HLSL/Metal/SPIR-V, contributing new lygia functions or examples and integrations for new enviroments like TouchDesigner, GoDot, ISF, etc.
+
+Another way to support it, is through [GitHub Sponsorships](https://github.com/sponsors/patriciogonzalezvivo). 
+
 # Acknowledgements
 
 This library has been built over years, and in many cases on top of the work of brillant, generous people like: [Inigo Quiles](https://www.iquilezles.org/), [Morgan McGuire](https://casual-effects.com/), [Hugh Kennedy](https://github.com/hughsk) and [Matt DesLauriers](https://www.mattdesl.com/).
 
 # License 
 
-LYGIA is dual-licensed under [the Prosperity License](https://prosperitylicense.com/versions/3.0.0) and the [Patron License](https://lygia.xyz/license) for individual cases.
+LYGIA is dual-licensed under [the Prosperity License](https://prosperitylicense.com/versions/3.0.0) and the [Patron License](https://lygia.xyz/license) for [sponsors](https://github.com/sponsors/patriciogonzalezvivo) and contributors.
 
-A [Patron License](https://lygia.xyz/license) can be obtained by making regular payments through [GitHub Sponsorships](https://github.com/sponsors/patriciogonzalezvivo), in amounts qualifying for a tier of rewards that includes “patron licenses”. A Patron License grants qualifying patrons permission to ignore any noncommercial or copyleft rules in all of [the Prosperity Licensed](https://prosperitylicense.com/versions/3.0.0) software.
-
-Keeping LYGIA healthy requires work and dedication. Your support will be greatly appreciated, whether it is by contributing with new code (functions or examples in new enviroments like Processing, TouchDesigner, Three.js, OpenFrameworks, etc), or fixing bugs and translating the GLSL/HLSL to Metal. 
-
-Another way to support is by [sponsoring through GitHub](https://github.com/sponsors/patriciogonzalezvivo). By becoming a Sponsor, you'll be helping to ensure I can spend more time fixing bugs, adding features, releasing new versions and making more examples, as well as expanding the support for new frameworks.
+Sponsors and contributors shown in the [Patron License](https://lygia.xyz/license) can ignore any noncommercial or copyleft rules in all of [the Prosperity Licensed](https://prosperitylicense.com/versions/3.0.0) software. 

@@ -102,8 +102,11 @@ vec4 pbr(const Material _mat) {
     vec3 lightSpecular = vec3(0.0);
     
     {
+        #ifdef LIGHT_DIRECTION
+        lightDirectional(diffuseColor, specularColor, N, V, NoV, roughness, f0, _mat.shadow, lightDiffuse, lightSpecular);
+        #else
         lightPoint(diffuseColor, specularColor, N, V, NoV, roughness, f0, _mat.shadow, lightDiffuse, lightSpecular);
-        // lightDirectional(diffuseColor, specularColor, N, V, NoV, roughness, f0, _mat.shadow, lightDiffuse, lightSpecular);
+        #endif
     }
     
     // Final Sum
