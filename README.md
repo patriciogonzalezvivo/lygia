@@ -111,15 +111,15 @@ There are some functions which behaviour can be change using `#defines` keyword 
 
 This library:
 
-* Relays on `#include "path/to/file.*lsl"` which is defined by Khronos GLSL standard and suported by most engines and enviroments ( like [glslViewer](https://github.com/patriciogonzalezvivo/glslViewer/wiki/Compiling), [glsl-canvas VS Code pluging](https://marketplace.visualstudio.com/items?itemName=circledev.glsl-canvas), Unity, etc. ). It requires a tipical C-like pre-compiler MACRO which is easy to implement with just basic string operations to resolve dependencies. Here you can find some implementations on different languages:
-    * [C++](https://github.com/patriciogonzalezvivo/ada/blob/main/src/fs.cpp#L88-L171)
+* Relays on `#include "path/to/file.*lsl"` which is defined by Khronos GLSL standard and suported by most engines and enviroments ( like Unity3D, [OpenFrameworks](https://github.com/openframeworks/openFrameworks), [glslViewer](https://github.com/patriciogonzalezvivo/glslViewer/wiki/Compiling), [glsl-canvas VS Code pluging](https://marketplace.visualstudio.com/items?itemName=circledev.glsl-canvas), etc. ). It requires a tipical C-like pre-compiler MACRO which is easy to implement with just basic string operations to resolve dependencies. Here you can find some implementations on different languages:
+    * [C++](https://github.com/patriciogonzalezvivo/vera/blob/main/src/ops/fs.cpp#L110-L171)
     * [Python](https://gist.github.com/patriciogonzalezvivo/9a50569c2ef9b08058706443a39d838e)
     * JavaScript: 
-        - [vanilla JS online resolver](https://lygia.xyz/resolve.js)
-        - [vite](https://github.com/UstymUkhman/vite-plugin-glsl)
-        - [esbuild](https://github.com/ricardomatias/esbuild-plugin-glsl-include)
-        - [webpack](https://github.com/grieve/webpack-glsl-loader)
-        - [observable](https://observablehq.com/d/e4e8a96f64a6bf81)
+        - [vanilla JS online resolver](https://lygia.xyz/resolve.js) This small file brings `resolveLygia()` which takes a `string` or `string[]` and parse it solving all the `#include` dependencies into a single `string` you can load on your shaders.
+        - [vite glsl plugin](https://github.com/UstymUkhman/vite-plugin-glsl) by Ustym Ukhman. Imports `.glsl` local dependencies, or load inline shaders through vite
+        - [esbuild glsl plugin](https://github.com/ricardomatias/esbuild-plugin-glsl-include) by Ricardo Matias. Import local `.glsl` dependencies through esbuild.
+        - [webpack glsl plugin](https://github.com/grieve/webpack-glsl-loader) by Ryan Grieve. Import local `.glsl` dependencies through webpack.
+        - [observable](https://observablehq.com/d/e4e8a96f64a6bf81) by Radamés Ajna. It's an series of examples on how to load LYGIA inside [Observable](https://observablehq.com).
 
 * it's **very granular**. One function per file. Where the file and the function share the same name. Ex: `myFunc.glsl` contains `myFunct()`. There are some files that just include a collection of files inside a folder with the same name. For example:
 
