@@ -2,7 +2,7 @@
 
 # LYGIA: a multi-language shader library
 
-Tired of reimplementing and searching for the same functions over and over, I started compiling and building a shader library of reusable assets (mostly functions) that can be include over and over. It's very granular, designed for reusability, performance and flexibility. 
+Tired of searching for the same functions over and over? or to port and reimplementing them between platforms and shader languages? LYGIA is shader library of reusable functions that can be include easily on your projects. Doesn't matter the shader language, if they run local or on the cloud. LYGIA is very granular, designed for reusability, performance and flexibility. 
 
 ## How does it work?
 
@@ -42,20 +42,13 @@ or as a submodule:
     git submodule add https://github.com/patriciogonzalezvivo/lygia.git
 ```
 
-Learn more about how to use it from this **examples**:
-
-* [2D examples for Processing (GLSL)](https://github.com/patriciogonzalezvivo/lygia_p5_examples)
-* [2D examples for Three.js (GLSL)](https://github.com/patriciogonzalezvivo/lygia_threejs_examples) 
-* [2D/3D examples for Unity3D (HLSL)](https://github.com/patriciogonzalezvivo/lygia_unity_examples)
-* [2D/3D examples on GlslViewer (GLSL)](https://github.com/patriciogonzalezvivo/lygia_examples)
-
-If you are working directly on a **cloud platform** probably you want to resolve the dependencies without needing to install anything. Just add a link to `https://lygia.xyz/resolve.js` and resolve the dependencies on a GLSL/HLSL source `String` or `Strings[]` 
+If you are working on a **cloud platform** probably you want to resolve the dependencies without needing to install anything. Just add a link to `https://lygia.xyz/resolve.js`: 
 
 ```html
 <script src="https://lygia.xyz/resolve.js"></script>
 ```
 
-And then resolve the dependencies by feeding the source files:
+To then resolve the dependencies by passing a `string` or `strings[]` to `resolveLygia()`:
 
 ```js
     vertSource = resolveLygia(vertSource);
@@ -63,9 +56,13 @@ And then resolve the dependencies by feeding the source files:
     shdr = createShader(vertSource, fragSource);
 ```
 
-Check related examples of this method here:
+Learn more about how to use it from this **examples**:
 
+* [2D examples for Processing (GLSL)](https://github.com/patriciogonzalezvivo/lygia_p5_examples)
 * [2D/3D examples for P5.js (GLSL)](https://editor.p5js.org/patriciogonzalezvivo/sketches)
+* [2D examples for Three.js (GLSL)](https://github.com/patriciogonzalezvivo/lygia_threejs_examples) 
+* [2D/3D examples for Unity3D (HLSL)](https://github.com/patriciogonzalezvivo/lygia_unity_examples)
+* [2D/3D examples on GlslViewer (GLSL)](https://github.com/patriciogonzalezvivo/lygia_examples)
 
 For more information, guidance or feedback about using LYGIA, join [#Lygia channel on shader.zone discord](https://shader.zone/).
 
@@ -85,7 +82,7 @@ The functions are divided in different categories:
 * `filters/`: typical filter operations like different kind of blurs, mean and median filters.
 * `distort/`: distort sampling operations
 * `simulate/`: simulate sampling operations
-* `lighting/`: different foward/deferred/raymarching lighting models and functions
+* `lighting/`: different lighting models and functions for foward/deferred/raymarching rendering
 
 
 ## Flexible how?
@@ -217,16 +214,18 @@ This library:
 
 ```
 
+# Contributions
+
+LYGIA have a long way to go. Your support will be appreciated and rewarded. It can take many forms like: fixing bugs, expanding the crosscompatibility between GLSL/HLSL/Metal/SPIR-V, contributing new lygia functions or examples and integrations for new enviroments like TouchDesigner, GoDot, ISF, etc.
+
+Another way to support it, is through [GitHub Sponsorships](https://github.com/sponsors/patriciogonzalezvivo). 
+
 # Acknowledgements
 
 This library has been built over years, and in many cases on top of the work of brillant generous people like: [Inigo Quiles](https://www.iquilezles.org/), [Morgan McGuire](https://casual-effects.com/), [Hugh Kennedy](https://github.com/hughsk) and [Matt DesLauriers](https://www.mattdesl.com/).
 
 # License 
 
-LYGIA is dual-licensed under [the Prosperity License](https://prosperitylicense.com/versions/3.0.0) and the [Patron License](https://lygia.xyz/license) for individual cases.
+LYGIA is dual-licensed under [the Prosperity License](https://prosperitylicense.com/versions/3.0.0) and the [Patron License](https://lygia.xyz/license) for [sponsors](https://github.com/sponsors/patriciogonzalezvivo) and contributors.
 
-A [Patron License](https://lygia.xyz/license) can be obtained by making regular payments through [GitHub Sponsorships](https://github.com/sponsors/patriciogonzalezvivo), in amounts qualifying for a tier of rewards that includes “patron licenses”. A Patron License grants qualifying patrons permission to ignore any noncommercial or copyleft rules in all of [the Prosperity Licensed](https://prosperitylicense.com/versions/3.0.0) software.
-
-Keeping LYGIA healthy require works and dedication, I will really appreciate your support. That could by contributing new code (functions or examples in new enviroments like Processing, TouchDesigner, Three.js, OpenFrameworks, etc), or fixing bugs and translating the GLSL/HLSL to Metal. 
-
-Another way to support is by [sponsoring through GitHub](https://github.com/sponsors/patriciogonzalezvivo). By becoming a Sponsor, you'll be helping to ensure I can spend more time fixing bugs, adding features, releasing new versions, and making more examples and expanding the support for new frameworks.
+Sponsors and contributors shown in the [Patron License](https://lygia.xyz/license) can ignore any noncommercial or copyleft rules in all of [the Prosperity Licensed](https://prosperitylicense.com/versions/3.0.0) software. 
