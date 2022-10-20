@@ -122,8 +122,7 @@ This library:
 
 * It's **very granular**. One function per file. The file and the function share the same name, namely: `myFunc.glsl` contains `myFunct()`. There are some files that just include a collection of files inside a folder with the same name. For example:
 
-```glsl
-
+```
     color/blend.glsl
     // which includes
     color/blend/*.glsl
@@ -133,10 +132,8 @@ This library:
 * It's **multi language**. Right now most of is GLSL (`*.glsl`) and HLSL (`*.hlsl`), but there are plans to extend it to Metal (`*.metal`).
 
 ```
-
     math/mirror.glsl
     math/mirror.hlsl
-
 ```
 
 * **Self documented**. Each file contains a structured comment (in YAML) at the top of the file. This one contains the name of the original author, description, use and `#define` options
