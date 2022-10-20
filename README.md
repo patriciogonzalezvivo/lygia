@@ -134,8 +134,8 @@ This library:
 
 ```
 
-    math/mix.glsl
-    math/mix.hlsl
+    math/mirror.glsl
+    math/mirror.hlsl
 
 ```
 
