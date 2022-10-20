@@ -99,8 +99,11 @@ float4 pbr(const Material _mat) {
     float3 lightSpecular = float3(0.0, 0.0, 0.0);
     
     {
-        // lightPoint(diffuseColor, specularColor, N, V, NoV, roughness, f0, _mat.shadow, lightDiffuse, lightSpecular);
+        #ifdef LIGHT_DIRECTION
         lightDirectional(diffuseColor, specularColor, N, V, NoV, roughness, f0, _mat.shadow, lightDiffuse, lightSpecular);
+        #else
+        lightPoint(diffuseColor, specularColor, N, V, NoV, roughness, f0, _mat.shadow, lightDiffuse, lightSpecular);
+        #endif
     }
     
     // Final Sum

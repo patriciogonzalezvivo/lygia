@@ -54,7 +54,7 @@ float voronoise(vec3 p, float u, float v)  {
     #if defined(PLATFORM_WEBGL)
     for ( float z = -2.0; z <= 2.0; z++ )
     for ( float y = -2.0; y <= 2.0; y++ )
-    for ( float x = -2.0; x <= 2.0 ; x++ ) {
+    for ( float x = -2.0; x <= 2.0; x++ ) {
         vec3 g = vec3(x, y, z);
 
     #else

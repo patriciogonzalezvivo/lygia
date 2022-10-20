@@ -37,6 +37,8 @@ options:
 #endif
 #endif
 
+
+
 #ifndef GOOCH_WARM 
 #define GOOCH_WARM float3(0.25, 0.15, 0.0)
 #endif 
@@ -77,7 +79,11 @@ float4 gooch(float4 albedo, float3 normal, float3 light, float3 view, float roug
 }
 
 float4 gooch(Material material) {
-    return gooch(material.albedo, material.normal, LIGHT_POSITION, (CAMERA_POSITION - material.position), material.roughness, material.shadow);
+    #ifdef LIGHT_DIRECTION
+    return gooch(material.albedo, material.normal, LIGHT_DIRECTION, (CAMERA_POSITION - material.position), material.roughness, material.shadow);
+    #else
+    return gooch(material.albedo, material.normal, (LIGHT_POSITION - material.position), (CAMERA_POSITION - material.position), material.roughness, material.shadow);
+    #endif
 }
 
 #endif
