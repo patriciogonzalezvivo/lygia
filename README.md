@@ -87,7 +87,7 @@ The functions are divided in different categories:
 
 ## Flexible how?
 
-There are some functions which behaviour can be change using `#defines` keyword before including it. For examples, [gaussian blurs](filter/gaussianBlur.glsl) are usually are done in two passes, so by default perform only 1D kernerls, but in the case you are interested on performing a 2D kernel all in the same pass you will need to add the `GAUSSIANBLUR_2D` keyword in the following way. 
+There are some functions whose behaviour can be changed using the `#defines` keyword before including it. For example, [gaussian blurs](filter/gaussianBlur.glsl) are usually are done in two passes. By default, these are performed on their 1D version, but in the case you are interested on using a 2D kernel, all in the same pass, you will need to add the `GAUSSIANBLUR_2D` keyword this way:
 
 ```glsl
 
@@ -108,7 +108,7 @@ There are some functions which behaviour can be change using `#defines` keyword 
 
 This library:
 
-* Relays on `#include "path/to/file.*lsl"` which is defined by Khronos GLSL standard and suported by most engines and enviroments ( like Unity3D, [OpenFrameworks](https://github.com/openframeworks/openFrameworks), [glslViewer](https://github.com/patriciogonzalezvivo/glslViewer/wiki/Compiling), [glsl-canvas VS Code pluging](https://marketplace.visualstudio.com/items?itemName=circledev.glsl-canvas), etc. ). It requires a tipical C-like pre-compiler MACRO which is easy to implement with just basic string operations to resolve dependencies. Here you can find some implementations on different languages:
+* Relies on `#include "path/to/file.*lsl"` which is defined by Khronos GLSL standard and suported by most engines and enviroments ( like Unity3D, [OpenFrameworks](https://github.com/openframeworks/openFrameworks), [glslViewer](https://github.com/patriciogonzalezvivo/glslViewer/wiki/Compiling), [glsl-canvas VS Code pluging](https://marketplace.visualstudio.com/items?itemName=circledev.glsl-canvas), etc. ). It requires a tipical C-like pre-compiler MACRO which is easy to implement with just basic string operations to resolve dependencies. Here you can find some implementations on different languages:
     * [C++](https://github.com/patriciogonzalezvivo/vera/blob/main/src/ops/fs.cpp#L110-L171)
     * [Python](https://gist.github.com/patriciogonzalezvivo/9a50569c2ef9b08058706443a39d838e)
     * JavaScript: 
@@ -118,7 +118,7 @@ This library:
         - [webpack glsl plugin](https://github.com/grieve/webpack-glsl-loader) by Ryan Grieve. Import local `.glsl` dependencies through webpack.
         - [observable](https://observablehq.com/d/e4e8a96f64a6bf81) by Radamés Ajna. It's an series of examples on how to load LYGIA inside [Observable](https://observablehq.com).
 
-* it's **very granular**. One function per file. Where the file and the function share the same name. Ex: `myFunc.glsl` contains `myFunct()`. There are some files that just include a collection of files inside a folder with the same name. For example:
+* It's **very granular**. One function per file. The file and the function share the same name, namely: `myFunc.glsl` contains `myFunct()`. There are some files that just include a collection of files inside a folder with the same name. For example:
 
 ```glsl
 
@@ -128,7 +128,7 @@ This library:
 
 ```
 
-* It's **multi language**. Right now most of it is on GLSL (`*.glsl`) and HLSL (`*.hlsl`), but there is plans to extend it to Metal (`*.metal`).
+* It's **multi language**. Right now most of is GLSL (`*.glsl`) and HLSL (`*.hlsl`), but there are plans to extend it to Metal (`*.metal`).
 
 ```
 
@@ -137,7 +137,7 @@ This library:
 
 ```
 
-* **Self documentation** each file contain a structured comment (in YAML) at the top of the file. This one contain the name of the original author, description, use and `#define` options
+* **Self documented**. Each file contains a structured comment (in YAML) at the top of the file. This one contains the name of the original author, description, use and `#define` options
 
 ```glsl
 
@@ -167,7 +167,7 @@ This library:
 
 ```
 
-* **Templeting capabilities through `#defines`**,  probably the most frequent one is templating the sampling function for reusability. The `#define` options start with the name of the function, in this example `MYFUNC_`. They are added as `options:` in the header.
+* **Templating capabilities through `#defines`**. Probably the most frequent use is templating the sampling function for reusability. The `#define` options start with the name of the function, in this example `MYFUNC_`. They are added as `options:` in the header.
  
 ```glsl
 
@@ -188,7 +188,7 @@ This library:
 
 ```
 
-* Utilize **function overloading**. where arguments are arrange in such a way that optional elements are at the back. When possible sort them according their memory size (except textures that reamin at the top). Ex.: `sampler2D, mat4, mat3, mat2, vec4, vec3, vec2, float, ivec4, ivec3, ivec2, int, bool`
+* **Function Overloading**. Arguments are arranged in such a way that optional elements are at the back. When possible sort them according their memory size (except textures that reamin at the top). Ex.: `sampler2D, mat4, mat3, mat2, vec4, vec3, vec2, float, ivec4, ivec3, ivec2, int, bool`
 
 ```glsl
 
@@ -222,7 +222,7 @@ Another way to support it, is through [GitHub Sponsorships](https://github.com/s
 
 # Acknowledgements
 
-This library has been built over years, and in many cases on top of the work of brillant generous people like: [Inigo Quiles](https://www.iquilezles.org/), [Morgan McGuire](https://casual-effects.com/), [Hugh Kennedy](https://github.com/hughsk) and [Matt DesLauriers](https://www.mattdesl.com/).
+This library has been built over years, and in many cases on top of the work of brillant, generous people like: [Inigo Quiles](https://www.iquilezles.org/), [Morgan McGuire](https://casual-effects.com/), [Hugh Kennedy](https://github.com/hughsk) and [Matt DesLauriers](https://www.mattdesl.com/).
 
 # License 
 
