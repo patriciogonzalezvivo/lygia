@@ -54,7 +54,7 @@ options:
 #define FNC_FBM
 FBM_NOISE_TYPE fbm(in vec2 st) {
     // Initial values
-    FBM_NOISE_TYPE value = FBM_VALUE_INITIAL;
+    FBM_NOISE_TYPE value = FBM_NOISE_TYPE(FBM_VALUE_INITIAL);
     float amplitud = FBM_AMPLITUD_INITIAL;
 
     // Loop of octaves
@@ -68,7 +68,7 @@ FBM_NOISE_TYPE fbm(in vec2 st) {
 
 FBM_NOISE_TYPE fbm(in vec3 pos) {
     // Initial values
-    FBM_NOISE_TYPE value = FBM_VALUE_INITIAL;
+    FBM_NOISE_TYPE value = FBM_NOISE_TYPE(FBM_VALUE_INITIAL);
     float amplitud = FBM_AMPLITUD_INITIAL;
 
     // Loop of octaves
