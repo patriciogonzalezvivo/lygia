@@ -16,6 +16,6 @@ options:
 
 #ifndef FNC_DIFFUSE
 #define FNC_DIFFUSE
-float diffuse(float3 _L, float3 _N, float3 _V, float _roughness) { return DIFFUSE_FNC(_L, N, V, roughness); }
+float diffuse(float3 _L, float3 _N, float3 _V, float _roughness) { return DIFFUSE_FNC(_L, _N, _V, _roughness); }
 float diffuse(float3 _L, float3 _N, float3 _V, float _NoV, float _NoL, float _roughness) { return DIFFUSE_FNC(_L, _N, _V, _NoV, _NoL, _roughness); }
 #endif
