@@ -4,11 +4,11 @@
 
 Tired of searching for the same functions over and over? or to port and reimplementing them between platforms and shader languages? LYGIA is shader library of reusable functions that can be include easily on your projects. Doesn't matter the shader language, if they run local or on the cloud. LYGIA is very granular, designed for reusability, performance and flexibility. 
 
-<p float="left">
-    <a href="https://github.com/patriciogonzalezvivo/lygia_unity_examples"> <img src="https://lygia.xyz/imgs/unity.png" width="100" /> </a>
-    <a href="https://github.com/patriciogonzalezvivo/lygia_threejs_examples">  <img src="https://lygia.xyz/imgs/threejs.png" width="100" /> </a>
-    <a href="https://github.com/patriciogonzalezvivo/lygia_p5_examples">  <img src="https://lygia.xyz/imgs/p5.png" width="100" /> </a>
-    <a href="https://editor.p5js.org/patriciogonzalezvivo/sketches"> <img src="https://lygia.xyz/imgs/p5js.png" width="100" /> </a>
+<p float="center">
+    <a href="https://github.com/patriciogonzalezvivo/lygia_unity_examples"><img src="https://lygia.xyz/imgs/unity.png" width="100" /></a>
+    <a href="https://github.com/patriciogonzalezvivo/lygia_threejs_examples"><img src="https://lygia.xyz/imgs/threejs.png" width="100" /></a>
+    <a href="https://github.com/patriciogonzalezvivo/lygia_p5_examples"><img src="https://lygia.xyz/imgs/p5.png" width="100" /></a>
+    <a href="https://editor.p5js.org/patriciogonzalezvivo/sketches"><img src="https://lygia.xyz/imgs/p5js.png" width="100" /></a>
 </p>
 
 ## How does it work?
