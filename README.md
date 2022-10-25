@@ -6,6 +6,13 @@ Tired of searching for the same functions over and over? or to port and reimplem
 
 [ ![Processing](https://lygia.xyz/imgs/p5.png)  ](https://github.com/patriciogonzalezvivo/lygia_p5_examples) | [ ![P5js](https://lygia.xyz/imgs/p5js.png) ](https://editor.p5js.org/patriciogonzalezvivo/sketches) | [ ![ThreeJs](https://lygia.xyz/imgs/threejs.png) ](https://github.com/patriciogonzalezvivo/lygia_threejs_examples) | [ ![Unity](https://lygia.xyz/imgs/unity.png) ](https://github.com/patriciogonzalezvivo/lygia_unity_examples)
 
+<p float="left">
+    <img src="https://lygia.xyz/imgs/unity.png" width="100" />
+    <img src="https://lygia.xyz/imgs/threejs.png" width="100" />
+    <img src="https://lygia.xyz/imgs/p5.png" width="100" />
+    <img src="https://lygia.xyz/imgs/p5js.png" width="100" /> 
+</p>
+
 ## How does it work?
 
 In your shader `#include` the functions you need:
