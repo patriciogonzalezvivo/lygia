@@ -1,4 +1,4 @@
-![](https://artpil.com/wp-content/uploads/Lygia-Clark-banner.jpg)
+![](https://cms.guggenheim-bilbao.eus/uploads/2020/02/01312.jpg)
 
 # LYGIA: a multi-language shader library
 
