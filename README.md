@@ -4,6 +4,8 @@
 
 Tired of searching for the same functions over and over? or to port and reimplementing them between platforms and shader languages? LYGIA is shader library of reusable functions that can be include easily on your projects. Doesn't matter the shader language, if they run local or on the cloud. LYGIA is very granular, designed for reusability, performance and flexibility. 
 
+[ ![Processing](https://lygia.xyz/imgs/p5.png)  ](https://github.com/patriciogonzalezvivo/lygia_p5_examples) | [ ![P5js](https://lygia.xyz/imgs/p5js.png) ](https://editor.p5js.org/patriciogonzalezvivo/sketches) | [ ![ThreeJs](https://lygia.xyz/imgs/threejs.png) ](https://github.com/patriciogonzalezvivo/lygia_threejs_examples) | [ ![Unity](https://lygia.xyz/imgs/unity.png) ](https://github.com/patriciogonzalezvivo/lygia_unity_examples)
+
 ## How does it work?
 
 In your shader `#include` the functions you need:
