@@ -1,4 +1,4 @@
-<img src="https://lygia.xyz/imgs/lygia.svg" width="200" style="display: block; margin-left: auto; margin-right: auto;">
+<img src="https://lygia.xyz/imgs/lygia.svg" width="200" style="display: block; margin-left: auto; margin-right: auto; filter: drop-shadow(2px 3px 4px gray);">
 
 # LYGIA Shader Library
 
