@@ -23,7 +23,7 @@ license: |
 #ifndef FNC_TRIPRISMSDF
 #define FNC_TRIPRISMSDF
 
-float triPrismSDF( float3 p, vec2 h ) {
+float triPrismSDF( float3 p, float2 h ) {
     float3 q = abs(p);
     return max(q.z-h.y,max(q.x*0.866025+p.y*0.5,-p.y)-h.x*0.5);
 }
