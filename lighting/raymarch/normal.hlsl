@@ -10,24 +10,24 @@ use: <float> raymarchNormal( in <float3> pos )
 #ifndef FNC_RAYMARCHNORMAL
 #define FNC_RAYMARCHNORMAL
 
-float3 raymarchNormal(float3 pos, float e) {
-   const float3 v1 = float3( 1.0,-1.0,-1.0);
-   const float3 v2 = float3(-1.0,-1.0, 1.0);
-   const float3 v3 = float3(-1.0, 1.0,-1.0);
-   const float3 v4 = float3( 1.0, 1.0, 1.0);
+float3 raymarchNormal(in float3 pos, in float2 pixel) {
+   float2 offset = float2(1.0, -1.0) * pixel;
+   return normalize( offset.xyy * raymarchMap( pos + offset.xyy ).a +
+                     offset.yyx * raymarchMap( pos + offset.yyx ).a +
+                     offset.yxy * raymarchMap( pos + offset.yxy ).a +
+                     offset.xxx * raymarchMap( pos + offset.xxx ).a );
+}
 
-   return normalize( v1 * raymarchMap( pos + v1 * e ).a +
-                     v2 * raymarchMap( pos + v2 * e ).a +
-                     v3 * raymarchMap( pos + v3 * e ).a +
-                     v4 * raymarchMap( pos + v4 * e ).a );
+float3 raymarchNormal(in float3 pos, in float e) {
+   const float2 offset = float2(1.0, -1.0);
+   return normalize( offset.xyy * raymarchMap( pos + offset.xyy * e ).a +
+                     offset.yyx * raymarchMap( pos + offset.yyx * e ).a +
+                     offset.yxy * raymarchMap( pos + offset.yxy * e ).a +
+                     offset.xxx * raymarchMap( pos + offset.xxx * e ).a );
 }
 
 float3 raymarchNormal( in float3 pos ) {
-   float2 e = float2(1.0, -1.0) * 0.5773 * 0.0005;
-   return normalize( e.xyy * raymarchMap( pos + e.xyy ).a + 
-                     e.yyx * raymarchMap( pos + e.yyx ).a + 
-                     e.yxy * raymarchMap( pos + e.yxy ).a + 
-                     e.xxx * raymarchMap( pos + e.xxx ).a );
+   return raymarchNormal(pos, 0.5773 * 0.0005);
 }
 
 #endif
