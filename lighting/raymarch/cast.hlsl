@@ -24,7 +24,7 @@ float4 raymarchCast( in float3 ro, in float3 rd ) {
 // #endif
     
     float t = tmin;
-    float3 m = float3(-1.0);
+    float3 m = float3(-1.0, -1.0, -1.0);
     for ( int i = 0; i < RAYMARCH_SAMPLES; i++ ) {
         float precis = 0.0004*t;
         float4 res = raymarchMap( ro + rd * t );
@@ -34,7 +34,7 @@ float4 raymarchCast( in float3 ro, in float3 rd ) {
     }
 
     #if defined(RAYMARCH_BACKGROUND) || defined(RAYMARCH_FLOOR)
-    if ( t>tmax ) m = float3(-1.0);
+    if ( t>tmax ) m = float3(-1.0, -1.0, -1.0);
     #endif
 
     return float4( m, t );
