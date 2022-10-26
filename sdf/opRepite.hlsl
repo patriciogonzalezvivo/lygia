@@ -1,3 +1,5 @@
+#include "../math/mod.hlsl"
+
 /*
 original_author:  Inigo Quiles
 description: repite operation of one 2D SDFs 
@@ -16,11 +18,11 @@ float3 opRepite( in float3 p, in float3 c ) {
 }
 
 float2 opRepite( in float2 p, in float2 lima, in float2 limb, in float s ) {
-    return p-s*clamp(floor(p/s),lima,limb);
+    return p-s*clamp(floor(p/s), lima, limb);
 }
 
 float3 opRepite( in float3 p, in float3 lima, in float3 limb, in float s ) {
-    return p-s*clamp(floor(p/s),lima,limb);
+    return p-s*clamp(floor(p/s), lima, limb);
 }
 
 #endif

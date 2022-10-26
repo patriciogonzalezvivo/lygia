@@ -2,7 +2,7 @@
 #include "ao.hlsl"
 #include "normal.hlsl"
 #include "softShadow.hlsl"
-#include "material.glsl"
+#include "material.hlsl"
 
 /*
 original_author:  Inigo Quiles
@@ -19,17 +19,17 @@ options:
 #ifndef FNC_RAYMARCHDEFAULT
 #define FNC_RAYMARCHDEFAULT
 
-vec4 raymarchDefaultRender( in vec3 ray_origin, in vec3 ray_direction ) { 
-    vec3 col = vec3(0.0);
+float4 raymarchDefaultRender( in float3 ray_origin, in float3 ray_direction ) { 
+    float3 col = float3(0.0, 0.0, 0.0);
     
-    vec4 res = raymarchCast(ray_origin, ray_direction);
+    float4 res = raymarchCast(ray_origin, ray_direction);
     float t = res.a;
 
-    vec3 pos = ray_origin + t * ray_direction;
-    vec3 nor = raymarchNormal( pos );
+    float3 pos = ray_origin + t * ray_direction;
+    float3 nor = raymarchNormal( pos );
     col = raymarchMaterial(ray_direction, pos, nor, res.rgb);
 
-    return vec4( saturate(col), t );
+    return float4( saturate(col), t );
 }
 
 

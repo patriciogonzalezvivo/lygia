@@ -10,6 +10,6 @@ float spiralSDF(float2 st, float t) {
     st -= 0.5;
     float r = dot(st, st);
     float a = atan2(st.y, st.x);
-    return abs(sin(fract(log(r) * t + a * 0.159)));
+    return abs(sin(frac(log(r) * t + a * 0.159)));
 }
 #endif
