@@ -52,7 +52,16 @@ or as a submodule:
 If you are working on a **cloud platform** probably you want to resolve the dependencies without needing to install anything. Just add a link to `https://lygia.xyz/resolve.js`: 
 
 ```html
-<script src="https://lygia.xyz/resolve.js"></script>
+<!DOCTYPE html>
+<html>
+	<head>
+		...
+	</head>
+	<body>
+        <script src="https://lygia.xyz/resolve.js"></script>
+		...
+	</body>
+</html>
 ```
 
 To then resolve the dependencies by passing a `string` or `strings[]` to `resolveLygia()`:
@@ -232,6 +241,6 @@ This library has been built over years, and in many cases on top of the work of 
 
 # License 
 
-LYGIA is dual-licensed under [the Prosperity License](https://prosperitylicense.com/versions/3.0.0) and the [Patron License](https://lygia.xyz/license) for [sponsors](https://github.com/sponsors/patriciogonzalezvivo) and contributors.
+LYGIA is dual-licensed under [the Prosperity License](https://prosperitylicense.com/versions/3.0.0) and the [Patron License](https://lygia.xyz/license) for [sponsors](https://github.com/sponsors/patriciogonzalezvivo) and [contributors](https://github.com/patriciogonzalezvivo/lygia/graphs/contributors).
 
-Sponsors and contributors shown in the [Patron License](https://lygia.xyz/license) can ignore any noncommercial or copyleft rules in all of [the Prosperity Licensed](https://prosperitylicense.com/versions/3.0.0) software. 
+[Sponsors](https://github.com/sponsors/patriciogonzalezvivo) and [contributors](https://github.com/patriciogonzalezvivo/lygia/graphs/contributors) are automatically added to the [Patron License](https://lygia.xyz/license) and they can ignore any noncommercial rule of [the Prosperity Licensed](https://prosperitylicense.com/versions/3.0.0) software. 
