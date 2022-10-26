@@ -10,17 +10,17 @@ use:
 #define FNC_CYLINDERSDF
 
 // vertical
-float cylinderSDF( float3 p, vec2 h ) {
-    vec2 d = abs(vec2(length(p.xz),p.y)) - h;
+float cylinderSDF( float3 p, float2 h ) {
+    float2 d = abs(float2(length(p.xz),p.y)) - h;
     return min(max(d.x,d.y),0.0) + length(max(d,0.0));
 }
 
 float cylinderSDF( float3 p, float h ) {
-    return cylinderSDF( p, vec2(h) );
+    return cylinderSDF( p, float2(h, h) );
 }
 
 float cylinderSDF( float3 p, float h, float r ) {
-    vec2 d = abs(vec2(length(p.xz),p.y)) - vec2(h,r);
+    float2 d = abs(float2(length(p.xz),p.y)) - float2(h,r);
     return min(max(d.x,d.y),0.0) + length(max(d,0.0));
 }
 
