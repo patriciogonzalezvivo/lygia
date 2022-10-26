@@ -62,7 +62,7 @@ float4 raymarchVolume( in float3 ro, in float3 rd ) {
 
     float T = 1.;
     float t = tmin;
-    float3 col = float3(0.0);
+    float3 col = float3(0.0, 0.0, 0.0);
     float3 pos = ro;
     for(int i = 0; i < RAYMARCH_SAMPLES; i++) {
         float4 res    = raymarchMap(pos);
