@@ -1,4 +1,4 @@
-#include "../lygia/sdf/boxSDF.glsl"
+#include "boxSDF.glsl"
 
 /*
 description: generate the SDF of a cube

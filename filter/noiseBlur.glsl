@@ -74,8 +74,8 @@ NOISEBLUR_TYPE noiseBlur(sampler2D tex, vec2 st, vec2 pixel) {
     for (float t = -NOISEBLUR_SAMPLES; t <= NOISEBLUR_SAMPLES; t++) {
         float percent = (t / NOISEBLUR_SAMPLES) + offset - 0.5;
         float weight = 1.0 - abs(percent);
-        NOISEBLUR_TYPE tex = NOISEBLUR_SAMPLER_FNC(st + pixel * percent);
-        rta += tex * weight;
+        NOISEBLUR_TYPE color = NOISEBLUR_SAMPLER_FNC(st + pixel * percent);
+        rta += color * weight;
         total += weight;
     }
     return rta / total;
