@@ -2,17 +2,16 @@
 #include "ao.hlsl"
 #include "normal.hlsl"
 #include "softShadow.hlsl"
-#include "../../math/saturate.hlsl"
 
 /*
 original_author:  Inigo Quiles
 description: default raymarching renderer
 use: <float4> raymarchDefaultRender( in <float3> ro, in <float3> rd ) 
 options:
-    - LIGHT_COLOR: float3(0.5) or u_lightColor in GlslViewer
+    - LIGHT_COLOR: float3(0.5, 0.5, 0.5) or u_lightColor in GlslViewer
     - LIGHT_POSITION: float3(0.0, 10.0, -50.0) or u_light in GlslViewer
-    - RAYMARCH_BACKGROUND: float3(0.0)
-    - RAYMARCH_AMBIENT: float3(1.0)
+    - RAYMARCH_BACKGROUND: float3(0.0, 0.0, 0.0)
+    - RAYMARCH_AMBIENT: float3(1.0, 1.0, 1.0)
     - RAYMARCH_MATERIAL_FNC raymarchDefaultMaterial
 */
 
@@ -28,16 +27,16 @@ options:
 #if defined(GLSLVIEWER)
 #define LIGHT_COLOR u_lightColor
 #else
-#define LIGHT_COLOR float3(0.5)
+#define LIGHT_COLOR float3(0.5, 0.5, 0.5)
 #endif
 #endif
 
 #ifndef RAYMARCH_AMBIENT
-#define RAYMARCH_AMBIENT float3(1.0)
+#define RAYMARCH_AMBIENT float3(1.0, 1.0, 1.0)
 #endif
 
 #ifndef RAYMARCH_BACKGROUND
-#define RAYMARCH_BACKGROUND float3(0.0)
+#define RAYMARCH_BACKGROUND float3(0.0, 0.0, 0.0)
 #endif
 
 #ifndef RAYMARCH_MATERIAL_FNC
@@ -65,7 +64,7 @@ float3 raymarchDefaultMaterial(float3 ray, float3 pos, float3 nor, float3 alb) {
     dif *= raymarchSoftShadow( pos, lig, 0.02, 2.5 );
     dom *= raymarchSoftShadow( pos, ref, 0.02, 2.5 );
 
-    float3 lin = float3(0.0);
+    float3 lin = float3(0.0, 0.0, 0.0);
     lin += 1.30 * dif * LIGHT_COLOR;
     lin += 0.40 * amb * occ * RAYMARCH_AMBIENT;
     lin += 0.50 * dom * occ * RAYMARCH_AMBIENT;
@@ -76,7 +75,7 @@ float3 raymarchDefaultMaterial(float3 ray, float3 pos, float3 nor, float3 alb) {
 }
 
 float4 raymarchDefaultRender( in float3 ray_origin, in float3 ray_direction ) { 
-    float3 col = float3(0.0);
+    float3 col = float3(0.0,0.0,0.0);
     
     float4 res = raymarchCast(ray_origin, ray_direction);
     float t = res.a;
