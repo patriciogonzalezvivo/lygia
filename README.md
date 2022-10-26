@@ -20,9 +20,9 @@ In your shader `#include` the functions you need:
     uniform vec2    u_resolution;
     uniform float   u_time;
 
-    #include "space/ratio.glsl"
-    #include "math/decimation.glsl"
-    #include "draw/circle.glsl"
+    #include "lygia/space/ratio.glsl"
+    #include "lygia/math/decimation.glsl"
+    #include "lygia/draw/circle.glsl"
 
     void main(void) {
         vec3 color = vec3(0.0);
