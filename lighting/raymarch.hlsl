@@ -27,7 +27,7 @@ options:
 
 float4 raymarch(float3 camera, float3 ta, float2 st) {
     float3x3 ca = RAYMARCH_CAMERA_MATRIX_FNC(camera, ta);
-    float3 rd = ca * normalize(float3(st*2.0-1.0, 3.0));
+    float3 rd = mul(ca, normalize(float3(st*2.0-1.0, 3.0)));
     
     return RAYMARCH_RENDER_FNC( camera * 0.11, rd );
 }
