@@ -78,18 +78,18 @@ For more information, guidance or feedback about using LYGIA, join [#Lygia chann
 
 The functions are divided in different categories:
 
-* `math/`: general math functions and constants like `PI`, `SqrtLength()`, etc. 
-* `space/`: general spatial operations like `scale()`, `rotate()`, etc.
-* `color/`: general color operations like `luma()`, `saturation()`, blend modes, palettes, color space conversion and tonemaps.
-* `animation/`: animation operations, like easing
-* `generative/`: generative functions like `random()`, `noise()`, etc. 
-* `sdf/`: signed distance field functions.
-* `draw/`: drawing functions like `digits()`, `stroke()`, `fill`, etc/.
-* `sample/`: sample operations
-* `filters/`: typical filter operations like different kind of blurs, mean and median filters.
-* `distort/`: distort sampling operations
-* `simulate/`: simulate sampling operations
-* `lighting/`: different lighting models and functions for foward/deferred/raymarching rendering
+* [`math/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/math): general math functions and constants like `PI`, `SqrtLength()`, etc. 
+* [`space/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/space): general spatial operations like `scale()`, `rotate()`, etc. 
+* [`color/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/color): general color operations like `luma()`, `saturation()`, blend modes, palettes, color space conversion and tonemaps.
+* [`animation/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/animation): animation operations, like easing
+* [`generative/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/generative): generative functions like `random()`, `noise()`, etc. 
+* [`sdf/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/sdf): signed distance field functions.
+* [`draw/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/draw): drawing functions like `digits()`, `stroke()`, `fill`, etc/.
+* [`sample/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/sample): sample operations
+* [`filter/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/filter): typical filter operations like different kind of blurs, mean and median filters.
+* [`distort/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/distort): distort sampling operations
+* [`simulate/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/simulate): simulate sampling operations
+* [`lighting/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/lighting): different lighting models and functions for foward/deferred/raymarching rendering
 
 
 ## Flexible how?
