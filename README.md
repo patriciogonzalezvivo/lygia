@@ -11,7 +11,7 @@ Tired of searching for the same functions over and over? or to port and reimplem
     <a href="https://editor.p5js.org/patriciogonzalezvivo/sketches"><img src="https://lygia.xyz/imgs/p5js.png" width="100" /></a>
 </p>
 
-## How does it work?
+### How does it work?
 
 In your shader `#include` the functions you need:
 
@@ -83,7 +83,7 @@ Learn more about how to use it from this **examples**:
 For more information, guidance or feedback about using LYGIA, join [#Lygia channel on shader.zone discord](https://shader.zone/).
 
 
-## How is it organized?
+### How is it organized?
 
 The functions are divided in different categories:
 
@@ -101,7 +101,7 @@ The functions are divided in different categories:
 * [`lighting/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/lighting): different lighting models and functions for foward/deferred/raymarching rendering
 
 
-## Flexible how?
+### Flexible how?
 
 There are some functions whose behaviour can be changed using the `#defines` keyword before including it. For example, [gaussian blurs](filter/gaussianBlur.glsl) are usually are done in two passes. By default, these are performed on their 1D version, but in the case you are interested on using a 2D kernel, all in the same pass, you will need to add the `GAUSSIANBLUR_2D` keyword this way:
 
@@ -120,7 +120,7 @@ There are some functions whose behaviour can be changed using the `#defines` key
 
 ```
 
-# Design Principles
+## Design Principles
 
 This library:
 
@@ -229,17 +229,17 @@ This library:
 
 ```
 
-# Contributions
+## Contributions
 
 LYGIA have a long way to go. Your support will be appreciated and rewarded. It can take many forms like: fixing bugs, expanding the crosscompatibility between GLSL/HLSL/Metal/SPIR-V, contributing new lygia functions or examples and integrations for new enviroments like TouchDesigner, GoDot, ISF, etc.
 
 Another way to support it, is through [GitHub Sponsorships](https://github.com/sponsors/patriciogonzalezvivo). 
 
-# Acknowledgements
+## Acknowledgements
 
 This library has been built over years, and in many cases on top of the work of brillant, generous people like: [Inigo Quiles](https://www.iquilezles.org/), [Morgan McGuire](https://casual-effects.com/), [Hugh Kennedy](https://github.com/hughsk) and [Matt DesLauriers](https://www.mattdesl.com/).
 
-# License 
+## License 
 
 LYGIA is dual-licensed under [the Prosperity License](https://prosperitylicense.com/versions/3.0.0) and the [Patron License](https://lygia.xyz/license) for [sponsors](https://github.com/sponsors/patriciogonzalezvivo) and [contributors](https://github.com/patriciogonzalezvivo/lygia/graphs/contributors).
 
