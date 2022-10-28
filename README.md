@@ -231,13 +231,13 @@ This library:
 
 ## Contributions
 
-LYGIA have a long way to go. Your support will be appreciated and rewarded. It can take many forms like: fixing bugs, expanding the crosscompatibility between GLSL/HLSL/Metal/SPIR-V, contributing new lygia functions or examples and integrations for new enviroments like TouchDesigner, GoDot, ISF, etc.
+LYGIA have a long way to go. Your support will be appreciated and rewarded (all contributors are automatically added to the [commercial license](https://lygia.xyz/license) ). This support can take multiple forms:
 
-Another way to support it, is through [GitHub Sponsorships](https://github.com/sponsors/patriciogonzalezvivo). 
-
-## Acknowledgements
-
-This library has been built over years, and in many cases on top of the work of brillant, generous people like: [Inigo Quiles](https://www.iquilezles.org/), [Morgan McGuire](https://casual-effects.com/), [Hugh Kennedy](https://github.com/hughsk) and [Matt DesLauriers](https://www.mattdesl.com/).
+* fixing bugs
+* expanding the crosscompatibility between languages GLSL/HLSL/WGSL/Metal
+* contributing new functions
+* adding new examples and integrations for new enviroments like: [TouchDesigner](https://derivative.ca/), [GoDot](https://godotengine.org/), [ISF](https://isf.video/), [MaxMSP](https://cycling74.com/products/max), etc.
+* through [sponsorships](https://github.com/sponsors/patriciogonzalezvivo)
 
 ## License 
 
@@ -246,3 +246,7 @@ LYGIA is dual-licensed under [the Prosperity License](https://prosperitylicense.
 [Sponsors](https://github.com/sponsors/patriciogonzalezvivo) and [contributors](https://github.com/patriciogonzalezvivo/lygia/graphs/contributors) are automatically added to the [Patron License](https://lygia.xyz/license) and they can ignore any non-commercial rule of [the Prosperity Licensed](https://prosperitylicense.com/versions/3.0.0) software. 
 
 Comming soon will be possible to get a permanent comercial license hook to a single and specific version of LYGIA.
+
+## Acknowledgements
+
+This library has been built over years, and in many cases on top of the work of brillant and generous people like: [Inigo Quiles](https://www.iquilezles.org/), [Morgan McGuire](https://casual-effects.com/), [Alan Wolfe](https://blog.demofox.org/), [Hugh Kennedy](https://github.com/hughsk), [Matt DesLauriers](https://www.mattdesl.com/) and many others.
