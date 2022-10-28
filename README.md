@@ -243,4 +243,6 @@ This library has been built over years, and in many cases on top of the work of 
 
 LYGIA is dual-licensed under [the Prosperity License](https://prosperitylicense.com/versions/3.0.0) and the [Patron License](https://lygia.xyz/license) for [sponsors](https://github.com/sponsors/patriciogonzalezvivo) and [contributors](https://github.com/patriciogonzalezvivo/lygia/graphs/contributors).
 
-[Sponsors](https://github.com/sponsors/patriciogonzalezvivo) and [contributors](https://github.com/patriciogonzalezvivo/lygia/graphs/contributors) are automatically added to the [Patron License](https://lygia.xyz/license) and they can ignore any noncommercial rule of [the Prosperity Licensed](https://prosperitylicense.com/versions/3.0.0) software. 
+[Sponsors](https://github.com/sponsors/patriciogonzalezvivo) and [contributors](https://github.com/patriciogonzalezvivo/lygia/graphs/contributors) are automatically added to the [Patron License](https://lygia.xyz/license) and they can ignore any non-commercial rule of [the Prosperity Licensed](https://prosperitylicense.com/versions/3.0.0) software. 
+
+Comming soon will be possible to get a permanent comercial license hook to a single and specific version of LYGIA.
