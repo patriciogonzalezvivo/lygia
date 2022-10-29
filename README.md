@@ -16,6 +16,7 @@ Tired of searching for the same functions over and over? or to port and reimplem
 
 In your shader `#include` the functions you need:
 
+<div class="codeAndCanvas" data="example.frag">
 ```glsl
 
     uniform vec2    u_resolution;
@@ -37,6 +38,7 @@ In your shader `#include` the functions you need:
         gl_FragColor = vec4(color, 1.0);
     }
 ```
+</div>
 
 If you are working **locally** on an ecosystem that can resolve `#include` dependencies, just clone LYGIA in your project relative to the shader you are loading:
 
