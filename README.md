@@ -35,7 +35,7 @@ In your shader `#include` the functions you need:
         
         gl_FragColor = vec4(color, 1.0);
     }
-```
+</div>
 
 If you are working **locally** on an ecosystem that can resolve `#include` dependencies, just clone LYGIA in your project relative to the shader you are loading:
 
