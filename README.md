@@ -17,7 +17,11 @@ Tired of searching for the same functions over and over? or to port and reimplem
 In your shader `#include` the functions you need:
 
 <div class="codeAndCanvas" data="example.frag">
-	
+
+	#ifdef GL_ES
+    precision mediump float;
+    #endif
+
     uniform vec2    u_resolution;
     uniform float   u_time;
 
