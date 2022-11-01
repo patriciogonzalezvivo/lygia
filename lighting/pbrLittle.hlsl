@@ -2,7 +2,7 @@
 #include "../color/tonemap.hlsl"
 
 #include "material.hlsl"
-#include "fresnel.hlsl"
+#include "fresnelReflection.hlsl"
 
 #include "envMap.hlsl"
 #include "sphericalHarmonics.hlsl"
@@ -84,7 +84,7 @@ float4 pbrLittle(float4 albedo, float3 position, float3 normal, float roughness,
 
     float3 R = reflect(-V, N);
     float3 ambientSpecular = tonemapReinhard( envMap(R, roughness, metallic) ) * specIntensity;
-    ambientSpecular += fresnel(R, float3(0.04, 0.04, 0.04), NoV) * metallic;
+    ambientSpecular += fresnelReflection(R, f0, NoV) * metallic;
 
     albedo.rgb =    albedo.rgb * notMetal + ( ambientSpecular 
                     + LIGHT_COLOR * 2.0 * spec
@@ -98,7 +98,7 @@ float4 pbrLittle(float4 albedo, float3 position, float3 normal, float roughness,
 }
 
 float4 pbrLittle(Material material) {
-    return pbrLittle(material.albedo, material.position, material.normal, material.roughness, material.metallic, material.ambientOcclusion * material.shadow) + float4(material.emissive, 0.0);
+    return pbrLittle(material.albedo, material.position, material.normal, material.roughness, material.metallic, material.f0, material.ambientOcclusion * material.shadow) + float4(material.emissive, 0.0);
 }
 
 #endif

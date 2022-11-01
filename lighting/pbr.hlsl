@@ -1,12 +1,12 @@
 #include "material.hlsl"
+#include "fresnelReflection.hlsl"
+
 #include "light/point.hlsl"
 #include "light/directional.hlsl"
 
 #include "common/reflection.hlsl"
 #include "common/specularAO.hlsl"
 #include "common/envBRDFApprox.hlsl"
-
-// #include "light/point.hlsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
@@ -80,7 +80,7 @@ float4 pbr(const Material _mat) {
 
     float3 Fr = float3(0.0, 0.0, 0.0);
     Fr = tonemapReinhard( envMap(R, roughness, _mat.metallic) ) * E;
-    Fr += fresnel(R, _mat.f0, NoV) * _mat.metallic * (1.0-roughness) * 0.2;
+    Fr += fresnelReflection(R, _mat.f0, NoV) * _mat.metallic * (1.0-roughness) * 0.2;
     Fr *= specAO;
 
     float3 Fd = float3(0.0, 0.0, 0.0);

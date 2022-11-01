@@ -1,8 +1,4 @@
 #include "common/schlick.glsl"
-#include "envMap.glsl"
-#include "fakeCube.glsl"
-#include "sphericalHarmonics.glsl"
-#include "../color/tonemap.glsl"
 #include "../math/saturate.glsl"
 
 /*
@@ -10,7 +6,7 @@ original_author: Patricio Gonzalez Vivo
 description: resolve fresnel coeficient
 use: 
     - <vec3> fresnel(const <vec3> f0, <float> LoH)
-    - <vec3> fresnel(<vec3> _R, <vec3> _f0, <float> _NoV)
+    - <vec3> fresnel(<vec3> V <vec3> N, <float> R0)
 */
 
 #ifndef FNC_FRESNEL
@@ -23,19 +19,6 @@ vec3 fresnel(const vec3 f0, float LoH) {
     float f90 = saturate(dot(f0, vec3(50.0 * 0.33)));
     return schlick(f0, f90, LoH);
 #endif
-}
-
-vec3 fresnel(vec3 _R, vec3 _f0, float _NoV) {
-    vec3 frsnl = fresnel(_f0, _NoV);
-
-    vec3 reflectColor = vec3(0.0);
-    #if defined(SCENE_SH_ARRAY)
-    reflectColor = tonemap( sphericalHarmonics(_R) );
-    #else
-    reflectColor = fakeCube(_R);
-    #endif
-
-    return reflectColor * frsnl;
 }
 
 // float fresnelf(vec3 V, vec3 N, float R0) {
