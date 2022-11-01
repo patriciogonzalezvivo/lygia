@@ -24,19 +24,6 @@ float3 fresnel(const float3 f0, float LoH) {
 #endif
 }
 
-float3 fresnel(float3 _R, float3 _f0, float _NoV) {
-    float3 frsnl = fresnel(_f0, _NoV);
-
-    float3 reflectColor = float3(0.0, 0.0, 0.0);
-    #if defined(SCENE_SH_ARRAY)
-    reflectColor = tonemap( sphericalHarmonics(_R) );
-    #else
-    reflectColor = fakeCube(_R);
-    #endif
-
-    return reflectColor * frsnl;
-}
-
 // float fresnelf(float3 V, float3 N, float R0) {
 //     float cosAngle = 1.0-max(dot(V, N), 0.0);
 //     float result = cosAngle * cosAngle;

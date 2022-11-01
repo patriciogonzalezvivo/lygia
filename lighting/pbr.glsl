@@ -1,6 +1,7 @@
 #include "../math/saturate.glsl"
 
 #include "material.glsl"
+#include "fresnelReflection.glsl"
 #include "light/point.glsl"
 #include "light/directional.glsl"
 
@@ -85,7 +86,7 @@ vec4 pbr(const Material _mat) {
 
     vec3 Fr = vec3(0.0);
     Fr = tonemapReinhard( envMap(R, roughness, _mat.metallic) ) * E;
-    Fr += fresnel(R, _mat.f0, NoV) * _mat.metallic * (1.0-roughness) * 0.2;
+    Fr += fresnelReflection(R, _mat.f0, NoV) * _mat.metallic * (1.0-roughness) * 0.2;
     Fr *= specularAO;
 
     vec3 Fd = vec3(0.0);
