@@ -72,6 +72,16 @@ If you are working on a **cloud platform** probably you want to resolve the depe
 </html>
 ```
 
+Or as a ES module, at the path `https://lygia.xyz/resolve.esm.js`:
+
+```html
+...
+    <script type="module">
+      import resolveLygia from "https://lygia.xyz/resolve.esm.js"
+    </script>
+...
+```
+
 To then resolve the dependencies by passing a `string` or `strings[]` to `resolveLygia()`:
 
 ```js
