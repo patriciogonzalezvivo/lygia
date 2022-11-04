@@ -93,6 +93,7 @@ Learn more about how to use it from this **examples**:
 
 * [2D examples for Processing (GLSL)](https://github.com/patriciogonzalezvivo/lygia_p5_examples)
 * [2D/3D examples for P5.js (GLSL)](https://editor.p5js.org/patriciogonzalezvivo/sketches)
+* [2D examples for Three.js + React (GLSL)](https://codesandbox.io/s/lygia-react-starter-fftx6p) by [Eduard Fossas](https://eduardfossas.vercel.app/)
 * [2D examples for Three.js (GLSL)](https://github.com/patriciogonzalezvivo/lygia_threejs_examples)
 * [3D examples for Three.js (GLSL)](https://github.com/guidoschmidt/lygia_threejs_examples) by [Guido Schmidt](https://guidoschmidt.cc/)
 * [2D examples for OpenFrameworks (GLSL)](https://github.com/patriciogonzalezvivo/lygia_of_examples) 
