@@ -19,10 +19,7 @@ use: spheremap(<sampler2D> texture, <float3> normal)
 #ifndef FNC_SPHEREMAP
 #define FNC_SPHEREMAP
 float2 sphereMap(float3 normal, float3 eye) {
-    // float3 reflected = reflect(eye, normal);
-    // float m = 2.8284271247461903 * sqrt( reflected.z+1.0 );
-    // return reflected.xy / m + 0.5;
-    float3 r = reflect(eye, normal);
+    float3 r = reflect(-eye, normal);
     r.z += 1.;
     float m = 2. * length(r);
     return r.xy / m + .5;
