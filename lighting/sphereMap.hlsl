@@ -5,7 +5,7 @@ use: spheremap(<sampler2D> texture, <float3> normal)
 */
 
 #ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
+#define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
 #endif
 
 #ifndef SPHEREMAP_TYPE
