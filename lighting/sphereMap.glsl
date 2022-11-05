@@ -6,11 +6,6 @@ options:
   SPHEREMAP_EYETOPOINT: where the eye is looking
 */
 
-#ifndef SPHEREMAP_EYETOPOINT
-#define SPHEREMAP_EYETOPOINT vec3(0.,0.,1.)
-#endif
-
-
 #ifndef SPHEREMAP_TYPE
 #define SPHEREMAP_TYPE vec4
 #endif
@@ -21,21 +16,17 @@ options:
 
 #ifndef FNC_SPHEREMAP
 #define FNC_SPHEREMAP
-SPHEREMAP_TYPE sphereMap (in sampler2D tex, in vec3 normal, in vec3 eye) {
-  vec3 r = reflect( eye, normal );
-	r.z += 1.;
-  float m = 2. * length(r);
-  vec2 uv = r.xy / m + .5;
-  return SPHEREMAP_SAMPLER_FNC(uv);
+vec2 sphereMap(vec3 normal, vec3 eye) {
+    // vec3 reflected = reflect(eye, normal);
+    // float m = 2.8284271247461903 * sqrt( reflected.z+1.0 );
+    // return reflected.xy / m + 0.5;
+    vec3 r = reflect(eye, normal);
+    r.z += 1.;
+    float m = 2. * length(r);
+    vec2 uv = r.xy / m + .5;
 }
 
-#ifdef FNC_TEXTURE2D
-SPHEREMAP_TYPE sphereMap (in SamplerVideo tex, in vec3 normal, in vec3 eye) {
-  vec3 r = reflect( eye, normal );
-	r.z += 1.;
-  float m = 2. * length(r);
-  vec2 uv = r.xy / m + .5;
-  return SPHEREMAP_SAMPLER_FNC(uv);
+SPHEREMAP_TYPE sphereMap(in sampler2D tex, in vec3 normal, in vec3 eye) {
+    return SPHEREMAP_SAMPLER_FNC( sphereMap(normal, eye) );
 }
-#endif
 #endif
