@@ -17,10 +17,7 @@ options:
 #ifndef FNC_SPHEREMAP
 #define FNC_SPHEREMAP
 vec2 sphereMap(vec3 normal, vec3 eye) {
-    // vec3 reflected = reflect(eye, normal);
-    // float m = 2.8284271247461903 * sqrt( reflected.z+1.0 );
-    // return reflected.xy / m + 0.5;
-    vec3 r = reflect(eye, normal);
+    vec3 r = reflect(-eye, normal);
     r.z += 1.;
     float m = 2. * length(r);
     return r.xy / m + .5;
