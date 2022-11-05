@@ -25,15 +25,9 @@ vec3 noised (in vec2 p) {
     vec2 i = floor( p );
     vec2 f = fract( p );
 
-  #ifdef NOISED_QUINTIC_INTERPOLATION
     // quintic interpolation
     vec2 u = f * f * f * (f * (f * 6. - 15.) + 10.);
     vec2 du = 30. * f * f * (f * (f - 2.) + 1.);
-  #else
-    // cubic interpolation
-    vec2 u = f * f * (3. - 2. * f);
-    vec2 du = 6. * f * (1. - f);
-  #endif
 
     vec2 ga = NOISED_RANDOM2_FNC(i + vec2(0., 0.));
     vec2 gb = NOISED_RANDOM2_FNC(i + vec2(1., 0.));
@@ -55,15 +49,9 @@ vec4 noised (in vec3 pos) {
     vec3 p = floor(pos);
     vec3 w = fract(pos);
 
-  #ifdef NOISED_QUINTIC_INTERPOLATION
     // quintic interpolant
     vec3 u = w * w * w * ( w * (w * 6. - 15.) + 10. );
     vec3 du = 30.0 * w * w * ( w * (w - 2.) + 1.);
-  #else
-    // cubic interpolant
-    vec3 u = w * w * (3. - 2. * w);
-    vec3 du = 6. * w * (1. - w);
-  #endif
 
     // gradients
     vec3 ga = NOISED_RANDOM3_FNC(p + vec3(0., 0., 0.));

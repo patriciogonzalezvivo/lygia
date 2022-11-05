@@ -25,15 +25,9 @@ float3 noised(in float2 p) {
     float2 i = floor( p );
     float2 f = frac( p );
 
-    #ifdef NOISED_QUINTIC_INTERPOLATION
     // quintic interpolation
     float2 u = f * f * f * (f * (f * 6. - 15.) + 10.);
     float2 du = 30. * f * f * (f * (f - 2.) + 1.);
-    #else
-    // cubic interpolation
-    float2 u = f * f * (3. - 2. * f);
-    float2 du = 6. * f * (1. - f);
-    #endif
 
     float2 ga = NOISED_RANDOM2_FNC(i + float2(0., 0.));
     float2 gb = NOISED_RANDOM2_FNC(i + float2(1., 0.));
@@ -55,15 +49,9 @@ float4 noised(in float3 pos) {
     float3 p = floor(pos);
     float3 w = frac(pos);
 
-    #ifdef NOISED_QUINTIC_INTERPOLATION
     // quintic interpolant
     float3 u = w * w * w * ( w * (w * 6. - 15.) + 10. );
     float3 du = 30.0 * w * w * ( w * (w - 2.) + 1.);
-    #else
-    // cubic interpolant
-    float3 u = w * w * (3. - 2. * w);
-    float3 du = 6. * w * (1. - w);
-    #endif
 
     // gradients
     float3 ga = NOISED_RANDOM3_FNC(p + float3(0., 0., 0.));
