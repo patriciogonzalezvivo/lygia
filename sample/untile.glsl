@@ -35,7 +35,7 @@ options:
 #ifndef FNC_SAMPLEUNTILE
 #define FNC_SAMPLEUNTILE
 
-SAMPLEUNTILE_TYPE sampleUntile(sampler2D tex, in vec2 st, float v) {
+SAMPLEUNTILE_TYPE sampleUntile(sampler2D tex, in vec2 st) {
         
     #ifdef PLATFORM_WEBGL
     // derivatives (for correct mipmapping)
@@ -43,7 +43,7 @@ SAMPLEUNTILE_TYPE sampleUntile(sampler2D tex, in vec2 st, float v) {
     vec2 ddy = dFdy( st );
     #endif
 
-    #ifdef SAMPLESSEAMLESS_FAST
+    #ifdef SAMPLEUNTILE_FAST
     float k = SAMPLEUNTILE_SAMPLER_FNC(0.005*st ).x; // cheap (cache friendly) lookup
     
     float l = k*8.0;
@@ -58,11 +58,11 @@ SAMPLEUNTILE_TYPE sampleUntile(sampler2D tex, in vec2 st, float v) {
     f = min(f, 1.0-f)*2.0;
     #endif    
     
-    vec2 offa = sin(vec2(3.0,7.0)*ia); // can replace with any other hash
-    vec2 offb = sin(vec2(3.0,7.0)*ib); // can replace with any other hash
+    vec2 offa = sin(vec2(3.0,7.0) * ia); // can replace with any other hash
+    vec2 offb = sin(vec2(3.0,7.0) * ib); // can replace with any other hash
 
-    SAMPLEUNTILE_TYPE cola = SAMPLEUNTILE_SAMPLER_FNC( st + v * offa );
-    SAMPLEUNTILE_TYPE colb = SAMPLEUNTILE_SAMPLER_FNC( st + v * offb );
+    SAMPLEUNTILE_TYPE cola = SAMPLEUNTILE_SAMPLER_FNC( st + offa );
+    SAMPLEUNTILE_TYPE colb = SAMPLEUNTILE_SAMPLER_FNC( st + offb );
     return mix( cola, colb, smoothstep(0.2, 0.8, f - 0.1 * sum(cola-colb) ) );
 
     #else 
@@ -82,7 +82,7 @@ SAMPLEUNTILE_TYPE sampleUntile(sampler2D tex, in vec2 st, float v) {
         vec2 r = g - f + o.xy;
         float d = dot(r,r);
         float w = exp(-5.0*d );
-        SAMPLEUNTILE_TYPE c = SAMPLEUNTILE_SAMPLER_FNC(st + v*o.zw); 
+        SAMPLEUNTILE_TYPE c = SAMPLEUNTILE_SAMPLER_FNC(st + o.zw); 
         va += w*c;
         w1 += w;
         w2 += w*w;
@@ -92,9 +92,9 @@ SAMPLEUNTILE_TYPE sampleUntile(sampler2D tex, in vec2 st, float v) {
     // return va/w1;
 
     // contrast preserving average
-    float mean = 0.3;// textureGrad( samp, uv, ddx*16.0, ddy*16.0 ).x;
+    float mean = 0.3;
     SAMPLEUNTILE_TYPE res = mean + (va-w1*mean)/sqrt(w2);
-    return mix( va/w1, res, v );
+    return res;
     #endif
 }
 
