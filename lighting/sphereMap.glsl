@@ -3,7 +3,7 @@ original_author: Patricio Gonzalez Vivo
 description: given a Spherical Map texture and a normal direction returns the right pixel
 use: spheremap(<sampler2D> texture, <vec3> normal)
 options:
-  SPHEREMAP_EYETOPOINT: where the eye is looking
+    SPHEREMAP_EYETOPOINT: where the eye is looking
 */
 
 #ifndef SPHEREMAP_TYPE
@@ -23,7 +23,7 @@ vec2 sphereMap(vec3 normal, vec3 eye) {
     vec3 r = reflect(eye, normal);
     r.z += 1.;
     float m = 2. * length(r);
-    vec2 uv = r.xy / m + .5;
+    return r.xy / m + .5;
 }
 
 SPHEREMAP_TYPE sphereMap(in sampler2D tex, in vec3 normal, in vec3 eye) {
