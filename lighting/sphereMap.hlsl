@@ -25,7 +25,7 @@ float2 sphereMap(float3 normal, float3 eye) {
     float3 r = reflect(eye, normal);
     r.z += 1.;
     float m = 2. * length(r);
-    float2 uv = r.xy / m + .5;
+    return r.xy / m + .5;
 }
 
 
