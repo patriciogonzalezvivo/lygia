@@ -38,4 +38,5 @@
 #include "sdf/opRevolve.glsl"
 #include "sdf/opRound.glsl"
 #include "sdf/opSubtraction.glsl"
+#include "sdf/opIntersection.glsl"
 #include "sdf/opUnion.glsl"
