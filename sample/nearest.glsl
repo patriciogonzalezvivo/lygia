@@ -1,4 +1,4 @@
-#include "lygia/math/decimation.glsl"
+#include "lygia/space/nearest.glsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
@@ -12,10 +12,9 @@ options:
 #define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
 #endif
 
-#ifndef FNC_SAMPLENEAR
-#define FNC_SAMPLENEAR
-vec4 sampleNear(sampler2D tex, vec2 st, vec2 texResolution) {
-    vec2 half_pixel = 0.5/texResolution;
-    return SAMPLER_FNC( tex, decimation(st, texResolution) + half_pixel );
+#ifndef FNC_SAMPLENEAREST
+#define FNC_SAMPLENEAREST
+vec4 sampleNearest(sampler2D tex, vec2 st, vec2 texResolution) {
+    return SAMPLER_FNC( tex, nearest(st, texResolution) );
 }
 #endif

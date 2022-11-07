@@ -1,4 +1,3 @@
-
 #ifndef SAMPLER_FNC
 #define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
 #endif
@@ -12,8 +11,11 @@
 #endif
 
 #ifndef SAMPLE_2DCUBE_FNC
-#define SAMPLE_2DCUBE_FNC
+#define SAMPLE_2DCUBE_FNC(TEX, UV) SAMPLER_FNC(TEX, saturate(UV))
+#endif
 
+#ifndef FNC_SAMPLE_2DCUBE
+#define FNC_SAMPLE_2DCUBE
 vec4 sample2DCube(in sampler2D tex_lut, in vec3 xyz) {
     float Z = xyz.z * SAMPLE_2DCUBE_CELL_SIZE;
 
@@ -32,16 +34,14 @@ vec4 sample2DCube(in sampler2D tex_lut, in vec3 xyz) {
     vec2 uvA = (cellA * cells_factor) + halt_pixel + ((cells_factor - pixel) * xyz.xy);
     vec2 uvB = (cellB * cells_factor) + halt_pixel + ((cells_factor - pixel) * xyz.xy);
 
-
     #ifdef SAMPLE_2DCUBE_FLIP_Y
     uvA.y = 1.0-uvA.y;
     uvB.y = 1.0-uvB.y;
     #endif
 
-    vec4 b0 = SAMPLER_FNC(tex_lut, saturate(uvA));
-    vec4 b1 = SAMPLER_FNC(tex_lut, saturate(uvB));
+    vec4 b0 = SAMPLE_2DCUBE_FNC(tex_lut, uvA);
+    vec4 b1 = SAMPLE_2DCUBE_FNC(tex_lut, uvB);
 
     return mix(b0, b1, fract(Z));
 }
-
 #endif 
