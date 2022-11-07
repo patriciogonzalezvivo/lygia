@@ -1,5 +1,4 @@
 #include "../math/cubic.glsl"
-#include "../math/invCubic.glsl"
 #include "../math/quintic.glsl"
 
 /*
@@ -16,7 +15,7 @@ options:
 #endif
 
 #ifndef SAMPLESMOOTH_POLYNOMIAL
-#define SAMPLESMOOTH_POLYNOMIAL cubic or quintic
+#define SAMPLESMOOTH_POLYNOMIAL cubic
 #endif
 
 #ifndef FNC_SAMPLESMOOTH
