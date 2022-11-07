@@ -26,7 +26,7 @@ vec4 raymarchCast( in vec3 ro, in vec3 rd ) {
     float t = tmin;
     vec3 m = vec3(-1.0);
     for ( int i = 0; i < RAYMARCH_SAMPLES; i++ ) {
-        float precis = 0.0004*t;
+        float precis = 0.00001*t;
         vec4 res = raymarchMap( ro + rd * t );
         if ( res.a < precis || t > tmax ) break;
         t += res.a;
@@ -34,7 +34,8 @@ vec4 raymarchCast( in vec3 ro, in vec3 rd ) {
     }
 
     #if defined(RAYMARCH_BACKGROUND) || defined(RAYMARCH_FLOOR)
-    if ( t>tmax ) m = vec3(-1.0);
+    if ( t>tmax ) 
+        m = vec3(-1.0);
     #endif
 
     return vec4( m, t );

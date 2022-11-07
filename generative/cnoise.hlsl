@@ -1,7 +1,7 @@
 #include "../math/mod289.hlsl"
 #include "../math/permute.hlsl"
 #include "../math/taylorInvSqrt.hlsl"
-#include "../math/fade.hlsl"
+#include "../math/quintic.hlsl"
 
 /*
 original_author: [Ian McEwan, Ashima Arts]
@@ -52,7 +52,7 @@ float cnoise(in float2 P) {
     float n01 = dot(g01, float2(fx.z, fy.z));
     float n11 = dot(g11, float2(fx.w, fy.w));
 
-    float2 fade_xy = fade(Pf.xy);
+    float2 fade_xy = quintic(Pf.xy);
     float2 n_x = lerp(float2(n00, n01), float2(n10, n11), fade_xy.x);
     float n_xy = lerp(n_x.x, n_x.y, fade_xy.y);
     return 2.3 * n_xy;
@@ -119,7 +119,7 @@ float cnoise(in float3 P) {
     float n011 = dot(g011, float3(Pf0.x, Pf1.yz));
     float n111 = dot(g111, Pf1);
 
-    float3 fade_xyz = fade(Pf0);
+    float3 fade_xyz = quintic(Pf0);
     float4 n_z = lerp(float4(n000, n100, n010, n110), float4(n001, n101, n011, n111), fade_xyz.z);
     float2 n_yz = lerp(n_z.xy, n_z.zw, fade_xyz.y);
     float n_xyz = lerp(n_yz.x, n_yz.y, fade_xyz.x);
@@ -250,7 +250,7 @@ float cnoise(in float4 P) {
     float n0111 = dot(g0111, float4(Pf0.x, Pf1.yzw));
     float n1111 = dot(g1111, Pf1);
 
-    float4 fade_xyzw = fade(Pf0);
+    float4 fade_xyzw = quintic(Pf0);
     float4 n_0w = lerp(float4(n0000, n1000, n0100, n1100), float4(n0001, n1001, n0101, n1101), fade_xyzw.w);
     float4 n_1w = lerp(float4(n0010, n1010, n0110, n1110), float4(n0011, n1011, n0111, n1111), fade_xyzw.w);
     float4 n_zw = lerp(n_0w, n_1w, fade_xyzw.z);

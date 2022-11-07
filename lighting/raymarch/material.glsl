@@ -60,7 +60,7 @@ vec3 raymarchDefaultMaterial(vec3 ray, vec3 position, vec3 normal, vec3 albedo) 
     vec3  hal = normalize( lig-ray );
     float amb = saturate( 0.5+0.5*normal.y );
     float dif = saturate( dot( normal, lig ) );
-    float bac = saturate( dot( normal, normalize(vec3(-lig.x,0.0,-lig.z))) ) * saturate( 1.0-position.y );
+    float bac = saturate( dot( normal, normalize(vec3(-lig.x, 0.0,-lig.z))) ) * saturate( 1.0-position.y );
     float dom = smoothstep( -0.1, 0.1, ref.y );
     float fre = pow( saturate(1.0+dot(normal,ray) ), 2.0 );
     
