@@ -21,7 +21,7 @@ float raymarchSoftShadow( in vec3 ro, in vec3 rd, in float mint, in float tmax )
     for (int i = 0; i < RAYMARCHSOFTSHADOW_ITERATIONS; i++) {
         float h = raymarchMap( ro + rd*t ).a;
         res = min( res, 8.0*h/t );
-        t += clamp( h, 0.02, 0.10 );
+        t += clamp( h, 0.002, 0.10 );
         if( res<0.005 || t>tmax ) 
             break;
     }
