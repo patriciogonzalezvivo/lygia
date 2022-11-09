@@ -81,12 +81,14 @@ vec4 gooch(vec4 albedo, vec3 normal, vec3 light, vec3 view, float roughness) {
 }
 
 vec4 gooch(Material material) {
+    vec3 pos = CAMERA_POSITION - material.position;
     #ifdef LIGHT_DIRECTION
-
-    return gooch(material.albedo, material.normal, LIGHT_DIRECTION, (CAMERA_POSITION - material.position), material.roughness, material.shadow);
+    vec3 lig = LIGHT_DIRECTION;
     #else
-    return gooch(material.albedo, material.normal, (LIGHT_POSITION - material.position), (CAMERA_POSITION - material.position), material.roughness, material.shadow);
+    vec3 lig = LIGHT_POSITION - material.position;
     #endif
+
+    return gooch(material.albedo, material.normal, lig, pos, material.roughness, material.shadow);
 }
 
 #endif
