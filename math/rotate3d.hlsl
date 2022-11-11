@@ -1,7 +1,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: returns a 4x4 rotation matrix
-use: rotate4d(<float3> axis, <float> radians)
+use: rotate3d(<float3> axis, <float> radians)
 */
 
 #ifndef FNC_ROTATE3D
