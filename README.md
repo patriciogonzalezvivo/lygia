@@ -10,7 +10,7 @@ Tired of searching for the same functions over and over? or to port and reimplem
     <a href="https://github.com/patriciogonzalezvivo/lygia_p5_examples"><img src="https://lygia.xyz/imgs/p5.png" width="100" /></a>
     <a href="https://editor.p5js.org/patriciogonzalezvivo/sketches"><img src="https://lygia.xyz/imgs/p5js.png" width="100" /></a>
     <a href="https://github.com/patriciogonzalezvivo/lygia_of_examples"><img src="https://lygia.xyz/imgs/of.png" width="100" /></a>
-    <a href="https://derivative.ca/community-post/asset/lygia-touchdesginer/66804"><img title="static-resolver by LeithBA" src="https://lygia.xyz/imgs/td.png" width="100" /></a>
+    <a href="https://derivative.ca/community-post/asset/lygia-touchdesginer/66804"><img title="dynamic-resolver by LeithBA" src="https://lygia.xyz/imgs/td.png" width="100" /></a>
     <a href="https://github.com/vectorsize/lygia-td"><img title="static-resolver by vectorsize" src="https://lygia.xyz/imgs/td.png" width="100" /></a>
     <a href="https://observablehq.com/@radames/hello-lygia-shader-library"><img src="https://lygia.xyz/imgs/ob.png" width="100" /></a>
     <a href="https://codesandbox.io/s/lygia-react-starter-fftx6p"><img src="https://lygia.xyz/imgs/r3f.png" width="100" /></a>
