@@ -42,6 +42,6 @@ vec4 sample2DCube(in sampler2D tex_lut, in vec3 xyz) {
     vec4 b0 = SAMPLE_2DCUBE_FNC(tex_lut, uvA);
     vec4 b1 = SAMPLE_2DCUBE_FNC(tex_lut, uvB);
 
-    return mix(b0, b1, fract(Z));
+    return mix(b0, b1, fract(Z) );
 }
 #endif 
