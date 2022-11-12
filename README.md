@@ -10,7 +10,8 @@ Tired of searching for the same functions over and over? or to port and reimplem
     <a href="https://github.com/patriciogonzalezvivo/lygia_p5_examples"><img src="https://lygia.xyz/imgs/p5.png" width="100" /></a>
     <a href="https://editor.p5js.org/patriciogonzalezvivo/sketches"><img src="https://lygia.xyz/imgs/p5js.png" width="100" /></a>
     <a href="https://github.com/patriciogonzalezvivo/lygia_of_examples"><img src="https://lygia.xyz/imgs/of.png" width="100" /></a>
-    <a href="https://derivative.ca/community-post/asset/lygia-touchdesginer/66804"><img src="https://lygia.xyz/imgs/td.png" width="100" /></a>
+    <a href="https://derivative.ca/community-post/asset/lygia-touchdesginer/66804"><img title="dynamic-resolver by LeithBA" src="https://lygia.xyz/imgs/td.png" width="100" /></a>
+    <a href="https://github.com/vectorsize/lygia-td"><img title="static-resolver by vectorsize" src="https://lygia.xyz/imgs/td.png" width="100" /></a>
     <a href="https://observablehq.com/@radames/hello-lygia-shader-library"><img src="https://lygia.xyz/imgs/ob.png" width="100" /></a>
     <a href="https://codesandbox.io/s/lygia-react-starter-fftx6p"><img src="https://lygia.xyz/imgs/r3f.png" width="100" /></a>
 </p>
@@ -98,7 +99,8 @@ Learn more about how to use it from this **examples**:
 * [3D examples for Three.js (GLSL)](https://github.com/guidoschmidt/lygia_threejs_examples) by [Guido Schmidt](https://guidoschmidt.cc/)
 * [2D examples for OpenFrameworks (GLSL)](https://github.com/patriciogonzalezvivo/lygia_of_examples) 
 * [2D/3D examples for Unity3D (HLSL)](https://github.com/patriciogonzalezvivo/lygia_unity_examples)
-* [2D examples for Touch Designer (GLSL)](https://derivative.ca/community-post/asset/lygia-touchdesginer/66804)
+* [2D examples for Touch Designer (GLSL)](https://derivative.ca/community-post/asset/lygia-touchdesginer/66804) (dynamic resolver) by [LeithBA](https://github.com/LeithBA)
+* [2D examples for Touch Designer (GLSL)](https://github.com/vectorsize/lygia-td) (static resolver) by [Victor Saz](https://github.com/vectorsize)
 * [2D examples on Observable Notebook (GLSL)](https://observablehq.com/@radames/hello-lygia-shader-library) by [Radames Ajna](https://twitter.com/radamar)
 * [2D/3D examples on GlslViewer (GLSL)](https://github.com/patriciogonzalezvivo/lygia_examples)
 
