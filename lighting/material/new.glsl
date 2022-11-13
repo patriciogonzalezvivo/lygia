@@ -6,6 +6,7 @@
 #include "metallic.glsl"
 #include "roughness.glsl"
 #include "shininess.glsl"
+#include "ior.glsl"
 
 #include "../material.glsl"
 #include "../shadow.glsl"
@@ -58,9 +59,13 @@ void materialNew(out Material _mat) {
     _mat.roughness          = materialRoughness();
     _mat.metallic           = materialMetallic();
 
-    // Other Properties
-    _mat.f0                 = vec3(0.04);
-    _mat.reflectance        = 0.5;
+#if defined(MATERIAL_TRANSPARENT_MODEL)
+    _mat.ior                = vec3(IOR_GLASS_RGB); // Index of Refraction
+    _mat.eta                = ior2eta(ior); // ratio of index of refraction
+    _mat.f0                 = ior2f0(ior);  // reflectance at 0 degree
+#else
+    _mat.f0                 = vec3(0.04);   // reflectance at 0 degree
+#endif
 
     // Shade
     _mat.ambientOcclusion   = materialOcclusion();

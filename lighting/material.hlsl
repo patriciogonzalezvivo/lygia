@@ -34,8 +34,11 @@ struct Material {
     float3  position;       // world position of the surface
     float3  normal;         // world normal of the surface
     
-    float3  f0;             // = float3(0.04);
-    float   reflectance;    // = 0.5;
+    #if defined(MATERIAL_TRANSPARENT_MODEL)
+    float3  ior;            // Index of Refraction
+    float3  eta;            // ratio of index of refraction
+    #endif
+    float3  f0;             // reflectance at 0 degree
 
     float   roughness;
     float   metallic;
