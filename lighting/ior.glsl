@@ -1,5 +1,8 @@
 // https://en.wikipedia.org/wiki/Refractive_index
 
+#include "ior/2eta.glsl"
+#include "ior/2f0.glsl"
+
 #ifndef IOR_AIR
 #define IOR_AIR 1.000293
 #endif
