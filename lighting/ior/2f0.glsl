@@ -1,4 +1,4 @@
-#include "../math/pow2.glsl"
+#include "../../math/pow2.glsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
