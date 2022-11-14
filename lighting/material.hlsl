@@ -31,31 +31,34 @@ struct Material {
     float4  albedo;
     float3  emissive;
 
-    float3  position;       // world position of the surface
-    float3  normal;         // world normal of the surface
+    float3  position;           // world position of the surface
+    float3  normal;             // world normal of the surface
+
+    #if defined(SCENE_BACK_SURFACE)
+    vec3    normal_back;        // world normal of the back surface of the model
+    #endif
     
     #if defined(MATERIAL_TRANSPARENT_MODEL)
-    float3  ior;            // Index of Refraction
-    float3  eta;            // ratio of index of refraction
+    float3  ior;                // Index of Refraction
     #endif
-    float3  f0;             // reflectance at 0 degree
+    float3  f0;                 // reflectance at 0 degree
 
     float   roughness;
     float   metallic;
-    float   ambientOcclusion;
-    float   shadow;         // = 1.0;
+    float   ambientOcclusion;   // default 1.0
+    float   shadow;             // default 1.0
 
 #if defined(MATERIAL_CLEARCOAT_THICKNESS)
     float   clearCoat;
     float   clearCoatRoughness;
     #if defined(MATERIAL_CLEARCOAT_THICKNESS_NORMAL)
-    float3  clearCoatNormal;// = float3(0.0, 0.0, 1.0);
+    float3  clearCoatNormal;    // default float3(0.0, 0.0, 1.0)
     #endif
 #endif
 
-#if defined(SHADING_MODEL_SUBSURFACE)
-    float   thickness;      // = 0.5;
-    float   subsurfacePower;// = 12.234;
+#if defined(SHADING_MODEL_SUBSURFACE) || defined(SCENE_BACK_SURFACE)
+    float   thickness;          // default 0.5;
+    float   subsurfacePower;    // default 12.234;
 #endif
 
 #if defined(SHADING_MODEL_CLOTH)
