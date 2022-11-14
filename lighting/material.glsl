@@ -38,9 +38,7 @@ struct Material {
     vec3    normal_back;    // world normal of the back surface of the model
     #endif
     
-    #if defined(SHADING_MODEL_TRANSPARENT)
     vec3    ior;            // Index of Refraction
-    #endif
     vec3    f0;             // reflectance at 0 degree
 
     float   roughness;
@@ -56,7 +54,7 @@ struct Material {
     #endif
 #endif
 
-#if defined(SHADING_MODEL_SUBSURFACE) || defined(SCENE_BACK_SURFACE)
+#if defined(SHADING_MODEL_SUBSURFACE)
     float   thickness;          // default to 0.5
     float   subsurfacePower;    // default to 12.234
 #endif
