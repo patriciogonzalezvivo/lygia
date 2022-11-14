@@ -78,8 +78,13 @@ float4 pbr(const Material _mat) {
     // ------------------------
     float3 E = envBRDFApprox(specularColor, NoV, roughness);
 
+    // This is a bit of a hack to pop the metalics
+    float specIntensity =   (2.0 * _mat.metallic) * 
+                            saturate(-1.1 + NoV + _mat.metallic) *          // Fresnel
+                            (_mat.metallic + (.95 - _mat.roughness) * 2.0); // make smaller highlights brighter
+
     float3 Fr = float3(0.0, 0.0, 0.0);
-    Fr = tonemapReinhard( envMap(R, roughness, _mat.metallic) ) * E;
+    Fr = tonemapReinhard( envMap(R, roughness, _mat.metallic) ) * E * specIntensity;
     Fr += fresnelReflection(R, _mat.f0, NoV) * _mat.metallic * (1.0-roughness) * 0.2;
     Fr *= specAO;
 
