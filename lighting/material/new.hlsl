@@ -27,6 +27,10 @@ options:
     - SHADING_MODEL_CLOTH
 */
 
+#ifndef SAMPLER_FNC
+#define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
+#endif
+
 #ifndef SURFACE_POSITION
 #if defined(GLSLVIEWER)
 #define SURFACE_POSITION v_position
@@ -52,19 +56,26 @@ void materialNew(out Material _mat) {
     _mat.position           = (SURFACE_POSITION).xyz;
     _mat.normal             = materialNormal();
 
+    #if defined(SCENE_BACK_SURFACE) && defined(RESOLUTION)
+    vec4 back_surface       = SAMPLER_FNC(SCENE_BACK_SURFACE, gl_FragCoord.xy / RESOLUTION);
+    _mat.normal_back        = back_surface.xyz;
+    _mat.thickness          = saturate(gl_FragCoord.z - back_surface.a);
+    #elif defined(SCENE_BACK_SURFACE)
+    _mat.normal_back        = -_mat.normal;
+    #elif defined(SHADING_MODEL_SUBSURFACE)
+    _mat.thickness          = 0.5;
+    #endif
+
     // PBR Properties
     _mat.albedo             = materialAlbedo();
     _mat.emissive           = materialEmissive();
     _mat.roughness          = materialRoughness();
     _mat.metallic           = materialMetallic();
 
-#if defined(MATERIAL_TRANSPARENT_MODEL)
-    _mat.ior                = float3(IOR_GLASS_RGB);    // Index of Refraction
-    _mat.eta                = ior2eta(ior);             // ratio of index of refraction
-    _mat.f0                 = ior2f0(ior);              // reflectance at 0 degree
-#else
-    _mat.f0                 = float3(0.04, 0.04, 0.04); // reflectance at 0 degree
+#if defined(SHADING_MODEL_TRANSPARENT)
+    _mat.ior                = vec3(IOR_GLASS_RGB); // Index of Refraction
 #endif
+    _mat.f0                 = float3(0.04, 0.04, 0.04); // reflectance at 0 degree
 
     // Shade
     _mat.ambientOcclusion   = materialOcclusion();
@@ -82,7 +93,6 @@ void materialNew(out Material _mat) {
 
     // SubSurface Model
 #if defined(SHADING_MODEL_SUBSURFACE)
-    _mat.thickness          = 0.5;
     _mat.subsurfacePower    = 12.234;
 #endif
 

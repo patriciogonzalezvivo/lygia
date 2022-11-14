@@ -9,8 +9,6 @@
 #include "common/specularAO.glsl"
 #include "common/envBRDFApprox.glsl"
 
-// #include "light/point.glsl"
-
 /*
 original_author: Patricio Gonzalez Vivo
 description: simple PBR shading model
@@ -105,7 +103,7 @@ vec4 pbr(const Material _mat) {
     {
         #ifdef LIGHT_DIRECTION
         lightDirectional(diffuseColor, specularColor, N, V, NoV, roughness, f0, _mat.shadow, lightDiffuse, lightSpecular);
-        #else
+        #elif LIGHT_POSITION
         lightPoint(diffuseColor, specularColor, N, V, NoV, roughness, f0, _mat.shadow, lightDiffuse, lightSpecular);
         #endif
     }

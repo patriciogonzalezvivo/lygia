@@ -19,27 +19,15 @@ options:
 #endif
 
 #ifndef LIGHT_POSITION
-#if defined(GLSLVIEWER)
-#define LIGHT_POSITION u_light
-#else
 #define LIGHT_POSITION vec3(0.0, 10.0, -50.0)
-#endif
 #endif
 
 #ifndef LIGHT_COLOR
-#if defined(GLSLVIEWER)
-#define LIGHT_COLOR u_lightColor
-#else
 #define LIGHT_COLOR vec3(0.5)
-#endif
 #endif
 
 #ifndef LIGHT_INTENSITY
-#if defined(GLSLVIEWER)
-#define LIGHT_INTENSITY u_lightIntensity
-#else
 #define LIGHT_INTENSITY 1.0
-#endif
 #endif
 
 #ifndef FNC_LIGHT_SPOT

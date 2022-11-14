@@ -33,29 +33,32 @@ struct Material {
 
     vec3    position;       // world position of the surface
     vec3    normal;         // world normal of the surface
+
+    #if defined(SCENE_BACK_SURFACE)
+    vec3    normal_back;    // world normal of the back surface of the model
+    #endif
     
-    #if defined(MATERIAL_TRANSPARENT_MODEL)
+    #if defined(SHADING_MODEL_TRANSPARENT)
     vec3    ior;            // Index of Refraction
-    vec3    eta;            // ratio of index of refraction
     #endif
     vec3    f0;             // reflectance at 0 degree
 
     float   roughness;
     float   metallic;
-    float   ambientOcclusion;
-    float   shadow;         // = 1.0;
+    float   ambientOcclusion;   // default 1.0
+    float   shadow;             // default 1.0
 
 #if defined(MATERIAL_CLEARCOAT_THICKNESS)
     float   clearCoat;
     float   clearCoatRoughness;
     #if defined(MATERIAL_CLEARCOAT_THICKNESS_NORMAL)
-    vec3    clearCoatNormal;// = vec3(0.0, 0.0, 1.0);
+    vec3    clearCoatNormal;    // default vec3(0.0, 0.0, 1.0);
     #endif
 #endif
 
-#if defined(SHADING_MODEL_SUBSURFACE)
-    float   thickness;      // = 0.5;
-    float   subsurfacePower;// = 12.234;
+#if defined(SHADING_MODEL_SUBSURFACE) || defined(SCENE_BACK_SURFACE)
+    float   thickness;          // default to 0.5
+    float   subsurfacePower;    // default to 12.234
 #endif
 
 #if defined(SHADING_MODEL_CLOTH)
@@ -63,7 +66,7 @@ struct Material {
 #endif
 
 #if defined(MATERIAL_SUBSURFACE_COLOR)
-    vec3    subsurfaceColor;// = vec3(1.0);
+    vec3    subsurfaceColor;    // defualt vec3(1.0)
 #endif
 
 #if defined(SHADING_MODEL_SPECULAR_GLOSSINESS)
