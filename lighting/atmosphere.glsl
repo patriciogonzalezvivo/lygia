@@ -61,11 +61,13 @@ OPTIONS:
 #define FNC_ATMOSPHERE
 
 bool atmosphere_intersect( const in Ray ray, inout float t0, inout float t1) {
-    vec3 rc = vec3(0.0) - ray.origin;
+    vec3 rc = vec3(0.0, 0.0, 0.0) - ray.origin;
     float radius2 = ATMOSPHERE_RADIUS_MAX * ATMOSPHERE_RADIUS_MAX;
     float tca = dot(rc, ray.direction);
     float d2 = dot(rc, rc) - tca * tca;
-    if (d2 > radius2) return false;
+    if (d2 > radius2) 
+        return false;
+
     float thc = sqrt(radius2 - d2);
     t0 = tca - thc;
     t1 = tca + thc;
@@ -101,6 +103,7 @@ vec3 atmosphere(const in Ray ray, vec3 sun_dir) {
     // "pierce" the atmosphere with the viewing ray
     float t0 = 0.0;
     float t1 = 0.0;
+    // atmosphere_intersect(ray, t0, t1);
     if (!atmosphere_intersect(ray, t0, t1))
         return vec3(0.0);
 
@@ -124,9 +127,9 @@ vec3 atmosphere(const in Ray ray, vec3 sun_dir) {
     float optical_depthR = 0.;
     float optical_depthM = 0.;
 
-    vec3 sumR = vec3(0);
-    vec3 sumM = vec3(0);
-    float march_pos = 0.;
+    vec3 sumR = vec3(0.0, 0.0, 0.0);
+    vec3 sumM = vec3(0.0, 0.0, 0.0);
+    float march_pos = 0.0;
 
     for (int i = 0; i < ATMOSPHERE_SAMPLES; i++) {
         vec3 s =    ray.origin +

@@ -10,6 +10,21 @@
 #include "common/specularAO.glsl"
 #include "common/envBRDFApprox.glsl"
 
+/*
+original_author: Patricio Gonzalez Vivo
+description: simple glass shading model
+use: 
+    - <vec4> glass(<Material> material) 
+    
+options:
+    - SPECULAR_FNC: specularGaussian, specularBeckmann, specularCookTorrance (default), specularPhongRoughness, specularBlinnPhongRoughnes (default on mobile)
+    - SCENE_BACK_SURFACE: 
+    - LIGHT_POSITION: in GlslViewer is u_light
+    - LIGHT_DIRECTION: 
+    - LIGHT_COLOR in GlslViewer is u_lightColor
+    - CAMERA_POSITION: in GlslViewer is u_camera
+*/
+
 #ifndef LIGHT_COLOR
 #define LIGHT_COLOR     vec3(1.0)
 #endif

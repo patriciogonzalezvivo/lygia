@@ -1,5 +1,6 @@
 #include "../common/beckmann.glsl"
 #include "../../math/powFast.glsl"
+#include "../../math/saturate.glsl"
 #include "../../math/const.glsl"
 
 #ifndef SPECULAR_POW
@@ -36,7 +37,7 @@ float specularCookTorrance(vec3 _L, vec3 _N, vec3 _V, float _NoV, float _NoL, fl
     float F = SPECULAR_POW(1.0 - NoV, _fresnel);
 
     //Multiply terms and done
-    return  G * F * D / max(PI * NoV * NoL, 0.000001);
+    return max(G * F * D / max(PI * NoV * NoL, 0.00001), 0.0);
 }
 
 // https://github.com/glslify/glsl-specular-cook-torrance

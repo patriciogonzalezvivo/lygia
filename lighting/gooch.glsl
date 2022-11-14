@@ -28,22 +28,12 @@ options:
 #endif
 
 #ifndef CAMERA_POSITION
-#if defined(GLSLVIEWER)
-#define CAMERA_POSITION u_camera
-#else
 #define CAMERA_POSITION vec3(0.0, 0.0, -10.0);
 #endif
-#endif
-
 
 #ifndef LIGHT_POSITION
-#if defined(GLSLVIEWER)
-#define LIGHT_POSITION u_light
-#else
 #define LIGHT_POSITION vec3(0.0, 10.0, -50.0)
 #endif
-#endif
-
 
 #ifndef GOOCH_WARM 
 #define GOOCH_WARM vec3(0.25, 0.15, 0.0)
@@ -87,7 +77,6 @@ vec4 gooch(Material material) {
     #else
     vec3 lig = LIGHT_POSITION - material.position;
     #endif
-
     return gooch(material.albedo, material.normal, lig, pos, material.roughness, material.shadow);
 }
 

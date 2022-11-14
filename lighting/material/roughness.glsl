@@ -28,7 +28,7 @@ uniform sampler2D MATERIAL_OCCLUSIONROUGHNESSMETALLICMAP;
 #endif
 
 float materialRoughness() {
-    float roughness = 0.001;
+    float roughness = 0.05;
 
 #if defined(MATERIAL_ROUGHNESSMAP) && defined(MODEL_VERTEX_TEXCOORD)
     vec2 uv = v_texcoord.xy;

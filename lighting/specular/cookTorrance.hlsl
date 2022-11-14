@@ -37,7 +37,7 @@ float specularCookTorrance(float3 _L, float3 _N, float3 _V, float _NoV, float _N
     float F = SPECULAR_POW(1.0 - NoV, _fresnel);
 
     //Multiply terms and done
-    return  G * F * D / max(PI * NoV * NoL, 0.000001);
+    return  max(G * F * D / max(PI * NoV * NoL, 0.000001), 0.0);
 }
 
 // https://github.com/glslify/glsl-specular-cook-torrance
