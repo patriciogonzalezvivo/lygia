@@ -59,11 +59,16 @@ void materialNew(out Material _mat) {
     #if defined(SCENE_BACK_SURFACE) && defined(RESOLUTION)
     vec4 back_surface       = SAMPLER_FNC(SCENE_BACK_SURFACE, gl_FragCoord.xy / RESOLUTION);
     _mat.normal_back        = back_surface.xyz;
+    #if defined(SHADING_MODEL_SUBSURFACE)
     _mat.thickness          = saturate(gl_FragCoord.z - back_surface.a);
-    #elif defined(SCENE_BACK_SURFACE)
+    #endif
+    #else 
+    #if defined(SCENE_BACK_SURFACE)
     _mat.normal_back        = -_mat.normal;
-    #elif defined(SHADING_MODEL_SUBSURFACE)
+    #endif
+    #if defined(SHADING_MODEL_SUBSURFACE)
     _mat.thickness          = 0.5;
+    #endif
     #endif
 
     // PBR Properties
@@ -72,9 +77,7 @@ void materialNew(out Material _mat) {
     _mat.roughness          = materialRoughness();
     _mat.metallic           = materialMetallic();
 
-#if defined(SHADING_MODEL_TRANSPARENT)
-    _mat.ior                = vec3(IOR_GLASS_RGB); // Index of Refraction
-#endif
+    _mat.ior                = vec3(IOR_GLASS_RGB);      // Index of Refraction
     _mat.f0                 = float3(0.04, 0.04, 0.04); // reflectance at 0 degree
 
     // Shade
