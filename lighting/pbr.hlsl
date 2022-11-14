@@ -101,14 +101,14 @@ float4 pbr(const Material _mat) {
     {
         #ifdef LIGHT_DIRECTION
         lightDirectional(diffuseColor, specularColor, N, V, NoV, roughness, f0, _mat.shadow, lightDiffuse, lightSpecular);
-        #else
+        #elif defined(LIGHT_POSITION)
         lightPoint(diffuseColor, specularColor, N, V, NoV, roughness, f0, _mat.shadow, lightDiffuse, lightSpecular);
         #endif
     }
     
     // Final Sum
     // ------------------------
-    float4 color  = float4(0.0, 0.0, 0.0, 0.0);
+    float4 color  = float4(0.0, 0.0, 0.0, 1.0);
     color.rgb  += Fd * IBL_LUMINANCE + lightDiffuse;     // Diffuse
     color.rgb  += Fr * IBL_LUMINANCE + lightSpecular;    // Specular
     color.rgb  *= _mat.ambientOcclusion;

@@ -22,35 +22,19 @@ options:
 */
 
 #ifndef CAMERA_POSITION
-#if defined(GLSLVIEWER)
-#define CAMERA_POSITION u_camera
-#else
 #define CAMERA_POSITION vec3(0.0, 0.0, -10.0);
-#endif
 #endif
 
 #ifndef LIGHT_POSITION
-#if defined(GLSLVIEWER)
-#define LIGHT_POSITION  u_light
-#else
 #define LIGHT_POSITION  vec3(0.0, 10.0, -50.0)
-#endif
 #endif
 
 #ifndef LIGHT_COLOR
-#if defined(GLSLVIEWER)
-#define LIGHT_COLOR     u_lightColor
-#else
-#define LIGHT_COLOR     vec3(0.5)
-#endif
+#define LIGHT_COLOR     vec3(0.5, 0.5, 0.5)
 #endif
 
 #ifndef IBL_LUMINANCE
-#if defined(GLSLVIEWER)
-#define IBL_LUMINANCE   u_iblLuminance
-#else
 #define IBL_LUMINANCE   1.0
-#endif
 #endif
 
 #ifndef FNC_PBR
@@ -71,10 +55,10 @@ vec4 pbr(const Material _mat) {
     // Ambient Occlusion
     // ------------------------
     float ssao = 1.0;
-#if defined(FNC_SSAO) && defined(SCENE_DEPTH) && defined(RESOLUTION) && defined(CAMERA_NEAR_CLIP) && defined(CAMERA_FAR_CLIP)
-    vec2 pixel = 1.0/RESOLUTION;
-    ssao = ssao(SCENE_DEPTH, gl_FragCoord.xy*pixel, pixel, 1.);
-#endif 
+// #if defined(FNC_SSAO) && defined(SCENE_DEPTH) && defined(RESOLUTION) && defined(CAMERA_NEAR_CLIP) && defined(CAMERA_FAR_CLIP)
+//     vec2 pixel = 1.0/RESOLUTION;
+//     ssao = ssao(SCENE_DEPTH, gl_FragCoord.xy*pixel, pixel, 1.);
+// #endif 
     float diffuseAO = min(_mat.ambientOcclusion, ssao);
     float specularAO = specularAO(NoV, diffuseAO, roughness);
 
@@ -82,12 +66,12 @@ vec4 pbr(const Material _mat) {
     // ------------------------
     vec3 E = envBRDFApprox(specularColor, NoV, roughness);
 
-    vec3 Fr = vec3(0.0);
+    vec3 Fr = vec3(0.0, 0.0, 0.0);
     Fr = tonemapReinhard( envMap(R, roughness, _mat.metallic) ) * E;
     Fr += fresnelReflection(R, _mat.f0, NoV) * _mat.metallic * (1.0-roughness) * 0.2;
     Fr *= specularAO;
 
-    vec3 Fd = vec3(0.0);
+    vec3 Fd = vec3(0.0, 0.0, 0.0);
     Fd = diffuseColor;
     #if defined(SCENE_SH_ARRAY)
     Fd *= tonemapReinhard( sphericalHarmonics(N) );
@@ -97,20 +81,20 @@ vec4 pbr(const Material _mat) {
 
     // Local Ilumination
     // ------------------------
-    vec3 lightDiffuse = vec3(0.0);
-    vec3 lightSpecular = vec3(0.0);
+    vec3 lightDiffuse = vec3(0.0, 0.0, 0.0);
+    vec3 lightSpecular = vec3(0.0, 0.0, 0.0);
     
     {
-        #ifdef LIGHT_DIRECTION
+        #if defined(LIGHT_DIRECTION)
         lightDirectional(diffuseColor, specularColor, N, V, NoV, roughness, f0, _mat.shadow, lightDiffuse, lightSpecular);
-        #elif LIGHT_POSITION
+        #elif defined(LIGHT_POSITION)
         lightPoint(diffuseColor, specularColor, N, V, NoV, roughness, f0, _mat.shadow, lightDiffuse, lightSpecular);
         #endif
     }
     
     // Final Sum
     // ------------------------
-    vec4 color  = vec4(0.0);
+    vec4 color  = vec4(0.0, 0.0, 0.0, 1.0);
     color.rgb  += Fd * IBL_LUMINANCE + lightDiffuse;     // Diffuse
     color.rgb  += Fr * IBL_LUMINANCE + lightSpecular;    // Specular
     color.rgb  *= _mat.ambientOcclusion;
