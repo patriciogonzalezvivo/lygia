@@ -10,7 +10,6 @@ use: <vec3> fisheye2xyz(<vec2> uv)
 #define FNC_FISHEYE2XYZ
 vec3 fisheye2xyz(vec2 uv) {
     vec2 ndc = uv * 2.0 - 1.0;
-    // ndc.x *= u_resolution.x / u_resolution.y;
     float R = sqrt(ndc.x * ndc.x + ndc.y * ndc.y);
     vec3 dir = vec3(ndc.x / R, 0.0, ndc.y / R);
     float Phi = (R) * PI * 0.52;

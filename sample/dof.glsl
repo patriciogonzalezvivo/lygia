@@ -12,10 +12,17 @@ options:
     - SAMPLEDOF_DEPTH_FNC(UV):
     - SAMPLEDOF_COLOR_FNC(UV):
     - SAMPLEDOF_DEBUG
+    - RESOLUTION
 */
 
 #ifndef SAMPLER_FNC
 #define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
+#endif
+
+#ifndef RESOLUTION
+#ifdef GLSLVIEWER
+#define RESOLUTION u_resolution
+#endif
 #endif
 
 #ifndef FNC_SAMPLEDOF
@@ -58,7 +65,7 @@ SAMPLEDOF_TYPE sampleDoF(sampler2D tex,sampler2D texDepth,vec2 texCoord,float fo
     
     float centerDepth = SAMPLEDOF_DEPTH_FNC(texCoord);
     float centerSize = getBlurSize(centerDepth, focusPoint, focusScale);
-    vec2 pixelSize = 1.0/u_resolution.xy;
+    vec2 pixelSize = 1.0/RESOLUTION.xy;
     SAMPLEDOF_TYPE color = SAMPLEDOF_COLOR_FNC(texCoord);
     
     float total = 1.0;
@@ -92,7 +99,7 @@ SAMPLEDOF_TYPE sampleDoF(sampler2D tex, sampler2D texDepth, vec2 texCoord, float
 
     float centerDepth = SAMPLEDOF_DEPTH_FNC(texCoord);
     float centerSize = getBlurSize(centerDepth, focusPoint, focusScale);
-    vec2 pixelSize = 1./u_resolution.xy;
+    vec2 pixelSize = 1./RESOLUTION.xy;
     SAMPLEDOF_TYPE color = SAMPLEDOF_COLOR_FNC(texCoord);
 
     float tot = 1.0;

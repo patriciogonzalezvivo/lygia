@@ -17,6 +17,12 @@ options:
 #define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
 #endif
 
+#ifndef RESOLUTION
+#if defined(UNITY_COMPILER_HLSL)
+#define RESOLUTION _ScreenParams
+#endif
+#endif
+
 #ifndef FNC_SAMPLEDOF
 #define FNC_SAMPLEDOF
 
@@ -57,7 +63,7 @@ SAMPLEDOF_TYPE sampleDoF(sampler2D tex, sampler2D texDepth, float2 texCoord, flo
     
     float centerDepth = SAMPLEDOF_DEPTH_FNC(texCoord);
     float centerSize = getBlurSize(centerDepth, focusPoint, focusScale);
-    float2 pixelSize = 1.0/u_resolution.xy;
+    float2 pixelSize = 1.0/RESOLUTION.xy;
     SAMPLEDOF_TYPE color = SAMPLEDOF_COLOR_FNC(texCoord);
     
     float total = 1.0;
@@ -91,7 +97,7 @@ SAMPLEDOF_TYPE sampleDoF(sampler2D tex, sampler2D texDepth, float2 texCoord, flo
 
     float centerDepth = SAMPLEDOF_DEPTH_FNC(texCoord);
     float centerSize = getBlurSize(centerDepth, focusPoint, focusScale);
-    float2 pixelSize = 1./u_resolution.xy;
+    float2 pixelSize = 1./RESOLUTION.xy;
     SAMPLEDOF_TYPE color = SAMPLEDOF_COLOR_FNC(texCoord);
 
     float tot = 1.0;
