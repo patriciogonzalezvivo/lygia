@@ -20,14 +20,22 @@ options:
 #if defined(TARGET_MOBILE) || defined(PLATFORM_RPI) || defined(PLATFORM_WEBGL)
     #define TONEMAP_FNC     tonemapUnreal
 #else
-    #define TONEMAP_FNC     tonemapACES
+    // #define TONEMAP_FNC     tonemapDebug
+    // #define TONEMAP_FNC     tonemapFilmic
+    // #define TONEMAP_FNC     tonemapACES
+    // #define TONEMAP_FNC     tonemapUncharted2
+    // #define TONEMAP_FNC     tonemapUncharted
+    #define TONEMAP_FNC     tonemapReinhardJodie
+    // #define TONEMAP_FNC     tonemapReinhard
+    // #define TONEMAP_FNC     tonemapUnreal
+    // #define TONEMAP_FNC     tonemapLinear
 #endif
 #endif
 
 #ifndef FNC_TONEMAP
 #define FNC_TONEMAP
 
-vec3 tonemap(const vec3 color) { return TONEMAP_FNC(color); }
-vec4 tonemap(const vec4 color) { return TONEMAP_FNC(color); }
+vec3 tonemap(const vec3 color) { return TONEMAP_FNC (color); }
+vec4 tonemap(const vec4 color) { return TONEMAP_FNC (color); }
 
 #endif

@@ -1,3 +1,5 @@
+#include "../color/tonemap.glsl"
+
 /*
 original_author: Patricio Gonzalez Vivo
 description: return the spherical harmonic value facing a normal direction
@@ -19,12 +21,16 @@ options:
 // #define SCENE_SH_ARRAY u_SH
 // #endif
 
+#ifndef SPHERICALHARMONICS_TONEMAP 
+#define SPHERICALHARMONICS_TONEMAP
+#endif
+
 #ifndef FNC_SPHERICALHARMONICS
 #define FNC_SPHERICALHARMONICS
 
 vec3 sphericalHarmonics(const vec3 n) {
 #ifdef SCENE_SH_ARRAY
-    return max(
+    return SPHERICALHARMONICS_TONEMAP ( max(
            0.282095 * SCENE_SH_ARRAY[0]
 #if SPHERICALHARMONICS_BANDS >= 2
         + -0.488603 * SCENE_SH_ARRAY[1] * (n.y)
@@ -38,7 +44,7 @@ vec3 sphericalHarmonics(const vec3 n) {
         + -1.092548 * SCENE_SH_ARRAY[7] * (n.z * n.x)
         +  0.546274 * SCENE_SH_ARRAY[8] * (n.x * n.x - n.y * n.y)
 #endif
-        , 0.0);
+        , 0.0) );
 #else
     return vec3(1.0);
 #endif

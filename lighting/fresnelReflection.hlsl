@@ -2,7 +2,6 @@
 #include "envMap.hlsl"
 #include "fakeCube.hlsl"
 #include "sphericalHarmonics.hlsl"
-#include "../color/tonemap.hlsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
@@ -19,10 +18,21 @@ float3 fresnelReflection(float3 _R, float3 _f0, float _NoV) {
     float3 frsnl = fresnel(_f0, _NoV);
 
     float3 reflectColor = float3(0.0, 0.0, 0.0);
-    #if defined(SCENE_SH_ARRAY)
-    reflectColor = tonemap( sphericalHarmonics(_R) );
+
+    #if defined(FRESNEL_REFLECTION_FNC)
+    reflection = FRESNEL_REFLECTION_FNC(R);
+
+    #elif defined(ENVMAP_FNC) 
+    reflectColor = ENVMAP_FNC(R, 0.001, 0.001);
+    
+    #elif defined(SCENE_CUBEMAP)
+    reflectColor = SAMPLE_CUBE_FNC( SCENE_CUBEMAP, R, ENVMAP_MAX_MIP_LEVEL).rgb;
+
+    #elif defined(SCENE_SH_ARRAY)
+    reflectColor = sphericalHarmonics(R);
+
     #else
-    reflectColor = fakeCube(_R);
+    reflectColor = fakeCube(R);
     #endif
 
     return reflectColor * frsnl;

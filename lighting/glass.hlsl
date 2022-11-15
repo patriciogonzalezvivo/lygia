@@ -83,16 +83,18 @@ float4 glass(const Material _mat) {
     float3 E = envBRDFApprox(_mat.albedo.rgb, NoV, roughness);
 
     float3 Fr = float3(0.0, 0.0, 0.0);
-    Fr = tonemapReinhard( envMap(Re, roughness) ) * E;
-    Fr += fresnelReflection(Re, _mat.f0, NoV) * (1.0-roughness);
+    Fr = tonemap( envMap(Re, roughness) ) * E;
+    Fr += tonemap( fresnelReflection(Re, _mat.f0, NoV) ) * (1.0-roughness);
 
     float4 color  = float4(0.0, 0.0, 0.0, 1.0);
     color.rgb   = envMap(RaG, roughness);
+    #if !defined(TARGET_MOBILE) && !defined(PLATFORM_RPI)
     color.r     = envMap(RaR, roughness).r;
     color.b     = envMap(RaB, roughness).b;
+    #endif
+    color.rgb   = tonemap(color.rgb); 
 
     // color.rgb   *= exp( -_mat.thickness * 200.0);
-
     color.rgb   += Fr * IBL_LUMINANCE;
 
     #if defined(LIGHT_DIRECTION)

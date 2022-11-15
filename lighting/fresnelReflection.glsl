@@ -2,7 +2,6 @@
 #include "envMap.glsl"
 #include "fakeCube.glsl"
 #include "sphericalHarmonics.glsl"
-#include "../color/tonemap.glsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
@@ -24,18 +23,22 @@ vec3 fresnelReflection(vec3 R, vec3 f0, float NoV) {
 
     #elif defined(ENVMAP_FNC) 
     reflectColor = ENVMAP_FNC(R, 0.001, 0.001);
-
-    #elif defined(SCENE_SH_ARRAY)
-    reflectColor = tonemap( sphericalHarmonics(R) );
     
     #elif defined(SCENE_CUBEMAP)
-    reflectColor = tonemap( SAMPLE_CUBE_FNC( SCENE_CUBEMAP, R, ENVMAP_MAX_MIP_LEVEL).rgb );
+    reflectColor = SAMPLE_CUBE_FNC( SCENE_CUBEMAP, R, ENVMAP_MAX_MIP_LEVEL).rgb;
+
+    #elif defined(SCENE_SH_ARRAY)
+    reflectColor = sphericalHarmonics(R);
 
     #else
     reflectColor = fakeCube(R);
     #endif
 
     return reflectColor * frsnl;
+}
+
+vec3 fresnelReflection(vec3 R, float f0, float NoV) {
+    return fresnelReflection(R, vec3(f0, f0, f0), NoV);
 }
 
 #endif
