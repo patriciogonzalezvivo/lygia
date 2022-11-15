@@ -60,13 +60,17 @@ vec4 glass(const Material _mat) {
     vec3 E = envBRDFApprox(_mat.albedo.rgb, NoV, roughness);
 
     vec3 Fr = vec3(0.0);
-    Fr = tonemapReinhard( envMap(Re, roughness) ) * E;
-    Fr += fresnelReflection(Re, _mat.f0, NoV) * (1.0-roughness);
+    Fr = tonemap( envMap(Re, roughness) ) * E;
+    Fr += tonemap( fresnelReflection(Re, _mat.f0, NoV) ) * (1.0-roughness);
 
     vec4 color  = vec4(0.0, 0.0, 0.0, 1.0);
     color.rgb   = envMap(RaG, roughness);
+
+    #if !defined(TARGET_MOBILE) && !defined(PLATFORM_RPI)
     color.r     = envMap(RaR, roughness).r;
     color.b     = envMap(RaB, roughness).b;
+    #endif
+    color       = tonemap( color );
 
     // color.rgb   *= exp( -_mat.thickness * 200.0);
 

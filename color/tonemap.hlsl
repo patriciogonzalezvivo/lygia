@@ -26,7 +26,15 @@ options:
 #if defined(TARGET_MOBILE) || defined(PLATFORM_RPI) || defined(PLATFORM_WEBGL)
     #define TONEMAP_FNC     tonemapUnreal
 #else
-    #define TONEMAP_FNC     tonemapACES
+    // #define TONEMAP_FNC     tonemapDebug
+    // #define TONEMAP_FNC     tonemapFilmic
+    // #define TONEMAP_FNC     tonemapACES
+    // #define TONEMAP_FNC     tonemapUncharted2
+    // #define TONEMAP_FNC     tonemapUncharted
+    #define TONEMAP_FNC     tonemapReinhardJodie
+    // #define TONEMAP_FNC     tonemapReinhard
+    // #define TONEMAP_FNC     tonemapUnreal
+    // #define TONEMAP_FNC     tonemapLinear
 #endif
 #endif
 

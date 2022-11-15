@@ -70,14 +70,14 @@ vec4 pbr(const Material _mat) {
                             (_mat.metallic + (.95 - _mat.roughness) * 2.0); // make smaller highlights brighter
 
     vec3 Fr = vec3(0.0, 0.0, 0.0);
-    Fr = tonemapReinhard( envMap(R, _mat.roughness, _mat.metallic) ) * E * specIntensity;
-    Fr += fresnelReflection(R, _mat.f0, NoV) * _mat.metallic * (1.0-_mat.roughness) * 0.2;
+    Fr = tonemap( envMap(R, _mat.roughness, _mat.metallic) ) * E * specIntensity;
+    Fr += tonemap( fresnelReflection(R, _mat.f0, NoV) ) * _mat.metallic * (1.0-_mat.roughness) * 0.2;
     Fr *= specularAO;
 
     vec3 Fd = vec3(0.0, 0.0, 0.0);
     Fd = diffuseColor;
     #if defined(SCENE_SH_ARRAY)
-    Fd *= tonemapReinhard( sphericalHarmonics(N) );
+    Fd *= tonemap( sphericalHarmonics(N) );
     #endif
     Fd *= diffuseAO;
     Fd *= (1.0 - E);

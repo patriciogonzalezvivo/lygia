@@ -84,8 +84,8 @@ float4 pbr(const Material _mat) {
                             (_mat.metallic + (.95 - _mat.roughness) * 2.0); // make smaller highlights brighter
 
     float3 Fr = float3(0.0, 0.0, 0.0);
-    Fr = tonemapReinhard( envMap(R, roughness, _mat.metallic) ) * E * specIntensity;
-    Fr += fresnelReflection(R, _mat.f0, NoV) * _mat.metallic * (1.0-roughness) * 0.2;
+    Fr = tonemap( envMap(R, roughness, _mat.metallic) ) * E * specIntensity;
+    Fr += tonemap( fresnelReflection(R, _mat.f0, NoV) ) * _mat.metallic * (1.0-roughness) * 0.2;
     Fr *= specAO;
 
     float3 Fd = float3(0.0, 0.0, 0.0);
@@ -93,7 +93,7 @@ float4 pbr(const Material _mat) {
     #if defined(UNITY_COMPILER_HLSL)
     Fd *= ShadeSH9(half4(N,1));
     #elif defined(SCENE_SH_ARRAY)
-    Fd *= tonemapReinhard( sphericalHarmonics(N) );
+    Fd *= tonemap( sphericalHarmonics(N) );
     #endif
     Fd *= diffAO;
     Fd *= (1.0 - E);
