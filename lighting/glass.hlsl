@@ -25,8 +25,29 @@ options:
     - CAMERA_POSITION: in GlslViewer is u_camera
 */
 
+#ifndef CAMERA_POSITION
+#if defined(UNITY_COMPILER_HLSL)
+#define CAMERA_POSITION _WorldSpaceCameraPos
+#else
+#define CAMERA_POSITION float3(0.0, 0.0, -10.0)
+#endif
+#endif
+
+#ifndef LIGHT_POSITION
+#if defined(UNITY_COMPILER_HLSL)
+#define LIGHT_POSITION _WorldSpaceLightPos0.xyz
+#else
+#define LIGHT_POSITION  float3(0.0, 10.0, -50.0)
+#endif
+#endif
+
 #ifndef LIGHT_COLOR
-#define LIGHT_COLOR     float3(1.0, 1.0, 1.0)
+#if defined(UNITY_COMPILER_HLSL)
+#include <UnityLightingCommon.cginc>
+#define LIGHT_COLOR     _LightColor0.rgb
+#else
+#define LIGHT_COLOR     float3(0.5, 0.5, 0.5)
+#endif
 #endif
 
 #ifndef IBL_LUMINANCE
