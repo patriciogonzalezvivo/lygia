@@ -1,4 +1,4 @@
-#include "../math/const.glsl"
+#include "../math/const.hlsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
@@ -8,7 +8,7 @@ use: <vec2> xyz2equirect(<vec2> d)
 
 #ifndef FNC_XYZ2EQUIRECT
 #define FNC_XYZ2EQUIRECT
-vec2 xyz2equirect(vec3 d) {
-    return vec2(atan(d.z, d.x) + PI, acos(-d.y)) / vec2(2.0 * PI, PI);
+float2 xyz2equirect(float3 d) {
+    return float2(atan(d.z, d.x) + PI, acos(-d.y)) / float2(TAU, PI);
 }
 #endif
