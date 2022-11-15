@@ -18,7 +18,13 @@ options:
 
 #ifndef FNC_SAMPLEEQUIRECT
 #define FNC_SAMPLEEQUIRECT
-vec4 sampleEquirect(sampler2D tex, vec3 dir) { return SAMPLER_FNC(tex, xyz2equirect(dir)); }
+vec4 sampleEquirect(sampler2D tex, vec3 dir) { 
+    vec2 st = xyz2equirect(dir);
+    #ifdef SAMPLEEQUIRECT_FLIP_Y
+    st.y = 1.0-st.y;
+    #endif
+    return SAMPLER_FNC(tex, st); 
+}
 
 vec4 sampleEquirect(sampler2D tex, vec3 dir, float lod) { 
     
