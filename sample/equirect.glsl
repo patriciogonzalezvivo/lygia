@@ -9,6 +9,7 @@ use: sampleEquirect(<sampler2D> texture, <vec3> dir)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - SAMPLEEQUIRET_ITERATIONS:
+    - SAMPLEEQUIRECT_FLIP_Y
 */
 
 #ifndef SAMPLER_FNC
@@ -24,6 +25,9 @@ vec4 sampleEquirect(sampler2D tex, vec3 dir, float lod) {
     #if defined(SAMPLEEQUIRET_ITERATIONS)
     vec4 acc = vec4(0.0);
     vec2 st = xyz2equirect(dir);
+    #ifdef SAMPLEEQUIRECT_FLIP_Y
+    st.y = 1.0-st.y;
+    #endif
     mat2 rot = mat2(cos(GOLDEN_ANGLE), sin(GOLDEN_ANGLE), -sin(GOLDEN_ANGLE), cos(GOLDEN_ANGLE));
     float r = 1.;
     vec2 vangle = vec2(0.0, lod * 0.01);
@@ -37,7 +41,11 @@ vec4 sampleEquirect(sampler2D tex, vec3 dir, float lod) {
 
     #else
     dir += srandom3( dir ) * 0.01 * lod;
-    return SAMPLER_FNC(tex, xyz2equirect(dir));
+    vec2 st = xyz2equirect(dir);
+    #ifdef SAMPLEEQUIRECT_FLIP_Y
+    st.y = 1.0-st.y;
+    #endif
+    return SAMPLER_FNC(tex, st);
 
     #endif
 }

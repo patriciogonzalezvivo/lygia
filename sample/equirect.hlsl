@@ -24,6 +24,9 @@ float4 sampleEquirect(sampler2D tex, float3 dir, float lod) {
     #if defined(SAMPLEEQUIRET_ITERATIONS)
     float4 acc = float4(0.0, 0.0, 0.0, 0.0);
     float2 st = xyz2equirect(dir);
+    #ifdef SAMPLEEQUIRECT_FLIP_Y
+    st.y = 1.0-st.y;
+    #endif
     float2x2 rot = float2x2(cos(GOLDEN_ANGLE), sin(GOLDEN_ANGLE), -sin(GOLDEN_ANGLE), cos(GOLDEN_ANGLE));
     float r = 1.;
     float2 vangle = float2(0.0, lod * 0.01);
@@ -37,7 +40,11 @@ float4 sampleEquirect(sampler2D tex, float3 dir, float lod) {
 
     #else
     dir += srandom3( dir ) * 0.01 * lod;
-    return SAMPLER_FNC(tex, xyz2equirect(dir));
+    float2 st = xyz2equirect(dir);
+    #ifdef SAMPLEEQUIRECT_FLIP_Y
+    st.y = 1.0-st.y;
+    #endif
+    return SAMPLER_FNC(tex, st);
 
     #endif
 }
