@@ -11,7 +11,13 @@ options:
     - RAYMARCH_BACKGROUND: default vec3(0.0)
     - RAYMARCH_CAMERA_MATRIX_FNC(RO, TA): default raymarchCamera(RO, TA)
     - RAYMARCH_RENDER_FNC(RO, RD): default raymarchDefaultRender(RO, RD)  
+    - RESOLUTION
 */
+#ifndef RESOLUTION
+#ifdef GLSLVIEWER
+#define RESOLUTION u_resolution
+#endif
+#endif
 
 #ifndef RAYMARCH_CAMERA_MATRIX_FNC
 #define RAYMARCH_CAMERA_MATRIX_FNC raymarchCamera
@@ -33,7 +39,7 @@ vec4 raymarch(vec3 camera, vec3 ta, vec2 st) {
     
 #if defined(RAYMARCH_MULTISAMPLE)
     vec4 color = vec4(0.0);
-    vec2 pixel = 1.0/ u_resolution;
+    vec2 pixel = 1.0/RESOLUTION;
     vec2 offset = rotate( vec2(0.5, 0.0), HALF_PI/4.);
 
     for (int i = 0; i < RAYMARCH_MULTISAMPLE; i++) {
