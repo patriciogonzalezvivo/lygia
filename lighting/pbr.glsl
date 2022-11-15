@@ -48,9 +48,7 @@ vec4 pbr(const Material _mat) {
     vec3    N       = _mat.normal;                                  // Normal
     vec3    V       = normalize(CAMERA_POSITION - _mat.position);   // View
     float   NoV     = dot(N, V);                                    // Normal . View
-    float   f0      = max(_mat.f0.r, max(_mat.f0.g, _mat.f0.b));
-    float roughness = _mat.roughness;
-    vec3    R       = reflection(V, N, roughness);
+    vec3    R       = reflection(V, N, _mat.roughness);
 
     // Ambient Occlusion
     // ------------------------
@@ -60,15 +58,20 @@ vec4 pbr(const Material _mat) {
 //     ssao = ssao(SCENE_DEPTH, gl_FragCoord.xy*pixel, pixel, 1.);
 // #endif 
     float diffuseAO = min(_mat.ambientOcclusion, ssao);
-    float specularAO = specularAO(NoV, diffuseAO, roughness);
+    float specularAO = specularAO(NoV, diffuseAO, _mat.roughness);
 
     // Global Ilumination ( mage Based Lighting )
     // ------------------------
-    vec3 E = envBRDFApprox(specularColor, NoV, roughness);
+    vec3 E = envBRDFApprox(specularColor, NoV, _mat.roughness);
+
+    // This is a bit of a hack to pop the metalics
+    float specIntensity =   (2.0 * _mat.metallic) * 
+                            saturate(-1.1 + NoV + _mat.metallic) *          // Fresnel
+                            (_mat.metallic + (.95 - _mat.roughness) * 2.0); // make smaller highlights brighter
 
     vec3 Fr = vec3(0.0, 0.0, 0.0);
-    Fr = tonemapReinhard( envMap(R, roughness, _mat.metallic) ) * E;
-    Fr += fresnelReflection(R, _mat.f0, NoV) * _mat.metallic * (1.0-roughness) * 0.2;
+    Fr = tonemapReinhard( envMap(R, _mat.roughness, _mat.metallic) ) * E * specIntensity;
+    Fr += fresnelReflection(R, _mat.f0, NoV) * _mat.metallic * (1.0-_mat.roughness) * 0.2;
     Fr *= specularAO;
 
     vec3 Fd = vec3(0.0, 0.0, 0.0);
@@ -86,9 +89,11 @@ vec4 pbr(const Material _mat) {
     
     {
         #if defined(LIGHT_DIRECTION)
-        lightDirectional(diffuseColor, specularColor, N, V, NoV, roughness, f0, _mat.shadow, lightDiffuse, lightSpecular);
+        float f0 = max(_mat.f0.r, max(_mat.f0.g, _mat.f0.b));
+        lightDirectional(diffuseColor, specularColor, N, V, NoV, _mat.roughness, f0, _mat.shadow, lightDiffuse, lightSpecular);
         #elif defined(LIGHT_POSITION)
-        lightPoint(diffuseColor, specularColor, N, V, NoV, roughness, f0, _mat.shadow, lightDiffuse, lightSpecular);
+        float f0 = max(_mat.f0.r, max(_mat.f0.g, _mat.f0.b));
+        lightPoint(diffuseColor, specularColor, N, V, NoV, _mat.roughness, f0, _mat.shadow, lightDiffuse, lightSpecular);
         #endif
     }
     

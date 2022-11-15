@@ -14,11 +14,15 @@ Options:
 */
 
 #ifndef TIME_SECS
+#if defined(UNITY_COMPILER_HLSL)
 #define TIME_SECS _Time.y
+#endif
 #endif
 
 #ifndef RESOLUTION
+#if defined(UNITY_COMPILER_HLSL)
 #define RESOLUTION _ScreenParams
+#endif
 #endif
 
 #include "dither/interleavedGradientNoise.hlsl"

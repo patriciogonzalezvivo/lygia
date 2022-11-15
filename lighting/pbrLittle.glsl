@@ -66,8 +66,8 @@ vec4 pbrLittle(vec4 albedo, vec3 position, vec3 normal, float roughness, float m
     float NoV = dot(N, V); 
 
     // SPECULAR
-    vec3 specIntensity =    vec3(1.0) *
-                            (0.04 * notMetal + 2.0 * metallic) * 
+    // This is a bit of a stilistic proach
+    float specIntensity =   (0.04 * notMetal + 2.0 * metallic) * 
                             saturate(-1.1 + NoV + metallic) * // Fresnel
                             (metallic + smooth * 4.0); // make smaller highlights brighter
 
