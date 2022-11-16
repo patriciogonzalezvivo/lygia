@@ -12,7 +12,7 @@ float3 tonemapACES(float3 x) {
     const float c = 2.43;
     const float d = 0.59;
     const float e = 0.14;
-    return saturate(x * (a * x + b)) / (x * (c * x + d) + e);
+    return saturate((x*(a*x+b))/(x*(c*x+d)+e));
 }
 
 float4 tonemapACES(float4 x) {

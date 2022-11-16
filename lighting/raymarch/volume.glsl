@@ -44,6 +44,10 @@ options:
 #define RAYMARCH_VOLUME_COLOR_FNC vec3
 #endif
 
+#ifndef RAYMARCH_MAP_FNC
+#define RAYMARCH_MAP_FNC(POS) raymarchMap(POS)
+#endif
+
 #ifndef FNC_RAYMARCHVOLUMERENDER
 #define FNC_RAYMARCHVOLUMERENDER
 
@@ -67,7 +71,7 @@ vec4 raymarchVolume( in vec3 ro, in vec3 rd ) {
     vec3 col = vec3(0.0);
     vec3 pos = ro;
     for(int i = 0; i < RAYMARCH_SAMPLES; i++) {
-        vec4 res    = raymarchMap(pos);
+        vec4 res    = RAYMARCH_MAP_FNC(pos);
         float density = (0.1 - res.a);
         if (density > 0.0) {
             float tmp = density / fSamples;

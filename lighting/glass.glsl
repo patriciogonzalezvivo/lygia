@@ -49,9 +49,11 @@ vec4 glass(const Material _mat) {
     vec3    f0      = ior2f0(_mat.ior);
     vec3    eta     = ior2eta(_mat.ior);
     vec3    Re      = reflection(V, N, roughness);
-    vec3    RaR     = refract(-V, No, eta.r);
     vec3    RaG     = refract(-V, No, eta.g);
+    #if !defined(TARGET_MOBILE) && !defined(PLATFORM_RPI)
+    vec3    RaR     = refract(-V, No, eta.r);
     vec3    RaB     = refract(-V, No, eta.b);
+    #endif
 
     float   NoV     = dot(N, V);                                    // Normal . View
 

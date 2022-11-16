@@ -1,4 +1,4 @@
-#include "map.hlsl"
+#include "map.glsl"
 
 /*
 original_author:  Inigo Quiles
@@ -6,24 +6,31 @@ description: calculate normals http://iquilezles.org/www/articles/normalsSDF/nor
 use: <float> raymarchNormal( in <float3> pos ) 
 */
 
+#ifndef RAYMARCH_MAP_FNC
+#define RAYMARCH_MAP_FNC(POS) raymarchMap(POS)
+#endif
+
+#ifndef RAYMARCH_MAP_DISTANCE
+#define RAYMARCH_MAP_DISTANCE a
+#endif
 
 #ifndef FNC_RAYMARCHNORMAL
 #define FNC_RAYMARCHNORMAL
 
-float3 raymarchNormal(in float3 pos, in float2 pixel) {
+float3 raymarchNormal(float3 pos, float2 pixel) {
    float2 offset = float2(1.0, -1.0) * pixel;
-   return normalize( offset.xyy * raymarchMap( pos + offset.xyy ).a +
-                     offset.yyx * raymarchMap( pos + offset.yyx ).a +
-                     offset.yxy * raymarchMap( pos + offset.yxy ).a +
-                     offset.xxx * raymarchMap( pos + offset.xxx ).a );
+   return normalize( offset.xyy * RAYMARCH_MAP_FNC( pos + offset.xyy ).RAYMARCH_MAP_DISTANCE +
+                     offset.yyx * RAYMARCH_MAP_FNC( pos + offset.yyx ).RAYMARCH_MAP_DISTANCE +
+                     offset.yxy * RAYMARCH_MAP_FNC( pos + offset.yxy ).RAYMARCH_MAP_DISTANCE +
+                     offset.xxx * RAYMARCH_MAP_FNC( pos + offset.xxx ).RAYMARCH_MAP_DISTANCE );
 }
 
-float3 raymarchNormal(in float3 pos, in float e) {
+float3 raymarchNormal(float3 pos, float e) {
    const float2 offset = float2(1.0, -1.0);
-   return normalize( offset.xyy * raymarchMap( pos + offset.xyy * e ).a +
-                     offset.yyx * raymarchMap( pos + offset.yyx * e ).a +
-                     offset.yxy * raymarchMap( pos + offset.yxy * e ).a +
-                     offset.xxx * raymarchMap( pos + offset.xxx * e ).a );
+   return normalize( offset.xyy * RAYMARCH_MAP_FNC( pos + offset.xyy * e ).RAYMARCH_MAP_DISTANCE +
+                     offset.yyx * RAYMARCH_MAP_FNC( pos + offset.yyx * e ).RAYMARCH_MAP_DISTANCE +
+                     offset.yxy * RAYMARCH_MAP_FNC( pos + offset.yxy * e ).RAYMARCH_MAP_DISTANCE +
+                     offset.xxx * RAYMARCH_MAP_FNC( pos + offset.xxx * e ).RAYMARCH_MAP_DISTANCE );
 }
 
 float3 raymarchNormal( in float3 pos ) {

@@ -10,10 +10,30 @@ use: <float> castRay( in <float3> pos, in <float3> nor )
 #define RAYMARCH_SAMPLES 64
 #endif
 
+#ifndef RAYMARCH_MAP_FNC
+#define RAYMARCH_MAP_FNC(POS) raymarchMap(POS)
+#endif
+
+#ifndef RAYMARCH_MAP_TYPE
+#define RAYMARCH_MAP_TYPE float4
+#endif
+
+#ifndef RAYMARCH_MAP_DISTANCE
+#define RAYMARCH_MAP_DISTANCE a
+#endif
+
+#ifndef RAYMARCH_MAP_MATERIAL
+#define RAYMARCH_MAP_MATERIAL rgb
+#endif
+
+#ifndef RAYMARCH_MAP_MATERIAL_TYPE
+#define RAYMARCH_MAP_MATERIAL_TYPE float3
+#endif
+
 #ifndef FNC_RAYMARCHCAST
 #define FNC_RAYMARCHCAST
 
-float4 raymarchCast( in float3 ro, in float3 rd ) {
+RAYMARCH_MAP_TYPE raymarchCast( in float3 ro, in float3 rd ) {
     float tmin = 1.0;
     float tmax = 20.0;
    
@@ -24,20 +44,22 @@ float4 raymarchCast( in float3 ro, in float3 rd ) {
 // #endif
     
     float t = tmin;
-    float3 m = float3(-1.0, -1.0, -1.0);
+    RAYMARCH_MAP_MATERIAL_TYPE m = RAYMARCH_MAP_MATERIAL_TYPE(-1.0);
     for ( int i = 0; i < RAYMARCH_SAMPLES; i++ ) {
-        float precis = 0.0004*t;
-        float4 res = raymarchMap( ro + rd * t );
-        if ( res.a < precis || t > tmax ) break;
-        t += res.a;
-        m = res.rgb;
+        float precis = 0.00001*t;
+        RAYMARCH_MAP_TYPE res = RAYMARCH_MAP_FNC( ro + rd * t );
+        if ( res.RAYMARCH_MAP_DISTANCE < precis || t > tmax ) 
+            break;
+        t += res.RAYMARCH_MAP_DISTANCE;
+        m = res.RAYMARCH_MAP_MATERIAL;
     }
 
     #if defined(RAYMARCH_BACKGROUND) || defined(RAYMARCH_FLOOR)
-    if ( t>tmax ) m = float3(-1.0, -1.0, -1.0);
+    if ( t > tmax ) 
+        m = RAYMARCH_MAP_MATERIAL_TYPE(-1.0);
     #endif
 
-    return float4( m, t );
+    return RAYMARCH_MAP_TYPE( m, t );
 }
 
 #endif
