@@ -22,18 +22,6 @@ use: <float> raymarchAO( in <vec3> pos, in <vec3> nor )
 #ifndef FNC_RAYMARCHAO
 #define FNC_RAYMARCHAO
 
-// float raymarchAO( in vec3 pos, in vec3 nor ) {
-//     float occ = 0.0;
-//     float sca = 1.0;
-//     for ( int i = 0; i < RAYMARCH_SAMPLES_AO; i++ ) {
-//         float hr = 0.01 + 0.12 * float(i) * 0.25;
-//         float dd = RAYMARCH_MAP_FNC( nor * hr + pos ).RAYMARCH_MAP_DISTANCE;
-//         occ += -(dd-hr)*sca;
-//         sca *= 0.95;
-//     }
-//     return saturate( 1.0 - 3.0*occ );    
-// }
-
 float raymarchAO( in vec3 pos, in vec3 nor ) {
     float occ = 0.0;
     float sca = 1.0;

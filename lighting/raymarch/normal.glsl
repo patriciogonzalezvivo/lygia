@@ -37,12 +37,4 @@ vec3 raymarchNormal( in vec3 pos ) {
    return raymarchNormal(pos, 0.5773 * 0.0005);
 }
 
-// vec3 raymarchNormal(in vec3 pos) {
-//     vec2 e = vec2(0.01,0.0);
-//     float d = RAYMARCH_MAP_FNC(pos).RAYMARCH_MAP_DISTANCE;
-//     return normalize( vec3(d - RAYMARCH_MAP_FNC(pos-e.xyy).RAYMARCH_MAP_DISTANCE, 
-//                            d - RAYMARCH_MAP_FNC(pos-e.yxy).RAYMARCH_MAP_DISTANCE, 
-//                            d - RAYMARCH_MAP_FNC(pos-e.yyx).RAYMARCH_MAP_DISTANCE));
-// }
-
 #endif
