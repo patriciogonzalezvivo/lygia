@@ -6,28 +6,43 @@ description: calculate normals http://iquilezles.org/www/articles/normalsSDF/nor
 use: <float> raymarchNormal( in <vec3> pos ) 
 */
 
+#ifndef RAYMARCH_MAP_FNC
+#define RAYMARCH_MAP_FNC(POS) raymarchMap(POS)
+#endif
+
+#ifndef RAYMARCH_MAP_DISTANCE
+#define RAYMARCH_MAP_DISTANCE a
+#endif
 
 #ifndef FNC_RAYMARCHNORMAL
 #define FNC_RAYMARCHNORMAL
 
 vec3 raymarchNormal(vec3 pos, vec2 pixel) {
    vec2 offset = vec2(1.0, -1.0) * pixel;
-   return normalize( offset.xyy * raymarchMap( pos + offset.xyy ).a +
-                     offset.yyx * raymarchMap( pos + offset.yyx ).a +
-                     offset.yxy * raymarchMap( pos + offset.yxy ).a +
-                     offset.xxx * raymarchMap( pos + offset.xxx ).a );
+   return normalize( offset.xyy * RAYMARCH_MAP_FNC( pos + offset.xyy ).RAYMARCH_MAP_DISTANCE +
+                     offset.yyx * RAYMARCH_MAP_FNC( pos + offset.yyx ).RAYMARCH_MAP_DISTANCE +
+                     offset.yxy * RAYMARCH_MAP_FNC( pos + offset.yxy ).RAYMARCH_MAP_DISTANCE +
+                     offset.xxx * RAYMARCH_MAP_FNC( pos + offset.xxx ).RAYMARCH_MAP_DISTANCE );
 }
 
 vec3 raymarchNormal(vec3 pos, float e) {
    const vec2 offset = vec2(1.0, -1.0);
-   return normalize( offset.xyy * raymarchMap( pos + offset.xyy * e ).a +
-                     offset.yyx * raymarchMap( pos + offset.yyx * e ).a +
-                     offset.yxy * raymarchMap( pos + offset.yxy * e ).a +
-                     offset.xxx * raymarchMap( pos + offset.xxx * e ).a );
+   return normalize( offset.xyy * RAYMARCH_MAP_FNC( pos + offset.xyy * e ).RAYMARCH_MAP_DISTANCE +
+                     offset.yyx * RAYMARCH_MAP_FNC( pos + offset.yyx * e ).RAYMARCH_MAP_DISTANCE +
+                     offset.yxy * RAYMARCH_MAP_FNC( pos + offset.yxy * e ).RAYMARCH_MAP_DISTANCE +
+                     offset.xxx * RAYMARCH_MAP_FNC( pos + offset.xxx * e ).RAYMARCH_MAP_DISTANCE );
 }
 
 vec3 raymarchNormal( in vec3 pos ) {
    return raymarchNormal(pos, 0.5773 * 0.0005);
 }
+
+// vec3 raymarchNormal(in vec3 pos) {
+//     vec2 e = vec2(0.01,0.0);
+//     float d = RAYMARCH_MAP_FNC(pos).RAYMARCH_MAP_DISTANCE;
+//     return normalize( vec3(d - RAYMARCH_MAP_FNC(pos-e.xyy).RAYMARCH_MAP_DISTANCE, 
+//                            d - RAYMARCH_MAP_FNC(pos-e.yxy).RAYMARCH_MAP_DISTANCE, 
+//                            d - RAYMARCH_MAP_FNC(pos-e.yyx).RAYMARCH_MAP_DISTANCE));
+// }
 
 #endif

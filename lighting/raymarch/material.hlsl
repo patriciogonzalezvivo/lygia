@@ -1,8 +1,9 @@
-#include "../material.hlsl"
-#include "ao.hlsl"
 #include "normal.hlsl"
-#include "softShadow.hlsl"
 #include "cast.hlsl"
+#include "ao.hlsl"
+#include "softShadow.hlsl"
+#include "../material.hlsl"
+#include "../../math/sum.hlsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
@@ -10,24 +11,20 @@ description: Material Constructor. Designed to integrate with GlslViewer's defin
 use: 
     - void raymarchMaterial(in <float3> ro, in <float3> rd, out material _mat)
     - material raymarchMaterial(in <float3> ro, in <float3> rd)
+options:
     - LIGHT_POSITION: in glslViewer is u_light
+    - LIGHT_DIRECTION
+    - LIGHT_COLOR
+    - RAYMARCH_AMBIENT
+    - RAYMARCH_MATERIAL_FNC(RAY, POSITION, NORMAL, ALBEDO)
 */
 
 #ifndef LIGHT_POSITION
-#if defined(UNITY_COMPILER_HLSL)
-#define LIGHT_POSITION _WorldSpaceLightPos0.xyz
-#else
-#define LIGHT_POSITION  float3(0.0, 10.0, -50.0)
-#endif
+#define LIGHT_POSITION float3(0.0, 10.0, -50.0)
 #endif
 
 #ifndef LIGHT_COLOR
-#if defined(UNITY_COMPILER_HLSL)
-#include <UnityLightingCommon.cginc>
-#define LIGHT_COLOR     _LightColor0.rgb
-#else
-#define LIGHT_COLOR     float3(0.5, 0.5, 0.5)
-#endif
+#define LIGHT_COLOR float3(0.5, 0.5, 0.5)
 #endif
 
 #ifndef RAYMARCH_AMBIENT
@@ -35,7 +32,15 @@ use:
 #endif
 
 #ifndef RAYMARCH_BACKGROUND
-#define RAYMARCH_BACKGROUND float3(0.0, 0.0, 0.0)
+#define RAYMARCH_BACKGROUND float3(0.0, 1.0, 1.0)
+#endif
+
+#ifndef RAYMARCH_MAP_MATERIAL_TYPE
+#define RAYMARCH_MAP_MATERIAL_TYPE float3
+#endif
+
+#ifndef RAYMARCH_MAP_MATERIAL_FNC
+#define RAYMARCH_MAP_MATERIAL_FNC 
 #endif
 
 #ifndef RAYMARCH_MATERIAL_FNC
@@ -45,10 +50,10 @@ use:
 #ifndef FNC_RAYMARCHMATERIAL
 #define FNC_RAYMARCHMATERIAL
 
-float3 raymarchDefaultMaterial(float3 ray, float3 position, float3 normal, float3 albedo) {
+float3 raymarchDefaultMaterial(float3 ray, float3 position, float3 normal, RAYMARCH_MAP_MATERIAL_TYPE color) {
     float3  env = RAYMARCH_AMBIENT;
 
-    if ( albedo.r + albedo.g + albedo.b <= 0.0 ) 
+    if ( sum(color) <= 0.0 ) 
         return RAYMARCH_BACKGROUND;
 
     float3 ref = reflect( ray, normal );
@@ -61,23 +66,23 @@ float3 raymarchDefaultMaterial(float3 ray, float3 position, float3 normal, float
     #endif
     
     float3  hal = normalize( lig-ray );
-    float amb = saturate( 0.5 + 0.5 * normal.y );
+    float amb = saturate( 0.5+0.5*normal.y );
     float dif = saturate( dot( normal, lig ) );
-    float bac = saturate( dot( normal, normalize(float3(-lig.x,0.0,-lig.z))) ) * saturate( 1.0-position.y );
+    float bac = saturate( dot( normal, normalize(float3(-lig.x, 0.0,-lig.z))) ) * saturate( 1.0-position.y );
     float dom = smoothstep( -0.1, 0.1, ref.y );
     float fre = pow( saturate(1.0+dot(normal,ray) ), 2.0 );
     
     dif *= raymarchSoftShadow( position, lig, 0.02, 2.5 );
     dom *= raymarchSoftShadow( position, ref, 0.02, 2.5 );
 
-    float3 light = float3(0.0, 0.0, 0.0);
+    float3 light = float3(0.0);
     light += 1.30 * dif * LIGHT_COLOR;
     light += 0.40 * amb * occ * env;
     light += 0.50 * dom * occ * env;
     light += 0.50 * bac * occ * 0.25;
     light += 0.25 * fre * occ;
 
-    return albedo * light;
+    return RAYMARCH_MAP_MATERIAL_FNC(color) * light;
 }
 
 float3 raymarchMaterial(float3 ray, float3 position, float3 normal, float3 albedo) {
@@ -85,7 +90,7 @@ float3 raymarchMaterial(float3 ray, float3 position, float3 normal, float3 albed
 }
 
 void raymarchMaterial( in float3 ro, in float3 rd, inout Material mat) { 
-    float4 res = raymarchCast(ro, rd);
+    vec4 res = raymarchCast(ro, rd);
 
     float3 col = float3(0.0, 0.0, 0.0);
     float3 m = res.rgb;
@@ -104,9 +109,9 @@ void raymarchMaterial( in float3 ro, in float3 rd, inout Material mat) {
     float3 lig = normalize( LIGHT_POSITION );
 
     float3  hal = normalize( lig-rd );
-    float amb = saturate( 0.5 + 0.5 * nor.y );
-    float dif = saturate( dot( nor, lig ) );
-    float bac = saturate( dot( nor, normalize(float3(-lig.x,0.0,-lig.z))) ) * saturate( 1.0-pos.y );
+    float amb = saturate( 0.5+0.5*nor.y);
+    float dif = saturate( dot( nor, lig ));
+    float bac = saturate( dot( nor, normalize(float3(-lig.x,0.0,-lig.z))))*saturate( 1.0-pos.y);
     float dom = smoothstep( -0.1, 0.1, ref.y );
     float fre = pow( saturate(1.0+dot(nor,rd) ), 2.0 );
 

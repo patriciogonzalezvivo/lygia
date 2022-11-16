@@ -8,6 +8,10 @@ use:
 
 #ifndef FNC_MIN
 #define FNC_MIN
+float mmin(const float v) {
+    return v;
+}
+
 float mmin(in float a, in float b) {
     return min(a, b);
 }

@@ -18,18 +18,34 @@ options:
     - RAYMARCH_MATERIAL_FNC raymarchDefaultMaterial
 */
 
+#ifndef RAYMARCH_MAP_DISTANCE
+#define RAYMARCH_MAP_DISTANCE a
+#endif
+
+#ifndef RAYMARCH_MAP_MATERIAL
+#define RAYMARCH_MAP_MATERIAL rgb
+#endif
+
+#ifndef RAYMARCH_MAP_MATERIAL_TYPE
+#define RAYMARCH_MAP_MATERIAL_TYPE vec3
+#endif
+
+#ifndef RAYMARCHCAST_TYPE
+#define RAYMARCHCAST_TYPE vec4
+#endif
+
 #ifndef FNC_RAYMARCHDEFAULT
 #define FNC_RAYMARCHDEFAULT
 
 vec4 raymarchDefaultRender( in vec3 ray_origin, in vec3 ray_direction ) { 
     vec3 col = vec3(0.0);
     
-    vec4 res = raymarchCast(ray_origin, ray_direction);
-    float t = res.a;
+    RAYMARCHCAST_TYPE res = raymarchCast(ray_origin, ray_direction);
+    float t = res.RAYMARCH_MAP_DISTANCE;
 
     vec3 pos = ray_origin + t * ray_direction;
     vec3 nor = raymarchNormal( pos );
-    col = raymarchMaterial(ray_direction, pos, nor, res.rgb);
+    col = raymarchMaterial(ray_direction, pos, nor, res.RAYMARCH_MAP_MATERIAL);
 
     return vec4( saturate(col), t );
 }

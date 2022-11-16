@@ -1,12 +1,14 @@
+#include "../../math/saturate.glsl"
+
 /*
 original_author:  Inigo Quiles
 description: default raymarching renderer
-use: <float4> raymarchDefaultRender( in <float3> ro, in <float3> rd ) 
+use: <float4> raymarchDefaultRender( in  float3> ro, in  float3> rd ) 
 options:
     - RAYMARCH_MATERIAL_FNC(RGB) float3(RGB)
-    - RAYMARCH_BACKGROUND float3(0.0, 0.0, 0.0)
-    - RAYMARCH_AMBIENT float3(1.0, 1.0, 1.0)
-    - LIGHT_COLOR     float3(0.5, 0.5, 0.5)
+    - RAYMARCH_BACKGROUND float3(0.0)
+    - RAYMARCH_AMBIENT float3(1.0)
+    - LIGHT_COLOR     float3(0.5)
     - LIGHT_POSITION  float3(0.0, 10.0, -50.0)
 */
 
@@ -42,6 +44,10 @@ options:
 #define RAYMARCH_VOLUME_COLOR_FNC float3
 #endif
 
+#ifndef RAYMARCH_MAP_FNC
+#define RAYMARCH_MAP_FNC(POS) raymarchMap(POS)
+#endif
+
 #ifndef FNC_RAYMARCHVOLUMERENDER
 #define FNC_RAYMARCHVOLUMERENDER
 
@@ -65,7 +71,7 @@ float4 raymarchVolume( in float3 ro, in float3 rd ) {
     float3 col = float3(0.0, 0.0, 0.0);
     float3 pos = ro;
     for(int i = 0; i < RAYMARCH_SAMPLES; i++) {
-        float4 res    = raymarchMap(pos);
+        float4 res    = RAYMARCH_MAP_FNC(pos);
         float density = (0.1 - res.a);
         if (density > 0.0) {
             float tmp = density / fSamples;

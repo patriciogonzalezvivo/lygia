@@ -8,13 +8,13 @@ use: <vec3|vec4> tonemapACES(<vec3|vec4> x)
 
 #ifndef FNC_TONEMAPACES
 #define FNC_TONEMAPACES
-vec3 tonemapACES(in vec3 x) {
+vec3 tonemapACES(vec3 x) {
     const float a = 2.51;
     const float b = 0.03;
     const float c = 2.43;
     const float d = 0.59;
     const float e = 0.14;
-    return saturate(x * (a * x + b)) / (x * (c * x + d) + e);
+    return saturate((x*(a*x+b))/(x*(c*x+d)+e));
 }
 
 vec4 tonemapACES(in vec4 x) {

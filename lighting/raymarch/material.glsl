@@ -4,6 +4,7 @@
 #include "ao.glsl"
 #include "softShadow.glsl"
 #include "../../math/saturate.glsl"
+#include "../../math/sum.glsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
@@ -35,6 +36,14 @@ options:
 #define RAYMARCH_BACKGROUND vec3(0.0)
 #endif
 
+#ifndef RAYMARCH_MAP_MATERIAL_TYPE
+#define RAYMARCH_MAP_MATERIAL_TYPE vec3
+#endif
+
+#ifndef RAYMARCH_MAP_MATERIAL_FNC
+#define RAYMARCH_MAP_MATERIAL_FNC 
+#endif
+
 #ifndef RAYMARCH_MATERIAL_FNC
 #define RAYMARCH_MATERIAL_FNC(RAY, POSITION, NORMAL, ALBEDO) raymarchDefaultMaterial(RAY, POSITION, NORMAL, ALBEDO)
 #endif
@@ -42,10 +51,10 @@ options:
 #ifndef FNC_RAYMARCHMATERIAL
 #define FNC_RAYMARCHMATERIAL
 
-vec3 raymarchDefaultMaterial(vec3 ray, vec3 position, vec3 normal, vec3 albedo) {
+vec3 raymarchDefaultMaterial(vec3 ray, vec3 position, vec3 normal, RAYMARCH_MAP_MATERIAL_TYPE color) {
     vec3  env = RAYMARCH_AMBIENT;
 
-    if ( albedo.r + albedo.g + albedo.b <= 0.0 ) 
+    if ( sum(color) <= 0.0 ) 
         return RAYMARCH_BACKGROUND;
 
     vec3 ref = reflect( ray, normal );
@@ -74,7 +83,7 @@ vec3 raymarchDefaultMaterial(vec3 ray, vec3 position, vec3 normal, vec3 albedo) 
     light += 0.50 * bac * occ * 0.25;
     light += 0.25 * fre * occ;
 
-    return albedo * light;
+    return RAYMARCH_MAP_MATERIAL_FNC(color) * light;
 }
 
 vec3 raymarchMaterial(vec3 ray, vec3 position, vec3 normal, vec3 albedo) {
