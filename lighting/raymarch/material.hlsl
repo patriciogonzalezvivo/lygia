@@ -75,7 +75,7 @@ float3 raymarchDefaultMaterial(float3 ray, float3 position, float3 normal, RAYMA
     dif *= raymarchSoftShadow( position, lig, 0.02, 2.5 );
     dom *= raymarchSoftShadow( position, ref, 0.02, 2.5 );
 
-    float3 light = float3(0.0);
+    float3 light = float3(0.0, 0.0, 0.0);
     light += 1.30 * dif * LIGHT_COLOR;
     light += 0.40 * amb * occ * env;
     light += 0.50 * dom * occ * env;
@@ -90,7 +90,7 @@ float3 raymarchMaterial(float3 ray, float3 position, float3 normal, float3 albed
 }
 
 void raymarchMaterial( in float3 ro, in float3 rd, inout Material mat) { 
-    vec4 res = raymarchCast(ro, rd);
+    RAYMARCH_MAP_TYPE res = raymarchCast(ro, rd);
 
     float3 col = float3(0.0, 0.0, 0.0);
     float3 m = res.rgb;

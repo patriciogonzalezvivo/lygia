@@ -91,7 +91,7 @@ vec3 raymarchMaterial(vec3 ray, vec3 position, vec3 normal, vec3 albedo) {
 }
 
 void raymarchMaterial( in vec3 ro, in vec3 rd, inout Material mat) { 
-    vec4 res = raymarchCast(ro, rd);
+    RAYMARCH_MAP_TYPE res = raymarchCast(ro, rd);
 
     vec3 col = vec3(0.0);
     vec3 m = res.rgb;

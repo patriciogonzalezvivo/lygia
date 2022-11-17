@@ -44,7 +44,7 @@ RAYMARCH_MAP_TYPE raymarchCast( in float3 ro, in float3 rd ) {
 // #endif
     
     float t = tmin;
-    RAYMARCH_MAP_MATERIAL_TYPE m = RAYMARCH_MAP_MATERIAL_TYPE(-1.0);
+    RAYMARCH_MAP_MATERIAL_TYPE m = float3( -1.0, -1.0, -1.0);
     for ( int i = 0; i < RAYMARCH_SAMPLES; i++ ) {
         float precis = 0.00001*t;
         RAYMARCH_MAP_TYPE res = RAYMARCH_MAP_FNC( ro + rd * t );
@@ -56,7 +56,7 @@ RAYMARCH_MAP_TYPE raymarchCast( in float3 ro, in float3 rd ) {
 
     #if defined(RAYMARCH_BACKGROUND) || defined(RAYMARCH_FLOOR)
     if ( t > tmax ) 
-        m = RAYMARCH_MAP_MATERIAL_TYPE(-1.0);
+        m = float3(-1.0, -1.0, -1.0);
     #endif
 
     return RAYMARCH_MAP_TYPE( m, t );

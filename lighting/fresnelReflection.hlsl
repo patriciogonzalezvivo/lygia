@@ -14,8 +14,8 @@ use:
 #ifndef FNC_FRESNEL_REFLECTION
 #define FNC_FRESNEL_REFLECTION
 
-float3 fresnelReflection(float3 _R, float3 _f0, float _NoV) {
-    float3 frsnl = fresnel(_f0, _NoV);
+float3 fresnelReflection(float3 R, float3 f0, float NoV) {
+    float3 frsnl = fresnel(f0, NoV);
 
     float3 reflectColor = float3(0.0, 0.0, 0.0);
 
