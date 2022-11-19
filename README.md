@@ -169,6 +169,7 @@ Here you can find some implementations on different languages:
         - [esbuild glsl plugin](https://github.com/ricardomatias/esbuild-plugin-glsl-include) by Ricardo Matias. Import local `.glsl` dependencies through esbuild.
         - [webpack glsl plugin](https://github.com/grieve/webpack-glsl-loader) by Ryan Grieve. Import local `.glsl` dependencies through webpack.
         - [observable](https://observablehq.com/d/e4e8a96f64a6bf81) by Radamés Ajna. It's an series of examples on how to load LYGIA inside [Observable](https://observablehq.com).
+        - [Figma's noise&texture plugin](https://www.figma.com/community/plugin/1138854718618193875) by Rogie King.  
 
 * It's **very granular**. One function per file. The file and the function share the same name, namely: `myFunc.glsl` contains `myFunct()`. There are some files that just include a collection of files inside a folder with the same name. For example:
 
