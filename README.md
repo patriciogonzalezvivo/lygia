@@ -111,6 +111,7 @@ Learn more about how to use it from this **examples**:
 * [2D examples for Touch Designer (GLSL)](https://derivative.ca/community-post/asset/lygia-touchdesginer/66804) (dynamic resolver) by [LeithBA](https://github.com/LeithBA)
 * [2D examples for Touch Designer (GLSL)](https://github.com/vectorsize/lygia-td) (static resolver) by [Victor Saz](https://github.com/vectorsize)
 * [2D examples on Observable Notebook (GLSL)](https://observablehq.com/@radames/hello-lygia-shader-library) by [Radames Ajna](https://twitter.com/radamar)
+* [Figma's noise&texture plugin](https://www.figma.com/community/plugin/1138854718618193875) by [Rogie King](https://twitter.com/rogie). You will need to go to the "Custom" tab on the plugin to edit shaders and load LYGIA modules  
 * [2D/3D examples on GlslViewer (GLSL)](https://github.com/patriciogonzalezvivo/lygia_examples)
 
 For more information, guidance or feedback about using LYGIA, join [#Lygia channel on shader.zone discord](https://shader.zone/).
@@ -168,9 +169,7 @@ Here you can find some implementations on different languages:
         - [vite glsl plugin](https://github.com/UstymUkhman/vite-plugin-glsl) by Ustym Ukhman. Imports `.glsl` local dependencies, or load inline shaders through vite
         - [esbuild glsl plugin](https://github.com/ricardomatias/esbuild-plugin-glsl-include) by Ricardo Matias. Import local `.glsl` dependencies through esbuild.
         - [webpack glsl plugin](https://github.com/grieve/webpack-glsl-loader) by Ryan Grieve. Import local `.glsl` dependencies through webpack.
-        - [observable](https://observablehq.com/d/e4e8a96f64a6bf81) by Radamés Ajna. It's an series of examples on how to load LYGIA inside [Observable](https://observablehq.com).
-        - [Figma's noise&texture plugin](https://www.figma.com/community/plugin/1138854718618193875) by Rogie King.  
-
+        
 * It's **very granular**. One function per file. The file and the function share the same name, namely: `myFunc.glsl` contains `myFunct()`. There are some files that just include a collection of files inside a folder with the same name. For example:
 
 ```
