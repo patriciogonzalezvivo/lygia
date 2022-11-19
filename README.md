@@ -13,6 +13,7 @@ Tired of searching, porting and/or reimplementing the same functions over and ov
     <a href="https://github.com/vectorsize/lygia-td"><img title="static-resolver by vectorsize" src="https://lygia.xyz/imgs/td.png" width="100" /></a>
     <a href="https://observablehq.com/@radames/hello-lygia-shader-library"><img src="https://lygia.xyz/imgs/ob.png" width="100" /></a>
     <a href="https://codesandbox.io/s/lygia-react-starter-fftx6p"><img src="https://lygia.xyz/imgs/r3f.png" width="100" /></a>
+    <a href="https://www.figma.com/community/plugin/1138854718618193875"><img src="https://lygia.xyz/imgs/figma.png" width="100" /></a>
 </p>
 
 ## How to use it?
@@ -281,6 +282,6 @@ LYGIA is dual-licensed under [the Prosperity License](https://prosperitylicense.
 
 Comming soon will be possible to get a permanent comercial license hook to a single and specific version of LYGIA.
 
-## Acknowledgements
+## Credits
 
-This library has been built over years, and in many cases on top of the work of brillant and generous people like: [Inigo Quiles](https://www.iquilezles.org/), [Morgan McGuire](https://casual-effects.com/), [Alan Wolfe](https://blog.demofox.org/), [Hugh Kennedy](https://github.com/hughsk), [Matt DesLauriers](https://www.mattdesl.com/) and many others.
+Created and mantain by [Patricio Gonzalez Vivo](https://patriciogonzalezvivo.com/)( <a rel="me" href="https://merveilles.town/@patricio">Mastodon</a> | [Twitter](https://twitter.com/patriciogv) | [Instagram](https://www.instagram.com/patriciogonzalezvivo/) | [GitHub](https://github.com/sponsors/patriciogonzalezvivo) ) and every direct or indirect [contributors](https://github.com/patriciogonzalezvivo/lygia/graphs/contributors) to the GitHub. This library has been built over years, and in many cases on top of the work of brillant and generous people like: [Inigo Quiles](https://www.iquilezles.org/), [Morgan McGuire](https://casual-effects.com/), [Alan Wolfe](https://blog.demofox.org/), [Hugh Kennedy](https://github.com/hughsk), [Matt DesLauriers](https://www.mattdesl.com/) and many others.
