@@ -96,7 +96,7 @@ To then resolve the dependencies by passing a `string` or `strings[]` to `resolv
     shdr = createShader(vertSource, fragSource);
 ```
 
-## Integrations examples
+### Integrations examples
 
 Learn more about how to use it from this **examples**:
 
@@ -114,7 +114,46 @@ Learn more about how to use it from this **examples**:
 
 For more information, guidance or feedback about using LYGIA, join [#Lygia channel on shader.zone discord](https://shader.zone/).
 
-## What are the design principles behind LYGIA?
+
+### How is it organized?
+
+The functions are divided in different categories:
+
+* [`math/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/math): general math functions and constants like `PI`, `SqrtLength()`, etc. 
+* [`space/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/space): general spatial operations like `scale()`, `rotate()`, etc. 
+* [`color/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/color): general color operations like `luma()`, `saturation()`, blend modes, palettes, color space conversion and tonemaps.
+* [`animation/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/animation): animation operations, like easing
+* [`generative/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/generative): generative functions like `random()`, `noise()`, etc. 
+* [`sdf/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/sdf): signed distance field functions.
+* [`draw/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/draw): drawing functions like `digits()`, `stroke()`, `fill`, etc/.
+* [`sample/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/sample): sample operations
+* [`filter/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/filter): typical filter operations like different kind of blurs, mean and median filters.
+* [`distort/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/distort): distort sampling operations
+* [`simulate/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/simulate): simulate sampling operations
+* [`lighting/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/lighting): different lighting models and functions for foward/deferred/raymarching rendering
+
+
+### Flexible how?
+
+There are some functions whose behaviour can be changed using the `#defines` keyword before including it. For example, [gaussian blurs](filter/gaussianBlur.glsl) are usually are done in two passes. By default, these are performed on their 1D version, but in the case you are interested on using a 2D kernel, all in the same pass, you will need to add the `GAUSSIANBLUR_2D` keyword this way:
+
+```glsl
+
+    #define GAUSSIANBLUR_2D
+    #include "filter/gaussianBlur.glsl"
+
+    void main(void) {
+        ...
+        
+        vec2 pixel = 1./u_resolution;
+        color = gaussianBlur(u_tex0, uv, pixel, 9);
+        ...
+    }
+
+```
+
+
+## Design Principles
 
 * It relies on `#include "path/to/file.*lsl"` which is defined by Khronos GLSL standard and requires a tipical C-like pre-compiler MACRO which is easy to implement with just basic string operations to resolve dependencies. 
 
@@ -222,44 +261,6 @@ Here you can find some implementations on different languages:
     #endif
 
 ```
-
-### How is it organized?
-
-The functions are divided in different categories:
-
-* [`math/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/math): general math functions and constants like `PI`, `SqrtLength()`, etc. 
-* [`space/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/space): general spatial operations like `scale()`, `rotate()`, etc. 
-* [`color/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/color): general color operations like `luma()`, `saturation()`, blend modes, palettes, color space conversion and tonemaps.
-* [`animation/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/animation): animation operations, like easing
-* [`generative/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/generative): generative functions like `random()`, `noise()`, etc. 
-* [`sdf/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/sdf): signed distance field functions.
-* [`draw/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/draw): drawing functions like `digits()`, `stroke()`, `fill`, etc/.
-* [`sample/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/sample): sample operations
-* [`filter/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/filter): typical filter operations like different kind of blurs, mean and median filters.
-* [`distort/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/distort): distort sampling operations
-* [`simulate/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/simulate): simulate sampling operations
-* [`lighting/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/lighting): different lighting models and functions for foward/deferred/raymarching rendering
-
-
-### Flexible how?
-
-There are some functions whose behaviour can be changed using the `#defines` keyword before including it. For example, [gaussian blurs](filter/gaussianBlur.glsl) are usually are done in two passes. By default, these are performed on their 1D version, but in the case you are interested on using a 2D kernel, all in the same pass, you will need to add the `GAUSSIANBLUR_2D` keyword this way:
-
-```glsl
-
-    #define GAUSSIANBLUR_2D
-    #include "filter/gaussianBlur.glsl"
-
-    void main(void) {
-        ...
-        
-        vec2 pixel = 1./u_resolution;
-        color = gaussianBlur(u_tex0, uv, pixel, 9);
-        ...
-    }
-
-```
-
 
 ## Contributions
 
