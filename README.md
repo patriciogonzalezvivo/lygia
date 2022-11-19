@@ -2,7 +2,7 @@
 
 # LYGIA Shader Library
 
-Tired of searching for the same functions over and over? or to port and reimplementing them between platforms and shader languages? LYGIA is shader library of reusable functions that can be include easily on your projects. Doesn't matter the shader language, if they run local or on the cloud. LYGIA is very granular, designed for reusability, performance and flexibility. 
+Tired of searching, porting and/or reimplementing the same functions over and over? LYGIA is a shader library of reusable functions that can be include easily on your projects. LYGIA is very granular, designed for reusability, performance and flexibility. And can be easily be added to any projects and frameworks.
 
 <p style="text-align: center;" >
     <a href="https://github.com/patriciogonzalezvivo/lygia_unity_examples"><img src="https://lygia.xyz/imgs/unity.png" width="100" /></a>
@@ -15,7 +15,7 @@ Tired of searching for the same functions over and over? or to port and reimplem
     <a href="https://codesandbox.io/s/lygia-react-starter-fftx6p"><img src="https://lygia.xyz/imgs/r3f.png" width="100" /></a>
 </p>
 
-### How does it work?
+## How to use it?
 
 In your shader `#include` the functions you need:
 
@@ -43,8 +43,11 @@ In your shader `#include` the functions you need:
         
         gl_FragColor = vec4(color, 1.0);
     }
-
+    
 </div>
+
+
+### LYGIA Locally
 
 If you are working **locally** on an ecosystem that can resolve `#include` dependencies, just clone LYGIA in your project relative to the shader you are loading:
 
@@ -58,36 +61,42 @@ or as a submodule:
     git submodule add https://github.com/patriciogonzalezvivo/lygia.git
 ```
 
-If you are working on a **cloud platform** probably you want to resolve the dependencies without needing to install anything. Just add a link to `https://lygia.xyz/resolve.js`: 
+### LYGIA on the cloud
+
+If you are working on a **cloud platform** probably you want to resolve the dependencies without needing to install anything. Just add a link to `https://lygia.xyz/resolve.js` (JS) or `https://lygia.xyz/resolve.esm.js` (ES6 module): 
 
 ```html
-<!DOCTYPE html>
-<html>
-	<head>
-		...
-	</head>
-	<body>
-        <script src="https://lygia.xyz/resolve.js"></script>
-		...
-	</body>
-</html>
-```
+    <!-- as a JavaScript source -->
+    <script src="https://lygia.xyz/resolve.js"></script>
 
-Or as a **ES module**, at the path `https://lygia.xyz/resolve.esm.js`:
-
-```html
+    <!-- Or as a ES6 module -->
     <script type="module">
-      import resolveLygia from "https://lygia.xyz/resolve.esm.js"
+        import resolveLygia from "https://lygia.xyz/resolve.esm.js"
     </script>
 ```
 
 To then resolve the dependencies by passing a `string` or `strings[]` to `resolveLygia()` or `resolveLygiaAsync()`:
 
 ```js
+    // 1. FIRST
+
+    // Sync resolver, one include at a time
     vertSource = resolveLygia(vertSource);
     fragSource = resolveLygia(fragSource);
+
+    // OR.
+    
+    // ASync resolver, all includes in parallel calls
+    vertSource = resolveLygiaAsync(vertSource);
+    fragSource = resolveLygiaAsync(fragSource);
+    
+    // 2. SECOND
+
+    // Use the resolved source code 
     shdr = createShader(vertSource, fragSource);
 ```
+
+## Integrations examples
 
 Learn more about how to use it from this **examples**:
 
@@ -105,49 +114,11 @@ Learn more about how to use it from this **examples**:
 
 For more information, guidance or feedback about using LYGIA, join [#Lygia channel on shader.zone discord](https://shader.zone/).
 
+## What are the design principles behind LYGIA?
 
-### How is it organized?
+* It relies on `#include "path/to/file.*lsl"` which is defined by Khronos GLSL standard and requires a tipical C-like pre-compiler MACRO which is easy to implement with just basic string operations to resolve dependencies. 
 
-The functions are divided in different categories:
-
-* [`math/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/math): general math functions and constants like `PI`, `SqrtLength()`, etc. 
-* [`space/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/space): general spatial operations like `scale()`, `rotate()`, etc. 
-* [`color/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/color): general color operations like `luma()`, `saturation()`, blend modes, palettes, color space conversion and tonemaps.
-* [`animation/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/animation): animation operations, like easing
-* [`generative/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/generative): generative functions like `random()`, `noise()`, etc. 
-* [`sdf/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/sdf): signed distance field functions.
-* [`draw/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/draw): drawing functions like `digits()`, `stroke()`, `fill`, etc/.
-* [`sample/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/sample): sample operations
-* [`filter/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/filter): typical filter operations like different kind of blurs, mean and median filters.
-* [`distort/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/distort): distort sampling operations
-* [`simulate/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/simulate): simulate sampling operations
-* [`lighting/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/lighting): different lighting models and functions for foward/deferred/raymarching rendering
-
-
-### Flexible how?
-
-There are some functions whose behaviour can be changed using the `#defines` keyword before including it. For example, [gaussian blurs](filter/gaussianBlur.glsl) are usually are done in two passes. By default, these are performed on their 1D version, but in the case you are interested on using a 2D kernel, all in the same pass, you will need to add the `GAUSSIANBLUR_2D` keyword this way:
-
-```glsl
-
-    #define GAUSSIANBLUR_2D
-    #include "filter/gaussianBlur.glsl"
-
-    void main(void) {
-        ...
-        
-        vec2 pixel = 1./u_resolution;
-        color = gaussianBlur(u_tex0, uv, pixel, 9);
-        ...
-    }
-
-```
-
-## Design Principles
-
-This library:
-
-* Relies on `#include "path/to/file.*lsl"` which is defined by Khronos GLSL standard and suported by most engines and enviroments ( like Unity3D, [OpenFrameworks](https://github.com/openframeworks/openFrameworks), [glslViewer](https://github.com/patriciogonzalezvivo/glslViewer/wiki/Compiling), [glsl-canvas VS Code pluging](https://marketplace.visualstudio.com/items?itemName=circledev.glsl-canvas), etc. ). It requires a tipical C-like pre-compiler MACRO which is easy to implement with just basic string operations to resolve dependencies. Here you can find some implementations on different languages:
+Here you can find some implementations on different languages:
     * C++:
         - [VERA's routines](https://github.com/patriciogonzalezvivo/vera/blob/main/src/ops/fs.cpp#L110-L171) for resolving GLSL dependencies.
     * Python
@@ -252,15 +223,54 @@ This library:
 
 ```
 
+### How is it organized?
+
+The functions are divided in different categories:
+
+* [`math/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/math): general math functions and constants like `PI`, `SqrtLength()`, etc. 
+* [`space/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/space): general spatial operations like `scale()`, `rotate()`, etc. 
+* [`color/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/color): general color operations like `luma()`, `saturation()`, blend modes, palettes, color space conversion and tonemaps.
+* [`animation/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/animation): animation operations, like easing
+* [`generative/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/generative): generative functions like `random()`, `noise()`, etc. 
+* [`sdf/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/sdf): signed distance field functions.
+* [`draw/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/draw): drawing functions like `digits()`, `stroke()`, `fill`, etc/.
+* [`sample/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/sample): sample operations
+* [`filter/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/filter): typical filter operations like different kind of blurs, mean and median filters.
+* [`distort/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/distort): distort sampling operations
+* [`simulate/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/simulate): simulate sampling operations
+* [`lighting/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/lighting): different lighting models and functions for foward/deferred/raymarching rendering
+
+
+### Flexible how?
+
+There are some functions whose behaviour can be changed using the `#defines` keyword before including it. For example, [gaussian blurs](filter/gaussianBlur.glsl) are usually are done in two passes. By default, these are performed on their 1D version, but in the case you are interested on using a 2D kernel, all in the same pass, you will need to add the `GAUSSIANBLUR_2D` keyword this way:
+
+```glsl
+
+    #define GAUSSIANBLUR_2D
+    #include "filter/gaussianBlur.glsl"
+
+    void main(void) {
+        ...
+        
+        vec2 pixel = 1./u_resolution;
+        color = gaussianBlur(u_tex0, uv, pixel, 9);
+        ...
+    }
+
+```
+
+
 ## Contributions
 
 LYGIA have a long way to go. Your support will be appreciated and rewarded (all contributors are automatically added to the [commercial license](https://lygia.xyz/license) ). This support can take multiple forms:
 
-* fixing bugs
+* fixing bugs!
 * expanding the crosscompatibility between languages GLSL/HLSL/WGSL/Metal
 * contributing new functions
 * adding new examples and integrations for new enviroments like: [TouchDesigner](https://derivative.ca/), [GoDot](https://godotengine.org/), [ISF](https://isf.video/), [MaxMSP](https://cycling74.com/products/max), etc.
 * through [sponsorships](https://github.com/sponsors/patriciogonzalezvivo)
+
 
 ## License 
 
