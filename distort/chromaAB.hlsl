@@ -1,4 +1,5 @@
 #include "../math/lengthSq.hlsl"
+#include "../sample.hlsl"
 
 /*
 original_author: Patricio Gonzalez Vivo, Johan Ismael
@@ -10,10 +11,6 @@ options:
     CHROMAAB_SAMPLER_FNC: function used to sample the input texture, defaults to texture2D(tex, POS_UV)
     CHROMAAB_CENTER_BUFFER: scalar to attenuate the sdf passed in   
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
-#endif
 
 #ifndef CHROMAAB_PCT
 #define CHROMAAB_PCT 1.5

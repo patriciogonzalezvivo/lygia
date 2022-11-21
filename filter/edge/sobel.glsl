@@ -1,3 +1,5 @@
+#include "../../sample.glsl"
+
 /*
 original_author: Brad Larson
 description: |
@@ -8,10 +10,6 @@ options:
     - EDGESOBEL_TYPE: Return type, defaults to float
     - EDGESOBEL_SAMPLER_FNC: Function used to sample the input texture, defaults to texture2D(tex,POS_UV).r
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
-#endif
 
 #ifndef EDGESOBEL_TYPE
 #ifdef EDGE_TYPE

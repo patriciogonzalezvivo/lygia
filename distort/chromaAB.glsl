@@ -1,5 +1,5 @@
 #include "../math/lengthSq.glsl"
-
+#include "../sample.glsl"
 /*
 original_author: Patricio Gonzalez Vivo, Johan Ismael
 description: Chroma Aberration inspired by https://www.shadertoy.com/view/4sX3z4
@@ -10,10 +10,6 @@ options:
     CHROMAAB_SAMPLER_FNC: function used to sample the input texture, defaults to texture2D(tex, POS_UV)
     CHROMAAB_CENTER_BUFFER: scalar to attenuate the sdf passed in   
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
-#endif
 
 #ifndef CHROMAAB_PCT
 #define CHROMAAB_PCT 1.5

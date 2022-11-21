@@ -1,4 +1,5 @@
 #include "../math/saturate.glsl"
+#include "../sample.glsl"
 
 /*
 original_author: Secret Weapons (@scrtwpns)
@@ -15,10 +16,6 @@ license: |
     This code is for non-commercial use only. It is provided for research and evaluation purposes.
     If you wish to obtain commercial license, please contact: mixbox@scrtwpns.com
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
-#endif
 
 #ifndef MIXBOX_LUT 
 #define MIXBOX_LUT u_tex0

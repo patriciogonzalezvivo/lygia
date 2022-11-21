@@ -2,6 +2,7 @@
 #include "../space/view2screenPosition.glsl"
 #include "../sdf/lineSDF.glsl"
 #include "../sdf/planeSDF.glsl"
+#include "../sample.glsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
@@ -17,10 +18,6 @@ options:
 */
 
 // #define SSR_FRESNEL
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
-#endif
 
 #ifndef CAMERA_NEAR_CLIP
 #define CAMERA_NEAR_CLIP u_cameraNearClip

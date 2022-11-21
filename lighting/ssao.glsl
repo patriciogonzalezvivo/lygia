@@ -1,6 +1,7 @@
 #include "../math/saturate.glsl"
 #include "../space/linearizeDepth.glsl"
 #include "../space/depth2viewZ.glsl"
+#include "../sample.glsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
@@ -18,10 +19,6 @@ options:
     - CAMERA_FAR_CLIP: required for depth only SSAO
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
-#endif
 
 #ifndef SSAO_SAMPLES_NUM
 #define SSAO_SAMPLES_NUM 8

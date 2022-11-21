@@ -1,3 +1,5 @@
+#include "../../sample.glsl"
+
 /*
 original_author: Matt DesLauriers
 description: adapted versions of gaussian fast blur 13 from https://github.com/Jam3/glsl-fast-gaussian-blur
@@ -7,10 +9,6 @@ options:
     - GAUSSIANBLUR1D_FAST5_TYPE
     - GAUSSIANBLUR1D_FAST5_SAMPLER_FNC(POS_UV)
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
-#endif
 
 #ifndef GAUSSIANBLUR1D_FAST5_TYPE
 #ifdef GAUSSIANBLUR_TYPE

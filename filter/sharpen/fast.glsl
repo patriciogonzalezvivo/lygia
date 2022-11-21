@@ -1,3 +1,5 @@
+#include "../../sample.glsl"
+
 /*
 original_author: Johan Ismael
 description: sharpening convolutional operation
@@ -8,10 +10,6 @@ options:
     - SHARPENFAST_TYPE: defaults to vec3
     - SHARPENFAST_SAMPLER_FNC(POS_UV): defaults to texture2D(tex, POS_UV).rgb
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
-#endif
 
 #ifndef SHARPENFAST_KERNELSIZE
 #ifdef SHARPEN_KERNELSIZE

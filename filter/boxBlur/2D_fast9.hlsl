@@ -1,3 +1,5 @@
+#include "../../sample.hlsl"
+
 /*
 original_author: Patricio Gonzalez Vivo
 description: simple two dimentional box blur, so can be apply in a single pass
@@ -7,10 +9,6 @@ options:
     - BOXBLUR2D_FAST9_TYPE: Default is `float4`
     - BOXBLUR2D_FAST9_SAMPLER_FNC(POS_UV): Default is `texture2D(tex, POS_UV)`
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
-#endif
 
 #ifndef BOXBLUR2D_FAST9_TYPE
 #ifdef BOXBLUR_TYPE

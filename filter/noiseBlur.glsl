@@ -1,4 +1,5 @@
 #include "../math/const.glsl"
+#include "../sample.glsl"
 
 #ifndef RANDOM_SCALE3
 #define RANDOM_SCALE3 vec3(443.897, 441.423, .0973)
@@ -17,10 +18,6 @@ options:
     - NOISEBLUR_SAMPLES: default to 4
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
-#endif
 
 #ifndef NOISEBLUR_SAMPLES
 #define NOISEBLUR_SAMPLES 4.0

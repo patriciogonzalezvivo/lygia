@@ -1,3 +1,5 @@
+#include "../sample.glsl"
+
 /*
 original_author: Patricio Gonzalez Vivo
 description: sharpening filter
@@ -9,10 +11,6 @@ options:
     - SHARPEN_FNC: defaults to sharpenFast
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
-#endif
 
 #ifndef RADIALBLUR_SAMPLER_FNC
 #define RADIALBLUR_SAMPLER_FNC(POS_UV) SAMPLER_FNC(tex, POS_UV)

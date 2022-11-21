@@ -1,3 +1,5 @@
+#include "../../sample.hlsl"
+
 /*
 original_author: [Morgan McGuire, Kyle Whitson]
 description: |
@@ -9,10 +11,6 @@ options:
     - MEDIAN2D_FAST5_TYPE: default float4
     - MEDIAN2D_FAST5_SAMPLER_FNC(POS_UV): default texture2D(tex, POS_UV)
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
-#endif
 
 #ifndef MEDIAN2D_FAST5_TYPE
 #ifdef MEDIAN2D_TYPE

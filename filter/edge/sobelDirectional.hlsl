@@ -1,3 +1,5 @@
+#include "../../sample.hlsl"
+
 /*
 original_author: Brad Larson
 description: Adapted version of directional Sobel edge detection from https://github.com/BradLarson/GPUImage2
@@ -6,10 +8,6 @@ options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - EDGESOBELDIRECTIONAL_SAMPLER_FNC: Function used to sample the input texture, defaults to texture2D(tex,POS_UV).r
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
-#endif
 
 #ifndef EDGESOBELDIRECTIONAL_SAMPLER_FNC
 #ifdef EDGE_SAMPLER_FNC

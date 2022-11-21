@@ -1,5 +1,6 @@
 #include "../space/depth2viewZ.hlsl"
 #include "../space/screen2viewPosition.hlsl"
+#include "../sample.hlsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
@@ -13,10 +14,6 @@ options:
     - CAMERA_PROJECTION_MATRIX: mat4 matrix with camera projection
     - INVERSE_CAMERA_PROJECTION_MATRIX: mat4 matrix with the inverse camara projection
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
-#endif
 
 #ifndef FNC_SAMPLEVIEWPOSITION
 #define FNC_SAMPLEVIEWPOSITION

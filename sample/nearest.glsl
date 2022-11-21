@@ -1,16 +1,13 @@
-#include "lygia/space/nearest.glsl"
+#include "../space/nearest.glsl"
+#include "../sample.glsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
 description: fakes a nearest sample
-use:> <vec4 sampleNear(<sampler2D> tex, <vec2> st, <vec2> texResolution);
+use: <vec4> sampleNearest(<sampler2D> tex, <vec2> st, <vec2> texResolution);
 options:
     - SAMPLER_FNC(TEX, UV)
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
-#endif
 
 #ifndef FNC_SAMPLENEAREST
 #define FNC_SAMPLENEAREST

@@ -1,5 +1,6 @@
 #include "../../math/saturate.glsl"
 #include "../../math/mmax.glsl"
+#include "../../sample.glsl"
 
 /*
 original_author: bacondither
@@ -11,11 +12,6 @@ options:
     - SHARPENDADAPTIVE_SAMPLER_FNC(POS_UV): defaults to texture2D(tex, POS_UV).rgb
     - SHARPENADAPTIVE_ANIME: only darken edges. Defaults to: false
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
-#endif
-
 
 #ifndef SHARPENADAPTIVE_TYPE
 #ifdef SHARPEN_TYPE

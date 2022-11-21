@@ -1,3 +1,5 @@
+#include "../../sample.glsl"
+
 /*
 original_author: Brad Larson
 description: Adapted version of Prewitt edge detection from https://github.com/BradLarson/GPUImage2
@@ -7,10 +9,6 @@ options:
     - EDGEPREWITT_TYPE: Return type, defaults to float
     - EDGEPREWITT_SAMPLER_FNC: Function used to sample the input texture, defaults to texture2D(tex,POS_UV).r
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
-#endif
 
 #ifndef EDGEPREWITT_TYPE
 #ifdef EDGE_TYPE

@@ -1,3 +1,5 @@
+#include "../sample.hlsl"
+
 /*
 Author: [Matt DesLauriers, Johan Ismael, Patricio Gonzalez Vivo]
 description: Use LUT textures to modify colors (float4 and float3) or a position in a gradient (float2 and floats)
@@ -9,10 +11,6 @@ options:
     - LUT_SQUARE: the LUT have a SQQUARE shape and not just a long row
     - LUT_FLIP_Y: hen defined it expects a vertically flipled texture 
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
-#endif
 
 #ifndef LUT_N_ROWS
 #define LUT_N_ROWS 1

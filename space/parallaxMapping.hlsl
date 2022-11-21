@@ -1,3 +1,5 @@
+#include "../sample.hlsl"
+
 /*
 original_author: Patricio Gonzalez Vivo
 description: get parallax mapping coordinates
@@ -9,10 +11,6 @@ options:
     - PARALLAXMAPPING_SCALE
     - PARALLAXMAPPING_NUMSEARCHES
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
-#endif
 
 #ifndef PARALLAXMAPPING_SAMPLER_FNC
 #define PARALLAXMAPPING_SAMPLER_FNC(POS_UV) SAMPLER_FNC(heightTex, POS_UV).r

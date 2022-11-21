@@ -1,4 +1,5 @@
 #include "../color/palette/heatmap.glsl"
+#include "../sample.glsl"
 
 /*
 original_author: Dennis Gustafsson
@@ -14,10 +15,6 @@ options:
     - SAMPLEDOF_DEBUG
     - RESOLUTION
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
-#endif
 
 #ifndef RESOLUTION
 #ifdef GLSLVIEWER

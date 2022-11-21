@@ -1,3 +1,5 @@
+#include "../sample.hlsl"
+
 /*
 original_author: Patricio Gonzalez Vivo
 description: convertes QUILT of tiles into something the LookingGlass Volumetric display can render
@@ -7,10 +9,6 @@ options:
     - SAMPLEQUILT_FLIPSUBP: 
     - SAMPLEQUILT_SAMPLER_FNC(POS_UV): Function used to sample into the normal map texture, defaults to texture2D(tex,POS_UV)
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
-#endif
 
 #ifndef SAMPLEQUILT_SAMPLER_FNC
 #define SAMPLEQUILT_SAMPLER_FNC(UV) SAMPLER_FNC(tex, UV)

@@ -2,6 +2,7 @@
 #include "../generative/pnoise.glsl"
 #include "../color/luma.glsl"
 #include "../color/blend/softLight.glsl"
+#include "../sample.glsl"
 
 /*
 original_author: Matt DesLauriers
@@ -14,10 +15,6 @@ options:
     - GRAIN_TYPE
     - GRAIN_SAMPLER_FNC
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
-#endif
 
 #ifndef GRAIN_TYPE
 #define GRAIN_TYPE vec3

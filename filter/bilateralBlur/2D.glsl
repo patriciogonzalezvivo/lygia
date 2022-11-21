@@ -1,4 +1,5 @@
 #include "../../color/space/rgb2luma.glsl"
+#include "../../sample.glsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
@@ -10,10 +11,6 @@ options:
     - BILATERALBLUR2D_LUMA(RGB): default rgb2luma
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
-#endif
 
 #ifndef BILATERALBLUR2D_TYPE
 #ifdef BILATERALBLUR_TYPE

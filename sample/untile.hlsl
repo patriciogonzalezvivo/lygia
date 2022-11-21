@@ -1,5 +1,6 @@
 #include "../math/const.hlsl"
 #include "../generative/random.hlsl"
+#include "../sample.hlsl"
 
 /*
 original_author: Inigo Quiles
@@ -10,9 +11,6 @@ options:
     - SAMPLEUNTILE_TYPE
     - SAMPLEUNTILE_SAMPLER_FNC(UV)
 */
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
-#endif
 
 #ifndef SAMPLEUNTILE_TYPE
 #define SAMPLEUNTILE_TYPE vec4

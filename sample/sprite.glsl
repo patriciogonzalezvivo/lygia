@@ -1,4 +1,5 @@
 #include "../space/sprite.glsl"
+#include "../sample.glsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
@@ -9,10 +10,6 @@ options:
     - SAMPLESPRITE_TYPE: vec4
     - SAMPLESPRITE_SAMPLER_FNC(UV)
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
-#endif
 
 #ifndef SAMPLESPRITE_TYPE
 #define SAMPLESPRITE_TYPE vec4

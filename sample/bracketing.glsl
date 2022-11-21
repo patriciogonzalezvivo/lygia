@@ -1,6 +1,8 @@
 #include "../space/rotate.glsl"
 #include "../space/bracketing.glsl"
 
+#include "../sample.glsl"
+
 /*
 original_author: Huw Bowles ( @hdb1 )
 description: 'Bracketing' technique maps a texture to a plane using any arbitrary 2D vector field to give orientatio. From https://www.shadertoy.com/view/NddcDr
@@ -13,10 +15,6 @@ options:
     - SAMPLEBRACKETING_REPLACE_DIVERGENCE
 license: Copyright Huw Bowles May 2022 on MIT license
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
-#endif
 
 #ifndef SAMPLEBRACKETING_TYPE
 #define SAMPLEBRACKETING_TYPE vec4

@@ -1,6 +1,7 @@
 #include "../math/const.glsl"
 #include "../math/sum.glsl"
 #include "../generative/random.glsl"
+#include "../sample.glsl"
 
 /*
 original_author: Inigo Quiles
@@ -11,10 +12,6 @@ options:
     - SAMPLEUNTILE_TYPE
     - SAMPLEUNTILE_SAMPLER_FNC(UV)
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
-#endif
 
 #ifndef SAMPLEUNTILE_TYPE
 #define SAMPLEUNTILE_TYPE vec4

@@ -9,6 +9,7 @@
 
 #include "../material.hlsl"
 #include "../ior.hlsl"
+#include "../../sample.hlsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
@@ -26,10 +27,6 @@ options:
     - MATERIAL_SUBSURFACE_COLOR
     - SHADING_MODEL_CLOTH
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
-#endif
 
 #ifndef SURFACE_POSITION
 #if defined(GLSLVIEWER)

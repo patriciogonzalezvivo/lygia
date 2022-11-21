@@ -1,3 +1,5 @@
+#include "../sample.hlsl"
+
 /*
 original_author: Brad Larson
 description: adapted version of mean average sampling on four coorners of a sampled point from https://github.com/BradLarson/GPUImage2
@@ -7,10 +9,6 @@ options:
     - AVERAGE_SAMPLER_FNC(POS_UV): defaults to texture2D(tex,POS_UV)
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
-#endif
 
 #ifndef MEAN_TYPE
 #define MEAN_TYPE float4

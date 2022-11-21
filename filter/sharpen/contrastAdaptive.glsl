@@ -1,5 +1,5 @@
-
 #include "../../math/saturate.glsl"
+#include "../../sample.glsl"
 
 /*
 original_author: deus0ww
@@ -15,10 +15,6 @@ options:
     - SHARPENCONTRASTADAPTIVE_TYPE: defaults to vec3
     - SHARPENCONTRASTADAPTIVE_SAMPLER_FNC(POS_UV): defaults to texture2D(tex, POS_UV).rgb
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
-#endif
 
 #ifndef SHARPENCONTRASTADAPTIVE_TYPE
 #ifdef SHARPEN_TYPE

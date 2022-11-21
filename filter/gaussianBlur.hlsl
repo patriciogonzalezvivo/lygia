@@ -1,3 +1,5 @@
+#include "../sample.hlsl"
+
 /*
 original_author: [Matt DesLauriers, Patricio Gonzalez Vivo]
 description: adapted versions from 5, 9 and 13 gaussian fast blur from https://github.com/Jam3/glsl-fast-gaussian-blur
@@ -7,10 +9,6 @@ options:
     - GAUSSIANBLUR_2D: default to 1D
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
-#endif
 
 #ifndef GAUSSIANBLUR_AMOUNT
 #define GAUSSIANBLUR_AMOUNT gaussianBlur13

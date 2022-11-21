@@ -1,6 +1,8 @@
 #include "../space/depth2viewZ.glsl"
 #include "../space/screen2viewPosition.glsl"
 
+#include "../sample.glsl"
+
 /*
 original_author: Patricio Gonzalez Vivo
 description: sampler the view Positiong from depthmap texture 
@@ -13,10 +15,6 @@ options:
     - CAMERA_PROJECTION_MATRIX: mat4 matrix with camera projection
     - INVERSE_CAMERA_PROJECTION_MATRIX: mat4 matrix with the inverse camara projection
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
-#endif
 
 #ifndef FNC_SAMPLEVIEWPOSITION
 #define FNC_SAMPLEVIEWPOSITION

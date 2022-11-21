@@ -1,7 +1,15 @@
+#include "../sample.hlsl"
 
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
-#endif
+/*
+Author: Patricio Gonzalez Vivo
+description: Use a 2D texture as a 3D one
+use: <float4> sample2DCube(in <sampler2D> tex_lut, in <float3> xyz) 
+options:
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
+    - SAMPLE_2DCUBE_CELL_SIZE
+    - SAMPLE_2DCUBE_CELLS_PER_SIDE
+    - SAMPLE_2DCUBE_FNC
+*/
 
 #ifndef SAMPLE_2DCUBE_CELL_SIZE
 #define SAMPLE_2DCUBE_CELL_SIZE 64.0

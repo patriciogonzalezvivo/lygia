@@ -1,4 +1,5 @@
 #include "../color/space/YCbCr2rgb.glsl"
+#include "../sample.glsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
@@ -7,11 +8,6 @@ use: sampleYUV(<sampler2D> tex1, <sampler2D> tex2, <vec2> st)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 */
-
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
-#endif
 
 #ifndef FNC_SAMPLEYUV
 #define FNC_SAMPLEYUV
