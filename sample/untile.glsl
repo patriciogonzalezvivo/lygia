@@ -17,8 +17,12 @@ options:
 #define SAMPLEUNTILE_TYPE vec4
 #endif
 
+#ifdef GL_OES_standard_derivatives
+#extension GL_OES_standard_derivatives : enable
+#endif
+
 #ifndef SAMPLEUNTILE_SAMPLER_FNC
-#if defined(PLATFORM_WEBGL) && defined(GL_OES_standard_derivatives)
+#if defined(PLATFORM_WEBGL) && __VERSION >= 300 && defined(GL_OES_standard_derivatives)
 #define SAMPLEUNTILE_SAMPLER_FNC(UV) textureGrad(tex, UV, ddx, ddy)
 #else
 #define SAMPLEUNTILE_SAMPLER_FNC(UV) SAMPLER_FNC(tex, UV)
@@ -34,7 +38,7 @@ options:
 
 SAMPLEUNTILE_TYPE sampleUntile(sampler2D tex, in vec2 st) {
         
-    #if defined(PLATFORM_WEBGL) && defined(GL_OES_standard_derivatives)
+    #if defined(PLATFORM_WEBGL) && __VERSION >= 300 && defined(GL_OES_standard_derivatives)
     vec2 ddx = dFdx( st );
     vec2 ddy = dFdy( st );
     #endif
