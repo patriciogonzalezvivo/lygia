@@ -75,9 +75,9 @@ SAMPLEUNTILE_TYPE sampleUntile(sampler2D tex, in vec2 st) {
     SAMPLEUNTILE_TYPE va = SAMPLEUNTILE_TYPE(0.0);
     float w1 = 0.0;
     float w2 = 0.0;
-    vec2 g = vec2(-1.0, -1.0);
-    for( g.y = -1.0; g.y <= 1.0; g.y++ )
-    for( g.x = -1.0; g.x <= 1.0; g.x++ ) {
+    for( float y = -1.0; y <= 1.0; y++ )
+    for( float x = -1.0; x <= 1.0; x++ ) {
+        vec2 g = vec2(x, y);
         vec4 o = SAMPLEUNTILE_RANDOM_FNC( p + g );
         vec2 r = g - f + o.xy;
         float d = dot(r,r);
