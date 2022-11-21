@@ -18,7 +18,7 @@ options:
 #endif
 
 #ifndef SAMPLEUNTILE_SAMPLER_FNC
-#ifdef PLATFORM_WEBGL
+#if defined(PLATFORM_WEBGL) && defined(GL_OES_standard_derivatives)
 #define SAMPLEUNTILE_SAMPLER_FNC(UV) textureGrad(tex, UV, ddx, ddy)
 #else
 #define SAMPLEUNTILE_SAMPLER_FNC(UV) SAMPLER_FNC(tex, UV)
@@ -34,8 +34,7 @@ options:
 
 SAMPLEUNTILE_TYPE sampleUntile(sampler2D tex, in vec2 st) {
         
-    #ifdef PLATFORM_WEBGL
-    // derivatives (for correct mipmapping)
+    #if defined(PLATFORM_WEBGL) && defined(GL_OES_standard_derivatives)
     vec2 ddx = dFdx( st );
     vec2 ddy = dFdy( st );
     #endif
