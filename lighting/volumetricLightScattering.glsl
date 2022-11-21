@@ -1,7 +1,8 @@
-#include "lygia/math/const.glsl"
-#include "lygia/math/inverse.glsl"
-#include "lygia/space/screen2viewPosition.glsl"
-#include "lygia/space/depth2viewZ.glsl"
+#include "../math/const.glsl"
+#include "../math/inverse.glsl"
+#include "../space/screen2viewPosition.glsl"
+#include "../space/depth2viewZ.glsl"
+#include "../sample.glsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
@@ -24,10 +25,6 @@ options:
     - VOLUMETRICLIGHTSCATTERING_NOISE_FNC
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
-#endif
 
 #ifndef VOLUMETRICLIGHTSCATTERING_FACTOR
 #define VOLUMETRICLIGHTSCATTERING_FACTOR 0.25

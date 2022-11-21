@@ -1,4 +1,5 @@
 #include "../math/saturate.glsl"
+#include "../sample.glsl"
 
 /*
 Author: [Matt DesLauriers, Johan Ismael, Patricio Gonzalez Vivo]
@@ -11,10 +12,6 @@ options:
     - LUT_SQUARE: the LUT have a SQQUARE shape and not just a long row
     - LUT_FLIP_Y: hen defined it expects a vertically flipled texture 
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
-#endif
 
 #ifndef LUT_N_ROWS
 #define LUT_N_ROWS 1
@@ -31,12 +28,12 @@ options:
 #ifndef FNC_LUT
 #define FNC_LUT
 
+
 #ifdef LUT_SQUARE 
 
 #ifdef LUT_FLIP_Y
 #define SAMPLE_2DCUBE_FLIP_Y
 #endif
-
 
 #ifndef SAMPLE_2DCUBE_CELL_SIZE
 #define SAMPLE_2DCUBE_CELL_SIZE LUT_CELL_SIZE
@@ -48,9 +45,10 @@ options:
 
 #include "../sample/2dCube.glsl"
 
-vec4 lut(in sampler2D tex_lut, in vec4 color, in int offset) {
-    return sample2DCube(tex_lut, color.rgb);
-}
+vec3 lut(in sampler2D tex_lut, in vec3 color) { return sample2DCube(tex_lut, color).rgb; }
+vec4 lut(in sampler2D tex_lut, in vec4 color) { return sample2DCube(tex_lut, color.rgb); }
+vec3 lut(in sampler2D tex_lut, in vec3 color, in int offset) { return sample2DCube(tex_lut, color).rgb; }
+vec4 lut(in sampler2D tex_lut, in vec3 color, in int offset) { return sample2DCube(tex_lut, color.rgb); }
 
 #else
 // Data about how the LUTs rows are encoded

@@ -1,3 +1,5 @@
+#include "../sample.hlsl"
+
 /*
 original_author: [Patricio Gonzalez Vivo, Johan Ismael]
 description: Samples multiple times a texture in the specified direction
@@ -9,10 +11,6 @@ options:
     - STRETCH_SAMPLER_FNC(POS_UV): function used to sample the input texture, defaults to texture2D(tex, POS_UV)
     - STRETCH_WEIGHT: shaping equation to multiply the sample weight.
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
-#endif
 
 #ifndef STRETCH_SAMPLES
 #define STRETCH_SAMPLES 20

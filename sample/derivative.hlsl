@@ -1,3 +1,5 @@
+#include "../sample.hlsl"
+
 /*
 original_author: Patricio Gonzalez Vivo
 description: sample derrivatives
@@ -6,10 +8,6 @@ options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (tex2D(...) or texture(...))
     - USE_DERIVATIVES
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
-#endif
 
 #ifndef SAMPLERDERIVATIVE_FNC
 #define SAMPLERDERIVATIVE_FNC(UV) SAMPLER_FNC(tex, clamp(UV, pixel, 1.0-pixel) ).r

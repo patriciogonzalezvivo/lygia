@@ -1,4 +1,5 @@
 #include "../../math/absi.glsl"
+#include "../../sample.glsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
@@ -10,9 +11,6 @@ options:
     - CONVOLUTIONPYRAMID_H2: 0.0270
     - CONVOLUTIONPYRAMID_G: 0.7753, 0.0312
 */
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
-#endif
 
 #ifndef CONVOLUTIONPYRAMID_H1
 #define CONVOLUTIONPYRAMID_H1 1.0334, 0.6836, 0.1507

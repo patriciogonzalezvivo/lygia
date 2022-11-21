@@ -1,4 +1,5 @@
 #include "../math/lengthSq.hlsl"
+#include "../sample.hlsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
@@ -13,10 +14,6 @@ options:
     - BARREL_OCT_2: two octaves of distortion
     - BARREL_OCT_3: three octaves of distortion
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
-#endif
 
 #ifndef BARREL_DISTANCE
 #define BARREL_DISTANCE dist

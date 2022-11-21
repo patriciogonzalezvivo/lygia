@@ -1,3 +1,5 @@
+#include "../../sample.glsl"
+
 /*
 original_author: Patricio Gonzalez Vivo
 description: simple one dimentional box blur, to be applied in two passes
@@ -8,10 +10,6 @@ options:
     - BOXBLUR1D_SAMPLER_FNC(POS_UV): default texture2D(tex, POS_UV)
     - BOXBLUR1D_KERNELSIZE: Use only for WebGL 1.0 and OpenGL ES 2.0 . For example RaspberryPis is not happy with dynamic loops. Default is 'kernelSize'
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
-#endif
 
 #ifndef BOXBLUR1D_TYPE
 #ifdef BOXBLUR_TYPE

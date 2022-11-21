@@ -1,5 +1,7 @@
 #include "../../space/nearest.glsl"
 
+#include "../../sample.glsl"
+
 /*
 original_author: Patricio Gonzalez Vivo
 description: one dimensional bilateral Blur that use a blue noise texture to sample a kernel with out introducing biases
@@ -12,10 +14,6 @@ options:
     - BILATERALBLURFAST_NOISE_FNC: functions use to sample the blue noise texture
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
-#endif
 
 #ifndef BILATERALBLURFAST_TYPE
 #ifdef BILATERALBLUR_TYPE

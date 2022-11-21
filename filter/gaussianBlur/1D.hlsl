@@ -1,3 +1,5 @@
+#include "../../sample.hlsl"
+
 /*
 original_author: Patricio Gonzalez Vivo
 description: one dimension Gaussian Blur to be applied in two passes
@@ -8,10 +10,6 @@ options:
     - GAUSSIANBLUR1D_SAMPLER_FNC(POS_UV):
     - GAUSSIANBLUR1D_KERNELSIZE: Use only for WebGL 1.0 and OpenGL ES 2.0 . For example RaspberryPis is not happy with dynamic loops. Default is 'kernelSize'
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
-#endif
 
 #ifndef GAUSSIANBLUR1D_TYPE
 #ifdef GAUSSIANBLUR_TYPE

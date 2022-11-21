@@ -1,5 +1,6 @@
 #include "../color/space/linear2gamma.glsl"
 #include "../color/space/gamma2linear.glsl"
+#include "../sample.glsl"
 
 /*
 original_author: Xor 
@@ -10,10 +11,6 @@ options:
     - FIBONACCIBOKEH_SAMPLER_FNC(UV):
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
-#endif
 
 #ifndef FIBONACCIBOKEH_TYPE
 #define FIBONACCIBOKEH_TYPE vec4

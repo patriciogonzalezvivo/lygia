@@ -1,3 +1,5 @@
+#include "../sample.glsl"
+
 /*
 original_author: Patricio Gonzalez Vivo
 description: make a radial blur, with dir as the direction to the center and strength as the amount
@@ -9,10 +11,6 @@ options:
     - RADIALBLUR_SAMPLER_FNC(POS_UV): Default `texture2D(tex, POS_UV)`
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
-#endif
 
 #ifndef RADIALBLUR_KERNELSIZE
 #define RADIALBLUR_KERNELSIZE 64

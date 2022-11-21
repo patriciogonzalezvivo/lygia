@@ -1,3 +1,5 @@
+#include "../sample.hlsl"
+
 /*
 original_author: Patricio Gonzalez Vivo
 description: given a texture return a simple box blured pixel
@@ -7,10 +9,6 @@ options:
     - BOXBLUR_ITERATIONS: default 3
     - SAMPLER_FNC(TEX, UV): optional depending the target version of HLSL (tex2D(...) or texture(...))
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
-#endif
 
 #ifndef BOXBLUR_ITERATIONS
 #define BOXBLUR_ITERATIONS 3

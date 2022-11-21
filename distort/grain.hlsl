@@ -2,6 +2,7 @@
 #include "../generative/pnoise.hlsl"
 #include "../color/luma.hlsl"
 #include "../color/blend/softLight.hlsl"
+#include "../sample.hlsl"
 
 /*
 original_author: Matt DesLauriers
@@ -14,10 +15,6 @@ options:
     - GRAIN_TYPE
     - GRAIN_SAMPLER_FNC
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
-#endif
 
 #ifndef GRAIN_TYPE
 #define GRAIN_TYPE float3

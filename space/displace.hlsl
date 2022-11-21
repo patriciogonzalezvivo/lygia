@@ -1,14 +1,11 @@
 #include "../lighting/raymarch/camera.glsl"
+#include "../sample.hlsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
 description: Displace UV space into a XYZ space using an heightmap
 use: <float3> displace(<sampler2D> tex, <float3> ro, <float3|vec2> rd) 
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
-#endif
 
 #ifndef DISPLACE_DEPTH
 #define DISPLACE_DEPTH 1.

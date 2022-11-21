@@ -5,6 +5,8 @@
 #endif
 #include "../generative/random.hlsl"
 
+#include "../sample.hlsl"
+
 /*
 original_author: Alan Wolfe
 description:  white noise blur based on this shader https://www.shadertoy.com/view/XsVBDR
@@ -17,10 +19,6 @@ options:
     - NOISEBLUR_SAMPLES: default to 4
     - SAMPLER_FNC(TEX, UV): optional depending the target version of HLSL
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
-#endif
 
 #ifndef NOISEBLUR_SAMPLES
 #define NOISEBLUR_SAMPLES 4.0

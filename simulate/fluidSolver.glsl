@@ -1,4 +1,5 @@
 #include "../math/saturate.glsl"
+#include "../sample.glsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
@@ -13,10 +14,6 @@ options:
     - FLUIDSOLVER_VELOCITY_DECAY: Default: 5e-6
     - FLUIDSOLVER_SAMPLER_FNC
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
-#endif
 
 #ifndef FLUIDSOLVER_DT
 #define FLUIDSOLVER_DT 0.15

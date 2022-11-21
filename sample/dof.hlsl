@@ -1,5 +1,7 @@
 #include "../color/palette/heatmap.hlsl"
 
+#include "../sample.hlsl"
+
 /*
 original_author: Dennis Gustafsson
 description:  http://blog.tuxedolabs.com/2018/05/04/bokeh-depth-of-field-in-single-pass.html
@@ -12,10 +14,6 @@ options:
     - SAMPLEDOF_DEPTH_FNC(UV):
     - SAMPLEDOF_COLOR_FNC(UV):
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
-#endif
 
 #ifndef RESOLUTION
 #if defined(UNITY_COMPILER_HLSL)

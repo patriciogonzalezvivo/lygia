@@ -1,3 +1,5 @@
+#include "../../sample.glsl"
+
 /*
 original_author: Patricio Gonzalez Vivo
 description: 
@@ -18,10 +20,6 @@ options:
 #else
 #define HIGHP
 #endif
-#endif
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
 #endif
 
 #ifndef BLUENOISE_TEXTURE_RESOLUTION

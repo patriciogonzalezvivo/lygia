@@ -1,4 +1,5 @@
 #include "../../color/space/gamma2linear.glsl"
+#include "../../sample.glsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
@@ -7,10 +8,6 @@ use: vec4 materialEmissive()
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
-#endif
 
 #ifndef FNC_MATERIAL_EMISSIVE
 #define FNC_MATERIAL_EMISSIVE

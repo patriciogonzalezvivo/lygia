@@ -1,3 +1,4 @@
+#include "../sample.hlsl"
 
 /*
 original_author: Armin Ronacher
@@ -10,9 +11,6 @@ options:
     - SAMPLEFXAA_SPAN_MAX
     - SAMPLEFXAA_SAMPLE_FNC
 */
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
-#endif
 
 #ifndef SAMPLEFXAA_REDUCE_MIN
 #define SAMPLEFXAA_REDUCE_MIN   (1.0/128.0)

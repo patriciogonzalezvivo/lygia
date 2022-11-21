@@ -1,4 +1,5 @@
 #include "../space/sprite.hlsl"
+#include "../sample.hlsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
@@ -9,10 +10,6 @@ options:
     - SAMPLESPRITE_TYPE: float4
     - SAMPLESPRITE_SAMPLER_FNC(UV)
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
-#endif
 
 #ifndef SAMPLESPRITE_TYPE
 #define SAMPLESPRITE_TYPE float4

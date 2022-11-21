@@ -1,5 +1,6 @@
-#include "../math/cubic.glsl"
-#include "../math/quintic.glsl"
+#include "../math/cubic.hlsl"
+#include "../math/quintic.hlsl"
+#include "../sample.hlsl"
 
 /*
 original_author: Inigo Quiles
@@ -9,10 +10,6 @@ options:
     - SAMPLER_FNC(TEX, UV)
     - SAMPLESMOOTH_POLYNOMIAL: cubic or quartic
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
-#endif
 
 #ifndef SAMPLESMOOTH_POLYNOMIAL
 #define SAMPLESMOOTH_POLYNOMIAL cubic

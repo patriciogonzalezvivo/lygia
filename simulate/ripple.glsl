@@ -1,4 +1,5 @@
 #include "../math/saturate.glsl"
+#include "../sample.glsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
@@ -8,10 +9,6 @@ options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - RIPPLE_SAMPLER_FNC(UV)
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
-#endif
 
 #ifndef RIPPLE_SAMPLER_FNC
 #define RIPPLE_SAMPLER_FNC(UV) SAMPLER_FNC(tex, UV)

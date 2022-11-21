@@ -1,4 +1,5 @@
 #include "../color/space/rgb2luma.glsl"
+#include "../sample.glsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
@@ -10,10 +11,6 @@ options:
     - BILATERALBLUR_TYPE
     - BILATERALBLUR_SAMPLER_FNC
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
-#endif
 
 #ifndef BILATERALBLUR_AMOUNT
 #define BILATERALBLUR_AMOUNT bilateralBlur13

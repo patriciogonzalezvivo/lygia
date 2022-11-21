@@ -1,4 +1,5 @@
 #include "../math/saturate.glsl"
+#include "../sample.glsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
@@ -8,10 +9,6 @@ options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - GRAYSCOTT_ITERATIONS
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
-#endif
 
 #ifndef GRAYSCOTT_ITERATIONS
 #define GRAYSCOTT_ITERATIONS 9

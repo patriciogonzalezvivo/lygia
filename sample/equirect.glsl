@@ -1,6 +1,7 @@
 #include "../space/xyz2equirect.glsl"
 #include "../generative/random.glsl"
 #include "../generative/srandom.glsl"
+#include "../sample.glsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
@@ -11,10 +12,6 @@ options:
     - SAMPLEEQUIRET_ITERATIONS:
     - SAMPLEEQUIRECT_FLIP_Y
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
-#endif
 
 #ifndef FNC_SAMPLEEQUIRECT
 #define FNC_SAMPLEEQUIRECT

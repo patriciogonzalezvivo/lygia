@@ -1,3 +1,5 @@
+#include "../../sample.hlsl"
+
 /*
 original_author: Patricio Gonzalez Vivo
 description: 
@@ -11,10 +13,6 @@ options:
     - DITHER_BLUENOISE_CHROMATIC
     - DITHER_BLUENOISE_ANIMATED
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
-#endif
 
 #ifndef BLUENOISE_TEXTURE_RESOLUTION
 #define BLUENOISE_TEXTURE_RESOLUTION float2(1024.0, 1024.0)

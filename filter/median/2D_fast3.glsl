@@ -1,3 +1,5 @@
+#include "../../sample.glsl"
+
 /*
 original_author: [Morgan McGuire, Kyle Whitson]
 description: |
@@ -9,10 +11,6 @@ options:
     - MEDIAN2D_FAST3_TYPE: default vec4
     - MEDIAN2D_FAST3_SAMPLER_FNC(POS_UV): default texture2D(tex, POS_UV)
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
-#endif
 
 #ifndef MEDIAN2D_FAST3_TYPE
 #ifdef MEDIAN2D_TYPE

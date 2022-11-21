@@ -1,3 +1,5 @@
+#include "../../sample.hlsl"
+
 /*
 function: gaussianBlur1D_fast13
 original_author: Matt DesLauriers
@@ -8,10 +10,6 @@ options:
     - GAUSSIANBLUR1D_FAST13_TYPE
     - GAUSSIANBLUR1D_FAST13_SAMPLER_FNC(POS_UV)
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
-#endif
 
 #ifndef GAUSSIANBLUR1D_FAST13_TYPE
 #ifdef GAUSSIANBLUR_TYPE

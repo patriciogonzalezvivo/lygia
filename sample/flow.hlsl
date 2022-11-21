@@ -1,4 +1,5 @@
 #include "../math/mod.hlsl"
+#include "../sample.hlsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
@@ -7,10 +8,6 @@ use: sampleFlow(<sampler2D> tex, <float2> st, <float2> dir, <float> time, <float
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
-#endif
 
 #ifndef FNC_SAMPLEFLOW
 #define FNC_SAMPLEFLOW

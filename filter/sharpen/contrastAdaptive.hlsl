@@ -1,3 +1,5 @@
+#include "../../sample.hlsl"
+
 /*
 original_author: deus0ww
 description: |
@@ -12,10 +14,6 @@ options:
     - SHARPENCONTRASTADAPTIVE_TYPE: defaults to float3
     - SHARPENCONTRASTADAPTIVE_SAMPLER_FNC(POS_UV): defaults to tex2D(tex, POS_UV).rgb
 */
-
-#ifndef SAMPLER_FNC
-#define SAMPLER_FNC(TEX, UV) tex2D(TEX, UV)
-#endif
 
 #ifndef SHARPENCONTRASTADAPTIVE_TYPE
 #ifdef SHARPEN_TYPE
