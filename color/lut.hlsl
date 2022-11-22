@@ -24,39 +24,22 @@ options:
 #define FNC_LUT
 
 #ifdef LUT_SQUARE 
-float4 lut(in sampler2D tex_lut, in float4 color, in int offset) {
-    float blueColor = color.b * 63.0;
 
-    const float pixel = 1.0/512.0;
-    const float halt_pixel = pixel * 0.5;
+#ifdef LUT_FLIP_Y
+#define SAMPLE_2DCUBE_FLIP_Y
+#endif
 
-    float2 quad1 = float2(0.0, 0.0);
-    quad1.y = floor(floor(blueColor) / 8.0);
-    quad1.x = floor(blueColor) - (quad1.y * 8.0);
-    
-    float2 quad2 = float2(0.0, 0.0);
-    quad2.y = floor(ceil(blueColor) / 8.0);
-    quad2.x = ceil(blueColor) - (quad2.y * 8.0);
-    
-    float2 texPos1 = (quad1 * 0.125) + halt_pixel + ((0.125 - pixel) * color.rg);
-    texPos1 = saturate(texPos1);
+#ifndef SAMPLE_2DCUBE_CELL_SIZE
+#define SAMPLE_2DCUBE_CELL_SIZE LUT_CELL_SIZE
+#endif
 
-    #ifdef LUT_FLIP_Y
-    texPos1.y = 1.0-texPos1.y;
-    #endif
-    
-    float2 texPos2 = (quad2 * 0.125) + halt_pixel + ((0.125 - pixel) * color.rg);
-    texPos2 = saturate(texPos2);
+#ifndef SAMPLE_2DCUBE_CELLS_PER_SIDE
+#define SAMPLE_2DCUBE_CELLS_PER_SIDE 8.0
+#endif
 
-    #ifdef LUT_FLIP_Y
-    texPos2.y = 1.0-texPos2.y;
-    #endif
-    
-    float4 b0 = SAMPLER_FNC(tex_lut, texPos1);
-    float4 b1 = SAMPLER_FNC(tex_lut, texPos2);
+#include "../sample/2dCube.hlsl"
 
-    return lerp(b0, b1, saturate(blueColor));
-}
+float4 lut(in sampler2D tex_lut, in float4 color, in int offset) { return sample2DCube(tex_lut, color.rgb); }
 
 #else
 // Data about how the LUTs rows are encoded
@@ -94,7 +77,6 @@ float4 lut(in sampler2D tex_lut, in float4 color, in int offset) {
 #endif
 
 float4 lut(in sampler2D tex_lut, in float4 color) { return lut(tex_lut, color, 0); }
-
 float3 lut(in sampler2D tex_lut, in float3 color, in int offset) { return lut(tex_lut, float4(color, 1.), offset).rgb; }
 float3 lut(in sampler2D tex_lut, in float3 color) { return lut(tex_lut, color, 0).rgb; }
 
