@@ -62,7 +62,7 @@ options:
 float4 pbrClearCoat(const Material _mat) {
     // Calculate Color
     float3    diffuseColor = _mat.albedo.rgb * (float3(1.0, 1.0, 1.0) - _mat.f0) * (1.0 - _mat.metallic);
-    float3    specularColor = mix(_mat.f0, _mat.albedo.rgb, _mat.metallic);
+    float3    specularColor = lerp(_mat.f0, _mat.albedo.rgb, _mat.metallic);
 
     float3    N     = _mat.normal;                                  // Normal
     float3    V     = normalize(CAMERA_POSITION - _mat.position);   // View
@@ -87,7 +87,7 @@ float4 pbrClearCoat(const Material _mat) {
 //     ssao = ssao(SCENE_DEPTH, gl_FragCoord.xy*pixel, pixel, 1.);
 // #endif 
     float diffuseAO = min(_mat.ambientOcclusion, ssao);
-    float specularAO = specularAO(NoV, diffuseAO, _mat.roughness);
+    float specAO = specularAO(NoV, diffuseAO, _mat.roughness);
 
     // Global Ilumination ( mage Based Lighting )
     // ------------------------
@@ -102,7 +102,7 @@ float4 pbrClearCoat(const Material _mat) {
     float3 Fr = float3(0.0, 0.0, 0.0);
     Fr = tonemap( envMap(R, _mat.roughness, _mat.metallic) ) * E * specIntensity;
     Fr += tonemap( fresnelReflection(R, f0, NoV) ) * _mat.metallic * (1.0-_mat.roughness) * 0.2;
-    Fr *= specularAO;
+    Fr *= specAO;
 
     float3 Fd = float3(0.0, 0.0, 0.0);
     Fd = diffuseColor;
@@ -121,9 +121,9 @@ float4 pbrClearCoat(const Material _mat) {
     float3 clearCoatR = reflection(V, clearCoatNormal, _mat.clearCoatRoughness);
     float3 clearCoatE = envBRDFApprox(f0, clearCoatNoV, _mat.clearCoatRoughness);
     float3 clearCoatLobe = float3(0.0, 0.0, 0.0);
-    clearCoatLobe += tonemap( envMap(clearCoatR, _mat.clearCoatRoughness, 1.0) ) * clearCoatE * 3.;
+    clearCoatLobe += tonemap( envMap(clearCoatR, _mat.clearCoatRoughness, 1.0) ) * clearCoatE;
     clearCoatLobe += tonemap( fresnelReflection(clearCoatR, f0, clearCoatNoV) ) * (1.0-_mat.clearCoatRoughness);
-    Fr += clearCoatLobe * (specularAO * _mat.clearCoat);
+    Fr += clearCoatLobe * (specAO * _mat.clearCoat);
 
     float4 color  = float4(0.0, 0.0, 0.0, 1.0);
     color.rgb  += Fd * IBL_LUMINANCE;    // Diffuse

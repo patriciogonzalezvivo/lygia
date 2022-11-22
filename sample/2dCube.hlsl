@@ -46,7 +46,7 @@ float4 sample2DCube(in sampler2D tex_lut, in float3 xyz) {
     float4 b0 = SAMPLE_2DCUBE_FNC(tex_lut, uvA);
     float4 b1 = SAMPLE_2DCUBE_FNC(tex_lut, uvB);
 
-    return lerp(b0, b1, fract(Z));
+    return lerp(b0, b1, frac(Z));
 }
 
 #endif 

@@ -54,8 +54,8 @@ void lightPoint(vec3 _diffuseColor, vec3 _specularColor, vec3 _N, vec3 _V, float
         lightContribution *= falloff(toLightLength, LIGHT_FALLOFF);
     #endif
 
-    _diffuse +=  _diffuseColor * lightContribution * dif;
-    _specular += _specularColor * lightContribution * spec;
+    _diffuse +=  max(0.0, _diffuseColor * lightContribution * dif);
+    _specular += max(0.0, _specularColor * lightContribution * spec);
 }
 
 void lightPoint(vec3 _diffuseColor, vec3 _specularColor, vec3 _N, vec3 _V, float _NoV, float _roughness, float _f0, inout vec3 _diffuse, inout vec3 _specular) {
