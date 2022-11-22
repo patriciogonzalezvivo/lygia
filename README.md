@@ -108,7 +108,7 @@ Learn more about how to use it from this **examples**:
 * [3D examples for Three.js (GLSL)](https://github.com/guidoschmidt/lygia_threejs_examples) by [Guido Schmidt](https://guidoschmidt.cc/)
 * [2D examples for OpenFrameworks (GLSL)](https://github.com/patriciogonzalezvivo/lygia_of_examples) 
 * [2D/3D examples for Unity3D (HLSL)](https://github.com/patriciogonzalezvivo/lygia_unity_examples)
-* [2D examples for Touch Designer (GLSL)](https://derivative.ca/community-post/asset/lygia-touchdesginer/66804) (dynamic resolver) by [LeithBA](https://github.com/LeithBA)
+* [2D examples for Touch Designer (GLSL)](https://derivative.ca/community-post/asset/lygia-touchdesginer/66804) (dynamic resolver) by [Leith Ben Abdessalem](https://leithba.com)
 * [2D examples for Touch Designer (GLSL)](https://github.com/vectorsize/lygia-td) (static resolver) by [Victor Saz](https://github.com/vectorsize)
 * [2D examples on Observable Notebook (GLSL)](https://observablehq.com/@radames/hello-lygia-shader-library) by [Radames Ajna](https://twitter.com/radamar)
 * [Figma's noise&texture plugin](https://www.figma.com/community/plugin/1138854718618193875) by [Rogie King](https://twitter.com/rogie). You will need to go to the "Custom" tab on the plugin to edit shaders and load LYGIA modules  
