@@ -45,10 +45,7 @@ options:
 
 #include "../sample/2dCube.glsl"
 
-vec3 lut(in sampler2D tex_lut, in vec3 color) { return sample2DCube(tex_lut, color).rgb; }
-vec4 lut(in sampler2D tex_lut, in vec4 color) { return sample2DCube(tex_lut, color.rgb); }
-vec3 lut(in sampler2D tex_lut, in vec3 color, in int offset) { return sample2DCube(tex_lut, color).rgb; }
-vec4 lut(in sampler2D tex_lut, in vec3 color, in int offset) { return sample2DCube(tex_lut, color.rgb); }
+vec4 lut(in sampler2D tex_lut, in vec4 color, in int offset) { return sample2DCube(tex_lut, color.rgb); }
 
 #else
 // Data about how the LUTs rows are encoded
