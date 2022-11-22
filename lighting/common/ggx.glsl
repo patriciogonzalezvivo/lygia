@@ -18,20 +18,21 @@
 // enough precision).
 // Overall this yields better performance, keeping all computations in mediump
 
-float GGX(float NoH, float linearRoughness) {
+float GGX(float NoH, float roughness) {
     float oneMinusNoHSquared = 1.0 - NoH * NoH;
-    float a = NoH * linearRoughness;
-    float k = linearRoughness / (oneMinusNoHSquared + a * a);
+    
+    float a = NoH * roughness;
+    float k = roughness / (oneMinusNoHSquared + a * a);
     float d = k * k * ONE_OVER_PI;
     return saturateMediump(d);
 }
 
-float GGX(vec3 N, vec3 H, float NoH, float linearRoughness) {
+float GGX(vec3 N, vec3 H, float NoH, float roughness) {
     vec3 NxH = cross(N, H);
     float oneMinusNoHSquared = dot(NxH, NxH);
 
-    float a = NoH * linearRoughness;
-    float k = linearRoughness / (oneMinusNoHSquared + a * a);
+    float a = NoH * roughness;
+    float k = roughness / (oneMinusNoHSquared + a * a);
     float d = k * k * ONE_OVER_PI;
     return saturateMediump(d);
 }

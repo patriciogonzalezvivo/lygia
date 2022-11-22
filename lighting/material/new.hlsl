@@ -20,9 +20,9 @@ use:
 options:
     - SURFACE_POSITION
     - SHADING_SHADOWS
-    - MATERIAL_CLEARCOAT_THICKNESS
+    - MATERIAL_HAS_CLEAR_COAT
     - MATERIAL_CLEARCOAT_ROUGHNESS
-    - MATERIAL_CLEARCOAT_THICKNESS_NORMAL
+    - MATERIAL_HAS_CLEAR_COAT_NORMAL
     - SHADING_MODEL_SUBSURFACE
     - MATERIAL_SUBSURFACE_COLOR
     - SHADING_MODEL_CLOTH
@@ -83,10 +83,10 @@ void materialNew(out Material _mat) {
     _mat.shadow             = SHADOW_INIT;
 
     // Clear Coat Model
-#if defined(MATERIAL_CLEARCOAT_THICKNESS)
-    _mat.clearCoat  = MATERIAL_CLEARCOAT_THICKNESS;
+#if defined(MATERIAL_HAS_CLEAR_COAT)
+    _mat.clearCoat  = MATERIAL_HAS_CLEAR_COAT;
     _mat.clearCoatRoughness = MATERIAL_CLEARCOAT_ROUGHNESS;
-#if defined(MATERIAL_CLEARCOAT_THICKNESS_NORMAL)
+#if defined(MATERIAL_HAS_CLEAR_COAT_NORMAL)
     _mat.clearCoatNormal    = float3(0.0, 0.0, 1.0);
 #endif
 #endif
