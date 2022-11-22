@@ -47,8 +47,8 @@ void lightDirectional(float3 _diffuseColor, float3 _specularColor, float3 _N, fl
     float NoL = dot(_N, s);
     float dif = diffuseOrenNayar(s, _N, _V, _NoV, NoL, _roughness);
     float spec = specularCookTorrance(s, _N, _V, _NoV, NoL, _roughness, _f0);
-    _diffuse = LIGHT_INTENSITY * (_diffuseColor * LIGHT_COLOR * dif) * _shadow;
-    _specular = LIGHT_INTENSITY * (_specularColor * LIGHT_COLOR * spec) * _shadow;
+    _diffuse += max(0.0, LIGHT_INTENSITY * (_diffuseColor * LIGHT_COLOR * dif) * _shadow);
+    _specular += max(0.0, LIGHT_INTENSITY * (_specularColor * LIGHT_COLOR * spec) * _shadow);
 }
 
 // void lightDirectional(float3 _diffuseColor, float3 _specularColor, float3 _N, float3 _V, float _NoV, float _roughness, float _f0, inout float3 _diffuse, inout float3 _specular) {
