@@ -4,7 +4,7 @@
 #include "light/point.hlsl"
 #include "light/directional.hlsl"
 
-#include "common/reflection.hlsl"
+#include "reflection.hlsl"
 #include "common/specularAO.hlsl"
 #include "common/envBRDFApprox.hlsl"
 

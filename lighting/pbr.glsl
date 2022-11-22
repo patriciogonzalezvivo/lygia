@@ -5,7 +5,7 @@
 #include "light/point.glsl"
 #include "light/directional.glsl"
 
-#include "common/reflection.glsl"
+#include "reflection.glsl"
 #include "common/specularAO.glsl"
 #include "common/envBRDFApprox.glsl"
 

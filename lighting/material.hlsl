@@ -16,9 +16,9 @@ description: Generic Material Structure
 options:
     - SURFACE_POSITION
     - SHADING_SHADOWS
-    - MATERIAL_CLEARCOAT_THICKNESS
+    - MATERIAL_HAS_CLEAR_COAT
     - MATERIAL_CLEARCOAT_ROUGHNESS
-    - MATERIAL_CLEARCOAT_THICKNESS_NORMAL
+    - MATERIAL_HAS_CLEAR_COAT_NORMAL
     - SHADING_MODEL_SUBSURFACE
     - MATERIAL_SUBSURFACE_COLOR
     - SHADING_MODEL_CLOTH
@@ -46,10 +46,10 @@ struct Material {
     float   ambientOcclusion;   // default 1.0
     float   shadow;             // default 1.0
 
-#if defined(MATERIAL_CLEARCOAT_THICKNESS)
+#if defined(MATERIAL_HAS_CLEAR_COAT)
     float   clearCoat;
     float   clearCoatRoughness;
-    #if defined(MATERIAL_CLEARCOAT_THICKNESS_NORMAL)
+    #if defined(MATERIAL_HAS_CLEAR_COAT_NORMAL)
     float3  clearCoatNormal;    // default float3(0.0, 0.0, 1.0)
     #endif
 #endif

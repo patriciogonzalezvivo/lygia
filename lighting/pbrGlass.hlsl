@@ -6,7 +6,7 @@
 #include "ior/2eta.hlsl"
 #include "ior/2f0.hlsl"
 
-#include "common/reflection.hlsl"
+#include "reflection.hlsl"
 #include "common/specularAO.hlsl"
 #include "common/envBRDFApprox.hlsl"
 
@@ -54,10 +54,10 @@ options:
 #define IBL_LUMINANCE   1.0
 #endif
 
-#ifndef FNC_GLASS
-#define FNC_GLASS
+#ifndef FNC_PBRGLASS
+#define FNC_PBRGLASS
 
-float4 glass(const Material _mat) {
+float4 pbrGlass(const Material _mat) {
     float3    V       = normalize(CAMERA_POSITION - _mat.position);   // View
 
     float3    N       = _mat.normal;                                  // Normal front

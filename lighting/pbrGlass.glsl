@@ -6,7 +6,7 @@
 #include "ior/2eta.glsl"
 #include "ior/2f0.glsl"
 
-#include "common/reflection.glsl"
+#include "reflection.glsl"
 #include "common/specularAO.glsl"
 #include "common/envBRDFApprox.glsl"
 
@@ -33,10 +33,10 @@ options:
 #define IBL_LUMINANCE   1.0
 #endif
 
-#ifndef FNC_GLASS
-#define FNC_GLASS
+#ifndef FNC_PBRGLASS
+#define FNC_PBRGLASS
 
-vec4 glass(const Material _mat) {
+vec4 pbrGlass(const Material _mat) {
     vec3    V       = normalize(CAMERA_POSITION - _mat.position);   // View
     vec3    N       = _mat.normal;                                  // Normal front
     vec3    No      = _mat.normal;                                  // Normal out
