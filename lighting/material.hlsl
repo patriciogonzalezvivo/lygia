@@ -46,13 +46,11 @@ struct Material {
     float   ambientOcclusion;   // default 1.0
     float   shadow;             // default 1.0
 
-#if defined(MATERIAL_HAS_CLEAR_COAT)
     float   clearCoat;
     float   clearCoatRoughness;
     #if defined(MATERIAL_HAS_CLEAR_COAT_NORMAL)
     float3  clearCoatNormal;    // default float3(0.0, 0.0, 1.0)
     #endif
-#endif
 
 #if defined(SHADING_MODEL_SUBSURFACE) || defined(SCENE_BACK_SURFACE)
     float   thickness;          // default 0.5;
