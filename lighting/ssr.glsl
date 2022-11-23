@@ -41,7 +41,7 @@ options:
 vec2 ssr(sampler2D texPosition, sampler2D texNormal, vec2 st, vec2 pixel, inout float op, inout float dist) {
     vec3 viewPosition = SAMPLER_FNC(texPosition, st).xyz;
     // if (-viewPosition.z >= CAMERA_FAR_CLIP)
-        // return st;
+    //     return st;
 
     vec2 ssr_uv = st;
     float thickness = 0.05;
