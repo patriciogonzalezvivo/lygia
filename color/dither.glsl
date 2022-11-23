@@ -13,18 +13,6 @@ Options:
     - SAMPLER_FNC
 */
 
-#ifndef TIME_SECS
-#ifdef GLSLVIEWER
-#define TIME_SECS u_time
-#endif 
-#endif
-
-#ifndef RESOLUTION
-#ifdef GLSLVIEWER
-#define RESOLUTION u_resolution
-#endif
-#endif
-
 #include "dither/interleavedGradientNoise.glsl"
 #include "dither/vlachos.glsl"
 #include "dither/triangleNoise.glsl"

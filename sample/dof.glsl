@@ -16,12 +16,6 @@ options:
     - RESOLUTION
 */
 
-#ifndef RESOLUTION
-#ifdef GLSLVIEWER
-#define RESOLUTION u_resolution
-#endif
-#endif
-
 #ifndef FNC_SAMPLEDOF
 #define FNC_SAMPLEDOF
 

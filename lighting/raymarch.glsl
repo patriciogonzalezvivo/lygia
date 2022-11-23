@@ -13,11 +13,6 @@ options:
     - RAYMARCH_RENDER_FNC(RO, RD): default raymarchDefaultRender(RO, RD)  
     - RESOLUTION
 */
-#ifndef RESOLUTION
-#ifdef GLSLVIEWER
-#define RESOLUTION u_resolution
-#endif
-#endif
 
 #ifndef RAYMARCH_CAMERA_MATRIX_FNC
 #define RAYMARCH_CAMERA_MATRIX_FNC raymarchCamera
