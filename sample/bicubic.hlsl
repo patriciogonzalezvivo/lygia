@@ -26,7 +26,7 @@ float4 sampleBicubic(sampler2D tex, vec2 st, vec2 texResolution) {
     vec2 pixel = 1.0 / texResolution;
     st = st * texResolution - 0.5;
 
-    vec2 fxy = fract(st);
+    vec2 fxy = frac(st);
     st -= fxy;
 
     float4 xcubic = sampleBicubic(fxy.x);
@@ -35,7 +35,7 @@ float4 sampleBicubic(sampler2D tex, vec2 st, vec2 texResolution) {
     float4 c = st.xxyy + vec2 (-0.5, 1.5).xyxy;
 
     float4 s = float4(xcubic.xz + xcubic.yw, ycubic.xz + ycubic.yw);
-    float4 offset = c + float4 (xcubic.yw, ycubic.yw) / s;
+    float4 offset = c + float4(xcubic.yw, ycubic.yw) / s;
 
     offset *= pixel.xxyy;
 
@@ -47,9 +47,9 @@ float4 sampleBicubic(sampler2D tex, vec2 st, vec2 texResolution) {
     float sx = s.x / (s.x + s.y);
     float sy = s.z / (s.z + s.w);
 
-    return mix( mix(sample3, sample2, sx), 
-                mix(sample1, sample0, sx), 
-                sy);
+    return lerp(    lerp(sample3, sample2, sx), 
+                    lerp(sample1, sample0, sx), 
+                    sy);
 }
 
 #endif
