@@ -4,7 +4,7 @@ description: transpose matrixes
 use: <mat3|mat4> transpose(in <mat3|mat4> m)
 */
 
-#ifndef FNC_TRANSPOSE
+#if !defined(FNC_TRANSPOSE) && (__VERSION__ < 120)
 #define FNC_TRANSPOSE
 
 mat3 transpose(in mat3 m) {
