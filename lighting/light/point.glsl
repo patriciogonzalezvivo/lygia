@@ -16,7 +16,7 @@ options:
 #include "falloff.glsl"
 
 #ifndef SURFACE_POSITION
-#define SURFACE_POSITION v_position
+#define SURFACE_POSITION vec3(0.0)
 #endif
 
 #ifndef LIGHT_POSITION
