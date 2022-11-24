@@ -1,3 +1,5 @@
+#include "../sample.glsl"
+
 /*
 original_author: Patricio Gonzalez Vivo
 description: given a Spherical Map texture and a normal direction returns the right pixel
@@ -11,7 +13,7 @@ options:
 #endif
 
 #ifndef SPHEREMAP_SAMPLER_FNC
-#define SPHEREMAP_SAMPLER_FNC(POS_UV) texture2D(tex, POS_UV)
+#define SPHEREMAP_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
 #endif
 
 #ifndef FNC_SPHEREMAP
@@ -24,6 +26,6 @@ vec2 sphereMap(vec3 normal, vec3 eye) {
 }
 
 SPHEREMAP_TYPE sphereMap(in sampler2D tex, in vec3 normal, in vec3 eye) {
-    return SPHEREMAP_SAMPLER_FNC( sphereMap(normal, eye) );
+    return SPHEREMAP_SAMPLER_FNC(tex, sphereMap(normal, eye) );
 }
 #endif

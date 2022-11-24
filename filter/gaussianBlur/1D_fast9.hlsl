@@ -7,7 +7,7 @@ use: gaussianBlur1D_fast9(<sampler2D> texture, <float2> st, <float2> pixel_direc
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - GAUSSIANBLUR1D_FAST9_TYPE
-    - GAUSSIANBLUR1D_FAST9_SAMPLER_FNC(POS_UV)
+    - GAUSSIANBLUR1D_FAST9_SAMPLER_FNC(TEX, UV)
 */
 
 #ifndef GAUSSIANBLUR1D_FAST9_TYPE
@@ -20,9 +20,9 @@ options:
 
 #ifndef GAUSSIANBLUR1D_FAST9_SAMPLER_FNC
 #ifdef GAUSSIANBLUR_SAMPLER_FNC
-#define GAUSSIANBLUR1D_FAST9_SAMPLER_FNC(POS_UV) GAUSSIANBLUR_SAMPLER_FNC(POS_UV)
+#define GAUSSIANBLUR1D_FAST9_SAMPLER_FNC(TEX, UV) GAUSSIANBLUR_SAMPLER_FNC(TEX, UV)
 #else
-#define GAUSSIANBLUR1D_FAST9_SAMPLER_FNC(POS_UV) SAMPLER_FNC(tex, POS_UV)
+#define GAUSSIANBLUR1D_FAST9_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
 #endif
 #endif
 
@@ -31,11 +31,11 @@ options:
 GAUSSIANBLUR1D_FAST9_TYPE gaussianBlur1D_fast9(in sampler2D tex, in float2 st, in float2 offset) {
     float2 off1 = float2(1.3846153846, 1.3846153846) * offset;
     float2 off2 = float2(3.2307692308, 3.2307692308) * offset;
-    GAUSSIANBLUR1D_FAST9_TYPE color = GAUSSIANBLUR1D_FAST9_SAMPLER_FNC(st) * .2270270270;
-    color += GAUSSIANBLUR1D_FAST9_SAMPLER_FNC(st + (off1)) * .3162162162;
-    color += GAUSSIANBLUR1D_FAST9_SAMPLER_FNC(st - (off1)) * .3162162162;
-    color += GAUSSIANBLUR1D_FAST9_SAMPLER_FNC(st + (off2)) * .0702702703;
-    color += GAUSSIANBLUR1D_FAST9_SAMPLER_FNC(st - (off2)) * .0702702703;
+    GAUSSIANBLUR1D_FAST9_TYPE color = GAUSSIANBLUR1D_FAST9_SAMPLER_FNC(tex, st) * .2270270270;
+    color += GAUSSIANBLUR1D_FAST9_SAMPLER_FNC(tex, st + (off1)) * .3162162162;
+    color += GAUSSIANBLUR1D_FAST9_SAMPLER_FNC(tex, st - (off1)) * .3162162162;
+    color += GAUSSIANBLUR1D_FAST9_SAMPLER_FNC(tex, st + (off2)) * .0702702703;
+    color += GAUSSIANBLUR1D_FAST9_SAMPLER_FNC(tex, st - (off2)) * .0702702703;
     return color;
 }
 #endif

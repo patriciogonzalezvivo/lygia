@@ -8,7 +8,7 @@ use: chromaAB(<sampler2D> texture, <float2> st [, <float|float2> sdf|offset, <fl
 options:
     CHROMAAB_TYPE: return type, defauls to float3
     CHROMAAB_PCT: amount of aberration, defaults to 1.5
-    CHROMAAB_SAMPLER_FNC: function used to sample the input texture, defaults to texture2D(tex, POS_UV)
+    CHROMAAB_SAMPLER_FNC: function used to sample the input texture, defaults to texture2D(TEX, UV)
     CHROMAAB_CENTER_BUFFER: scalar to attenuate the sdf passed in   
 */
 
@@ -21,7 +21,7 @@ options:
 #endif
 
 #ifndef CHROMAAB_SAMPLER_FNC
-#define CHROMAAB_SAMPLER_FNC(POS_UV) SAMPLER_FNC(tex, POS_UV)
+#define CHROMAAB_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
 #endif
 
 #ifndef FNC_CHROMAAB
@@ -29,9 +29,9 @@ options:
 
 CHROMAAB_TYPE chromaAB(in sampler2D tex, in float2 st, in float2 direction, in float3 distortion ) {
     CHROMAAB_TYPE c = float4(1., 1., 1., 1.);
-    c.r = CHROMAAB_SAMPLER_FNC(st + direction * distortion.r).r;
-    c.g = CHROMAAB_SAMPLER_FNC(st + direction * distortion.g).g;
-    c.b = CHROMAAB_SAMPLER_FNC(st + direction * distortion.b).b;
+    c.r = CHROMAAB_SAMPLER_FNC(tex, st + direction * distortion.r).r;
+    c.g = CHROMAAB_SAMPLER_FNC(tex, st + direction * distortion.g).g;
+    c.b = CHROMAAB_SAMPLER_FNC(tex, st + direction * distortion.b).b;
     return c;
 }
 
@@ -48,9 +48,9 @@ CHROMAAB_TYPE chromaAB(in sampler2D tex, in float2 st, in float2 offset, in floa
 
   // Get the individual channels using the modified UVs
   CHROMAAB_TYPE c = float4(1., 1., 1., 1.);
-  c.r = CHROMAAB_SAMPLER_FNC(stR).r;
-  c.g = CHROMAAB_SAMPLER_FNC(st).g;
-  c.b = CHROMAAB_SAMPLER_FNC(stB).b;
+  c.r = CHROMAAB_SAMPLER_FNC(tex, stR).r;
+  c.g = CHROMAAB_SAMPLER_FNC(tex, st).g;
+  c.b = CHROMAAB_SAMPLER_FNC(tex, stB).b;
   return c;
 }
 

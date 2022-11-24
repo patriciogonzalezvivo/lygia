@@ -8,7 +8,7 @@ description: one dimensional bilateral Blur that use a blue noise texture to sam
 use: bilateralBlurFast(<sampler2D> texture, <vec2> st, <vec2> pixelSize, <float> smoothingFactor,  <float> kernelSize)
 options:
     - BILATERALBLURFAST_TYPE: default is vec4
-    - BILATERALBLURFAST_SAMPLER_FNC(POS_UV): default texture2D(tex, POS_UV)
+    - BILATERALBLURFAST_SAMPLER_FNC(TEX, UV): default texture2D(tex, TEX, UV)
     - BILATERALBLURFAST_NOISE_TEX_SIZE: blue noise texture size. Default 64.0
     - BILATERALBLURFAST_SIGMA_R: sigma defualt .075
     - BILATERALBLURFAST_NOISE_FNC: functions use to sample the blue noise texture
@@ -25,9 +25,9 @@ options:
 
 #ifndef BILATERALBLURFAST_SAMPLER_FNC
 #ifdef BILATERALBLUR_SAMPLER_FNC
-#define BILATERALBLURFAST_SAMPLER_FNC(POS_UV) BILATERALBLUR_SAMPLER_FNC(POS_UV)
+#define BILATERALBLURFAST_SAMPLER_FNC(TEX, UV) BILATERALBLUR_SAMPLER_FNC(TEX, UV)
 #else
-#define BILATERALBLURFAST_SAMPLER_FNC(POS_UV) SAMPLER_FNC(tex, POS_UV)
+#define BILATERALBLURFAST_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
 #endif
 #endif
 
@@ -40,7 +40,7 @@ options:
 #endif
 
 #ifndef BILATERALBLURFAST_NOISE_FNC
-#define BILATERALBLURFAST_NOISE_FNC(POS_UV) SAMPLER_FNC(poissonNoise, nearest(fract(POS_UV),vec2(BILATERALBLURFAST_NOISE_TEX_SIZE))).xy
+#define BILATERALBLURFAST_NOISE_FNC(TEX, UV) SAMPLER_FNC(poissonNoise, nearest(fract(TEX, UV),vec2(BILATERALBLURFAST_NOISE_TEX_SIZE))).xy
 #endif
 
 #ifndef FNC_BILATERALBLURFAST
@@ -48,7 +48,7 @@ options:
 
 #if define(PLATFORM_RPI)
 BILATERALBLURFAST_TYPE bilateralBlurFast(in sampler2D tex, in vec2 st, in vec2 pixel, in float smoothingFactor, const float sigma_s) {
-    BILATERALBLURFAST_TYPE colorRef = BILATERALBLURFAST_SAMPLER_FNC(st);
+    BILATERALBLURFAST_TYPE colorRef = BILATERALBLURFAST_SAMPLER_FNC(tex, st);
     BILATERALBLURFAST_TYPE accumColor = BILATERALBLURFAST_TYPE(0.);
     float accumWeight = 0.;
 
@@ -68,7 +68,7 @@ BILATERALBLURFAST_TYPE bilateralBlurFast(in sampler2D tex, in vec2 st, in vec2 p
         vec2 coords = BILATERALBLURFAST_NOISE_FNC(vec2(i * samplePitch, yFetch));
         coords = (coords - .5) * scale;
         float coordsz = dot(coords, coords);
-        BILATERALBLURFAST_TYPE colorFetch = BILATERALBLURFAST_SAMPLER_FNC(coords + st);
+        BILATERALBLURFAST_TYPE colorFetch = BILATERALBLURFAST_SAMPLER_FNC(tex, coords + st);
         BILATERALBLURFAST_TYPE colorDist = colorFetch - colorRef;
         float tmpWeight = exp(-dot(colorDist, colorDist) * sigma_r2 - coordsz * sigma_s2);
         accumColor += colorFetch * tmpWeight;
@@ -79,7 +79,7 @@ BILATERALBLURFAST_TYPE bilateralBlurFast(in sampler2D tex, in vec2 st, in vec2 p
 #endif
 
 BILATERALBLURFAST_TYPE bilateralBlurFast10(in sampler2D tex, in vec2 st, in vec2 pixel, in float smoothingFactor) {
-    BILATERALBLURFAST_TYPE colorRef = BILATERALBLURFAST_SAMPLER_FNC(st);
+    BILATERALBLURFAST_TYPE colorRef = BILATERALBLURFAST_SAMPLER_FNC(tex, st);
     BILATERALBLURFAST_TYPE accumColor = BILATERALBLURFAST_TYPE(0.);
     float accumWeight = 0.;
 
@@ -95,7 +95,7 @@ BILATERALBLURFAST_TYPE bilateralBlurFast10(in sampler2D tex, in vec2 st, in vec2
         vec2 coords = BILATERALBLURFAST_NOISE_FNC(vec2(i * .1, yFetch));
         coords = (coords - .5) * scale;
         float coordsz = dot(coords, coords);
-        BILATERALBLURFAST_TYPE colorFetch = BILATERALBLURFAST_SAMPLER_FNC(coords + st);
+        BILATERALBLURFAST_TYPE colorFetch = BILATERALBLURFAST_SAMPLER_FNC(tex, coords + st);
         BILATERALBLURFAST_TYPE colorDist = colorFetch - colorRef;
         float tmpWeight = exp(-dot(colorDist, colorDist) * sigma_r2 - coordsz * .5);
         accumColor += colorFetch * tmpWeight;
@@ -105,7 +105,7 @@ BILATERALBLURFAST_TYPE bilateralBlurFast10(in sampler2D tex, in vec2 st, in vec2
 }
 
 BILATERALBLURFAST_TYPE bilateralBlurFast20(in sampler2D tex, in vec2 st, in vec2 pixel, in float smoothingFactor) {
-    BILATERALBLURFAST_TYPE colorRef = BILATERALBLURFAST_SAMPLER_FNC(st);
+    BILATERALBLURFAST_TYPE colorRef = BILATERALBLURFAST_SAMPLER_FNC(tex, st);
     BILATERALBLURFAST_TYPE accumColor = BILATERALBLURFAST_TYPE(0.);
     float accumWeight = 0.;
 
@@ -121,7 +121,7 @@ BILATERALBLURFAST_TYPE bilateralBlurFast20(in sampler2D tex, in vec2 st, in vec2
         vec2 coords = BILATERALBLURFAST_NOISE_FNC(vec2(i * 0.05, yFetch));
         coords = (coords - .5) * scale;
         float coordsz = dot(coords, coords);
-        BILATERALBLURFAST_TYPE colorFetch = BILATERALBLURFAST_SAMPLER_FNC(coords + st);
+        BILATERALBLURFAST_TYPE colorFetch = BILATERALBLURFAST_SAMPLER_FNC(tex, coords + st);
         BILATERALBLURFAST_TYPE colorDist = colorFetch - colorRef;
         float tmpWeight = exp(-dot(colorDist, colorDist) * sigma_r2 - coordsz * .125);
         accumColor += colorFetch * tmpWeight;
@@ -131,7 +131,7 @@ BILATERALBLURFAST_TYPE bilateralBlurFast20(in sampler2D tex, in vec2 st, in vec2
 }
 
 BILATERALBLURFAST_TYPE bilateralBlurFast30(in sampler2D tex, in vec2 st, in vec2 pixel, in float smoothingFactor) {
-    BILATERALBLURFAST_TYPE colorRef = BILATERALBLURFAST_SAMPLER_FNC(st);
+    BILATERALBLURFAST_TYPE colorRef = BILATERALBLURFAST_SAMPLER_FNC(tex, st);
     BILATERALBLURFAST_TYPE accumColor = BILATERALBLURFAST_TYPE(0.);
     float accumWeight = 0.;
 
@@ -147,7 +147,7 @@ BILATERALBLURFAST_TYPE bilateralBlurFast30(in sampler2D tex, in vec2 st, in vec2
         vec2 coords = BILATERALBLURFAST_NOISE_FNC(vec2(i * .03333333333, yFetch));
         coords = (coords - .5) * scale;
         float coordsz = dot(coords, coords);
-        BILATERALBLURFAST_TYPE colorFetch = BILATERALBLURFAST_SAMPLER_FNC(coords + st);
+        BILATERALBLURFAST_TYPE colorFetch = BILATERALBLURFAST_SAMPLER_FNC(tex, coords + st);
         BILATERALBLURFAST_TYPE colorDist = colorFetch - colorRef;
         float tmpWeight = exp(-dot(colorDist, colorDist) * sigma_r2 - coordsz * .05555555556);
         accumColor += colorFetch * tmpWeight;
@@ -157,7 +157,7 @@ BILATERALBLURFAST_TYPE bilateralBlurFast30(in sampler2D tex, in vec2 st, in vec2
 }
 
 BILATERALBLURFAST_TYPE bilateralBlurFast40(in sampler2D tex, in vec2 st, in vec2 pixel, in float smoothingFactor) {
-    BILATERALBLURFAST_TYPE colorRef = BILATERALBLURFAST_SAMPLER_FNC(st);
+    BILATERALBLURFAST_TYPE colorRef = BILATERALBLURFAST_SAMPLER_FNC(tex, st);
     BILATERALBLURFAST_TYPE accumColor = BILATERALBLURFAST_TYPE(0.);
     float accumWeight = 0.;
 
@@ -173,7 +173,7 @@ BILATERALBLURFAST_TYPE bilateralBlurFast40(in sampler2D tex, in vec2 st, in vec2
         vec2 coords = BILATERALBLURFAST_NOISE_FNC(vec2(i * .025, yFetch));
         coords = (coords - .5) * scale;
         float coordsz = dot(coords, coords);
-        BILATERALBLURFAST_TYPE colorFetch = BILATERALBLURFAST_SAMPLER_FNC(coords + st);
+        BILATERALBLURFAST_TYPE colorFetch = BILATERALBLURFAST_SAMPLER_FNC(tex, coords + st);
         BILATERALBLURFAST_TYPE colorDist = colorFetch - colorRef;
         float tmpWeight = exp(-dot(colorDist, colorDist) * sigma_r2 - coordsz * .03125);
         accumColor += colorFetch * tmpWeight;
@@ -183,7 +183,7 @@ BILATERALBLURFAST_TYPE bilateralBlurFast40(in sampler2D tex, in vec2 st, in vec2
 }
 
 BILATERALBLURFAST_TYPE bilateralBlurFast50(in sampler2D tex, in vec2 st, in vec2 pixel, in float smoothingFactor) {
-    BILATERALBLURFAST_TYPE colorRef = BILATERALBLURFAST_SAMPLER_FNC(st);
+    BILATERALBLURFAST_TYPE colorRef = BILATERALBLURFAST_SAMPLER_FNC(tex, st);
     BILATERALBLURFAST_TYPE accumColor = BILATERALBLURFAST_TYPE(0.);
     float accumWeight = 0.;
 
@@ -199,7 +199,7 @@ BILATERALBLURFAST_TYPE bilateralBlurFast50(in sampler2D tex, in vec2 st, in vec2
         vec2 coords = BILATERALBLURFAST_NOISE_FNC(vec2(i * .02, yFetch));
         coords = (coords - .5) * scale;
         float coordsz = dot(coords, coords);
-        BILATERALBLURFAST_TYPE colorFetch = BILATERALBLURFAST_SAMPLER_FNC(coords + st);
+        BILATERALBLURFAST_TYPE colorFetch = BILATERALBLURFAST_SAMPLER_FNC(tex, coords + st);
         BILATERALBLURFAST_TYPE colorDist = colorFetch - colorRef;
         float tmpWeight = exp(-dot(colorDist, colorDist) * sigma_r2 - coordsz * .02);
         accumColor += colorFetch * tmpWeight;
@@ -209,7 +209,7 @@ BILATERALBLURFAST_TYPE bilateralBlurFast50(in sampler2D tex, in vec2 st, in vec2
 }
 
 BILATERALBLURFAST_TYPE bilateralBlurFast60(in sampler2D tex, in vec2 st, in vec2 pixel, in float smoothingFactor) {
-    BILATERALBLURFAST_TYPE colorRef = BILATERALBLURFAST_SAMPLER_FNC(st);
+    BILATERALBLURFAST_TYPE colorRef = BILATERALBLURFAST_SAMPLER_FNC(tex, st);
     BILATERALBLURFAST_TYPE accumColor = BILATERALBLURFAST_TYPE(0.);
     float accumWeight = 0.;
 
@@ -225,7 +225,7 @@ BILATERALBLURFAST_TYPE bilateralBlurFast60(in sampler2D tex, in vec2 st, in vec2
         vec2 coords = BILATERALBLURFAST_NOISE_FNC(vec2(i * .01666666667, yFetch));
         coords = (coords - .5) * scale;
         float coordsz = dot(coords, coords);
-        BILATERALBLURFAST_TYPE colorFetch = BILATERALBLURFAST_SAMPLER_FNC(coords + st);
+        BILATERALBLURFAST_TYPE colorFetch = BILATERALBLURFAST_SAMPLER_FNC(tex, coords + st);
         BILATERALBLURFAST_TYPE colorDist = colorFetch - colorRef;
         float tmpWeight = exp(-dot(colorDist, colorDist) * sigma_r2 - coordsz * .01388888889);
         accumColor += colorFetch * tmpWeight;

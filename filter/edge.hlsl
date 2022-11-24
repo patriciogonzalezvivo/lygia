@@ -20,7 +20,7 @@ options:
 #endif
 
 #ifndef EDGE_SAMPLER_FNC
-#define EDGE_SAMPLER_FNC(POS_UV) SAMPLER_FNC(tex, POS_UV).r
+#define EDGE_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV).r
 #endif
 
 #include "edge/prewitt.hlsl"

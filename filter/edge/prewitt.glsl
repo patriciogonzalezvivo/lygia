@@ -7,7 +7,7 @@ use: edgePrewitt(<sampler2D> texture, <vec2> st, <vec2> scale)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - EDGEPREWITT_TYPE: Return type, defaults to float
-    - EDGEPREWITT_SAMPLER_FNC: Function used to sample the input texture, defaults to texture2D(tex,POS_UV).r
+    - EDGEPREWITT_SAMPLER_FNC: Function used to sample the input texture, defaults to texture2D(tex,TEX, UV).r
 */
 
 #ifndef EDGEPREWITT_TYPE
@@ -20,9 +20,9 @@ options:
 
 #ifndef EDGEPREWITT_SAMPLER_FNC
 #ifdef EDGE_SAMPLER_FNC
-#define EDGEPREWITT_SAMPLER_FNC(POS_UV) EDGE_SAMPLER_FNC(POS_UV)
+#define EDGEPREWITT_SAMPLER_FNC(TEX, UV) EDGE_SAMPLER_FNC(TEX, UV)
 #else
-#define EDGEPREWITT_SAMPLER_FNC(POS_UV) SAMPLER_FNC(tex, POS_UV).r
+#define EDGEPREWITT_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV).r
 #endif
 #endif
 
@@ -30,14 +30,14 @@ options:
 #define FNC_EDGEPREWITT
 EDGEPREWITT_TYPE edgePrewitt(in sampler2D tex, in vec2 st, in vec2 offset) {
     // get samples around pixel
-    EDGEPREWITT_TYPE tleft = EDGEPREWITT_SAMPLER_FNC(st + vec2(-offset.x, offset.y));
-    EDGEPREWITT_TYPE left = EDGEPREWITT_SAMPLER_FNC(st + vec2(-offset.x, 0.));
-    EDGEPREWITT_TYPE bleft = EDGEPREWITT_SAMPLER_FNC(st + vec2(-offset.x, -offset.y));
-    EDGEPREWITT_TYPE top = EDGEPREWITT_SAMPLER_FNC(st + vec2(0., offset.y));
-    EDGEPREWITT_TYPE bottom = EDGEPREWITT_SAMPLER_FNC(st + vec2(0., -offset.y));
-    EDGEPREWITT_TYPE tright = EDGEPREWITT_SAMPLER_FNC(st + offset);
-    EDGEPREWITT_TYPE right = EDGEPREWITT_SAMPLER_FNC(st + vec2(offset.x, 0.));
-    EDGEPREWITT_TYPE bright = EDGEPREWITT_SAMPLER_FNC(st + vec2(offset.x, -offset.y));
+    EDGEPREWITT_TYPE tleft = EDGEPREWITT_SAMPLER_FNC(tex, st + vec2(-offset.x, offset.y));
+    EDGEPREWITT_TYPE left = EDGEPREWITT_SAMPLER_FNC(tex, st + vec2(-offset.x, 0.));
+    EDGEPREWITT_TYPE bleft = EDGEPREWITT_SAMPLER_FNC(tex, st + vec2(-offset.x, -offset.y));
+    EDGEPREWITT_TYPE top = EDGEPREWITT_SAMPLER_FNC(tex, st + vec2(0., offset.y));
+    EDGEPREWITT_TYPE bottom = EDGEPREWITT_SAMPLER_FNC(tex, st + vec2(0., -offset.y));
+    EDGEPREWITT_TYPE tright = EDGEPREWITT_SAMPLER_FNC(tex, st + offset);
+    EDGEPREWITT_TYPE right = EDGEPREWITT_SAMPLER_FNC(tex, st + vec2(offset.x, 0.));
+    EDGEPREWITT_TYPE bright = EDGEPREWITT_SAMPLER_FNC(tex, st + vec2(offset.x, -offset.y));
     EDGEPREWITT_TYPE x = -tleft - top - tright + bleft + bottom + bright;
     EDGEPREWITT_TYPE y = -bleft - left - tleft + bright + right + tright;
     return sqrt((x * x) + (y * y));

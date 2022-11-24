@@ -7,7 +7,7 @@ description: two dimensional bilateral Blur, to do it in one single pass
 use: bilateralBlur2D(<sampler2D> texture, <vec2> st, <vec2> offset, <int> kernelSize)
 options:
     - BILATERALBLUR2D_TYPE: default is vec3
-    - BILATERALBLUR2D_SAMPLER_FNC(POS_UV): default texture2D(tex, POS_UV)
+    - BILATERALBLUR2D_SAMPLER_FNC(TEX, UV): default texture2D(TEX, UV)
     - BILATERALBLUR2D_LUMA(RGB): default rgb2luma
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 */
@@ -22,9 +22,9 @@ options:
 
 #ifndef BILATERALBLUR2D_SAMPLER_FNC
 #ifdef BILATERALBLUR_SAMPLER_FNC
-#define BILATERALBLUR2D_SAMPLER_FNC(POS_UV) BILATERALBLUR_SAMPLER_FNC(POS_UV)
+#define BILATERALBLUR2D_SAMPLER_FNC(TEX, UV) BILATERALBLUR_SAMPLER_FNC(TEX, UV)
 #else
-#define BILATERALBLUR2D_SAMPLER_FNC(POS_UV) SAMPLER_FNC(tex, POS_UV)
+#define BILATERALBLUR2D_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
 #endif
 #endif
 
@@ -54,7 +54,7 @@ BILATERALBLUR2D_TYPE bilateralBlur2D(in sampler2D tex, in vec2 st, in vec2 offse
     const float k2 = k * k;
     
     float kernelSize2 = kernelSizef * kernelSizef;
-    BILATERALBLUR2D_TYPE tex0 = BILATERALBLUR2D_SAMPLER_FNC(st);
+    BILATERALBLUR2D_TYPE tex0 = BILATERALBLUR2D_SAMPLER_FNC(tex, st);
     float lum0 = BILATERALBLUR2D_LUMA(tex0);
 
     for (int j = 0; j < BILATERALBLUR2D_KERNELSIZE; j++) {
@@ -69,7 +69,7 @@ BILATERALBLUR2D_TYPE bilateralBlur2D(in sampler2D tex, in vec2 st, in vec2 offse
                 break;
             #endif
             float dx = -.5 * (kernelSizef - 1.0) + float(i);
-            BILATERALBLUR2D_TYPE t = BILATERALBLUR2D_SAMPLER_FNC(st + vec2(dx, dy) * offset);
+            BILATERALBLUR2D_TYPE t = BILATERALBLUR2D_SAMPLER_FNC(tex, st + vec2(dx, dy) * offset);
             float lum = BILATERALBLUR2D_LUMA(t);
             float dl = 255. * (lum - lum0);
             float weight = (k2 / kernelSize2) * exp(-(dx * dx + dy * dy + dl * dl) / (2. * kernelSize2));

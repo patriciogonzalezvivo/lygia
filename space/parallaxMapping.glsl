@@ -3,7 +3,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: get parallax mapping coordinates
-use: parallaxMapping(<sampler2D> heightTex, <vec3> V, <vec2> T, <float> parallaxHeight) 
+use: parallaxMapping(<sampler2D> tex, <vec3> V, <vec2> T, <float> parallaxHeight) 
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - PARALLAXMAPPING_FNC()
@@ -13,7 +13,7 @@ options:
 */
 
 #ifndef PARALLAXMAPPING_SAMPLER_FNC
-#define PARALLAXMAPPING_SAMPLER_FNC(POS_UV) SAMPLER_FNC(heightTex, POS_UV).r
+#define PARALLAXMAPPING_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV).r
 #endif
 
 #if defined(PARALLAXMAPPING_SEETP)
@@ -43,10 +43,10 @@ options:
 //
 //  http://sunandblackcat.com/tipFullView.php?topicid=28
 
-vec2 parallaxMapping_simple(in sampler2D heightTex, in vec3 V, in vec2 T, out float parallaxHeight) {
+vec2 parallaxMapping_simple(in sampler2D tex, in vec3 V, in vec2 T, out float parallaxHeight) {
 
     // get depth for this fragment
-    float initialHeight = PARALLAXMAPPING_SAMPLER_FNC(T);
+    float initialHeight = PARALLAXMAPPING_SAMPLER_FNC(tex, T);
 
     // calculate amount of offset for Parallax Mapping
     vec2 texCoordOffset = PARALLAXMAPPING_SCALE * V.xy / V.z * initialHeight;
@@ -59,7 +59,7 @@ vec2 parallaxMapping_simple(in sampler2D heightTex, in vec3 V, in vec2 T, out fl
 }
 
 
-vec2 parallaxMapping_steep(in sampler2D heightTex, in vec3 V, in vec2 T, out float parallaxHeight) {
+vec2 parallaxMapping_steep(in sampler2D tex, in vec3 V, in vec2 T, out float parallaxHeight) {
 
     // determine number of layers from angle between V and N
     const float minLayers = PARALLAXMAPPING_NUMSEARCHES * 0.5;
@@ -77,7 +77,7 @@ vec2 parallaxMapping_steep(in sampler2D heightTex, in vec3 V, in vec2 T, out flo
     vec2 currentTextureCoords = T;
 
     // get first depth from heightmap
-    float heightFromTexture = PARALLAXMAPPING_SAMPLER_FNC(currentTextureCoords);
+    float heightFromTexture = PARALLAXMAPPING_SAMPLER_FNC(tex, currentTextureCoords);
 
     // while point is above surface
     while(heightFromTexture > currentLayerHeight) {
@@ -86,7 +86,7 @@ vec2 parallaxMapping_steep(in sampler2D heightTex, in vec3 V, in vec2 T, out flo
         // shift texture coordinates along vector V
         currentTextureCoords -= dtex;
         // get new depth from heightmap
-        heightFromTexture = PARALLAXMAPPING_SAMPLER_FNC(currentTextureCoords);
+        heightFromTexture = PARALLAXMAPPING_SAMPLER_FNC(tex, currentTextureCoords);
     }
 
     // return results
@@ -94,7 +94,7 @@ vec2 parallaxMapping_steep(in sampler2D heightTex, in vec3 V, in vec2 T, out flo
     return currentTextureCoords;
 }
 
-vec2 parallaxMapping_relief(in sampler2D heightTex, in vec3 V, in vec2 T, out float parallaxHeight) {
+vec2 parallaxMapping_relief(in sampler2D tex, in vec3 V, in vec2 T, out float parallaxHeight) {
     // determine required number of layers
     const float minLayers = PARALLAXMAPPING_NUMSEARCHES;
     const float maxLayers = 15.0;
@@ -111,7 +111,7 @@ vec2 parallaxMapping_relief(in sampler2D heightTex, in vec3 V, in vec2 T, out fl
     vec2 currentTextureCoords = T;
 
     // depth from heightmap
-    float heightFromTexture = PARALLAXMAPPING_SAMPLER_FNC(currentTextureCoords);
+    float heightFromTexture = PARALLAXMAPPING_SAMPLER_FNC(tex, currentTextureCoords);
 
     // while point is above surface
     while (heightFromTexture > currentLayerHeight) {
@@ -120,7 +120,7 @@ vec2 parallaxMapping_relief(in sampler2D heightTex, in vec3 V, in vec2 T, out fl
         // shift texture coordinates along V
         currentTextureCoords -= dtex;
         // new depth from heightmap
-        heightFromTexture = PARALLAXMAPPING_SAMPLER_FNC(currentTextureCoords);
+        heightFromTexture = PARALLAXMAPPING_SAMPLER_FNC(tex, currentTextureCoords);
     }
 
     ///////////////////////////////////////////////////////////
@@ -142,7 +142,7 @@ vec2 parallaxMapping_relief(in sampler2D heightTex, in vec3 V, in vec2 T, out fl
         deltaHeight *= 0.5;
 
         // new depth from heightmap
-        heightFromTexture = PARALLAXMAPPING_SAMPLER_FNC(currentTextureCoords);
+        heightFromTexture = PARALLAXMAPPING_SAMPLER_FNC(tex, currentTextureCoords);
 
         // shift along or agains vector V
         if(heightFromTexture > currentLayerHeight) // below the surface
@@ -164,7 +164,7 @@ vec2 parallaxMapping_relief(in sampler2D heightTex, in vec3 V, in vec2 T, out fl
 
 
 #if defined(PARALLAXMAPPING_OCCLUSION)
-vec2 parallaxMapping_occlusion(in sampler2D heightTex, in vec3 V, in vec2 T, out float parallaxHeight) {
+vec2 parallaxMapping_occlusion(in sampler2D tex, in vec3 V, in vec2 T, out float parallaxHeight) {
     // determine optimal number of layers
     const float minLayers = PARALLAXMAPPING_NUMSEARCHES;
     const float maxLayers = 15.0;
@@ -182,7 +182,7 @@ vec2 parallaxMapping_occlusion(in sampler2D heightTex, in vec3 V, in vec2 T, out
     vec2 currentTextureCoords = T;
 
     // depth from heightmap
-    float heightFromTexture = PARALLAXMAPPING_SAMPLER_FNC(currentTextureCoords);
+    float heightFromTexture = PARALLAXMAPPING_SAMPLER_FNC(tex, currentTextureCoords);
 
     // while point is above the surface
     while(heightFromTexture > curLayerHeight) {
@@ -191,7 +191,7 @@ vec2 parallaxMapping_occlusion(in sampler2D heightTex, in vec3 V, in vec2 T, out
         // shift of texture coordinates
         currentTextureCoords -= dtex;
         // new depth from heightmap
-        heightFromTexture = PARALLAXMAPPING_SAMPLER_FNC(currentTextureCoords);
+        heightFromTexture = PARALLAXMAPPING_SAMPLER_FNC(tex, currentTextureCoords);
     }
 
     ///////////////////////////////////////////////////////////
@@ -203,7 +203,7 @@ vec2 parallaxMapping_occlusion(in sampler2D heightTex, in vec3 V, in vec2 T, out
 
     // heights for linear interpolation
     float nextH	= heightFromTexture - curLayerHeight;
-    float prevH	= PARALLAXMAPPING_SAMPLER_FNC(prevTCoords) - curLayerHeight + layerHeight;
+    float prevH	= PARALLAXMAPPING_SAMPLER_FNC(tex, prevTCoords) - curLayerHeight + layerHeight;
 
     // proportions for linear interpolation
     float weight = nextH / (nextH - prevH);
@@ -219,13 +219,13 @@ vec2 parallaxMapping_occlusion(in sampler2D heightTex, in vec3 V, in vec2 T, out
 }
 #endif
 
-vec2 parallaxMapping(in sampler2D heightTex, in vec3 V, in vec2 T, out float parallaxHeight) {
-    return PARALLAXMAPPING_FNC(heightTex, V, T, parallaxHeight);
+vec2 parallaxMapping(in sampler2D tex, in vec3 V, in vec2 T, out float parallaxHeight) {
+    return PARALLAXMAPPING_FNC(tex, V, T, parallaxHeight);
 }
 
-vec2 parallaxMapping(in sampler2D heightTex, in vec3 V, in vec2 T) {
+vec2 parallaxMapping(in sampler2D tex, in vec3 V, in vec2 T) {
     float height;
-    return PARALLAXMAPPING_FNC(heightTex, V, T, height);
+    return PARALLAXMAPPING_FNC(tex, V, T, height);
 }
 
 #endif

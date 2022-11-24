@@ -7,17 +7,17 @@ description: downscale for function for convolution pyramid  https://www.cs.huji
 use: <vec4> convolutionPyramidDownscale(<sampler2D> tex, <vec2> st, <vec2> pixel)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
-    - CONVOLUTIONPYRAMID_H1: 1.0334, 0.6836, 0.1507
+    - POISSONFILL_H1: 1.0334, 0.6836, 0.1507
 */
 
-#ifndef CONVOLUTIONPYRAMID_H1
-#define CONVOLUTIONPYRAMID_H1 1.0334, 0.6836, 0.1507
+#ifndef POISSONFILL_H1
+#define POISSONFILL_H1 1.0334, 0.6836, 0.1507
 #endif
  
-#ifndef FNC_CONVOLUTIONPYRAMID_DOWNSCALE
-#define FNC_CONVOLUTIONPYRAMID_DOWNSCALE
-vec4 convolutionPyramidDownscale(sampler2D tex, vec2 st, vec2 pixel) {
-    const vec3 h1 = vec3(CONVOLUTIONPYRAMID_H1);
+#ifndef FNC_POISSONFILL_DOWNSCALE
+#define FNC_POISSONFILL_DOWNSCALE
+vec4 poissonFillDownscale(sampler2D tex, vec2 st, vec2 pixel) {
+    const vec3 h1 = vec3(POISSONFILL_H1);
 
     vec4 color = vec4(0.0);
     for (int dy = -2; dy <= 2; dy++) {

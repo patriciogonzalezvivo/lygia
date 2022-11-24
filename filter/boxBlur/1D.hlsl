@@ -7,7 +7,7 @@ use: boxBlur1D(<sampler2D> texture, <float2> st, <float2> pixel_offset, <int> ke
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - BOXBLUR1D_TYPE: default is float4
-    - BOXBLUR1D_SAMPLER_FNC(POS_UV): default texture2D(tex, POS_UV)
+    - BOXBLUR1D_SAMPLER_FNC(TEX, UV): default texture2D(tex, TEX, UV)
     - BOXBLUR1D_KERNELSIZE: Use only for WebGL 1.0 and OpenGL ES 2.0 . For example RaspberryPis is not happy with dynamic loops. Default is 'kernelSize'
 */
 
@@ -21,9 +21,9 @@ options:
 
 #ifndef BOXBLUR1D_SAMPLER_FNC
 #ifdef BOXBLUR_SAMPLER_FNC
-#define BOXBLUR1D_SAMPLER_FNC(POS_UV) BOXBLUR_SAMPLER_FNC(POS_UV)
+#define BOXBLUR1D_SAMPLER_FNC(TEX, UV) BOXBLUR_SAMPLER_FNC(TEX, UV)
 #else
-#define BOXBLUR1D_SAMPLER_FNC(POS_UV) SAMPLER_FNC(tex, POS_UV)
+#define BOXBLUR1D_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
 #endif
 #endif
 
@@ -40,7 +40,7 @@ BOXBLUR1D_TYPE boxBlur1D(in sampler2D tex, in float2 st, in float2 offset, const
 
     for (int i = 0; i < BOXBLUR1D_KERNELSIZE; i++) {
         float x = -.5 * (f_kernelSize - 1.) + float(i);
-        color += BOXBLUR1D_SAMPLER_FNC(st + offset * x ) * weight;
+        color += BOXBLUR1D_SAMPLER_FNC(tex, st + offset * x ) * weight;
     }
     return color;
 }

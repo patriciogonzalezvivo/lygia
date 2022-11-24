@@ -8,7 +8,7 @@ options:
     - RADIALBLUR_KERNELSIZE: Default 64 
     - RADIALBLUR_STRENGTH: Default 0.125
     - RADIALBLUR_TYPE: Default `float4`
-    - RADIALBLUR_SAMPLER_FNC(POS_UV): Default `tex2D(tex, POS_UV)`
+    - RADIALBLUR_SAMPLER_FNC(TEX, UV): Default `tex2D(tex, TEX, UV)`
     - SAMPLER_FNC(TEX, UV): optional depending the target version of HLSL
 */
 
@@ -25,7 +25,7 @@ options:
 #endif
 
 #ifndef RADIALBLUR_SAMPLER_FNC
-#define RADIALBLUR_SAMPLER_FNC(POS_UV) SAMPLER_FNC(tex, POS_UV)
+#define RADIALBLUR_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
 #endif
 
 #ifndef FNC_RADIALBLUR
@@ -35,8 +35,8 @@ RADIALBLUR_TYPE radialBlur(in sampler2D tex, in float2 st, in float2 dir, in flo
     float f_samples = float(RADIALBLUR_KERNELSIZE);
     float f_factor = 1./f_samples;
     for (int i = 0; i < RADIALBLUR_KERNELSIZE; i += 2) {
-        color += RADIALBLUR_SAMPLER_FNC(st + float(i) * f_factor * dir * strength);
-        color += RADIALBLUR_SAMPLER_FNC(st + float(i+1) * f_factor * dir * strength);
+        color += RADIALBLUR_SAMPLER_FNC(tex, st + float(i) * f_factor * dir * strength);
+        color += RADIALBLUR_SAMPLER_FNC(tex, st + float(i+1) * f_factor * dir * strength);
     }
     return color * f_factor;
 }

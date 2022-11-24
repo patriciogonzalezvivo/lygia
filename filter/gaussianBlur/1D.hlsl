@@ -7,7 +7,7 @@ use: gaussianBlur1D(<sampler2D> texture, <float2> st, <float2> pixel_direction ,
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - GAUSSIANBLUR1D_TYPE:
-    - GAUSSIANBLUR1D_SAMPLER_FNC(POS_UV):
+    - GAUSSIANBLUR1D_SAMPLER_FNC(TEX, UV):
     - GAUSSIANBLUR1D_KERNELSIZE: Use only for WebGL 1.0 and OpenGL ES 2.0 . For example RaspberryPis is not happy with dynamic loops. Default is 'kernelSize'
 */
 
@@ -21,9 +21,9 @@ options:
 
 #ifndef GAUSSIANBLUR1D_SAMPLER_FNC
 #ifdef GAUSSIANBLUR_SAMPLER_FNC
-#define GAUSSIANBLUR1D_SAMPLER_FNC(POS_UV) GAUSSIANBLUR_SAMPLER_FNC(POS_UV)
+#define GAUSSIANBLUR1D_SAMPLER_FNC(TEX, UV) GAUSSIANBLUR_SAMPLER_FNC(TEX, UV)
 #else
-#define GAUSSIANBLUR1D_SAMPLER_FNC(POS_UV) SAMPLER_FNC(tex, POS_UV)
+#define GAUSSIANBLUR1D_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
 #endif
 #endif
 
@@ -41,7 +41,7 @@ GAUSSIANBLUR1D_TYPE gaussianBlur1D(in sampler2D tex,in float2 st,in float2 offse
             break;
         float x = -0.5 * (float(kernelSize) - 1.0)+float(i);
         float weight = (k/float(kernelSize)) * exp(-(x*x)/(2.0*kernelSize2));
-        accumColor += weight * GAUSSIANBLUR1D_SAMPLER_FNC(st + x * offset);
+        accumColor += weight * GAUSSIANBLUR1D_SAMPLER_FNC(tex, st + x * offset);
         accumWeight += weight;
     }
     return accumColor/accumWeight;

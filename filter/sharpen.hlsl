@@ -7,13 +7,13 @@ use: sharpen(<sampler2D> texture, <float2> st, <float2> renderSize [, float stre
 options:
     - SHARPEN_KERNELSIZE: Defaults 2
     - SHARPEN_TYPE: defaults to float3
-    - SHARPEN_SAMPLER_FNC(POS_UV): defaults to texture2D(tex, POS_UV).rgb
+    - SHARPEN_SAMPLER_FNC(TEX, UV): defaults to texture2D(TEX, UV).rgb
     - SHARPEN_FNC: defaults to sharpenFast
     - SAMPLER_FNC(TEX, UV): optional depending the target version of HLSL (texture2D(...) or texture(...))
 */
 
 #ifndef RADIALBLUR_SAMPLER_FNC
-#define RADIALBLUR_SAMPLER_FNC(POS_UV) SAMPLER_FNC(tex, POS_UV)
+#define RADIALBLUR_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
 #endif
 
 #ifndef SHARPEN_TYPE
@@ -21,7 +21,7 @@ options:
 #endif
 
 #ifndef SHARPEN_SAMPLER_FNC
-#define SHARPEN_SAMPLER_FNC(POS_UV) SAMPLER_FNC(tex, POS_UV).rgb
+#define SHARPEN_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV).rgb
 #endif
 
 #ifndef SHARPEN_FNC
@@ -36,11 +36,11 @@ options:
 #define FNC_SHARPEN
 
 SHARPEN_TYPE sharpen(in sampler2D tex, in float2 st, in float2 pixel, float strenght) {
-    return SHARPEN_FNC (tex, st, pixel, strenght);
+    return SHARPEN_FNC(tex, st, pixel, strenght);
 }
 
 SHARPEN_TYPE sharpen(in sampler2D tex, in float2 st, in float2 pixel) {
-    return SHARPEN_FNC (tex, st, pixel);
+    return SHARPEN_FNC(tex, st, pixel);
 }
 
 #endif 

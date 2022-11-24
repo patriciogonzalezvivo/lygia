@@ -11,7 +11,7 @@ use: spheremap(<sampler2D> texture, <float3> normal)
 #endif
 
 #ifndef SPHEREMAP_SAMPLER_FNC
-#define SPHEREMAP_SAMPLER_FNC(POS_UV) SAMPLER_FNC(tex, POS_UV)
+#define SPHEREMAP_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
 #endif
 
 #ifndef FNC_SPHEREMAP
@@ -25,6 +25,6 @@ float2 sphereMap(float3 normal, float3 eye) {
 
 
 SPHEREMAP_TYPE sphereMap (in sampler2D tex, in float3 normal, in float3 eye) {
-    return SPHEREMAP_SAMPLER_FNC( sphereMap(normal, eye) );
+    return SPHEREMAP_SAMPLER_FNC(tex, sphereMap(normal, eye) );
 }
 #endif

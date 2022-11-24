@@ -29,7 +29,7 @@ options:
 #endif
 
 #ifndef NOISEBLUR_SAMPLER_FNC
-#define NOISEBLUR_SAMPLER_FNC(UV) SAMPLER_FNC(tex, UV)
+#define NOISEBLUR_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
 #endif
 
 #ifndef NOISEBLUR_RANDOM23_FNC
@@ -57,7 +57,7 @@ NOISEBLUR_TYPE noiseBlur(in sampler2D tex, in float2 st, in float2 pixel, float 
         float2 cr = float2(sin(r.x),cos(r.x))*sqrt(r.y);
         #endif
         
-        NOISEBLUR_TYPE color = NOISEBLUR_SAMPLER_FNC( st + cr * blurRadius * pixel );
+        NOISEBLUR_TYPE color = NOISEBLUR_SAMPLER_FNC(tex, st + cr * blurRadius * pixel );
         // average the samples as we get em
         // https://blog.demofox.org/2016/08/23/incremental-averaging/
         result = lerp(result, color, 1.0 / (i+1.0));
@@ -72,7 +72,7 @@ NOISEBLUR_TYPE noiseBlur(sampler2D tex, float2 st, float2 pixel) {
     for (float t = -NOISEBLUR_SAMPLES; t <= NOISEBLUR_SAMPLES; t++) {
         float percent = (t / NOISEBLUR_SAMPLES) + offset - 0.5;
         float weight = 1.0 - abs(percent);
-        NOISEBLUR_TYPE color = NOISEBLUR_SAMPLER_FNC(st + pixel * percent);
+        NOISEBLUR_TYPE color = NOISEBLUR_SAMPLER_FNC(tex, st + pixel * percent);
         rta += color * weight;
         total += weight;
     }

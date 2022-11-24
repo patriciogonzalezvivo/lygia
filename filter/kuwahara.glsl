@@ -6,7 +6,7 @@ description: Kuwahara image abstraction, drawn from the work of Kyprianidis, et.
 use: kuwahara(<sampler2D> texture, <vec2> st, <vec2> pixel)
 options:
     - KUWAHARA_TYPE: defaults to vec3
-    - KUWAHARA_SAMPLER_FNC(POS_UV): defaults to texture2D(tex, POS_UV).rgb
+    - KUWAHARA_SAMPLER_FNC(TEX, UV): defaults to texture2D(tex, TEX, UV).rgb
     - KUWAHARA_RADIUS radius
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 */
@@ -16,7 +16,7 @@ options:
 #endif
 
 #ifndef KUWAHARA_SAMPLER_FNC
-#define KUWAHARA_SAMPLER_FNC(POS_UV) SAMPLER_FNC(tex, POS_UV)
+#define KUWAHARA_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
 #endif
 
 #ifndef FNC_KUWAHARA
@@ -38,7 +38,7 @@ KUWAHARA_TYPE kuwahara(in sampler2D tex, in vec2 st, in vec2 pixel, in int radiu
 
     for (j = -KUWAHARA_RADIUS; j <= 0; ++j)  {
         for (i = -KUWAHARA_RADIUS; i <= 0; ++i)  {
-            c = KUWAHARA_SAMPLER_FNC(st + vec2(i,j) * pixel);
+            c = KUWAHARA_SAMPLER_FNC(tex, st + vec2(i,j) * pixel);
             m0 += c;
             s0 += c * c;
         }
@@ -46,7 +46,7 @@ KUWAHARA_TYPE kuwahara(in sampler2D tex, in vec2 st, in vec2 pixel, in int radiu
 
     for (j = -KUWAHARA_RADIUS; j <= 0; ++j)  {
         for (i = 0; i <= KUWAHARA_RADIUS; ++i)  {
-            c = KUWAHARA_SAMPLER_FNC(st + vec2(i,j) * pixel);
+            c = KUWAHARA_SAMPLER_FNC(tex, st + vec2(i,j) * pixel);
             m1 += c;
             s1 += c * c;
         }
@@ -54,7 +54,7 @@ KUWAHARA_TYPE kuwahara(in sampler2D tex, in vec2 st, in vec2 pixel, in int radiu
 
     for (j = 0; j <= KUWAHARA_RADIUS; ++j)  {
         for (i = 0; i <= KUWAHARA_RADIUS; ++i)  {
-            c = KUWAHARA_SAMPLER_FNC(st + vec2(i,j) * pixel);
+            c = KUWAHARA_SAMPLER_FNC(tex, st + vec2(i,j) * pixel);
             m2 += c;
             s2 += c * c;
         }
@@ -62,7 +62,7 @@ KUWAHARA_TYPE kuwahara(in sampler2D tex, in vec2 st, in vec2 pixel, in int radiu
 
     for (j = 0; j <= KUWAHARA_RADIUS; ++j)  {
         for (i = -KUWAHARA_RADIUS; i <= 0; ++i)  {
-            c = KUWAHARA_SAMPLER_FNC(st + vec2(i,j) * pixel);
+            c = KUWAHARA_SAMPLER_FNC(tex, st + vec2(i,j) * pixel);
             m3 += c;
             s3 += c * c;
         }
@@ -134,7 +134,7 @@ KUWAHARA_TYPE kuwahara(in sampler2D tex, in vec2 st, in vec2 pixel, in int radiu
     
     for (j = -KUWAHARA_RADIUS; j <= 0; ++j)  { 
         for (i = -KUWAHARA_RADIUS; i <= 0; ++i)  {
-            c = KUWAHARA_SAMPLER_FNC(st + vec2(i,j) * pixel);
+            c = KUWAHARA_SAMPLER_FNC(tex, st + vec2(i,j) * pixel);
             m0 += c;
             s0 += c * c;
         }
@@ -146,7 +146,7 @@ KUWAHARA_TYPE kuwahara(in sampler2D tex, in vec2 st, in vec2 pixel, in int radiu
             if (i > radius)
                 break;
             #endif
-            c = KUWAHARA_SAMPLER_FNC(st + vec2(i,j) * pixel);
+            c = KUWAHARA_SAMPLER_FNC(tex, st + vec2(i,j) * pixel);
             m1 += c;
             s1 += c * c;
         }
@@ -162,7 +162,7 @@ KUWAHARA_TYPE kuwahara(in sampler2D tex, in vec2 st, in vec2 pixel, in int radiu
             if (i > radius)
                 break;
             #endif
-            c = KUWAHARA_SAMPLER_FNC(st + vec2(i,j) * pixel);
+            c = KUWAHARA_SAMPLER_FNC(tex, st + vec2(i,j) * pixel);
             m2 += c;
             s2 += c * c;
         }
@@ -170,7 +170,7 @@ KUWAHARA_TYPE kuwahara(in sampler2D tex, in vec2 st, in vec2 pixel, in int radiu
     
     for (j = 0; j <= KUWAHARA_RADIUS; ++j)  {
         for (i = -KUWAHARA_RADIUS; i <= 0; ++i)  {
-            c = KUWAHARA_SAMPLER_FNC(st + vec2(i,j) * pixel);
+            c = KUWAHARA_SAMPLER_FNC(tex, st + vec2(i,j) * pixel);
             m3 += c;
             s3 += c * c;
         }
