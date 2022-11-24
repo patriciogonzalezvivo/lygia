@@ -58,32 +58,5 @@ vec4 sample2DCube(in sampler2D lut, in vec3 xyz) {
     return mix( SAMPLE_2DCUBE_FNC(lut, uv0), 
                 SAMPLE_2DCUBE_FNC(lut, uv1), 
                 xyz.z - iz);
-                    
-    // float Z = xyz.z * (SAMPLE_2DCUBE_CELL_SIZE-1.0);
-
-    // const float cells_factor = 1.0/SAMPLE_2DCUBE_CELLS_PER_SIDE;
-    // const float pixel = 1.0/ (SAMPLE_2DCUBE_CELLS_PER_SIDE * SAMPLE_2DCUBE_CELL_SIZE);
-    // const float halt_pixel = pixel * 0.5;
-
-    // vec2 cellA = vec2(0.0, 0.0);
-    // cellA.y = floor(floor(Z) / SAMPLE_2DCUBE_CELLS_PER_SIDE);
-    // cellA.x = floor(Z) - (cellA.y * SAMPLE_2DCUBE_CELLS_PER_SIDE);
-    
-    // vec2 cellB = vec2(0.0, 0.0);
-    // cellB.y = floor(ceil(Z) / SAMPLE_2DCUBE_CELLS_PER_SIDE);
-    // cellB.x = ceil(Z) - (cellB.y * SAMPLE_2DCUBE_CELLS_PER_SIDE);
-    
-    // vec2 uvA = (cellA * cells_factor) + halt_pixel + ((cells_factor - pixel) * xyz.xy);
-    // vec2 uvB = (cellB * cells_factor) + halt_pixel + ((cells_factor - pixel) * xyz.xy);
-
-    // #ifdef SAMPLE_2DCUBE_FLIP_Y
-    // uvA.y = 1.0-uvA.y;
-    // uvB.y = 1.0-uvB.y;
-    // #endif
-
-    // vec4 b0 = SAMPLE_2DCUBE_FNC(lut, uvA);
-    // vec4 b1 = SAMPLE_2DCUBE_FNC(lut, uvB);
-
-    // return mix(b0, b1, fract(Z) );
 }
 #endif 

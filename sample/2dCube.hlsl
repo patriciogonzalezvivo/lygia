@@ -1,19 +1,16 @@
 #include "../sample.hlsl"
+#include "../math/mod.hlsl"
 
 /*
 Author: Patricio Gonzalez Vivo
 description: Use a 2D texture as a 3D one
-use: <float4> sample2DCube(in <sampler2D> tex_lut, in <float3> xyz) 
+use: <float4> sample2DCube(in <sampler2D> lut, in <float3> xyz) 
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - SAMPLE_2DCUBE_CELL_SIZE
     - SAMPLE_2DCUBE_CELLS_PER_SIDE
     - SAMPLE_2DCUBE_FNC
 */
-
-#ifndef SAMPLE_2DCUBE_CELL_SIZE
-#define SAMPLE_2DCUBE_CELL_SIZE 64.0
-#endif
 
 #ifndef SAMPLE_2DCUBE_CELLS_PER_SIDE
 #define SAMPLE_2DCUBE_CELLS_PER_SIDE 8.0
@@ -25,28 +22,42 @@ options:
 
 #ifndef FNC_SAMPLE_2DCUBE
 #define FNC_SAMPLE_2DCUBE
-float4 sample2DCube(in sampler2D tex_lut, in float3 xyz) {
-    float Z = xyz.z * SAMPLE_2DCUBE_CELL_SIZE;
+float4 sample2DCube(in sampler2D lut, in float3 xyz) {
 
-    const float cells_factor = 1.0/SAMPLE_2DCUBE_CELLS_PER_SIDE;
-    const float pixel = 1.0/ (SAMPLE_2DCUBE_CELLS_PER_SIDE * SAMPLE_2DCUBE_CELL_SIZE);
-    const float halt_pixel = pixel * 0.5;
+#if defined(SAMPLE_2DCUBE_CELL_SIZE)
+    const float cellsSize = SAMPLE_2DCUBE_CELL_SIZE;
+    float cellsPerSide = sqrt(cellsSize);
+    float cellsFactor = 1.0/cellsPerSide;
+    float lutSize = cellsPerSide * cellsSize;
+    float lutSizeFactor = 1.0/lutSize;
 
-    float2 cellA = float2(0.0, 0.0);
-    cellA.y = floor(floor(Z) / SAMPLE_2DCUBE_CELLS_PER_SIDE);
-    cellA.x = floor(Z) - (cellA.y * SAMPLE_2DCUBE_CELLS_PER_SIDE);
-    
-    float2 cellB = float2(0.0, 0.0);
-    cellB.y = floor(ceil(Z) / SAMPLE_2DCUBE_CELLS_PER_SIDE);
-    cellB.x = ceil(Z) - (cellB.y * SAMPLE_2DCUBE_CELLS_PER_SIDE);
-    
-    float2 uvA = (cellA * cells_factor) + halt_pixel + ((cells_factor - pixel) * xyz.xy);
-    float2 uvB = (cellB * cells_factor) + halt_pixel + ((cells_factor - pixel) * xyz.xy);
+#elif defined(SAMPLE_2DCUBE_CELLS_PER_SIDE)
+    const float cellsPerSide = SAMPLE_2DCUBE_CELLS_PER_SIDE;
+    const float cellsSize = cellsPerSide * cellsPerSide;
+    const float cellsFactor = 1.0/cellsPerSide;
+    const float lutSize = cellsPerSide * cellsSize;
+    const float lutSizeFactor = 1.0/lutSize;
+#endif
 
-    float4 b0 = SAMPLE_2DCUBE_FNC(tex_lut, uvA);
-    float4 b1 = SAMPLE_2DCUBE_FNC(tex_lut, uvB);
+    xyz *= (cellsSize-1.0);
+    float iz = floor(xyz.z);
 
-    return lerp(b0, b1, frac(Z));
+    float x0 = mod(iz, cellsPerSide) * cellsSize;
+    float y0 = floor(iz * cellsFactor) * cellsSize;
+
+    float x1 = mod(iz + 1.0, cellsPerSide) * cellsSize;
+    float y1 = floor((iz + 1.0) * cellsFactor) * cellsSize;
+
+    float2 uv0 = float2(x0 + xyz.x + 0.5, y0 + xyz.y + 0.5) * lutSizeFactor;
+    float2 uv1 = float2(x1 + xyz.x + 0.5, y1 + xyz.y + 0.5) * lutSizeFactor;
+
+    #ifndef SAMPLE_2DCUBE_FLIP_Y
+    uv0.y = 1.0 - uv0.y;
+    uv1.y = 1.0 - uv1.y;
+    #endif
+
+    return lerp(SAMPLE_2DCUBE_FNC(lut, uv0), 
+                SAMPLE_2DCUBE_FNC(lut, uv1), 
+                xyz.z - iz );
 }
-
 #endif 
