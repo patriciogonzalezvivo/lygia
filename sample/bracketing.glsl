@@ -11,9 +11,7 @@ options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - SAMPLEBRACKETING_TYPE:
     - SAMPLEBRACKETING_SAMPLER_FNC(UV):
-    - SAMPLEBRACKETING_ANGLE_DELTA:
     - SAMPLEBRACKETING_REPLACE_DIVERGENCE
-license: Copyright Huw Bowles May 2022 on MIT license
 */
 
 #ifndef SAMPLEBRACKETING_TYPE

@@ -13,6 +13,30 @@ options:
     - LUT_FLIP_Y: hen defined it expects a vertically flipled texture 
 */
 
+#ifndef FNC_LUT
+#define FNC_LUT
+
+#ifdef LUT_SQUARE 
+
+#ifdef LUT_FLIP_Y
+#define SAMPLE_2DCUBE_FLIP_Y
+#endif
+
+#ifndef SAMPLE_2DCUBE_CELLS_PER_SIDE
+#ifdef LUT_CELLS_PER_SIDE
+#define SAMPLE_2DCUBE_CELLS_PER_SIDE LUT_CELLS_PER_SIDE
+#else
+#define SAMPLE_2DCUBE_CELLS_PER_SIDE 8.0
+#endif
+#endif
+
+#include "../sample/2dCube.glsl"
+vec4 lut(in sampler2D tex_lut, in vec4 color, in int offset) { 
+    return sample2DCube(tex_lut, color.rgb); 
+}
+
+#else
+
 #ifndef LUT_N_ROWS
 #define LUT_N_ROWS 1
 #endif
@@ -25,29 +49,7 @@ options:
 #define LUT_CELLS_PER_SIDE 8.0
 #endif
 
-#ifndef FNC_LUT
-#define FNC_LUT
 
-
-#ifdef LUT_SQUARE 
-
-#ifdef LUT_FLIP_Y
-#define SAMPLE_2DCUBE_FLIP_Y
-#endif
-
-#ifndef SAMPLE_2DCUBE_CELL_SIZE
-#define SAMPLE_2DCUBE_CELL_SIZE LUT_CELL_SIZE
-#endif
-
-#ifndef SAMPLE_2DCUBE_CELLS_PER_SIDE
-#define SAMPLE_2DCUBE_CELLS_PER_SIDE 8.0
-#endif
-
-#include "../sample/2dCube.glsl"
-
-vec4 lut(in sampler2D tex_lut, in vec4 color, in int offset) { return sample2DCube(tex_lut, color.rgb); }
-
-#else
 // Data about how the LUTs rows are encoded
 const float LUT_WIDTH = LUT_CELL_SIZE*LUT_CELL_SIZE;
 const float LUT_OFFSET = 1./ float( LUT_N_ROWS );
