@@ -9,6 +9,8 @@ use: <float|mat2|mat3|mat4> inverse(in <float|mat2|mat3|mat4> m)
 
 float inverse(float m) { return 1.0 / m; }
 
+#if (__VERSION__ < 140)
+
 mat2 inverse(mat2 m) {
     return mat2(m[1][1],-m[0][1],
                 -m[1][0], m[0][0]) / (m[0][0]*m[1][1] - m[0][1]*m[1][0]);
@@ -70,5 +72,7 @@ mat4 inverse(mat4 m) {
                 a31 * b01 - a30 * b03 - a32 * b00,
                 a20 * b03 - a21 * b01 + a22 * b00) / det;
 }
+
+#endif
 
 #endif
