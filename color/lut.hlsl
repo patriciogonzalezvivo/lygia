@@ -12,14 +12,6 @@ options:
     - LUT_FLIP_Y: hen defined it expects a vertically flipled texture 
 */
 
-#ifndef LUT_N_ROWS
-#define LUT_N_ROWS 1
-#endif
-
-#ifndef LUT_CELL_SIZE
-#define LUT_CELL_SIZE 32.0
-#endif
-
 #ifndef FNC_LUT
 #define FNC_LUT
 
@@ -29,17 +21,18 @@ options:
 #define SAMPLE_2DCUBE_FLIP_Y
 #endif
 
-#ifndef SAMPLE_2DCUBE_CELL_SIZE
-#define SAMPLE_2DCUBE_CELL_SIZE LUT_CELL_SIZE
-#endif
-
 #ifndef SAMPLE_2DCUBE_CELLS_PER_SIDE
+#ifdef LUT_CELLS_PER_SIDE
+#define SAMPLE_2DCUBE_CELLS_PER_SIDE LUT_CELLS_PER_SIDE
+#else
 #define SAMPLE_2DCUBE_CELLS_PER_SIDE 8.0
+#endif
 #endif
 
 #include "../sample/2dCube.hlsl"
-
-float4 lut(in sampler2D tex_lut, in float4 color, in int offset) { return sample2DCube(tex_lut, color.rgb); }
+float4 lut(in sampler2D tex, in float4 color, in int offset) { 
+    return sample2DCube(tex, color.rgb); 
+}
 
 #else
 // Data about how the LUTs rows are encoded
@@ -49,7 +42,7 @@ const float4 LUT_SIZE = float4(LUT_WIDTH, LUT_CELL_SIZE, 1./LUT_WIDTH, 1./LUT_CE
 
 // Apply LUT to a COLOR
 // ------------------------------------------------------------
-float4 lut(in sampler2D tex_lut, in float4 color, in int offset) {
+float4 lut(in sampler2D tex, in float4 color, in int offset) {
     float3 scaledColor = clamp(color.rgb, float3(0., 0., 0.), float3(1., 1., 1.)) * (LUT_SIZE.y - 1.);
     float bFrac = frac(scaledColor.z);
 
@@ -66,8 +59,8 @@ float4 lut(in sampler2D tex_lut, in float4 color, in int offset) {
     #endif
 
     // sample the 2 adjacent blue slices
-    float4 b0 = SAMPLER_FNC(tex_lut, texc);
-    float4 b1 = SAMPLER_FNC(tex_lut, float2(texc.x + LUT_SIZE.w, texc.y));
+    float4 b0 = SAMPLER_FNC(tex, texc);
+    float4 b1 = SAMPLER_FNC(tex, float2(texc.x + LUT_SIZE.w, texc.y));
 
     // blend between the 2 adjacent blue slices
     color = lerp(b0, b1, bFrac);
@@ -76,8 +69,8 @@ float4 lut(in sampler2D tex_lut, in float4 color, in int offset) {
 }
 #endif
 
-float4 lut(in sampler2D tex_lut, in float4 color) { return lut(tex_lut, color, 0); }
-float3 lut(in sampler2D tex_lut, in float3 color, in int offset) { return lut(tex_lut, float4(color, 1.), offset).rgb; }
-float3 lut(in sampler2D tex_lut, in float3 color) { return lut(tex_lut, color, 0).rgb; }
+float4 lut(in sampler2D tex, in float4 color) { return lut(tex, color, 0); }
+float3 lut(in sampler2D tex, in float3 color, in int offset) { return lut(tex, float4(color, 1.), offset).rgb; }
+float3 lut(in sampler2D tex, in float3 color) { return lut(tex, color, 0).rgb; }
 
 #endif
