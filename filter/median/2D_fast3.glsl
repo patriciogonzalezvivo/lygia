@@ -9,7 +9,7 @@ use: median2D_fast3(<sampler2D> texture, <vec2> st, <vec2> pixel)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - MEDIAN2D_FAST3_TYPE: default vec4
-    - MEDIAN2D_FAST3_SAMPLER_FNC(POS_UV): default texture2D(tex, POS_UV)
+    - MEDIAN2D_FAST3_SAMPLER_FNC(TEX, UV): default texture2D(TEX, UV)
 */
 
 #ifndef MEDIAN2D_FAST3_TYPE
@@ -22,9 +22,9 @@ options:
 
 #ifndef MEDIAN2D_FAST3_SAMPLER_FNC
 #ifdef MEDIAN_SAMPLER_FNC
-#define MEDIAN2D_FAST3_SAMPLER_FNC(POS_UV) MEDIAN_SAMPLER_FNC(POS_UV)
+#define MEDIAN2D_FAST3_SAMPLER_FNC(TEX, UV) MEDIAN_SAMPLER_FNC(TEX, UV)
 #else
-#define MEDIAN2D_FAST3_SAMPLER_FNC(POS_UV) SAMPLER_FNC(tex, POS_UV)
+#define MEDIAN2D_FAST3_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
 #endif
 #endif
 
@@ -52,7 +52,7 @@ MEDIAN2D_FAST3_TYPE median2D_fast3(in sampler2D tex, in vec2 st, in vec2 radius)
             // If a pixel in the window is located at (x+dX, y+dY), put it at index (dX + R)(2R + 1) + (dY + R) of the
             // pixel array. This will fill the pixel array, with the top left pixel of the window at pixel[0] and the
             // bottom right pixel of the window at pixel[N-1].
-            v[(dX + 1) * 3 + (dY + 1)] = MEDIAN2D_FAST3_SAMPLER_FNC(st + offset * radius);
+            v[(dX + 1) * 3 + (dY + 1)] = MEDIAN2D_FAST3_SAMPLER_FNC(tex, st + offset * radius);
         }
     }
     MEDIAN2D_FAST3_TYPE temp = MEDIAN2D_FAST3_TYPE(0.);

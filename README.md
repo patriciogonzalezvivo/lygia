@@ -225,13 +225,13 @@ Here you can find some implementations on different languages:
     #endif
 
     #ifndef MYFUNC_SAMPLER_FNC
-    #define MYFUNC_SAMPLER_FNC(POS_UV) texture2D(tex, POS_UV)
+    #define MYFUNC_SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
     #endif
 
     #ifndef FNC_MYFUNC
     #define FNC_MYFUNC
     MYFUNC_TYPE myFunc(sampler2D tex, vec2 st) {
-        return MYFUNC_SAMPLER_FNC(st);
+        return MYFUNC_SAMPLER_FNC(tex, st);
     }
     #endif
 

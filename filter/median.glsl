@@ -7,7 +7,7 @@ use: median(<sampler2D> texture, <vec2> st, <vec2> pixel)
 options:
     - MEDIAN_AMOUNT: median3 (3x3) median5 (5x5)
     - MEDIAN_TYPE: default vec4
-    - MEDIAN_SAMPLER_FNC(POS_UV): default texture2D(tex, POS_UV)
+    - MEDIAN_SAMPLER_FNC(TEX, UV): default texture2D(TEX, UV)
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 license:
     Copyright (c) Morgan McGuire and Williams College, 2006. All rights reserved.
@@ -26,7 +26,7 @@ license:
 #endif
 
 #ifndef MEDIAN_SAMPLER_FNC
-#define MEDIAN_SAMPLER_FNC(POS_UV) SAMPLER_FNC(tex, POS_UV)
+#define MEDIAN_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
 #endif
 
 #include "median/2D_fast3.glsl"

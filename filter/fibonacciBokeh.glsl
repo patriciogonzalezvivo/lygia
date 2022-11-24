@@ -17,7 +17,7 @@ options:
 #endif
 
 #ifndef FIBONACCIBOKEH_SAMPLER_FNC
-#define FIBONACCIBOKEH_SAMPLER_FNC(POS_UV) SAMPLER_FNC(tex, POS_UV)
+#define FIBONACCIBOKEH_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
 #endif
 
 #ifndef FNC_FIBONACCIBOKEH
@@ -35,7 +35,7 @@ FIBONACCIBOKEH_TYPE fibonacciBokeh(sampler2D tex, vec2 st, vec2 pixel, float amo
     float counter = 0.0;
     for (float i = 1.0; i < 16.0; i += 1.0/i) {
         st2 *= m;
-        color += gamma2linear( FIBONACCIBOKEH_SAMPLER_FNC(st + st2 * i * pixel ) * f);
+        color += gamma2linear( FIBONACCIBOKEH_SAMPLER_FNC(tex, st + st2 * i * pixel ) * f);
         counter++;
     }
     return linear2gamma(color / counter);

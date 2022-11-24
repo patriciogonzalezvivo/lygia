@@ -4,32 +4,32 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: upscale for function for convolution pyramid  https://www.cs.huji.ac.il/labs/cglab/projects/convpyr/data/convpyr-small.pdf
-use: <vec4> convolutionPyramidUpscale(<sampler2D> tex0, sampler2D tex1, <vec2> st, <vec2> pixel)
+use: <vec4> POISSONFILLUpscale(<sampler2D> tex0, sampler2D tex1, <vec2> st, <vec2> pixel)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
-    - CONVOLUTIONPYRAMID_H1: 1.0334, 0.6836, 0.1507
-    - CONVOLUTIONPYRAMID_H2: 0.0270
-    - CONVOLUTIONPYRAMID_G: 0.7753, 0.0312
+    - POISSONFILL_H1: 1.0334, 0.6836, 0.1507
+    - POISSONFILL_H2: 0.0270
+    - POISSONFILL_G: 0.7753, 0.0312
 */
 
-#ifndef CONVOLUTIONPYRAMID_H1
-#define CONVOLUTIONPYRAMID_H1 1.0334, 0.6836, 0.1507
+#ifndef POISSONFILL_H1
+#define POISSONFILL_H1 1.0334, 0.6836, 0.1507
 #endif
 
-#ifndef CONVOLUTIONPYRAMID_H2
-#define CONVOLUTIONPYRAMID_H2 0.0270
+#ifndef POISSONFILL_H2
+#define POISSONFILL_H2 0.0270
 #endif
 
-#ifndef CONVOLUTIONPYRAMID_G
-#define CONVOLUTIONPYRAMID_G 0.7753, 0.0312
+#ifndef POISSONFILL_G
+#define POISSONFILL_G 0.7753, 0.0312
 #endif
 
-#ifndef FNC_CONVOLUTIONPYRAMID_UPSCALE
-#define FNC_CONVOLUTIONPYRAMID_UPSCALE
-vec4 convolutionPyramidUpscale(sampler2D tex0, sampler2D tex1, vec2 st, vec2 pixel) {
-    const vec3  h1 = vec3(CONVOLUTIONPYRAMID_H1);
-    const float h2 = CONVOLUTIONPYRAMID_H2;
-    const vec2  g  = vec2(CONVOLUTIONPYRAMID_G);
+#ifndef FNC_POISSONFILL_UPSCALE
+#define FNC_POISSONFILL_UPSCALE
+vec4 poissonFillUpscale(sampler2D tex0, sampler2D tex1, vec2 st, vec2 pixel) {
+    const vec3  h1 = vec3(POISSONFILL_H1);
+    const float h2 = POISSONFILL_H2;
+    const vec2  g  = vec2(POISSONFILL_G);
 
     vec4 color = vec4(0.0);
     for (int dy = -1; dy <= 1; dy++) {

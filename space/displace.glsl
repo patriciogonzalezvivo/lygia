@@ -20,8 +20,8 @@ options:
 #define DISPLACE_PRECISION 0.01
 #endif
 
-#ifndef DISPLACE_SAMPLER
-#define DISPLACE_SAMPLER(UV) SAMPLER_FNC(tex, UV).r
+#ifndef DISPLACE_SAMPLER_FNC
+#define DISPLACE_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV).r
 #endif
 
 #ifndef DISPLACE_MAX_ITERATIONS
@@ -52,7 +52,7 @@ vec3 displace(sampler2D tex, vec3 ro, vec3 rd) {
         prev = curr;
         curr = prev + rd * DISPLACE_PRECISION;
 
-        hmap = DISPLACE_SAMPLER( curr.xy - 0.5 );
+        hmap = DISPLACE_SAMPLER_FNC(tex, curr.xy - 0.5 );
         // distance to the displaced surface
         float df = curr.z - hmap * DISPLACE_DEPTH;
         
@@ -71,6 +71,6 @@ vec3 displace(sampler2D tex, vec3 ro, vec3 rd) {
 
 vec3 displace(sampler2D tex, vec3 ro, vec2 uv) {
     vec3 rd = raymarchCamera(ro) * normalize(vec3(uv - 0.5, 1.0));
-    return displace(u_tex0Depth, ro, rd);
+    return displace(tex, ro, rd);
 }
 #endif

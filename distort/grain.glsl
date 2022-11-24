@@ -21,7 +21,7 @@ options:
 #endif
 
 #ifndef GRAIN_SAMPLER_FNC
-#define GRAIN_SAMPLER_FNC(POS_UV) SAMPLER_FNC(tex, POS_UV).rgb
+#define GRAIN_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV).rgb
 #endif
 
 #ifndef FNC_GRAIN
@@ -42,7 +42,7 @@ float grain(vec2 texCoord, vec2 resolution) {
 }
 
 GRAIN_TYPE grain(sampler2D tex, vec2 st, vec2 resolution, float t, float multiplier ) {
-    GRAIN_TYPE org = GRAIN_SAMPLER_FNC(st);
+    GRAIN_TYPE org = GRAIN_SAMPLER_FNC(tex, st);
 
     float g = grain(st, resolution, t, multiplier);
 

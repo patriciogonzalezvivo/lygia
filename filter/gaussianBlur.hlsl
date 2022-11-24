@@ -19,7 +19,7 @@ options:
 #endif
 
 #ifndef GAUSSIANBLUR_SAMPLER_FNC
-#define GAUSSIANBLUR_SAMPLER_FNC(POS_UV) SAMPLER_FNC(tex, POS_UV)
+#define GAUSSIANBLUR_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
 #endif
 
 #include "gaussianBlur/2D.hlsl"

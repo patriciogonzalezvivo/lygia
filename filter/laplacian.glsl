@@ -6,7 +6,7 @@ description: laplacian filter
 use: laplacian(<sampler2D> texture, <vec2> st, <vec2> pixels_scale [, <float> pixel_padding])
 options:
     - LAPLACIAN_TYPE: Return type, defaults to float
-    - LAPLACIAN_SAMPLER_FNC: Function used to sample the input texture, defaults to texture2D(tex,POS_UV).r
+    - LAPLACIAN_SAMPLER_FNC: Function used to sample the input texture, defaults to texture2D(tex,TEX, UV).r
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 */
 
@@ -15,7 +15,7 @@ options:
 #endif
 
 #ifndef LAPLACIAN_SAMPLER_FNC
-#define LAPLACIAN_SAMPLER_FNC(POS_UV) SAMPLER_FNC(tex, POS_UV)
+#define LAPLACIAN_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
 #endif
 
 #ifndef LAPLACIAN_FNC
@@ -38,40 +38,40 @@ options:
 
 LAPLACIAN_TYPE laplacian_w4(sampler2D tex, vec2 st, vec2 pixel) {
     LAPLACIAN_TYPE acc = LAPLACIAN_TYPE(0.0);
-    acc += LAPLACIAN_SAMPLER_FNC(st) * 4.0;
-    acc -= LAPLACIAN_SAMPLER_FNC(st + vec2(-1.0,  0.0) * pixel);
-    acc -= LAPLACIAN_SAMPLER_FNC(st + vec2( 0.0, -1.0) * pixel);
-    acc -= LAPLACIAN_SAMPLER_FNC(st + vec2( 0.0,  1.0) * pixel);
-    acc -= LAPLACIAN_SAMPLER_FNC(st + vec2( 1.0,  0.0) * pixel);
+    acc += LAPLACIAN_SAMPLER_FNC(tex, st) * 4.0;
+    acc -= LAPLACIAN_SAMPLER_FNC(tex, st + vec2(-1.0,  0.0) * pixel);
+    acc -= LAPLACIAN_SAMPLER_FNC(tex, st + vec2( 0.0, -1.0) * pixel);
+    acc -= LAPLACIAN_SAMPLER_FNC(tex, st + vec2( 0.0,  1.0) * pixel);
+    acc -= LAPLACIAN_SAMPLER_FNC(tex, st + vec2( 1.0,  0.0) * pixel);
     return acc;
 }
 
 LAPLACIAN_TYPE laplacian_w8(sampler2D tex, vec2 st, vec2 pixel) {
     LAPLACIAN_TYPE acc = LAPLACIAN_TYPE(0.0);
-    acc += LAPLACIAN_SAMPLER_FNC(st) * 8.0;
-    acc -= LAPLACIAN_SAMPLER_FNC(st + vec2(-1.0,  0.0) * pixel);
-    acc -= LAPLACIAN_SAMPLER_FNC(st + vec2( 0.0, -1.0) * pixel);
-    acc -= LAPLACIAN_SAMPLER_FNC(st + vec2( 0.0,  1.0) * pixel);
-    acc -= LAPLACIAN_SAMPLER_FNC(st + vec2( 1.0,  0.0) * pixel);
-    acc -= LAPLACIAN_SAMPLER_FNC(st + vec2(-1.0,  1.0) * pixel);
-    acc -= LAPLACIAN_SAMPLER_FNC(st + vec2( 1.0, -1.0) * pixel);
-    acc -= LAPLACIAN_SAMPLER_FNC(st + vec2( 1.0,  1.0) * pixel);
-    acc -= LAPLACIAN_SAMPLER_FNC(st + vec2( 1.0,  1.0) * pixel);
+    acc += LAPLACIAN_SAMPLER_FNC(tex, st) * 8.0;
+    acc -= LAPLACIAN_SAMPLER_FNC(tex, st + vec2(-1.0,  0.0) * pixel);
+    acc -= LAPLACIAN_SAMPLER_FNC(tex, st + vec2( 0.0, -1.0) * pixel);
+    acc -= LAPLACIAN_SAMPLER_FNC(tex, st + vec2( 0.0,  1.0) * pixel);
+    acc -= LAPLACIAN_SAMPLER_FNC(tex, st + vec2( 1.0,  0.0) * pixel);
+    acc -= LAPLACIAN_SAMPLER_FNC(tex, st + vec2(-1.0,  1.0) * pixel);
+    acc -= LAPLACIAN_SAMPLER_FNC(tex, st + vec2( 1.0, -1.0) * pixel);
+    acc -= LAPLACIAN_SAMPLER_FNC(tex, st + vec2( 1.0,  1.0) * pixel);
+    acc -= LAPLACIAN_SAMPLER_FNC(tex, st + vec2( 1.0,  1.0) * pixel);
     return acc;
 }
 
 LAPLACIAN_TYPE laplacian_w12(sampler2D tex, vec2 st, vec2 pixel) {
     LAPLACIAN_TYPE acc = LAPLACIAN_TYPE(0.0);
-    acc += LAPLACIAN_SAMPLER_FNC(st) * 12.0;
-    acc -= LAPLACIAN_SAMPLER_FNC(st + vec2(-1.0,  0.0) * pixel) * 2.0;
-    acc -= LAPLACIAN_SAMPLER_FNC(st + vec2( 0.0, -1.0) * pixel) * 2.0;
-    acc -= LAPLACIAN_SAMPLER_FNC(st + vec2( 0.0,  1.0) * pixel) * 2.0;
-    acc -= LAPLACIAN_SAMPLER_FNC(st + vec2( 1.0,  0.0) * pixel) * 2.0;
+    acc += LAPLACIAN_SAMPLER_FNC(tex, st) * 12.0;
+    acc -= LAPLACIAN_SAMPLER_FNC(tex, st + vec2(-1.0,  0.0) * pixel) * 2.0;
+    acc -= LAPLACIAN_SAMPLER_FNC(tex, st + vec2( 0.0, -1.0) * pixel) * 2.0;
+    acc -= LAPLACIAN_SAMPLER_FNC(tex, st + vec2( 0.0,  1.0) * pixel) * 2.0;
+    acc -= LAPLACIAN_SAMPLER_FNC(tex, st + vec2( 1.0,  0.0) * pixel) * 2.0;
 
-    acc -= LAPLACIAN_SAMPLER_FNC(st + vec2(-1.0,  1.0) * pixel);
-    acc -= LAPLACIAN_SAMPLER_FNC(st + vec2( 1.0, -1.0) * pixel);
-    acc -= LAPLACIAN_SAMPLER_FNC(st + vec2( 1.0,  1.0) * pixel);
-    acc -= LAPLACIAN_SAMPLER_FNC(st + vec2( 1.0,  1.0) * pixel);
+    acc -= LAPLACIAN_SAMPLER_FNC(tex, st + vec2(-1.0,  1.0) * pixel);
+    acc -= LAPLACIAN_SAMPLER_FNC(tex, st + vec2( 1.0, -1.0) * pixel);
+    acc -= LAPLACIAN_SAMPLER_FNC(tex, st + vec2( 1.0,  1.0) * pixel);
+    acc -= LAPLACIAN_SAMPLER_FNC(tex, st + vec2( 1.0,  1.0) * pixel);
     return acc;
 }
 

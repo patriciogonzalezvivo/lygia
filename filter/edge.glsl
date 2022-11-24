@@ -7,7 +7,7 @@ use: edge(<sampler2D> texture, <vec2> st, <vec2> pixels_scale)
 options:
     - EDGE_FNC: Edge detection algorithm, defaults to edgeSobel, edgePrewitt & edgeSobel_directional also available
     - EDGE_TYPE: Return type, defaults to float
-    - EDGE_SAMPLER_FNC: Function used to sample the input texture, defaults to texture2D(tex,POS_UV).r
+    - EDGE_SAMPLER_FNC: Function used to sample the input texture, defaults to texture2D(tex,TEX, UV).r
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 */
 
@@ -20,7 +20,7 @@ options:
 #endif
 
 #ifndef EDGE_SAMPLER_FNC
-#define EDGE_SAMPLER_FNC(POS_UV) SAMPLER_FNC(tex, POS_UV).r
+#define EDGE_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV).r
 #endif
 
 #include "edge/prewitt.glsl"
