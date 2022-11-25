@@ -29,11 +29,7 @@ options:
 */
 
 #ifndef SURFACE_POSITION
-#if defined(GLSLVIEWER)
-#define SURFACE_POSITION v_position
-#else
 #define SURFACE_POSITION float3(0.0, 0.0, 0.0)
-#endif
 #endif
 
 #ifndef SHADOW_INIT

@@ -10,8 +10,8 @@ options:
     - SAMPLEDOF_TYPE:
     - SAMPLEDOF_BLUR_SIZE:
     - SAMPLEDOF_RAD_SCALE:
-    - SAMPLEDOF_DEPTH_FNC(UV):
-    - SAMPLEDOF_COLOR_FNC(UV):
+    - SAMPLEDOF_DEPTH_SAMPLE_FNC(TEX, UV):
+    - SAMPLEDOF_COLOR_SAMPLE_FNC(TEX, UV):
     - SAMPLEDOF_DEBUG
     - RESOLUTION
 */
@@ -32,12 +32,12 @@ options:
 #define GOLDEN_ANGLE 2.39996323
 #endif
 
-#ifndef SAMPLEDOF_DEPTH_FNC
-#define SAMPLEDOF_DEPTH_FNC(UV) SAMPLER_FNC(texDepth,UV).r
+#ifndef SAMPLEDOF_DEPTH_SAMPLE_FNC
+#define SAMPLEDOF_DEPTH_SAMPLE_FNC(TEX, UV) SAMPLER_FNC(TEX,UV).r
 #endif
 
-#ifndef SAMPLEDOF_COLOR_FNC
-#define SAMPLEDOF_COLOR_FNC(UV) SAMPLER_FNC(tex,UV).rgb
+#ifndef SAMPLEDOF_COLOR_SAMPLE_FNC
+#define SAMPLEDOF_COLOR_SAMPLE_FNC(TEX, UV) SAMPLER_FNC(TEX, UV).rgb
 #endif
 
 #ifndef SAMPLEDOF_TYPE
@@ -54,10 +54,10 @@ float getBlurSize(float depth,float focusPoint,float focusScale){
 SAMPLEDOF_TYPE sampleDoF(sampler2D tex,sampler2D texDepth,vec2 texCoord,float focusPoint,float focusScale){
     float pct=0.;
     
-    float centerDepth = SAMPLEDOF_DEPTH_FNC(texCoord);
+    float centerDepth = SAMPLEDOF_DEPTH_SAMPLE_FNC(texDepth, texCoord);
     float centerSize = getBlurSize(centerDepth, focusPoint, focusScale);
     vec2 pixelSize = 1.0/RESOLUTION.xy;
-    SAMPLEDOF_TYPE color = SAMPLEDOF_COLOR_FNC(texCoord);
+    SAMPLEDOF_TYPE color = SAMPLEDOF_COLOR_SAMPLE_FNC(tex, texCoord);
     
     float total = 1.0;
     float radius = SAMPLEDOF_RAD_SCALE;
@@ -66,12 +66,12 @@ SAMPLEDOF_TYPE sampleDoF(sampler2D tex,sampler2D texDepth,vec2 texCoord,float fo
             break;
 
         vec2 tc = texCoord + vec2(cos(angle), sin(angle)) * pixelSize * radius;
-        float sampleDepth = SAMPLEDOF_DEPTH_FNC(tc);
+        float sampleDepth = SAMPLEDOF_DEPTH_SAMPLE_FNC(texDepth, tc);
         float sampleSize = getBlurSize(sampleDepth, focusPoint, focusScale);
         if (sampleDepth > centerDepth)
             sampleSize=clamp(sampleSize, 0.0, centerSize*2.0);
         pct = smoothstep(radius-0.5, radius+0.5, sampleSize);
-        SAMPLEDOF_TYPE sampleColor = SAMPLEDOF_COLOR_FNC(tc);
+        SAMPLEDOF_TYPE sampleColor = SAMPLEDOF_COLOR_SAMPLE_FNC(tex, tc);
         #ifdef SAMPLEDOF_DEBUG
         sampleColor.rgb = heatmap(pct*0.5+(angle/SAMPLEDOF_BLUR_SIZE)*0.1);
         #endif
@@ -88,21 +88,21 @@ SAMPLEDOF_TYPE sampleDoF(sampler2D tex, sampler2D texDepth, vec2 texCoord, float
     float pct = 0.0;
     float ang = 0.0;
 
-    float centerDepth = SAMPLEDOF_DEPTH_FNC(texCoord);
+    float centerDepth = SAMPLEDOF_DEPTH_SAMPLE_FNC(texDepth, texCoord);
     float centerSize = getBlurSize(centerDepth, focusPoint, focusScale);
     vec2 pixelSize = 1./RESOLUTION.xy;
-    SAMPLEDOF_TYPE color = SAMPLEDOF_COLOR_FNC(texCoord);
+    SAMPLEDOF_TYPE color = SAMPLEDOF_COLOR_SAMPLE_FNC(tex, texCoord);
 
     float tot = 1.0;
     float radius = SAMPLEDOF_RAD_SCALE;
     for (ang = 0.0; radius < SAMPLEDOF_BLUR_SIZE; ang += GOLDEN_ANGLE) {
         vec2 tc = texCoord + vec2(cos(ang), sin(ang)) * pixelSize * radius;
-        float sampleDepth = SAMPLEDOF_DEPTH_FNC(tc);
+        float sampleDepth = SAMPLEDOF_DEPTH_SAMPLE_FNC(texDepth, tc);
         float sampleSize = getBlurSize(sampleDepth, focusPoint, focusScale);
         if (sampleDepth > centerDepth)
             sampleSize = clamp(sampleSize, 0.0, centerSize*2.0);
         pct = smoothstep(radius-0.5, radius+0.5, sampleSize);
-        SAMPLEDOF_TYPE sampleColor = SAMPLEDOF_COLOR_FNC(tc);
+        SAMPLEDOF_TYPE sampleColor = SAMPLEDOF_COLOR_SAMPLE_FNC(tex, tc);
         #ifdef SAMPLEDOF_DEBUG
         sampleColor.rgb = heatmap(pct * 0.5 + (ang/SAMPLEDOF_BLUR_SIZE) * 0.1);
         #endif
