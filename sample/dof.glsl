@@ -51,13 +51,13 @@ float getBlurSize(float depth,float focusPoint,float focusScale){
 
 #ifdef PLATFORM_WEBGL
 
-SAMPLEDOF_TYPE sampleDoF(sampler2D tex,sampler2D texDepth,vec2 texCoord,float focusPoint,float focusScale){
+SAMPLEDOF_TYPE sampleDoF(sampler2D tex,sampler2D texDepth, vec2 st, float focusPoint,float focusScale){
     float pct=0.;
     
-    float centerDepth = SAMPLEDOF_DEPTH_SAMPLE_FNC(texDepth, texCoord);
+    float centerDepth = SAMPLEDOF_DEPTH_SAMPLE_FNC(texDepth, st);
     float centerSize = getBlurSize(centerDepth, focusPoint, focusScale);
     vec2 pixelSize = 1.0/RESOLUTION.xy;
-    SAMPLEDOF_TYPE color = SAMPLEDOF_COLOR_SAMPLE_FNC(tex, texCoord);
+    SAMPLEDOF_TYPE color = SAMPLEDOF_COLOR_SAMPLE_FNC(tex, st);
     
     float total = 1.0;
     float radius = SAMPLEDOF_RAD_SCALE;
@@ -65,7 +65,7 @@ SAMPLEDOF_TYPE sampleDoF(sampler2D tex,sampler2D texDepth,vec2 texCoord,float fo
         if (radius >= SAMPLEDOF_BLUR_SIZE)
             break;
 
-        vec2 tc = texCoord + vec2(cos(angle), sin(angle)) * pixelSize * radius;
+        vec2 tc = st + vec2(cos(angle), sin(angle)) * pixelSize * radius;
         float sampleDepth = SAMPLEDOF_DEPTH_SAMPLE_FNC(texDepth, tc);
         float sampleSize = getBlurSize(sampleDepth, focusPoint, focusScale);
         if (sampleDepth > centerDepth)
@@ -84,19 +84,19 @@ SAMPLEDOF_TYPE sampleDoF(sampler2D tex,sampler2D texDepth,vec2 texCoord,float fo
 
 #else
 
-SAMPLEDOF_TYPE sampleDoF(sampler2D tex, sampler2D texDepth, vec2 texCoord, float focusPoint, float focusScale) {
+SAMPLEDOF_TYPE sampleDoF(sampler2D tex, sampler2D texDepth, vec2 st, float focusPoint, float focusScale) {
     float pct = 0.0;
     float ang = 0.0;
 
-    float centerDepth = SAMPLEDOF_DEPTH_SAMPLE_FNC(texDepth, texCoord);
+    float centerDepth = SAMPLEDOF_DEPTH_SAMPLE_FNC(texDepth, st);
     float centerSize = getBlurSize(centerDepth, focusPoint, focusScale);
     vec2 pixelSize = 1./RESOLUTION.xy;
-    SAMPLEDOF_TYPE color = SAMPLEDOF_COLOR_SAMPLE_FNC(tex, texCoord);
+    SAMPLEDOF_TYPE color = SAMPLEDOF_COLOR_SAMPLE_FNC(tex, st);
 
     float tot = 1.0;
     float radius = SAMPLEDOF_RAD_SCALE;
     for (ang = 0.0; radius < SAMPLEDOF_BLUR_SIZE; ang += GOLDEN_ANGLE) {
-        vec2 tc = texCoord + vec2(cos(ang), sin(ang)) * pixelSize * radius;
+        vec2 tc = st + vec2(cos(ang), sin(ang)) * pixelSize * radius;
         float sampleDepth = SAMPLEDOF_DEPTH_SAMPLE_FNC(texDepth, tc);
         float sampleSize = getBlurSize(sampleDepth, focusPoint, focusScale);
         if (sampleDepth > centerDepth)
