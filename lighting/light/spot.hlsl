@@ -15,7 +15,7 @@ options:
 #include "falloff.hlsl"
 
 #ifndef SURFACE_POSITION
-#define SURFACE_POSITION v_position
+#define SURFACE_POSITION float3(0.0, 0.0, 0.0)
 #endif
 
 #ifndef LIGHT_POSITION
