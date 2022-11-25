@@ -23,7 +23,14 @@ options:
 vec4 alphaFill(sampler2D tex, vec2 st, vec2 pixel, int passes) {
     vec4 accum = vec4(0.0, 0.0, 0.0, 0.0);
     float max_dist = sqrt(ALPHAFILL_RADIUS * ALPHAFILL_RADIUS);
+
+    #if defined(PLATFORM_WEBGL)
+    for (int s = 0; s < 100; s++) {   
+        if (s >= passes)
+            break;
+    #else 
     for (int s = 0; s < passes; s++) {    
+    #endif
         vec2 spiral = vec2(sin(float(s)*GOLDEN_ANGLE), cos(float(s)*GOLDEN_ANGLE));
         float dist = sqrt(ALPHAFILL_RADIUS * float(s));
         spiral *= dist;
