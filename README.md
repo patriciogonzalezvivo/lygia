@@ -285,3 +285,8 @@ Comming soon will be possible to get a permanent comercial license hook to a sin
 ## Credits
 
 Created and mantain by [Patricio Gonzalez Vivo](https://patriciogonzalezvivo.com/)( <a rel="me" href="https://merveilles.town/@patricio">Mastodon</a> | [Twitter](https://twitter.com/patriciogv) | [Instagram](https://www.instagram.com/patriciogonzalezvivo/) | [GitHub](https://github.com/sponsors/patriciogonzalezvivo) ) and every direct or indirect [contributors](https://github.com/patriciogonzalezvivo/lygia/graphs/contributors) to the GitHub. This library has been built over years, and in many cases on top of the work of brillant and generous people like: [Inigo Quiles](https://www.iquilezles.org/), [Morgan McGuire](https://casual-effects.com/), [Alan Wolfe](https://blog.demofox.org/), [Hugh Kennedy](https://github.com/hughsk), [Matt DesLauriers](https://www.mattdesl.com/) and many others.
+
+
+## Get the latest news and releases
+
+Sign up for the news letter bellow, joing [the LYGIA's channel on Discord](https://shader.zone) or follow the [Github repository](https://github.com/patriciogonzalezvivo/lygia)
