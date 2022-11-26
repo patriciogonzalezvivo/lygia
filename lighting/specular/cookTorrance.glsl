@@ -1,4 +1,5 @@
 #include "../common/beckmann.glsl"
+#include "../common/ggx.glsl"
 #include "../../math/powFast.glsl"
 #include "../../math/saturate.glsl"
 #include "../../math/const.glsl"
@@ -11,6 +12,11 @@
 #endif
 #endif
 
+#ifndef SPECULAR_COOKTORRANCE_DIFFUSE_FNC
+#define SPECULAR_COOKTORRANCE_DIFFUSE_FNC GGX
+// #define SPECULAR_COOKTORRANCE_DIFFUSE_FNC beckmann
+#endif 
+
 #ifndef FNC_SPECULAR_COOKTORRANCE
 #define FNC_SPECULAR_COOKTORRANCE
 
@@ -19,32 +25,29 @@ float specularCookTorrance(vec3 _L, vec3 _N, vec3 _V, float _NoV, float _NoL, fl
     float NoV = max(_NoV, 0.0);
     float NoL = max(_NoL, 0.0);
 
-    //Half angle vector
+    // Half angle vector
     vec3 H = normalize(_L + _V);
 
-    //Geometric term
+    // Geometric term
     float NoH = max(dot(_N, H), 0.0);
     float VoH = max(dot(_V, H), 0.000001);
-    float LoH = max(dot(_L, H), 0.000001);
 
     float x = 2.0 * NoH / VoH;
     float G = min(1.0, min(x * NoV, x * NoL));
     
-    //Distribution term
-    float D = beckmann(NoH, _roughness);
+    // Distribution term
+    float D = SPECULAR_COOKTORRANCE_DIFFUSE_FNC(NoH, _roughness);
 
-    //Fresnel term
+    // Fresnel term
     float F = SPECULAR_POW(1.0 - NoV, _fresnel);
 
-    //Multiply terms and done
+    // Multiply terms and done
     return max(G * F * D / max(PI * NoV * NoL, 0.00001), 0.0);
 }
 
 // https://github.com/glslify/glsl-specular-cook-torrance
 float specularCookTorrance(vec3 L, vec3 N, vec3 V, float roughness, float fresnel) {
-    float NoV = max(dot(N, V), 0.0);
-    float NoL = max(dot(N, L), 0.0);
-    return specularCookTorrance(L, N, V, NoV, NoL, roughness, fresnel);
+    return specularCookTorrance(L, N, V, dot(N, V), dot(N, L), roughness, fresnel);
 }
 
 float specularCookTorrance(vec3 L, vec3 N, vec3 V, float roughness) {

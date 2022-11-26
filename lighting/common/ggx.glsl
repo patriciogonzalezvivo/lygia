@@ -28,8 +28,12 @@ float GGX(float NoH, float roughness) {
 }
 
 float GGX(vec3 N, vec3 H, float NoH, float roughness) {
+#if defined(TARGET_MOBILE)
     vec3 NxH = cross(N, H);
     float oneMinusNoHSquared = dot(NxH, NxH);
+#else
+    float oneMinusNoHSquared = 1.0 - NoH * NoH;
+#endif
 
     float a = NoH * roughness;
     float k = roughness / (oneMinusNoHSquared + a * a);

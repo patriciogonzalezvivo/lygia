@@ -1,6 +1,7 @@
 #include "../common/ggx.glsl"
 #include "../common/smithGGXCorrelated.glsl"
 #include "../../math/saturate.glsl"
+#include "../../math/saturateMediump.glsl"
 #include "../fresnel.glsl"
 
 #ifndef FNC_SPECULAR_GGX
