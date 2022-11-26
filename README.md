@@ -14,6 +14,7 @@ Tired of searching, porting and/or reimplementing the same functions over and ov
     <a href="https://observablehq.com/@radames/hello-lygia-shader-library"><img src="https://lygia.xyz/imgs/ob.png" width="100" /></a>
     <a href="https://codesandbox.io/s/lygia-react-starter-fftx6p"><img src="https://lygia.xyz/imgs/r3f.png" width="100" /></a>
     <a href="https://www.figma.com/community/plugin/1138854718618193875"><img src="https://lygia.xyz/imgs/figma.png" width="100" /></a>
+    <a href="https://github.com/irmf/irmf-examples/tree/master/examples/028-lygia"><img src="https://lygia.xyz/imgs/irmf.png" width="100" /></a>
 </p>
 
 ## How to use it?
@@ -112,7 +113,8 @@ Learn more about how to use it from this **examples**:
 * [2D examples for Touch Designer (GLSL)](https://github.com/vectorsize/lygia-td) (static resolver) by [Victor Saz](https://github.com/vectorsize)
 * [2D examples on Observable Notebook (GLSL)](https://observablehq.com/@radames/hello-lygia-shader-library) by [Radames Ajna](https://twitter.com/radamar)
 * [Figma's noise&texture plugin](https://www.figma.com/community/plugin/1138854718618193875) by [Rogie King](https://twitter.com/rogie). You will need to go to the "Custom" tab on the plugin to edit shaders and load LYGIA modules  
-* [2D/3D examples on GlslViewer (GLSL)](https://github.com/patriciogonzalezvivo/lygia_examples)
+* [3D example on Irmf](https://github.com/irmf/irmf-examples/tree/master/examples/028-lygia) by [Glenn Lewis](https://github.com/gmlewis)
+* [2D/3D examples on GlslVhttps://github.com/irmf/irmf-examples/tree/master/examples/028-lygiaiewer (GLSL)](https://github.com/patriciogonzalezvivo/lygia_examples)
 
 For more information, guidance or feedback about using LYGIA, join [#Lygia channel on shader.zone discord](https://shader.zone/).
 
