@@ -67,7 +67,6 @@ vec4 pbrGlass(const Material _mat) {
 
     vec4 color  = vec4(0.0, 0.0, 0.0, 1.0);
     color.rgb   = envMap(RaG, roughness);
-
     #if !defined(TARGET_MOBILE) && !defined(PLATFORM_RPI)
     color.r     = envMap(RaR, roughness).r;
     color.b     = envMap(RaB, roughness).b;

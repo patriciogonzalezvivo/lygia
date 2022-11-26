@@ -17,8 +17,8 @@ vec3 iridescence(float cosA, float thickness) {
     // basic energy of light
     float luma = 0.01070;
     // tint of the final color
-    //vec3 tint = vec3(0.7333,0.89804,0.94902);
-    vec3 tint = vec3(0.49639,0.78252,0.88723);
+    vec3 tint = vec3(0.7333,0.89804,0.94902);
+    // vec3 tint = vec3(0.49639,0.78252,0.88723);
     // interference rate at minimum angle
     float interf0 = 2.4;
     // phase shift rate at minimum angle
@@ -43,7 +43,13 @@ vec3 iridescence(float cosA, float thickness) {
     
     vec3 film = hue * lum + vec3(0.49639,0.78252,0.88723) * luma;
     
-    return vec3((film * 3.0 + pow(f, 12.0))) * tint;
+    return gamma2linear((film * 5.0 + pow(f, 6.0)) * tint);
+    // return gamma2linear((film * 3.0 + pow(f, 16.0)) * tint);
+    // return gamma2linear(film * 5.);
+}
+
+vec3 iridescence(vec3 V, vec3 N, vec3 L, float d) {
+    return saturate( wavelength( abs(dot(N, -L) - dot(N, V)) * d) );
 }
 
 #endif
