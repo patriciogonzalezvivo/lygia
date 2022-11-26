@@ -68,6 +68,7 @@ vec4 pbr(const Material _mat) {
     float specIntensity =   (2.0 * _mat.metallic) * 
                             saturate(-1.1 + NoV + _mat.metallic) *          // Fresnel
                             (_mat.metallic + (.95 - _mat.roughness) * 2.0); // make smaller highlights brighter
+                            // (_mat.metallic + (1.0 - _mat.roughness)); // make smaller highlights brighter
 
     vec3 Fr = vec3(0.0, 0.0, 0.0);
     Fr = tonemap( envMap(R, _mat.roughness, _mat.metallic) ) * E * specIntensity;
@@ -100,8 +101,12 @@ vec4 pbr(const Material _mat) {
     // Final Sum
     // ------------------------
     vec4 color  = vec4(0.0, 0.0, 0.0, 1.0);
-    color.rgb  += Fd * IBL_LUMINANCE + lightDiffuse;     // Diffuse
-    color.rgb  += Fr * IBL_LUMINANCE + lightSpecular;    // Specular
+    // Diffuse
+    color.rgb  += Fd * IBL_LUMINANCE;
+    color.rgb  += lightDiffuse;     
+    // Specular
+    color.rgb  += Fr * IBL_LUMINANCE;
+    color.rgb  += lightSpecular;    
     color.rgb  *= _mat.ambientOcclusion;
     color.rgb  += _mat.emissive;
     color.a     = _mat.albedo.a;

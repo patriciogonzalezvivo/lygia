@@ -4,6 +4,7 @@
 
 #include "fakeCube.glsl"
 #include "toShininess.glsl"
+#include "sphericalHarmonics.glsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
@@ -31,10 +32,17 @@ vec3 envMap(vec3 _normal, float _roughness, float _metallic) {
 #if defined(ENVMAP_FNC) 
     return ENVMAP_FNC(_normal, _roughness, _metallic);
 
+// Cubemap sampling - spherical harmonics
+#elif defined(SCENE_CUBEMAP) && defined(SCENE_SH_ARRAY) && !defined(TARGET_MOBILE)
+    return mix(
+        SAMPLE_CUBE_FNC( SCENE_CUBEMAP, _normal, (ENVMAP_MAX_MIP_LEVEL * _roughness) ).rgb,
+        sphericalHarmonics(_normal),
+        _roughness * _roughness * _roughness
+    );
+
 // Cubemap sampling
 #elif defined(SCENE_CUBEMAP)
-    float lod = ENVMAP_MAX_MIP_LEVEL * _roughness;
-    return SAMPLE_CUBE_FNC( SCENE_CUBEMAP, _normal, lod).rgb;
+    return SAMPLE_CUBE_FNC( SCENE_CUBEMAP, _normal, (ENVMAP_MAX_MIP_LEVEL * _roughness) ).rgb;
 
 // Default
 #else
