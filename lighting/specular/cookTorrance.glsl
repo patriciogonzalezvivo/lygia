@@ -36,11 +36,7 @@ float specularCookTorrance(vec3 _L, vec3 _N, vec3 _V, float _NoV, float _NoL, fl
     float G = min(1.0, min(x * NoV, x * NoL));
     
     // Distribution term
-    #if defined(PLATFORM_WEBGL)
-    float D = beckmann(NoH, _roughness);
-    #else
-    float D = GGX(_N, H, NoH, _roughness);
-    #endif
+    float D = SPECULAR_COOKTORRANCE_DIFFUSE_FNC(_N, H, NoH, _roughness);
 
     // Fresnel term
     float F = SPECULAR_POW(1.0 - NoV, _fresnel);
