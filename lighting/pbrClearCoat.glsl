@@ -75,30 +75,31 @@ vec4 pbrClearCoat(const Material _mat) {
 //     vec2 pixel = 1.0/RESOLUTION;
 //     ssao = ssao(SCENE_DEPTH, gl_FragCoord.xy*pixel, pixel, 1.);
 // #endif 
-    float diffuseAO = min(_mat.ambientOcclusion, ssao);
-    float specularAO = specularAO(NoV, diffuseAO, _mat.roughness);
 
     // Global Ilumination ( mage Based Lighting )
     // ------------------------
     vec3 E = envBRDFApprox(specularColor, NoV, _mat.roughness);
 
-    // This is a bit of a hack to pop the metalics
-    float specIntensity =   (2.0 * _mat.metallic) * 
-                            saturate(-1.1 + NoV + _mat.metallic) *          // Fresnel
-                            (_mat.metallic + (.95 - _mat.roughness) * 2.0); // make smaller highlights brighter
+    // // This is a bit of a hack to pop the metalics
+    // float specIntensity =   (2.0 * _mat.metallic) * 
+    //                         saturate(-1.1 + NoV + _mat.metallic) *          // Fresnel
+    //                         (_mat.metallic + (.95 - _mat.roughness) * 2.0); // make smaller highlights brighter
 
+    float diffAO = min(_mat.ambientOcclusion, ssao);
+    float specAO = specularAO(NoV, diffAO, _mat.roughness);
 
     vec3 Fr = vec3(0.0, 0.0, 0.0);
-    Fr = envMap(R, _mat.roughness, _mat.metallic) * E * specIntensity;
+    Fr = envMap(R, _mat.roughness, _mat.metallic) * E * 2.0;
+    #if !defined(PLATFORM_RPI)
     Fr += tonemap( fresnelReflection(R, f0, NoV) ) * _mat.metallic * (1.0-_mat.roughness) * 0.2;
-    Fr *= specularAO;
+    #endif
+    Fr *= specAO;
 
-    vec3 Fd = vec3(0.0, 0.0, 0.0);
-    Fd = diffuseColor;
+    vec3 Fd = diffuseColor;
     #if defined(SCENE_SH_ARRAY)
     Fd *= tonemap( sphericalHarmonics(N) );
     #endif
-    Fd *= diffuseAO;
+    Fd *= diffAO;
     Fd *= (1.0 - E);
 
     vec3 Fc = fresnel(f0, clearCoatNoV) * _mat.clearCoat;
@@ -111,8 +112,8 @@ vec4 pbrClearCoat(const Material _mat) {
     vec3 clearCoatE = envBRDFApprox(f0, clearCoatNoV, _mat.clearCoatRoughness);
     vec3 clearCoatLobe = vec3(0.0, 0.0, 0.0);
     clearCoatLobe += envMap(clearCoatR, _mat.clearCoatRoughness, 1.0) * clearCoatE * 3.;
-    clearCoatLobe += tonemap( fresnelReflection(clearCoatR, f0, clearCoatNoV) ) * (1.0-_mat.clearCoatRoughness);
-    Fr += clearCoatLobe * (specularAO * _mat.clearCoat);
+    clearCoatLobe += tonemap( fresnelReflection(clearCoatR, f0, clearCoatNoV) ) * (1.0-_mat.clearCoatRoughness) * 0.2;
+    Fr += clearCoatLobe * (specAO * _mat.clearCoat);
 
     vec4 color  = vec4(0.0, 0.0, 0.0, 1.0);
     color.rgb  += Fd * IBL_LUMINANCE;    // Diffuse
@@ -136,8 +137,9 @@ vec4 pbrClearCoat(const Material _mat) {
     color.rgb  += lightDiffuse;     // Diffuse
     color.rgb  += lightSpecular;    // Specular
 
-    // Clear Coat
+    // Clear Coat Local ilumination
     #if defined(LIGHT_DIRECTION) || defined(LIGHT_POSITION)
+
     #if defined(LIGHT_DIRECTION)
     vec3 L = normalize(LIGHT_DIRECTION);
     #elif defined(LIGHT_POSITION)

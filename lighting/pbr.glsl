@@ -61,18 +61,11 @@ vec4 pbr(const in Material _mat) {
     // Global Ilumination ( Image Based Lighting )
     // ------------------------
     vec3 E = envBRDFApprox(specularColor, NoV, _mat.roughness);
-
-    // This is a bit of a hack to pop the metalics
-    float specIntensity =   (2.0 * _mat.metallic) * 
-                            saturate(-1.1 + NoV + _mat.metallic) *          // Fresnel
-                            (_mat.metallic + (.95 - _mat.roughness) * 2.0); // make smaller highlights brighter
-                            // (_mat.metallic + (1.0 - _mat.roughness)); // make smaller highlights brighter
-
     float diffuseAO = min(_mat.ambientOcclusion, ssao);
 
     vec3 Fr = vec3(0.0, 0.0, 0.0);
-    Fr = envMap(R, _mat.roughness, _mat.metallic) * E * specIntensity;
-    #if defined(PLATFORM_RPI)
+    Fr = envMap(R, _mat.roughness, _mat.metallic) * E * 2.0;
+    #if !defined(PLATFORM_RPI)
     Fr += tonemap( fresnelReflection(R, _mat.f0, NoV) ) * _mat.metallic * (1.0-_mat.roughness) * 0.2;
     #endif
     Fr *= specularAO(NoV, diffuseAO, _mat.roughness);
@@ -81,7 +74,7 @@ vec4 pbr(const in Material _mat) {
     #if defined(SCENE_SH_ARRAY)
     Fd *= tonemap( sphericalHarmonics(N) );
     #endif
-    Fd *= diffuseAO; // diffuseAO
+    Fd *= diffuseAO;
     Fd *= (1.0 - E);
 
     // Local Ilumination
