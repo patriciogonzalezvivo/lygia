@@ -10,7 +10,7 @@
 
 #ifndef FNC_HENYEYGREENSTEIN
 #define FNC_HENYEYGREENSTEIN
-float henyeyGreenstein(float mu) {
+float henyeyGreenstein(const in float mu) {
     return max(0.0, (1.0 - HENYEYGREENSTEIN_SCATTERING*HENYEYGREENSTEIN_SCATTERING) / ((4. + PI) * pow(1.0 + HENYEYGREENSTEIN_SCATTERING*HENYEYGREENSTEIN_SCATTERING - 2.0 * HENYEYGREENSTEIN_SCATTERING * mu, 1.5)));
 }
 #endif

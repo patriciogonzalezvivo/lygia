@@ -1,7 +1,7 @@
 #ifndef FNC_ENVBRDFAPPROX
 #define FNC_ENVBRDFAPPROX
 
-vec3 envBRDFApprox(vec3 _specularColor, float _NoV, float _roughness) {
+vec3 envBRDFApprox(const in vec3 _specularColor, const in float _NoV, const in float _roughness) {
     vec4 c0 = vec4(-1.0, -0.0275, -0.572,  0.022 );
     vec4 c1 = vec4( 1.0,  0.0425,  1.040, -0.040 );
     vec4 r = _roughness * c0 + c1;

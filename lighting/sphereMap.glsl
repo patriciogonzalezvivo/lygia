@@ -18,14 +18,14 @@ options:
 
 #ifndef FNC_SPHEREMAP
 #define FNC_SPHEREMAP
-vec2 sphereMap(vec3 normal, vec3 eye) {
+vec2 sphereMap(const in vec3 normal, const in vec3 eye) {
     vec3 r = reflect(-eye, normal);
     r.z += 1.;
     float m = 2. * length(r);
     return r.xy / m + .5;
 }
 
-SPHEREMAP_TYPE sphereMap(in sampler2D tex, in vec3 normal, in vec3 eye) {
+SPHEREMAP_TYPE sphereMap(in sampler2D tex, const in vec3 normal, const in vec3 eye) {
     return SPHEREMAP_SAMPLER_FNC(tex, sphereMap(normal, eye) );
 }
 #endif

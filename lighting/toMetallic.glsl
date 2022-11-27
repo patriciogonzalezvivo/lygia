@@ -12,7 +12,7 @@ use: <float> toMetallic(<vec3> diffuse, <vec3> specular, <float> maxSpecular)
 #ifndef FNC_TOMETALLIC
 #define FNC_TOMETALLIC
 
-float toMetallic(vec3 diffuse, vec3 specular, float maxSpecular) {
+float toMetallic(const in vec3 diffuse, const in vec3 specular, const in float maxSpecular) {
     float perceivedDiffuse = sqrt(0.299 * diffuse.r * diffuse.r + 0.587 * diffuse.g * diffuse.g + 0.114 * diffuse.b * diffuse.b);
     float perceivedSpecular = sqrt(0.299 * specular.r * specular.r + 0.587 * specular.g * specular.g + 0.114 * specular.b * specular.b);
     if (perceivedSpecular < TOMETALLIC_MIN_REFLECTANCE) {
@@ -25,7 +25,7 @@ float toMetallic(vec3 diffuse, vec3 specular, float maxSpecular) {
     return saturate((-b + sqrt(D)) / (2.0 * a));
 }
 
-float toMetallic(vec3 diffuse, vec3 specular) {
+float toMetallic(const in vec3 diffuse, const in vec3 specular) {
     float maxSpecula = max(max(specular.r, specular.g), specular.b);
     return toMetallic(diffuse, specular, maxSpecula);
 }

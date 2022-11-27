@@ -9,7 +9,7 @@ use:
 #ifndef FNC_DIFFUSE_ORENNAYAR
 #define FNC_DIFFUSE_ORENNAYAR
 
-float diffuseOrenNayar(vec3 L, vec3 N, vec3 V, float NoV, float NoL, float roughness) {
+float diffuseOrenNayar(const in vec3 L, const in vec3 N, const in vec3 V, const in float NoV, const in float NoL, const in float roughness) {
     float LoV = dot(L, V);
     
     float s = LoV - NoL * NoV;
@@ -22,7 +22,7 @@ float diffuseOrenNayar(vec3 L, vec3 N, vec3 V, float NoV, float NoL, float rough
     return max(0.0, NoL) * (A + B * s / t);
 }
 
-float diffuseOrenNayar(vec3 L, vec3 N, vec3 V, float roughness) {
+float diffuseOrenNayar(const in vec3 L, const in vec3 N, const in vec3 V, const in float roughness) {
     float NoV = max(dot(N, V), 0.001);
     float NoL = max(dot(N, L), 0.001);
     return diffuseOrenNayar(L, N, V, NoV, NoL, roughness);

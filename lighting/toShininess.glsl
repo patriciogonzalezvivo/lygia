@@ -7,7 +7,7 @@ use: float toShininess(<float> roughness, <float> metallic)
 #ifndef FNC_TOSHININESS
 #define FNC_TOSHININESS
 
-float toShininess(float roughness, float metallic) {
+float toShininess(const in float roughness, const in float metallic) {
     float s = .95 - roughness * 0.5;
     s *= s;
     s *= s;

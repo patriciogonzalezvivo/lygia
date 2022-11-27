@@ -21,11 +21,18 @@ options:
 #ifndef FNC_SHADOW
 #define FNC_SHADOW
 
-float shadow(sampler2D shadoMap, vec2 size, vec2 uv, float compare) {
+float shadow(sampler2D shadoMap, const in vec2 size, const in vec2 uv, float compare) {
     #ifdef SHADOWMAP_BIAS
     compare -= SHADOWMAP_BIAS;
     #endif
+
+    #if defined(PLATFORM_RPI) 
+    return sampleShadow(shadoMap, size, uv, compare);
+    #elif defined(TARGET_MOBILE) || defined(PLATFORM_WEBGL)
+    return sampleShadowLerp(shadoMap, size, uv, compare);
+    #else 
     return sampleShadowPCF(shadoMap, size, uv, compare);
+    #endif
 }
 
 #endif 

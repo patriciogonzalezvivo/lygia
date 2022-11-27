@@ -2,7 +2,7 @@
 #define FNC_SPECULAR_WARD
 
 // https://github.com/glslify/glsl-specular-ward
-float specularWard(vec3 L, vec3 N, vec3 V, vec3 fiber, float shinyParallel, float shinyPerpendicular) {
+float specularWard(const in vec3 L, const in vec3 N, const in vec3 V, const in vec3 fiber, const in float shinyParallel, const in float shinyPerpendicular) {
     float NdotL = dot(N, L);
     float NdotR = dot(N, V);
     vec3 fiberParallel = normalize(fiber);

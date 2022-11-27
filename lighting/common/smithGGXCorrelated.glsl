@@ -4,7 +4,7 @@
 #ifndef FNC_SMITH_GGX_CORRELATED
 #define FNC_SMITH_GGX_CORRELATED
 
-float smithGGXCorrelated(float NoV, float NoL, float roughness) {
+float smithGGXCorrelated(const in float NoV, const in float NoL, const in float roughness) {
     // Heitz 2014, "Understanding the Masking-Shadowing Function in Microfacet-Based BRDFs"
     float a2 = roughness * roughness;
     // TODO: lambdaV can be pre-computed for all the lights, it should be moved out of this function
@@ -17,7 +17,7 @@ float smithGGXCorrelated(float NoV, float NoL, float roughness) {
     return saturateMediump(v);
 }
 
-float smithGGXCorrelated_Fast(float NoV, float NoL, float roughness) {
+float smithGGXCorrelated_Fast(const in float NoV, const in float NoL, const in float roughness) {
     // Hammon 2017, "PBR Diffuse Lighting for GGX+Smith Microsurfaces"
     float v = 0.5 / mix(2.0 * NoL * NoV, NoL + NoV, roughness);
     return saturateMediump(v);

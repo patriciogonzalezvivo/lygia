@@ -10,7 +10,9 @@ options:
 */
 
 #ifndef SPHERICALHARMONICS_BANDS
-#if defined(TARGET_MOBILE) || defined(PLATFORM_RPI) || defined(PLATFORM_WEBGL)
+#if defined(PLATFORM_RPI) 
+#define SPHERICALHARMONICS_BANDS           1
+#elif defined(TARGET_MOBILE) || defined(PLATFORM_WEBGL)
 #define SPHERICALHARMONICS_BANDS           2
 #else
 #define SPHERICALHARMONICS_BANDS           3
@@ -28,7 +30,7 @@ options:
 #ifndef FNC_SPHERICALHARMONICS
 #define FNC_SPHERICALHARMONICS
 
-vec3 sphericalHarmonics(const vec3 n) {
+vec3 sphericalHarmonics(const in vec3 n) {
 #ifdef SCENE_SH_ARRAY
     return SPHERICALHARMONICS_TONEMAP ( max(
            0.282095 * SCENE_SH_ARRAY[0]

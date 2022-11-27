@@ -40,7 +40,7 @@ options:
 #ifndef FNC_PBR
 #define FNC_PBR
 
-vec4 pbr(const Material _mat) {
+vec4 pbr(const in Material _mat) {
     // Calculate Color
     vec3    diffuseColor = _mat.albedo.rgb * (vec3(1.0) - _mat.f0) * (1.0 - _mat.metallic);
     vec3    specularColor = mix(_mat.f0, _mat.albedo.rgb, _mat.metallic);
@@ -57,10 +57,8 @@ vec4 pbr(const Material _mat) {
 //     vec2 pixel = 1.0/RESOLUTION;
 //     ssao = ssao(SCENE_DEPTH, gl_FragCoord.xy*pixel, pixel, 1.);
 // #endif 
-    float diffuseAO = min(_mat.ambientOcclusion, ssao);
-    float specularAO = specularAO(NoV, diffuseAO, _mat.roughness);
 
-    // Global Ilumination ( mage Based Lighting )
+    // Global Ilumination ( Image Based Lighting )
     // ------------------------
     vec3 E = envBRDFApprox(specularColor, NoV, _mat.roughness);
 
@@ -70,17 +68,20 @@ vec4 pbr(const Material _mat) {
                             (_mat.metallic + (.95 - _mat.roughness) * 2.0); // make smaller highlights brighter
                             // (_mat.metallic + (1.0 - _mat.roughness)); // make smaller highlights brighter
 
+    float diffuseAO = min(_mat.ambientOcclusion, ssao);
+
     vec3 Fr = vec3(0.0, 0.0, 0.0);
     Fr = tonemap( envMap(R, _mat.roughness, _mat.metallic) ) * E * specIntensity;
+    #if !defined(PLATFORM_RPI)
     Fr += tonemap( fresnelReflection(R, _mat.f0, NoV) ) * _mat.metallic * (1.0-_mat.roughness) * 0.2;
-    Fr *= specularAO;
+    #endif
+    Fr *= specularAO(NoV, diffuseAO, _mat.roughness);
 
-    vec3 Fd = vec3(0.0, 0.0, 0.0);
-    Fd = diffuseColor;
+    vec3 Fd = diffuseColor;
     #if defined(SCENE_SH_ARRAY)
     Fd *= tonemap( sphericalHarmonics(N) );
     #endif
-    Fd *= diffuseAO;
+    Fd *= diffuseAO; // diffuseAO
     Fd *= (1.0 - E);
 
     // Local Ilumination
