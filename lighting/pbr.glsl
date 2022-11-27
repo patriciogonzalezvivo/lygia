@@ -71,8 +71,10 @@ vec4 pbr(const in Material _mat) {
     float diffuseAO = min(_mat.ambientOcclusion, ssao);
 
     vec3 Fr = vec3(0.0, 0.0, 0.0);
+    #if defined(PLATFORM_RPI)
+    Fr = envMap(R, _mat.roughness, _mat.metallic) * E * specIntensity;
+    #else
     Fr = tonemap( envMap(R, _mat.roughness, _mat.metallic) ) * E * specIntensity;
-    #if !defined(PLATFORM_RPI)
     Fr += tonemap( fresnelReflection(R, _mat.f0, NoV) ) * _mat.metallic * (1.0-_mat.roughness) * 0.2;
     #endif
     Fr *= specularAO(NoV, diffuseAO, _mat.roughness);
