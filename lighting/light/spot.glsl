@@ -33,7 +33,7 @@ options:
 #ifndef FNC_LIGHT_SPOT
 #define FNC_LIGHT_SPOT
 
-void lightSpot(vec3 _diffuseColor, vec3 _specularColor, vec3 _N, vec3 _V, float _NoV, float _roughness, float _f0, out vec3 _diffuse, out vec3 _specular) {
+void lightSpot(const in vec3 _diffuseColor, const in vec3 _specularColor, const in vec3 _N, const in vec3 _V, const in float _NoV, const in float _roughness, const in float _f0, out vec3 _diffuse, out vec3 _specular) {
     vec3 toLight = LIGHT_POSITION - (SURFACE_POSITION).xyz;
     float toLightLength = length(toLight);
     vec3 s = toLight/toLightLength;

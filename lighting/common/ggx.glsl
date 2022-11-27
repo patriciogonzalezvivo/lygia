@@ -6,29 +6,28 @@
 
 // Walter et al. 2007, "Microfacet Models for Refraction through Rough Surfaces"
 
-// In mediump, there are two problems computing 1.0 - NoH^2
-// 1) 1.0 - NoH^2 suffers floating point cancellation when NoH^2 is close to 1 (highlights)
-// 2) NoH doesn't have enough precision around 1.0
-// Both problem can be fixed by computing 1-NoH^2 in highp and providing NoH in highp as well
-
-// However, we can do better using Lagrange's identity:
-//      ||a x b||^2 = ||a||^2 ||b||^2 - (a . b)^2
-// since N and H are unit vectors: ||N x H||^2 = 1.0 - NoH^2
-// This computes 1.0 - NoH^2 directly (which is close to zero in the highlights and has
-// enough precision).
-// Overall this yields better performance, keeping all computations in mediump
-
-float GGX(float NoH, float roughness) {
+// This one is not great on mediump. Read next comment 
+float GGX(const in float NoH, const in float roughness) {
     float oneMinusNoHSquared = 1.0 - NoH * NoH;
-    
     float a = NoH * roughness;
     float k = roughness / (oneMinusNoHSquared + a * a);
     float d = k * k * ONE_OVER_PI;
     return saturateMediump(d);
 }
 
-float GGX(vec3 N, vec3 H, float NoH, float roughness) {
-#if defined(TARGET_MOBILE)
+float GGX(const in vec3 N, const in vec3 H, const in float NoH, float roughness) {
+#if defined(TARGET_MOBILE) || defined(PLATFORM_RPI) || defined(PLATFORM_WEBGL)
+    // In mediump, there are two problems computing 1.0 - NoH^2
+    // 1) 1.0 - NoH^2 suffers floating point cancellation when NoH^2 is close to 1 (highlights)
+    // 2) NoH doesn't have enough precision around 1.0
+    // Both problem can be fixed by computing 1-NoH^2 in highp and providing NoH in highp as well
+
+    // However, we can do better using Lagrange's identity:
+    //      ||a x b||^2 = ||a||^2 ||b||^2 - (a . b)^2
+    // since N and H are unit vectors: ||N x H||^2 = 1.0 - NoH^2
+    // This computes 1.0 - NoH^2 directly (which is close to zero in the highlights and has
+    // enough precision).
+    // Overall this yields better performance, keeping all computations in mediump
     vec3 NxH = cross(N, H);
     float oneMinusNoHSquared = dot(NxH, NxH);
 #else

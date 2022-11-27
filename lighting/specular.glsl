@@ -25,7 +25,7 @@ options:
 
 #ifndef FNC_SPECULAR
 #define FNC_SPECULAR
-float specular(vec3 L, vec3 N, vec3 V, float roughness) { return SPECULAR_FNC(L, N, V, roughness); }
-float specular(vec3 L, vec3 N, vec3 V, float roughness, float fresnel) { return SPECULAR_FNC(L, N, V, roughness, fresnel); }
-float specular(vec3 L, vec3 N, vec3 V, float NoV, float NoL, float roughness, float fresnel) { return SPECULAR_FNC(L, N, V, NoV, NoL, roughness, fresnel); }
+float specular(const in vec3 L, const in vec3 N, const in vec3 V, const in float roughness) { return SPECULAR_FNC(L, N, V, roughness); }
+float specular(const in vec3 L, const in vec3 N, const in vec3 V, const in float roughness, const in float fresnel) { return SPECULAR_FNC(L, N, V, roughness, fresnel); }
+float specular(const in vec3 L, const in vec3 N, const in vec3 V, const in float NoV, const in float NoL, const in float roughness, const in float fresnel) { return SPECULAR_FNC(L, N, V, NoV, NoL, roughness, fresnel); }
 #endif

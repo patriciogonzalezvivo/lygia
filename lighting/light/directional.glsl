@@ -28,22 +28,16 @@ options:
 
 #ifndef FNC_LIGHT_DIRECTIONAL
 #define FNC_LIGHT_DIRECTIONAL
-
-void lightDirectional(vec3 _diffuseColor, vec3 _specularColor, vec3 _N, vec3 _V, float _NoV, float _roughness, float _f0, float _shadow, inout vec3 _diffuse, inout vec3 _specular) {
+void lightDirectional(const in vec3 _diffuseColor, const in vec3 _specularColor, const in vec3 _N, const in vec3 _V, const in float _NoV, const in float _roughness, const in float _f0, const in float _shadow, inout vec3 _diffuse, inout vec3 _specular) {
     #ifdef LIGHT_DIRECTION
     vec3    D = normalize(LIGHT_DIRECTION);
     #else 
     vec3    D = normalize(LIGHT_POSITION);
     #endif
     float NoL = dot(_N, D);
-    float dif = diffuseOrenNayar(D, _N, _V, _NoV, NoL, _roughness);
-    float spec = specularCookTorrance(D, _N, _V, _NoV, NoL, _roughness, _f0);
+    float dif = diffuse(D, _N, _V, _NoV, NoL, _roughness);
+    float spec = specular(D, _N, _V, _NoV, NoL, _roughness, _f0);
     _diffuse  += max(vec3(0.0), LIGHT_INTENSITY * (_diffuseColor * LIGHT_COLOR * dif) * _shadow);
     _specular += max(vec3(0.0), LIGHT_INTENSITY * (_specularColor * LIGHT_COLOR * spec) * _shadow);
 }
-
-// void lightDirectional(float3 _diffuseColor, float3 _specularColor, float3 _N, float3 _V, float _NoV, float _roughness, float _f0, inout float3 _diffuse, inout float3 _specular) {
-//     return lightDirectional(_diffuseColor, _specularColor, _N, _V, _NoV, _roughness, _f0, 1.0, _diffuse, _specular);
-// }
-
 #endif

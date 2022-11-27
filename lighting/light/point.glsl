@@ -38,7 +38,7 @@ options:
 #ifndef FNC_LIGHT_POINT
 #define FNC_LIGHT_POINT
 
-void lightPoint(vec3 _diffuseColor, vec3 _specularColor, vec3 _N, vec3 _V, float _NoV, float _roughness, float _f0, float _shadow, inout vec3 _diffuse, inout vec3 _specular) {
+void lightPoint(const in vec3 _diffuseColor, const in vec3 _specularColor, const in vec3 _N, const in vec3 _V, const in float _NoV, const in float _roughness, const in float _f0, const in float _shadow, inout vec3 _diffuse, inout vec3 _specular) {
     vec3 toLight = LIGHT_POSITION - (SURFACE_POSITION).xyz;
     float toLightLength = length(toLight);
     vec3 s = toLight/toLightLength;
@@ -58,7 +58,7 @@ void lightPoint(vec3 _diffuseColor, vec3 _specularColor, vec3 _N, vec3 _V, float
     _specular += max(vec3(0.0), _specularColor * lightContribution * spec);
 }
 
-void lightPoint(vec3 _diffuseColor, vec3 _specularColor, vec3 _N, vec3 _V, float _NoV, float _roughness, float _f0, inout vec3 _diffuse, inout vec3 _specular) {
+void lightPoint(const in vec3 _diffuseColor, const in vec3 _specularColor, const in vec3 _N, const in vec3 _V, const in float _NoV, const in float _roughness, const in float _f0, inout vec3 _diffuse, inout vec3 _specular) {
     lightPoint(_diffuseColor, _specularColor, _N, _V,  _NoV, _roughness, _f0, 1.0, _diffuse, _specular);
 }
 

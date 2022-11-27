@@ -49,7 +49,7 @@ options:
 
 #ifndef FNC_GOOCH
 #define FNC_GOOCH
-vec4 gooch(vec4 albedo, vec3 normal, vec3 light, vec3 view, float roughness, float shadow) {
+vec4 gooch(const in vec4 albedo, const in vec3 normal, const in vec3 light, const in vec3 view, const in float roughness, const in float shadow) {
     vec3 warm = GOOCH_WARM + albedo.rgb * 0.6;
     vec3 cold = GOOCH_COLD + albedo.rgb * 0.1;
 
@@ -66,7 +66,7 @@ vec4 gooch(vec4 albedo, vec3 normal, vec3 light, vec3 view, float roughness, flo
 }
 
 
-vec4 gooch(vec4 albedo, vec3 normal, vec3 light, vec3 view, float roughness) {
+vec4 gooch(const in vec4 albedo, const in vec3 normal, const in vec3 light, const in vec3 view, const in float roughness) {
     return gooch(albedo, normal, light, view, roughness, 1.0);
 }
 

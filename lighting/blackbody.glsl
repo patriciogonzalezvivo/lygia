@@ -8,5 +8,5 @@ use: <vec3> blackbody(<float> wavelength)
 
 #ifndef FNC_BLACKBODY
 #define FNC_BLACKBODY
-vec3 blackbody(float k) { return k2rgb(w); }
+vec3 blackbody(const in float k) { return k2rgb(w); }
 #endif

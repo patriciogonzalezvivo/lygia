@@ -26,14 +26,14 @@ options:
 
 #ifndef FNC_ENVMAP
 #define FNC_ENVMAP
-vec3 envMap(vec3 _normal, float _roughness, float _metallic) {
+vec3 envMap(const in vec3 _normal, const in float _roughness, const in float _metallic) {
 
 // ENVMAP overwrites cube sampling  
 #if defined(ENVMAP_FNC) 
     return ENVMAP_FNC(_normal, _roughness, _metallic);
 
 // Cubemap sampling - spherical harmonics
-#elif defined(SCENE_CUBEMAP) && defined(SCENE_SH_ARRAY) && !defined(TARGET_MOBILE)
+#elif defined(SCENE_CUBEMAP) && defined(SCENE_SH_ARRAY) && !defined(TARGET_MOBILE) && !defined(PLATFORM_RPI) && !defined(PLATFORM_WEBGL)
     return mix(
         SAMPLE_CUBE_FNC( SCENE_CUBEMAP, _normal, (ENVMAP_MAX_MIP_LEVEL * _roughness) ).rgb,
         sphericalHarmonics(_normal),
@@ -51,7 +51,7 @@ vec3 envMap(vec3 _normal, float _roughness, float _metallic) {
 #endif
 }
 
-vec3 envMap(vec3 _normal, float _roughness) {
+vec3 envMap(const in vec3 _normal, const in float _roughness) {
     return envMap(_normal, _roughness, 1.0);
 }
 #endif

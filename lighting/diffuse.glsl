@@ -11,11 +11,15 @@ options:
 */
 
 #ifndef DIFFUSE_FNC 
+#if defined(TARGET_MOBILE) || defined(PLATFORM_RPI) || defined(PLATFORM_WEBGL)
 #define DIFFUSE_FNC diffuseLambert
+#else
+#define DIFFUSE_FNC diffuseOrenNayar
+#endif  
 #endif
 
 #ifndef FNC_DIFFUSE
 #define FNC_DIFFUSE
-float diffuse(vec3 _L, vec3 _N, vec3 _V, float _roughness) { return DIFFUSE_FNC(_L, _N, _V, _roughness); }
-float diffuse(vec3 _L, vec3 _N, vec3 _V, float _NoV, float _NoL, float _roughness) { return DIFFUSE_FNC(_L, _N, _V, _NoV, _NoL, _roughness); }
+float diffuse(const in vec3 _L, const in vec3 _N, const in vec3 _V, const in float _roughness) { return DIFFUSE_FNC(_L, _N, _V, _roughness); }
+float diffuse(const in vec3 _L, const in vec3 _N, const in vec3 _V, const in float _NoV, const in float _NoL, const in float _roughness) { return DIFFUSE_FNC(_L, _N, _V, _NoV, _NoL, _roughness); }
 #endif

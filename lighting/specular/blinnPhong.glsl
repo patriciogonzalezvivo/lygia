@@ -13,21 +13,21 @@
 #define FNC_SPECULAR_BLINNPHONG
 
 // https://github.com/glslify/glsl-specular-blinn-phong
-float specularBlinnPhong(vec3 L, vec3 N, vec3 V, float shininess) {
+float specularBlinnPhong(const in vec3 L, const in vec3 N, const in vec3 V, float shininess) {
     // halfVector
     vec3 H = normalize(L + V);
     return SPECULAR_POW(max(0.0, dot(N, H)), shininess);
 }
 
-float specularBlinnPhongRoughnes(vec3 L, vec3 N, vec3 V, float roughness) {
+float specularBlinnPhongRoughnes(const in vec3 L, const in vec3 N, const in vec3 V, const in float roughness) {
     return specularBlinnPhong(L, N, V, toShininess(roughness, 0.0) );
 }
 
-float specularBlinnPhongRoughnes(vec3 L, vec3 N, vec3 V, float roughness, float fresnel) {
+float specularBlinnPhongRoughnes(const in vec3 L, const in vec3 N, const in vec3 V, const in float roughness, const in float fresnel) {
     return specularBlinnPhongRoughnes(L, N, V, roughness);
 }
 
-float specularBlinnPhongRoughnes(vec3 L, vec3 N, vec3 V, float NoV, float NoL, float roughness, float fresnel) {
+float specularBlinnPhongRoughnes(const in vec3 L, const in vec3 N, const in vec3 V, const in float NoV, const in float NoL, const in float roughness, const in float fresnel) {
     return specularBlinnPhongRoughnes(L, N, V, roughness);
 }
 

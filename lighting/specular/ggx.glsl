@@ -7,7 +7,7 @@
 #ifndef FNC_SPECULAR_GGX
 #define FNC_SPECULAR_GGX
 
-float specularGGX(vec3 _L, vec3 _N, vec3 _V, float _NoV, float _NoL, float _roughness, float _fresnel) {
+float specularGGX(const in vec3 _L, const in vec3 _N, const in vec3 _V, float _NoV, float _NoL, float _roughness, float _fresnel) {
     float NoV = max(_NoV, 0.0);
     float NoL = max(_NoL, 0.0);
 
@@ -18,7 +18,13 @@ float specularGGX(vec3 _L, vec3 _N, vec3 _V, float _NoV, float _NoL, float _roug
     // float NoV, float NoL, float roughness
     float linearRoughness =  _roughness * _roughness;
     float D = GGX(NoH, linearRoughness);
+
+#if defined(PLATFORM_RPI)
+    float V = smithGGXCorrelated_Fast(_NoV, NoL,linearRoughness);
+#else
     float V = smithGGXCorrelated(_NoV, NoL,linearRoughness);
+#endif
+    
     float F = fresnel(vec3(_fresnel), LoH).r;
 
     return (D * V) * F;
