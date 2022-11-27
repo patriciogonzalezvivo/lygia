@@ -63,8 +63,8 @@ vec4 pbrGlass(const Material _mat) {
 
     vec3 Fr = vec3(0.0, 0.0, 0.0);
     Fr = envMap(Re, roughness) * E;
-    #if defined(PLATFORM_RPI)
-    Fr += tonemap( fresnelReflection(Re, _mat.f0, NoV) ) * (1.0-roughness);
+    #if !defined(PLATFORM_RPI)
+    Fr += tonemap( fresnelReflection(Re, _mat.f0, NoV) ) * (1.0-roughness) * 0.2;
     #endif
 
     vec4 color  = vec4(0.0, 0.0, 0.0, 1.0);
