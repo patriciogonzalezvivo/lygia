@@ -89,7 +89,7 @@ vec4 pbrClearCoat(const Material _mat) {
 
 
     vec3 Fr = vec3(0.0, 0.0, 0.0);
-    Fr = tonemap( envMap(R, _mat.roughness, _mat.metallic) ) * E * specIntensity;
+    Fr = envMap(R, _mat.roughness, _mat.metallic) * E * specIntensity;
     Fr += tonemap( fresnelReflection(R, f0, NoV) ) * _mat.metallic * (1.0-_mat.roughness) * 0.2;
     Fr *= specularAO;
 
@@ -110,7 +110,7 @@ vec4 pbrClearCoat(const Material _mat) {
     vec3 clearCoatR = reflection(V, clearCoatNormal, _mat.clearCoatRoughness);
     vec3 clearCoatE = envBRDFApprox(f0, clearCoatNoV, _mat.clearCoatRoughness);
     vec3 clearCoatLobe = vec3(0.0, 0.0, 0.0);
-    clearCoatLobe += tonemap( envMap(clearCoatR, _mat.clearCoatRoughness, 1.0) ) * clearCoatE * 3.;
+    clearCoatLobe += envMap(clearCoatR, _mat.clearCoatRoughness, 1.0) * clearCoatE * 3.;
     clearCoatLobe += tonemap( fresnelReflection(clearCoatR, f0, clearCoatNoV) ) * (1.0-_mat.clearCoatRoughness);
     Fr += clearCoatLobe * (specularAO * _mat.clearCoat);
 
