@@ -61,9 +61,11 @@ vec4 pbrGlass(const Material _mat) {
     // ------------------------
     vec3 E = envBRDFApprox(_mat.albedo.rgb, NoV, roughness);
 
-    vec3 Fr = vec3(0.0);
+    vec3 Fr = vec3(0.0, 0.0, 0.0);
+    #if defined(PLATFORM_RPI)
+    Fr = envMap(Re, roughness) * E;
+    #else
     Fr = tonemap( envMap(Re, roughness) ) * E;
-    #if !defined(TARGET_MOBILE) && !defined(PLATFORM_RPI)
     Fr += tonemap( fresnelReflection(Re, _mat.f0, NoV) ) * (1.0-roughness);
     #endif
 
@@ -72,8 +74,8 @@ vec4 pbrGlass(const Material _mat) {
     #if !defined(TARGET_MOBILE) && !defined(PLATFORM_RPI)
     color.r     = envMap(RaR, roughness).r;
     color.b     = envMap(RaB, roughness).b;
-    #endif
     color       = tonemap( color );
+    #endif
     // color.rgb   *= exp( -_mat.thickness * 200.0);
     color.rgb   += Fr * IBL_LUMINANCE;
 
