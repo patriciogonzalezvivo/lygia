@@ -22,3 +22,6 @@ description: Include all available color spaces conversions
 
 #include "space/rgb2cmyk.glsl"
 #include "space/cmyk2rgb.glsl"
+
+#include "space/w2rgb.glsl"
+#include "space/k2rgb.glsl"
