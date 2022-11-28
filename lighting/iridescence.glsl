@@ -1,4 +1,6 @@
 #include "../color/palette/hue.glsl"
+#include "../color/space/w2rgb.glsl"
+#include "../color/space/gamma2linear.glsl"
 
 /*
 original_author: Paniq (https://www.shadertoy.com/view/Ms33zj)
@@ -43,13 +45,13 @@ vec3 iridescence(float cosA, float thickness) {
     
     vec3 film = hue * lum + vec3(0.49639,0.78252,0.88723) * luma;
     
-    return gamma2linear((film * 5.0 + pow(f, 6.0)) * tint);
+    return gamma2linear( (film * 5.0 + pow(f, 6.0)) * tint );
     // return gamma2linear((film * 3.0 + pow(f, 16.0)) * tint);
     // return gamma2linear(film * 5.);
 }
 
 vec3 iridescence(vec3 V, vec3 N, vec3 L, float d) {
-    return saturate( wavelength( abs(dot(N, -L) - dot(N, V)) * d) );
+    return saturate( gamma2linear( w2rgb( abs(dot(N, -L) - dot(N, V)) * d) ) );
 }
 
 #endif

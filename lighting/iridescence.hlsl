@@ -1,4 +1,5 @@
 #include "../color/palette/hue.hlsl"
+#include "../color/space/w2rgb.hlsl"
 
 /*
 original_author: Paniq (https://www.shadertoy.com/view/Ms33zj)
@@ -40,7 +41,12 @@ float3 iridescence(float cosAngle, float thickness) {
     
     float3 film = h * lum + float3(0.49639,0.78252,0.88723) * luma;
     
-    return float3((film * 3.0 + pow(f, 12.0))) * tint;
+    // return float3((film * 3.0 + pow(f, 12.0))) * tint;
+    return gamma2linear( (film * 5.0 + pow(f, 6.0)) * tint );
+}
+
+float3 iridescence(float3 V, float3 N, float3 L, float d) {
+    return saturate( w2rgb( abs(dot(N, -L) - dot(N, V)) * d) );
 }
 
 #endif
