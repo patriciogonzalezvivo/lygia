@@ -1,5 +1,7 @@
 #include "../math/const.glsl"
+#include "../math/decimation.glsl"
 #include "../sample.glsl"
+#include "../sample/nearest.glsl"
 
 #ifndef RANDOM_SCALE3
 #define RANDOM_SCALE3 vec3(443.897, 441.423, .0973)
@@ -19,6 +21,7 @@ options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 */
 
+
 #ifndef NOISEBLUR_SAMPLES
 #define NOISEBLUR_SAMPLES 4.0
 #endif
@@ -37,15 +40,27 @@ options:
 
 #ifndef FNC_NOISEBLUR
 #define FNC_NOISEBLUR
+
 NOISEBLUR_TYPE noiseBlur(in sampler2D tex, in vec2 st, in vec2 pixel, float radius) {
     float blurRadius = radius;
-    vec2 whiteNoiseUV = st;
+    vec2 noiseOffset = st;
+
+    #ifdef NOISEBLUR_SECS
+    noiseOffset += 1337.0*fract(NOISEBLUR_SECS * 0.1);
+    #endif
+
     NOISEBLUR_TYPE result = NOISEBLUR_TYPE(0.0);
     for (float i = 0.0; i < NOISEBLUR_SAMPLES; ++i) {
-        vec2 whiteNoiseRand = NOISEBLUR_RANDOM23_FNC(vec3(whiteNoiseUV.xy, i));
-        whiteNoiseUV = whiteNoiseRand;
 
-        vec2 r = whiteNoiseRand;
+        #if defined(BLUENOISE_TEXTURE) && defined(BLUENOISE_TEXTURE_RESOLUTION)
+        vec2 noiseRand = sampleNearest(BLUENOISE_TEXTURE, noiseOffset.xy, BLUENOISE_TEXTURE_RESOLUTION).xy;
+        #else 
+        vec2 noiseRand = NOISEBLUR_RANDOM23_FNC(vec3(noiseOffset.xy, i));
+        #endif
+
+        noiseOffset = noiseRand;
+
+        vec2 r = noiseRand;
         r.x *= TAU;
         
         #if defined(NOISEBLUR_GAUSSIAN_K)
