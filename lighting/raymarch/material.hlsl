@@ -2,7 +2,6 @@
 #include "cast.hlsl"
 #include "ao.hlsl"
 #include "softShadow.hlsl"
-#include "../material.hlsl"
 #include "../../math/sum.hlsl"
 
 /*
@@ -89,6 +88,7 @@ float3 raymarchMaterial(float3 ray, float3 position, float3 normal, float3 albed
     return RAYMARCH_MATERIAL_FNC(ray, position, normal, albedo);
 }
 
+#if defined(STR_MATERIAL)
 void raymarchMaterial( in float3 ro, in float3 rd, inout Material mat) { 
     RAYMARCH_MAP_TYPE res = raymarchCast(ro, rd);
 
@@ -125,5 +125,6 @@ void raymarchMaterial( in float3 ro, in float3 rd, inout Material mat) {
     mat.shadows += 0.25 * fre * occ * 0.25;
     #endif
 }
+#endif
 
 #endif
