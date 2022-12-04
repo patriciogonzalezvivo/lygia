@@ -1,6 +1,6 @@
 #include "../math/saturate.glsl"
 #include "../math/sum.glsl"
-#include "../sample/2dCube.glsl"
+#include "../sample/2DCube.glsl"
 #include "../sample.glsl"
 
 /*
