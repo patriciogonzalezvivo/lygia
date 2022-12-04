@@ -1,4 +1,3 @@
-#include "../material.glsl"
 #include "normal.glsl"
 #include "cast.glsl"
 #include "ao.glsl"
@@ -90,6 +89,7 @@ vec3 raymarchMaterial(vec3 ray, vec3 position, vec3 normal, vec3 albedo) {
     return RAYMARCH_MATERIAL_FNC(ray, position, normal, albedo);
 }
 
+#if defined(STR_MATERIAL)
 void raymarchMaterial( in vec3 ro, in vec3 rd, inout Material mat) { 
     RAYMARCH_MAP_TYPE res = raymarchCast(ro, rd);
 
@@ -126,5 +126,6 @@ void raymarchMaterial( in vec3 ro, in vec3 rd, inout Material mat) {
     mat.shadows += 0.25 * fre * occ * 0.25;
     #endif
 }
+#endif
 
 #endif
