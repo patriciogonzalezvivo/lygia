@@ -1,5 +1,5 @@
 #include "../math/sum.hlsl"
-#include "../sample/2dCube.hlsl"
+#include "../sample/2DCube.hlsl"
 #include "../sample.hlsl"
 
 /*

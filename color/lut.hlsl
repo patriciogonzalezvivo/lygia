@@ -29,7 +29,7 @@ options:
 #endif
 #endif
 
-#include "../sample/2dCube.hlsl"
+#include "../sample/2DCube.hlsl"
 float4 lut(in sampler2D tex, in float4 color, in int offset) { 
     return sample2DCube(tex, color.rgb); 
 }

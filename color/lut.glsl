@@ -30,7 +30,7 @@ options:
 #endif
 #endif
 
-#include "../sample/2dCube.glsl"
+#include "../sample/2DCube.glsl"
 vec4 lut(in sampler2D tex_lut, in vec4 color, in int offset) { 
     return sample2DCube(tex_lut, color.rgb); 
 }

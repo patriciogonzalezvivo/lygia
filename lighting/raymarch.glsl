@@ -22,6 +22,14 @@ options:
 #define RAYMARCH_RENDER_FNC raymarchDefaultRender
 #endif
 
+#ifndef RAYMARCH_CAMERA_FOV
+#define RAYMARCH_CAMERA_FOV 3.0
+#endif
+
+#ifndef RAYMARCH_CAMERA_SCALE
+#define RAYMARCH_CAMERA_SCALE 0.11
+#endif
+
 #include "../math/const.glsl"
 #include "../space/rotate.glsl"
 #include "raymarch/render.glsl"
@@ -38,14 +46,14 @@ vec4 raymarch(vec3 camera, vec3 ta, vec2 st) {
     vec2 offset = rotate( vec2(0.5, 0.0), HALF_PI/4.);
 
     for (int i = 0; i < RAYMARCH_MULTISAMPLE; i++) {
-        vec3 rd = ca * normalize(vec3((st + offset * pixel)*2.0-1.0, 3.0));
-        color += RAYMARCH_RENDER_FNC( camera * 0.11, rd);
+        vec3 rd = ca * normalize(vec3((st + offset * pixel)*2.0-1.0, RAYMARCH_CAMERA_FOV));
+        color += RAYMARCH_RENDER_FNC( camera * RAYMARCH_CAMERA_SCALE, rd);
         offset = rotate(offset, HALF_PI);
     }
     return color/float(RAYMARCH_MULTISAMPLE);
 #else
-    vec3 rd = ca * normalize(vec3(st*2.0-1.0, 3.0));
-    return RAYMARCH_RENDER_FNC( camera * 0.11, rd);
+    vec3 rd = ca * normalize(vec3(st*2.0-1.0, RAYMARCH_CAMERA_FOV));
+    return RAYMARCH_RENDER_FNC( camera * RAYMARCH_CAMERA_SCALE, rd);
 #endif
 }
 
