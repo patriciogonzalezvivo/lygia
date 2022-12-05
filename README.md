@@ -284,7 +284,7 @@ LYGIA is dual-licensed under [the Prosperity License](https://prosperitylicense.
 
 It's also possible to get a permanent comercial license hook to a single and specific version of LYGIA.
 
-*) **Exceptions**:
+**Exceptions**:
 
 * `color/mixBox.glsl` and `color/mixBox.hlsl` it's copyrighted by Secret Weapons with their own non-commercial license. This functions also require a LUT texture wich is provided for research and evaluation purposes, if you wish to obtain it together with a commercial license, please contact them at mixbox@scrtwpns.com 
 
