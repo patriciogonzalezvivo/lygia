@@ -286,7 +286,7 @@ It's also possible to get a permanent comercial license hook to a single and spe
 
 *) **Exceptions**:
 
-* `color/mixBox.glsl` and `color/mixBox.hlsl` it's copyrighted by Secret Weapons with their own non-commercial use only. Which also require a LUT texture wich is provided for research and evaluation purposes, if you wish to obtain it together with a commercial license, please contact them at mixbox@scrtwpns.com 
+* `color/mixBox.glsl` and `color/mixBox.hlsl` it's copyrighted by Secret Weapons with their own non-commercial license. This functions also require a LUT texture wich is provided for research and evaluation purposes, if you wish to obtain it together with a commercial license, please contact them at mixbox@scrtwpns.com 
 
 ## Credits
 
