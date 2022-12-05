@@ -280,11 +280,11 @@ LYGIA have a long way to go. Your support will be appreciated and rewarded (all 
 
 LYGIA is dual-licensed under [the Prosperity License](https://prosperitylicense.com/versions/3.0.0) and the [Patron License](https://lygia.xyz/license) for [sponsors](https://github.com/sponsors/patriciogonzalezvivo) and [contributors](https://github.com/patriciogonzalezvivo/lygia/graphs/contributors).
 
-[Sponsors](https://github.com/sponsors/patriciogonzalezvivo) and [contributors](https://github.com/patriciogonzalezvivo/lygia/graphs/contributors) are automatically added to the [Patron License](https://lygia.xyz/license) and they can ignore the any non-commercial rule of [the Prosperity Licensed](https://prosperitylicense.com/versions/3.0.0) software with exception ( *. with exception to the files at the end of this section).
+[Sponsors](https://github.com/sponsors/patriciogonzalezvivo) and [contributors](https://github.com/patriciogonzalezvivo/lygia/graphs/contributors) are automatically added to the [Patron License](https://lygia.xyz/license) and they can ignore the any non-commercial rule of [the Prosperity Licensed](https://prosperitylicense.com/versions/3.0.0) software (please take a look to the exception).
 
 It's also possible to get a permanent comercial license hook to a single and specific version of LYGIA.
 
-*) Exceptions:
+*) ** Exceptions **:
 
 * `color/mixBox.glsl` and `color/mixBox.hlsl` it's copyrighted by Secret Weapons with their own non-commercial use only. Which also require a LUT texture wich is provided for research and evaluation purposes, if you wish to obtain it together with a commercial license, please contact them at mixbox@scrtwpns.com 
 
