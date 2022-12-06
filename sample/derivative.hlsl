@@ -10,7 +10,7 @@ options:
 */
 
 #ifndef SAMPLERDERIVATIVE_FNC
-#define SAMPLERDERIVATIVE_FNC(UV) SAMPLER_FNC(tex, clamp(UV, pixel, 1.0-pixel) ).r
+#define SAMPLERDERIVATIVE_FNC(TEX, UV) SAMPLER_FNC(tex, UV).r
 #endif
 
 #ifndef FNC_SAMPLEDERIVATIVE
