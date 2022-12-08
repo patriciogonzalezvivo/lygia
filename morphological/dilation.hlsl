@@ -37,8 +37,8 @@ DILATION_TYPE dilation(sampler2D tex,float2 st,float2 pixel, int radius) {
         float2 kst = rxy * invKR;
         float2 texOffset = st + rxy * pixel;
         float kernel = saturate(1.0 - dot(kst, kst));
-        DILATION_TYPE tex = DILATION_SAMPLE_FNC(tex, texOffset);
-        DILATION_TYPE v = tex + kernel;
+        DILATION_TYPE t = DILATION_SAMPLE_FNC(tex, texOffset);
+        DILATION_TYPE v = t + kernel;
         if (sum(v) > sum(acc)) {
             acc = v;
             w = kernel;

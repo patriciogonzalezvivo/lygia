@@ -26,7 +26,7 @@ float worley(vec2 p){
     return 1.0-dis;
 }
 
-float worley(vec3 p){
+float worley(vec3 p) {
     vec3 n = floor( p );
     vec3 f = fract( p );
 

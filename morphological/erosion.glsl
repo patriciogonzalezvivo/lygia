@@ -37,8 +37,8 @@ EROSION_TYPE erosion(sampler2D tex, vec2 st, vec2 pixel, int radius) {
         vec2 kst = rxy * invKR;
         vec2 texOffset = st + rxy * pixel;
         float kernel = saturate(1.0 - dot(kst, kst));
-        EROSION_TYPE tex = EROSION_SAMPLE_FNC(tex, texOffset);
-        EROSION_TYPE v = tex - kernel;
+        EROSION_TYPE t = EROSION_SAMPLE_FNC(tex, texOffset);
+        EROSION_TYPE v = t - kernel;
         if (sum(v) < sum(acc)) {
             acc = v;
             w = kernel;
