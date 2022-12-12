@@ -16,6 +16,7 @@ Tired of searching, porting and/or reimplementing the same functions over and ov
     <a href="https://www.figma.com/community/plugin/1138854718618193875"><img src="https://lygia.xyz/imgs/figma.png" width="100" /></a>
     <a href="https://github.com/irmf/irmf-examples/tree/master/examples/028-lygia"><img src="https://lygia.xyz/imgs/irmf.png" width="100" /></a>
     <a href="https://github.com/ossia/score-examples"><img src="https://lygia.xyz/imgs/ossia.png" width="100" /></a>
+    <a href="https://www.npmjs.com/package/resolve-lygia"><img src="https://lygia.xyz/imgs/npm.png" width="100" /></a>
     
 </p>
 
@@ -170,10 +171,11 @@ Here you can find some implementations on different languages:
     * Python
         - [Small and simple routing to resolve includes](https://gist.github.com/patriciogonzalezvivo/9a50569c2ef9b08058706443a39d838e)
     * JavaScript: 
-        - [vanilla JS online resolver](https://lygia.xyz/resolve.js) This small file brings `resolveLygia()` which takes a `string` or `string[]` and parse it solving all the `#include` dependencies into a single `string` you can load on your shaders.
-        - [vite glsl plugin](https://github.com/UstymUkhman/vite-plugin-glsl) by Ustym Ukhman. Imports `.glsl` local dependencies, or load inline shaders through vite
-        - [esbuild glsl plugin](https://github.com/ricardomatias/esbuild-plugin-glsl-include) by Ricardo Matias. Import local `.glsl` dependencies through esbuild.
-        - [webpack glsl plugin](https://github.com/grieve/webpack-glsl-loader) by Ryan Grieve. Import local `.glsl` dependencies through webpack.
+        - [vanilla JS (online resolver)](https://lygia.xyz/resolve.js) This small file brings `resolveLygia()` which takes a `string` or `string[]` and parse it solving all the `#include` dependencies into a single `string` you can load on your shaders.
+        - [npm module (online resolver)](https://www.npmjs.com/package/resolve-lygia) by Eduardo Fossas
+        - [vite glsl plugin (local bundle)](https://github.com/UstymUkhman/vite-plugin-glsl) by Ustym Ukhman. Imports `.glsl` local dependencies, or load inline shaders through vite
+        - [esbuild glsl plugin (local bundle)](https://github.com/ricardomatias/esbuild-plugin-glsl-include) by Ricardo Matias. Import local `.glsl` dependencies through esbuild.
+        - [webpack glsl plugin (local bundle)](https://github.com/grieve/webpack-glsl-loader) by Ryan Grieve. Import local `.glsl` dependencies through webpack.
         
 * It's **very granular**. One function per file. The file and the function share the same name, namely: `myFunc.glsl` contains `myFunct()`. There are some files that just include a collection of files inside a folder with the same name. For example:
 
