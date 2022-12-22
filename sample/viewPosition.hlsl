@@ -17,6 +17,10 @@ options:
 
 #ifndef FNC_SAMPLEVIEWPOSITION
 #define FNC_SAMPLEVIEWPOSITION
+float4 sampleViewPosition(const in float depth, const in float2 st, const in float near, const in float far) {
+    float viewZ = depth2viewZ(depth, near, far);
+    return screen2viewPosition(st, depth, viewZ);
+}
 
 float4 sampleViewPosition(sampler2D texDepth, const in float2 st, const in float near, const in float far) {
     float depth = SAMPLER_FNC(texDepth, st).r;
@@ -25,7 +29,7 @@ float4 sampleViewPosition(sampler2D texDepth, const in float2 st, const in float
 }
 
 #if defined(CAMERA_NEAR_CLIP) && defined(CAMERA_FAR_CLIP)
-float sampleViewPosition(sampler2D texDepth, const in float2 st) {
+float4 sampleViewPosition(sampler2D texDepth, const in float2 st) {
     return sampleViewPosition( texDepth, st, CAMERA_NEAR_CLIP, CAMERA_FAR_CLIP); 
 }
 #endif
