@@ -19,7 +19,7 @@ options:
 #endif
 
 #ifndef BOXBLUR_SAMPLER_FNC
-#define BOXBLUR_SAMPLER_FNC(UV) SAMPLER_FNC(TEX, UV)
+#define BOXBLUR_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
 #endif
 
 #include "boxBlur/1D.glsl"
