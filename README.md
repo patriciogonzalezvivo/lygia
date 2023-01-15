@@ -1,6 +1,7 @@
 <img src="https://lygia.xyz/imgs/lygia.svg" width="200" style="display: block; margin-left: auto; margin-right: auto; filter: drop-shadow(2px 3px 4px gray);">
 
 # LYGIA Shader Library
+![GitHub Sponsor](https://img.shields.io/github/sponsors/<username>?label=Sponsor&logo=GitHub)
 
 Tired of searching, porting and/or reimplementing the same functions over and over? LYGIA is a shader library of reusable functions that can be include easily on your projects. LYGIA is very granular, designed for reusability, performance and flexibility. And can be easily be added to any projects and frameworks.
 
