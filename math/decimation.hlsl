@@ -6,5 +6,7 @@ use: decimation(<float|float2|float3|float4> value, <float|float2|float3|float4>
 
 #ifndef FNC_DECIMATION
 #define FNC_DECIMATION
+
 #define decimation(value, presicion) (floor(value * presicion)/presicion)
+
 #endif

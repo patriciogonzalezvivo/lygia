@@ -6,6 +6,7 @@ use: pow5(<float|float2|float3|float4> x)
 
 #ifndef FNC_POW5
 #define FNC_POW5
+
 float pow5(in float x) {
     float x2 = x * x;
     return x2 * x2 * x;
@@ -25,4 +26,5 @@ float4 pow5(in float4 x) {
     float4 x2 = x * x;
     return x2 * x2 * x;
 }
+
 #endif
