@@ -1,4 +1,5 @@
 #include "../../math/saturate.cuh"
+#include "../../math/pow.cuh"
 
 /*
 original_author: Patricio Gonzalez Vivo
