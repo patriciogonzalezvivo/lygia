@@ -1,4 +1,4 @@
-#include "../math.cuh"
+#include "operations.cuh"
 
 /*
 original_author: Patricio Gonzalez Vivo

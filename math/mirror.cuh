@@ -1,5 +1,6 @@
 #include "mod.cuh"
 #include "frac.cuh"
+#include "operations.cuh"
 
 /*
 original_author: Ian Heisters
