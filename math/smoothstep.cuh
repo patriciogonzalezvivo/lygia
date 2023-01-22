@@ -1,4 +1,5 @@
 #include "clamp.cuh"
+#include "operations.cuh"
 
 /*
 original_author:
