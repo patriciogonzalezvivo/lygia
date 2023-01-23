@@ -26,11 +26,11 @@ vec3 raymarchNormal(vec3 pos, vec2 pixel) {
 }
 
 vec3 raymarchNormal(vec3 pos, float e) {
-   const vec2 offset = vec2(1.0, -1.0);
-   return normalize( offset.xyy * RAYMARCH_MAP_FNC( pos + offset.xyy * e ).RAYMARCH_MAP_DISTANCE +
-                     offset.yyx * RAYMARCH_MAP_FNC( pos + offset.yyx * e ).RAYMARCH_MAP_DISTANCE +
-                     offset.yxy * RAYMARCH_MAP_FNC( pos + offset.yxy * e ).RAYMARCH_MAP_DISTANCE +
-                     offset.xxx * RAYMARCH_MAP_FNC( pos + offset.xxx * e ).RAYMARCH_MAP_DISTANCE );
+   const vec2 offset = vec2(1.0, -1.0) * e;
+   return normalize( offset.xyy * RAYMARCH_MAP_FNC( pos + offset.xyy ).RAYMARCH_MAP_DISTANCE +
+                     offset.yyx * RAYMARCH_MAP_FNC( pos + offset.yyx ).RAYMARCH_MAP_DISTANCE +
+                     offset.yxy * RAYMARCH_MAP_FNC( pos + offset.yxy ).RAYMARCH_MAP_DISTANCE +
+                     offset.xxx * RAYMARCH_MAP_FNC( pos + offset.xxx ).RAYMARCH_MAP_DISTANCE );
 }
 
 vec3 raymarchNormal( in vec3 pos ) {
