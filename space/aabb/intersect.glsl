@@ -1,4 +1,5 @@
 #include "../aabb.glsl"
+#include "../../lighting/ray.glsl"
 
 /*
 original_author: Dominik Schmid 
@@ -13,6 +14,16 @@ use: <vec2> AABBintersect(<AABB> box, <vec3> rayOrigin, <vec3> rayDir)
 vec2 AABBintersect(const in AABB box, const in vec3 rayOrigin, const in vec3 rayDir) {
     vec3 tMin = (box.min - rayOrigin) / rayDir;
     vec3 tMax = (box.max - rayOrigin) / rayDir;
+    vec3 t1 = min(tMin, tMax);
+    vec3 t2 = max(tMin, tMax);
+    float tNear = max(max(t1.x, t1.y), t1.z);
+    float tFar = min(min(t2.x, t2.y), t2.z);
+    return vec2(tNear, tFar);
+}
+
+vec2 AABBintersect(const in AABB box, const in Ray ray) {
+    vec3 tMin = (box.min - ray.origin) / ray.direction;
+    vec3 tMax = (box.max - ray.origin) / ray.direction;
     vec3 t1 = min(tMin, tMax);
     vec3 t2 = max(tMin, tMax);
     float tNear = max(max(t1.x, t1.y), t1.z);

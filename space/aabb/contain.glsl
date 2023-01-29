@@ -4,13 +4,13 @@
 /*
 original_author: P
 description: Compute if point is inside AABB
-use: <bool> AABBinside(<AABB> box, <vec3> point ) 
+use: <bool> AABBcontain(<AABB> box, <vec3> point ) 
 */
 
-#ifndef FNC_AABB_INSIDE
-#define FNC_AABB_INSIDE
+#ifndef FNC_AABB_CONTAIN
+#define FNC_AABB_CONTAIN
 
-bool AABBinside(const in AABB box, const in vec3 point ) {
+bool AABBcontain(const in AABB box, const in vec3 point ) {
     return  all( lessThanEqual(point, box.max) ) && 
             all( lessThan(box.min, point) );
 }
