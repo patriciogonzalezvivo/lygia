@@ -1,16 +1,16 @@
 
-#include "../aabb.hlsl"
+#include "aabb.cuh"
 
 /*
-original_author: P
+original_author: Patricio Gonzalez Vivo
 description: Compute if point is inside AABB
-use: <bool> AABBinside(<AABB> box, <vec3> point ) 
+use: <bool> contain(<AABB> box, <vec3> point ) 
 */
 
 #ifndef FNC_AABB_CONTAIN
 #define FNC_AABB_CONTAIN
 
-bool AABBcontain(const in AABB _box, const in float3 _point ) {
+inline __host__ __device__ bool contain(const AABB& _box, const float3& _point ) {
     return  (_point.x >= _box.min.x && _point.x <= _box.max.x) &&
             (_point.y >= _box.min.y && _point.y <= _box.max.y) &&
             (_point.z >= _box.min.z && _point.z <= _box.max.z);

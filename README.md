@@ -35,7 +35,7 @@ In your shader `#include` the functions you need:
     uniform float   u_time;
 
     #include "lygia/space/ratio.glsl"
-    #include "lygia/math/decimation.glsl"
+    #include "lygia/math/decimate.glsl"
     #include "lygia/draw/circle.glsl"
 
     void main(void) {
@@ -44,7 +44,7 @@ In your shader `#include` the functions you need:
         st = ratio(st, u_resolution);
         
         color = vec3(st.x,st.y,abs(sin(u_time)));
-        color = decimation(color, 20.);
+        color = decimate(color, 20.);
         color += circle(st, .5, .1);
         
         gl_FragColor = vec4(color, 1.0);

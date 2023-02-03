@@ -3,8 +3,16 @@
 
 #include <cuda_runtime.h>
 
-typedef unsigned int uint;
-typedef unsigned short ushort;
+typedef unsigned int    uint;
+typedef unsigned short  ushort;
+
+typedef float2          vec2;
+typedef float3          vec3;
+typedef float4          vec4;
+
+typedef int2            ivec2;
+typedef int3            ivec3;
+typedef int4            ivec4;
 
 ////////////////////////////////////////////////////////////////////////////////
 // constructors
@@ -66,4 +74,19 @@ inline __host__ __device__ uint4 make_uint4(uint3 a) { return make_uint4(a.x, a.
 inline __host__ __device__ uint4 make_uint4(uint3 a, uint w) { return make_uint4(a.x, a.y, a.z, w); }
 inline __host__ __device__ uint4 make_uint4(int4 a) { return make_uint4(uint(a.x), uint(a.y), uint(a.z), uint(a.w)); }
 
+#ifdef GLM_VERSION
+inline __host__ __device__ float2 make_float2(const glm::vec2& _v) { return make_float2(_v.x, _v.y); } 
+inline __host__ __device__ float3 make_float3(const glm::vec3& _v) { return make_float3(_v.x, _v.y, _v.z); } 
+inline __host__ __device__ float4 make_float4(const glm::vec4& _v) { return make_float4(_v.x, _v.y, _v.z, _v.w); } 
+
+inline __host__ __device__ glm::vec2 make_vec2(const float2& _v) { return glm::vec2(_v.x, _v.y); } 
+inline __host__ __device__ glm::vec3 make_vec3(const float3& _v) { return glm::vec3(_v.x, _v.y, _v.z); } 
+inline __host__ __device__ glm::vec4 mkae_vec4(const float4& _v) { return glm::vec4(_v.x, _v.y, _v.z, _v.w); } 
+
+inline __host__ __device__ glm::ivec2 make_ivec2(const int2& _v) { return glm::ivec2(_v.x, _v.y); } 
+inline __host__ __device__ glm::ivec3 make_ivec3(const int3& _v) { return glm::ivec3(_v.x, _v.y, _v.z); } 
+inline __host__ __device__ glm::ivec4 mkae_ivec4(const int4& _v) { return glm::ivec4(_v.x, _v.y, _v.z, _v.w); } 
 #endif
+
+#endif
+

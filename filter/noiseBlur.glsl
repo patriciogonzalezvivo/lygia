@@ -1,5 +1,4 @@
 #include "../math/const.glsl"
-#include "../math/decimation.glsl"
 #include "../sample.glsl"
 #include "../sample/nearest.glsl"
 
