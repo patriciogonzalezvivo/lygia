@@ -3,7 +3,7 @@
 #include "../../math/cross.cuh"
 
 /*
-original_author: Patricio Gonzalez Vivo
+original_author: Thomas Müller & Alex Evans
 description: returns the centroid of a triangle
 use: <float3> centroid(<Triangle> tri) 
 */
