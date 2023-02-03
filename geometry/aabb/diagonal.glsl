@@ -1,15 +1,15 @@
 
-#include "../aabb.hlsl"
+#include "aabb.glsl"
 
 /*
 original_author: Patrincio Gonzalez Vivo
 description: return the diagonal vector of a AABB
-use: <float> AABBdiagonal(<AABB> box ) 
+use: <float> diagonal(<AABB> box ) 
 */
 
 #ifndef FNC_AABB_DIAGONAL
 #define FNC_AABB_DIAGONAL
 
-float3 AABBdiagonal(const AABB box) { return abs(box.max - box.min); }
+vec3 diagonal(const in AABB box) { return abs(box.max - box.min); }
 
 #endif

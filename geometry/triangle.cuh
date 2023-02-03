@@ -1,0 +1,7 @@
+#include "triangle/area.cuh"
+#include "triangle/barycentric.cuh"
+#include "triangle/centroid.cuh"
+#include "triangle/closestDistance.cuh"
+#include "triangle/closestPoint.cuh"
+#include "triangle/intersect.cuh"
+#include "triangle/normal.cuh"
