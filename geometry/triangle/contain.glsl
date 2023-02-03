@@ -1,22 +1,20 @@
-#include "triangle.cuh"
-#include "../../math/operations.cuh"
-#include "../../math/cross.cuh"
+#include "triangle.glsl"
 
 /*
 original_author: Thomas Müller & Alex Evans
 description: returns the centroid of a triangle
-use: <float3> centroid(<Triangle> tri) 
+use: <vec3> centroid(<Triangle> tri) 
 */
 
 #ifndef FNC_TRIANGLE_CONTAIN
 #define FNC_TRIANGLE_CONTAIN
 
-inline __host__ __device__ bool contain(const Triangle& _tri, const float3& _pos) { 
+bool contain(Triangle _tri, vec3 _pos) { 
     // Move the triangle so that the point becomes the
     // triangles origin
-    float3 local_a = _tri.a - _pos;
-    float3 local_b = _tri.b - _pos;
-    float3 local_c = _tri.c - _pos;
+    vec3 local_a = _tri.a - _pos;
+    vec3 local_b = _tri.b - _pos;
+    vec3 local_c = _tri.c - _pos;
 
     // The point should be moved too, so they are both
     // relative, but because we don't use p in the
@@ -28,13 +26,13 @@ inline __host__ __device__ bool contain(const Triangle& _tri, const float3& _pos
     // v = normal of PCA
     // w = normal of PAB
 
-    float3 u = cross(local_b, local_c);
-    float3 v = cross(local_c, local_a);
-    float3 w = cross(local_a, local_b);
+    vec3 u = cross(local_b, local_c);
+    vec3 v = cross(local_c, local_a);
+    vec3 w = cross(local_a, local_b);
 
     // Test to see if the normals are facing the same direction.
     // If yes, the point is inside, otherwise it isn't.
-    return dot(u, v) >= 0.0f && dot(u, w) >= 0.0f;
+    return dot(u, v) >= 0.0 && dot(u, w) >= 0.0;
 }
 
 #endif
