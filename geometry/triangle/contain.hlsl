@@ -1,6 +1,4 @@
-#include "triangle.cuh"
-#include "../../math/operations.cuh"
-#include "../../math/cross.cuh"
+#include "triangle.hlsl"
 
 /*
 original_author: Thomas Müller & Alex Evans
@@ -11,7 +9,7 @@ use: <float3> centroid(<Triangle> tri)
 #ifndef FNC_TRIANGLE_CONTAIN
 #define FNC_TRIANGLE_CONTAIN
 
-inline __host__ __device__ bool contain(const Triangle& _tri, const float3& _pos) { 
+bool contain(Triangle _tri, float3 _pos) { 
     // Move the triangle so that the point becomes the
     // triangles origin
     float3 local_a = _tri.a - _pos;
