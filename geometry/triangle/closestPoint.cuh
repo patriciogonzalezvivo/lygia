@@ -17,8 +17,6 @@ use: <float3> closestDistance(<Triangle> tri, <float3> _pos)
 inline __host__ __device__ float3 closestPoint(const Triangle& _tri, const float3& _triNormal, const float3& _pos) {
     float3 ab = _tri.b - _tri.a;
     float3 ac = _tri.c - _tri.a;
-    float3 normal = _triNormal;
-
     float3 p = _pos - dot(_triNormal, _pos - _tri.a) * _triNormal;
     float3 ap = p - _tri.a;
 

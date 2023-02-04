@@ -10,8 +10,8 @@ use: taylorInvSqrt(<float|float4> x)
 #define FNC_TAYLORINVSQRT
 
 inline __host__ __device__ float taylorInvSqrt(float r) { return 1.79284291400159f - 0.85373472095314f * r; }
-inline __host__ __device__ float2 taylorInvSqrt(float2 r) { return 1.79284291400159f - 0.85373472095314f * r; }
-inline __host__ __device__ float3 taylorInvSqrt(float3 r) { return 1.79284291400159f - 0.85373472095314f * r; }
-inline __host__ __device__ float4 taylorInvSqrt(float4 r) { return 1.79284291400159f - 0.85373472095314f * r; }
+inline __host__ __device__ float2 taylorInvSqrt(const float2& r) { return 1.79284291400159f - 0.85373472095314f * r; }
+inline __host__ __device__ float3 taylorInvSqrt(const float3& r) { return 1.79284291400159f - 0.85373472095314f * r; }
+inline __host__ __device__ float4 taylorInvSqrt(const float4& r) { return 1.79284291400159f - 0.85373472095314f * r; }
 
 #endif
