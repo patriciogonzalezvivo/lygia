@@ -10,8 +10,8 @@ use: permute(<float|float2|float3|float4> x)
 #define FNC_PERMUTE
 
 inline __device__ __host__ float permute(float x) { return mod289(((x * 34.0f) + 1.0f) * x); }
-inline __device__ __host__ float2 permute(float2 x) { return mod289(((x * 34.0f) + 1.0f) * x); }
-inline __device__ __host__ float3 permute(float3 x) { return mod289(((x * 34.0f) + 1.0f) * x); }
-inline __device__ __host__ float4 permute(float4 x) { return mod289(((x * 34.0f) + 1.0f) * x); }
+inline __device__ __host__ float2 permute(const float2& x) { return mod289(((x * 34.0f) + 1.0f) * x); }
+inline __device__ __host__ float3 permute(const float3& x) { return mod289(((x * 34.0f) + 1.0f) * x); }
+inline __device__ __host__ float4 permute(const float4& x) { return mod289(((x * 34.0f) + 1.0f) * x); }
 
 #endif

@@ -1,4 +1,5 @@
 #include "triangle.cuh"
+#include "../../math/const.cuh"
 #include "../../math/dot.cuh"
 #include "../../math/cross.cuh"
 #include "../../math/operations.cuh"
@@ -24,7 +25,7 @@ inline __host__ __device__ float intersect(const Triangle& _tri, const float3& _
     float v = d *  dot(q, v1v0);
     float t = d * -dot(_point, rov0);
     if (u < 0.0f || u > 1.0f || v < 0.0f || (u+v) > 1.0f || t < 0.0f)
-        t = std::numeric_limits<float>::max(); // No intersection
+        t = MAX_FLOAT_VALUE; // No intersection
 
     return t;
 }

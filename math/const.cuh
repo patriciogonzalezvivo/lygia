@@ -31,3 +31,6 @@
 #ifndef GOLDEN_ANGLE // (3.-sqrt(5.0))*PI radians
 #define GOLDEN_ANGLE 2.39996323
 #endif
+#ifndef MAX_FLOAT_VALUE
+#define MAX_FLOAT_VALUE 3.402823E+38
+#endif

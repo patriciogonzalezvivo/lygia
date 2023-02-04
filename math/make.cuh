@@ -14,6 +14,10 @@ typedef int2            ivec2;
 typedef int3            ivec3;
 typedef int4            ivec4;
 
+typedef uint2           uvec2;
+typedef uint3           uvec3;
+typedef uint4           uvec4;
+
 ////////////////////////////////////////////////////////////////////////////////
 // constructors
 ////////////////////////////////////////////////////////////////////////////////
@@ -83,9 +87,21 @@ inline __host__ __device__ glm::vec2 make_vec2(const float2& _v) { return glm::v
 inline __host__ __device__ glm::vec3 make_vec3(const float3& _v) { return glm::vec3(_v.x, _v.y, _v.z); } 
 inline __host__ __device__ glm::vec4 mkae_vec4(const float4& _v) { return glm::vec4(_v.x, _v.y, _v.z, _v.w); } 
 
+inline __host__ __device__ int2 make_int2(const glm::ivec2& _v) { return make_int2(_v.x, _v.y); } 
+inline __host__ __device__ int3 make_int3(const glm::ivec3& _v) { return make_int3(_v.x, _v.y, _v.z); } 
+inline __host__ __device__ int4 make_int4(const glm::ivec4& _v) { return make_int4(_v.x, _v.y, _v.z, _v.w); } 
+
 inline __host__ __device__ glm::ivec2 make_ivec2(const int2& _v) { return glm::ivec2(_v.x, _v.y); } 
 inline __host__ __device__ glm::ivec3 make_ivec3(const int3& _v) { return glm::ivec3(_v.x, _v.y, _v.z); } 
 inline __host__ __device__ glm::ivec4 mkae_ivec4(const int4& _v) { return glm::ivec4(_v.x, _v.y, _v.z, _v.w); } 
+
+inline __host__ __device__ uint2 make_uint2(const glm::uvec2& _v) { return make_uint2(_v.x, _v.y); } 
+inline __host__ __device__ uint3 make_uint3(const glm::uvec3& _v) { return make_uint3(_v.x, _v.y, _v.z); } 
+inline __host__ __device__ uint4 make_uint4(const glm::uvec4& _v) { return make_uint4(_v.x, _v.y, _v.z, _v.w); } 
+
+inline __host__ __device__ glm::uvec2 make_uvec2(const uint2& _v) { return glm::uvec2(_v.x, _v.y); } 
+inline __host__ __device__ glm::uvec3 make_uvec3(const uint3& _v) { return glm::uvec3(_v.x, _v.y, _v.z); } 
+inline __host__ __device__ glm::uvec4 mkae_uvec4(const uint4& _v) { return glm::uvec4(_v.x, _v.y, _v.z, _v.w); } 
 #endif
 
 #endif
