@@ -276,7 +276,7 @@ Here you can find some implementations on different languages:
 LYGIA have a long way to go. Your support will be appreciated and rewarded (all contributors are automatically added to the [commercial license](https://lygia.xyz/license) ). This support can take multiple forms:
 
 * fixing bugs!
-* expanding the crosscompatibility between languages GLSL/HLSL/WGSL/Metal
+* expanding the crosscompatibility between languages GLSL/HLSL/MSL/WGSL/CUDA
 * contributing new functions
 * adding new examples and integrations for new enviroments like: [TouchDesigner](https://derivative.ca/), [GoDot](https://godotengine.org/), [ISF](https://isf.video/), [MaxMSP](https://cycling74.com/products/max), etc.
 * through [sponsorships](https://github.com/sponsors/patriciogonzalezvivo)
