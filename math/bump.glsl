@@ -8,8 +8,10 @@ use: <float> bump(<float> x, <float> k)
 
 #ifndef FNC_BUMP
 #define FNC_BUMP
+
 float bump(float x, float k){ return saturate( (1.0 - x * x) - k); }
 vec3 bump(vec3 x, vec3 k){ return saturate( (1.0 - x * x) - k); }
 float bump(float x) { return max(1.0 - x * x, 0.0); }
 vec3 bump(vec3 x) { return max(vec3(1.,1.,1.) - x * x, vec3(0.,0.,0.)); }
+
 #endif

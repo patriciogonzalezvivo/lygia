@@ -6,29 +6,15 @@ use:
   - max(<float2|float3|float4> A)
 */
 
-#ifndef FNC_MAX
-#define FNC_MAX
-float mmax(in float a, in float b) {
-    return max(a, b);
-}
+#ifndef FNC_MMAX
+#define FNC_MMAX
 
-float mmax(in float a, in float b, in float c) {
-    return max(a, max(b, c));
-}
+float mmax(in float a, in float b) { return max(a, b); }
+float mmax(in float a, in float b, in float c) { return max(a, max(b, c)); }
+float mmax(in float a, in float b, in float c, in float d) { return max(max(a, b), max(c, d)); }
 
-float mmax(in float a, in float b, in float c, in float d) {
-    return max(max(a, b), max(c, d));
-}
+float mmax(const float2 v) { return max(v.x, v.y); }
+float mmax(const float3 v) { return mmax(v.x, v.y, v.z); }
+float mmax(const float4 v) { return mmax(v.x, v.y, v.z, v.w); }
 
-float mmax(const float2 v) {
-    return max(v.x, v.y);
-}
-
-float mmax(const float3 v) {
-    return mmax(v.x, v.y, v.z);
-}
-
-float mmax(const float4 v) {
-    return mmax(v.x, v.y, v.z, v.w);
-}
 #endif
