@@ -1,4 +1,4 @@
-#include "linear2gamma.glsl"
+#include "linear2gamma.wgsl"
 
 vec3 xyz2rgb(in vec3 c) {
     const M = mat3x3<f32>(  vec3<f32>(3.2404542, -0.9692660,  0.0556434),
