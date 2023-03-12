@@ -187,11 +187,14 @@ Here you can find some implementations on different languages:
 
 ```
 
-* It's **multi language**. Right now most of is GLSL (`*.glsl`) and HLSL (`*.hlsl`), but there are plans to extend it to Metal (`*.metal`).
+* It's **multi language**. Right now most of is GLSL (`*.glsl`) and HLSL (`*.hlsl`), but we are slowly extending to WGSL (`*.wgsl`), CUDA (`*.cuh`) and Metal (`*.msl`).
 
 ```
     math/mirror.glsl
     math/mirror.hlsl
+    math/mirror.wgsl
+    math/mirror.msl
+    math/mirror.cuh
 ```
 
 * **Self documented**. Each file contains a structured comment (in YAML) at the top of the file. This one contains the name of the original author, description, use and `#define` options
