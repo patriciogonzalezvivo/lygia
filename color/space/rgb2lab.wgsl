@@ -1,5 +1,5 @@
-#include "rgb2xyz.glsl"
-#include "xyz2lab.glsl"
+#include "rgb2xyz.wgsl"
+#include "xyz2lab.wgsl"
 
 fn rgb2lab(c: vec3<f32> ) -> vec3<f32> {
     let lab = xyz2lab(rgb2xyz(c));
