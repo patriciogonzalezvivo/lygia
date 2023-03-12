@@ -12,7 +12,7 @@ use: <vec3> k2rgb(<float> wavelength)
 vec3 k2rgb(float t) {
     float p = pow(t, -1.5);
     float l = log(t);
-	vec3 color = vec3(
+	  vec3 color = vec3(
         220000.0 * p + 0.5804,
         0.3923 * l - 2.4431,
         0.7615 * l - 5.681
