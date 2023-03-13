@@ -5,13 +5,13 @@
 
 /*
 original_author: Secret Weapons (@scrtwpns)
-description: mix using mixbox pigment algorithm https://github.com/scrtwpns/pigment-mixing and converted to GLSL by Patricio Gonzalez Vivo
+description: mix using mixbox pigment algorithm https://github.com/scrtwpns/pigment-mixing 
 use: <vec3\vec4> mixBox(<vec3|vec4> rgbA, <vec3|vec4> rgbB, float pct)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - MIXBOX_LUT: name of the texture uniform which you can find here https://github.com/scrtwpns/pigment-mixing
     - MIXBOX_LUT_FLIP_Y: when defined it expects a vertically flipled texture  
-    - MIXBOX_LUT_SAMPLER_FNC: sampler function. Default: texture2D(MIXBOX_LUT, POS_UV).rgb
+    - MIXBOX_LUT_SAMPLER_FNC: sampler function. Default, texture2D(MIXBOX_LUT, POS_UV).rgb
     - MIXBOX_LUT_CELL_SIZE: Default 256
 license: |
     Copyright (c) 2022, Secret Weapons. All rights reserved.
