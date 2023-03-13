@@ -168,7 +168,11 @@ There are some functions whose behaviour can be changed using the `#defines` key
 
 Here you can find some implementations on different languages:
 
-  -  C++:
+  - C#:
+  
+    . [GLSLIncludes](https://github.com/seb776/GLSLIncludes) a small utility to add the include feature to glsl by [z0rg](https://github.com/seb776)
+
+  - C++:
 
     . [VERA's routines](https://github.com/patriciogonzalezvivo/vera/blob/main/src/ops/fs.cpp#L110-L171) for resolving GLSL dependencies.
 
