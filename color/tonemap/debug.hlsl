@@ -1,7 +1,7 @@
 #include "../luminance.hlsl"
 
 /*
-Author:
+Author: nan
 description: |
     Converts the input HDR RGB color into one of 16 debug colors that represent
     the pixel's exposure. When the output is cyan, the input color represents
