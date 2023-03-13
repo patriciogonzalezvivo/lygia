@@ -128,18 +128,18 @@ For more information, guidance or feedback about using LYGIA, join [#Lygia chann
 
 The functions are divided in different categories:
 
-* [`math/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/math): general math functions and constants like `PI`, `SqrtLength()`, etc. 
-* [`space/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/space): general spatial operations like `scale()`, `rotate()`, etc. 
-* [`color/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/color): general color operations like `luma()`, `saturation()`, blend modes, palettes, color space conversion and tonemaps.
-* [`animation/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/animation): animation operations, like easing
-* [`generative/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/generative): generative functions like `random()`, `noise()`, etc. 
-* [`sdf/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/sdf): signed distance field functions.
-* [`draw/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/draw): drawing functions like `digits()`, `stroke()`, `fill`, etc/.
-* [`sample/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/sample): sample operations
-* [`filter/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/filter): typical filter operations like different kind of blurs, mean and median filters.
-* [`distort/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/distort): distort sampling operations
-* [`simulate/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/simulate): simulate sampling operations
-* [`lighting/`](https://github.com/patriciogonzalezvivo/lygia/tree/main/lighting): different lighting models and functions for foward/deferred/raymarching rendering
+* [`math/`](https://lygia.xyz/math): general math functions and constants like `PI`, `SqrtLength()`, etc. 
+* [`space/`](https://lygia.xyz/space): general spatial operations like `scale()`, `rotate()`, etc. 
+* [`color/`](https://lygia.xyz/color): general color operations like `luma()`, `saturation()`, blend modes, palettes, color space conversion and tonemaps.
+* [`animation/`](https://lygia.xyz/animation): animation operations, like easing
+* [`generative/`](https://lygia.xyz/generative): generative functions like `random()`, `noise()`, etc. 
+* [`sdf/`](https://lygia.xyz/sdf): signed distance field functions.
+* [`draw/`](https://lygia.xyz/draw): drawing functions like `digits()`, `stroke()`, `fill`, etc/.
+* [`sample/`](https://lygia.xyz/sample): sample operations
+* [`filter/`](https://lygia.xyz/filter): typical filter operations like different kind of blurs, mean and median filters.
+* [`distort/`](https://lygia.xyz/distort): distort sampling operations
+* [`simulate/`](https://lygia.xyz/simulate): simulate sampling operations
+* [`lighting/`](https://lygia.xyz/lighting): different lighting models and functions for foward/deferred/raymarching rendering
 
 
 ### Flexible how?
@@ -164,19 +164,27 @@ There are some functions whose behaviour can be changed using the `#defines` key
 
 ## Design Principles
 
-* It relies on `#include "path/to/file.*lsl"` which is defined by Khronos GLSL standard and requires a tipical C-like pre-compiler MACRO which is easy to implement with just basic string operations to resolve dependencies. 
+1. It relies on `#include "path/to/file.*lsl"` which is defined by Khronos GLSL standard and requires a tipical C-like pre-compiler MACRO which is easy to implement with just basic string operations to resolve dependencies. 
 
 Here you can find some implementations on different languages:
-    * C++:
-        - [VERA's routines](https://github.com/patriciogonzalezvivo/vera/blob/main/src/ops/fs.cpp#L110-L171) for resolving GLSL dependencies.
-    * Python
-        - [Small and simple routing to resolve includes](https://gist.github.com/patriciogonzalezvivo/9a50569c2ef9b08058706443a39d838e)
-    * JavaScript: 
-        - [vanilla JS (online resolver)](https://lygia.xyz/resolve.js) This small file brings `resolveLygia()` which takes a `string` or `string[]` and parse it solving all the `#include` dependencies into a single `string` you can load on your shaders.
-        - [npm module (online resolver)](https://www.npmjs.com/package/resolve-lygia) by Eduardo Fossas
-        - [vite glsl plugin (local bundle)](https://github.com/UstymUkhman/vite-plugin-glsl) by Ustym Ukhman. Imports `.glsl` local dependencies, or load inline shaders through vite
-        - [esbuild glsl plugin (local bundle)](https://github.com/ricardomatias/esbuild-plugin-glsl-include) by Ricardo Matias. Import local `.glsl` dependencies through esbuild.
-        - [webpack glsl plugin (local bundle)](https://github.com/grieve/webpack-glsl-loader) by Ryan Grieve. Import local `.glsl` dependencies through webpack.
+
+  -  C++:
+
+    . [VERA's routines](https://github.com/patriciogonzalezvivo/vera/blob/main/src/ops/fs.cpp#L110-L171) for resolving GLSL dependencies.
+
+  - Python:
+
+    . [Small and simple routing to resolve includes](https://gist.github.com/patriciogonzalezvivo/9a50569c2ef9b08058706443a39d838e)
+
+  - JavaScript: 
+  
+    . [vanilla JS (online resolver)](https://lygia.xyz/resolve.js) This small file brings `resolveLygia()` which takes a `string` or `string[]` and parse it solving all the `#include` dependencies into a single `string` you can load on your shaders
+  
+    . [npm module (online resolver)](https://www.npmjs.com/package/resolve-lygia) by Eduardo Fossas; [vite glsl plugin (local bundle)](https://github.com/UstymUkhman/vite-plugin-glsl) by Ustym Ukhman. Imports `.glsl` local dependencies, or load inline shaders through vite
+  
+    . [esbuild glsl plugin (local bundle)](https://github.com/ricardomatias/esbuild-plugin-glsl-include) by Ricardo Matias. Import local `.glsl` dependencies through esbuild
+
+    . [webpack glsl plugin (local bundle)](https://github.com/grieve/webpack-glsl-loader) by Ryan Grieve that import local `.glsl` dependencies through webpack.
         
 * It's **very granular**. One function per file. The file and the function share the same name, namely: `myFunc.glsl` contains `myFunct()`. There are some files that just include a collection of files inside a folder with the same name. For example:
 
@@ -281,7 +289,7 @@ LYGIA have a long way to go. Your support will be appreciated and rewarded (all 
 * fixing bugs!
 * expanding the crosscompatibility between languages GLSL/HLSL/MSL/WGSL/CUDA
 * contributing new functions
-* adding new examples and integrations for new enviroments like: [TouchDesigner](https://derivative.ca/), [GoDot](https://godotengine.org/), [ISF](https://isf.video/), [MaxMSP](https://cycling74.com/products/max), etc.
+* adding new examples and integrations for new enviroments like: [GoDot](https://godotengine.org/), [ISF](https://isf.video/), [MaxMSP](https://cycling74.com/products/max), etc.
 * through [sponsorships](https://github.com/sponsors/patriciogonzalezvivo)
 
 
