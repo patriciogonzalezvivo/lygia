@@ -1,8 +1,18 @@
 #include "../../math/cubic.glsl" 
 /*
 original_author: Patricio Gonzalez Vivo
-description: Physical Hue. Ratio: 1/3 = neon, 1/4 = refracted, 1/5+ = approximate white
+description: |
+    Physical Hue. 
+    
+    Ratio: 
+
+    * 1/3 = neon
+    * 1/4 = refracted
+    * 1/5+ = approximate white
+
 use: <vec3> hue(<float> hue[, <float> ratio])
+examples:
+    - https://raw.githubusercontent.com/eduardfossas/lygia-study-examples/main/color/palette/hue.frag
 */
 
 #ifndef FNC_PALETTE_HUE

@@ -2,6 +2,8 @@
 original_author: Patricio Gonzalez Vivo
 description: Simpler fire color ramp 
 use: <vec3> fire(<float> value)
+examples:
+    - https://raw.githubusercontent.com/eduardfossas/lygia-study-examples/main/color/palette/fire.frag
 */
 
 #ifndef FNC_FIRE

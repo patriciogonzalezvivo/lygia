@@ -4,6 +4,8 @@ description: Performs a smoothstep using standard derivatives for anti-aliased e
 use: aastep(<float> threshold, <float> value)
 option:
     AA_EDGE: in the absence of derivatives you can specify the antialiasing factor
+examples:
+    - https://raw.githubusercontent.com/eduardfossas/lygia-study-examples/main/draw/aastep.frag
 */
 
 #ifndef FNC_AASTEP
