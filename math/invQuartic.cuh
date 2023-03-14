@@ -4,7 +4,7 @@
 /*
 original_author: Inigo Quiles
 description: inverse quartic polynomial https://iquilezles.org/articles/smoothsteps/
-use: <float|float2|float3|float4> invQuartic(<float|float2|float3|float4> value);
+use: invQuartic(<float|float2|float3|float4> value);
 */
 
 #ifndef FNC_INVQUARTIC
