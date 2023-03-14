@@ -4,6 +4,8 @@
 original_author:  Inigo Quiles
 description: calculate normals http://iquilezles.org/www/articles/normalsSDF/normalsSDF.htm
 use: <float> raymarchNormal( in <vec3> pos ) 
+examples:
+    - /shaders/lighting_raymarching.frag
 */
 
 #ifndef RAYMARCH_MAP_FNC

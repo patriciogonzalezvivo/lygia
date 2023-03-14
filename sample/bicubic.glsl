@@ -6,6 +6,8 @@ description: bicubic filter sampling
 use: <vec4> sampleBicubic(<sampler2D> tex, <vec2> st, <vec2> texResolution);
 options:
     - SAMPLER_FNC(TEX, UV)
+examples:
+    - /shaders/sample_filter_bicubic.frag
 */
 
 #ifndef FNC_SAMPLEBICUBIC

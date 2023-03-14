@@ -11,6 +11,8 @@ Options:
     - DITHER_ANIMATED
     - DITHER_CHROMATIC
     - SAMPLER_FNC
+examples:
+    - /shaders/color_dither.frag
 */
 
 #include "dither/interleavedGradientNoise.glsl"

@@ -8,6 +8,8 @@ options:
     - BOXBLUR_2D: default to 1D
     - BOXBLUR_ITERATIONS: default 3
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
+examples:
+    - /shaders/filter_boxBlur2D.frag
 */
 
 #ifndef BOXBLUR_ITERATIONS

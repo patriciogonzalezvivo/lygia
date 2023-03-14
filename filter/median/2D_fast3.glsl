@@ -10,6 +10,8 @@ options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - MEDIAN2D_FAST3_TYPE: default vec4
     - MEDIAN2D_FAST3_SAMPLER_FNC(TEX, UV): default texture2D(TEX, UV)
+examples:
+    - /shaders/filter_median2D.frag
 */
 
 #ifndef MEDIAN2D_FAST3_TYPE

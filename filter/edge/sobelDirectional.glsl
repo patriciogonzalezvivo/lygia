@@ -7,6 +7,8 @@ use: edgeSobel_directional(<sampler2D> texture, <vec2> st, <vec2> pixels_scale)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - EDGESOBELDIRECTIONAL_SAMPLER_FNC: Function used to sample the input texture, defaults to texture2D(tex,TEX, UV).r
+examples:
+    - /shaders/filter_edge2D.frag
 */
 
 #ifndef EDGESOBELDIRECTIONAL_SAMPLER_FNC

@@ -11,6 +11,8 @@ options:
     - LUT_CELL_SIZE: cell side. DEfault. 32
     - LUT_SQUARE: the LUT have a SQQUARE shape and not just a long row
     - LUT_FLIP_Y: hen defined it expects a vertically flipled texture 
+examples:
+    - /shaders/color_lut.frag
 */
 
 #ifndef FNC_LUT

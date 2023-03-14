@@ -2,7 +2,7 @@
 
 /*
 original_author: Patricio Gonzalez Vivo
-description: 
+description: nan
 use: 
  - <vec4|vec3|float> ditherBlueNoise(<vec4|vec3|float> value, <vec2> st, <float> time)
  - <vec4|vec3|float> ditherBlueNoise(<vec4|vec3|float> value, <float> time)
@@ -12,6 +12,8 @@ options:
     - BLUENOISE_TEXTURE_RESOLUTION
     - DITHER_BLUENOISE_CHROMATIC
     - DITHER_BLUENOISE_ANIMATED
+examples:
+    - /shaders/color_dither.frag
 */
 
 #ifndef HIGHP

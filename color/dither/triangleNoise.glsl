@@ -1,9 +1,12 @@
 /*
 original_author: Patricio Gonzalez Vivo
-description: Gjøl 2016, "Banding in Games: A Noisy Rant"
+description: |
+    Gjøl 2016, "Banding in Games: A Noisy Rant"
 use: 
  - <vec4|vec3|float> ditherTriangleNoise(<vec4|vec3|float> value, <vec2> st, <float> time)
  - <vec4|vec3|float> ditherTriangleNoise(<vec4|vec3|float> value, <float> time)
+examples:
+    - /shaders/color_dither.frag
 */
 
 

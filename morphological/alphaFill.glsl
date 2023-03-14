@@ -8,6 +8,8 @@ use: <vec4> fillAlpha(<sampler2D> texture, <vec2> st, <vec2> pixel, <int> passes
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - ALPHAFILL_RADIUS
+examples:
+    - /shaders/morphological_alphaFill.frag
 */
 
 #ifndef ALPHAFILL_RADIUS

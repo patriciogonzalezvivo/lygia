@@ -10,6 +10,8 @@ options:
     - BILATERALBLUR2D_SAMPLER_FNC(TEX, UV): default texture2D(TEX, UV)
     - BILATERALBLUR2D_LUMA(RGB): default rgb2luma
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
+examples:
+    - /shaders/filter_bilateralBlur2D.frag
 */
 
 #ifndef BILATERALBLUR2D_TYPE

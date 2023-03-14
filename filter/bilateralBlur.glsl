@@ -10,6 +10,8 @@ options:
     - BILATERALBLUR_AMOUNT
     - BILATERALBLUR_TYPE
     - BILATERALBLUR_SAMPLER_FNC
+examples:
+    - /shaders/filter_bilateralBlur2D.frag
 */
 
 #ifndef BILATERALBLUR_AMOUNT

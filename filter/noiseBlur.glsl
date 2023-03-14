@@ -18,6 +18,8 @@ options:
     - NOISEBLUR_SAMPLER_FNC(UV): defualts to texture2D(tex, UV).rgb
     - NOISEBLUR_SAMPLES: default to 4
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
+examples:
+    - /shaders/filter_noiseBlur2D.frag
 */
 
 
