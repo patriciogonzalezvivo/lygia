@@ -12,6 +12,7 @@ description: |
     With weighter MSE (RGB weights: 0.3, 0.59, 0.11)
 use: <vec3> spectral_zucconi(<float> x)
 examples:
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/color_wavelenght.frag
     - https://raw.githubusercontent.com/eduardfossas/lygia-study-examples/main/color/palette/spectral.frag
 */
 

@@ -2,7 +2,7 @@
 
 /*
 original_author: Patricio Gonzalez Vivo
-description: 
+description: nan
 use: 
  - <float4|float3|float> ditherBlueNoise(<float4|float3|float> value, <float2> fragcoord, <float> time)
  - <float4|float3|float> ditherBlueNoise(<float4|float3|float> value, <float> time)

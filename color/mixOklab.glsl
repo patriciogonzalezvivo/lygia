@@ -1,7 +1,9 @@
 /*
 original_author: Bjorn Ottosson (@bjornornorn), Inigo Quiles
 description: oklab to linear RGB https://bottosson.github.io/posts/oklab/
-use: use: <vec3\vec4> mixOklab(<vec3|vec4> colorA, <vec3|vec4> colorB, float pct)
+use: <vec3\vec4> mixOklab(<vec3|vec4> colorA, <vec3|vec4> colorB, float pct)
+examples:
+    - /shaders/color_mix.frag
 */
 
 #ifndef FNC_MIXOKLAB

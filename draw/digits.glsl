@@ -1,12 +1,14 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: |
-  Draws all the digits of a floating point number, useful for debugging.
-  Requires high precision to work properly.
+    Draws all the digits of a floating point number, useful for debugging.
+    Requires high precision to work properly.
 use: digits(<vec2> st, <float> value [, <float> nDecDigit])
 options:
-  DIGITS_DECIMALS: number of decimals after the point, defaults to 2
-  DIGITS_SIZE: size of the font, defaults to vec2(.025)
+    DIGITS_DECIMALS: number of decimals after the point, defaults to 2
+    DIGITS_SIZE: size of the font, defaults to vec2(.025)
+examples:
+    - /shaders/draw_digits.frag
 */
 
 #ifndef DIGITS_SIZE

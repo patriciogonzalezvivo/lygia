@@ -10,6 +10,8 @@ options:
     - RADIALBLUR_TYPE: Default `vec4`
     - RADIALBLUR_SAMPLER_FNC(TEX, UV): Default `texture2D(tex, TEX, UV)`
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
+examples:
+    - /shaders/filter_radialBlur2D.frag
 */
 
 #ifndef RADIALBLUR_KERNELSIZE

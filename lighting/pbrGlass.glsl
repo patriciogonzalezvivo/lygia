@@ -23,6 +23,8 @@ options:
     - LIGHT_DIRECTION: 
     - LIGHT_COLOR in GlslViewer is u_lightColor
     - CAMERA_POSITION: in GlslViewer is u_camera
+examples:
+    - /shaders/lighting_raymarching_glass.frag
 */
 
 #ifndef LIGHT_COLOR

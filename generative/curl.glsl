@@ -4,6 +4,8 @@
 original_author: Isaac Cohen
 description: https://github.com/cabbibo/glsl-curl-noise/blob/master/curl.glsl
 use: curl(<vec3|vec4> pos)
+examples:
+    - /shaders/generative_curl.frag
 */
 
 

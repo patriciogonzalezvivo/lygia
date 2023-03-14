@@ -1,6 +1,7 @@
 /*
 original_author: Inigo Quiles
-description: Remapping the unit interval into the unit interval by expanding the sides and compressing the center, and keeping 1/2 mapped to 1/2, that can be done with the gain() function. From https://iquilezles.org/articles/functions/
+description: | 
+    Remapping the unit interval into the unit interval by expanding the sides and compressing the center, and keeping 1/2 mapped to 1/2, that can be done with the gain() function. From https://iquilezles.org/articles/functions/
 use: <float> gain(<float> x, <float> k)
 */
 

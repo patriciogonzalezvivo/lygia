@@ -9,6 +9,8 @@ options:
     - GAUSSIANBLUR2D_TYPE: Default `vec4`
     - GAUSSIANBLUR2D_SAMPLER_FNC(TEX, UV): Default `texture2D(tex, TEX, UV)`
     - GAUSSIANBLUR2D_KERNELSIZE: Use only for WebGL 1.0 and OpenGL ES 2.0 . For example RaspberryPis is not happy with dynamic loops. Default is 'kernelSize'
+examples:
+    - /shaders/filter_gaussianBlur2D.frag
 */
 
 #ifndef GAUSSIANBLUR2D_TYPE

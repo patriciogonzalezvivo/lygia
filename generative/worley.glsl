@@ -4,6 +4,8 @@
 original_author: Patricio Gonzalez Vivo
 description: Worley noise
 use: <vec2> worley(<vec2|vec3> pos)
+examples:
+    - /shaders/generative_worley.frag
 */
 
 #ifndef FNC_WORLEY

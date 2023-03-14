@@ -7,7 +7,9 @@ original_author: Inigo Quiles
 description: cell noise https://iquilezles.org/articles/voronoise/
 use: <float> voronoi(<vec3|vec2> pos, float voronoi, float _smoothness);
 options:
-    VORONOI_RANDOM_FNC: 
+    VORONOI_RANDOM_FNC: nan
+examples:
+    - /shaders/generative_voronoise.frag
 */
 
 #ifndef VORONOI_RANDOM_FNC 
