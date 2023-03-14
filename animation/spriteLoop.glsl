@@ -8,6 +8,8 @@ options:
     - SAMPLER_FNC(TEX, UV)
     - SAMPLESPRITE_TYPE: vec4
     - SAMPLESPRITE_SAMPLER_FNC(UV)
+examples:
+    - /shaders/animation_sprite.frag
 */
 
 #ifndef FNC_SPRITELOOP

@@ -13,6 +13,8 @@ options:
     - BARREL_OCT_1: one octave of distortion
     - BARREL_OCT_2: two octaves of distortion
     - BARREL_OCT_3: three octaves of distortion
+examples:
+    - https://raw.githubusercontent.com/eduardfossas/lygia-study-examples/main/distort/barrel.frag
 */
 
 #ifndef BARREL_DISTANCE
