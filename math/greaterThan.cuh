@@ -2,12 +2,12 @@
 
 /*
 original_author: [Ian McEwan, Ashima Arts]
-description: grad4, used for snoise(float4 v)
-use: grad4(<float> j, <float4> ip)
+description: greaterThan, returns 1 if x > y, 0 otherwise
+use: greaterThan(<float|float2|float3|float4> x, y)
 
 */
-#ifndef FNC_GRATERTHAN
-#define FNC_GRATERTHAN
+#ifndef FNC_GREATERTHAN
+#define FNC_GREATERTHAN
 
 inline __host__ __device__ float greaterThan(float x, float y) { return step(y, x); }
 inline __host__ __device__ float2 greaterThan(const float2& x, const float2& y) { return step(y, x); }

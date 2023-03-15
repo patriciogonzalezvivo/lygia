@@ -13,5 +13,5 @@ vec3 rgb2lms(vec3 rgb) {
         (0.0299566 * rgb.r) + (0.184309 * rgb.g) + (1.46709 * rgb.b)
     );
 }
-vec4 rgb2lms(vec4 rgb) { vec4(rgb.rgb, rgb.a); }
+vec4 rgb2lms(vec4 rgb) { return vec4(rgb.rgb, rgb.a); }
 #endif

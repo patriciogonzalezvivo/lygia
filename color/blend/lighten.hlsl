@@ -12,7 +12,7 @@ float blendLighten(in float base, in float blend) {
 
 float3 blendLighten(in float3 base, in float3 blend) {
     return float3(  blendLighten(base.r, blend.r),
-                    lendLighten(base.g, blend.g),
+                    blendLighten(base.g, blend.g),
                     blendLighten(base.b, blend.b) );
 }
 

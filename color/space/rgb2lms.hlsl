@@ -13,5 +13,5 @@ float3 rgb2lms(float3 rgb) {
         (0.0299566 * rgb.r) + (0.184309 * rgb.g) + (1.46709 * rgb.b)
     );
 }
-float4 rgb2lms(float4 rgb) { float4( rgb2lms(rgb.rgb), rgb.a); }
+float4 rgb2lms(float4 rgb) { return float4( rgb2lms(rgb.rgb), rgb.a); }
 #endif
