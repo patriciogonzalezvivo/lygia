@@ -1,19 +1,20 @@
 /*
 original_author: Patricio Gonzalez Vivo
-description: |
-  Convert from RGB to YIQ which was the followin range
-  Y [0,.1], I [-0.5957, 0.5957], Q [-0.5226, 0.5226]
-  From https://en.wikipedia.org/wiki/YIQ
-use: rgb2yiq(<float3|float4> color)
+description: | 
+    Convert from linear RGB to YIQ which was the followin range. 
+    Using conversion matrices from FCC NTSC Standard (SMPTE C) https://en.wikipedia.org/wiki/YIQ
+use: <float3|float4> rgb2yiq(<float3|float4> color)
 */
 
 #ifndef FNC_RGB2YIQ
 #define FNC_RGB2YIQ
-// https://en.wikipedia.org/wiki/YIQ
+
+#ifndef FNC_RGB2YIQ
+#define FNC_RGB2YIQ
 const float3x3 rgb2yiq_mat = float3x3(
-    .299,  .596,  .211,
-    .587, -.274, -.523,
-    .114, -.322,  .0312
+    0.300,  0.5900,  0.1100, 
+    0.599, -0.2773, -0.3217, 
+    0.213, -0.5251,  0.3121
 );
 
 float3 rgb2yiq(in float3 rgb) {
