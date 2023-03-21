@@ -1,16 +1,18 @@
 /*
 original_author: Patricio Gonzalez Vivo
-description: pass a color in YIQ and get RGB color. From https://en.wikipedia.org/wiki/YIQ
-use: yiq2rgb(<float3|float4> color)
+description: |
+   Convert a color in YIQ to linear RGB color. 
+   From https://en.wikipedia.org/wiki/YIQQ
+use: <float3|float4> yiq2rgb(<float3|float4> color)
 */
 
 #ifndef FNC_YIQ2RGB
 #define FNC_YIQ2RGB
 
 const float3x3 yiq2rgb_mat = float3x3(
-    1.,     1.,     1.,
-    .956,  -.272, -1.106,
-    .621,  -.647,  1.703
+    1.0,  0.9469,  0.6235, 
+    1.0, -0.2747, -0.6357, 
+    1.0, -1.1085,  1.7020
 );
 
 float3 yiq2rgb(in float3 yiq) {
