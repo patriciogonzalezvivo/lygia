@@ -140,7 +140,8 @@ The functions are divided in different categories:
 * [`distort/`](https://lygia.xyz/distort): distort sampling operations
 * [`simulate/`](https://lygia.xyz/simulate): simulate sampling operations
 * [`lighting/`](https://lygia.xyz/lighting): different lighting models and functions for foward/deferred/raymarching rendering
-
+* [`geometry/`](https://lygia.xyz/geometry): operation related to geometries. Like intersections and AABB accelerating structures.
+* [`morphological/`](https://lygia.xyz/morphological): morphological filters like: dilation, erosion, alpha and poisson fill.
 
 ### Flexible how?
 
