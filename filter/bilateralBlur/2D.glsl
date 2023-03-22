@@ -3,7 +3,9 @@
 
 /*
 original_author: Patricio Gonzalez Vivo
-description: two dimensional bilateral Blur, to do it in one single pass
+description: | 
+    two dimensional bilateral Blur, to do it in one single pass.
+    Other examples https://www.shadertoy.com/view/4dfGDH , https://www.shadertoy.com/view/XtVGWG
 use: bilateralBlur2D(<sampler2D> texture, <vec2> st, <vec2> offset, <int> kernelSize)
 options:
     - BILATERALBLUR2D_TYPE: default is vec3
