@@ -1,5 +1,6 @@
+#include "../math/gaussian.hlsl"
+#include "../sample/clamp2edge.hlsl"
 #include "../color/space/rgb2luma.hlsl"
-#include "../sample.hlsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
@@ -34,34 +35,49 @@ options:
 #endif
 
 #ifndef BILATERAL_SAMPLER_FNC
-#define BILATERAL_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
+#define BILATERAL_SAMPLER_FNC(TEX, UV) sampleClamp2edge(TEX, UV)
 #endif
 
 #ifndef BILATERAL_LUMA
 #define BILATERAL_LUMA(RGB) rgb2luma(RGB.rgb)
 #endif
 
+#ifndef BILATERAL_KERNEL_MAXSIZE
+#define BILATERAL_KERNEL_MAXSIZE 20
+#endif
+
 #include "bilateral/2D.hlsl"
 
 #ifndef FNC_BILATERALFILTER
 #define FNC_BILATERALFILTER
-BILATERAL_TYPE bilateral(in sampler2D tex, in float2 st, in float2 offset, const int kernelSize) {
-    return bilateral2D(tex, st, offset, kernelSize);
-}
 
-BILATERAL_TYPE bilateral13(in sampler2D tex, in float2 st, in float2 offset) {
-    return bilateral(tex, st, offset, 7);
-}
+BILATERAL_TYPE bilateral(sampler2D tex, float2 st, float2 offset, const int kernelSize) {
+    BILATERAL_TYPE accumColor = float4(0.0, 0.0, 0.0, 0.0);
+    float accumWeight = 0.0;
+    const float k = 0.15915494; // 1. / (2.*PI)
+    const float k2 = k * k;
+    float kernelSizef = float(kernelSize);
+    float kernelSize2f = kernelSizef * kernelSizef;
+    BILATERAL_TYPE tex0 = BILATERAL_SAMPLER_FNC(tex, st);
+    float lum0 = BILATERAL_LUMA(tex0);
 
-BILATERAL_TYPE bilateral9(in sampler2D tex, in float2 st, in float2 offset) {
-    return bilateral(tex, st, offset, 5);
-}
+    for (int j = 0; j < BILATERAL_KERNEL_MAXSIZE; j++) {
+        if (j >= kernelSize)
+            break;
+        float dy = -0.5 * (kernelSizef - 1.0) + float(j);
+        for (int i = 0; i < BILATERAL_KERNEL_MAXSIZE; i++) {
+            if (i >= kernelSize)
+                break;
+            float dx = -0.5 * (kernelSizef - 1.0) + float(i);
 
-BILATERAL_TYPE bilateral5(in sampler2D tex, in float2 st, in float2 offset) {
-    return bilateral(tex, st, offset, 3);
-}
-
-BILATERAL_TYPE bilateral(in sampler2D tex, in float2 st, in float2 offset) {
-    return BILATERAL_AMOUNT(tex, st, offset);
+            BILATERAL_TYPE t = BILATERAL_SAMPLER_FNC(tex, st + float2(dx, dy) * offset);
+            float lum = BILATERAL_LUMA(t);
+            float dl = 255.0 * (lum - lum0);
+            float weight = (k2 / kernelSize2f) * gaussian(kernelSizef, float3(dx, dy, dl));
+            accumColor += weight * t;
+            accumWeight += weight;
+        }
+    }
+    return accumColor / accumWeight;
 }
 #endif

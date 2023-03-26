@@ -1,29 +1,28 @@
+#include "../math/gaussian.glsl"
 #include "../color/space/rgb2luma.glsl"
-#include "../sample.glsl"
+#include "../sample/clamp2edge.glsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
 description: |
 
-    The bilateral filter is a non-linear filter, which means that the intensity of each pixel is
-    replaced by a weighted average of intensity values from nearby pixels. The weights are computed
-    using a Gaussian function of the spatial distance between pixels (the 'd' variable in the code
-    below) and a Gaussian function of the intensity difference between pixels (the 'r' variable in
-    the code below). The spatial Gaussian function is the same as the one used in the Gaussian blur.
-    The intensity Gaussian is defined by the standard deviation of the intensity values in the
-    neighborhood of the pixel (the 'sigma_r' variable in the code below). The 'sigma_r' variable is
-    usually set to a small value, such as 0.1. The 'sigma_d' variable is the standard deviation of the
-    spatial Gaussian function. It is usually set to a value slightly larger than the radius of the
-    neighborhood of the pixel. The 'sigma_d' variable is usually set to a value slightly larger than
-    the radius of the neighborhood of the pixel. The 'sigma_d' variable is usually set to a value
-    slightly larger than the radius of the neighborhood of the pixel.
+    This is a two dimensioanl Bilateral filter (for a single pass) It's a non-linear, edge-preserving, and noise-reducing
+    smoothing filter for images. It replaces the intensity of each pixel with a weighted average of
+    intensity values from nearby pixels. This filter is very effective at noise removal while
+    preserving edges. It is very similar to the Gaussian blur, but it also takes into account the
+    intensity differences between a pixel and its neighbors. This is what makes it particularly
+    effective at noise removal while preserving edges.
 
-use: bilateral(<sampler2D> texture, <vec2> st, <vec2> duv)
+    Other examples https://www.shadertoy.com/view/4dfGDH , https://www.shadertoy.com/view/XtVGWG
+
+use: bilateral(<sampler2D> texture, <vec2> st, <vec2> duv [, <int> kernelSize]])
+
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
-    - BILATERAL_AMOUNT
-    - BILATERAL_TYPE
-    - BILATERAL_SAMPLER_FNC
+    - BILATERAL_TYPE: default is vec3
+    - BILATERAL_SAMPLER_FNC(TEX, UV): default texture2D(TEX, UV)
+    - BILATERAL_LUMA(RGB): default rgb2luma
+    - BILATERAL_KERNEL_MAXSIZE: default 20
 examples:
     - /shaders/filter_bilateral2D.frag
 */
@@ -37,34 +36,58 @@ examples:
 #endif
 
 #ifndef BILATERAL_SAMPLER_FNC
-#define BILATERAL_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
+#define BILATERAL_SAMPLER_FNC(TEX, UV) sampleClamp2edge(TEX, UV)
 #endif
 
 #ifndef BILATERAL_LUMA
 #define BILATERAL_LUMA(RGB) rgb2luma(RGB.rgb)
 #endif
 
-#include "bilateral/2D.glsl"
-
 #ifndef FNC_BILATERALFILTER
 #define FNC_BILATERALFILTER
 BILATERAL_TYPE bilateral(in sampler2D tex, in vec2 st, in vec2 offset, const int kernelSize) {
-    return bilateral2D(tex, st, offset, kernelSize);
-}
+    BILATERAL_TYPE accumColor = BILATERAL_TYPE(0.);
 
-BILATERAL_TYPE bilateral13(in sampler2D tex, in vec2 st, in vec2 offset) {
-    return bilateral(tex, st, offset, 7);
-}
+    #ifndef BILATERAL_KERNELSIZE
+    #if defined(PLATFORM_WEBGL)
+    #define BILATERAL_KERNELSIZE 20
+    float kernelSizef = float(kernelSize);
+    #else
+    #define BILATERAL_KERNELSIZE kernelSize
+    float kernelSizef = float(BILATERAL_KERNELSIZE);
+    #endif
+    #else 
+    float kernelSizef = float(BILATERAL_KERNELSIZE);
+    #endif
+    
+    float accumWeight = 0.0;
+    const float k = 0.15915494; // 1. / (2.*PI)
+    const float k2 = k * k;
+    
+    float kernelSize2 = kernelSizef * kernelSizef;
+    BILATERAL_TYPE tex0 = BILATERAL_SAMPLER_FNC(tex, st);
+    float lum0 = BILATERAL_LUMA(tex0);
 
-BILATERAL_TYPE bilateral9(in sampler2D tex, in vec2 st, in vec2 offset) {
-    return bilateral(tex, st, offset, 5);
-}
-
-BILATERAL_TYPE bilateral5(in sampler2D tex, in vec2 st, in vec2 offset) {
-    return bilateral(tex, st, offset, 3);
-}
-
-BILATERAL_TYPE bilateral(in sampler2D tex, in vec2 st, in vec2 offset) {
-    return BILATERAL_AMOUNT(tex, st, offset);
+    for (int j = 0; j < BILATERAL_KERNELSIZE; j++) {
+        #if defined(PLATFORM_WEBGL)
+        if (j >= kernelSize)
+            break;
+        #endif
+        float dy = -0.5 * (kernelSizef - 1.0) + float(j);
+        for (int i = 0; i < BILATERAL_KERNELSIZE; i++) {
+            #if defined(PLATFORM_WEBGL)
+            if (i >= kernelSize)
+                break;
+            #endif
+            float dx = -0.5 * (kernelSizef - 1.0) + float(i);
+            BILATERAL_TYPE t = BILATERAL_SAMPLER_FNC(tex, st + vec2(dx, dy) * offset);
+            float lum = BILATERAL_LUMA(t);
+            float dl = 255.0 * (lum - lum0);
+            float weight = (k2 / kernelSize2) * gaussian(kernelSizef, vec3(dx,dy,dl));
+            accumColor += weight * t;
+            accumWeight += weight;
+        }
+    }
+    return accumColor / accumWeight;
 }
 #endif
