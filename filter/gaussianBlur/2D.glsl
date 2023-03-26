@@ -49,7 +49,7 @@ GAUSSIANBLUR2D_TYPE gaussianBlur2D(in sampler2D tex, in vec2 st, in vec2 offset,
     #endif
 
     float accumWeight = 0.;
-    const float k = .15915494; // 1 / (2*PI)
+    const float k = 0.15915494; // 1 / (2*PI)
     float kernelSize2 = kernelSizef * kernelSizef;
 
     for (int j = 0; j < GAUSSIANBLUR2D_KERNELSIZE; j++) {
