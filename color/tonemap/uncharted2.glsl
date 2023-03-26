@@ -1,6 +1,6 @@
 /*
-Author:John Hable
-description: tonemapping function from presentation "Uncharted 2 HDR Lighting", Page 142-143
+author: John Hable
+description: tonemapping function from presentation, uncharted 2 HDR Lighting, Page 142 to 143
 use: <vec3|vec4> tonemapUncharted2(<vec3|vec4> x)
 */
 

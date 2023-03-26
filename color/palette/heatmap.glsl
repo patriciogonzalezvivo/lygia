@@ -2,6 +2,8 @@
 original_author: Patricio Gonzalez Vivo
 description: heatmap palette
 use: <vec3> heatmap(<float> value)
+examples:
+    - https://raw.githubusercontent.com/eduardfossas/lygia-study-examples/main/color/palette/heatmap.frag
 */
 
 #ifndef FNC_HEATMAP

@@ -7,7 +7,9 @@ original_author: Patricio Gonzalez Vivo
 description: Voronoi positions and distance to centroids
 use: <vec3> voronoi(<vec2> pos, <float> time)
 options:
-    VORONOI_RANDOM_FNC: 
+    VORONOI_RANDOM_FNC: nan
+examples:
+    - /shaders/generative_voronoi.frag
 */
 
 #ifndef VORONOI_RANDOM_FNC 

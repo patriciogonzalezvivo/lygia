@@ -17,6 +17,8 @@ options:
     - LIGHT_COLOR
     - RAYMARCH_AMBIENT
     - RAYMARCH_MATERIAL_FNC(RAY, POSITION, NORMAL, ALBEDO)
+examples:
+    - /shaders/lighting_raymarching.frag
 */
 
 #ifndef LIGHT_POSITION

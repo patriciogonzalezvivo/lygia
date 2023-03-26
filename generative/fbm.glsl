@@ -13,6 +13,8 @@ options:
     FBM_SCALE_SCALAR: scalar. Defualt is 2.
     FBM_AMPLITUD_INITIAL: initial amplitud value. Default is 0.5
     FBM_AMPLITUD_SCALAR: amplitud scalar. Default is 0.5
+examples:
+    - /shaders/generative_fbm.frag
 */
 
 #ifndef FBM_OCTAVES

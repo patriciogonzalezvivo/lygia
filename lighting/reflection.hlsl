@@ -7,7 +7,7 @@ float3 reflection(float3 _V, float3 _N, float _roughness) {
     float3  anisotropicT = MATERIAL_ANISOTROPY_DIRECTION;
     float3  anisotropicB = MATERIAL_ANISOTROPY_DIRECTION;
 
-#ifdef MODERL_VERTEX_TANGENT
+#ifdef MODEL_VERTEX_TANGENT
     anisotropicT = normalize(v_tangentToWorld * MATE RIAL_ANISOTROPY_DIRECTION);
     anisotropicB = normalize(cross(v_tangentToWorld[2], anisotropicT));
 #endif

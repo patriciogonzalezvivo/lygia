@@ -5,7 +5,8 @@
 #include "common/rayleigh.hlsl"
 
 /*
-description: Rayleigh and Mie scattering atmosphere system. Implementation of the techniques described here: https://www.scratchapixel.com/lessons/procedural-generation-virtual-worlds/simulating-sky/simulating-colors-of-the-sky
+description: |
+    Rayleigh and Mie scattering atmosphere system. Implementation of the techniques described here: https://www.scratchapixel.com/lessons/procedural-generation-virtual-worlds/simulating-sky/simulating-colors-of-the-sky
 use: <float3> atmosphere(<float3> eye_dir, <float3> sun_dir)
 OPTIONS:
     ATMOSPHERE_FAST: use fast implementation from https://www.shadertoy.com/view/3dBSDW
@@ -14,7 +15,7 @@ OPTIONS:
     ATMOSPHERE_SUN_POWER: sun power. Default 20.0
     ATMOSPHERE_LIGHT_SAMPLES: Defualt 8 
     ATMOSPHERE_SAMPLES: Defualt 16
-    HENYEYGREENSTEIN_SCATTERING
+    HENYEYGREENSTEIN_SCATTERING: nan
 */
 
 #ifndef ATMOSPHERE_RADIUS_MIN

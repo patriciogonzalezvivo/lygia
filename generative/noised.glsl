@@ -6,6 +6,8 @@ description: returns 2D/3D value noise in the first channel and in the rest the 
 use: noised(<vec2|vec3> space)
 options:
     NOISED_QUINTIC_INTERPOLATION: Quintic interpolation on/off. Default is off.
+examples:
+    - /shaders/generative_noised.frag
 */
 
 #ifndef NOISED_RANDOM2_FNC

@@ -1,7 +1,3 @@
-/*
-description: Include all spectral palettes
-*/
-
 #include "spectral/gems.glsl"
 #include "spectral/geoffrey.glsl"
 #include "spectral/soft.glsl"
@@ -14,6 +10,8 @@ description: Include all spectral palettes
 original_author: Martijn Steinrucken
 description: Spectral Response Function https://www.shadertoy.com/view/wlSBzD
 use: <vec3> spectral(<float> value)
+examples:
+    - https://raw.githubusercontent.com/eduardfossas/lygia-study-examples/main/color/palette/spectral.frag
 */
 
 #ifndef FNC_SPECTRAL

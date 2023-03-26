@@ -11,6 +11,8 @@ options:
     - SHARPENADAPTIVE_TYPE: defaults to vec3
     - SHARPENDADAPTIVE_SAMPLER_FNC(TEX, UV): defaults to texture2D(TEX, UV).rgb
     - SHARPENADAPTIVE_ANIME: only darken edges. Defaults to: false
+examples:
+    - /shaders/filter_sharpen2D.frag
 */
 
 #ifndef SHARPENADAPTIVE_TYPE

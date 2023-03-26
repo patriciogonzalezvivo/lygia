@@ -31,6 +31,6 @@ vec4 poissonFill(sampler2D tex0, sampler2D tex1, vec2 st, vec2 pixel, bool upsca
     else {
         color = poissonFillUpscale(tex0, tex1, st, pixel);
     }
-    return (color.a == 0.0)? color : vec4(color.rgb/color.a, 1.0)
+    return (color.a == 0.0)? color : vec4(color.rgb/color.a, 1.0);
 }
 #endif

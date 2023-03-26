@@ -6,7 +6,7 @@
 
 /*
 original_author: Matt DesLauriers
-description: Natural looking film grain using 3D noise functions (original source: https://github.com/mattdesl/glsl-film-grain). Inspired by [Martins Upitis](http://devlog-martinsh.blogspot.com/2013/05/image-imperfections-and-film-grain-post.html).
+description: Natural looking film grain using 3D noise functions (original source https://github.com/mattdesl/glsl-film-grain). Inspired by [Martins Upitis](http://devlog-martinsh.blogspot.com/2013/05/image-imperfections-and-film-grain-post.html).
 use: 
     - grain(<float2> texCoord, <float2> resolution [, <float> t, <float> multiplier])
     - grain(<sampler2D> texture, <float2> texCoord, <float|float2> resolution [, <float> t, <float> multiplier])

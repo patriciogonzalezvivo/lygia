@@ -10,6 +10,7 @@
 #include "sdf/starSDF.glsl"
 #include "sdf/triSDF.glsl"
 #include "sdf/vesicaSDF.glsl"
+#include "sdf/flowerSDF.glsl"
 
 // 3D
 #include "sdf/boxFrameSDF.glsl"
