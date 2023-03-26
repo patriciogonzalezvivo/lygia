@@ -16,6 +16,8 @@ options:
     - RAYMARCH_BACKGROUND: vec3(0.0)
     - RAYMARCH_AMBIENT: vec3(1.0)
     - RAYMARCH_MATERIAL_FNC raymarchDefaultMaterial
+examples:
+    - /shaders/lighting_raymarching.frag
 */
 
 #ifndef RAYMARCH_MAP_DISTANCE

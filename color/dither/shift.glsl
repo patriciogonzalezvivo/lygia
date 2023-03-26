@@ -1,10 +1,13 @@
 /*
 original_author: Patricio Gonzalez Vivo
-description: Vlachos 2016, "Advanced VR Rendering" http://alex.vlachos.com/graphics/Alex_Vlachos_Advanced_VR_Rendering_GDC2015.pdf
+description: |
+    Vlachos 2016, "Advanced VR Rendering" http://alex.vlachos.com/graphics/Alex_Vlachos_Advanced_VR_Rendering_GDC2015.pdf
 use: <vec4|vec3|float> ditherShift(<vec4|vec3|float> value, <float> time)
 options:
     - DITHER_SHIFT_ANIMATED
     - DITHER_SHIFT_CHROMATIC
+examples:
+    - /shaders/color_dither.frag
 */
 
 #ifdef DITHER_CHROMATIC

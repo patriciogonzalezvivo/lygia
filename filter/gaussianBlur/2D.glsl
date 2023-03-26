@@ -9,6 +9,8 @@ options:
     - GAUSSIANBLUR2D_TYPE: Default `vec4`
     - GAUSSIANBLUR2D_SAMPLER_FNC(TEX, UV): Default `texture2D(tex, TEX, UV)`
     - GAUSSIANBLUR2D_KERNELSIZE: Use only for WebGL 1.0 and OpenGL ES 2.0 . For example RaspberryPis is not happy with dynamic loops. Default is 'kernelSize'
+examples:
+    - /shaders/filter_gaussianBlur2D.frag
 */
 
 #ifndef GAUSSIANBLUR2D_TYPE
@@ -47,7 +49,7 @@ GAUSSIANBLUR2D_TYPE gaussianBlur2D(in sampler2D tex, in vec2 st, in vec2 offset,
     #endif
 
     float accumWeight = 0.;
-    const float k = .15915494; // 1 / (2*PI)
+    const float k = 0.15915494; // 1 / (2*PI)
     float kernelSize2 = kernelSizef * kernelSizef;
 
     for (int j = 0; j < GAUSSIANBLUR2D_KERNELSIZE; j++) {

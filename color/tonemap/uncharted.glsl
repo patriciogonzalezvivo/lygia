@@ -1,6 +1,6 @@
 /*
-original_author:
-description: 
+original_author: nan
+description: NAN
 use: <vec3|vec4> tonemapUncharted(<vec3|vec4> x)
 */
 

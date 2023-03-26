@@ -1,4 +1,4 @@
-/*\
+/*
 original_author: Patricio Gonzalez Vivo
 description: Returns a hexagon-shaped SDF
 use: hexSDF(<float2> st)

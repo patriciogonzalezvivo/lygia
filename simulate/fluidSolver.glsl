@@ -7,12 +7,12 @@ description: Simple single pass fluid simlation from the book GPU Pro 2, "Simple
 use: <vec2> fluidSolver(<sampler2D> tex, <vec2> st, <vec2> pixel, <vec2> force)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
-    - FLUIDSOLVER_DT: Default 0.15
-    - FLUIDSOLVER_DX: Defailt 1.0
+    - FLUIDSOLVER_DT: Default, 0.15
+    - FLUIDSOLVER_DX: Defailt, 1.0
     - FLUIDSOLVER_VORTICITY: lower value for vorticity threshold means higher viscosity and vice versa (max .3)
-    - FLUIDSOLVER_VISCOSITY: Default: 0.16
-    - FLUIDSOLVER_VELOCITY_DECAY: Default: 5e-6
-    - FLUIDSOLVER_SAMPLER_FNC
+    - FLUIDSOLVER_VISCOSITY: Default, 0.16
+    - FLUIDSOLVER_VELOCITY_DECAY: Default, 5e-6
+    - FLUIDSOLVER_SAMPLER_FNC: sampler function
 */
 
 #ifndef FLUIDSOLVER_DT

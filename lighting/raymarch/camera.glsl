@@ -4,6 +4,8 @@
 original_author:  Inigo Quiles
 description: set a camera for raymarching 
 use: <mat3> raymarchCamera(in <vec3> ro, [in <vec3> ta [, in <vec3> up] ])
+examples:
+    - /shaders/lighting_raymarching.frag
 */
 
 #ifndef FNC_RAYMARCHCAMERA

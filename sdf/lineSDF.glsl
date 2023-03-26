@@ -1,6 +1,6 @@
 #include "../math/saturate.glsl"
 
-/*\
+/*
 original_author: Inigo Quiles
 description: Segment SDF
 use: lineSDF(<vec2> st, <vec2> A, <vec2> B)

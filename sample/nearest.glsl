@@ -7,6 +7,8 @@ description: fakes a nearest sample
 use: <vec4> sampleNearest(<sampler2D> tex, <vec2> st, <vec2> texResolution);
 options:
     - SAMPLER_FNC(TEX, UV)
+examples:
+    - /shaders/sample_filter_nearest.frag
 */
 
 #ifndef FNC_SAMPLENEAREST

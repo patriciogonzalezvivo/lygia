@@ -2,6 +2,8 @@
 original_author: Patricio Gonzalez Vivo
 description: pass a value and get some random normalize value between 0 and 1
 use: float random[2|3](<float|vec2|vec3> value)
+examples:
+    - /shaders/generative_random.frag
 */
 
 #ifndef FNC_RANDOM

@@ -1,6 +1,6 @@
 /*
-original_author:
-description: 
+original_author: nan
+description: NAN
 use: <float3|float4> tonemapUncharted(<float3|float4> x)
 */
 
@@ -25,5 +25,5 @@ float3 tonemapUncharted(const float3 x) {
     return curr * whiteScale;
 }
 
-float4 tonemapUncharted(const float4 x) { float4( tonemapUncharted(x.rgb), x.a); }
+float4 tonemapUncharted(const float4 x) { return float4( tonemapUncharted(x.rgb), x.a); }
 #endif

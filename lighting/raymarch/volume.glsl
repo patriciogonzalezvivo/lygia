@@ -10,6 +10,8 @@ options:
     - RAYMARCH_AMBIENT vec3(1.0)
     - LIGHT_COLOR     vec3(0.5)
     - LIGHT_POSITION  vec3(0.0, 10.0, -50.0)
+examples:
+    - /shaders/lighting_raymarching_volume.frag
 */
 
 #ifndef LIGHT_COLOR

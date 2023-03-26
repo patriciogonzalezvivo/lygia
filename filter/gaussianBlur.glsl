@@ -8,6 +8,8 @@ options:
     - GAUSSIANBLUR_AMOUNT: gaussianBlur5 gaussianBlur9 gaussianBlur13 
     - GAUSSIANBLUR_2D: default to 1D
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
+examples:
+    - /shaders/filter_gaussianBlur2D.frag
 */
 
 #ifndef GAUSSIANBLUR_AMOUNT

@@ -8,6 +8,8 @@ options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - BOXBLUR2D_FAST9_TYPE: Default is `vec4`
     - BOXBLUR2D_FAST9_SAMPLER_FNC(TEX, UV): Default is `texture2D(tex, TEX, UV)`
+examples:
+    - /shaders/filter_boxBlur2D.frag
 */
 
 #ifndef BOXBLUR2D_FAST9_TYPE

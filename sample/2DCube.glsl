@@ -1,4 +1,5 @@
 #include "../sample.glsl"
+#include "../math/saturate.glsl"
 
 /*
 Author: Patricio Gonzalez Vivo
@@ -37,6 +38,10 @@ vec4 sample2DCube(in sampler2D lut, in vec3 xyz) {
     const float lutSize = cellsPerSide * cellsSize;
     const float lutSizeFactor = 1.0/lutSize;
 #endif
+
+    #ifndef SAMPLE_2DCUBE_FLIP_Z
+    xyz.z = 1.0 - xyz.z;
+    #endif
 
     xyz *= (cellsSize-1.0);
     float iz = floor(xyz.z);

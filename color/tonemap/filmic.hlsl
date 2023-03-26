@@ -4,7 +4,7 @@
 
 /*
 Author: [Jim Hejl, Richard Burgess-Dawson ]
-description: Haarm-Peter Duiker’s curve from John Hable's presentation "Uncharted 2 HDR Lighting", Page 140: http://www.gdcvault.com/play/1012459/Uncharted_2__HDR_Lighting
+description: Haarm-Peter Duikers curve from John Hables presentation "Uncharted 2 HDR Lighting", Page 140, http://www.gdcvault.com/play/1012459/Uncharted_2__HDR_Lighting
 use: <float3|float4> tonemapFilmic(<float3|float4> x)
 */
 
