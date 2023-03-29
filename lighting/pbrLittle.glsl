@@ -28,7 +28,7 @@ options:
 */
 
 #ifndef CAMERA_POSITION
-#define CAMERA_POSITION vec3(0.0, 0.0, -10.0);
+#define CAMERA_POSITION vec3(0.0, 0.0, -10.0)
 #endif
 
 #ifndef LIGHT_POSITION
