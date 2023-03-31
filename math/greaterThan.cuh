@@ -1,7 +1,7 @@
 #include "step.cuh"
 
 /*
-original_author: [Ian McEwan, Ashima Arts]
+original_author: [Stefan Gustavson, Ian McEwan]
 description: greaterThan, returns 1 if x > y, 0 otherwise
 use: greaterThan(<float|float2|float3|float4> x, y)
 

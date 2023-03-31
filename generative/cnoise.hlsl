@@ -4,8 +4,8 @@
 #include "../math/quintic.hlsl"
 
 /*
-original_author: [Ian McEwan, Ashima Arts]
-description: Classic Perlin Noise https://github.com/ashima/webgl-noise
+original_author: [Stefan Gustavson, Ian McEwan]
+description: Classic Perlin Noise https://github.com/stegu/webgl-noise
 use: cnoise(<float2|float3|float4> pos)
 license: |
     Copyright (C) 2011 Ashima Arts. All rights reserved.
