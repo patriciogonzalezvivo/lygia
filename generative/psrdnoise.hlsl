@@ -6,9 +6,9 @@
 #include "../math/greaterThan.hlsl"
 
 /*
-original_author: [Stefan Gustavson, Ian McEwan, Ashima Arts]
+original_author: [Stefan Gustavson, Ian McEwan]
 description:  |
-    Tiling simplex flow noise in 2-D and 3-D https://github.com/stegu/psrdnoise
+    Tiling simplex flow noise in 2-D and 3-D from https://github.com/stegu/psrdnoise
     "float2/3 x" is the point to evaluate,
     "float2/3 period" is the desired periods 
     "float alpha" is the rotation (in radians) for the swirling gradients.
