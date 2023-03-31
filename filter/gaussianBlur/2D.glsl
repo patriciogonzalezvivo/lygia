@@ -1,4 +1,5 @@
 #include "../../sample.glsl"
+#include "../../math/gaussian.glsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
@@ -50,22 +51,21 @@ GAUSSIANBLUR2D_TYPE gaussianBlur2D(in sampler2D tex, in vec2 st, in vec2 offset,
 
     float accumWeight = 0.;
     const float k = 0.15915494; // 1 / (2*PI)
-    float kernelSize2 = kernelSizef * kernelSizef;
-
+    vec2 xy = vec2(0.0);
     for (int j = 0; j < GAUSSIANBLUR2D_KERNELSIZE; j++) {
         #if defined(PLATFORM_WEBGL)
         if (j >= kernelSize)
             break;
         #endif
-        float y = -.5 * (kernelSizef - 1.) + float(j);
+        xy.y = -.5 * (kernelSizef - 1.) + float(j);
         for (int i = 0; i < GAUSSIANBLUR2D_KERNELSIZE; i++) {
             #if defined(PLATFORM_WEBGL)
             if (i >= kernelSize)
                 break;
             #endif
-            float x = -.5 * (kernelSizef - 1.) + float(i);
-            float weight = (k / kernelSizef) * exp(-(x * x + y * y) / (2. * kernelSize2));
-            accumColor += weight * GAUSSIANBLUR2D_SAMPLER_FNC(tex, st + vec2(x, y) * offset);
+            xy.x = -0.5 * (kernelSizef - 1.) + float(i);
+            float weight = (k / kernelSizef) * gaussian(kernelSizef, xy);
+            accumColor += weight * GAUSSIANBLUR2D_SAMPLER_FNC(tex, st + xy * offset);
             accumWeight += weight;
         }
     }

@@ -1,5 +1,5 @@
 /*
-original_author: [Ian McEwan, Ashima Arts]
+original_author: [Stefan Gustavson, Ian McEwan]
 description: modulus of 289
 use: mod289(<float|vec2|vec3|vec4> x)
 */

@@ -1,7 +1,7 @@
 #include "operations.cuh"
 
 /*
-original_author: [Ian McEwan, Ashima Arts]
+original_author: [Stefan Gustavson, Ian McEwan]
 description: 
 use: taylorInvSqrt(<float|float4> x)
 */

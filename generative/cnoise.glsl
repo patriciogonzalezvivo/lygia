@@ -4,11 +4,11 @@
 #include "../math/quintic.glsl"
 
 /*
-original_author: [Ian McEwan, Ashima Arts]
-description: Classic Perlin Noise https://github.com/ashima/webgl-noise
+original_author: [Stefan Gustavson, Ian McEwan]
+description: Classic Perlin Noise https://github.com/stegu/webgl-noise
 use: cnoise(<vec2|vec3|vec4> pos)
 license: |
-    Copyright (C) 2011 Ashima Arts. All rights reserved.
+    Copyright (C) 2011 by Ashima Arts (Simplex noise)
     Copyright (C) 2011-2016 by Stefan Gustavson (Classic noise and others)
       Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
     Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.

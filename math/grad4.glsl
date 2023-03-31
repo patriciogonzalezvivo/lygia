@@ -1,5 +1,5 @@
 /*
-original_author: [Ian McEwan, Ashima Arts]
+original_author: [Stefan Gustavson, Ian McEwan]
 description: grad4, used for snoise(vec4 v)
 use: grad4(<float> j, <vec4> ip)
 */
