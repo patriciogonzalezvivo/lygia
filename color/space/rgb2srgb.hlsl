@@ -1,7 +1,7 @@
 #include ""
 /*
 original_author: Patricio Gonzalez Vivo  
-description: 
+description: Converts a linear RGB color to sRGB color space.
 use: <float|float3\float4> rgb2srgb(<float|float3|float4> srgb)
 */
 
