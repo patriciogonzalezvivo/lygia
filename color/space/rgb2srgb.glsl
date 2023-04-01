@@ -1,6 +1,6 @@
 /*
 original_author: Patricio Gonzalez Vivo  
-description: 
+description: Converts a linear RGB color to sRGB
 use: <float|vec3\vec4> rgb2srgb(<float|vec3|vec4> srgb)
 */
 
