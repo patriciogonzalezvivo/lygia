@@ -15,11 +15,14 @@ description:  |
     The "float" return value is the noise value n,
     the "out gradient" argument returns the first order derivatives,
     and "out dg" returns the second order derivatives as (dn2/dx2, dn2/dy2, dn2/dxy)
-
 use: <float> psrdnoise(<float2|float3> x, <float2|float3> period, <float> alpha, out <float2|float3> gradient [, out <float3> dg])
 Options:
     - PSRDNOISE_PERLIN_GRID
     - PSRDNOISE_FAST_ROTATION
+license: |
+    Copyright 2021-2023 by Stefan Gustavson and Ian McEwan.
+    Published under the terms of the MIT license:
+    https://opensource.org/license/mit/
 */
 
 #ifndef FNC_PSRFNOISE
