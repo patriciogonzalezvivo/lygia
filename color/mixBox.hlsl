@@ -4,7 +4,15 @@
 
 /*
 original_author: Secret Weapons (@scrtwpns)
-description: mix using mixbox pigment algorithm https://github.com/scrtwpns/pigment-mixing and converted to GLSL by Patricio Gonzalez Vivo
+description: |
+    Blending method for natural color mixing. It produces saturated gradients with hue shifts 
+    and natural secondary colors during blending. Yellow and blue make green. The interface is 
+    simple - RGB in, RGB out. Internally, Mixbox treats colors as real-life pigments using the
+    Kubelka & Munk theory to predict realistic color behavior. That way, colors act like actual 
+    paints and bring more vibrance and intuition into digital painting. Learn more about it 
+    by checking [Secret Weapons repository](https://github.com/scrtwpns/mixbox). Also notice that 
+    this code is for non-commercial use only. And you need to get in touch with them to download
+    the LUT texture.
 use: <float3\float4> mixBox(<float3|float4> rgbA, <float3|float4> rgbB, float pct)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
