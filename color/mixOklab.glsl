@@ -1,6 +1,8 @@
 /*
 original_author: Bjorn Ottosson (@bjornornorn), Inigo Quiles
-description: OkLab to linear RGB https://bottosson.github.io/posts/oklab/
+description: |
+    Mix function utilizing Bjorn Ottosso's OkLab color space, which is provide smooth stransitions 
+    Learn more about it [his article](https://bottosson.github.io/posts/oklab/)
 use: <vec3\vec4> mixOklab(<vec3|vec4> colorA, <vec3|vec4> colorB, float pct)
 examples:
     - /shaders/color_mix.frag
