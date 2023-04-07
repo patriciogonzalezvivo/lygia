@@ -1,39 +1,22 @@
-#include ""
 /*
 original_author: Patricio Gonzalez Vivo  
 description: Converts a linear RGB color to sRGB color space.
 use: <float|float3\float4> rgb2srgb(<float|float3|float4> srgb)
 */
 
-
-#ifndef SRGB_GAMMA
-#define SRGB_GAMMA 0.4545454545
-#endif
-
-#ifndef SRGB_ALPHA
-#define SRGB_ALPHA 0.055
+#ifndef SRGB_EPSILON 
+#define SRGB_EPSILON 0.00000001
 #endif
 
 #ifndef FNC_RGB2SRGB
 #define FNC_RGB2SRGB
 
 float rgb2srgb(float channel) {
-    if (channel <= 0.0031308)
-        return 12.92 * channel;
-    else
-        return (1.0 + SRGB_ALPHA) * pow(channel, 0.4166666666666667) - SRGB_ALPHA;
+    return (channel < 0.0031308) ? channel * 12.92 : 1.055 * pow(channel, 0.4166666666666667) - 0.055;
 }
 
 float3 rgb2srgb(float3 rgb) {
-    #if defined(TARGET_MOBILE) || defined(PLATFORM_RPI) | defined(PLATFORM_WEBGL)
-        return pow(rgb, float3(SRGB_GAMMA));
-    #else 
-
-        float3 rgb_lo = 12.92 * rgb;
-        float3 rgb_hi = (1.0 + SRGB_ALPHA) * pow(rgb, float3(0.4166666666666667, 0.4166666666666667, 0.4166666666666667)) - SRGB_ALPHA;
-        return lerp(rgb_lo, rgb_hi, step(float3(0.0031308, 0.0031308, 0.0031308), rgb));
-
-    #endif
+    return saturate(float3(rgb2srgb(rgb[0] - SRGB_EPSILON), rgb2srgb(rgb[1] - SRGB_EPSILON), rgb2srgb(rgb[2] - SRGB_EPSILON)));
 }
 
 float4 rgb2srgb(float4 rgb) {
