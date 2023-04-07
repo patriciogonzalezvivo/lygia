@@ -1,7 +1,12 @@
 #include "../math/saturate.glsl"
 #include "../math/sum.glsl"
-#include "../sample/2DCube.glsl"
 #include "../sample.glsl"
+
+#ifdef MIXBOX_LUT_FLIP_Y
+#define SAMPLE_2DCUBE_FLIP_Z
+#endif
+
+#include "../sample/2DCube.glsl"
 
 /*
 original_author: Secret Weapons (@scrtwpns)
