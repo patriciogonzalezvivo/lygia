@@ -1,7 +1,7 @@
-#include "lygia/color/luminance.glsl"
-#include "lygia/color/space/srgb2rgb.glsl"
-#include "lygia/color/space/rgb2srgb.glsl"
-#include "lygia/color/space/xyz2srgb.glsl"
+#include "luminance.glsl"
+#include "space/srgb2rgb.glsl"
+#include "space/rgb2srgb.glsl"
+#include "space/xyz2srgb.glsl"
 
 /*
 original_author: Ronald van Wijnen (@OneDayOfCrypto)
