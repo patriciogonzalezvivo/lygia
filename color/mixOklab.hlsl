@@ -1,6 +1,8 @@
 /*
 original_author: Bjorn Ottosson (@bjornornorn), Inigo Quiles
-description: oklab to linear RGB https://bottosson.github.io/posts/oklab/
+description: |
+    Mix function utilizing Bjorn Ottosso's OkLab color space, which is provide smooth stransitions 
+    Learn more about it [his article](https://bottosson.github.io/posts/oklab/)
 use: <float3\float4> mixOklab(<float3|float4> colorA, <float3|float4> colorB, float pct)
 */
 
