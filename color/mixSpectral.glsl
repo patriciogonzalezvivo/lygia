@@ -9,8 +9,7 @@ description: |
     Spectral mix allows you to achieve realistic color mixing in your projects. 
     It is based on the Kubelka-Munk theory, a proven scientific model that simulates 
     how light interacts with paint to produce lifelike color mixing. 
-    Find more informatiom on [Ronald van Wijnen](@OneDayOfCrypto)'s [original repository](https://github.com/rvanwijnen/spectral.js)
-
+    Find more informatiom on Ronald van Wijnen's [original repository](https://github.com/rvanwijnen/spectral.js)
 use: <vec3\vec4> mixSpectral(<vec3|vec4> colorA, <vec3|vec4> colorB, float pct)
 examples:
     - /shaders/color_mix.frag
