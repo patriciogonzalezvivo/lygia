@@ -10,7 +10,8 @@ description: |
     It is based on the Kubelka-Munk theory, a proven scientific model that simulates 
     how light interacts with paint to produce lifelike color mixing. 
     Find more informatiom on Ronald van Wijnen's [original repository](https://github.com/rvanwijnen/spectral.js)
-
+options:
+    - MIXSPECTRAL_COLORSPACE_SRGB: by default colA and colB are linear RGB. If you want to use sRGB, define this flag.
 use: <float3\float4> mixSpectral(<float3|float4> colorA, <float3|float4> colorB, float pct)
 examples:
     - /shaders/color_mix.frag
@@ -109,9 +110,14 @@ float3 mixSpectral_reflectance2xyz(float R[MIXSPECTRA_SIZE]) {
     return xyz;
 }
 
-float3 mixSpectral(float3 srgb1, float3 srgb2, float t) {
-    float3 lrgb1 = srgb2rgb(srgb1);
-    float3 lrgb2 = srgb2rgb(srgb2);
+float3 mixSpectral(float3 colA, float3 colB, float t) {
+    #ifdef MIXSPECTRAL_COLORSPACE_SRGB
+    float3 lrgb1 = srgb2rgb(colA);
+    float3 lrgb2 = srgb2rgb(colB);
+    #else
+    float3 lrgb1 = colA;
+    float3 lrgb2 = colB;
+    #endif
 
     // Linear luminance to concentration
     float t1 = luminance(lrgb1) * pow(1.0 - t, 2.0);
@@ -132,7 +138,12 @@ float3 mixSpectral(float3 srgb1, float3 srgb2, float t) {
       //Saunderson correction
       R[i] = KM;
     }
-    return xyz2srgb(mixSpectral_reflectance2xyz(R));
+    float3 srgb = xyz2srgb(mixSpectral_reflectance2xyz(R));
+    #ifdef MIXSPECTRAL_COLORSPACE_SRGB
+    return srgb;
+    #else
+    return srgb2rgb(srgb);
+    #endif
 }
 
 float4 mixSpectral( float4 colA, float4 colB, float h ) {

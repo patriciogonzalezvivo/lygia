@@ -1,6 +1,8 @@
 #include "../math/sum.hlsl"
 #include "../sample/2DCube.hlsl"
 #include "../sample.hlsl"
+#include "space/srgb2rgb.hlsl"
+#include "space/rgb2srgb.hlsl"
 
 /*
 original_author: Secret Weapons (@scrtwpns)
@@ -19,6 +21,7 @@ options:
     - MIXBOX_LUT: name of the texture uniform which you can find here https://github.com/scrtwpns/pigment-mixing
     - MIXBOX_LUT_FLIP_Y: when defined it expects a vertically flipled texture  
     - MIXBOX_LUT_SAMPLER_FNC: sampler function. Default, texture2D(MIXBOX_LUT, POS_UV).rgb
+    - MIXBOX_COLORSPACE_SRGB: by default colorA and colorB are linear RGB. If you want to use sRGB colors, define this flag.
     - MIXBOX_LUT_CELL_SIZE: Default 256
 license: |
     Copyright (c) 2022, Secret Weapons. All rights reserved.
@@ -69,12 +72,20 @@ float3 mixBox(float3 c) {
 
 MIXBOX_LATENT_TYPE mixBox_rgb2latent(float3 rgb) {
     rgb = saturate(rgb);
+    #ifndef MIXBOX_COLORSPACE_SRGB
+    rgb = rgb2srgb(rgb);
+    #endif
     float3 lut = sample2DCube(MIXBOX_LUT, rgb).xyz;
     return MIXBOX_LATENT_TYPE(lut, rgb - mixBox(lut), float3(0.0, 0.0, 0.0));
 }
 
 float3 mixBox_latent2rgb(MIXBOX_LATENT_TYPE latent) {
-    return saturate( mixBox(latent[0]) + latent[1] );
+    float3 srgb = saturate( mixBox(latent[0]) + latent[1] );
+    #ifdef MIXBOX_COLORSPACE_SRGB
+    return srgb;
+    #else
+    return srgb2rgb(srgb);
+    #endif
 }
 
 float3 mixBox(float3 colA, float3 colB, float t) {
