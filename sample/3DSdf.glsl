@@ -14,6 +14,8 @@ options:
     - SAMPLE_2DCUBE_FNC
     - SAMPLE3DSDF_TYPE: defaults to float
     - SAMPLE3DSDF_FNC(TEX, POS): defaults to sample2DCube(TEX, POS).r
+examples:
+    - /shaders/sample_3Dsdf.frag 
 */
 
 #ifndef SAMPLE3DSDF_TYPE
