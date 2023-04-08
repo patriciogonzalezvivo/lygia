@@ -1,10 +1,11 @@
 #include "luminance.wgsl"
 #include "space/srgb2rgb.wgsl"
+#include "space/rgb2srgb.wgsl"
 #include "space/xyz2srgb.wgsl"
 
 fn mixSpectral(srgb1: vec3<f32>, srgb2: vec3<f32>, t: f32) -> vec3<f32> {
-    let lrgb1 = srgb2rgb(srgb1);
-    let lrgb2 = srgb2rgb(srgb2);
+    let lrgb1 = srgb1;
+    let lrgb2 = srgb2;
 
     // Linear luminance to concentration
     let t1 = luminanceLinear(lrgb1) * pow(1.0 - t, 2.0);
@@ -138,5 +139,5 @@ fn mixSpectral(srgb1: vec3<f32>, srgb2: vec3<f32>, t: f32) -> vec3<f32> {
     xyz += R[35] * vec3<f32>(0.00003275, 0.00001268, 0.00000000);
     xyz += R[36] * vec3<f32>(0.00001376, 0.00000535, 0.00000000);
 
-    return xyz2srgb(xyz);
+    return srgb2rgb(xyz2srgb(xyz));
 }

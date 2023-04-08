@@ -10,7 +10,9 @@ description: |
     It is based on the Kubelka-Munk theory, a proven scientific model that simulates 
     how light interacts with paint to produce lifelike color mixing. 
     Find more informatiom on Ronald van Wijnen's [original repository](https://github.com/rvanwijnen/spectral.js)
-use: <vec3\vec4> mixSpectral(<vec3|vec4> colorA, <vec3|vec4> colorB, float pct)
+options:
+    - MIXSPECTRAL_COLORSPACE_SRGB: by default colA and colB are linear RGB. If you want to use sRGB, define this flag.
+use: <vec3\vec4> mixSpectral(<vec3|vec4> colA, <vec3|vec4> colB, float pct)
 examples:
     - /shaders/color_mix.frag
 license: |
@@ -21,12 +23,12 @@ license: |
     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS ORIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THEAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHERLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THESOFTWARE.
 */
 
-#ifndef FNC_MIXSPECTRA
-#define FNC_MIXSPECTRA
+#ifndef FNC_MIXSPECTRAL
+#define FNC_MIXSPECTRA:
 
-const int MIXSPECTRA_SIZE = 37;
+const int MIXSPECTRAL_SIZE = 37;
 
-void mixSpectral_linear2reflectance(vec3 lrgb, inout float R[MIXSPECTRA_SIZE]) {
+void mixSpectral_linear2reflectance(vec3 lrgb, inout float R[MIXSPECTRAL_SIZE]) {
      R[0] = dot(vec3(0.03065266, 0.00488428, 0.96446343), lrgb);
      R[1] = dot(vec3(0.03065266, 0.00488428, 0.96446661), lrgb);
      R[2] = dot(vec3(0.03012503, 0.00489302, 0.96499804), lrgb);
@@ -66,7 +68,7 @@ void mixSpectral_linear2reflectance(vec3 lrgb, inout float R[MIXSPECTRA_SIZE]) {
     R[36] = dot(vec3(0.97432335, 0.00520568, 0.02047109), lrgb);
 }
 
-vec3 mixSpectral_reflectance2xyz(float R[MIXSPECTRA_SIZE]) {
+vec3 mixSpectral_reflectance2xyz(float R[MIXSPECTRAL_SIZE]) {
     vec3 xyz = vec3(0.0);
     xyz +=  R[0] * vec3(0.00013656, 0.00001886, 0.00060998);
     xyz +=  R[1] * vec3(0.00131637, 0.00018140, 0.00595953);
@@ -108,22 +110,28 @@ vec3 mixSpectral_reflectance2xyz(float R[MIXSPECTRA_SIZE]) {
     return xyz;
 }
 
-vec3 mixSpectral(vec3 srgb1, vec3 srgb2, float t) {
-    vec3 lrgb1 = srgb2rgb(srgb1);
-    vec3 lrgb2 = srgb2rgb(srgb2);
+vec3 mixSpectral(vec3 colA, vec3 colB, float t) {
+   
+    #ifdef MIXSPECTRAL_COLORSPACE_SRGB
+    vec3 lrgb1 = srgb2rgb(colA);
+    vec3 lrgb2 = srgb2rgb(colB);
+    #else
+    vec3 lrgb1 = colA;
+    vec3 lrgb2 = colB;
+    #endif
 
     // Linear luminance to concentration
     float t1 = luminance(lrgb1) * pow(1.0 - t, 2.0);
     float t2 = luminance(lrgb2) * pow(t, 2.0);
     t = t2 / (t1 + t2);
 
-    float R1[MIXSPECTRA_SIZE];
-    float R2[MIXSPECTRA_SIZE];
+    float R1[MIXSPECTRAL_SIZE];
+    float R2[MIXSPECTRAL_SIZE];
     mixSpectral_linear2reflectance(lrgb1, R1);
     mixSpectral_linear2reflectance(lrgb2, R2);
 
-    float R[MIXSPECTRA_SIZE];
-    for (int i = 0; i < MIXSPECTRA_SIZE; i++) {
+    float R[MIXSPECTRAL_SIZE];
+    for (int i = 0; i < MIXSPECTRAL_SIZE; i++) {
       float KS = 0.0;
       KS += (1.0 - t) * (pow(1.0 - R1[i], 2.0) / (2.0 * R1[i]));
       KS += t * (pow(1.0 - R2[i], 2.0) / (2.0 * R2[i]));
@@ -131,7 +139,14 @@ vec3 mixSpectral(vec3 srgb1, vec3 srgb2, float t) {
       //Saunderson correction
       R[i] = KM;
     }
-    return xyz2srgb(mixSpectral_reflectance2xyz(R));
+
+    vec3 srgb = xyz2srgb(mixSpectral_reflectance2xyz(R));
+
+    #ifdef MIXSPECTRAL_COLORSPACE_SRGB
+    return srgb;
+    #else
+    return srgb2rgb(srgb);
+    #endif
 }
 
 vec4 mixSpectral( vec4 colA, vec4 colB, float h ) {

@@ -1,6 +1,10 @@
 #include "../math/saturate.glsl"
 #include "../math/sum.glsl"
 #include "../sample.glsl"
+#include "space/srgb2rgb.glsl"
+#include "space/rgb2srgb.glsl"
+#include "space/linear2gamma.glsl"
+#include "space/gamma2linear.glsl"
 
 #ifdef MIXBOX_LUT_FLIP_Y
 #define SAMPLE_2DCUBE_FLIP_Z
@@ -19,13 +23,14 @@ description: |
     by checking [Secret Weapons repository](https://github.com/scrtwpns/mixbox). Also notice that 
     this code is for non-commercial use only. And you need to get in touch with them to download
     the LUT texture.
-use: <vec3\vec4> mixBox(<vec3|vec4> rgbA, <vec3|vec4> rgbB, float pct)
+use: <vec3\vec4> mixBox(<vec3|vec4> colA, <vec3|vec4> colB, float pct)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - MIXBOX_LUT: name of the texture uniform which you can find here https://github.com/scrtwpns/mixbox
     - MIXBOX_LUT_FLIP_Y: when defined it expects a vertically flipled texture  
     - MIXBOX_LUT_SAMPLER_FNC: sampler function. Default, texture2D(MIXBOX_LUT, POS_UV).rgb
     - MIXBOX_LUT_CELL_SIZE: Default 256
+    - MIXBOX_COLORSPACE_SRGB: by default colorA and colorB are linear RGB. If you want to use sRGB colors, define this flag.
 license: |
     Copyright (c) 2022, Secret Weapons. All rights reserved.
     
@@ -44,6 +49,7 @@ license: |
 #ifndef MIXBOX_LATENT_TYPE
 #define MIXBOX_LATENT_TYPE mat3
 #endif
+
 
 #ifndef FNC_MIXBOX
 #define FNC_MIXBOX
@@ -76,12 +82,20 @@ vec3 mixBox(vec3 c) {
 
 MIXBOX_LATENT_TYPE mixBox_rgb2latent(vec3 rgb) {
     rgb = saturate(rgb);
+    #ifndef MIXBOX_COLORSPACE_SRGB
+    rgb = rgb2srgb(rgb);
+    #endif
     vec3 lut = sample2DCube(MIXBOX_LUT, rgb).xyz;
     return MIXBOX_LATENT_TYPE(lut, rgb - mixBox(lut), vec3(0.0, 0.0, 0.0));
 }
 
 vec3 mixBox_latent2rgb(MIXBOX_LATENT_TYPE latent) {
-    return saturate( mixBox(latent[0]) + latent[1] );
+    vec3 srgb = saturate( mixBox(latent[0]) + latent[1] );
+    #ifdef MIXBOX_COLORSPACE_SRGB
+    return srgb;
+    #else
+    return srgb2rgb(srgb);
+    #endif
 }
 
 vec3 mixBox(vec3 colA, vec3 colB, float t) {
