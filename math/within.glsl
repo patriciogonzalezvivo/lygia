@@ -1,4 +1,3 @@
-
 /*
 original_author: Johan Ismael
 description: Similar to step but for an interval instead of a threshold. Returns 1 is x is between left and right, 0 otherwise

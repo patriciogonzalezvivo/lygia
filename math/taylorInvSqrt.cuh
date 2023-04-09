@@ -3,7 +3,7 @@
 /*
 original_author: [Stefan Gustavson, Ian McEwan]
 description: Fast, accurate inverse square root. 
-use: taylorInvSqrt(<float|float4> x)
+use: <float|float2|float3|float4> taylorInvSqrt(<float|float2|float3|float4> x)
 */
 
 #ifndef FNC_TAYLORINVSQRT
