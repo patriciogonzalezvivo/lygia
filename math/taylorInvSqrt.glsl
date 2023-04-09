@@ -1,6 +1,6 @@
 /*
 original_author: [Stefan Gustavson, Ian McEwan]
-description: 
+description: Fast, accurate inverse square root. 
 use: taylorInvSqrt(<float|vec4> x)
 */
 
