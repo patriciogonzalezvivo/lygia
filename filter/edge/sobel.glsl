@@ -1,4 +1,4 @@
-#include "../../sample.glsl"
+#include "../../sample/clamp2edge.glsl"
 
 /*
 original_author: Brad Larson
@@ -25,7 +25,7 @@ examples:
 #ifdef EDGE_SAMPLER_FNC
 #define EDGESOBEL_SAMPLER_FNC(TEX, UV) EDGE_SAMPLER_FNC(TEX, UV)
 #else
-#define EDGESOBEL_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV).r
+#define EDGESOBEL_SAMPLER_FNC(TEX, UV) sampleClamp2edge(TEX, UV).r
 #endif
 #endif
 

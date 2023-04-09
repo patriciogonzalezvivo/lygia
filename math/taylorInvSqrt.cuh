@@ -2,7 +2,7 @@
 
 /*
 original_author: [Stefan Gustavson, Ian McEwan]
-description: 
+description: Fast, accurate inverse square root. 
 use: taylorInvSqrt(<float|float4> x)
 */
 

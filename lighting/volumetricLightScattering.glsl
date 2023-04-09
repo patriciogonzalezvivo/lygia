@@ -79,6 +79,10 @@ options:
 // https://www.alexandre-pestana.com/volumetric-lights/
 // https://www.gamedev.net/blogs/entry/2266308-effect-volumetric-light-scattering/
 
+#ifndef VOLUMETRICLIGHTSCATTERING_SAMPLE_FNC
+#define VOLUMETRICLIGHTSCATTERING_SAMPLE_FNC(TEX, UV) SAMPLER_FNC(TEX, UV).r
+#endif
+
 #ifndef FNC_VOLUMETRICLIGHTSCATTERING
 #define FNC_VOLUMETRICLIGHTSCATTERING
 VOLUMETRICLIGHTSCATTERING_TYPE volumetricLightScattering(sampler2D lightShadowMap, const in mat4 lightMatrix, const in vec3 lightPos, const in vec3 rayOrigin, const in vec3 rayEnd) {
@@ -100,7 +104,7 @@ VOLUMETRICLIGHTSCATTERING_TYPE volumetricLightScattering(sampler2D lightShadowMa
     for (int i = 0; i < VOLUMETRICLIGHTSCATTERING_STEPS; i ++) {
         vec4 worldInShadowCameraSpace = lightMatrix * rayCurrPos;
         worldInShadowCameraSpace /= worldInShadowCameraSpace.w;
-        float shadowMapValue = SAMPLER_FNC(lightShadowMap, worldInShadowCameraSpace.xy ).r;
+        float shadowMapValue = VOLUMETRICLIGHTSCATTERING_SAMPLE_FNC(lightShadowMap, worldInShadowCameraSpace.xy );
         L +=    step(worldInShadowCameraSpace.z, shadowMapValue) * 
                 #ifdef VOLUMETRICLIGHTSCATTERING_MASK_FNC
                 VOLUMETRICLIGHTSCATTERING_MASK_FNC(worldInShadowCameraSpace) *
@@ -114,7 +118,7 @@ VOLUMETRICLIGHTSCATTERING_TYPE volumetricLightScattering(sampler2D lightShadowMa
 }
 
 VOLUMETRICLIGHTSCATTERING_TYPE volumetricLightScattering(sampler2D texDepth, vec2 st) {
-    float depth = SAMPLER_FNC(texDepth, st).r;
+    float depth = VOLUMETRICLIGHTSCATTERING_SAMPLE_FNC(texDepth, st);
     depth = min(depth, 0.997);
     float viewZ = depth2viewZ(depth, CAMERA_NEAR_CLIP, CAMERA_FAR_CLIP);
     
