@@ -2,9 +2,6 @@
 #include "../sample.glsl"
 #include "../sample/nearest.glsl"
 
-#ifndef RANDOM_SCALE3
-#define RANDOM_SCALE3 vec3(443.897, 441.423, .0973)
-#endif
 #include "../generative/random.glsl"
 
 /*
@@ -21,7 +18,6 @@ options:
 examples:
     - /shaders/filter_noiseBlur2D.frag
 */
-
 
 #ifndef NOISEBLUR_SAMPLES
 #define NOISEBLUR_SAMPLES 4.0
