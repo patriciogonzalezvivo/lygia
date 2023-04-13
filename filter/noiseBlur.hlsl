@@ -1,7 +1,7 @@
 #include "../math/const.hlsl"
 
-#ifndef RANDOM_SCALE3
-#define RANDOM_SCALE3 float3(443.897, 441.423, .0973)
+#ifndef RANDOM_SCALE
+#define RANDOM_SCALE float3(443.897, 441.423, .0973)
 #endif
 #include "../generative/random.hlsl"
 
