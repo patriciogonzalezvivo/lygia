@@ -1,4 +1,4 @@
-#include "../../sample.glsl"
+#include "../../sample/clamp2edge.glsl"
 
 /*
 original_author: Matt DesLauriers
@@ -22,7 +22,7 @@ options:
 #ifdef GAUSSIANBLUR_SAMPLER_FNC
 #define GAUSSIANBLUR1D_FAST9_SAMPLER_FNC(TEX, UV) GAUSSIANBLUR_SAMPLER_FNC(TEX, UV)
 #else
-#define GAUSSIANBLUR1D_FAST9_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
+#define GAUSSIANBLUR1D_FAST9_SAMPLER_FNC(TEX, UV) sampleClamp2edge(TEX, UV)
 #endif
 #endif
 

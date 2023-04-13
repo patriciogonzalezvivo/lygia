@@ -1,5 +1,5 @@
-#include "../../sample.glsl"
 #include "../../math/gaussian.glsl"
+#include "../../sample/clamp2edge.glsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
@@ -23,7 +23,7 @@ options:
 #ifdef GAUSSIANBLUR_SAMPLER_FNC
 #define GAUSSIANBLUR1D_SAMPLER_FNC(TEX, UV) GAUSSIANBLUR_SAMPLER_FNC(TEX, UV)
 #else
-#define GAUSSIANBLUR1D_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
+#define GAUSSIANBLUR1D_SAMPLER_FNC(TEX, UV) sampleClamp2edge(TEX, UV)
 #endif
 #endif
 
