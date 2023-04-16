@@ -11,8 +11,8 @@ examples:
 #ifndef FNC_AASTEP
 #define FNC_AASTEP
 
-#ifdef GL_OES_standard_derivatives
-    #extension GL_OES_standard_derivatives : enable
+#if defined(GL_OES_standard_derivatives)
+#extension GL_OES_standard_derivatives : enable
 #endif
 
 float aastep(float threshold, float value) {
