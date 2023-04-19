@@ -83,7 +83,7 @@ BILATERAL_TYPE bilateral(in sampler2D tex, in vec2 st, in vec2 offset, const int
             BILATERAL_TYPE t = BILATERAL_SAMPLER_FNC(tex, st + vec2(dx, dy) * offset);
             float lum = BILATERAL_LUMA(t);
             float dl = 255.0 * (lum - lum0);
-            float weight = (k2 / kernelSize2) * gaussian(kernelSizef, vec3(dx,dy,dl));
+            float weight = (k2 / kernelSize2) * gaussian(vec3(dx,dy,dl), kernelSizef);
             accumColor += weight * t;
             accumWeight += weight;
         }

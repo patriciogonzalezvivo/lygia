@@ -64,7 +64,7 @@ GAUSSIANBLUR2D_TYPE gaussianBlur2D(in sampler2D tex, in vec2 st, in vec2 offset,
                 break;
             #endif
             xy.x = -0.5 * (kernelSizef - 1.) + float(i);
-            float weight = (k / kernelSizef) * gaussian(kernelSizef, xy);
+            float weight = (k / kernelSizef) * gaussian(xy, kernelSizef);
             accumColor += weight * GAUSSIANBLUR2D_SAMPLER_FNC(tex, st + xy * offset);
             accumWeight += weight;
         }
