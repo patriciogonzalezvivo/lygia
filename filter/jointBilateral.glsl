@@ -93,7 +93,7 @@ JOINTBILATERAL_TYPE jointBilateral(sampler2D tex, sampler2D guide, vec2 uv, vec2
 
             float w = 1.0;
             // w *= (k / kernelSizef) * exp(-(x * x + y * y) / (2. * kernelSize2));
-            w = (k / kernelSizef) * gaussian(kernelSizef, vec2(x, y));
+            w = (k / kernelSizef) * gaussian(vec2(x, y), kernelSizef);
             w *= gaussian(JOINTBILATERAL_INTENSITY_SIGMA, centerGuide - sampleGuide);
             sum += sample * w;
             weight += w;
