@@ -97,7 +97,7 @@ vec4 fluidSolver(sampler2D tex, vec2 st, vec2 pixel, vec2 force) {
     d.xy *= smoothstep(0.5, 0.49,abs(st - 0.5));
 
     // Pack XY, Z and W data
-    d.xy = clamp(d.xy, -0.999, 0.999) * 0.5 + 0.5;
+    d.xy = clamp(d.xy, -0.999, 0.999);// * 0.5 + 0.5;
     d.zw = saturate(d.zw);
     return d;
 }
