@@ -14,6 +14,6 @@ options:
 #ifndef FNC_SAMPLEDITHER
 #define FNC_SAMPLEDITHER
 vec3 sampleDither(sampler2D tex, const in vec2 st, const in vec2 resolution) {
-    return ditherBayer(sampleNearest(u_band_rgba, st, resolution).rgb, st * resolution);
+    return ditherBayer(sampleNearest(tex, st, resolution).rgb, st * resolution);
 }
 #endif
