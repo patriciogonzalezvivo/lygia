@@ -9,10 +9,10 @@ use:
  - <vec4|vec3|float> ditherBayer(<vec4|vec3|float> value, <vec2> st, <float> time)
  - <vec4|vec3|float> ditherBayer(<vec4|vec3|float> value, <vec2> st)
  - <float> ditherBayer(<vec2> xy)
-
 options:
     - DITHERBAKER_LUT(COLOR): function that returns a vec3 with the color to use for the dithering
-
+examples:
+    - /shaders/color_dither_bayer.frag
 */
 
 #ifndef FNC_DITHERBAYER
