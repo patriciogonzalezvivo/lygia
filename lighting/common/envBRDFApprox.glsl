@@ -11,7 +11,6 @@ vec3 envBRDFApprox(const in vec3 _specularColor, const in float _NoV, const in f
     return _specularColor * AB.x + AB.y;
 }
 
-//https://www.unrealengine.com/en-US/blog/physically-based-shading-on-mobile
 vec2 envBRDFApprox(const in float _NoV, in float _roughness ) {
 	const vec4 c0 = vec4( -1.0, -0.0275, -0.572, 0.022 );
 	const vec4 c1 = vec4( 1.0, 0.0425, 1.04, -0.04 );
