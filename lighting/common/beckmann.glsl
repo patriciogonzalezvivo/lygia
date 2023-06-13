@@ -1,5 +1,7 @@
 #include "../../math/const.glsl"
 
+// https://github.com/glslify/glsl-specular-beckmann
+
 #ifndef FNC_BECKMANN
 #define FNC_BECKMANN
 float beckmann(const in float _NoH, const in float roughness) {

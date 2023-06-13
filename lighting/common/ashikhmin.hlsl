@@ -2,7 +2,6 @@
 
 #ifndef FNC_ASHIKHMIN
 #define FNC_ASHIKHMIN
-
 float ashikhmin(float NoH, float roughness) {
     // Ashikhmin 2007, "Distribution-based BRDFs"
     float a2 = roughness * roughness;
@@ -12,5 +11,4 @@ float ashikhmin(float NoH, float roughness) {
     float cot2 = -cos2h / (a2 * sin2h);
     return 1.0 / (PI * (4.0 * a2 + 1.0) * sin4h) * (4.0 * exp(cot2) + sin4h);
 }
-
 #endif
