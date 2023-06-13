@@ -8,7 +8,7 @@ use: nearest(vec2 st, <vec2> resolution)
 #ifndef FNC_NEAREST
 #define FNC_NEAREST
 vec2 nearest(in vec2 st, in vec2 resolution) {
-    vec2 offset = .5 / (resolution - 1.);
+    vec2 offset = 0.5 / (resolution - 1.0);
     return floor(st * resolution) / resolution + offset;
 }
 #endif

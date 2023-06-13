@@ -11,6 +11,10 @@ use:
 #ifndef FNC_FRESNEL
 #define FNC_FRESNEL
 
+vec3 fresnel(vec3 f0, vec3 normal, vec3 view) {
+   return schlick(f0, 1.0, dot(view, normal));
+}
+
 vec3 fresnel(const in vec3 f0, const in float NoV) {
 #if defined(TARGET_MOBILE) || defined(PLATFORM_RPI)
     return schlick(f0, 1.0, NoV);

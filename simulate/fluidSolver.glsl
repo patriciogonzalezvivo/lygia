@@ -33,20 +33,11 @@ options:
 // #endif 
 
 #ifndef FLUIDSOLVER_SAMPLER_FNC
-#define FLUIDSOLVER_SAMPLER_FNC(UV) SAMPLER_FNC(tex, UV)
+#define FLUIDSOLVER_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
 #endif
 
 #ifndef FNC_FLUIDSOLVER
 #define FNC_FLUIDSOLVER
-
-vec4 fluidSolver_sampler(sampler2D tex, vec2 st) {
-    vec4 data = FLUIDSOLVER_SAMPLER_FNC(st);
-    // XY velocity  -1.0 to 1.0
-    // Z density     0.0 to 1.0
-    // W vorticity   0.0 to 1.0
-    data.xy = data.xy * 2.0 - 1.0;
-    return data;
-}
 
 vec4 fluidSolver(sampler2D tex, vec2 st, vec2 pixel, vec2 force) {
     const float k = .2;
@@ -54,11 +45,11 @@ vec4 fluidSolver(sampler2D tex, vec2 st, vec2 pixel, vec2 force) {
     const float dx = FLUIDSOLVER_DX;
     
     // Data
-    vec4 d = fluidSolver_sampler(tex, st);
-    vec4 dR = fluidSolver_sampler(tex, st + vec2(pixel.x, 0.));
-    vec4 dL = fluidSolver_sampler(tex, st - vec2(pixel.x, 0.));
-    vec4 dT = fluidSolver_sampler(tex, st + vec2(0., pixel.y));
-    vec4 dB = fluidSolver_sampler(tex, st - vec2(0., pixel.y));
+    vec4 d = FLUIDSOLVER_SAMPLER_FNC(tex, st);
+    vec4 dR = FLUIDSOLVER_SAMPLER_FNC(tex, st + vec2(pixel.x, 0.));
+    vec4 dL = FLUIDSOLVER_SAMPLER_FNC(tex, st - vec2(pixel.x, 0.));
+    vec4 dT = FLUIDSOLVER_SAMPLER_FNC(tex, st + vec2(0., pixel.y));
+    vec4 dB = FLUIDSOLVER_SAMPLER_FNC(tex, st - vec2(0., pixel.y));
 
     // Delta Data
     vec4 ddx = (dR - dL).xyzw; // delta data on X
@@ -77,7 +68,7 @@ vec4 fluidSolver(sampler2D tex, vec2 st, vec2 pixel, vec2 force) {
     // Semi-lagrangian advection
     vec2 densityInvariance = s * vec2(ddx.z, ddy.z);
     vec2 was = st - FLUIDSOLVER_DT * d.xy * pixel;
-    d.xyw = fluidSolver_sampler(tex, was).xyw;
+    d.xyw = FLUIDSOLVER_SAMPLER_FNC(tex, was).xyw;
     d.xy += FLUIDSOLVER_DT * (viscosityForce - densityInvariance + force);
     #endif
     
@@ -97,7 +88,7 @@ vec4 fluidSolver(sampler2D tex, vec2 st, vec2 pixel, vec2 force) {
     d.xy *= smoothstep(0.5, 0.49,abs(st - 0.5));
 
     // Pack XY, Z and W data
-    d.xy = clamp(d.xy, -0.999, 0.999) * 0.5 + 0.5;
+    d.xy = clamp(d.xy, -0.999, 0.999);// * 0.5 + 0.5;
     d.zw = saturate(d.zw);
     return d;
 }
