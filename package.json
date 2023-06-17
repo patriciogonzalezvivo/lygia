@@ -1,0 +1,23 @@
+{
+    "name": "com.patriciogonzalezvivo.lygia",
+    "displayName": "Lygia",
+    "version": "1.1.0",
+    "unity": "2022.3",
+    "description": "LYGIA, it's a granular and multi-language (GLSL, HLSL, WGSL, MSL and CUDA) shader library designed for performance and flexibility.",
+    "keywords": [
+      "library",
+      "metal",
+      "shaders",
+      "computer-graphics",
+      "glsl",
+      "shader",
+      "hlsl",
+      "glsl-shader",
+      "wgpu",
+      "hlsl-shader",
+      "metal-shader",
+      "wgsl",
+      "shader-library",
+      "wgsl-shader"
+    ]
+}
