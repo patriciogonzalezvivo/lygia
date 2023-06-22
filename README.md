@@ -1,25 +1,25 @@
-<img src="https://lygia.xyz/imgs/lygia.svg" width="200" style="display: block; margin-left: auto; margin-right: auto; filter: drop-shadow(2px 3px 4px gray);">
+<img src="https://lygia.xyz/imgs/lygia.svg" alt="LYGIA" width="200" style="display: block; margin-left: auto; margin-right: auto; filter: drop-shadow(2px 3px 4px gray);">
 
 # LYGIA Shader Library 
 
-Tired of searching, porting and/or reimplementing the same functions over and over? LYGIA is a shader library of reusable functions that can be include easily on your projects. LYGIA is very granular, designed for reusability, performance and flexibility. And can be easily be added to any projects and frameworks.
+Tired of searching, porting and/or reimplementing the same functions over and over? LYGIA is a shader library of reusable functions that can be included easily into your projects. LYGIA is very granular and designed for reusability, performance, and flexibility. LYGIA can easily be added to any project or framework.
 
 [![](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub)](https://github.com/sponsors/patriciogonzalezvivo)
 
 <p style="text-align: center;" >
-    <a href="https://github.com/patriciogonzalezvivo/lygia_unity_examples"><img src="https://lygia.xyz/imgs/unity.png" width="64" /></a>
-    <a href="https://github.com/guidoschmidt/lygia_threejs_examples"><img src="https://lygia.xyz/imgs/threejs.png" width="64" /></a>
-    <a href="https://github.com/patriciogonzalezvivo/lygia_p5_examples"><img src="https://lygia.xyz/imgs/p5.png" width="64" /></a>
-    <a href="https://editor.p5js.org/patriciogonzalezvivo/sketches"><img src="https://lygia.xyz/imgs/p5js.png" width="64" /></a>
-    <a href="https://github.com/patriciogonzalezvivo/lygia_of_examples"><img src="https://lygia.xyz/imgs/of.png" width="64" /></a>
-    <a href="https://github.com/vectorsize/lygia-td"><img title="static-resolver by vectorsize" src="https://lygia.xyz/imgs/td.png" width="64" /></a>
-    <a href="https://github.com/patriciogonzalezvivo/lygia_examples"><img src="https://lygia.xyz/imgs/glslViewer.png" width="64" /></a>
-    <a href="https://observablehq.com/@radames/hello-lygia-shader-library"><img src="https://lygia.xyz/imgs/ob.png" width="64" /></a>
-    <a href="https://codesandbox.io/s/lygia-react-starter-fftx6p"><img src="https://lygia.xyz/imgs/r3f.png" width="64" /></a>
-    <a href="https://www.figma.com/community/plugin/1138854718618193875"><img src="https://lygia.xyz/imgs/figma.png" width="64" /></a>
-    <a href="https://github.com/irmf/irmf-examples/tree/master/examples/028-lygia"><img src="https://lygia.xyz/imgs/irmf.png" width="64" /></a>
-    <a href="https://github.com/ossia/score-examples"><img src="https://lygia.xyz/imgs/ossia.png" width="64" /></a>
-    <a href="https://www.npmjs.com/package/resolve-lygia"><img src="https://lygia.xyz/imgs/npm.png" width="64" /></a>
+    <a href="https://github.com/patriciogonzalezvivo/lygia_unity_examples"><img src="https://lygia.xyz/imgs/unity.png" alt="uUnity" width="64" /></a>
+    <a href="https://github.com/guidoschmidt/lygia_threejs_examples"><img src="https://lygia.xyz/imgs/threejs.png" alt="threejs" width="64" /></a>
+    <a href="https://github.com/patriciogonzalezvivo/lygia_p5_examples"><img src="https://lygia.xyz/imgs/p5.png" alt="p5" width="64" /></a>
+    <a href="https://editor.p5js.org/patriciogonzalezvivo/sketches"><img src="https://lygia.xyz/imgs/p5js.png" alt="p5js" width="64" /></a>
+    <a href="https://github.com/patriciogonzalezvivo/lygia_of_examples"><img src="https://lygia.xyz/imgs/of.png" alt="openFrameworks" width="64" /></a>
+    <a href="https://github.com/vectorsize/lygia-td"><img title="static-resolver by vectorsize" src="https://lygia.xyz/imgs/td.png" alt="touchDesigner" width="64" /></a>
+    <a href="https://github.com/patriciogonzalezvivo/lygia_examples"><img src="https://lygia.xyz/imgs/glslViewer.png" alt="glslViewer" width="64" /></a>
+    <a href="https://observablehq.com/@radames/hello-lygia-shader-library"><img src="https://lygia.xyz/imgs/ob.png" alt="ob" width="64" /></a>
+    <a href="https://codesandbox.io/s/lygia-react-starter-fftx6p"><img src="https://lygia.xyz/imgs/r3f.png" alt="r3rf" width="64" /></a>
+    <a href="https://www.figma.com/community/plugin/1138854718618193875"><img src="https://lygia.xyz/imgs/figma.png" alt="Figma" width="64" /></a>
+    <a href="https://github.com/irmf/irmf-examples/tree/master/examples/028-lygia"><img src="https://lygia.xyz/imgs/irmf.png" alt="irmf" width="64" /></a>
+    <a href="https://github.com/ossia/score-examples"><img src="https://lygia.xyz/imgs/ossia.png" alt="Ossia" width="64" /></a>
+    <a href="https://www.npmjs.com/package/resolve-lygia"><img src="https://lygia.xyz/imgs/npm.png" alt="npm" width="64" /></a>
 
 </p>
 
@@ -58,7 +58,7 @@ In your shader `#include` the functions you need:
 
 ### LYGIA Locally
 
-If you are working **locally** on an ecosystem that can resolve `#include` dependencies, just clone LYGIA in your project relative to the shader you are loading:
+If you are working **locally** in an environment that can resolve `#include` dependencies, just clone LYGIA into your project relative to the shader you are loading:
 
 ```bash
     git clone https://github.com/patriciogonzalezvivo/lygia.git
@@ -72,7 +72,7 @@ or as a submodule:
 
 ### LYGIA on the cloud
 
-If you are working on a **cloud platform** probably you want to resolve the dependencies without needing to install anything. Just add a link to `https://lygia.xyz/resolve.js` (JS) or `https://lygia.xyz/resolve.esm.js` (ES6 module): 
+If you are working on a **cloud platform** you probably want to resolve the dependencies without needing to install anything. Just add a link to `https://lygia.xyz/resolve.js` (JS) or `https://lygia.xyz/resolve.esm.js` (ES6 module): 
 
 ```html
     <!-- as a JavaScript source -->
@@ -107,7 +107,7 @@ To then resolve the dependencies by passing a `string` or `strings[]` to `resolv
 
 ### Integrations examples
 
-Learn more about how to use it from this **examples**:
+Learn more about LYGIA and how to use it from these **examples**:
 
 * [2D examples for Processing (GLSL)](https://github.com/patriciogonzalezvivo/lygia_p5_examples)
 * [2D/3D examples for P5.js (GLSL)](https://editor.p5js.org/patriciogonzalezvivo/sketches)
@@ -124,31 +124,31 @@ Learn more about how to use it from this **examples**:
 * [2D/3D examples on GlslViewer (GLSL)](https://github.com/patriciogonzalezvivo/lygia_examples)
 * [2D examples on Ossia by Jean-Michaël Celerier](https://github.com/ossia/score-examples)
 
-For more information, guidance or feedback about using LYGIA, join [#Lygia channel on shader.zone discord](https://shader.zone/).
+For more information, guidance, or feedback about using LYGIA, join [#Lygia channel on shader.zone discord](https://shader.zone/).
 
 
 ### How is it organized?
 
-The functions are divided in different categories:
+The functions are divided into different categories:
 
-* [`math/`](https://lygia.xyz/math): general math functions and constants like `PI`, `SqrtLength()`, etc. 
-* [`space/`](https://lygia.xyz/space): general spatial operations like `scale()`, `rotate()`, etc. 
-* [`color/`](https://lygia.xyz/color): general color operations like `luma()`, `saturation()`, blend modes, palettes, color space conversion and tonemaps.
-* [`animation/`](https://lygia.xyz/animation): animation operations, like easing
-* [`generative/`](https://lygia.xyz/generative): generative functions like `random()`, `noise()`, etc. 
+* [`math/`](https://lygia.xyz/math): general math functions and constants: `PI`, `SqrtLength()`, etc. 
+* [`space/`](https://lygia.xyz/space): general spatial operations: `scale()`, `rotate()`, etc. 
+* [`color/`](https://lygia.xyz/color): general color operations: `luma()`, `saturation()`, blend modes, palettes, color space conversion, and tonemaps.
+* [`animation/`](https://lygia.xyz/animation): animation operations: easing
+* [`generative/`](https://lygia.xyz/generative): generative functions: `random()`, `noise()`, etc. 
 * [`sdf/`](https://lygia.xyz/sdf): signed distance field functions.
 * [`draw/`](https://lygia.xyz/draw): drawing functions like `digits()`, `stroke()`, `fill`, etc/.
 * [`sample/`](https://lygia.xyz/sample): sample operations
-* [`filter/`](https://lygia.xyz/filter): typical filter operations like different kind of blurs, mean and median filters.
+* [`filter/`](https://lygia.xyz/filter): typical filter operations: different kind of blurs, mean and median filters.
 * [`distort/`](https://lygia.xyz/distort): distort sampling operations
 * [`simulate/`](https://lygia.xyz/simulate): simulate sampling operations
 * [`lighting/`](https://lygia.xyz/lighting): different lighting models and functions for foward/deferred/raymarching rendering
-* [`geometry/`](https://lygia.xyz/geometry): operation related to geometries. Like intersections and AABB accelerating structures.
-* [`morphological/`](https://lygia.xyz/morphological): morphological filters like: dilation, erosion, alpha and poisson fill.
+* [`geometry/`](https://lygia.xyz/geometry): operation related to geometries: intersections and AABB accelerating structures.
+* [`morphological/`](https://lygia.xyz/morphological): morphological filters: dilation, erosion, alpha and poisson fill.
 
 ### Flexible how?
 
-There are some functions whose behaviour can be changed using the `#defines` keyword before including it. For example, [gaussian blurs](filter/gaussianBlur.glsl) are usually are done in two passes. By default, these are performed on their 1D version, but in the case you are interested on using a 2D kernel, all in the same pass, you will need to add the `GAUSSIANBLUR_2D` keyword this way:
+There are some functions whose behavior can be changed using the `#defines` keyword before including it. For example, [gaussian blurs](filter/gaussianBlur.glsl) are usually are done in two passes. By default, these are performed on their 1D version, but if you are interested in using a 2D kernel, all in the same pass, you will need to add the `GAUSSIANBLUR_2D` keyword this way:
 
 ```glsl
 
@@ -168,13 +168,13 @@ There are some functions whose behaviour can be changed using the `#defines` key
 
 ## Design Principles
 
-1. It relies on `#include "path/to/file.*lsl"` which is defined by Khronos GLSL standard and requires a tipical C-like pre-compiler MACRO which is easy to implement with just basic string operations to resolve dependencies. 
+1. It relies on `#include "path/to/file.*lsl"` which is defined by Khronos GLSL standard and requires a typical C-like pre-compiler MACRO which is easy to implement with just basic string operations to resolve dependencies. 
 
 Here you can find some implementations on different languages:
 
   - C#:
   
-    . [GLSLIncludes](https://github.com/seb776/GLSLIncludes) a small utility to add the include feature to glsl by [z0rg](https://github.com/seb776)
+    . [GLSLIncludes](https://github.com/seb776/GLSLIncludes) a small utility to add the include feature to glsl by [z0rg](https://github.com/seb776).
 
   - C++:
 
@@ -186,13 +186,13 @@ Here you can find some implementations on different languages:
 
   - JavaScript: 
   
-    . [vanilla JS (online resolver)](https://lygia.xyz/resolve.js) This small file brings `resolveLygia()` which takes a `string` or `string[]` and parse it solving all the `#include` dependencies into a single `string` you can load on your shaders
+    . [vanilla JS (online resolver)](https://lygia.xyz/resolve.js) This small file brings `resolveLygia()` which takes a `string` or `string[]` and parses it, solving all the `#include` dependencies into a single `string` you can load on your shaders.
   
-    . [npm module (online resolver)](https://www.npmjs.com/package/resolve-lygia) by Eduardo Fossas; [vite glsl plugin (local bundle)](https://github.com/UstymUkhman/vite-plugin-glsl) by Ustym Ukhman. Imports `.glsl` local dependencies, or load inline shaders through vite
+    . [npm module (online resolver)](https://www.npmjs.com/package/resolve-lygia) by Eduardo Fossas; [vite glsl plugin (local bundle)](https://github.com/UstymUkhman/vite-plugin-glsl) by Ustym Ukhman. Imports `.glsl` local dependencies, or load inline shaders through vite.
   
-    . [esbuild glsl plugin (local bundle)](https://github.com/ricardomatias/esbuild-plugin-glsl-include) by Ricardo Matias. Import local `.glsl` dependencies through esbuild
+    . [esbuild glsl plugin (local bundle)](https://github.com/ricardomatias/esbuild-plugin-glsl-include) by Ricardo Matias. Imports local `.glsl` dependencies through esbuild.
 
-    . [webpack glsl plugin (local bundle)](https://github.com/grieve/webpack-glsl-loader) by Ryan Grieve that import local `.glsl` dependencies through webpack.
+    . [webpack glsl plugin (local bundle)](https://github.com/grieve/webpack-glsl-loader) by Ryan Grieve that imports local `.glsl` dependencies through webpack.
         
 * It's **very granular**. One function per file. The file and the function share the same name, namely: `myFunc.glsl` contains `myFunct()`. There are some files that just include a collection of files inside a folder with the same name. For example:
 
@@ -213,7 +213,7 @@ Here you can find some implementations on different languages:
     math/mirror.cuh
 ```
 
-* **Self documented**. Each file contains a structured comment (in YAML) at the top of the file. This one contains the name of the original author, description, use and `#define` options
+* **Self documented**. Each file contains a structured comment (in YAML) at the top of the file. This one contains the name of the original author, description, use, and `#define` options
 
 ```glsl
 
@@ -264,7 +264,7 @@ Here you can find some implementations on different languages:
 
 ```
 
-* **Function Overloading**. Arguments are arranged in such a way that optional elements are at the back. When possible sort them according their memory size (except textures that reamin at the top). Ex.: `sampler2D, mat4, mat3, mat2, vec4, vec3, vec2, float, ivec4, ivec3, ivec2, int, bool`
+* **Function Overloading**. Arguments are arranged in such a way that optional elements are at the end. When possible sort them according their memory size (except textures that remain at the top). Ex.: `sampler2D, mat4, mat3, mat2, vec4, vec3, vec2, float, ivec4, ivec3, ivec2, int, bool`
 
 ```glsl
 
@@ -292,32 +292,32 @@ Here you can find some implementations on different languages:
 
 ## Contributions
 
-LYGIA have a long way to go. Your support will be appreciated and rewarded (all contributors are automatically added to the [commercial license](https://lygia.xyz/license) ). This support can take multiple forms:
+LYGIA has a long way to go. Your support will be appreciated and rewarded! All contributors are automatically added to the [commercial license](https://lygia.xyz/license). This support can take multiple forms:
 
 * fixing bugs!
-* expanding the crosscompatibility between languages GLSL/HLSL/MSL/WGSL/CUDA
+* expanding the cross-compatibility between languages GLSL/HLSL/MSL/WGSL/CUDA
 * contributing new functions
-* adding new examples and integrations for new enviroments like: [GoDot](https://godotengine.org/), [ISF](https://isf.video/), [MaxMSP](https://cycling74.com/products/max), etc.
+* adding new examples and integrations for new environments like: [GoDot](https://godotengine.org/), [ISF](https://isf.video/), [MaxMSP](https://cycling74.com/products/max), etc.
 * through [sponsorships](https://github.com/sponsors/patriciogonzalezvivo)
 
 
 ## License 
 
-LYGIA is dual-licensed under [the Prosperity License](https://prosperitylicense.com/versions/3.0.0) and the [Patron License](https://lygia.xyz/license) for [sponsors](https://github.com/sponsors/patriciogonzalezvivo) and [contributors](https://github.com/patriciogonzalezvivo/lygia/graphs/contributors).
+LYGIA is dual-licensed under the [Prosperity License](https://prosperitylicense.com/versions/3.0.0) and the [Patron License](https://lygia.xyz/license) for [sponsors](https://github.com/sponsors/patriciogonzalezvivo) and [contributors](https://github.com/patriciogonzalezvivo/lygia/graphs/contributors).
 
-[Sponsors](https://github.com/sponsors/patriciogonzalezvivo) and [contributors](https://github.com/patriciogonzalezvivo/lygia/graphs/contributors) are automatically added to the [Patron License](https://lygia.xyz/license) and they can ignore the any non-commercial rule of [the Prosperity Licensed](https://prosperitylicense.com/versions/3.0.0) software (please take a look to the exception).
+[Sponsors](https://github.com/sponsors/patriciogonzalezvivo) and [contributors](https://github.com/patriciogonzalezvivo/lygia/graphs/contributors) are automatically added to the [Patron License](https://lygia.xyz/license) and they can ignore any non-commercial rule of the [Prosperity License](https://prosperitylicense.com/versions/3.0.0) software (please take a look at the exceptions).
 
-It's also possible to get a permanent comercial license hook to a single and specific version of LYGIA.
+It's also possible to get a permanent commercial license hooked to a single and specific version of LYGIA.
 
 **Exceptions**:
 
-* `color/mixBox.glsl` and `color/mixBox.hlsl` it's copyrighted by Secret Weapons with their own non-commercial license. This functions also require a LUT texture wich is provided for research and evaluation purposes, if you wish to obtain it together with a commercial license, please contact them at mixbox@scrtwpns.com 
+* `color/mixBox.glsl` and `color/mixBox.hlsl` are copyrighted by Secret Weapons with their own non-commercial license. These functions also require a LUT texture which is provided for research and evaluation purposes, if you wish to obtain it together with a commercial license, please contact them at [mixbox@scrtwpns.com](mailto:mixbox@scrtwpns.com).
 
 ## Credits
 
-Created and mantain by [Patricio Gonzalez Vivo](https://patriciogonzalezvivo.com/)( <a rel="me" href="https://merveilles.town/@patricio">Mastodon</a> | [Twitter](https://twitter.com/patriciogv) | [Instagram](https://www.instagram.com/patriciogonzalezvivo/) | [GitHub](https://github.com/sponsors/patriciogonzalezvivo) ) and every direct or indirect [contributors](https://github.com/patriciogonzalezvivo/lygia/graphs/contributors) to the GitHub. This library has been built over years, and in many cases on top of the work of brillant and generous people like: [Inigo Quiles](https://www.iquilezles.org/), [Morgan McGuire](https://casual-effects.com/), [Alan Wolfe](https://blog.demofox.org/), [Hugh Kennedy](https://github.com/hughsk), [Matt DesLauriers](https://www.mattdesl.com/) and many others.
+Created and mantained by [Patricio Gonzalez Vivo](https://patriciogonzalezvivo.com/)( <a rel="me" href="https://merveilles.town/@patricio">Mastodon</a> | [Twitter](https://twitter.com/patriciogv) | [Instagram](https://www.instagram.com/patriciogonzalezvivo/) | [GitHub](https://github.com/sponsors/patriciogonzalezvivo) ) and every direct or indirect [contributors](https://github.com/patriciogonzalezvivo/lygia/graphs/contributors) to the GitHub. This library has been built over years, and in many cases on top of the work of brilliant and generous people like: [Inigo Quiles](https://www.iquilezles.org/), [Morgan McGuire](https://casual-effects.com/), [Alan Wolfe](https://blog.demofox.org/), [Hugh Kennedy](https://github.com/hughsk), [Matt DesLauriers](https://www.mattdesl.com/), and many others.
 
 
 ## Get the latest news and releases
 
-Sign up for the news letter bellow, joing [the LYGIA's channel on Discord](https://shader.zone) or follow the [Github repository](https://github.com/patriciogonzalezvivo/lygia)
+Sign up for the news letter below, join [the LYGIA's channel on Discord](https://shader.zone) or follow the [Github repository](https://github.com/patriciogonzalezvivo/lygia)
