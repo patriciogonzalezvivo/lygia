@@ -1,23 +1,72 @@
 {
-    "name": "com.patriciogonzalezvivo.lygia",
-    "displayName": "Lygia",
-    "version": "1.1.0",
-    "unity": "2022.3",
-    "description": "LYGIA, it's a granular and multi-language (GLSL, HLSL, WGSL, MSL and CUDA) shader library designed for performance and flexibility.",
-    "keywords": [
-      "library",
-      "metal",
-      "shaders",
-      "computer-graphics",
-      "glsl",
-      "shader",
-      "hlsl",
-      "glsl-shader",
-      "wgpu",
-      "hlsl-shader",
-      "metal-shader",
-      "wgsl",
-      "shader-library",
-      "wgsl-shader"
-    ]
+  "name": "lygia",
+  "version": "0.0.13",
+  "description": "lygia, it's a granular and multi-language shader library designed for performance and flexibility",
+  "main": "dist/umd/lygia.main.js",
+  "unpkg": "dist/umd/lygia.main.js",
+  "jsdelivr": "dist/umd/lygia.main.js",
+  "module": "dist/module/lygia.main.js",
+  "type": "module",
+  "scripts": {
+    "build": "rm -rf dist/* && webpack",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint --fix --ext .js ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/patriciogonzalezvivo/lygia.git"
+  },
+  "keywords": [
+    "library",
+    "metal",
+    "computer-graphics",
+    "glsl",
+    "shader",
+    "hlsl",
+    "glsl-shader",
+    "hlsl-shader",
+    "metal-shader",
+    "shader-library"
+  ],
+  "author": "Patricio Gonzalez Vivo",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/patriciogonzalezvivo/lygia/issues"
+  },
+  "homepage": "https://github.com/patriciogonzalezvivo/lygia#readme",
+  "devDependencies": {
+    "eslint": "^7.24.0",
+    "eslint-config-prettier": "^8.2.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "prettier": "^2.2.1",
+    "webpack": "^5.36.2",
+    "webpack-cli": "^4.6.0",
+    "webpack-glsl-loader": "github:patriciogonzalezvivo/webpack-glsl-loader"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true,
+      "es6": true
+    },
+    "extends": [
+      "prettier"
+    ],
+    "plugins": [
+      "prettier"
+    ],
+    "rules": {
+      "prettier/prettier": [
+        "error"
+      ]
+    },
+    "parserOptions": {
+      "sourceType": "module"
+    }
+  },
+  "prettier": {
+    "semi": false,
+    "arrowParens": "always",
+    "singleQuote": true
+  }
 }
