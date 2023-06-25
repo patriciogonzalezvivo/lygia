@@ -1,6 +1,6 @@
 {
   "name": "lygia",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "lygia, it's a granular and multi-language shader library designed for performance and flexibility",
   "main": "dist/umd/lygia.main.js",
   "unpkg": "dist/umd/lygia.main.js",
@@ -18,22 +18,24 @@
   },
   "keywords": [
     "library",
-    "metal",
     "computer-graphics",
-    "glsl",
     "shader",
+    "shader-library",
+    "glsl",
+    "wgsl",
     "hlsl",
+    "metal",
     "glsl-shader",
     "hlsl-shader",
-    "metal-shader",
-    "shader-library"
+    "wgsl-shader",
+    "metal-shader"
   ],
   "author": "Patricio Gonzalez Vivo",
-  "license": "BSD-3-Clause",
+  "license": "Prosperity License & Patron License (https://lygia.xyz/license)",
   "bugs": {
     "url": "https://github.com/patriciogonzalezvivo/lygia/issues"
   },
-  "homepage": "https://github.com/patriciogonzalezvivo/lygia#readme",
+  "homepage": "https://lygia.xyz",
   "devDependencies": {
     "eslint": "^7.24.0",
     "eslint-config-prettier": "^8.2.0",
