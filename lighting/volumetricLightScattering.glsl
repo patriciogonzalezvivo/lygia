@@ -80,7 +80,7 @@ options:
 // https://www.gamedev.net/blogs/entry/2266308-effect-volumetric-light-scattering/
 
 #ifndef VOLUMETRICLIGHTSCATTERING_SAMPLE_FNC
-#define VOLUMETRICLIGHTSCATTERING_SAMPLE_FNC(TEX, UV) SAMPLER_FNC(TEX, UV).r
+#define VOLUMETRICLIGHTSCATTERING_SAMPLE_FNC(TEX, UV) min(SAMPLER_FNC(TEX, UV).r, 0.997)
 #endif
 
 #ifndef FNC_VOLUMETRICLIGHTSCATTERING
@@ -119,7 +119,6 @@ VOLUMETRICLIGHTSCATTERING_TYPE volumetricLightScattering(sampler2D lightShadowMa
 
 VOLUMETRICLIGHTSCATTERING_TYPE volumetricLightScattering(sampler2D texDepth, vec2 st) {
     float depth = VOLUMETRICLIGHTSCATTERING_SAMPLE_FNC(texDepth, st);
-    depth = min(depth, 0.997);
     float viewZ = depth2viewZ(depth, CAMERA_NEAR_CLIP, CAMERA_FAR_CLIP);
     
     #ifdef VOLUMETRICLIGHTSCATTERING_NOISE_FNC
