@@ -1,12 +1,12 @@
 /*
 original_author: TheTurk
-description: Distance function for an arrow. Returns float 3D SDF. Originally from https://www.shadertoy.com/view/NttcW8
-use: arrow3DSDF(<vec3> position, <vec3> start, <vec3> end, <float> baseRadius, <float> tipRadius, <float> tipHeight)
+description: Distance function for an arrow. Returns float. Originally from https://www.shadertoy.com/view/NttcW8
+use: arrowSDF(<vec3> position, <vec3> start, <vec3> end, <float> baseRadius, <float> tipRadius, <float> tipHeight)
 */
 
-#ifndef FNC_ARROW3DSDF
-#define FNC_ARROW3DSDF
-float arrow3DSDF(vec3 position, vec3 start, vec3 end, float baseRadius, float tipRadius, float tipHeight){
+#ifndef FNC_ARROWSDF
+#define FNC_ARROWSDF
+float arrowSDF(vec3 position, vec3 start, vec3 end, float baseRadius, float tipRadius, float tipHeight){
     vec3 t = start - end;
     float l = length(t);
     t /= l;
