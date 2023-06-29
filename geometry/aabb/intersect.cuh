@@ -7,8 +7,8 @@
 #include "../../lighting/ray.cuh"
 /*
 original_author: Dominik Schmid 
-description: compute the near and far intersections of the cube (stored in the x and y components) using the slab method
-// no intersection means vec.x > vec.y (really tNear > tFar) https://gist.github.com/DomNomNom/46bb1ce47f68d255fd5d
+description: |
+    compute the near and far intersections of the cube (stored in the x and y components) using the slab method no intersection means vec.x > vec.y (really tNear > tFar) https://gist.github.com/DomNomNom/46bb1ce47f68d255fd5d
 use: <float2> intersect(<AABB> box, <float3> rayOrigin, <float3> rayDir)
 */
 
