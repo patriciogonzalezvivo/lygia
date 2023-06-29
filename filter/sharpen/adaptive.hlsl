@@ -9,7 +9,7 @@ options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - SHARPENADAPTIVE_TYPE: defaults to float3
     - SHARPENDADAPTIVE_SAMPLER_FNC(TEX, UV): defaults to texture2D(TEX, UV).rgb
-    - SHARPENADAPTIVE_ANIME: only darken edges. Defaults to: false
+    - SHARPENADAPTIVE_ANIME: only darken edges. Defaults to false
 */
 
 #ifndef SHARPENADAPTIVE_TYPE

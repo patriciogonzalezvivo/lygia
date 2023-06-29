@@ -4,7 +4,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: Barrel distortion
-use: barrel(sampler2D tex, <vec2> st, [, <vec2|float> sdf])
+use: barrel(sampler2D tex, <vec2> st [, <vec2|float> sdf])
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - BARREL_DISTANCE: function used to shape the distortion, defaults to radial shape with lengthSq

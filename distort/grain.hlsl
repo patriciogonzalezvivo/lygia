@@ -12,8 +12,8 @@ use:
     - grain(<sampler2D> texture, <float2> texCoord, <float|float2> resolution [, <float> t, <float> multiplier])
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
-    - GRAIN_TYPE
-    - GRAIN_SAMPLER_FNC
+    - GRAIN_TYPE: type of the returned value (vec3 by default)
+    - GRAIN_SAMPLER_FNC: grain function for sampler2D
 */
 
 #ifndef GRAIN_TYPE
