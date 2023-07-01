@@ -29,10 +29,10 @@ options:
 vec3 fakeCube(const in vec3 _normal, const in float _shininnes) {
 
     #if defined(FAKECUBE_SAMPLE_FNC)
-    vec3 colx = FAKECUBE_SAMPLE_FNC(d.yz).rgb;
-    vec3 coly = FAKECUBE_SAMPLE_FNC(d.zx).rgb;
-    vec3 colz = FAKECUBE_SAMPLE_FNC(d.xy).rgb;
-    vec3 n = d*d;
+    vec3 colx = FAKECUBE_SAMPLE_FNC(_normal.yz).rgb;
+    vec3 coly = FAKECUBE_SAMPLE_FNC(_normal.zx).rgb;
+    vec3 colz = FAKECUBE_SAMPLE_FNC(_normal.xy).rgb;
+    vec3 n = _normal*_normal;
     return (colx*n.x + coly*n.y + colz*n.z)/(n.x+n.y+n.z);
 
     #elif defined(FAKECUBE_ONLYXWALL)
