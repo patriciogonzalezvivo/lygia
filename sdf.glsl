@@ -36,7 +36,7 @@
 
 // Operations
 #include "sdf/opOnion.glsl"
-#include "sdf/opRepite.glsl"
+#include "sdf/opRepeat.glsl"
 #include "sdf/opRevolve.glsl"
 #include "sdf/opRound.glsl"
 #include "sdf/opSubtraction.glsl"
