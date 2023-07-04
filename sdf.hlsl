@@ -34,7 +34,7 @@
 
 // Operations
 #include "sdf/opOnion.hlsl"
-#include "sdf/opRepite.hlsl"
+#include "sdf/opRepeat.hlsl"
 #include "sdf/opRevolve.hlsl"
 #include "sdf/opRound.hlsl"
 #include "sdf/opSubtraction.hlsl"
