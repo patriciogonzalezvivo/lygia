@@ -32,6 +32,10 @@ examples: |
     #endif
 #endif
 
+#ifdef RAYMARCH_GLASS_MAP_FNC
+#define RAYMARCH_GLASS_WAVELENGTH_MAP_FNC(res, rdIn, rdOut, pEnter, pExit, nEnter, nExit, ior, roughness) RAYMARCH_GLASS_MAP_FNC(res, rdIn, rdOut, pEnter, pExit, nEnter, nExit, ior, roughness)
+#endif
+
 #ifndef RAYMARCH_GLASS_CHROMATIC_ABBERATION
 #define RAYMARCH_GLASS_CHROMATIC_ABBERATION .01
 #endif
@@ -101,17 +105,17 @@ vec3 raymarchGlass(in vec3 ray, in vec3 pos, in float ior, in float roughness) {
     RAYMARCH_MAP_TYPE marchOutside = raymarchGlassMarching(pos,ray, 1.); // Outside of the object
     if(marchOutside.RAYMARCH_MAP_DISTANCE < RAYMARCH_MAX_DIST) {
         vec3 newPos = pos + ray * marchOutside.RAYMARCH_MAP_DISTANCE;
-        vec3 newNormal, nExit;
+        vec3 nEnter, nExit;
 
     #ifdef RAYMARCH_GLASS_EDGE_SHARPNESS
-        newNormal = raymarchNormal(newPos, RAYMARCH_GLASS_EDGE_SHARPNESS);
+        nEnter = raymarchNormal(newPos, RAYMARCH_GLASS_EDGE_SHARPNESS);
     #else
-        newNormal = raymarchNormal(newPos);
+        nEnter = raymarchNormal(newPos);
     #endif
-        vec3 newReflect = reflect(ray, newNormal);
+        vec3 newReflect = reflect(ray, nEnter);
 
-        vec3 rdIn = refract(ray, newNormal, 1./ior);
-        vec3 pEnter = newPos - newNormal * RAYMARCH_GLASS_MIN_HIT_DIST * 3.;
+        vec3 rdIn = refract(ray, nEnter, 1./ior);
+        vec3 pEnter = newPos - nEnter * RAYMARCH_GLASS_MIN_HIT_DIST * 3.;
         
         RAYMARCH_MAP_TYPE marchInside = raymarchGlassMarching(pEnter, rdIn, -1.); // Inside the object
         
@@ -126,15 +130,15 @@ vec3 raymarchGlass(in vec3 ray, in vec3 pos, in float ior, in float roughness) {
         vec3 rdOut, res;
     #ifdef RAYMARCH_GLASS_WAVELENGTH
         vec3 vie = normalize(ray);
-        float NoV = dot(newNormal, vie);
+        float NoV = dot(nEnter, vie);
     #ifdef RAYMARCH_GLASS_ENABLE_FRESNEL
-        float fresnelVal = powFast(1.+fresnel(dot(ray, newNormal), -NoV), RAYMARCH_GLASS_FRESNEL_STRENGTH);
+        float fresnelVal = powFast(1.+fresnel(dot(ray, nEnter), -NoV), RAYMARCH_GLASS_FRESNEL_STRENGTH);
     #endif
 
-        // Red
         #ifdef RAYMARCH_GLASS_WAVELENGTH_MAP_FNC
-            res = RAYMARCH_GLASS_WAVELENGTH_MAP_FNC(res, rdIn, rdOut, nExit, ior, roughness);
+            RAYMARCH_GLASS_WAVELENGTH_MAP_FNC(res, rdIn, rdOut, pEnter, pExit, nEnter, nExit, ior, roughness);
         #else
+            // Red
             rdOut = refract(rdIn, nExit, ior - RAYMARCH_GLASS_CHROMATIC_ABBERATION);
 
             if(dot(rdOut, rdOut) == 0.)
