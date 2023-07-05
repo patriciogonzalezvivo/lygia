@@ -14,7 +14,7 @@ options:
     - RAYMARCH_GLASS_WAVELENGTH
     - RAYMARCH_GLASS_ENABLE_FRESNEL
     - RAYMARCH_GLASS_FRESNEL_STRENGTH 5.
-    - RAYMARCH_GLASS_CHROMATIC_ABBERATION 1.
+    - RAYMARCH_GLASS_CHROMATIC_ABBERATION .01
     - RAYMARCH_GLASS_MAP_FNC(res, rdIn, rdOut, pEnter, pExit, nEnter, nExit, ior, roughness)
 examples: |
     - /shaders/lighting_glass_raymarching_refraction.frag
@@ -54,7 +54,7 @@ examples: |
 #endif
 
 #ifndef RAYMARCH_GLASS_MIN_HIT_DIST
-#define RAYMARCH_GLASS_MIN_HIT_DIST .001
+#define RAYMARCH_GLASS_MIN_HIT_DIST .0001
 #endif
 
 #ifndef RAYMARCH_MAP_DISTANCE
@@ -133,7 +133,7 @@ vec3 raymarchGlass(in vec3 ray, in vec3 pos, in float ior, in float roughness) {
         vec3 vie = normalize(ray);
         float NoV = dot(nEnter, vie);
     #ifdef RAYMARCH_GLASS_ENABLE_FRESNEL
-        float fresnelVal = powFast(1.+fresnel(dot(ray, nEnter), -NoV), RAYMARCH_GLASS_FRESNEL_STRENGTH);
+        float fresnelVal = powFast(fresnel(dot(ray, nEnter), NoV), RAYMARCH_GLASS_FRESNEL_STRENGTH);
     #endif
 
         #ifdef RAYMARCH_GLASS_WAVELENGTH_MAP_FNC
@@ -168,7 +168,7 @@ vec3 raymarchGlass(in vec3 ray, in vec3 pos, in float ior, in float roughness) {
 
         res *= optDist * RAYMARCH_GLASS_COLOR;
     #ifdef RAYMARCH_GLASS_ENABLE_FRESNEL
-        return mix(res, color, fresnelVal);
+        return mix(res, color, saturate(fresnelVal));
     #else
         return res;
     #endif
