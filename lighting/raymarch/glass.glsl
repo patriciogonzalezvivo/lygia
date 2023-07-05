@@ -3,21 +3,22 @@
 
 /*
 original_author:  The Art Of Code
-description: raymarching for glass render
-use: <vec4> raymarchDefaultRender( in <vec3> ro, in <vec3> rd ) 
-options: |
-    - LIGHT_COLOR: vec3(0.5) or u_lightColor in GlslViewer |
-    - LIGHT_POSITION: vec3(0.0, 10.0, -50.0) or u_light in GlslViewer |
-    - LIGHT_DIRECTION; |
-    - RAYMARCH_BACKGROUND: vec3(0.0) |
-    - RAYMARCH_AMBIENT: vec3(1.0) |
-    - RAYMARCH_MATERIAL_FNC raymarchDefaultMaterial |
+description: |
+    Raymarching for glass render. For more info, see the video below link:
+    Tutorial 1:https://youtu.be/NCpaaLkmXI8
+    Tutorial 2:https://youtu.be/0RWaR7zApEo
+use: <vec3> raymarchGlass( in <vec3> ray, in <vec3> pos, in <float> ior, in <float> roughness ) 
+options:
+    - RAYMARCH_GLASS_DENSITY: 0.
+    - RAYMARCH_GLASS_COLOR: vec3(1.0, 1.0, 1.0)
+    - RAYMARCH_GLASS_WAVELENGTH
+    - RAYMARCH_GLASS_ENABLE_FRESNEL
+    - RAYMARCH_GLASS_FRESNEL_STRENGTH 5.
+    - RAYMARCH_GLASS_CHROMATIC_ABBERATION 1.
+    - RAYMARCH_GLASS_MAP_FNC(res, rdIn, rdOut, pEnter, pExit, nEnter, nExit, ior, roughness)
 examples: |
-    - /shaders/lighting__glass_raymarching.frag
+    - /shaders/lighting_glass_raymarching_refraction.frag
 */
-// Thanks to Art of Code
-// Tutorial 1: https://youtu.be/NCpaaLkmXI8
-// Tutorial 2: https://youtu.be/0RWaR7zApEo
 
 #ifndef RAYMARCH_GLASS_DENSITY
 #define RAYMARCH_GLASS_DENSITY 0.
