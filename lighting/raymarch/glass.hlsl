@@ -14,8 +14,8 @@ options:
     - RAYMARCH_GLASS_DENSITY: 0.                        [Density of the ray going through the glass]
     - RAYMARCH_GLASS_COLOR: float3(1.0, 1.0, 1.0)       [Color of the glass]
     - RAYMARCH_GLASS_WAVELENGTH                         [Define this option to enable chromatic abberation effects]
-    - RAYMARCH_GLASS_ENABLE_FRESNEL                     [Define this option to enable fresnel on edges]
-    - RAYMARCH_GLASS_FRESNEL_STRENGTH 5.                [The lower the value, more sharp it gets]
+    - RAYMARCH_GLASS_ENABLE_REFLECTION                  [Define this option to enable reflection]
+    - RAYMARCH_GLASS_REFLECTION_EFFECT 5.               [The higher the value, the less reflections area from surface view]
     - RAYMARCH_GLASS_CHROMATIC_ABBERATION .01           [Chromatic Abberation Effects on environment map]
     - RAYMARCH_GLASS_MAP_FNC(res, rdIn, rdOut, pEnter, pExit, nEnter, nExit, ior, roughness)
 */
@@ -27,8 +27,8 @@ options:
 #define RAYMARCH_GLASS_COLOR float3(1.,1.,1.)
 #endif
 
-#if !defined(RAYMARCH_GLASS_FRESNEL_STRENGTH) && defined(RAYMARCH_GLASS_ENABLE_FRESNEL)
-#define RAYMARCH_GLASS_FRESNEL_STRENGTH 5.
+#if !defined(RAYMARCH_GLASS_REFLECTION_EFFECT) && defined(RAYMARCH_GLASS_ENABLE_REFLECTION)
+#define RAYMARCH_GLASS_REFLECTION_EFFECT 5.
 #endif
 
 #ifdef RAYMARCH_GLASS_MAP_FNC
@@ -103,7 +103,7 @@ RAYMARCH_MAP_TYPE raymarchGlassMarching(in float3 ro, in float3 rd) {
 #ifndef FNC_RAYMARCH_DEFAULT_GLASS
 #define FNC_RAYMARCH_DEFAULT_GLASS
 float3 raymarchGlass(in float3 ray, in float3 pos, in float ior, in float roughness) {
-    float3 color = envMap(ray, roughness).rgb;
+    float3 color = float3(0.);
 
     RAYMARCH_MAP_TYPE marchOutside = raymarchGlassMarching(pos,ray); // Outside of the object
     if(marchOutside.RAYMARCH_MAP_DISTANCE < RAYMARCH_MAX_DIST) {
@@ -116,6 +116,8 @@ float3 raymarchGlass(in float3 ray, in float3 pos, in float ior, in float roughn
         nEnter = raymarchNormal(newPos);
     #endif
         float3 newReflect = reflect(ray, nEnter);
+
+        color = envMap(newReflect, roughness).rgb
 
         float3 rdIn = refract(ray, nEnter, 1./ior);
         float3 pEnter = newPos - nEnter * RAYMARCH_GLASS_MIN_HIT_DIST * 3.;
@@ -166,8 +168,8 @@ float3 raymarchGlass(in float3 ray, in float3 pos, in float ior, in float roughn
 
         res *= optDist * RAYMARCH_GLASS_COLOR;
 
-        #ifdef RAYMARCH_GLASS_ENABLE_FRESNEL
-            float fresnelVal = pow(1.+dot(ray, nEnter), RAYMARCH_GLASS_FRESNEL_STRENGTH);
+        #ifdef RAYMARCH_GLASS_ENABLE_REFLECTION
+            float fresnelVal = pow(1.+dot(ray, nEnter), RAYMARCH_GLASS_REFLECTION_EFFECT);
             return lerp(res, color, saturate(fresnelVal));
         #else
             return res;
@@ -184,8 +186,8 @@ float3 raymarchGlass(in float3 ray, in float3 pos, in float ior, in float roughn
 
         res *= optDist * RAYMARCH_GLASS_COLOR;
 
-        #ifdef RAYMARCH_GLASS_ENABLE_FRESNEL
-            float fresnelVal = pow(1.+dot(ray, nEnter), RAYMARCH_GLASS_FRESNEL_STRENGTH);
+        #ifdef RAYMARCH_GLASS_ENABLE_REFLECTION
+            float fresnelVal = pow(1.+dot(ray, nEnter), RAYMARCH_GLASS_REFLECTION_EFFECT);
             return lerp(res, color, saturate(fresnelVal));
         #else
             return res;
