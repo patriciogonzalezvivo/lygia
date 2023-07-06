@@ -10,7 +10,7 @@ vec3 reflection(const in vec3 _V, const in vec3 _N, const in float _roughness) {
     vec3  anisotropicB = MATERIAL_ANISOTROPY_DIRECTION;
 
     #ifdef MODEL_VERTEX_TANGENT
-    anisotropicT = normalize(v_tangentToWorld * MATE RIAL_ANISOTROPY_DIRECTION);
+    anisotropicT = normalize(v_tangentToWorld * MATERIAL_ANISOTROPY_DIRECTION);
     anisotropicB = normalize(cross(v_tangentToWorld[2], anisotropicT));
     #endif
 
