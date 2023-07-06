@@ -7,16 +7,16 @@
 original_author:  The Art Of Code
 description: |
     Raymarching for glass render. For more info, see the video below link:
-    Tutorial 1:https://youtu.be/NCpaaLkmXI8
-    Tutorial 2:https://youtu.be/0RWaR7zApEo
+    Tutorial 1: https://youtu.be/NCpaaLkmXI8
+    Tutorial 2: https://youtu.be/0RWaR7zApEo
 use: <vec3> raymarchGlass( in <vec3> ray, in <vec3> pos, in <float> ior, in <float> roughness ) 
 options:
     - RAYMARCH_GLASS_DENSITY: 0.                        [Density of the ray going through the glass]
     - RAYMARCH_GLASS_COLOR: vec3(1.0, 1.0, 1.0)       [Color of the glass]
-    - RAYMARCH_GLASS_WAVELENGTH                         [Define this option]
+    - RAYMARCH_GLASS_WAVELENGTH                         [Define this option to enable chromatic abberation effects]
     - RAYMARCH_GLASS_ENABLE_FRESNEL                     [Define this option to enable fresnel on edges]
     - RAYMARCH_GLASS_FRESNEL_STRENGTH 5.                [The lower the value, more sharp it gets]
-    - RAYMARCH_GLASS_CHROMATIC_ABBERATION .01           [Chromatic Abberation Effects on environment map]
+    - RAYMARCH_GLASS_CHROMATIC_ABBERATION .01           [Chromatic Abberation Effects value on environment map]
     - RAYMARCH_GLASS_MAP_FNC(res, rdIn, rdOut, pEnter, pExit, nEnter, nExit, ior, roughness)
 examples: |
     - /shaders/lighting_glass_raymarching_refraction.frag
