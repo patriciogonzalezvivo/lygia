@@ -19,7 +19,7 @@ options:
     - RAYMARCH_GLASS_CHROMATIC_ABBERATION .01           [Chromatic Abberation Effects value on environment map]
     - RAYMARCH_GLASS_MAP_FNC(res, rdIn, rdOut, pEnter, pExit, nEnter, nExit, ior, roughness)
 examples: |
-    - /shaders/lighting_glass_raymarching_refraction.frag
+    - /shaders/lighting_raymarching_glass_refraction.frag
 */
 
 #ifndef RAYMARCH_GLASS_DENSITY
