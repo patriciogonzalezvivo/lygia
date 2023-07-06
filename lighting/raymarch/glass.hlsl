@@ -1,7 +1,7 @@
-#include "../envMap.glsl"
-#include "../fresnel.glsl"
-#include "../specular.glsl"
-#include "../reflection.glsl"
+#include "../envMap.hlsl"
+#include "../fresnel.hlsl"
+#include "../specular.hlsl"
+#include "../reflection.hlsl"
 
 /*
 original_author:  The Art Of Code
@@ -9,10 +9,10 @@ description: |
     Raymarching for glass render. For more info, see the video below link:
     Tutorial 1:https://youtu.be/NCpaaLkmXI8
     Tutorial 2:https://youtu.be/0RWaR7zApEo
-use: <vec3> raymarchGlass( in <vec3> ray, in <vec3> pos, in <float> ior, in <float> roughness ) 
+use: <float3> raymarchGlass( in <float3> ray, in <float3> pos, in <float> ior, in <float> roughness ) 
 options:
     - RAYMARCH_GLASS_DENSITY: 0.                        [Density of the ray going through the glass]
-    - RAYMARCH_GLASS_COLOR: vec3(1.0, 1.0, 1.0)       [Color of the glass]
+    - RAYMARCH_GLASS_COLOR: float3(1.0, 1.0, 1.0)       [Color of the glass]
     - RAYMARCH_GLASS_WAVELENGTH                         [Define this option]
     - RAYMARCH_GLASS_ENABLE_FRESNEL                     [Define this option to enable fresnel on edges]
     - RAYMARCH_GLASS_FRESNEL_STRENGTH 5.                [The lower the value, more sharp it gets]
@@ -26,7 +26,7 @@ examples: |
 #define RAYMARCH_GLASS_DENSITY 0.
 #endif
 #ifndef RAYMARCH_GLASS_COLOR
-#define RAYMARCH_GLASS_COLOR vec3(1.,1.,1.)
+#define RAYMARCH_GLASS_COLOR float3(1.,1.,1.)
 #endif
 
 #ifdef RAYMARCH_GLASS_WAVELENGTH
@@ -68,11 +68,11 @@ examples: |
 #endif
 
 #ifndef RAYMARCH_MAP_TYPE
-#define RAYMARCH_MAP_TYPE vec4
+#define RAYMARCH_MAP_TYPE float4
 #endif
 
 #ifndef RAYMARCH_MAP_MATERIAL_TYPE
-#define RAYMARCH_MAP_MATERIAL_TYPE vec3
+#define RAYMARCH_MAP_MATERIAL_TYPE float3
 #endif
 
 #ifndef RAYMARCH_GLASS_MAP_MATERIAL
@@ -81,7 +81,7 @@ examples: |
 
 #ifndef FNC_RAYMARCHGLASS
 #define FNC_RAYMARCHGLASS
-RAYMARCH_MAP_TYPE raymarchGlassMarching(in vec3 ro, in vec3 rd) {
+RAYMARCH_MAP_TYPE raymarchGlassMarching(in float3 ro, in float3 rd) {
     float tmin = RAYMARCH_GLASS_MIN_DIST;
     float tmax = RAYMARCH_GLASS_MAX_DIST;
 
@@ -92,7 +92,7 @@ RAYMARCH_MAP_TYPE raymarchGlassMarching(in vec3 ro, in vec3 rd) {
     float side = sign(RAYMARCH_MAP_FNC(ro).RAYMARCH_MAP_DISTANCE);
 
     for (int i = 0; i < RAYMARCH_GLASS_SAMPLES; i++) {
-        vec3 pos = ro + rd * t;
+        float3 pos = ro + rd * t;
         RAYMARCH_MAP_TYPE sideDirection = RAYMARCH_MAP_FNC(pos);
         t += sideDirection.RAYMARCH_MAP_DISTANCE * side;
         m = sideDirection.RAYMARCH_GLASS_MAP_MATERIAL;
@@ -106,27 +106,27 @@ RAYMARCH_MAP_TYPE raymarchGlassMarching(in vec3 ro, in vec3 rd) {
 
 #ifndef FNC_RAYMARCH_DEFAULT_GLASS
 #define FNC_RAYMARCH_DEFAULT_GLASS
-vec3 raymarchGlass(in vec3 ray, in vec3 pos, in float ior, in float roughness) {
-    vec3 color = envMap(ray, roughness).rgb;
+float3 raymarchGlass(in float3 ray, in float3 pos, in float ior, in float roughness) {
+    float3 color = envMap(ray, roughness).rgb;
 
     RAYMARCH_MAP_TYPE marchOutside = raymarchGlassMarching(pos,ray); // Outside of the object
     if(marchOutside.RAYMARCH_MAP_DISTANCE < RAYMARCH_MAX_DIST) {
-        vec3 newPos = pos + ray * marchOutside.RAYMARCH_MAP_DISTANCE;
-        vec3 nEnter, nExit;
+        float3 newPos = pos + ray * marchOutside.RAYMARCH_MAP_DISTANCE;
+        float3 nEnter, nExit;
 
     #ifdef RAYMARCH_GLASS_EDGE_SHARPNESS
         nEnter = raymarchNormal(newPos, RAYMARCH_GLASS_EDGE_SHARPNESS);
     #else
         nEnter = raymarchNormal(newPos);
     #endif
-        vec3 newReflect = reflect(ray, nEnter);
+        float3 newReflect = reflect(ray, nEnter);
 
-        vec3 rdIn = refract(ray, nEnter, 1./ior);
-        vec3 pEnter = newPos - nEnter * RAYMARCH_GLASS_MIN_HIT_DIST * 3.;
+        float3 rdIn = refract(ray, nEnter, 1./ior);
+        float3 pEnter = newPos - nEnter * RAYMARCH_GLASS_MIN_HIT_DIST * 3.;
         
         RAYMARCH_MAP_TYPE marchInside = raymarchGlassMarching(pEnter, rdIn); // Inside the object
         
-        vec3 pExit = pEnter + rdIn * marchInside.RAYMARCH_MAP_DISTANCE;
+        float3 pExit = pEnter + rdIn * marchInside.RAYMARCH_MAP_DISTANCE;
 
     #ifdef RAYMARCH_GLASS_EDGE_SHARPNESS
         nExit = -raymarchNormal(pExit, RAYMARCH_GLASS_EDGE_SHARPNESS);
@@ -134,7 +134,7 @@ vec3 raymarchGlass(in vec3 ray, in vec3 pos, in float ior, in float roughness) {
         nExit = -raymarchNormal(pExit);
     #endif
 
-        vec3 rdOut, res;
+        float3 rdOut, res;
     #ifdef RAYMARCH_GLASS_WAVELENGTH
         float NoV = dot(ray, nEnter);
 
