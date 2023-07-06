@@ -18,8 +18,6 @@ options:
     - RAYMARCH_GLASS_FRESNEL_STRENGTH 5.                [The lower the value, more sharp it gets]
     - RAYMARCH_GLASS_CHROMATIC_ABBERATION .01           [Chromatic Abberation Effects on environment map]
     - RAYMARCH_GLASS_MAP_FNC(res, rdIn, rdOut, pEnter, pExit, nEnter, nExit, ior, roughness)
-examples: |
-    - /shaders/lighting_glass_raymarching_refraction.frag
 */
 
 #ifndef RAYMARCH_GLASS_DENSITY
