@@ -29,10 +29,8 @@ examples: |
 #define RAYMARCH_GLASS_COLOR vec3(1.,1.,1.)
 #endif
 
-#ifdef RAYMARCH_GLASS_WAVELENGTH
-    #if !defined(RAYMARCH_GLASS_FRESNEL_STRENGTH) && defined(RAYMARCH_GLASS_ENABLE_FRESNEL)
-    #define RAYMARCH_GLASS_FRESNEL_STRENGTH 5.
-    #endif
+#if !defined(RAYMARCH_GLASS_FRESNEL_STRENGTH) && defined(RAYMARCH_GLASS_ENABLE_FRESNEL)
+#define RAYMARCH_GLASS_FRESNEL_STRENGTH 5.
 #endif
 
 #ifdef RAYMARCH_GLASS_MAP_FNC
@@ -169,12 +167,13 @@ vec3 raymarchGlass(in vec3 ray, in vec3 pos, in float ior, in float roughness) {
         float optDist = exp(-marchInside.RAYMARCH_MAP_DISTANCE * RAYMARCH_GLASS_DENSITY);
 
         res *= optDist * RAYMARCH_GLASS_COLOR;
-    #ifdef RAYMARCH_GLASS_ENABLE_FRESNEL
-        float fresnelVal = pow(1.+dot(ray, nEnter), RAYMARCH_GLASS_FRESNEL_STRENGTH);
-        return mix(res, color, saturate(fresnelVal));
-    #else
-        return res;
-    #endif
+        
+        #ifdef RAYMARCH_GLASS_ENABLE_FRESNEL
+            float fresnelVal = pow(1.+dot(ray, nEnter), RAYMARCH_GLASS_FRESNEL_STRENGTH);
+            return mix(res, color, saturate(fresnelVal));
+        #else
+            return res;
+        #endif
     #else
         rdOut = refract(rdIn, nExit, ior);
 
@@ -187,7 +186,12 @@ vec3 raymarchGlass(in vec3 ray, in vec3 pos, in float ior, in float roughness) {
 
         res *= optDist * RAYMARCH_GLASS_COLOR;
 
-        return res;
+        #ifdef RAYMARCH_GLASS_ENABLE_FRESNEL
+            float fresnelVal = pow(1.+dot(ray, nEnter), RAYMARCH_GLASS_FRESNEL_STRENGTH);
+            return mix(res, color, saturate(fresnelVal));
+        #else
+            return res;
+        #endif
     #endif
     } else {
         return envMap(ray, 0.).rgb;
