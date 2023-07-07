@@ -4,7 +4,7 @@ description: pass a value and get some random normalize value between 0 and 1
 use: float random[2|3](<float|vec2|vec3> value)
 options:
     - RANDOM_HIGHER_RANGE: for working with a range over 0 and 1
-    - RANDOM_SINLESS: Use sin-less random, which tolerates bigger values before producing pattern. From: https://www.shadertoy.com/view/4djSRW
+    - RANDOM_SINLESS: Use sin-less random, which tolerates bigger values before producing pattern. From https://www.shadertoy.com/view/4djSRW
     - RANDOM_SCALE: by default this scale if for number with a big range. For producing good random between 0 and 1 use bigger range
 examples:
     - /shaders/generative_random.frag

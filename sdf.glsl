@@ -32,10 +32,11 @@
 #include "sdf/tetrahedronSDF.glsl"
 #include "sdf/torusSDF.glsl"
 #include "sdf/triPrismSDF.glsl"
+#include "sdf/arrowSDF.glsl"
 
 // Operations
 #include "sdf/opOnion.glsl"
-#include "sdf/opRepite.glsl"
+#include "sdf/opRepeat.glsl"
 #include "sdf/opRevolve.glsl"
 #include "sdf/opRound.glsl"
 #include "sdf/opSubtraction.glsl"
