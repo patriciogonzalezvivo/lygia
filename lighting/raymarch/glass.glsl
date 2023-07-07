@@ -6,7 +6,7 @@
 /*
 original_author:  The Art Of Code
 description: |
-    Raymarching for glass render. For more info, see the video below link:
+    Raymarching for glass render. For more info, see the video link:
     Tutorial 1: https://youtu.be/NCpaaLkmXI8
     Tutorial 2: https://youtu.be/0RWaR7zApEo
 use: <vec3> raymarchGlass( in <vec3> ray, in <vec3> pos, in <float> ior, in <float> roughness ) 
@@ -18,13 +18,14 @@ options:
     - RAYMARCH_GLASS_REFLECTION_EFFECT 5.               [The higher the value, the less reflections area from surface view]
     - RAYMARCH_GLASS_CHROMATIC_ABBERATION .01           [Chromatic Abberation Effects value on environment map]
     - RAYMARCH_GLASS_MAP_FNC(res, rdIn, rdOut, pEnter, pExit, nEnter, nExit, ior, roughness)
-examples: |
+examples:
     - /shaders/lighting_raymarching_glass_refraction.frag
 */
 
 #ifndef RAYMARCH_GLASS_DENSITY
 #define RAYMARCH_GLASS_DENSITY 0.
 #endif
+
 #ifndef RAYMARCH_GLASS_COLOR
 #define RAYMARCH_GLASS_COLOR vec3(1.,1.,1.)
 #endif
@@ -136,7 +137,6 @@ vec3 raymarchGlass(in vec3 ray, in vec3 pos, in float ior, in float roughness) {
 
         vec3 rdOut, res;
     #ifdef RAYMARCH_GLASS_WAVELENGTH
-        float NoV = dot(ray, nEnter);
 
         #ifdef RAYMARCH_GLASS_WAVELENGTH_MAP_FNC
             RAYMARCH_GLASS_WAVELENGTH_MAP_FNC(res, rdIn, rdOut, pEnter, pExit, nEnter, nExit, ior, roughness);
