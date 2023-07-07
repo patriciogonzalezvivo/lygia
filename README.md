@@ -19,7 +19,8 @@ Tired of searching, porting and/or reimplementing the same functions over and ov
     <a href="https://www.figma.com/community/plugin/1138854718618193875"><img src="https://lygia.xyz/imgs/figma.png" alt="Figma" width="64" /></a>
     <a href="https://github.com/irmf/irmf-examples/tree/master/examples/028-lygia"><img src="https://lygia.xyz/imgs/irmf.png" alt="irmf" width="64" /></a>
     <a href="https://github.com/ossia/score-examples"><img src="https://lygia.xyz/imgs/ossia.png" alt="Ossia" width="64" /></a>
-    <a href="https://www.npmjs.com/package/resolve-lygia"><img src="https://lygia.xyz/imgs/npm.png" alt="npm" width="64" /></a>
+    <a href="https://www.npmjs.com/package/lygia"><img src="https://lygia.xyz/imgs/npm.png" alt="npm" width="64" /></a>
+    <a href="https://github.com/kujohn/lygia_ogl_examples"><img src="https://lygia.xyz/imgs/ogl.png" alt="ogl" width="64" /></a>
 
 </p>
 
@@ -123,6 +124,7 @@ Learn more about LYGIA and how to use it from these **examples**:
 * [3D example on Irmf](https://github.com/irmf/irmf-examples/tree/master/examples/028-lygia) by [Glenn Lewis](https://github.com/gmlewis)
 * [2D/3D examples on GlslViewer (GLSL)](https://github.com/patriciogonzalezvivo/lygia_examples)
 * [2D examples on Ossia by Jean-Michaël Celerier](https://github.com/ossia/score-examples)
+* [Ogl integration](https://github.com/kujohn/lygia_ogl_examples) examples by [John Ku](https://github.com/kujohn)
 
 For more information, guidance, or feedback about using LYGIA, join [#Lygia channel on shader.zone discord](https://shader.zone/).
 
