@@ -20,8 +20,9 @@ Tired of searching, porting and/or reimplementing the same functions over and ov
     <a href="https://github.com/irmf/irmf-examples/tree/master/examples/028-lygia"><img src="https://lygia.xyz/imgs/irmf.png" alt="irmf" width="64" /></a>
     <a href="https://github.com/ossia/score-examples"><img src="https://lygia.xyz/imgs/ossia.png" alt="Ossia" width="64" /></a>
     <a href="https://www.npmjs.com/package/lygia"><img src="https://lygia.xyz/imgs/npm.png" alt="npm" width="64" /></a>
+    <a href="https://www.productioncrate.com/laforge/"><img src="https://lygia.xyz/imgs/laforge.png" alt="laforge" width="64" /></a>
+    <a href="https://synesthesia.live/"><img src="https://lygia.xyz/imgs/synesthesia.png" alt="synesthesia" width="64" /></a>
     <a href="https://github.com/kujohn/lygia_ogl_examples"><img src="https://lygia.xyz/imgs/ogl.png" alt="ogl" width="64" /></a>
-
 </p>
 
 
@@ -125,6 +126,7 @@ Learn more about LYGIA and how to use it from these **examples**:
 * [2D/3D examples on GlslViewer (GLSL)](https://github.com/patriciogonzalezvivo/lygia_examples)
 * [2D examples on Ossia](https://github.com/ossia/score-examples) by [Jean-Michaël Celerier](https://jcelerier.name/)
 * [Ogl integration](https://github.com/kujohn/lygia_ogl_examples) by [John Ku](https://github.com/kujohn)
+
 
 For more information, guidance, or feedback about using LYGIA, join [#Lygia channel on shader.zone discord](https://shader.zone/).
 
