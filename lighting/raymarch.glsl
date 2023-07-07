@@ -1,6 +1,6 @@
 /*
 original_author: Patricio Gonzalez Vivo
-description: raymarching template where it needs to define a vec4 raymarchMSap( in vec3 pos ) 
+description: raymarching template where it needs to define a vec4 raymarchMap( in vec3 pos ) 
 use: <vec4> raymarch(<vec3> camera, <vec2> st)
 options:
     - LIGHT_POSITION: in glslViewer is u_light
