@@ -123,8 +123,8 @@ Learn more about LYGIA and how to use it from these **examples**:
 * [Figma's noise&texture plugin](https://www.figma.com/community/plugin/1138854718618193875) by [Rogie King](https://twitter.com/rogie). You will need to go to the "Custom" tab on the plugin to edit shaders and load LYGIA modules  
 * [3D example on Irmf](https://github.com/irmf/irmf-examples/tree/master/examples/028-lygia) by [Glenn Lewis](https://github.com/gmlewis)
 * [2D/3D examples on GlslViewer (GLSL)](https://github.com/patriciogonzalezvivo/lygia_examples)
-* [2D examples on Ossia by Jean-Michaël Celerier](https://github.com/ossia/score-examples)
-* [Ogl integration](https://github.com/kujohn/lygia_ogl_examples) examples by [John Ku](https://github.com/kujohn)
+* [2D examples on Ossia](https://github.com/ossia/score-examples) by [Jean-Michaël Celerier](https://jcelerier.name/)
+* [Ogl integration](https://github.com/kujohn/lygia_ogl_examples) by [John Ku](https://github.com/kujohn)
 
 For more information, guidance, or feedback about using LYGIA, join [#Lygia channel on shader.zone discord](https://shader.zone/).
 
