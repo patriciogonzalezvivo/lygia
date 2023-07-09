@@ -3,6 +3,8 @@
 #include "../generative/srandom.glsl"
 #include "../sample.glsl"
 
+#include "../color/space/linear2gamma.glsl"
+#include "../color/space/gamma2linear.glsl"
 /*
 original_author: Patricio Gonzalez Vivo
 description: sample an equirect texture as it was a cubemap
@@ -26,21 +28,26 @@ vec4 sampleEquirect(sampler2D tex, vec3 dir) {
 vec4 sampleEquirect(sampler2D tex, vec3 dir, float lod) { 
     
     #if defined(SAMPLEEQUIRET_ITERATIONS)
-    vec4 acc = vec4(0.0);
+    vec4 color = vec4(0.0);
     vec2 st = xyz2equirect(dir);
     #ifdef SAMPLEEQUIRECT_FLIP_Y
     st.y = 1.0-st.y;
     #endif
-    mat2 rot = mat2(cos(GOLDEN_ANGLE), sin(GOLDEN_ANGLE), -sin(GOLDEN_ANGLE), cos(GOLDEN_ANGLE));
-    float r = 1.;
-    vec2 vangle = vec2(0.0, lod * 0.01);
-    for (int i = 0; i < SAMPLEEQUIRET_ITERATIONS; i++) {
-        vangle = rot * vangle;
-        r++;
-        vec4 col = SAMPLER_FNC(tex, st + random( vec3(st, r) ) * vangle );
-        acc += col * col;
+
+    vec2 r = vec2(lod);
+    const float f = 1.0 / (1.001 - 0.75);
+    // mat2 rot = mat2(0.0, 0.061, 1.413, 0.0) - 0.737;
+    mat2 rot = mat2( cos(GOLDEN_ANGLE), sin(GOLDEN_ANGLE), 
+                    -sin(GOLDEN_ANGLE), cos(GOLDEN_ANGLE));
+    vec2 st2 = vec2( dot(st + st - r, vec2(.0002,-0.001)), 0.0 );
+
+    float counter = 0.0;
+    for (float i = 1.0; i < float(SAMPLEEQUIRET_ITERATIONS); i += 2.0/i) {
+        st2 *= rot;
+        color += gamma2linear( SAMPLER_FNC(tex, st + st2 * i / vec2(r.x * 2.0, r.y))) * f;
+        counter++;
     }
-    return vec4(acc.rgb/acc.a, 1.0); 
+    return linear2gamma(color / counter);
 
     #else
     dir += srandom3( dir ) * 0.01 * lod;
@@ -52,5 +59,6 @@ vec4 sampleEquirect(sampler2D tex, vec3 dir, float lod) {
 
     #endif
 }
+
 
 #endif
