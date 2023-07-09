@@ -61,4 +61,10 @@ float gnoise(vec3 p, float tileLength) {
                             dot( srandom3(i + vec3(1.0,1.0,1.0), tileLength), f - vec3(1.0,1.0,1.0)), u.x), u.y), u.z );
 }
 
+vec3 gnoise3(vec3 x) {
+    return vec3(gnoise(x+vec3(123.456, 0.567, 0.37)),
+                gnoise(x+vec3(0.11, 47.43, 19.17)),
+                gnoise(x) );
+}
+
 #endif
