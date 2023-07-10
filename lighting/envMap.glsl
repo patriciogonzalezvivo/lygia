@@ -1,6 +1,7 @@
 
 #include "../math/powFast.glsl"
 #include "../color/tonemap.glsl"
+#include "../sample/equirect.glsl"
 
 #include "fakeCube.glsl"
 #include "toShininess.glsl"
@@ -32,13 +33,16 @@ vec3 envMap(const in vec3 _normal, const in float _roughness, const in float _me
 #if defined(ENVMAP_FNC) 
     return ENVMAP_FNC(_normal, _roughness, _metallic);
 
-// Cubemap sampling - spherical harmonics
-#elif defined(SCENE_CUBEMAP) && defined(SCENE_SH_ARRAY) && !defined(TARGET_MOBILE) && !defined(PLATFORM_RPI) && !defined(PLATFORM_WEBGL)
-    return mix(
-        SAMPLE_CUBE_FNC( SCENE_CUBEMAP, _normal, (ENVMAP_MAX_MIP_LEVEL * _roughness) ).rgb,
-        sphericalHarmonics(_normal),
-        _roughness * _roughness * _roughness
-    );
+#elif defined(SCENE_EQUIRECT)
+    return sampleEquirect(SCENE_EQUIRECT, _normal, 1.0 + 26.0 * _roughness).rgb;
+
+// // Cubemap sampling - spherical harmonics
+// #elif defined(SCENE_CUBEMAP) && defined(SCENE_SH_ARRAY) && !defined(TARGET_MOBILE) && !defined(PLATFORM_RPI) && !defined(PLATFORM_WEBGL)
+//     return mix(
+//         SAMPLE_CUBE_FNC( SCENE_CUBEMAP, _normal, (ENVMAP_MAX_MIP_LEVEL * _roughness) ).rgb,
+//         sphericalHarmonics(_normal),
+//         _roughness * _roughness * _roughness
+//     );
 
 // Cubemap sampling
 #elif defined(SCENE_CUBEMAP)
