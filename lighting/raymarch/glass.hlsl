@@ -1,7 +1,4 @@
 #include "../envMap.hlsl"
-#include "../fresnel.hlsl"
-#include "../specular.hlsl"
-#include "../reflection.hlsl"
 
 /*
 original_author:  The Art Of Code
