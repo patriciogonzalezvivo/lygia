@@ -132,7 +132,7 @@ Learn more about LYGIA and how to use it from these **examples**:
 * [2D/3D examples on GlslViewer (GLSL)](https://github.com/patriciogonzalezvivo/lygia_examples)
 * [2D examples on Ossia](https://github.com/ossia/score-examples) by [Jean-Michaël Celerier](https://jcelerier.name/)
 * [Ogl integration](https://github.com/kujohn/lygia_ogl_examples) by [John Ku](https://github.com/kujohn)
-
+* [2D templates for Ogl(TS) and Three.js(JS/TS)](https://github.com/cdaein/create-ssam) by [Daeinc](https://paperdove.com)
 
 For more information, guidance, or feedback about using LYGIA, join [#Lygia channel on shader.zone discord](https://shader.zone/).
 
