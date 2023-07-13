@@ -72,6 +72,12 @@ or as a submodule:
     git submodule add https://github.com/patriciogonzalezvivo/lygia.git
 ```
 
+or you may clone LYGIA without the git history and reduce the project size (9MB+) with the following command:
+
+```bash
+    npx degit https://github.com/patriciogonzalezvivo/lygia.git lygia
+```
+
 ### LYGIA on the cloud
 
 If you are working on a **cloud platform** you probably want to resolve the dependencies without needing to install anything. Just add a link to `https://lygia.xyz/resolve.js` (JS) or `https://lygia.xyz/resolve.esm.js` (ES6 module): 
