@@ -1,4 +1,4 @@
-#include "aabb/center.glsl"
+#include "aabb/centroid.glsl"
 #include "aabb/contain.glsl"
 #include "aabb/diagonal.glsl"
 #include "aabb/expand.glsl"
