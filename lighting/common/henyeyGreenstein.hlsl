@@ -20,6 +20,6 @@ float henyeyGreenstein(float mu, float g) {
 }
 
 float henyeyGreenstein(float mu, float g, float dual_lobe_weight) {
-    return mix(henyeyGreenstein( mu, -g), henyeyGreenstein(mu, g), dual_lobe_weight);
+    return lerp(henyeyGreenstein( mu, -g), henyeyGreenstein(mu, g), dual_lobe_weight);
 }
 #endif

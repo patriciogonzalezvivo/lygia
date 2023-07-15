@@ -7,7 +7,7 @@ use: sharpen(<sampler2D> texture, <float2> st, <float2> pixel)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - SHARPENFAST_KERNELSIZE: Defaults 2
-    - SHARPENFAST_TYPE: defaults to vec3
+    - SHARPENFAST_TYPE: defaults to float3
     - SHARPENFAST_SAMPLER_FNC(TEX, UV): defaults to texture2D(tex, TEX, UV).rgb
 */
 

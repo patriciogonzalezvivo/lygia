@@ -3,7 +3,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: convertes QUILT of tiles into something the LookingGlass Volumetric display can render
-use: sampleQuilt(<sampler2D> texture, <vec4> calibration, <float3> tile, <float2> st, <float2> resolution)
+use: sampleQuilt(<sampler2D> texture, <float4> calibration, <float3> tile, <float2> st, <float2> resolution)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - SAMPLEQUILT_FLIPSUBP: 
@@ -27,7 +27,7 @@ float2 mapQuilt(float3 tile, float2 pos, float a) {
     return (tile2 + pos) / tile.xy;
 }
 
-float3 sampleQuilt(sampler2D tex, vec4 calibration, float3 tile, float2 st, float2 resolution) {
+float3 sampleQuilt(sampler2D tex, float4 calibration, float3 tile, float2 st, float2 resolution) {
     float pitch = -resolution.x / calibration.x  * calibration.y * sin(atan(abs(calibration.z)));
     float tilt = resolution.y / (resolution.x * calibration.z);
     float subp = 1.0 / (3.0 * resolution.x);

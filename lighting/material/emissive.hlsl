@@ -4,7 +4,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: get material emissive property from GlslViewer's defines https://github.com/patriciogonzalezvivo/glslViewer/wiki/GlslViewer-DEFINES#material-defines 
-use: vec4 materialEmissive()
+use: float4 materialEmissive()
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 */
@@ -20,7 +20,7 @@ float3 materialEmissive() {
     float3 emission = float3(0.0, 0.0, 0.0);
 
 #if defined(MATERIAL_EMISSIVEMAP) && defined(MODEL_VERTEX_TEXCOORD)
-    vec2 uv = v_texcoord.xy;
+    float2 uv = v_texcoord.xy;
     #if defined(MATERIAL_EMISSIVEMAP_OFFSET)
     uv += (MATERIAL_EMISSIVEMAP_OFFSET).xy;
     #endif

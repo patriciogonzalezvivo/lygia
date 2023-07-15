@@ -3,7 +3,7 @@
 /*
 original_author:  Inigo Quiles
 description: repite operation of one 2D SDFs 
-use: <vec4> opElongate( in <float3> p, in <float3> h )
+use: <float4> opElongate( in <float3> p, in <float3> h )
 */
 
 #ifndef FNC_OPREPEAT

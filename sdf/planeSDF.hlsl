@@ -1,7 +1,7 @@
 /*
 original_author:  Inigo Quiles
 description: generate the SDF of a plane
-use: <float> planeSDF( in <float3> pos, in <vec2> h ) 
+use: <float> planeSDF( in <float3> pos, in <float2> h ) 
 */
 
 #ifndef FNC_PLANESDF

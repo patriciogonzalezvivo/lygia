@@ -7,6 +7,6 @@ use: flip(<float> v, <float> pct)
 #ifndef FNC_FLIP
 #define FNC_FLIP
 float flip(in float v, in float pct) {
-    return mix(v, 1. - v, pct);
+    return lerp(v, 1. - v, pct);
 }
 #endif

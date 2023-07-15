@@ -1,7 +1,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: pass a color in RGB and get it in YPbPr from http://www.equasys.de/colorconversion.html
-use: rgb2YPbPr(<float3|vec4> color)
+use: rgb2YPbPr(<float3|float4> color)
 */
 
 #ifndef FNC_RGB2YPBPR

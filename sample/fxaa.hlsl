@@ -3,7 +3,7 @@
 /*
 original_author: Armin Ronacher
 description: Basic FXAA implementation based on the code on geeks3d.com with the modification that the texture2DLod stuff was removed since it's unsupported by WebGL from https://github.com/mitsuhiko/webgl-meincraft
-use: sampleFXAA(<sampler2D> tex, <vec2> st, <vec2> pixel)
+use: sampleFXAA(<sampler2D> tex, <float2> st, <float2> pixel)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - SAMPLEFXAA_REDUCE_MIN
@@ -30,11 +30,11 @@ options:
 
 #ifndef FNC_SAMPLEFXAA
 #define FNC_SAMPLEFXAA 
-float4 sampleFXAA(sampler2D tex, vec2 uv, vec2 pixel) {
-    float3 rgbNW  = SAMPLEFXAA_SAMPLE_FNC(uv.xy + vec2( -1.0, -1.0 ) * pixel).xyz;
-    float3 rgbNE  = SAMPLEFXAA_SAMPLE_FNC(uv.xy + vec2( 1.0, -1.0 ) * pixel).xyz;
-    float3 rgbSW  = SAMPLEFXAA_SAMPLE_FNC(uv.xy + vec2( -1.0, 1.0 ) * pixel).xyz;
-    float3 rgbSE  = SAMPLEFXAA_SAMPLE_FNC(uv.xy + vec2( 1.0, 1.0 ) * pixel).xyz;
+float4 sampleFXAA(sampler2D tex, float2 uv, float2 pixel) {
+    float3 rgbNW  = SAMPLEFXAA_SAMPLE_FNC(uv.xy + float2( -1.0, -1.0 ) * pixel).xyz;
+    float3 rgbNE  = SAMPLEFXAA_SAMPLE_FNC(uv.xy + float2( 1.0, -1.0 ) * pixel).xyz;
+    float3 rgbSW  = SAMPLEFXAA_SAMPLE_FNC(uv.xy + float2( -1.0, 1.0 ) * pixel).xyz;
+    float3 rgbSE  = SAMPLEFXAA_SAMPLE_FNC(uv.xy + float2( 1.0, 1.0 ) * pixel).xyz;
     float4 rgbaM  = SAMPLEFXAA_SAMPLE_FNC(uv.xy  * pixel);
     float3 rgbM   = rgbaM.xyz;
     float3 luma   = float3( 0.299, 0.587, 0.114 );
@@ -45,14 +45,14 @@ float4 sampleFXAA(sampler2D tex, vec2 uv, vec2 pixel) {
     float lumaM     = dot( rgbM,  luma );
     float lumaMin   = min( lumaM, min( min( lumaNW, lumaNE ), min( lumaSW, lumaSE ) ) );
     float lumaMax   = max( lumaM, max( max( lumaNW, lumaNE) , max( lumaSW, lumaSE ) ) );
-    vec2 dir = vec2(-((lumaNW + lumaNE) - (lumaSW + lumaSE)),
+    float2 dir = float2(-((lumaNW + lumaNE) - (lumaSW + lumaSE)),
                      ((lumaNW + lumaSW) - (lumaNE + lumaSE)) );
 
     float dirReduce = max(  ( lumaNW + lumaNE + lumaSW + lumaSE ) * ( 0.25 * SAMPLEFXAA_REDUCE_MUL ), 
                             SAMPLEFXAA_REDUCE_MIN );
     float rcpDirMin = 1.0 / ( min( abs( dir.x ), abs( dir.y ) ) + dirReduce );
-    dir = min( vec2(SAMPLEFXAA_SPAN_MAX,  SAMPLEFXAA_SPAN_MAX),
-                max(vec2(-SAMPLEFXAA_SPAN_MAX, -SAMPLEFXAA_SPAN_MAX),
+    dir = min( float2(SAMPLEFXAA_SPAN_MAX,  SAMPLEFXAA_SPAN_MAX),
+                max(float2(-SAMPLEFXAA_SPAN_MAX, -SAMPLEFXAA_SPAN_MAX),
                     dir * rcpDirMin)) * pixel;
 
     float4 rgbA = 0.5 * (   SAMPLEFXAA_SAMPLE_FNC( uv.xy + dir * (1.0/3.0 - 0.5)) +
