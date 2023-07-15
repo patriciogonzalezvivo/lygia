@@ -3,7 +3,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: return center of a AABB
-use: <float3> centrood(<AABB> box) 
+use: <float3> centroid(<AABB> box) 
 */
 
 #ifndef FNC_AABB_CENTROID
