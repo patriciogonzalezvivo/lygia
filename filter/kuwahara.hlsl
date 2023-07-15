@@ -5,7 +5,7 @@ original_author: [Brad Larson, Ben Cochran, Hugues Lismonde, Keitaroh Kobayashi,
 description: Kuwahara image abstraction, drawn from the work of Kyprianidis, et. al. in their publication "Anisotropic Kuwahara Filtering on the GPU" within the GPU Pro collection. This produces an oil-painting-like image, but it is extremely computationally expensive, so it can take seconds to render a frame on an iPad 2. This might be best used for still images.
 use: kuwahara(<sampler2D> texture, <float2> st, <float2> pixel)
 options:
-    - KUWAHARA_TYPE: defaults to vec3
+    - KUWAHARA_TYPE: defaults to float3
     - KUWAHARA_SAMPLER_FNC(TEX, UV): defaults to texture2D(tex, TEX, UV).rgb
     - KUWAHARA_RADIUS radius
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))

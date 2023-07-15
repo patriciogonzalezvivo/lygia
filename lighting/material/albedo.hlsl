@@ -24,7 +24,7 @@ float4 materialAlbedo() {
     float4 base = float4(0.5, 0.5, 0.5, 1.0);
     
 #if defined(MATERIAL_BASECOLORMAP) && defined(MODEL_VERTEX_TEXCOORD)
-    vec2 uv = v_texcoord.xy;
+    float2 uv = v_texcoord.xy;
     #if defined(MATERIAL_BASECOLORMAP_OFFSET)
     uv += (MATERIAL_BASECOLORMAP_OFFSET).xy;
     #endif
@@ -34,7 +34,7 @@ float4 materialAlbedo() {
     base = gamma2linear( SAMPLER_FNC(MATERIAL_BASECOLORMAP, uv) );
 
 #elif defined(MATERIAL_ALBEDOMAP) && defined(MODEL_VERTEX_TEXCOORD)
-    vec2 uv = v_texcoord.xy;
+    float2 uv = v_texcoord.xy;
     #if defined(MATERIAL_ALBEDOMAP_OFFSET)
     uv += (MATERIAL_ALBEDOMAP_OFFSET).xy;
     #endif

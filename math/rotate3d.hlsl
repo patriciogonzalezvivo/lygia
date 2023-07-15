@@ -1,7 +1,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: returns a 3x3 rotation matrix
-use: rotate3d(<vec3> axis, <float> radians)
+use: rotate3d(<float3> axis, <float> radians)
 */
 
 #ifndef FNC_ROTATE3D

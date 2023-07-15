@@ -34,7 +34,7 @@ options:
 
 #ifndef SHADOW_INIT
 #if defined(LIGHT_SHADOWMAP) && defined(LIGHT_SHADOWMAP_SIZE) && defined(LIGHT_COORD)
-#define SHADOW_INIT shadow(LIGHT_SHADOWMAP, vec2(LIGHT_SHADOWMAP_SIZE), (LIGHT_COORD).xy, (LIGHT_COORD).z)
+#define SHADOW_INIT shadow(LIGHT_SHADOWMAP, float2(LIGHT_SHADOWMAP_SIZE), (LIGHT_COORD).xy, (LIGHT_COORD).z)
 #else
 #define SHADOW_INIT 1.0
 #endif
@@ -50,7 +50,7 @@ void materialNew(out Material _mat) {
     _mat.normal             = materialNormal();
 
     #if defined(SCENE_BACK_SURFACE) && defined(RESOLUTION)
-    vec4 back_surface       = SAMPLER_FNC(SCENE_BACK_SURFACE, gl_FragCoord.xy / RESOLUTION);
+    float4 back_surface       = SAMPLER_FNC(SCENE_BACK_SURFACE, gl_FragCoord.xy / RESOLUTION);
     _mat.normal_back        = back_surface.xyz;
     #if defined(SHADING_MODEL_SUBSURFACE)
     _mat.thickness          = saturate(gl_FragCoord.z - back_surface.a);
