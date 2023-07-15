@@ -113,6 +113,13 @@ To then resolve the dependencies by passing a `string` or `strings[]` to `resolv
     shdr = createShader(vertSource, fragSource);
 ```
 
+This this function can also resolve dependencies to previous versions of LYGIA by using this pattern `lygia/vX.X.X/...` on you dependency paths. For example:
+
+```glsl
+#include "lygia/v1.0.0/math/decimation.glsl"
+#include "lygia/v1.1.0/math/decimation.glsl"
+```
+
 ### Integrations examples
 
 Learn more about LYGIA and how to use it from these **examples**:
@@ -196,9 +203,11 @@ Here you can find some implementations on different languages:
 
   - JavaScript: 
   
-    . [vanilla JS (online resolver)](https://lygia.xyz/resolve.js) This small file brings `resolveLygia()` which takes a `string` or `string[]` and parses it, solving all the `#include` dependencies into a single `string` you can load on your shaders.
+    . [vanilla JS (online resolver)](https://lygia.xyz/resolve.js) This small file brings `resolveLygia()` which takes a `string` or `string[]` and parses it, solving all the `#include` dependencies into a single `string` you can load on your shaders. It also has a `resolveLygiaAsync()` version that resolves all the dependencies in parallel. Both support dependencies to previous versions of LYGIA by using this pattern `lygia/vX.X.X/...` on you dependency paths. 
   
-    . [npm module (online resolver)](https://www.npmjs.com/package/resolve-lygia) by Eduardo Fossas; [vite glsl plugin (local bundle)](https://github.com/UstymUkhman/vite-plugin-glsl) by Ustym Ukhman. Imports `.glsl` local dependencies, or load inline shaders through vite.
+    . [npm module (online resolver)](https://www.npmjs.com/package/resolve-lygia) by Eduardo Fossas. This is bring the same `resolveLygia()` and `resolveLygiaAsync()` function but as a npm module.
+
+    . [vite glsl plugin (local bundle)](https://github.com/UstymUkhman/vite-plugin-glsl) by Ustym Ukhman. Imports `.glsl` local dependencies, or load inline shaders through vite.
   
     . [esbuild glsl plugin (local bundle)](https://github.com/ricardomatias/esbuild-plugin-glsl-include) by Ricardo Matias. Imports local `.glsl` dependencies through esbuild.
 
