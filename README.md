@@ -72,6 +72,12 @@ or as a submodule:
     git submodule add https://github.com/patriciogonzalezvivo/lygia.git
 ```
 
+or you may clone LYGIA without the git history and reduce the project size (9MB+) with the following command:
+
+```bash
+    npx degit https://github.com/patriciogonzalezvivo/lygia.git lygia
+```
+
 ### LYGIA on the cloud
 
 If you are working on a **cloud platform** you probably want to resolve the dependencies without needing to install anything. Just add a link to `https://lygia.xyz/resolve.js` (JS) or `https://lygia.xyz/resolve.esm.js` (ES6 module): 
@@ -107,6 +113,13 @@ To then resolve the dependencies by passing a `string` or `strings[]` to `resolv
     shdr = createShader(vertSource, fragSource);
 ```
 
+This this function can also resolve dependencies to previous versions of LYGIA by using this pattern `lygia/vX.X.X/...` on you dependency paths. For example:
+
+```glsl
+#include "lygia/v1.0.0/math/decimation.glsl"
+#include "lygia/v1.1.0/math/decimation.glsl"
+```
+
 ### Integrations examples
 
 Learn more about LYGIA and how to use it from these **examples**:
@@ -126,7 +139,7 @@ Learn more about LYGIA and how to use it from these **examples**:
 * [2D/3D examples on GlslViewer (GLSL)](https://github.com/patriciogonzalezvivo/lygia_examples)
 * [2D examples on Ossia](https://github.com/ossia/score-examples) by [Jean-Michaël Celerier](https://jcelerier.name/)
 * [Ogl integration](https://github.com/kujohn/lygia_ogl_examples) by [John Ku](https://github.com/kujohn)
-
+* [2D templates for Ogl(TS) and Three.js(JS/TS)](https://github.com/cdaein/create-ssam) by [Daeinc](https://paperdove.com)
 
 For more information, guidance, or feedback about using LYGIA, join [#Lygia channel on shader.zone discord](https://shader.zone/).
 
@@ -190,9 +203,11 @@ Here you can find some implementations on different languages:
 
   - JavaScript: 
   
-    . [vanilla JS (online resolver)](https://lygia.xyz/resolve.js) This small file brings `resolveLygia()` which takes a `string` or `string[]` and parses it, solving all the `#include` dependencies into a single `string` you can load on your shaders.
+    . [vanilla JS (online resolver)](https://lygia.xyz/resolve.js) This small file brings `resolveLygia()` which takes a `string` or `string[]` and parses it, solving all the `#include` dependencies into a single `string` you can load on your shaders. It also has a `resolveLygiaAsync()` version that resolves all the dependencies in parallel. Both support dependencies to previous versions of LYGIA by using this pattern `lygia/vX.X.X/...` on you dependency paths. 
   
-    . [npm module (online resolver)](https://www.npmjs.com/package/resolve-lygia) by Eduardo Fossas; [vite glsl plugin (local bundle)](https://github.com/UstymUkhman/vite-plugin-glsl) by Ustym Ukhman. Imports `.glsl` local dependencies, or load inline shaders through vite.
+    . [npm module (online resolver)](https://www.npmjs.com/package/resolve-lygia) by Eduardo Fossas. This is bring the same `resolveLygia()` and `resolveLygiaAsync()` function but as a npm module.
+
+    . [vite glsl plugin (local bundle)](https://github.com/UstymUkhman/vite-plugin-glsl) by Ustym Ukhman. Imports `.glsl` local dependencies, or load inline shaders through vite.
   
     . [esbuild glsl plugin (local bundle)](https://github.com/ricardomatias/esbuild-plugin-glsl-include) by Ricardo Matias. Imports local `.glsl` dependencies through esbuild.
 
