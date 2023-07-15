@@ -147,6 +147,6 @@ float3 mixSpectral(float3 colA, float3 colB, float t) {
 }
 
 float4 mixSpectral( float4 colA, float4 colB, float h ) {
-    return float4( mixSpectral(colA.rgb, colB.rgb, h), mix(colA.a, colB.a, h) );
+    return float4( mixSpectral(colA.rgb, colB.rgb, h), lerp(colA.a, colB.a, h) );
 }
 #endif
