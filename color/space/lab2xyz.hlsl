@@ -1,7 +1,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: Converts a Lab color to XYZ color space.
-use: rgb2xyz(<float3|vec4> color)
+use: rgb2xyz(<float3|float4> color)
 */
 
 #ifndef FNC_LAB2XYZ
@@ -16,5 +16,5 @@ float3 lab2xyz(in float3 c) {
     return float3(95.047, 100.000, 108.883) * lerp(c0, c1, step(f, float3(0.206897, 0.206897, 0.206897)));
 }
 
-vec4 lab2xyz(in vec4 c) { return vec4(lab2xyz(c.xyz), c.w); }
+float4 lab2xyz(in float4 c) { return float4(lab2xyz(c.xyz), c.w); }
 #endif

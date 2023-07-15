@@ -86,7 +86,7 @@ bool laplacian_isOutside(float2 pos) {
 LAPLACIAN_TYPE laplacian_w4(sampler2D tex, float2 st, float2 pixel, float pixel_pad) {
     LAPLACIAN_TYPE acc = float4(0.0, 0.0, 0.0, 0.0);
     float2 uv = st * float2(1.0 + pixel_pad * 2.0 * pixel) - pixel_pad * pixel;
-    vec3 pixelShift = vec3(pixel, 0.0);
+    float3 pixelShift = float3(pixel, 0.0);
 
     if (!laplacian_isOutside(uv)) acc = 4.0 * LAPLACIAN_SAMPLER_FNC(tex, uv);
     float2 e = uv + pixelShift.xz;
@@ -103,7 +103,7 @@ LAPLACIAN_TYPE laplacian_w4(sampler2D tex, float2 st, float2 pixel, float pixel_
 LAPLACIAN_TYPE laplacian_w8(sampler2D tex, float2 st, float2 pixel, float pixel_pad) {
     LAPLACIAN_TYPE acc = float4(0.0, 0.0, 0.0, 0.0);
     float2 uv = st * float2(1.0 + pixel_pad * 2.0 * pixel) - pixel_pad * pixel;
-    vec3 pixelShift = vec3(pixel, 0.0);
+    float3 pixelShift = float3(pixel, 0.0);
 
     if (!laplacian_isOutside(uv)) acc = 8.0 * LAPLACIAN_SAMPLER_FNC(tex, uv);
     float2 e = uv + pixelShift.xz;
@@ -130,7 +130,7 @@ LAPLACIAN_TYPE laplacian_w8(sampler2D tex, float2 st, float2 pixel, float pixel_
 LAPLACIAN_TYPE laplacian_w12(sampler2D tex, float2 st, float2 pixel, float pixel_pad) {
     LAPLACIAN_TYPE acc = float4(0.0, 0.0, 0.0, 0.0);
     float2 uv = st * float2(1.0 + pixel_pad * 2.0 * pixel) - pixel_pad * pixel;
-    vec3 pixelShift = vec3(pixel, 0.0);
+    float3 pixelShift = float3(pixel, 0.0);
 
     if (!laplacian_isOutside(uv)) acc = 12.0 * LAPLACIAN_SAMPLER_FNC(tex, uv);
 

@@ -2,7 +2,7 @@
 original_author:  Inigo Quiles
 description: generate the SDF of a cylinder
 use: 
-    - <float> cylinderSDF( in <float3> pos, in <vec2|float> h [, <float> r] ) 
+    - <float> cylinderSDF( in <float3> pos, in <float2|float> h [, <float> r] ) 
     - <float> cylinderSDF( <float3> p, <float3> a, <float3> b, <float> r) 
 */
 

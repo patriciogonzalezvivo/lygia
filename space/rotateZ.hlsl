@@ -4,7 +4,7 @@
 function: rotateZ
 original_author: Patricio Gonzalez Vivo
 description: rotate a 2D space by a radian angle
-use: rotateZ(<float3|vec4> pos, float radian [, float3 center])
+use: rotateZ(<float3|float4> pos, float radian [, float3 center])
 options:
   - CENTER_3D
 */
@@ -12,7 +12,7 @@ options:
 #ifndef FNC_ROTATEZ
 #define FNC_ROTATEZ
 float3 rotateZ(in float3 pos, in float radian, in float3 center) {
-    return mul(rotate4dZ(radian), vec4(pos - center, 0.) ).xyz + center;
+    return mul(rotate4dZ(radian), float4(pos - center, 0.) ).xyz + center;
 }
 
 float3 rotateZ(in float3 pos, in float radian) {
