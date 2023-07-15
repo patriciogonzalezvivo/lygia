@@ -46,7 +46,7 @@ options:
 #endif
 
 #ifndef SAMPLEDOF_TYPE
-#define SAMPLEDOF_TYPE vec3
+#define SAMPLEDOF_TYPE float3
 #endif
 
 float getBlurSize(float depth,float focusPoint,float focusScale){

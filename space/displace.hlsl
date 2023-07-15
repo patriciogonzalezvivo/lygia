@@ -4,7 +4,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: Displace UV space into a XYZ space using an heightmap
-use: <float3> displace(<sampler2D> tex, <float3> ro, <float3|vec2> rd) 
+use: <float3> displace(<sampler2D> tex, <float3> ro, <float3|float2> rd) 
 */
 
 #ifndef DISPLACE_DEPTH
@@ -64,7 +64,7 @@ float3 displace(sampler2D tex, float3 ro, float3 rd) {
     return float3(0.0, 0.0, 1.0);
 }
 
-float3 displace(sampler2D tex, float3 ro, vec2 uv) {
+float3 displace(sampler2D tex, float3 ro, float2 uv) {
     float3 rd = raymarchCamera(ro) * normalize(float3(uv - 0.5, 1.0));
     return displace(u_tex0Depth, ro, rd);
 }
