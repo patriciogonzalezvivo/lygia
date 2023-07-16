@@ -11,8 +11,8 @@ options:
     - CAMERA_NEAR_CLIP: required
     - CAMERA_FAR_CLIP: required
     - CAMERA_ORTHOGRAPHIC_PROJECTION, if it's not present is consider a PERECPECTIVE camera
-    - CAMERA_PROJECTION_MATRIX: mat4 matrix with camera projection
-    - INVERSE_CAMERA_PROJECTION_MATRIX: mat4 matrix with the inverse camara projection
+    - CAMERA_PROJECTION_MATRIX: float4x4 matrix with camera projection
+    - INVERSE_CAMERA_PROJECTION_MATRIX: float4x4 matrix with the inverse camara projection
 */
 
 #ifndef FNC_SAMPLEVIEWPOSITION
