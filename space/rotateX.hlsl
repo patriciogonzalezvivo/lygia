@@ -1,4 +1,4 @@
-#include "../math/rotate4dX.glsl"
+#include "../math/rotate4dX.hlsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
