@@ -2,7 +2,7 @@
 
 /*
 original_author: Isaac Cohen
-description: https://github.com/cabbibo/glsl-curl-noise/blob/master/curl.glsl
+description: https://github.com/cabbibo/glsl-curl-noise/blob/master/curl.hlsl
 use: curl(<float3|float4> pos)
 */
 
