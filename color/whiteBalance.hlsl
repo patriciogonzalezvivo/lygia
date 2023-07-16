@@ -1,5 +1,5 @@
-#include "space/rgb2yiq.glsl"
-#include "space/yiq2rgb.glsl"
+#include "space/rgb2yiq.hlsl"
+#include "space/yiq2rgb.hlsl"
 
 /*
 original_author: Patricio Gonzalez Vivo

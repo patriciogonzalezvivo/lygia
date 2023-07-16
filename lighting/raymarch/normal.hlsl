@@ -1,4 +1,4 @@
-#include "map.glsl"
+#include "map.hlsl"
 
 /*
 original_author:  Inigo Quiles

@@ -1,4 +1,4 @@
-#include "vividLight.glsl"
+#include "vividLight.hlsl"
 
 /*
 original_author: Jamie Owen

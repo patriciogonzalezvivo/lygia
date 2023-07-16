@@ -1,4 +1,4 @@
-#include "overlay.glsl"
+#include "overlay.hlsl"
 
 /*
 original_author: Jamie Owen

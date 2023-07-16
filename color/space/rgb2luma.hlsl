@@ -1,6 +1,6 @@
 /*
 original_author: Hugh Kennedy (https://github.com/hughsk)
-description: get's the luminosity of a color. From https://github.com/hughsk/glsl-luma/blob/master/index.glsl
+description: get's the luminosity of a color. From https://github.com/hughsk/glsl-luma/blob/master/index.hlsl
 use: rgb2luma(<float3 float4> color)
 */
 

@@ -1,4 +1,4 @@
-#include "triangle.glsl"
+#include "triangle.hlsl"
 
 /*
 original_author: Inigo Quiles
