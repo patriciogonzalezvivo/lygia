@@ -1,4 +1,4 @@
-#include "../lighting/raymarch/camera.glsl"
+#include "../lighting/raymarch/camera.hlsl"
 #include "../sample.hlsl"
 
 /*

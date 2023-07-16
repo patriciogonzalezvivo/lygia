@@ -1,4 +1,4 @@
-#include "../math/rotate4dZ.glsl"
+#include "../math/rotate4dZ.hlsl"
 
 /*
 function: rotateZ
