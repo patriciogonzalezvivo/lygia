@@ -30,23 +30,27 @@ options:
 #ifndef FNC_SPHERICALHARMONICS
 #define FNC_SPHERICALHARMONICS
 
-vec3 sphericalHarmonics(const in vec3 n) {
-#ifdef SCENE_SH_ARRAY
+vec3 sphericalHarmonics(const vec3[9] sh, const in vec3 n) {
     return SPHERICALHARMONICS_TONEMAP ( max(
-           0.282095 * SCENE_SH_ARRAY[0]
+           0.282095 * sh[0]
 #if SPHERICALHARMONICS_BANDS >= 2
-        + -0.488603 * SCENE_SH_ARRAY[1] * (n.y)
-        +  0.488603 * SCENE_SH_ARRAY[2] * (n.z)
-        + -0.488603 * SCENE_SH_ARRAY[3] * (n.x)
+        + -0.488603 * sh[1] * (n.y)
+        +  0.488603 * sh[2] * (n.z)
+        + -0.488603 * sh[3] * (n.x)
 #endif
 #if SPHERICALHARMONICS_BANDS >= 3
-        +  1.092548 * SCENE_SH_ARRAY[4] * (n.y * n.x)
-        + -1.092548 * SCENE_SH_ARRAY[5] * (n.y * n.z)
-        +  0.315392 * SCENE_SH_ARRAY[6] * (3.0 * n.z * n.z - 1.0)
-        + -1.092548 * SCENE_SH_ARRAY[7] * (n.z * n.x)
-        +  0.546274 * SCENE_SH_ARRAY[8] * (n.x * n.x - n.y * n.y)
+        +  1.092548 * sh[4] * (n.y * n.x)
+        + -1.092548 * sh[5] * (n.y * n.z)
+        +  0.315392 * sh[6] * (3.0 * n.z * n.z - 1.0)
+        + -1.092548 * sh[7] * (n.z * n.x)
+        +  0.546274 * sh[8] * (n.x * n.x - n.y * n.y)
 #endif
         , 0.0) );
+}
+
+vec3 sphericalHarmonics(const in vec3 n) {
+#ifdef SCENE_SH_ARRAY
+    return sphericalHarmonics(SCENE_SH_ARRAY, n);
 #else
     return vec3(1.0);
 #endif

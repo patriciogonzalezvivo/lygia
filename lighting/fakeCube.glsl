@@ -1,4 +1,5 @@
 #include "../math/powFast.glsl"
+#include "../sample/triplanar.glsl"
 #include "material/shininess.glsl"
 
 /*
@@ -16,7 +17,7 @@ options:
     - FAKECUBE_NONXWALL: removes the -x wall from the fake cube
     - FAKECUBE_NOZWALL: removes the z wall from the fake cube
     - FAKECUBE_NOMZWALL: removes the -z wall from the fake cube
-    - FAKECUBE_SAMPLE_FNC(UV): function to sample the fake cube
+    - FAKECUBE_TEXTURE2D: function to sample the fake cube
 */
 
 #ifndef FAKECUBE_LIGHT_AMOUNT
@@ -28,12 +29,8 @@ options:
 
 vec3 fakeCube(const in vec3 _normal, const in float _shininnes) {
 
-    #if defined(FAKECUBE_SAMPLE_FNC)
-    vec3 colx = FAKECUBE_SAMPLE_FNC(_normal.yz).rgb;
-    vec3 coly = FAKECUBE_SAMPLE_FNC(_normal.zx).rgb;
-    vec3 colz = FAKECUBE_SAMPLE_FNC(_normal.xy).rgb;
-    vec3 n = _normal*_normal;
-    return (colx*n.x + coly*n.y + colz*n.z)/(n.x+n.y+n.z);
+    #if defined(FAKECUBE_TEXTURE2D)
+    return sampleTriplanar(FAKECUBE_TEXTURE2D, _normal);
 
     #elif defined(FAKECUBE_ONLYXWALL)
     return vec3( powFast(saturate(_normal.x) + FAKECUBE_LIGHT_AMOUNT, _shininnes) );

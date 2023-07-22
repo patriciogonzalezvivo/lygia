@@ -34,15 +34,14 @@ vec4 sampleEquirect(sampler2D tex, vec3 dir, float lod) {
     st.y = 1.0-st.y;
     #endif
 
-    vec2 r = vec2(lod);
+    vec2 r = vec2(1.0+lod);
     const float f = 1.0 / (1.001 - 0.75);
-    // mat2 rot = mat2(0.0, 0.061, 1.413, 0.0) - 0.737;
     mat2 rot = mat2( cos(GOLDEN_ANGLE), sin(GOLDEN_ANGLE), 
                     -sin(GOLDEN_ANGLE), cos(GOLDEN_ANGLE));
     vec2 st2 = vec2( dot(st + st - r, vec2(.0002,-0.001)), 0.0 );
 
     float counter = 0.0;
-    for (float i = 1.0; i < float(SAMPLEEQUIRET_ITERATIONS); i += 2.0/i) {
+    for (float i = 0.0; i < float(SAMPLEEQUIRET_ITERATIONS); i += 2.0/i) {
         st2 *= rot;
         color += gamma2linear( SAMPLER_FNC(tex, st + st2 * i / vec2(r.x * 2.0, r.y))) * f;
         counter++;

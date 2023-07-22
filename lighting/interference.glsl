@@ -1,5 +1,6 @@
 #include "envMap.glsl"
 #include "fresnel.glsl"
+
 /*
 original_author: Cornus Ammonis
 description: | 
@@ -77,8 +78,8 @@ vec3 interference_gamma(vec3 x) { return log(INTERFERENCE_GAMMA_CURVE * x + 1.0)
 vec3 interference_gamma_inverse(vec3 y) { return (1.0 / INTERFERENCE_GAMMA_CURVE) * (exp(INTERFERENCE_GAMMA_SCALE * y) - 1.0);  }
 
 vec3 interference_fresnel( vec3 rd, vec3 norm, vec3 n2 ) {
-    vec3 r0 = pow((1.0-n2)/(1.0+n2), vec3(2.0));
-    return schlick(r0, vec3(1.0), 1.0-saturate(1.0+dot(rd, norm)));
+    vec3 f0 = pow((1.0-n2)/(1.0+n2), vec3(2.0));
+    return schlick(f0, vec3(1.0), 1.0-saturate(1.0+dot(rd, norm)));
 }
 
 // sample weights for the cubemap given a wavelength i
@@ -129,8 +130,8 @@ vec3 interference(vec3 ray, vec3 normal, float thickness, float roughness, float
 
     vec3 f0 = (1.0 - INTERFERENCE_FRESNEL_RATIO) + INTERFERENCE_FRESNEL_RATIO * interference_fresnel(ray, normal, 1.0 / iors0);
     vec3 f1 = (1.0 - INTERFERENCE_FRESNEL_RATIO) + INTERFERENCE_FRESNEL_RATIO * interference_fresnel(ray, normal, 1.0 / iors1);
-    vec3 i0 = INTERFERENCE_SCALE * interference_gamma_inverse(mix(vec3(0.0), cube0, f0));
-    vec3 i1 = INTERFERENCE_SCALE * interference_gamma_inverse(mix(vec3(0.0), cube1, f1));
+    vec3 i0 = INTERFERENCE_SCALE * interference_gamma_inverse(cube0 * f0);
+    vec3 i1 = INTERFERENCE_SCALE * interference_gamma_inverse(cube1 * f1);
 
     vec3 w0 = interference_sampleWeights(wavelengths0.x);
     vec3 w1 = interference_sampleWeights(wavelengths0.y);
@@ -146,8 +147,8 @@ vec3 interference(vec3 ray, vec3 normal, float thickness, float roughness, float
 vec3 interference(vec3 ray, vec3 normal, float thickness, float roughness) {
     const vec3 wavelengths0 = INTERFERENCE_WAVELENGTHS0;
     const vec3 wavelengths1 = INTERFERENCE_WAVELENGTHS1;
-    const vec3 iors0 = INTERFERENCE_IOR + wavelengths0 * INTERFERENCE_DISPERSION;
-    const vec3 iors1 = INTERFERENCE_IOR + wavelengths1 * INTERFERENCE_DISPERSION;
+    const vec3 iors0 = (INTERFERENCE_IOR + wavelengths0 * INTERFERENCE_DISPERSION);
+    const vec3 iors1 = (INTERFERENCE_IOR + wavelengths1 * INTERFERENCE_DISPERSION);
 
     vec3 att0 = interference_attenuation(wavelengths0, normal, ray, thickness) * 0.5;
     vec3 att1 = interference_attenuation(wavelengths1, normal, ray, thickness) * 0.5;
@@ -158,8 +159,8 @@ vec3 interference(vec3 ray, vec3 normal, float thickness, float roughness) {
 
     vec3 f0 = (1.0 - INTERFERENCE_FRESNEL_RATIO) + INTERFERENCE_FRESNEL_RATIO * interference_fresnel(ray, normal, 1.0 / iors0);
     vec3 f1 = (1.0 - INTERFERENCE_FRESNEL_RATIO) + INTERFERENCE_FRESNEL_RATIO * interference_fresnel(ray, normal, 1.0 / iors1);
-    vec3 i0 = INTERFERENCE_SCALE * interference_gamma_inverse(mix(vec3(0.0), cube0, f0));
-    vec3 i1 = INTERFERENCE_SCALE * interference_gamma_inverse(mix(vec3(0.0), cube1, f1));
+    vec3 i0 = INTERFERENCE_SCALE * interference_gamma_inverse(cube0 * f0);
+    vec3 i1 = INTERFERENCE_SCALE * interference_gamma_inverse(cube1 * f1);
 
     vec3 rds[6];
     rds[0] = refract(ray, normal, iors0.x);
