@@ -1,7 +1,4 @@
 #include "../envMap.hlsl"
-#include "../fresnel.hlsl"
-#include "../specular.hlsl"
-#include "../reflection.hlsl"
 
 /*
 original_author:  The Art Of Code
@@ -17,6 +14,9 @@ options:
     - RAYMARCH_GLASS_ENABLE_REFLECTION                  [Define this option to enable reflection]
     - RAYMARCH_GLASS_REFLECTION_EFFECT 5.               [The higher the value, the less reflections area from surface view]
     - RAYMARCH_GLASS_CHROMATIC_ABBERATION .01           [Chromatic Abberation Effects on environment map]
+    - RAYMARCH_GLASS_EDGE_SHARPNESS                     [Optional, to determine the edge sharpness]
+    - RAYMARCH_GLASS_FNC_MANUAL                         [Optional, enable this to set glass params manually without using defines]
+    - RAYMARCH_GLASS_FNC(RAY,POSITION,IOR,ROUGHNESS)
     - RAYMARCH_GLASS_MAP_FNC(res, rdIn, rdOut, pEnter, pExit, nEnter, nExit, ior, roughness)
 */
 
@@ -33,6 +33,10 @@ options:
 
 #ifdef RAYMARCH_GLASS_MAP_FNC
 #define RAYMARCH_GLASS_WAVELENGTH_MAP_FNC(res, rdIn, rdOut, pEnter, pExit, nEnter, nExit, ior, roughness) RAYMARCH_GLASS_MAP_FNC(res, rdIn, rdOut, pEnter, pExit, nEnter, nExit, ior, roughness)
+#endif
+
+#ifndef RAYMARCH_GLASS_FNC
+#define RAYMARCH_GLASS_FNC(RAY, POSITION, IOR, ROUGHNESS) raymarchDefaultGlass(RAY, POSITION, IOR, ROUGHNESS)
 #endif
 
 #ifndef RAYMARCH_GLASS_CHROMATIC_ABBERATION
@@ -102,7 +106,99 @@ RAYMARCH_MAP_TYPE raymarchGlassMarching(in float3 ro, in float3 rd) {
 
 #ifndef FNC_RAYMARCH_DEFAULT_GLASS
 #define FNC_RAYMARCH_DEFAULT_GLASS
-float3 raymarchGlass(in float3 ray, in float3 pos, in float ior, in float roughness) {
+
+// For overwriting the parameters rendering that can be set manually
+#ifdef RAYMARCH_GLASS_FNC_MANUAL
+float3 raymarchDefaultGlass(in float3 ray, in float3 pos, in float ior, in float roughness, in float glassSharpness, in float chromatic, in float density, in bool enableReflection, in float reflection, in float3 colorGlass) {
+    float3 color = float3(0.);
+
+    RAYMARCH_MAP_TYPE marchOutside = raymarchGlassMarching(pos,ray); // Outside of the object
+    if(marchOutside.RAYMARCH_MAP_DISTANCE < RAYMARCH_MAX_DIST) {
+        float3 newPos = pos + ray * marchOutside.RAYMARCH_MAP_DISTANCE;
+        float3 nEnter, nExit;
+
+        nEnter = raymarchNormal(newPos, glassSharpness);
+
+        float3 newReflect = reflect(ray, nEnter);
+
+        color = envMap(newReflect, roughness).rgb;
+
+        float3 rdIn = refract(ray, nEnter, 1./ior);
+        float3 pEnter = newPos - nEnter * RAYMARCH_GLASS_MIN_HIT_DIST * 3.;
+        
+        RAYMARCH_MAP_TYPE marchInside = raymarchGlassMarching(pEnter, rdIn); // Inside the object
+        
+        float3 pExit = pEnter + rdIn * marchInside.RAYMARCH_MAP_DISTANCE;
+
+        nExit = -raymarchNormal(pExit, glassSharpness);
+
+        float3 rdOut, res;
+        if(chromatic != 0.) {
+
+            #ifdef RAYMARCH_GLASS_WAVELENGTH_MAP_FNC
+                RAYMARCH_GLASS_WAVELENGTH_MAP_FNC(res, rdIn, rdOut, pEnter, pExit, nEnter, nExit, ior, roughness);
+            #else
+                // Red
+                rdOut = refract(rdIn, nExit, ior - chromatic);
+
+                if(dot(rdOut, rdOut) == 0.)
+                    rdOut = reflect(rdIn, nExit);
+
+                res.r = envMap(rdOut, roughness).r;
+
+                // Green
+                rdOut = refract(rdIn, nExit, ior);
+
+                if(dot(rdOut, rdOut) == 0.)
+                    rdOut = reflect(rdIn, nExit);
+
+                res.g = envMap(rdOut, roughness).g;
+
+                // Blue
+                rdOut = refract(rdIn, nExit, ior + chromatic);
+
+                if(dot(rdOut, rdOut) == 0.)
+                    rdOut = reflect(rdIn, nExit);
+
+                res.b = envMap(rdOut, roughness).b;
+            #endif
+
+            float optDist = exp(-marchInside.RAYMARCH_MAP_DISTANCE * density);
+
+            res *= optDist * colorGlass;
+            
+            if (enableReflection) {
+                float fresnelVal = pow(1.+dot(ray, nEnter), reflection);
+                return lerp(res, color, saturate(fresnelVal));
+            } else {
+                return res;
+            }
+        } else {
+            rdOut = refract(rdIn, nExit, ior);
+
+            if(dot(rdOut, rdOut) == 0.)
+                rdOut = reflect(rdIn, nExit);
+
+            float optDist = exp(-marchInside.RAYMARCH_MAP_DISTANCE * density);
+
+            res = envMap(rdOut, roughness).rgb;
+
+            res *= optDist * colorGlass;
+
+            if (enableReflection) {
+                float fresnelVal = pow(1.+dot(ray, nEnter), reflection);
+                return lerp(res, color, saturate(fresnelVal));
+            } else {
+                return res;
+            }
+        }
+    } else {
+        return envMap(ray, 0.).rgb;
+    }
+}
+#endif
+
+float3 raymarchDefaultGlass(in float3 ray, in float3 pos, in float ior, in float roughness) {
     float3 color = float3(0.);
 
     RAYMARCH_MAP_TYPE marchOutside = raymarchGlassMarching(pos,ray); // Outside of the object
@@ -196,5 +292,9 @@ float3 raymarchGlass(in float3 ray, in float3 pos, in float ior, in float roughn
     } else {
         return envMap(ray, 0.).rgb;
     }
+}
+
+float3 raymarchGlass(in float3 ray, in float3 pos, in float ior, in float roughness) {
+    return RAYMARCH_GLASS_FNC(ray, pos, ior, roughness);
 }
 #endif

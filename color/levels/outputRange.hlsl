@@ -9,7 +9,7 @@ use: levelsOutputRange(<float3|float4> color, float minOutput, float maxOutput)
 #ifndef FNC_LEVELSOUTPUTRANGE
 #define FNC_LEVELSOUTPUTRANGE
 float3 levelsOutputRange(in float3 color, in float3 minOutput, in float3 maxOutput) {
-  return mix(minOutput, maxOutput, color);
+  return lerp(minOutput, maxOutput, color);
 }
 
 float4 levelsOutputRange(in float4 color, in float3 minOutput, in float3 maxOutput) {

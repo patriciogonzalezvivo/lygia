@@ -83,7 +83,7 @@ float4 pbrClearCoat(const Material _mat) {
     // ------------------------
     float ssao = 1.0;
 // #if defined(FNC_SSAO) && defined(SCENE_DEPTH) && defined(RESOLUTION) && defined(CAMERA_NEAR_CLIP) && defined(CAMERA_FAR_CLIP)
-//     vec2 pixel = 1.0/RESOLUTION;
+//     float2 pixel = 1.0/RESOLUTION;
 //     ssao = ssao(SCENE_DEPTH, gl_FragCoord.xy*pixel, pixel, 1.);
 // #endif 
     float diffuseAO = min(_mat.ambientOcclusion, ssao);

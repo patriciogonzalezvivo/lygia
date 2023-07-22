@@ -46,7 +46,7 @@ options:
 #endif
 
 #ifndef SAMPLEDOF_TYPE
-#define SAMPLEDOF_TYPE vec3
+#define SAMPLEDOF_TYPE float3
 #endif
 
 float getBlurSize(float depth,float focusPoint,float focusScale){
@@ -80,7 +80,7 @@ SAMPLEDOF_TYPE sampleDoF(sampler2D tex, sampler2D texDepth, float2 texCoord, flo
         #ifdef SAMPLEDOF_DEBUG
         sampleColor.rgb = heatmap(pct*0.5+(angle/SAMPLEDOF_BLUR_SIZE)*0.1);
         #endif
-        color += mix(color/total, sampleColor, pct);
+        color += lerp(color/total, sampleColor, pct);
         total += 1.0;
         radius += SAMPLEDOF_RAD_SCALE/radius;
     }
@@ -111,7 +111,7 @@ SAMPLEDOF_TYPE sampleDoF(sampler2D tex, sampler2D texDepth, float2 texCoord, flo
         #ifdef SAMPLEDOF_DEBUG
         sampleColor.rgb = heatmap(pct * 0.5 + (ang/SAMPLEDOF_BLUR_SIZE) * 0.1);
         #endif
-        color += mix(color/tot, sampleColor, pct);
+        color += lerp(color/tot, sampleColor, pct);
         tot += 1.0;
         radius += SAMPLEDOF_RAD_SCALE/radius;
     }

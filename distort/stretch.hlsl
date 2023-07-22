@@ -7,7 +7,7 @@ use: stretch(<sampler2D> tex, <float2> st, <float2> direction [, int samples])
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - STRETCH_SAMPLES: number of samples taken, defaults to 20
-    - STRETCH_TYPE: return type, defauls to vec4
+    - STRETCH_TYPE: return type, defauls to float4
     - STRETCH_SAMPLER_FNC(TEX, UV): function used to sample the input texture, defaults to texture2D(tex, TEX, UV)
     - STRETCH_WEIGHT: shaping equation to multiply the sample weight.
 */
@@ -17,7 +17,7 @@ options:
 #endif
 
 #ifndef STRETCH_TYPE
-#define STRETCH_TYPE vec4
+#define STRETCH_TYPE float4
 #endif
 
 #ifndef STRETCH_SAMPLER_FNC

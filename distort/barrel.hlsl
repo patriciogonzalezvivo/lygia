@@ -8,7 +8,7 @@ use: barrel(sampler2D tex, <float2> st, [, <float2|float> sdf])
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - BARREL_DISTANCE: function used to shape the distortion, defaults to radial shape with lengthSq
-    - BARREL_TYPE: return type, defaults to vec3
+    - BARREL_TYPE: return type, defaults to float3
     - BARREL_SAMPLER_FNC: function used to sample the input texture, defaults to texture2D(TEX, UV).rgb
     - BARREL_OCT_1: one octave of distortion
     - BARREL_OCT_2: two octaves of distortion

@@ -1,9 +1,9 @@
-#include "../math/rotate4dX.glsl"
+#include "../math/rotate4dX.hlsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
 description: rotate a 2D space by a radian angle
-use: rotateX(<float3|vec4> pos, float radian [, float3 center])
+use: rotateX(<float3|float4> pos, float radian [, float3 center])
 options:
     - CENTER_3D
 */
@@ -11,7 +11,7 @@ options:
 #ifndef FNC_ROTATEX
 #define FNC_ROTATEX
 float3 rotateX(in float3 pos, in float radian, in float3 center) {
-    return mul(rotate4dX(radian), vec4(pos - center, 1.)).xyz + center;
+    return mul(rotate4dX(radian), float4(pos - center, 1.)).xyz + center;
 }
 
 float3 rotateX(in float3 pos, in float radian) {

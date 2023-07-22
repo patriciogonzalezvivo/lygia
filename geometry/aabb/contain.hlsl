@@ -4,7 +4,7 @@
 /*
 original_author: P
 description: Compute if point is inside AABB
-use: <bool> inside(<AABB> box, <vec3> point ) 
+use: <bool> inside(<AABB> box, <float3> point ) 
 */
 
 #ifndef FNC_AABB_CONTAIN

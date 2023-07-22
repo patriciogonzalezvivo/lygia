@@ -6,9 +6,9 @@ description: |
 use: <float3|float4> vibrance(<float3|float4> color, <float> v) 
 */
 
-#include "../math/mmax.glsl"
-#include "../math/mmin.glsl"
-#include "luma.glsl"
+#include "../math/mmax.hlsl"
+#include "../math/mmin.hlsl"
+#include "luma.hlsl"
 
 #ifndef FNC_VIBRANCE
 #define FNC_VIBRANCE

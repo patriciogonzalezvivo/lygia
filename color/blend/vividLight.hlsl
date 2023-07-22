@@ -1,5 +1,5 @@
-#include "colorBurn.glsl"
-#include "colorDodge.glsl"
+#include "colorBurn.hlsl"
+#include "colorDodge.hlsl"
 
 /*
 original_author: Jamie Owen

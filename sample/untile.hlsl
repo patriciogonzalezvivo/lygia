@@ -14,7 +14,7 @@ options:
 */
 
 #ifndef SAMPLEUNTILE_TYPE
-#define SAMPLEUNTILE_TYPE vec4
+#define SAMPLEUNTILE_TYPE float4
 #endif
 
 #ifndef SAMPLEUNTILE_SAMPLER_FNC

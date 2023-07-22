@@ -3,7 +3,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: 3D vector to equirect 2D projection 
-use: <vec2> xyz2equirect(<vec2> d)
+use: <float2> xyz2equirect(<float2> d)
 */
 
 #ifndef FNC_XYZ2EQUIRECT

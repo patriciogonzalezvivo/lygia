@@ -1,5 +1,5 @@
-#include "space/rgb2yiq.glsl"
-#include "space/yiq2rgb.glsl"
+#include "space/rgb2yiq.hlsl"
+#include "space/yiq2rgb.hlsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
@@ -28,7 +28,7 @@ float3 whiteBalance(in float3 rgb, in float temperature, in float tint) {
                     (rgb.g < 0.5 ? (2.0 * rgb.g * warmFilter.g) : (1.0 - 2.0 * (1.0 - rgb.g) * (1.0 - warmFilter.g))),
                     (rgb.b < 0.5 ? (2.0 * rgb.b * warmFilter.b) : (1.0 - 2.0 * (1.0 - rgb.b) * (1.0 - warmFilter.b))) );
 
-    return mix(rgb, processed, temperature * 0.5);
+    return lerp(rgb, processed, temperature * 0.5);
                         
 #else
     // Get the CIE xy chromaticity of the reference white point.

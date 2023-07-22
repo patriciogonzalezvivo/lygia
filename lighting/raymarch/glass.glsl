@@ -1,12 +1,9 @@
 #include "../envMap.glsl"
-#include "../fresnel.glsl"
-#include "../specular.glsl"
-#include "../reflection.glsl"
 
 /*
 original_author:  The Art Of Code
 description: |
-    Raymarching for glass render. For more info, see the video below link:
+    Raymarching for glass render. For more info, see the video link:
     Tutorial 1: https://youtu.be/NCpaaLkmXI8
     Tutorial 2: https://youtu.be/0RWaR7zApEo
 use: <vec3> raymarchGlass( in <vec3> ray, in <vec3> pos, in <float> ior, in <float> roughness ) 
@@ -17,14 +14,18 @@ options:
     - RAYMARCH_GLASS_ENABLE_REFLECTION                  [Define this option to enable reflection]
     - RAYMARCH_GLASS_REFLECTION_EFFECT 5.               [The higher the value, the less reflections area from surface view]
     - RAYMARCH_GLASS_CHROMATIC_ABBERATION .01           [Chromatic Abberation Effects value on environment map]
+    - RAYMARCH_GLASS_EDGE_SHARPNESS                     [Optional, to determine the edge sharpness]
+    - RAYMARCH_GLASS_FNC_MANUAL                         [Optional, enable this to set glass params manually without using defines]
+    - RAYMARCH_GLASS_FNC(RAY,POSITION,IOR,ROUGHNESS)
     - RAYMARCH_GLASS_MAP_FNC(res, rdIn, rdOut, pEnter, pExit, nEnter, nExit, ior, roughness)
-examples: |
+examples:
     - /shaders/lighting_raymarching_glass_refraction.frag
 */
 
 #ifndef RAYMARCH_GLASS_DENSITY
 #define RAYMARCH_GLASS_DENSITY 0.
 #endif
+
 #ifndef RAYMARCH_GLASS_COLOR
 #define RAYMARCH_GLASS_COLOR vec3(1.,1.,1.)
 #endif
@@ -35,6 +36,10 @@ examples: |
 
 #ifdef RAYMARCH_GLASS_MAP_FNC
 #define RAYMARCH_GLASS_WAVELENGTH_MAP_FNC(res, rdIn, rdOut, pEnter, pExit, nEnter, nExit, ior, roughness) RAYMARCH_GLASS_MAP_FNC(res, rdIn, rdOut, pEnter, pExit, nEnter, nExit, ior, roughness)
+#endif
+
+#ifndef RAYMARCH_GLASS_FNC
+#define RAYMARCH_GLASS_FNC(RAY, POSITION, IOR, ROUGHNESS) raymarchDefaultGlass(RAY, POSITION, IOR, ROUGHNESS)
 #endif
 
 #ifndef RAYMARCH_GLASS_CHROMATIC_ABBERATION
@@ -104,7 +109,99 @@ RAYMARCH_MAP_TYPE raymarchGlassMarching(in vec3 ro, in vec3 rd) {
 
 #ifndef FNC_RAYMARCH_DEFAULT_GLASS
 #define FNC_RAYMARCH_DEFAULT_GLASS
-vec3 raymarchGlass(in vec3 ray, in vec3 pos, in float ior, in float roughness) {
+
+// For overwriting the parameters rendering that can be set manually
+#ifdef RAYMARCH_GLASS_FNC_MANUAL
+vec3 raymarchDefaultGlass(in vec3 ray, in vec3 pos, in float ior, in float roughness, in float glassSharpness, in float chromatic, in float density, in bool enableReflection, in float reflection, in vec3 colorGlass) {
+    vec3 color = vec3(0.);
+
+    RAYMARCH_MAP_TYPE marchOutside = raymarchGlassMarching(pos,ray); // Outside of the object
+    if(marchOutside.RAYMARCH_MAP_DISTANCE < RAYMARCH_MAX_DIST) {
+        vec3 newPos = pos + ray * marchOutside.RAYMARCH_MAP_DISTANCE;
+        vec3 nEnter, nExit;
+
+        nEnter = raymarchNormal(newPos, glassSharpness);
+
+        vec3 newReflect = reflect(ray, nEnter);
+
+        color = envMap(newReflect, roughness).rgb;
+
+        vec3 rdIn = refract(ray, nEnter, 1./ior);
+        vec3 pEnter = newPos - nEnter * RAYMARCH_GLASS_MIN_HIT_DIST * 3.;
+        
+        RAYMARCH_MAP_TYPE marchInside = raymarchGlassMarching(pEnter, rdIn); // Inside the object
+        
+        vec3 pExit = pEnter + rdIn * marchInside.RAYMARCH_MAP_DISTANCE;
+
+        nExit = -raymarchNormal(pExit, glassSharpness);
+
+        vec3 rdOut, res;
+        if(chromatic != 0.) {
+
+            #ifdef RAYMARCH_GLASS_WAVELENGTH_MAP_FNC
+                RAYMARCH_GLASS_WAVELENGTH_MAP_FNC(res, rdIn, rdOut, pEnter, pExit, nEnter, nExit, ior, roughness);
+            #else
+                // Red
+                rdOut = refract(rdIn, nExit, ior - chromatic);
+
+                if(dot(rdOut, rdOut) == 0.)
+                    rdOut = reflect(rdIn, nExit);
+
+                res.r = envMap(rdOut, roughness).r;
+
+                // Green
+                rdOut = refract(rdIn, nExit, ior);
+
+                if(dot(rdOut, rdOut) == 0.)
+                    rdOut = reflect(rdIn, nExit);
+
+                res.g = envMap(rdOut, roughness).g;
+
+                // Blue
+                rdOut = refract(rdIn, nExit, ior + chromatic);
+
+                if(dot(rdOut, rdOut) == 0.)
+                    rdOut = reflect(rdIn, nExit);
+
+                res.b = envMap(rdOut, roughness).b;
+            #endif
+
+            float optDist = exp(-marchInside.RAYMARCH_MAP_DISTANCE * density);
+
+            res *= optDist * colorGlass;
+            
+            if (enableReflection) {
+                float fresnelVal = pow(1.+dot(ray, nEnter), reflection);
+                return mix(res, color, saturate(fresnelVal));
+            } else {
+                return res;
+            }
+        } else {
+            rdOut = refract(rdIn, nExit, ior);
+
+            if(dot(rdOut, rdOut) == 0.)
+                rdOut = reflect(rdIn, nExit);
+
+            float optDist = exp(-marchInside.RAYMARCH_MAP_DISTANCE * density);
+
+            res = envMap(rdOut, roughness).rgb;
+
+            res *= optDist * colorGlass;
+
+            if (enableReflection) {
+                float fresnelVal = pow(1.+dot(ray, nEnter), reflection);
+                return mix(res, color, saturate(fresnelVal));
+            } else {
+                return res;
+            }
+        }
+    } else {
+        return envMap(ray, 0.).rgb;
+    }
+}
+#endif
+
+vec3 raymarchDefaultGlass(in vec3 ray, in vec3 pos, in float ior, in float roughness) {
     vec3 color = vec3(0.);
 
     RAYMARCH_MAP_TYPE marchOutside = raymarchGlassMarching(pos,ray); // Outside of the object
@@ -136,7 +233,6 @@ vec3 raymarchGlass(in vec3 ray, in vec3 pos, in float ior, in float roughness) {
 
         vec3 rdOut, res;
     #ifdef RAYMARCH_GLASS_WAVELENGTH
-        float NoV = dot(ray, nEnter);
 
         #ifdef RAYMARCH_GLASS_WAVELENGTH_MAP_FNC
             RAYMARCH_GLASS_WAVELENGTH_MAP_FNC(res, rdIn, rdOut, pEnter, pExit, nEnter, nExit, ior, roughness);
@@ -198,5 +294,9 @@ vec3 raymarchGlass(in vec3 ray, in vec3 pos, in float ior, in float roughness) {
     } else {
         return envMap(ray, 0.).rgb;
     }
+}
+
+vec3 raymarchGlass(in vec3 ray, in vec3 pos, in float ior, in float roughness) {
+    return RAYMARCH_GLASS_FNC(ray, pos, ior, roughness);
 }
 #endif
