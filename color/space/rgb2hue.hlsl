@@ -10,8 +10,8 @@ float rgb2hue(in float3 c) {
     float4 K = float4(0., -.33333333333333333333, .6666666666666666666, -1.);
 
 #ifdef RGB2HSV_MIX
-    float4 p = mix(float4(c.bg, K.wz), float4(c.gb, K.xy), step(c.b, c.g));
-    float4 q = mix(float4(p.xyw, c.r), float4(c.r, p.yzx), step(p.x, c.r));
+    float4 p = lerp(float4(c.bg, K.wz), float4(c.gb, K.xy), step(c.b, c.g));
+    float4 q = lerp(float4(p.xyw, c.r), float4(c.r, p.yzx), step(p.x, c.r));
 #else
     float4 p = c.g < c.b ? float4(c.bg, K.wz) : float4(c.gb, K.xy);
     float4 q = c.r < p.x ? float4(p.xyw, c.r) : float4(c.r, p.yzx);

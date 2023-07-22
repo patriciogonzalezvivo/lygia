@@ -1,6 +1,6 @@
 /*
 original_author: Patricio Gonzalez Vivo 
-description: Convert camera depth to view depth. based on https://github.com/mrdoob/three.js/blob/master/src/renderers/shaders/ShaderChunk/packing.glsl.js
+description: Convert camera depth to view depth. based on https://github.com/mrdoob/three.js/blob/master/src/renderers/shaders/ShaderChunk/packing.hlsl.js
 use: <float> viewZ2depth( <float> viewZ, [, <float> near, <float> far] ) 
 options: 
     - CAMERA_NEAR_CLIP

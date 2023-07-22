@@ -14,7 +14,7 @@
 original_author: Patricio Gonzalez Vivo
 description: simple glass shading model
 use: 
-    - <vec4> glass(<Material> material) 
+    - <float4> glass(<Material> material) 
     
 options:
     - SPECULAR_FNC: specularGaussian, specularBeckmann, specularCookTorrance (default), specularPhongRoughness, specularBlinnPhongRoughnes (default on mobile)

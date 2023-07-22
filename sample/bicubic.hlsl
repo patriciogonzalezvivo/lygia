@@ -3,7 +3,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: bicubic filter sampling
-use: <float4> sampleBicubic(<sampler2D> tex, <vec2> st, <vec2> texResolution);
+use: <float4> sampleBicubic(<sampler2D> tex, <float2> st, <float2> texResolution);
 options:
     - SAMPLER_FNC(TEX, UV)
 */
@@ -22,17 +22,17 @@ float4 sampleBicubic(float v) {
     return o;
 }
 
-float4 sampleBicubic(sampler2D tex, vec2 st, vec2 texResolution) {
-    vec2 pixel = 1.0 / texResolution;
+float4 sampleBicubic(sampler2D tex, float2 st, float2 texResolution) {
+    float2 pixel = 1.0 / texResolution;
     st = st * texResolution - 0.5;
 
-    vec2 fxy = frac(st);
+    float2 fxy = frac(st);
     st -= fxy;
 
     float4 xcubic = sampleBicubic(fxy.x);
     float4 ycubic = sampleBicubic(fxy.y);
 
-    float4 c = st.xxyy + vec2 (-0.5, 1.5).xyxy;
+    float4 c = st.xxyy + float2 (-0.5, 1.5).xyxy;
 
     float4 s = float4(xcubic.xz + xcubic.yw, ycubic.xz + ycubic.yw);
     float4 offset = c + float4(xcubic.yw, ycubic.yw) / s;

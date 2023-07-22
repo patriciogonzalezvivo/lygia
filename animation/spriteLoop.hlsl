@@ -7,7 +7,7 @@ description: sample a frame on a sprite sheet
 use: <SPRITELOOP_TYPE> SpriteLOOP(<sampler2D >tex, <float2> st, <float2> grid, <float> frame)
 options:
     - SAMPLER_FNC(TEX, UV)
-    - SAMPLESPRITE_TYPE: vec4
+    - SAMPLESPRITE_TYPE: float4
     - SAMPLESPRITE_SAMPLER_FNC(UV)
 */
 

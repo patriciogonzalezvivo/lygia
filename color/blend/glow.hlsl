@@ -1,4 +1,4 @@
-#include "reflect.glsl"
+#include "reflect.hlsl"
 
 /*
 original_author: Jamie Owen

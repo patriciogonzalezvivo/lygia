@@ -5,7 +5,7 @@ original_author: Brad Larson
 description: adapted version of mean average sampling on four coorners of a sampled point from https://github.com/BradLarson/GPUImage2
 use: mean(<sampler2D> texture, <float2> st, <float2> pixel)
 options:
-    - MEAN_TYPE: defaults to vec4
+    - MEAN_TYPE: defaults to float4
     - AVERAGE_SAMPLER_FNC(TEX, UV): defaults to texture2D(tex,TEX, UV)
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 */

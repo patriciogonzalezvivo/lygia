@@ -1,7 +1,7 @@
 /*
 original_author:  Inigo Quiles
 description: generate the SDF of a triangular prism
-use: <float> triPrismSDF( in <float3> pos, in <vec2> h ) 
+use: <float> triPrismSDF( in <float3> pos, in <float2> h ) 
 license: |
     The MIT License
     Copyright © 2013 Inigo Quilez
@@ -28,17 +28,17 @@ float triPrismSDF( float3 p, float2 h ) {
     return max(q.z-h.y,max(q.x*0.866025+p.y*0.5,-p.y)-h.x*0.5);
 }
 
-// float triPrismSDF( float3 p, vec2 h ) {
+// float triPrismSDF( float3 p, float2 h ) {
 //     const float k = sqrt(3.0);
 //     h.x *= 0.5*k;
 //     p.xy /= h.x;
 //     p.x = abs(p.x) - 1.0;
 //     p.y = p.y + 1.0/k;
-//     if( p.x+k*p.y>0.0 ) p.xy=vec2(p.x-k*p.y,-k*p.x-p.y)/2.0;
+//     if( p.x+k*p.y>0.0 ) p.xy=float2(p.x-k*p.y,-k*p.x-p.y)/2.0;
 //     p.x -= clamp( p.x, -2.0, 0.0 );
 //     float d1 = length(p.xy)*sign(-p.y)*h.x;
 //     float d2 = abs(p.z)-h.y;
-//     return length(max(vec2(d1,d2),0.0)) + min(max(d1,d2), 0.);
+//     return length(max(float2(d1,d2),0.0)) + min(max(d1,d2), 0.);
 // }
 
 

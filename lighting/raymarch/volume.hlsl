@@ -1,4 +1,4 @@
-#include "../../math/saturate.glsl"
+#include "../../math/saturate.hlsl"
 
 /*
 original_author:  Inigo Quiles

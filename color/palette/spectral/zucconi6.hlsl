@@ -1,4 +1,4 @@
-#include "../../../math/bump.glsl"
+#include "../../../math/bump.hlsl"
 
 /*
 original_author: Alan Zucconi
