@@ -4,7 +4,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: Simple single pass fluid simlation from the book GPU Pro 2, "Simple and Fast Fluids"
-use: <vec2> fluidSolver(<sampler2D> tex, <vec2> st, <vec2> pixel, <vec2> force)
+use: <vec2> fluidSolver(<SAMPLER_TYPE> tex, <vec2> st, <vec2> pixel, <vec2> force)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - FLUIDSOLVER_DT: Default, 0.15
@@ -39,7 +39,7 @@ options:
 #ifndef FNC_FLUIDSOLVER
 #define FNC_FLUIDSOLVER
 
-vec4 fluidSolver(sampler2D tex, vec2 st, vec2 pixel, vec2 force) {
+vec4 fluidSolver(SAMPLER_TYPE tex, vec2 st, vec2 pixel, vec2 force) {
     const float k = .2;
     const float s = k/FLUIDSOLVER_DT;
     const float dx = FLUIDSOLVER_DX;

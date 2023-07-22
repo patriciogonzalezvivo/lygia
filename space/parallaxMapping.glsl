@@ -3,7 +3,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: get parallax mapping coordinates
-use: parallaxMapping(<sampler2D> tex, <vec3> V, <vec2> T, <float> parallaxHeight) 
+use: parallaxMapping(<SAMPLER_TYPE> tex, <vec3> V, <vec2> T, <float> parallaxHeight) 
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - PARALLAXMAPPING_FNC()
@@ -43,7 +43,7 @@ options:
 //
 //  http://sunandblackcat.com/tipFullView.php?topicid=28
 
-vec2 parallaxMapping_simple(in sampler2D tex, in vec3 V, in vec2 T, out float parallaxHeight) {
+vec2 parallaxMapping_simple(in SAMPLER_TYPE tex, in vec3 V, in vec2 T, out float parallaxHeight) {
 
     // get depth for this fragment
     float initialHeight = PARALLAXMAPPING_SAMPLER_FNC(tex, T);
@@ -59,7 +59,7 @@ vec2 parallaxMapping_simple(in sampler2D tex, in vec3 V, in vec2 T, out float pa
 }
 
 
-vec2 parallaxMapping_steep(in sampler2D tex, in vec3 V, in vec2 T, out float parallaxHeight) {
+vec2 parallaxMapping_steep(in SAMPLER_TYPE tex, in vec3 V, in vec2 T, out float parallaxHeight) {
 
     // determine number of layers from angle between V and N
     const float minLayers = PARALLAXMAPPING_NUMSEARCHES * 0.5;
@@ -94,7 +94,7 @@ vec2 parallaxMapping_steep(in sampler2D tex, in vec3 V, in vec2 T, out float par
     return currentTextureCoords;
 }
 
-vec2 parallaxMapping_relief(in sampler2D tex, in vec3 V, in vec2 T, out float parallaxHeight) {
+vec2 parallaxMapping_relief(in SAMPLER_TYPE tex, in vec3 V, in vec2 T, out float parallaxHeight) {
     // determine required number of layers
     const float minLayers = PARALLAXMAPPING_NUMSEARCHES;
     const float maxLayers = 15.0;
@@ -164,7 +164,7 @@ vec2 parallaxMapping_relief(in sampler2D tex, in vec3 V, in vec2 T, out float pa
 
 
 #if defined(PARALLAXMAPPING_OCCLUSION)
-vec2 parallaxMapping_occlusion(in sampler2D tex, in vec3 V, in vec2 T, out float parallaxHeight) {
+vec2 parallaxMapping_occlusion(in SAMPLER_TYPE tex, in vec3 V, in vec2 T, out float parallaxHeight) {
     // determine optimal number of layers
     const float minLayers = PARALLAXMAPPING_NUMSEARCHES;
     const float maxLayers = 15.0;
@@ -219,11 +219,11 @@ vec2 parallaxMapping_occlusion(in sampler2D tex, in vec3 V, in vec2 T, out float
 }
 #endif
 
-vec2 parallaxMapping(in sampler2D tex, in vec3 V, in vec2 T, out float parallaxHeight) {
+vec2 parallaxMapping(in SAMPLER_TYPE tex, in vec3 V, in vec2 T, out float parallaxHeight) {
     return PARALLAXMAPPING_FNC(tex, V, T, parallaxHeight);
 }
 
-vec2 parallaxMapping(in sampler2D tex, in vec3 V, in vec2 T) {
+vec2 parallaxMapping(in SAMPLER_TYPE tex, in vec3 V, in vec2 T) {
     float height;
     return PARALLAXMAPPING_FNC(tex, V, T, height);
 }

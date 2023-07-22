@@ -18,7 +18,7 @@ description: |
     the radius of the neighborhood of the pixel. The 'sigma_d' variable is usually set to a value
     slightly larger than the radius of the neighborhood of the pixel.
     
-use: bilateral(<sampler2D> texture, <float2> st, <float2> duv)
+use: bilateral(<SAMPLER_TYPE> texture, <float2> st, <float2> duv)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - BILATERAL_AMOUNT
@@ -51,7 +51,7 @@ options:
 #ifndef FNC_BILATERALFILTER
 #define FNC_BILATERALFILTER
 
-BILATERAL_TYPE bilateral(sampler2D tex, float2 st, float2 offset, const int kernelSize) {
+BILATERAL_TYPE bilateral(SAMPLER_TYPE tex, float2 st, float2 offset, const int kernelSize) {
     BILATERAL_TYPE accumColor = float4(0.0, 0.0, 0.0, 0.0);
     float accumWeight = 0.0;
     const float k = 0.15915494; // 1. / (2.*PI)

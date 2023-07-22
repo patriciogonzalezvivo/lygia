@@ -3,7 +3,7 @@
 /*
 original_author: Brad Larson
 description: Adapted version of Prewitt edge detection from https://github.com/BradLarson/GPUImage2
-use: edgePrewitt(<sampler2D> texture, <vec2> st, <vec2> scale)
+use: edgePrewitt(<SAMPLER_TYPE> texture, <vec2> st, <vec2> scale)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - EDGEPREWITT_TYPE: Return type, defaults to float
@@ -30,7 +30,7 @@ examples:
 
 #ifndef FNC_EDGEPREWITT
 #define FNC_EDGEPREWITT
-EDGEPREWITT_TYPE edgePrewitt(in sampler2D tex, in vec2 st, in vec2 offset) {
+EDGEPREWITT_TYPE edgePrewitt(in SAMPLER_TYPE tex, in vec2 st, in vec2 offset) {
     // get samples around pixel
     EDGEPREWITT_TYPE tleft = EDGEPREWITT_SAMPLER_FNC(tex, st + vec2(-offset.x, offset.y));
     EDGEPREWITT_TYPE left = EDGEPREWITT_SAMPLER_FNC(tex, st + vec2(-offset.x, 0.));

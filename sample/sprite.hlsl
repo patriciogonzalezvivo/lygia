@@ -4,7 +4,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: sample a frame on a sprite sheet
-use: <SAMPLESPRITE_TYPE> sampleSprite(<sampler2D >tex, <float2> st, <float2> grid, <float> frame)
+use: <SAMPLESPRITE_TYPE> sampleSprite(<SAMPLER_TYPE >tex, <float2> st, <float2> grid, <float> frame)
 options:
     - SAMPLER_FNC(TEX, UV)
     - SAMPLESPRITE_TYPE: float4
@@ -22,7 +22,7 @@ options:
 #ifndef FNC_SAMPLESPRITE
 #define FNC_SAMPLESPRITE
 
-SAMPLESPRITE_TYPE sampleSprite(sampler2D tex, in float2 st, in float2 grid, float frame) {
+SAMPLESPRITE_TYPE sampleSprite(SAMPLER_TYPE tex, in float2 st, in float2 grid, float frame) {
     return SAMPLESPRITE_SAMPLER_FNC( sprite(st, grid, frame) );
 }
 

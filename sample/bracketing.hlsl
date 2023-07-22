@@ -7,7 +7,7 @@
 original_author: Huw Bowles ( @hdb1 )
 description: |
     'Bracketing' technique maps a texture to a plane using any arbitrary 2D vector field to give orientatio. From https://www.shadertoy.com/view/NddcDr
-use: sampleBracketing(<sampler2D> texture, <float2> st, <float2> direction [, <float> scale] )
+use: sampleBracketing(<SAMPLER_TYPE> texture, <float2> st, <float2> direction [, <float> scale] )
 options:
     - BRACKETING_ANGLE_DELTA:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
@@ -28,7 +28,7 @@ license: Copyright Huw Bowles May 2022 on MIT license
 #ifndef FNC_SAMPLEBRACKETING
 #define FNC_SAMPLEBRACKETING
 
-SAMPLEBRACKETING_TYPE sampleBracketing(sampler2D tex, float2 st, float2 dir, float scale) {
+SAMPLEBRACKETING_TYPE sampleBracketing(SAMPLER_TYPE tex, float2 st, float2 dir, float scale) {
     float2 vAxis0 = float2(0.0, 0.0);
     float2 vAxis1 = float2(0.0, 0.0);
     float blendAlpha = 0.0;
@@ -56,5 +56,5 @@ SAMPLEBRACKETING_TYPE sampleBracketing(sampler2D tex, float2 st, float2 dir, flo
     return result;
 }
 
-SAMPLEBRACKETING_TYPE sampleBracketing(sampler2D tex, float2 st, float2 dir) { return sampleBracketing(tex, st, dir, 1.0); }
+SAMPLEBRACKETING_TYPE sampleBracketing(SAMPLER_TYPE tex, float2 st, float2 dir) { return sampleBracketing(tex, st, dir, 1.0); }
 #endif

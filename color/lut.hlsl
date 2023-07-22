@@ -3,7 +3,7 @@
 /*
 Author: [Matt DesLauriers, Johan Ismael, Patricio Gonzalez Vivo]
 description: Use LUT textures to modify colors (float4 and float3) or a position in a gradient (float2 and floats)
-use: lut(<sampler2D> texture, <float4|float3|float2|float> value [, int row])
+use: lut(<SAMPLER_TYPE> texture, <float4|float3|float2|float> value [, int row])
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - LUT_N_ROWS: only useful on row LUTs to stack several of those one on top of each other 
@@ -30,7 +30,7 @@ options:
 #endif
 
 #include "../sample/2DCube.hlsl"
-float4 lut(in sampler2D tex, in float4 color, in int offset) { 
+float4 lut(in SAMPLER_TYPE tex, in float4 color, in int offset) { 
     return sample2DCube(tex, color.rgb); 
 }
 
@@ -42,7 +42,7 @@ const float4 LUT_SIZE = float4(LUT_WIDTH, LUT_CELL_SIZE, 1./LUT_WIDTH, 1./LUT_CE
 
 // Apply LUT to a COLOR
 // ------------------------------------------------------------
-float4 lut(in sampler2D tex, in float4 color, in int offset) {
+float4 lut(in SAMPLER_TYPE tex, in float4 color, in int offset) {
     float3 scaledColor = clamp(color.rgb, float3(0., 0., 0.), float3(1., 1., 1.)) * (LUT_SIZE.y - 1.);
     float bFrac = frac(scaledColor.z);
 
@@ -69,8 +69,8 @@ float4 lut(in sampler2D tex, in float4 color, in int offset) {
 }
 #endif
 
-float4 lut(in sampler2D tex, in float4 color) { return lut(tex, color, 0); }
-float3 lut(in sampler2D tex, in float3 color, in int offset) { return lut(tex, float4(color, 1.), offset).rgb; }
-float3 lut(in sampler2D tex, in float3 color) { return lut(tex, color, 0).rgb; }
+float4 lut(in SAMPLER_TYPE tex, in float4 color) { return lut(tex, color, 0); }
+float3 lut(in SAMPLER_TYPE tex, in float3 color, in int offset) { return lut(tex, float4(color, 1.), offset).rgb; }
+float3 lut(in SAMPLER_TYPE tex, in float3 color) { return lut(tex, color, 0).rgb; }
 
 #endif

@@ -4,7 +4,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: one dimension Gaussian Blur to be applied in two passes
-use: gaussianBlur1D(<sampler2D> texture, <vec2> st, <vec2> pixel_direction , const int kernelSize)
+use: gaussianBlur1D(<SAMPLER_TYPE> texture, <vec2> st, <vec2> pixel_direction , const int kernelSize)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - GAUSSIANBLUR1D_TYPE:
@@ -32,7 +32,7 @@ options:
 
 #ifdef PLATFORM_WEBGL
 
-GAUSSIANBLUR1D_TYPE gaussianBlur1D(in sampler2D tex,in vec2 st,in vec2 offset,const int kernelSize){
+GAUSSIANBLUR1D_TYPE gaussianBlur1D(in SAMPLER_TYPE tex,in vec2 st,in vec2 offset,const int kernelSize){
     GAUSSIANBLUR1D_TYPE accumColor = GAUSSIANBLUR1D_TYPE(0.0);
     
     float accumWeight = 0.0;
@@ -51,7 +51,7 @@ GAUSSIANBLUR1D_TYPE gaussianBlur1D(in sampler2D tex,in vec2 st,in vec2 offset,co
 
 #else
 
-GAUSSIANBLUR1D_TYPE gaussianBlur1D(in sampler2D tex,in vec2 st,in vec2 offset,const int kernelSize){
+GAUSSIANBLUR1D_TYPE gaussianBlur1D(in SAMPLER_TYPE tex,in vec2 st,in vec2 offset,const int kernelSize){
     GAUSSIANBLUR1D_TYPE accumColor=GAUSSIANBLUR1D_TYPE(0.);
 
     float kernelSizef = float(kernelSize);

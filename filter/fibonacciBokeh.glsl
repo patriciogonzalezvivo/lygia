@@ -5,7 +5,7 @@
 /*
 original_author: Xor 
 description: Fibonacci Bokeh ( https://www.shadertoy.com/view/fljyWd )
-use: <vec4> fibonacciBokeh(<sampler2D> tex, <vec2> st, <vec2> pixel, <float> amount) 
+use: <vec4> fibonacciBokeh(<SAMPLER_TYPE> tex, <vec2> st, <vec2> pixel, <float> amount) 
 options:
     - FIBONACCIBOKEH_TYPE:
     - FIBONACCIBOKEH_SAMPLER_FNC(UV):
@@ -23,7 +23,7 @@ options:
 #ifndef FNC_FIBONACCIBOKEH
 #define FNC_FIBONACCIBOKEH
 
-FIBONACCIBOKEH_TYPE fibonacciBokeh(sampler2D tex, vec2 st, vec2 pixel, float amount) {
+FIBONACCIBOKEH_TYPE fibonacciBokeh(SAMPLER_TYPE tex, vec2 st, vec2 pixel, float amount) {
     FIBONACCIBOKEH_TYPE color = FIBONACCIBOKEH_TYPE(0.0);
     vec2 r = 1.0/pixel;
     vec2 uv = st * r;

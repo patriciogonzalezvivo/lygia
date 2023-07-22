@@ -4,7 +4,7 @@
 original_author: Patricio Gonzalez Vivo
 description: sample shadow map using PCF
 use:
-    - <float> sampleShadowPCF(<sampler2D> depths, <vec2> size, <vec2> uv, <float> compare)
+    - <float> sampleShadowPCF(<SAMPLER_TYPE> depths, <vec2> size, <vec2> uv, <float> compare)
     - <float> sampleShadowPCF(<vec3> lightcoord)
 options:
     - SHADOWMAP_BIAS
@@ -21,7 +21,7 @@ options:
 #ifndef FNC_SHADOW
 #define FNC_SHADOW
 
-float shadow(sampler2D shadoMap, const in vec2 size, const in vec2 uv, float compare) {
+float shadow(SAMPLER_TYPE shadoMap, const in vec2 size, const in vec2 uv, float compare) {
     #ifdef SHADOWMAP_BIAS
     compare -= SHADOWMAP_BIAS;
     #endif

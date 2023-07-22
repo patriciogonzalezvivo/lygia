@@ -3,7 +3,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: Wrapper around three different edge detection algorithms Sobel, Prewitt, and directional Sobel
-use: edge(<sampler2D> texture, <float2> st, <float2> pixels_scale)
+use: edge(<SAMPLER_TYPE> texture, <float2> st, <float2> pixels_scale)
 options:
     - EDGE_FNC: Edge detection algorithm, defaults to edgeSobel, edgePrewitt & edgeSobel_directional also available
     - EDGE_TYPE: Return type, defaults to float
@@ -29,7 +29,7 @@ options:
 
 #ifndef FNC_EDGE
 #define FNC_EDGE
-EDGE_TYPE edge(in sampler2D tex, in float2 st, in float2 offset) {
+EDGE_TYPE edge(in SAMPLER_TYPE tex, in float2 st, in float2 offset) {
     return EDGE_FNC(tex, st, offset);
 }
 #endif

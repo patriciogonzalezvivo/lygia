@@ -4,7 +4,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: Grayscott Reaction-Diffusion
-use: <vec3> grayscott(<sampler2D> tex, <vec2> st, <vec2> pixel, <float> src [, <float> diffU, <float> diffV, <float> f, <float> k ])
+use: <vec3> grayscott(<SAMPLER_TYPE> tex, <vec2> st, <vec2> pixel, <float> src [, <float> diffU, <float> diffV, <float> f, <float> k ])
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - GRAYSCOTT_ITERATIONS
@@ -17,7 +17,7 @@ options:
 #ifndef FNC_GRAYSCOTT
 #define FNC_GRAYSCOTT
 
-vec3 grayscott(sampler2D tex, vec2 st, vec2 pixel, float src, float diffU, float diffV, float f, float k ) {
+vec3 grayscott(SAMPLER_TYPE tex, vec2 st, vec2 pixel, float src, float diffU, float diffV, float f, float k ) {
     
     float kernel[9];
     kernel[0] = 0.707106781;
@@ -67,7 +67,7 @@ vec3 grayscott(sampler2D tex, vec2 st, vec2 pixel, float src, float diffU, float
     return vec3(saturate(u), 1.0 - u/v, saturate(v));
 }
 
-vec3 grayscott(sampler2D tex, vec2 st, vec2 pixel, float src) {
+vec3 grayscott(SAMPLER_TYPE tex, vec2 st, vec2 pixel, float src) {
     return grayscott(tex, st, pixel, src, 0.25, 0.05, 0.1, 0.063); 
 }
 

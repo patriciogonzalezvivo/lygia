@@ -3,7 +3,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: Converts a RGB normal map into normal vectors
-use: SAMPLEBUMPMap(<sampler2D> texture, <float2> st, <float2> pixel)
+use: SAMPLEBUMPMap(<SAMPLER_TYPE> texture, <float2> st, <float2> pixel)
 options:
     - SAMPLEBUMPMAP_Z: Steepness of z before normalization, defaults to .01
 */
@@ -13,7 +13,7 @@ options:
 
 #ifndef FNC_SAMPLEBUMPMAP
 #define FNC_SAMPLEBUMPMAP
-float3 sampleBumpMap(sampler2D tex, float2 st, float2 pixel) {
+float3 sampleBumpMap(SAMPLER_TYPE tex, float2 st, float2 pixel) {
     float2 deltas = sampleDerivative(tex, st, pixel);
     return normalize(float3(deltas.x, deltas.y, SAMPLEBUMPMAP_Z) );
 }

@@ -4,7 +4,7 @@
 original_author: Brad Larson
 description: |
     Adapted version of Sobel edge detection from https://github.com/BradLarson/GPUImage2.
-use: edgeSobel(<sampler2D> texture, <float2> st, <float2> pixels_scale)
+use: edgeSobel(<SAMPLER_TYPE> texture, <float2> st, <float2> pixels_scale)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - EDGESOBEL_TYPE: Return type, defaults to float
@@ -29,7 +29,7 @@ options:
 
 #ifndef FNC_EDGESOBEL
 #define FNC_EDGESOBEL
-EDGESOBEL_TYPE edgeSobel(in sampler2D tex, in float2 st, in float2 offset) {
+EDGESOBEL_TYPE edgeSobel(in SAMPLER_TYPE tex, in float2 st, in float2 offset) {
     // get samples around pixel
     EDGESOBEL_TYPE tleft = EDGESOBEL_SAMPLER_FNC(tex, st + float2(-offset.x, offset.y));
     EDGESOBEL_TYPE left = EDGESOBEL_SAMPLER_FNC(tex, st + float2(-offset.x, 0.));

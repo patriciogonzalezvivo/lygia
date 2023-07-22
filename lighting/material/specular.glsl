@@ -13,7 +13,7 @@ options:
 #define FNC_MATERIAL_SPECULAR
 
 #ifdef MATERIAL_SPECULARMAP
-uniform sampler2D MATERIAL_SPECULARMAP;
+uniform SAMPLER_TYPE MATERIAL_SPECULARMAP;
 #endif
 
 vec3 materialSpecular() {

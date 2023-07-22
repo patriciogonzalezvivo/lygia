@@ -4,7 +4,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: upscale for function for convolution pyramid  https://www.cs.huji.ac.il/labs/cglab/projects/convpyr/data/convpyr-small.pdf
-use: <vec4> POISSONFILLUpscale(<sampler2D> tex0, sampler2D tex1, <vec2> st, <vec2> pixel)
+use: <vec4> POISSONFILLUpscale(<SAMPLER_TYPE> tex0, SAMPLER_TYPE tex1, <vec2> st, <vec2> pixel)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - POISSONFILL_H1: 1.0334, 0.6836, 0.1507
@@ -26,7 +26,7 @@ options:
 
 #ifndef FNC_POISSONFILL_UPSCALE
 #define FNC_POISSONFILL_UPSCALE
-vec4 poissonFillUpscale(sampler2D tex0, sampler2D tex1, vec2 st, vec2 pixel) {
+vec4 poissonFillUpscale(SAMPLER_TYPE tex0, SAMPLER_TYPE tex1, vec2 st, vec2 pixel) {
     const vec3  h1 = vec3(POISSONFILL_H1);
     const float h2 = POISSONFILL_H2;
     const vec2  g  = vec2(POISSONFILL_G);

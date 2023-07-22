@@ -3,7 +3,7 @@
 /*
 original_author: [Patricio Gonzalez Vivo, Johan Ismael]
 description: Samples multiple times a texture in the specified direction
-use: stretch(<sampler2D> tex, <vec2> st, <vec2> direction [, int samples])
+use: stretch(<SAMPLER_TYPE> tex, <vec2> st, <vec2> direction [, int samples])
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - STRETCH_SAMPLES: number of samples taken, defaults to 20
@@ -26,7 +26,7 @@ options:
 
 #ifndef FNC_STRETCH
 #define FNC_STRETCH
-STRETCH_TYPE stretch(in sampler2D tex, in vec2 st, in vec2 direction, const int i_samples) {
+STRETCH_TYPE stretch(in SAMPLER_TYPE tex, in vec2 st, in vec2 direction, const int i_samples) {
     float f_samples = float(i_samples);
     STRETCH_TYPE color = STRETCH_TYPE(0.);
 
@@ -47,7 +47,7 @@ STRETCH_TYPE stretch(in sampler2D tex, in vec2 st, in vec2 direction, const int 
     return color / f_samples;
 }
 
-STRETCH_TYPE stretch(in sampler2D tex, in vec2 st, in vec2 direction) {
+STRETCH_TYPE stretch(in SAMPLER_TYPE tex, in vec2 st, in vec2 direction) {
     float f_samples = float(STRETCH_SAMPLES);  
     STRETCH_TYPE color = STRETCH_TYPE(0.);
     for (int i = 0; i < STRETCH_SAMPLES; i++) {

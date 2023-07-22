@@ -3,7 +3,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: sharpening filter
-use: sharpen(<sampler2D> texture, <vec2> st, <vec2> renderSize [, float streanght])
+use: sharpen(<SAMPLER_TYPE> texture, <vec2> st, <vec2> renderSize [, float streanght])
 options:
     - SHARPEN_KERNELSIZE: Defaults 2
     - SHARPEN_TYPE: defaults to vec3
@@ -35,11 +35,11 @@ options:
 #ifndef FNC_SHARPEN
 #define FNC_SHARPEN
 
-SHARPEN_TYPE sharpen(in sampler2D tex, in vec2 st, in vec2 pixel, float strenght) {
+SHARPEN_TYPE sharpen(in SAMPLER_TYPE tex, in vec2 st, in vec2 pixel, float strenght) {
     return SHARPEN_FNC (tex, st, pixel, strenght);
 }
 
-SHARPEN_TYPE sharpen(in sampler2D tex, in vec2 st, in vec2 pixel) {
+SHARPEN_TYPE sharpen(in SAMPLER_TYPE tex, in vec2 st, in vec2 pixel) {
     return SHARPEN_FNC (tex, st, pixel);
 }
 

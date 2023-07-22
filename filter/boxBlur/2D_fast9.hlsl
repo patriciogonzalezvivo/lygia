@@ -3,7 +3,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: simple two dimentional box blur, so can be apply in a single pass
-use: boxBlur1D_fast9(<sampler2D> texture, <float2> st, <float2> pixel_direction)
+use: boxBlur1D_fast9(<SAMPLER_TYPE> texture, <float2> st, <float2> pixel_direction)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - BOXBLUR2D_FAST9_TYPE: Default is `float4`
@@ -28,7 +28,7 @@ options:
 
 #ifndef FNC_BOXBLUR2D_FAST9
 #define FNC_BOXBLUR2D_FAST9
-BOXBLUR2D_FAST9_TYPE boxBlur2D_fast9(in sampler2D tex, in float2 st, in float2 offset) {
+BOXBLUR2D_FAST9_TYPE boxBlur2D_fast9(in SAMPLER_TYPE tex, in float2 st, in float2 offset) {
     BOXBLUR2D_FAST9_TYPE color = BOXBLUR2D_FAST9_SAMPLER_FNC(tex, st);           // center
     color += BOXBLUR2D_FAST9_SAMPLER_FNC(tex, st + float2(-offset.x, offset.y));  // tleft
     color += BOXBLUR2D_FAST9_SAMPLER_FNC(tex, st + float2(-offset.x, 0.));        // left

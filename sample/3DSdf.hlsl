@@ -5,7 +5,7 @@
 
 #ifndef FNC_SAMPLE3DSDF
 #define FNC_SAMPLE3DSDF
-float sample3DSdf(sampler2D tex, float3 pos) {
+float sample3DSdf(SAMPLER_TYPE tex, float3 pos) {
     pos += .5;
     pos = scale(pos, .5);
     float sdf = (sample2DCube(tex, pos).r * 2.0 - 1.0) * 1.5;

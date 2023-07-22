@@ -14,7 +14,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: down and up scaling functions for convolution pyramid  https://www.cs.huji.ac.il/labs/cglab/projects/convpyr/data/convpyr-small.pdf
-use: convolutionPyramid(<sampler2D> texture0, <sampler2D> texture1, <vec2> st, <vec2> pixel, <bool> upscale)
+use: convolutionPyramid(<SAMPLER_TYPE> texture0, <SAMPLER_TYPE> texture1, <vec2> st, <vec2> pixel, <bool> upscale)
 options:
     - POISSONFILL_H1: 1.0334, 0.6836, 0.1507
     - POISSONFILL_H2: 0.0270
@@ -23,7 +23,7 @@ options:
 
 #ifndef FNC_POISSONFILL
 #define FNC_POISSONFILL
-vec4 poissonFill(sampler2D tex0, sampler2D tex1, vec2 st, vec2 pixel, bool upscale) {
+vec4 poissonFill(SAMPLER_TYPE tex0, SAMPLER_TYPE tex1, vec2 st, vec2 pixel, bool upscale) {
     vec4 color = vec4(0.0);
     if (!upscale) {
         color = poissonFillDownscale(tex0, st, pixel);

@@ -13,7 +13,7 @@ options:
 #define FNC_MATERIAL_EMISSIVE
 
 #ifdef MATERIAL_EMISSIVEMAP
-uniform sampler2D MATERIAL_EMISSIVEMAP;
+uniform SAMPLER_TYPE MATERIAL_EMISSIVEMAP;
 #endif
 
 vec3 materialEmissive() {

@@ -3,7 +3,7 @@
 /*
 original_author: Armin Ronacher
 description: Basic FXAA implementation based on the code on geeks3d.com with the modification that the texture2DLod stuff was removed since it's unsupported by WebGL from https://github.com/mitsuhiko/webgl-meincraft
-use: sampleFXAA(<sampler2D> tex, <float2> st, <float2> pixel)
+use: sampleFXAA(<SAMPLER_TYPE> tex, <float2> st, <float2> pixel)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - SAMPLEFXAA_REDUCE_MIN
@@ -30,7 +30,7 @@ options:
 
 #ifndef FNC_SAMPLEFXAA
 #define FNC_SAMPLEFXAA 
-float4 sampleFXAA(sampler2D tex, float2 uv, float2 pixel) {
+float4 sampleFXAA(SAMPLER_TYPE tex, float2 uv, float2 pixel) {
     float3 rgbNW  = SAMPLEFXAA_SAMPLE_FNC(uv.xy + float2( -1.0, -1.0 ) * pixel).xyz;
     float3 rgbNE  = SAMPLEFXAA_SAMPLE_FNC(uv.xy + float2( 1.0, -1.0 ) * pixel).xyz;
     float3 rgbSW  = SAMPLEFXAA_SAMPLE_FNC(uv.xy + float2( -1.0, 1.0 ) * pixel).xyz;

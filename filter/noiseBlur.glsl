@@ -7,7 +7,7 @@
 /*
 original_author: Alan Wolfe
 description:  white noise blur based on this shader https://www.shadertoy.com/view/XsVBDR
-use: noiseBlur(<sampler2D> texture, <vec2> st, <vec2> pixel, <float> radius)
+use: noiseBlur(<SAMPLER_TYPE> texture, <vec2> st, <vec2> pixel, <float> radius)
 options:
     - NOISEBLUR_TYPE: default to vec3
     - NOISEBLUR_GAUSSIAN_K: no gaussian by default
@@ -38,7 +38,7 @@ examples:
 #ifndef FNC_NOISEBLUR
 #define FNC_NOISEBLUR
 
-NOISEBLUR_TYPE noiseBlur(in sampler2D tex, in vec2 st, in vec2 pixel, float radius) {
+NOISEBLUR_TYPE noiseBlur(in SAMPLER_TYPE tex, in vec2 st, in vec2 pixel, float radius) {
     float blurRadius = radius;
     vec2 noiseOffset = st;
 
@@ -76,7 +76,7 @@ NOISEBLUR_TYPE noiseBlur(in sampler2D tex, in vec2 st, in vec2 pixel, float radi
     return result;
 }
 
-NOISEBLUR_TYPE noiseBlur(sampler2D tex, vec2 st, vec2 pixel) {
+NOISEBLUR_TYPE noiseBlur(SAMPLER_TYPE tex, vec2 st, vec2 pixel) {
     NOISEBLUR_TYPE rta = NOISEBLUR_TYPE(0.0);
     float total = 0.0;
     float offset = random(vec3(12.9898 + st.x, 78.233 + st.y, 151.7182));

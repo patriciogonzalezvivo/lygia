@@ -3,7 +3,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: make a radial blur, with dir as the direction to the center and strength as the amount
-use: radialBlur(<sampler2D> texture, <float2> st, <float2> dir [, <float> strength] )
+use: radialBlur(<SAMPLER_TYPE> texture, <float2> st, <float2> dir [, <float> strength] )
 options:
     - RADIALBLUR_KERNELSIZE: Default 64 
     - RADIALBLUR_STRENGTH: Default 0.125
@@ -30,7 +30,7 @@ options:
 
 #ifndef FNC_RADIALBLUR
 #define FNC_RADIALBLUR
-RADIALBLUR_TYPE radialBlur(in sampler2D tex, in float2 st, in float2 dir, in float strength) {
+RADIALBLUR_TYPE radialBlur(in SAMPLER_TYPE tex, in float2 st, in float2 dir, in float strength) {
     RADIALBLUR_TYPE color = float4(0.0, 0.0, 0.0, 0.0);
     float f_samples = float(RADIALBLUR_KERNELSIZE);
     float f_factor = 1./f_samples;
@@ -41,7 +41,7 @@ RADIALBLUR_TYPE radialBlur(in sampler2D tex, in float2 st, in float2 dir, in flo
     return color * f_factor;
 }
 
-RADIALBLUR_TYPE radialBlur(in sampler2D tex, in float2 st, in float2 dir) {
+RADIALBLUR_TYPE radialBlur(in SAMPLER_TYPE tex, in float2 st, in float2 dir) {
     return radialBlur(tex, st, dir, RADIALBLUR_STRENGTH);
 }
 #endif

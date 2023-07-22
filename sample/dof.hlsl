@@ -5,7 +5,7 @@
 /*
 original_author: Dennis Gustafsson
 description:  http://blog.tuxedolabs.com/2018/05/04/bokeh-depth-of-field-in-single-pass.html
-use: sampleDoF(<sampler2D> texture, <sampler2D> depth, <float2> st, <float> focusPoint, <float> focusScale)
+use: sampleDoF(<SAMPLER_TYPE> texture, <SAMPLER_TYPE> depth, <float2> st, <float> focusPoint, <float> focusScale)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - SAMPLEDOF_TYPE:
@@ -56,7 +56,7 @@ float getBlurSize(float depth,float focusPoint,float focusScale){
 
 #ifdef PLATFORM_WEBGL
 
-SAMPLEDOF_TYPE sampleDoF(sampler2D tex, sampler2D texDepth, float2 texCoord, float focusPoint, float focusScale){
+SAMPLEDOF_TYPE sampleDoF(SAMPLER_TYPE tex, SAMPLER_TYPE texDepth, float2 texCoord, float focusPoint, float focusScale){
     float pct=0.;
     
     float centerDepth = SAMPLEDOF_DEPTH_SAMPLE_FNC(texDepth, texCoord);
@@ -89,7 +89,7 @@ SAMPLEDOF_TYPE sampleDoF(sampler2D tex, sampler2D texDepth, float2 texCoord, flo
 
 #else
 
-SAMPLEDOF_TYPE sampleDoF(sampler2D tex, sampler2D texDepth, float2 texCoord, float focusPoint, float focusScale) {
+SAMPLEDOF_TYPE sampleDoF(SAMPLER_TYPE tex, SAMPLER_TYPE texDepth, float2 texCoord, float focusPoint, float focusScale) {
     float pct = 0.0;
     float ang = 0.0;
 

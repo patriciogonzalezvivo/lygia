@@ -4,7 +4,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: samples a hue rainbox pattern color encoded texture and returns a float
-use: <fluat> sampleHue(<sampler2D> tex, <vec2> st);
+use: <fluat> sampleHue(<SAMPLER_TYPE> tex, <vec2> st);
 options:
     - SAMPLER_FNC(TEX, UV)
 */
@@ -15,7 +15,7 @@ options:
 
 #ifndef FNC_SAMPLEHUE
 #define FNC_SAMPLEHUE
-float sampleHue(sampler2D tex, vec2 st) { 
+float sampleHue(SAMPLER_TYPE tex, vec2 st) { 
     return rgb2hue( SAMPLER_FNC( tex, st ) ); 
 }
 #endif

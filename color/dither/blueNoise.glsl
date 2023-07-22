@@ -47,7 +47,7 @@ float remap_pdf_tri_unity( float v ) {
 
 const vec2 blueNoiseTexturePixel = 1.0/BLUENOISE_TEXTURE_RESOLUTION;
 
-float ditherBlueNoise(sampler2D tex, in float b, const HIGHP in float time) {
+float ditherBlueNoise(SAMPLER_TYPE tex, in float b, const HIGHP in float time) {
     vec2 st = gl_FragCoord.xy;
     #ifdef DITHER_BLUENOISE_ANIMATED 
     st += 1337.0*fract(time);
@@ -57,7 +57,7 @@ float ditherBlueNoise(sampler2D tex, in float b, const HIGHP in float time) {
     return b + (bn_tri*2.0-0.5)/255.0;
 }
 
-vec3 ditherBlueNoise(sampler2D tex, in vec3 rgb, const HIGHP in float time) {
+vec3 ditherBlueNoise(SAMPLER_TYPE tex, in vec3 rgb, const HIGHP in float time) {
     vec2 st = gl_FragCoord.xy;
     #ifdef DITHER_BLUENOISE_ANIMATED
     st += 1337.0*fract(time * 0.1);
@@ -78,7 +78,7 @@ vec3 ditherBlueNoise(sampler2D tex, in vec3 rgb, const HIGHP in float time) {
     return rgb;
 }
 
-vec4 ditherBlueNoise(sampler2D tex, in vec4 rgba, const HIGHP in float time) {
+vec4 ditherBlueNoise(SAMPLER_TYPE tex, in vec4 rgba, const HIGHP in float time) {
     return vec4(ditherBlueNoise(tex, rgba.rgb, time), rgba.a);
 }
 

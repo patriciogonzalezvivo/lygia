@@ -3,7 +3,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: given a Spherical Map texture and a normal direction returns the right pixel
-use: spheremap(<sampler2D> texture, <float3> normal)
+use: spheremap(<SAMPLER_TYPE> texture, <float3> normal)
 */
 
 #ifndef SPHEREMAP_TYPE
@@ -24,7 +24,7 @@ float2 sphereMap(float3 normal, float3 eye) {
 }
 
 
-SPHEREMAP_TYPE sphereMap (in sampler2D tex, in float3 normal, in float3 eye) {
+SPHEREMAP_TYPE sphereMap (in SAMPLER_TYPE tex, in float3 normal, in float3 eye) {
     return SPHEREMAP_SAMPLER_FNC(tex, sphereMap(normal, eye) );
 }
 #endif

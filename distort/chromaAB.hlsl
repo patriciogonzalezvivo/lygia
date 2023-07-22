@@ -4,7 +4,7 @@
 /*
 original_author: Patricio Gonzalez Vivo, Johan Ismael
 description: Chroma Aberration inspired by https://www.shadertoy.com/view/4sX3z4
-use: chromaAB(<sampler2D> texture, <float2> st [, <float|float2> sdf|offset, <float> pct])
+use: chromaAB(<SAMPLER_TYPE> texture, <float2> st [, <float|float2> sdf|offset, <float> pct])
 options:
     CHROMAAB_TYPE: return type, defauls to float3
     CHROMAAB_PCT: amount of aberration, defaults to 1.5
@@ -27,7 +27,7 @@ options:
 #ifndef FNC_CHROMAAB
 #define FNC_CHROMAAB
 
-CHROMAAB_TYPE chromaAB(in sampler2D tex, in float2 st, in float2 direction, in float3 distortion ) {
+CHROMAAB_TYPE chromaAB(in SAMPLER_TYPE tex, in float2 st, in float2 direction, in float3 distortion ) {
     CHROMAAB_TYPE c = float4(1., 1., 1., 1.);
     c.r = CHROMAAB_SAMPLER_FNC(tex, st + direction * distortion.r).r;
     c.g = CHROMAAB_SAMPLER_FNC(tex, st + direction * distortion.g).g;
@@ -35,7 +35,7 @@ CHROMAAB_TYPE chromaAB(in sampler2D tex, in float2 st, in float2 direction, in f
     return c;
 }
 
-CHROMAAB_TYPE chromaAB(in sampler2D tex, in float2 st, in float2 offset, in float pct) {
+CHROMAAB_TYPE chromaAB(in SAMPLER_TYPE tex, in float2 st, in float2 offset, in float pct) {
 
   #ifdef CHROMAAB_CENTER_BUFFER
     // modify the distance from the center, so that only the edges are affected
@@ -54,19 +54,19 @@ CHROMAAB_TYPE chromaAB(in sampler2D tex, in float2 st, in float2 offset, in floa
   return c;
 }
 
-CHROMAAB_TYPE chromaAB(in sampler2D tex, in float2 st, in float sdf, in float pct) {
+CHROMAAB_TYPE chromaAB(in SAMPLER_TYPE tex, in float2 st, in float sdf, in float pct) {
   return chromaAB(tex, st, float2(sdf, sdf), pct);
 }
 
-CHROMAAB_TYPE chromaAB(in sampler2D tex, in float2 st, in float sdf) {
+CHROMAAB_TYPE chromaAB(in SAMPLER_TYPE tex, in float2 st, in float sdf) {
   return chromaAB(tex, st, sdf, CHROMAAB_PCT);
 }
 
-CHROMAAB_TYPE chromaAB(in sampler2D tex, in float2 st, in float2 offset) {
+CHROMAAB_TYPE chromaAB(in SAMPLER_TYPE tex, in float2 st, in float2 offset) {
   return chromaAB(tex, st, offset, CHROMAAB_PCT);
 }
 
-CHROMAAB_TYPE chromaAB(in sampler2D tex, in float2 st) {
+CHROMAAB_TYPE chromaAB(in SAMPLER_TYPE tex, in float2 st) {
   return chromaAB(tex, st, lengthSq(st - .5), CHROMAAB_PCT);
 }
 

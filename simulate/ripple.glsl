@@ -4,7 +4,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: Simple Ripple Propagation
-use: <vec3> ripple(<sampler2D> tex, <vec2> st, <vec2> pixel)
+use: <vec3> ripple(<SAMPLER_TYPE> tex, <vec2> st, <vec2> pixel)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - RIPPLE_SAMPLER_FNC(UV)
@@ -16,7 +16,7 @@ options:
 
 #ifndef FNC_RIPPLE
 #define FNC_RIPPLE
-vec3 ripple(sampler2D tex, vec2 st, vec2 pixel) {
+vec3 ripple(SAMPLER_TYPE tex, vec2 st, vec2 pixel) {
     vec3 rta = RIPPLE_SAMPLER_FNC(st).rgb;
    	float s0 = rta.y;
     float s1 = RIPPLE_SAMPLER_FNC(st + vec2(0.0,   -pixel.y)).r;    //     s1
