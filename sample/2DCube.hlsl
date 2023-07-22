@@ -4,7 +4,7 @@
 /*
 Author: Patricio Gonzalez Vivo
 description: Use a 2D texture as a 3D one
-use: <float4> sample2DCube(in <sampler2D> lut, in <float3> xyz) 
+use: <float4> sample2DCube(in <SAMPLER_TYPE> lut, in <float3> xyz) 
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - SAMPLE_2DCUBE_CELL_SIZE
@@ -22,7 +22,7 @@ options:
 
 #ifndef FNC_SAMPLE_2DCUBE
 #define FNC_SAMPLE_2DCUBE
-float4 sample2DCube(in sampler2D lut, in float3 xyz) {
+float4 sample2DCube(in SAMPLER_TYPE lut, in float3 xyz) {
 
 #if defined(SAMPLE_2DCUBE_CELL_SIZE)
     const float cellsSize = SAMPLE_2DCUBE_CELL_SIZE;

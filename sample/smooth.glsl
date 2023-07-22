@@ -5,7 +5,7 @@
 /*
 original_author: Inigo Quiles
 description: avoid the ugly artifacts of bilinear texture filtering. You can find more information here https://iquilezles.org/articles/texture
-use: <vec4> sampleSmooth(<sampler2D> tex, <vec2> st, <vec2> texResolution)
+use: <vec4> sampleSmooth(<SAMPLER_TYPE> tex, <vec2> st, <vec2> texResolution)
 options:
     - SAMPLER_FNC(TEX, UV): nan
     - SAMPLESMOOTH_POLYNOMIAL: cubic or quartic
@@ -19,7 +19,7 @@ examples:
 
 #ifndef FNC_SAMPLESMOOTH
 #define FNC_SAMPLESMOOTH
-vec4 sampleSmooth(sampler2D tex, vec2 st, vec2 texResolution) {
+vec4 sampleSmooth(SAMPLER_TYPE tex, vec2 st, vec2 texResolution) {
     st *= texResolution + 0.5;
     vec2 fst = fract( st );
     st = floor( st );

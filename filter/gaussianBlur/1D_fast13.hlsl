@@ -4,7 +4,7 @@
 function: gaussianBlur1D_fast13
 original_author: Matt DesLauriers
 description: adapted versions of gaussian fast blur 13 from https://github.com/Jam3/glsl-fast-gaussian-blur
-use: gaussianBlur1D_fast13(<sampler2D> texture, <float2> st, <float2> pixel_direction)
+use: gaussianBlur1D_fast13(<SAMPLER_TYPE> texture, <float2> st, <float2> pixel_direction)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - GAUSSIANBLUR1D_FAST13_TYPE
@@ -29,7 +29,7 @@ options:
 
 #ifndef FNC_GAUSSIANBLUR1D_FAST13
 #define FNC_GAUSSIANBLUR1D_FAST13
-GAUSSIANBLUR1D_FAST13_TYPE gaussianBlur1D_fast13(in sampler2D tex, in float2 st, in float2 offset) {
+GAUSSIANBLUR1D_FAST13_TYPE gaussianBlur1D_fast13(in SAMPLER_TYPE tex, in float2 st, in float2 offset) {
     float2 off1 = float2(1.411764705882353,1.411764705882353) * offset;
     float2 off2 = float2(3.2941176470588234, 3.2941176470588234) * offset;
     float2 off3 = float2(5.176470588235294, 5.176470588235294) * offset;

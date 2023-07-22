@@ -5,7 +5,7 @@ original_author: [Morgan McGuire, Kyle Whitson]
 description: |
     3x3 median filter, adapted from "A Fast, Small-Radius GPU Median Filter" 
     by Morgan McGuire in ShaderX6 https://casual-effects.com/research/McGuire2008Median/index.html
-use: median2D_fast3(<sampler2D> texture, <vec2> st, <vec2> pixel)
+use: median2D_fast3(<SAMPLER_TYPE> texture, <vec2> st, <vec2> pixel)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - MEDIAN2D_FAST3_TYPE: default vec4
@@ -46,7 +46,7 @@ examples:
 #define MEDIAN_MNMX4(a, b, c, d) MEDIAN_2(a, b); MEDIAN_2(c, d); MEDIAN_2(a, c); MEDIAN_2(b, d);                                  // 4 exchanges
 #define MEDIAN_MNMX5(a, b, c, d, e) MEDIAN_2(a, b); MEDIAN_2(c, d); MEDIAN_MN3(a, c, e); MEDIAN_MX3(b, d, e);                     // 6 exchanges
 #define MEDIAN_MNMX6(a, b, c, d, e, f) MEDIAN_2(a, d); MEDIAN_2(b, e); MEDIAN_2(c, f); MEDIAN_MN3(a, b, c); MEDIAN_MX3(d, e, f);  // 7 exchanges
-MEDIAN2D_FAST3_TYPE median2D_fast3(in sampler2D tex, in vec2 st, in vec2 radius) {
+MEDIAN2D_FAST3_TYPE median2D_fast3(in SAMPLER_TYPE tex, in vec2 st, in vec2 radius) {
     MEDIAN2D_FAST3_TYPE v[9];
     for (int dX = -1; dX <= 1; ++dX) {
         for (int dY = -1; dY <= 1; ++dY) {

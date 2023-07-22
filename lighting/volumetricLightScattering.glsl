@@ -7,7 +7,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: ScreenSpace Reflections
-use: <float> ssao(<sampler2D> texPosition, <sampler2D> texNormal, vec2 <st> [, <float> radius, float <bias>])
+use: <float> ssao(<SAMPLER_TYPE> texPosition, <SAMPLER_TYPE> texNormal, vec2 <st> [, <float> radius, float <bias>])
 options:
     - CAMERA_POSITION
     - CAMERA_NEAR_CLIP: camera near clip distance
@@ -85,7 +85,7 @@ options:
 
 #ifndef FNC_VOLUMETRICLIGHTSCATTERING
 #define FNC_VOLUMETRICLIGHTSCATTERING
-VOLUMETRICLIGHTSCATTERING_TYPE volumetricLightScattering(sampler2D lightShadowMap, const in mat4 lightMatrix, const in vec3 lightPos, const in vec3 rayOrigin, const in vec3 rayEnd) {
+VOLUMETRICLIGHTSCATTERING_TYPE volumetricLightScattering(SAMPLER_TYPE lightShadowMap, const in mat4 lightMatrix, const in vec3 lightPos, const in vec3 rayOrigin, const in vec3 rayEnd) {
     vec3  rayVector     = rayEnd - rayOrigin;
     float rayLength     = length(rayVector);
     vec3  rayDirection  = rayVector / rayLength;
@@ -117,7 +117,7 @@ VOLUMETRICLIGHTSCATTERING_TYPE volumetricLightScattering(sampler2D lightShadowMa
     return L * stepLength;
 }
 
-VOLUMETRICLIGHTSCATTERING_TYPE volumetricLightScattering(sampler2D texDepth, vec2 st) {
+VOLUMETRICLIGHTSCATTERING_TYPE volumetricLightScattering(SAMPLER_TYPE texDepth, vec2 st) {
     float depth = VOLUMETRICLIGHTSCATTERING_SAMPLE_FNC(texDepth, st);
     float viewZ = depth2viewZ(depth, CAMERA_NEAR_CLIP, CAMERA_FAR_CLIP);
     

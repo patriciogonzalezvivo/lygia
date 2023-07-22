@@ -4,7 +4,7 @@
 /*
 original_author: Huw Bowles ( @hdb1 )
 description: Bracketing technique maps a texture to a plane using any arbitrary 2D vector field to give orientation. From https://www.shadertoy.com/view/NddcDr
-use: sampleBracketing(<sampler2D> texture, <float2> st, <float2> direction [, <float> scale] )
+use: sampleBracketing(<SAMPLER_TYPE> texture, <float2> st, <float2> direction [, <float> scale] )
 options:
     - BRACKETING_ANGLE_DELTA
 */

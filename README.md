@@ -276,14 +276,14 @@ Here you can find some implementations on different languages:
 
     #ifndef FNC_MYFUNC
     #define FNC_MYFUNC
-    MYFUNC_TYPE myFunc(sampler2D tex, vec2 st) {
+    MYFUNC_TYPE myFunc(SAMPLER_TYPE tex, vec2 st) {
         return MYFUNC_SAMPLER_FNC(tex, st);
     }
     #endif
 
 ```
 
-* **Function Overloading**. Arguments are arranged in such a way that optional elements are at the end. When possible sort them according their memory size (except textures that remain at the top). Ex.: `sampler2D, mat4, mat3, mat2, vec4, vec3, vec2, float, ivec4, ivec3, ivec2, int, bool`
+* **Function Overloading**. Arguments are arranged in such a way that optional elements are at the end. When possible sort them according their memory size (except textures that remain at the top). Ex.: `SAMPLER_TYPE, mat4, mat3, mat2, vec4, vec3, vec2, float, ivec4, ivec3, ivec2, int, bool`
 
 ```glsl
 

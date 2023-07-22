@@ -3,7 +3,7 @@
 /*
 original_author: [Morgan McGuire, Kyle Whitson]
 description: 3x3 and 5x5 median filter, adapted from "A Fast, Small-Radius GPU Median Filter" by Morgan McGuire in ShaderX6 https://casual-effects.com/research/McGuire2008Median/index.html
-use: median(<sampler2D> texture, <float2> st, <float2> pixel)
+use: median(<SAMPLER_TYPE> texture, <float2> st, <float2> pixel)
 options:
     - MEDIAN_AMOUNT: median3 (3x3) median5 (5x5)
     - MEDIAN_TYPE: default float4
@@ -34,15 +34,15 @@ license: >
 
 #ifndef FNC_MEDIAN
 #define FNC_MEDIAN
-MEDIAN_TYPE median3(in sampler2D tex, in float2 st, in float2 radius) {
+MEDIAN_TYPE median3(in SAMPLER_TYPE tex, in float2 st, in float2 radius) {
     return median2D_fast3(tex, st, radius);
 }
 
-MEDIAN_TYPE median5(in sampler2D tex, in float2 st, in float2 radius) {
+MEDIAN_TYPE median5(in SAMPLER_TYPE tex, in float2 st, in float2 radius) {
     return median2D_fast5(tex, st, radius);
 }
 
-MEDIAN_TYPE median(in sampler2D tex, in float2 st, in float2 radius) {
+MEDIAN_TYPE median(in SAMPLER_TYPE tex, in float2 st, in float2 radius) {
     return MEDIAN_AMOUNT(tex, st, radius);
 }
 #endif

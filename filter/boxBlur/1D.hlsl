@@ -3,7 +3,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: simple one dimentional box blur, to be applied in two passes
-use: boxBlur1D(<sampler2D> texture, <float2> st, <float2> pixel_offset, <int> kernelSize)
+use: boxBlur1D(<SAMPLER_TYPE> texture, <float2> st, <float2> pixel_offset, <int> kernelSize)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - BOXBLUR1D_TYPE: default is float4
@@ -29,7 +29,7 @@ options:
 
 #ifndef FNC_BOXBLUR1D
 #define FNC_BOXBLUR1D
-BOXBLUR1D_TYPE boxBlur1D(in sampler2D tex, in float2 st, in float2 offset, const int kernelSize) {
+BOXBLUR1D_TYPE boxBlur1D(in SAMPLER_TYPE tex, in float2 st, in float2 offset, const int kernelSize) {
     BOXBLUR1D_TYPE color = float4(0.0, 0.0, 0.0, 0.0);
     #ifndef BOXBLUR1D_KERNELSIZE
     #define BOXBLUR1D_KERNELSIZE kernelSize

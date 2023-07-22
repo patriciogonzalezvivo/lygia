@@ -13,11 +13,11 @@ options:
 #define FNC_MATERIAL_ALBEDO
 
 #ifdef MATERIAL_BASECOLORMAP
-uniform sampler2D MATERIAL_BASECOLORMAP;
+uniform SAMPLER_TYPE MATERIAL_BASECOLORMAP;
 #endif
 
 #ifdef MATERIAL_ALBEDOMAP
-uniform sampler2D MATERIAL_ALBEDOMAP;
+uniform SAMPLER_TYPE MATERIAL_ALBEDOMAP;
 #endif
 
 vec4 materialAlbedo() {

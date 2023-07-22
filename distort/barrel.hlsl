@@ -4,7 +4,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: Barrel distortion
-use: barrel(sampler2D tex, <float2> st, [, <float2|float> sdf])
+use: barrel(SAMPLER_TYPE tex, <float2> st, [, <float2|float> sdf])
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - BARREL_DISTANCE: function used to shape the distortion, defaults to radial shape with lengthSq
@@ -37,7 +37,7 @@ float2 barrel(float2 st, float amt) {
     return barrel(st, amt, lengthSq(st-.5));
 }
 
-BARREL_TYPE barrel(in sampler2D tex, in float2 st, float offset) {
+BARREL_TYPE barrel(in SAMPLER_TYPE tex, in float2 st, float offset) {
     BARREL_TYPE a1 = BARREL_SAMPLER_FNC(tex, barrel(st, .0, offset));
     BARREL_TYPE a2 = BARREL_SAMPLER_FNC(tex, barrel(st, .2, offset));
     BARREL_TYPE a3 = BARREL_SAMPLER_FNC(tex, barrel(st, .4, offset));
@@ -59,11 +59,11 @@ BARREL_TYPE barrel(in sampler2D tex, in float2 st, float offset) {
     return (a1+a2+a3+a4+a5+a6+a7+a8+a9+a10+a11+a12)/12.;
 }
 
-BARREL_TYPE barrel(in sampler2D tex, in float2 st, in float2 offset) {
+BARREL_TYPE barrel(in SAMPLER_TYPE tex, in float2 st, in float2 offset) {
     return barrel(tex, st, dot(float2(.5, .5), offset));
 }
 
-BARREL_TYPE barrel(in sampler2D tex, in float2 st) {
+BARREL_TYPE barrel(in SAMPLER_TYPE tex, in float2 st) {
     return barrel(tex, st, lengthSq(st-.5));
 }
 

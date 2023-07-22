@@ -3,7 +3,7 @@
 /*
 original_author: Brad Larson
 description: Adapted version of directional Sobel edge detection from https://github.com/BradLarson/GPUImage2
-use: edgeSobel_directional(<sampler2D> texture, <vec2> st, <vec2> pixels_scale)
+use: edgeSobel_directional(<SAMPLER_TYPE> texture, <vec2> st, <vec2> pixels_scale)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - EDGESOBELDIRECTIONAL_SAMPLER_FNC: Function used to sample the input texture, defaults to texture2D(tex,TEX, UV).r
@@ -21,7 +21,7 @@ examples:
 
 #ifndef FNC_EDGESOBEL_DIRECTIONAL
 #define FNC_EDGESOBEL_DIRECTIONAL
-vec3 edgeSobelDirectional(in sampler2D tex, in vec2 st, in vec2 offset) {
+vec3 edgeSobelDirectional(in SAMPLER_TYPE tex, in vec2 st, in vec2 offset) {
     // get samples around pixel
     float tleft = EDGESOBELDIRECTIONAL_SAMPLER_FNC(tex, st + vec2(-offset.x, offset.y));
     float left = EDGESOBELDIRECTIONAL_SAMPLER_FNC(tex, st + vec2(-offset.x, 0.));

@@ -4,7 +4,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: Displace UV space into a XYZ space using an heightmap
-use: <vec3> displace(<sampler2D> tex, <vec3> ro, <vec3|vec2> rd) 
+use: <vec3> displace(<SAMPLER_TYPE> tex, <vec3> ro, <vec3|vec2> rd) 
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - BILATERALBLUR_AMOUNT
@@ -30,7 +30,7 @@ options:
 
 #ifndef FNC_DISPLACE
 #define FNC_DISPLACE
-vec3 displace(sampler2D tex, vec3 ro, vec3 rd) {
+vec3 displace(SAMPLER_TYPE tex, vec3 ro, vec3 rd) {
 
     // the z length of the target vector
     float dz = ro.z - DISPLACE_DEPTH;
@@ -69,7 +69,7 @@ vec3 displace(sampler2D tex, vec3 ro, vec3 rd) {
     return vec3(0.0, 0.0, 1.0);
 }
 
-vec3 displace(sampler2D tex, vec3 ro, vec2 uv) {
+vec3 displace(SAMPLER_TYPE tex, vec3 ro, vec2 uv) {
     vec3 rd = raymarchCamera(ro) * normalize(vec3(uv - 0.5, 1.0));
     return displace(tex, ro, rd);
 }

@@ -9,11 +9,11 @@ original_author: Matt DesLauriers
 description: Natural looking film grain using 3D noise functions (original source https://github.com/mattdesl/glsl-film-grain). Inspired by [Martins Upitis](http://devlog-martinsh.blogspot.com/2013/05/image-imperfections-and-film-grain-post.html).
 use: 
     - grain(<float2> texCoord, <float2> resolution [, <float> t, <float> multiplier])
-    - grain(<sampler2D> texture, <float2> texCoord, <float|float2> resolution [, <float> t, <float> multiplier])
+    - grain(<SAMPLER_TYPE> texture, <float2> texCoord, <float|float2> resolution [, <float> t, <float> multiplier])
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - GRAIN_TYPE: type of the returned value (float3 by default)
-    - GRAIN_SAMPLER_FNC: grain function for sampler2D
+    - GRAIN_SAMPLER_FNC: grain function for SAMPLER_TYPE
 */
 
 #ifndef GRAIN_TYPE
@@ -41,7 +41,7 @@ float grain(float2 texCoord, float2 resolution) {
     return grain(texCoord, resolution, 0.);
 }
 
-GRAIN_TYPE grain(sampler2D tex, float2 st, float2 resolution, float t, float multiplier ) {
+GRAIN_TYPE grain(SAMPLER_TYPE tex, float2 st, float2 resolution, float t, float multiplier ) {
     GRAIN_TYPE org = GRAIN_SAMPLER_FNC(tex, st);
 
     float g = grain(st, resolution, t, multiplier);
@@ -57,11 +57,11 @@ GRAIN_TYPE grain(sampler2D tex, float2 st, float2 resolution, float t, float mul
                     response * response);
 }
 
-GRAIN_TYPE grain(sampler2D tex, float2 st, float2 resolution, float t ) {
+GRAIN_TYPE grain(SAMPLER_TYPE tex, float2 st, float2 resolution, float t ) {
     return grain(tex, st, resolution, t, 2.5 );
 }
 
-GRAIN_TYPE grain(sampler2D tex, float2 st, float2 resolution) {
+GRAIN_TYPE grain(SAMPLER_TYPE tex, float2 st, float2 resolution) {
     return grain(tex, st, resolution, 0.);
 }
 

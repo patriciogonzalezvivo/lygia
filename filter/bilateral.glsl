@@ -15,7 +15,7 @@ description: |
 
     Other examples https://www.shadertoy.com/view/4dfGDH , https://www.shadertoy.com/view/XtVGWG
 
-use: bilateral(<sampler2D> texture, <vec2> st, <vec2> duv [, <int> kernelSize]])
+use: bilateral(<SAMPLER_TYPE> texture, <vec2> st, <vec2> duv [, <int> kernelSize]])
 
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
@@ -45,7 +45,7 @@ examples:
 
 #ifndef FNC_BILATERALFILTER
 #define FNC_BILATERALFILTER
-BILATERAL_TYPE bilateral(in sampler2D tex, in vec2 st, in vec2 offset, const int kernelSize) {
+BILATERAL_TYPE bilateral(in SAMPLER_TYPE tex, in vec2 st, in vec2 offset, const int kernelSize) {
     BILATERAL_TYPE accumColor = BILATERAL_TYPE(0.);
 
     #ifndef BILATERAL_KERNELSIZE

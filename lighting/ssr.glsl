@@ -7,7 +7,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: ScreenSpace Reflections
-use: <float> ssao(<sampler2D> texPosition, <sampler2D> texNormal, vec2 <st> [, <float> radius, float <bias>])
+use: <float> ssao(<SAMPLER_TYPE> texPosition, <SAMPLER_TYPE> texNormal, vec2 <st> [, <float> radius, float <bias>])
 options:
     - SSR_MAX_STEP: number max number of raymarching steps (int)
     - SSR_MAX_DISTANCE: max distance (float)
@@ -38,7 +38,7 @@ options:
 #ifndef FNC_SSR
 #define FNC_SSR
 
-vec2 ssr(sampler2D texPosition, sampler2D texNormal, vec2 st, vec2 pixel, inout float op, inout float dist) {
+vec2 ssr(SAMPLER_TYPE texPosition, SAMPLER_TYPE texNormal, vec2 st, vec2 pixel, inout float op, inout float dist) {
     vec3 viewPosition = SAMPLER_FNC(texPosition, st).xyz;
     // if (-viewPosition.z >= CAMERA_FAR_CLIP)
     //     return st;
@@ -116,19 +116,19 @@ vec2 ssr(sampler2D texPosition, sampler2D texNormal, vec2 st, vec2 pixel, inout 
     return ssr_uv;
 }
 
-vec2 ssr(sampler2D texPosition, sampler2D texNormal, vec2 st, vec2 pixel, inout float op) {
+vec2 ssr(SAMPLER_TYPE texPosition, SAMPLER_TYPE texNormal, vec2 st, vec2 pixel, inout float op) {
     float dist = 0.0;
     return ssr(texPosition, texNormal, st, pixel, op, dist);
 }
 
-vec3 ssr(sampler2D tex, sampler2D texPosition, sampler2D texNormal, vec2 st, vec2 pixel, float opacity) {
+vec3 ssr(SAMPLER_TYPE tex, SAMPLER_TYPE texPosition, SAMPLER_TYPE texNormal, vec2 st, vec2 pixel, float opacity) {
     vec3 color = SAMPLER_FNC(tex, st).rgb;
     float dist = 0.0;
     vec2 uv = ssr(texPosition, texNormal, st, pixel, opacity, dist);
     return mix(color, SAMPLER_FNC(tex, uv).rgb, opacity);
 }
 
-vec3 ssr(sampler2D tex, sampler2D texPosition, sampler2D texNormal, vec2 st, vec2 pixel) {
+vec3 ssr(SAMPLER_TYPE tex, SAMPLER_TYPE texPosition, SAMPLER_TYPE texNormal, vec2 st, vec2 pixel) {
     return ssr(tex, texPosition, texNormal, st, pixel, 0.5); 
 }
 

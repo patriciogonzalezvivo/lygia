@@ -7,7 +7,7 @@
 original_author: Inigo Quiles
 description: |
     Avoiding texture repetition by using Voronoise: a small texture can be used to generate infinite variety instead of tiled repetition. More info:  https://iquilezles.org/articles/texturerepetition/
-use: sampleUNTILE(<sampler2D> texture, <vec2> st, <float> noTiling)
+use: sampleUNTILE(<SAMPLER_TYPE> texture, <vec2> st, <float> noTiling)
 options:
     - SAMPLER_FNC(TEX, UV)
     - SAMPLEUNTILE_TYPE
@@ -39,7 +39,7 @@ examples:
 #ifndef FNC_SAMPLEUNTILE
 #define FNC_SAMPLEUNTILE
 
-SAMPLEUNTILE_TYPE sampleUntile(sampler2D tex, in vec2 st) {
+SAMPLEUNTILE_TYPE sampleUntile(SAMPLER_TYPE tex, in vec2 st) {
         
     #if defined(PLATFORM_WEBGL) && __VERSION__ >= 300 && defined(GL_OES_standard_derivatives)
     vec2 ddx = dFdx( st );

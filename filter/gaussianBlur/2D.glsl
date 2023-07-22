@@ -4,7 +4,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: two dimension Gaussian Blur to be applied in only one passes
-use: gaussianBlur2D(<sampler2D> texture, <vec2> st, <vec2> pixel_direction , const int kernelSize)
+use: gaussianBlur2D(<SAMPLER_TYPE> texture, <vec2> st, <vec2> pixel_direction , const int kernelSize)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - GAUSSIANBLUR2D_TYPE: Default `vec4`
@@ -32,7 +32,7 @@ examples:
 
 #ifndef FNC_GAUSSIANBLUR2D
 #define FNC_GAUSSIANBLUR2D
-GAUSSIANBLUR2D_TYPE gaussianBlur2D(in sampler2D tex, in vec2 st, in vec2 offset, const int kernelSize) {
+GAUSSIANBLUR2D_TYPE gaussianBlur2D(in SAMPLER_TYPE tex, in vec2 st, in vec2 offset, const int kernelSize) {
     GAUSSIANBLUR2D_TYPE accumColor = GAUSSIANBLUR2D_TYPE(0.);
     
     #ifndef GAUSSIANBLUR2D_KERNELSIZE

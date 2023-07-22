@@ -3,7 +3,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: sample derrivatives
-use: sampleDerivative(<sampler2D> tex, <vec2> st)
+use: sampleDerivative(<SAMPLER_TYPE> tex, <vec2> st)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (tex2D(...) or texture(...))
     - USE_DERIVATIVES
@@ -15,7 +15,7 @@ options:
 
 #ifndef FNC_SAMPLEDERIVATIVE
 #define FNC_SAMPLEDERIVATIVE
-vec2 sampleDerivative(in sampler2D tex, in vec2 st, vec2 pixel) { 
+vec2 sampleDerivative(in SAMPLER_TYPE tex, in vec2 st, vec2 pixel) { 
     float p = SAMPLERDERIVATIVE_FNC(tex, st); 
 
     #if defined(SAMPLEDERRIVATIVE_DD)

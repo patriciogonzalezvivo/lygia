@@ -5,3 +5,7 @@
 #define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
 #endif
 #endif
+
+#ifndef SAMPLER_TYPE
+#define SAMPLER_TYPE sampler2D
+#endif

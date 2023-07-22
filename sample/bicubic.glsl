@@ -3,7 +3,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: bicubic filter sampling
-use: <vec4> sampleBicubic(<sampler2D> tex, <vec2> st, <vec2> texResolution);
+use: <vec4> sampleBicubic(<SAMPLER_TYPE> tex, <vec2> st, <vec2> texResolution);
 options:
     - SAMPLER_FNC(TEX, UV)
 examples:
@@ -24,7 +24,7 @@ vec4 sampleBicubic(float v) {
     return o;
 }
 
-vec4 sampleBicubic(sampler2D tex, vec2 st, vec2 texResolution) {
+vec4 sampleBicubic(SAMPLER_TYPE tex, vec2 st, vec2 texResolution) {
     vec2 pixel = 1.0 / texResolution;
     st = st * texResolution - 0.5;
 

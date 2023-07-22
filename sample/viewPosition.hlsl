@@ -5,7 +5,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: sampler the view Positiong from depthmap texture 
-use: <float4> sampleViewPosition(<sampler2D> texDepth, <float2> st [, <float> near, <float> far])
+use: <float4> sampleViewPosition(<SAMPLER_TYPE> texDepth, <float2> st [, <float> near, <float> far])
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - CAMERA_NEAR_CLIP: required
@@ -22,14 +22,14 @@ float4 sampleViewPosition(const in float depth, const in float2 st, const in flo
     return screen2viewPosition(st, depth, viewZ);
 }
 
-float4 sampleViewPosition(sampler2D texDepth, const in float2 st, const in float near, const in float far) {
+float4 sampleViewPosition(SAMPLER_TYPE texDepth, const in float2 st, const in float near, const in float far) {
     float depth = SAMPLER_FNC(texDepth, st).r;
     float viewZ = depth2viewZ(depth, near, far);
     return screen2viewPosition(st, depth, viewZ);
 }
 
 #if defined(CAMERA_NEAR_CLIP) && defined(CAMERA_FAR_CLIP)
-float4 sampleViewPosition(sampler2D texDepth, const in float2 st) {
+float4 sampleViewPosition(SAMPLER_TYPE texDepth, const in float2 st) {
     return sampleViewPosition( texDepth, st, CAMERA_NEAR_CLIP, CAMERA_FAR_CLIP); 
 }
 #endif

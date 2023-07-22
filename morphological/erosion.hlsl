@@ -8,7 +8,7 @@ description: |
     morphological erosion operation. Based on: 
         https://lettier.github.io/3d-game-shaders-for-beginners/dilation.html
         https://www.shadertoy.com/view/WsyXWc
-use: erode(<sampler2D> texture, <float2> st, <float2> pixels_scale, <int> passes)
+use: erode(<SAMPLER_TYPE> texture, <float2> st, <float2> pixels_scale, <int> passes)
 options:
     - SAMPLER_FNC(TEX, UV)
     - EROSION_TYPE
@@ -26,7 +26,7 @@ options:
 #ifndef FNC_EROSION
 #define FNC_EROSION
 
-EROSION_TYPE erosion(sampler2D tex,float2 st,float2 pixel, int radius) {
+EROSION_TYPE erosion(SAMPLER_TYPE tex,float2 st,float2 pixel, int radius) {
 
     float invKR = 1.0 / float(radius);
     EROSION_TYPE acc = EROSION_TYPE(1.0);

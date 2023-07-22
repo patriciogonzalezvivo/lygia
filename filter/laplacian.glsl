@@ -3,7 +3,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: laplacian filter
-use: laplacian(<sampler2D> texture, <vec2> st, <vec2> pixels_scale [, <float> pixel_padding])
+use: laplacian(<SAMPLER_TYPE> texture, <vec2> st, <vec2> pixels_scale [, <float> pixel_padding])
 options:
     - LAPLACIAN_TYPE: Return type, defaults to float
     - LAPLACIAN_SAMPLER_FNC: Function used to sample the input texture, defaults to texture2D(tex,TEX, UV).r
@@ -38,7 +38,7 @@ examples:
 #ifndef FNC_LAPLACIAN
 #define FNC_LAPLACIAN
 
-LAPLACIAN_TYPE laplacian_w4(sampler2D tex, vec2 st, vec2 pixel) {
+LAPLACIAN_TYPE laplacian_w4(SAMPLER_TYPE tex, vec2 st, vec2 pixel) {
     LAPLACIAN_TYPE acc = LAPLACIAN_TYPE(0.0);
     acc += LAPLACIAN_SAMPLER_FNC(tex, st) * 4.0;
     acc -= LAPLACIAN_SAMPLER_FNC(tex, st + vec2(-1.0,  0.0) * pixel);
@@ -48,7 +48,7 @@ LAPLACIAN_TYPE laplacian_w4(sampler2D tex, vec2 st, vec2 pixel) {
     return acc;
 }
 
-LAPLACIAN_TYPE laplacian_w8(sampler2D tex, vec2 st, vec2 pixel) {
+LAPLACIAN_TYPE laplacian_w8(SAMPLER_TYPE tex, vec2 st, vec2 pixel) {
     LAPLACIAN_TYPE acc = LAPLACIAN_TYPE(0.0);
     acc += LAPLACIAN_SAMPLER_FNC(tex, st) * 8.0;
     acc -= LAPLACIAN_SAMPLER_FNC(tex, st + vec2(-1.0,  0.0) * pixel);
@@ -62,7 +62,7 @@ LAPLACIAN_TYPE laplacian_w8(sampler2D tex, vec2 st, vec2 pixel) {
     return acc;
 }
 
-LAPLACIAN_TYPE laplacian_w12(sampler2D tex, vec2 st, vec2 pixel) {
+LAPLACIAN_TYPE laplacian_w12(SAMPLER_TYPE tex, vec2 st, vec2 pixel) {
     LAPLACIAN_TYPE acc = LAPLACIAN_TYPE(0.0);
     acc += LAPLACIAN_SAMPLER_FNC(tex, st) * 12.0;
     acc -= LAPLACIAN_SAMPLER_FNC(tex, st + vec2(-1.0,  0.0) * pixel) * 2.0;
@@ -77,7 +77,7 @@ LAPLACIAN_TYPE laplacian_w12(sampler2D tex, vec2 st, vec2 pixel) {
     return acc;
 }
 
-LAPLACIAN_TYPE laplacian(sampler2D tex, vec2 st, vec2 pixel) {
+LAPLACIAN_TYPE laplacian(SAMPLER_TYPE tex, vec2 st, vec2 pixel) {
     return LAPLACIAN_FNC(tex, st, pixel);
 }
 
@@ -85,7 +85,7 @@ bool laplacian_isOutside(vec2 pos) {
     return (pos.x < 0.0 || pos.y < 0.0 || pos.x > 1.0 || pos.y > 1.0);
 }
 
-LAPLACIAN_TYPE laplacian_w4(sampler2D tex, vec2 st, vec2 pixel, float pixel_pad) {
+LAPLACIAN_TYPE laplacian_w4(SAMPLER_TYPE tex, vec2 st, vec2 pixel, float pixel_pad) {
     LAPLACIAN_TYPE acc = LAPLACIAN_TYPE(0.0);
     vec2 uv = st * vec2(1.0 + pixel_pad * 2.0 * pixel) - pixel_pad * pixel;
     vec3 pixelShift = vec3(pixel, 0.0);
@@ -102,7 +102,7 @@ LAPLACIAN_TYPE laplacian_w4(sampler2D tex, vec2 st, vec2 pixel, float pixel_pad)
     return acc;
 }
 
-LAPLACIAN_TYPE laplacian_w8(sampler2D tex, vec2 st, vec2 pixel, float pixel_pad) {
+LAPLACIAN_TYPE laplacian_w8(SAMPLER_TYPE tex, vec2 st, vec2 pixel, float pixel_pad) {
     LAPLACIAN_TYPE acc = LAPLACIAN_TYPE(0.0);
     vec2 uv = st * vec2(1.0 + pixel_pad * 2.0 * pixel) - pixel_pad * pixel;
     vec3 pixelShift = vec3(pixel, 0.0);
@@ -129,7 +129,7 @@ LAPLACIAN_TYPE laplacian_w8(sampler2D tex, vec2 st, vec2 pixel, float pixel_pad)
     return acc;
 }
 
-LAPLACIAN_TYPE laplacian_w12(sampler2D tex, vec2 st, vec2 pixel, float pixel_pad) {
+LAPLACIAN_TYPE laplacian_w12(SAMPLER_TYPE tex, vec2 st, vec2 pixel, float pixel_pad) {
     LAPLACIAN_TYPE acc = LAPLACIAN_TYPE(0.0);
     vec2 uv = st * vec2(1.0 + pixel_pad * 2.0 * pixel) - pixel_pad * pixel;
     vec3 pixelShift = vec3(pixel, 0.0);
@@ -157,7 +157,7 @@ LAPLACIAN_TYPE laplacian_w12(sampler2D tex, vec2 st, vec2 pixel, float pixel_pad
     return acc;
 }
 
-LAPLACIAN_TYPE laplacian(sampler2D tex, vec2 st, vec2 pixel, float pixel_pad) {
+LAPLACIAN_TYPE laplacian(SAMPLER_TYPE tex, vec2 st, vec2 pixel, float pixel_pad) {
     return LAPLACIAN_FNC(tex, st, pixel, pixel_pad);
 }
 

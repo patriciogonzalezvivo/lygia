@@ -4,7 +4,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: fill alpha with edge colors
-use: <float4> fillAlpha(<sampler2D> texture, <float2> st, <float2> pixel, <int> passes)
+use: <float4> fillAlpha(<SAMPLER_TYPE> texture, <float2> st, <float2> pixel, <int> passes)
 options:
     - SAMPLER_FNC(TEX, UV)
     - ALPHAFILL_RADIUS
@@ -17,7 +17,7 @@ options:
 #ifndef FNC_ALPHAFILL
 #define FNC_ALPHAFILL
 
-float4 alphaFill(sampler2D tex, float2 st, float2 pixel, int passes) {
+float4 alphaFill(SAMPLER_TYPE tex, float2 st, float2 pixel, int passes) {
     float4 accum = float4(0.0, 0.0, 0.0, 0.0);
     float max_dist = sqrt(ALPHAFILL_RADIUS * ALPHAFILL_RADIUS);
     for (int s = 0; s < passes; s++) {    

@@ -3,7 +3,7 @@
 /*
 original_author: Matt DesLauriers
 description: adapted versions of gaussian fast blur 13 from https://github.com/Jam3/glsl-fast-gaussian-blur
-use: gaussianBlur1D_fast9(<sampler2D> texture, <float2> st, <float2> pixel_direction)
+use: gaussianBlur1D_fast9(<SAMPLER_TYPE> texture, <float2> st, <float2> pixel_direction)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - GAUSSIANBLUR1D_FAST9_TYPE
@@ -28,7 +28,7 @@ options:
 
 #ifndef FNC_GAUSSIANBLUR1D_FAST9
 #define FNC_GAUSSIANBLUR1D_FAST9
-GAUSSIANBLUR1D_FAST9_TYPE gaussianBlur1D_fast9(in sampler2D tex, in float2 st, in float2 offset) {
+GAUSSIANBLUR1D_FAST9_TYPE gaussianBlur1D_fast9(in SAMPLER_TYPE tex, in float2 st, in float2 offset) {
     float2 off1 = float2(1.3846153846, 1.3846153846) * offset;
     float2 off2 = float2(3.2307692308, 3.2307692308) * offset;
     GAUSSIANBLUR1D_FAST9_TYPE color = GAUSSIANBLUR1D_FAST9_SAMPLER_FNC(tex, st) * .2270270270;

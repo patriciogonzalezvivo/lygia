@@ -3,7 +3,7 @@
 /*
 original_author: [Brad Larson, Ben Cochran, Hugues Lismonde, Keitaroh Kobayashi, Alaric Cole, Matthew Clark, Jacob Gundersen, Chris Williams.]
 description: Kuwahara image abstraction, drawn from the work of Kyprianidis, et. al. in their publication "Anisotropic Kuwahara Filtering on the GPU" within the GPU Pro collection. This produces an oil-painting-like image, but it is extremely computationally expensive, so it can take seconds to render a frame on an iPad 2. This might be best used for still images.
-use: kuwahara(<sampler2D> texture, <float2> st, <float2> pixel)
+use: kuwahara(<SAMPLER_TYPE> texture, <float2> st, <float2> pixel)
 options:
     - KUWAHARA_TYPE: defaults to float3
     - KUWAHARA_SAMPLER_FNC(TEX, UV): defaults to texture2D(tex, TEX, UV).rgb
@@ -30,7 +30,7 @@ options:
 #ifndef FNC_KUWAHARA
 #define FNC_KUWAHARA
 
-KUWAHARA_TYPE kuwahara(in sampler2D tex, in float2 st, in float2 pixel, in int radius) {
+KUWAHARA_TYPE kuwahara(in SAMPLER_TYPE tex, in float2 st, in float2 pixel, in int radius) {
 
     float n = float((KUWAHARA_RADIUS + 1) * (KUWAHARA_RADIUS + 1));
     int i; int j;

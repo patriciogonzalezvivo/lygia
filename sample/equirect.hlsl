@@ -6,7 +6,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: sample an equirect texture as it was a cubemap
-use: sampleEquirect(<sampler2D> texture, <float3> dir)
+use: sampleEquirect(<SAMPLER_TYPE> texture, <float3> dir)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - SAMPLEEQUIRET_ITERATIONS:
@@ -14,7 +14,7 @@ options:
 
 #ifndef FNC_SAMPLEEQUIRECT
 #define FNC_SAMPLEEQUIRECT
-float4 sampleEquirect(sampler2D tex, float3 dir) { 
+float4 sampleEquirect(SAMPLER_TYPE tex, float3 dir) { 
     float2 st = xyz2equirect(dir);
     #ifdef SAMPLEEQUIRECT_FLIP_Y
     st.y = 1.0-st.y;
@@ -22,7 +22,7 @@ float4 sampleEquirect(sampler2D tex, float3 dir) {
     return SAMPLER_FNC(tex, st); 
 }
 
-float4 sampleEquirect(sampler2D tex, float3 dir, float lod) { 
+float4 sampleEquirect(SAMPLER_TYPE tex, float3 dir, float lod) { 
     
     #if defined(SAMPLEEQUIRET_ITERATIONS)
     float4 acc = float4(0.0, 0.0, 0.0, 0.0);

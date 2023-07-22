@@ -8,7 +8,7 @@ description: |
     morphological dilation operation. Based on: 
         https://lettier.github.io/3d-game-shaders-for-beginners/dilation.html
         https://www.shadertoy.com/view/WsyXWc
-use: dilation(<sampler2D> texture, <float2> st, <float2> pixels_scale, <int> passes)
+use: dilation(<SAMPLER_TYPE> texture, <float2> st, <float2> pixels_scale, <int> passes)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - DILATION_TYPE
@@ -26,7 +26,7 @@ options:
 #ifndef FNC_DILATE
 #define FNC_DILATE
 
-DILATION_TYPE dilation(sampler2D tex, vec2 st, vec2 pixel, int radius) {
+DILATION_TYPE dilation(SAMPLER_TYPE tex, vec2 st, vec2 pixel, int radius) {
 
     float invKR = 1.0 / float(radius);
     DILATION_TYPE acc = DILATION_TYPE(0.0);

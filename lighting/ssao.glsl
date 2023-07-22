@@ -6,7 +6,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: ScreenSpace Ambient Occlusion
-use: <float> ssao(<sampler2D> texPosition, <sampler2D> texNormal, vec2 <st> [, <float> radius, float <bias>])
+use: <float> ssao(<SAMPLER_TYPE> texPosition, <SAMPLER_TYPE> texNormal, vec2 <st> [, <float> radius, float <bias>])
 options:
     - SSAO_SAMPLES_NUM: number of half-sphere offsets samples
     - SSAO_SAMPLES_ARRAY: array of weighted vec3 half-sphere offsets   
@@ -63,7 +63,7 @@ uniform vec3 u_ssaoNoise[SSAO_NOISE_NUM];
 
 #if defined(CAMERA_NEAR_CLIP) && defined(CAMERA_FAR_CLIP)
 
-float ssao(sampler2D texDepth, vec2 st, vec2 pixel, float radius) {
+float ssao(SAMPLER_TYPE texDepth, vec2 st, vec2 pixel, float radius) {
 
     #if defined(SSAO_NOISE2_FNC) 
     vec2 noise = SSAO_NOISE2_FNC( st ); 
@@ -104,7 +104,7 @@ float ssao(sampler2D texDepth, vec2 st, vec2 pixel, float radius) {
 }
 #endif
 
-float ssao(sampler2D texPosition, sampler2D texNormal, vec2 st, float radius) {
+float ssao(SAMPLER_TYPE texPosition, SAMPLER_TYPE texNormal, vec2 st, float radius) {
     vec4  position  = SAMPLER_FNC(texPosition, st);
     vec3  normal    = SAMPLER_FNC(texNormal, st).rgb;
 

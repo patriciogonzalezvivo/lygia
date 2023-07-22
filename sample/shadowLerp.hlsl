@@ -3,13 +3,13 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: sample shadow map using PCF
-use: <float> sampleShadowLerp(<sampler2D> depths, <float2> size, <float2> uv, <float> compare)
+use: <float> sampleShadowLerp(<SAMPLER_TYPE> depths, <float2> size, <float2> uv, <float> compare)
 */
 
 #ifndef FNC_SAMPLESHADOWLERP
 #define FNC_SAMPLESHADOWLERP
 
-float sampleShadowLerp(sampler2D depths, float2 size, float2 uv, float compare) {
+float sampleShadowLerp(SAMPLER_TYPE depths, float2 size, float2 uv, float compare) {
     float2 texelSize = 1.0/size;
     float2 f = frac(uv*size+0.5);
     float2 centroidUV = floor(uv*size+0.5)/size;

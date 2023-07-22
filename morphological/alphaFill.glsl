@@ -4,7 +4,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: fill alpha with edge colors
-use: <vec4> fillAlpha(<sampler2D> texture, <vec2> st, <vec2> pixel, <int> passes)
+use: <vec4> fillAlpha(<SAMPLER_TYPE> texture, <vec2> st, <vec2> pixel, <int> passes)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - ALPHAFILL_RADIUS
@@ -22,7 +22,7 @@ examples:
 
 #ifndef FNC_ALPHAFILL
 #define FNC_ALPHAFILL
-vec4 alphaFill(sampler2D tex, vec2 st, vec2 pixel, int passes) {
+vec4 alphaFill(SAMPLER_TYPE tex, vec2 st, vec2 pixel, int passes) {
     vec4 accum = vec4(0.0, 0.0, 0.0, 0.0);
     float max_dist = sqrt(ALPHAFILL_RADIUS * ALPHAFILL_RADIUS);
 

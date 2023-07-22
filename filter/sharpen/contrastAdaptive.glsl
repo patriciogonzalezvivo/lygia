@@ -8,7 +8,7 @@ description: |
     Orginal: https://github.com/GPUOpen-Effects/FidelityFX-CAS
     Reshade: https://gist.github.com/SLSNe/bbaf2d77db0b2a2a0755df581b3cf00c
     Reshade: https://gist.github.com/martymcmodding/30304c4bffa6e2bd2eb59ff8bb09d135
-use: sharpenContrastAdaptive(<sampler2D> texture, <vec2> st, <vec2> pixel, <float> strenght)
+use: sharpenContrastAdaptive(<SAMPLER_TYPE> texture, <vec2> st, <vec2> pixel, <float> strenght)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - SHARPEN_KERNELSIZE: Defaults 2
@@ -34,7 +34,7 @@ options:
 
 #ifndef FNC_SHARPENADCONTRASTAPTIVE
 #define FNC_SHARPENADCONTRASTAPTIVE
-SHARPENCONTRASTADAPTIVE_TYPE sharpenContrastAdaptive(sampler2D tex, vec2 st, vec2 pixel, float strenght) {
+SHARPENCONTRASTADAPTIVE_TYPE sharpenContrastAdaptive(SAMPLER_TYPE tex, vec2 st, vec2 pixel, float strenght) {
     float peak = -1.0 / mix(8.0, 5.0, saturate(strenght));
     
     // fetch a 3x3 neighborhood around the pixel 'e',
@@ -79,7 +79,7 @@ SHARPENCONTRASTADAPTIVE_TYPE sharpenContrastAdaptive(sampler2D tex, vec2 st, vec
 	return saturate((window * wRGB + e) / weightRGB);
 }
 
-SHARPENCONTRASTADAPTIVE_TYPE sharpenContrastAdaptive(sampler2D tex, vec2 st, vec2 pixel) {
+SHARPENCONTRASTADAPTIVE_TYPE sharpenContrastAdaptive(SAMPLER_TYPE tex, vec2 st, vec2 pixel) {
     return sharpenContrastAdaptive(tex, st, pixel, 1.0);
 }
 #endif

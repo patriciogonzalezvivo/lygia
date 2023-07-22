@@ -3,7 +3,7 @@
 /*
 original_author: Johan Ismael
 description: sharpening convolutional operation
-use: sharpen(<sampler2D> texture, <float2> st, <float2> pixel)
+use: sharpen(<SAMPLER_TYPE> texture, <float2> st, <float2> pixel)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - SHARPENFAST_KERNELSIZE: Defaults 2
@@ -37,7 +37,7 @@ options:
 
 #ifndef FNC_SHARPENFAST
 #define FNC_SHARPENFAST
-SHARPENFAST_TYPE sharpenFast(in sampler2D tex, in float2 coords, in float2 pixel, float strenght) {
+SHARPENFAST_TYPE sharpenFast(in SAMPLER_TYPE tex, in float2 coords, in float2 pixel, float strenght) {
     SHARPENFAST_TYPE sum = float4(0.0,0.0,0.0,0.0);
     for (int i = 0; i < SHARPENFAST_KERNELSIZE; i++) {
         float f_size = float(i) + 1.;
@@ -51,7 +51,7 @@ SHARPENFAST_TYPE sharpenFast(in sampler2D tex, in float2 coords, in float2 pixel
     return sum / float(SHARPENFAST_KERNELSIZE);
 }
 
-SHARPENFAST_TYPE sharpenFast(in sampler2D tex, in float2 coords, in float2 pixel) {
+SHARPENFAST_TYPE sharpenFast(in SAMPLER_TYPE tex, in float2 coords, in float2 pixel) {
     SHARPENFAST_TYPE sum = float4(0.0,0.0,0.0,0.0);
     for (int i = 0; i < SHARPENFAST_KERNELSIZE; i++) {
         float f_size = float(i) + 1.;

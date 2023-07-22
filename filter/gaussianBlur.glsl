@@ -3,7 +3,7 @@
 /*
 original_author: [Matt DesLauriers, Patricio Gonzalez Vivo]
 description: adapted versions from 5, 9 and 13 gaussian fast blur from https://github.com/Jam3/glsl-fast-gaussian-blur
-use: gaussianBlur(<sampler2D> texture, <vec2> st, <vec2> pixel_direction [, const int kernelSize])
+use: gaussianBlur(<SAMPLER_TYPE> texture, <vec2> st, <vec2> pixel_direction [, const int kernelSize])
 options:
     - GAUSSIANBLUR_AMOUNT: gaussianBlur5 gaussianBlur9 gaussianBlur13 
     - GAUSSIANBLUR_2D: default to 1D
@@ -32,7 +32,7 @@ examples:
 
 #ifndef FNC_GAUSSIANBLUR
 #define FNC_GAUSSIANBLUR
-GAUSSIANBLUR_TYPE gaussianBlur13(in sampler2D tex, in vec2 st, in vec2 offset) {
+GAUSSIANBLUR_TYPE gaussianBlur13(in SAMPLER_TYPE tex, in vec2 st, in vec2 offset) {
 #ifdef GAUSSIANBLUR_2D
     return gaussianBlur2D(tex, st, offset, 7);
 #else
@@ -40,7 +40,7 @@ GAUSSIANBLUR_TYPE gaussianBlur13(in sampler2D tex, in vec2 st, in vec2 offset) {
 #endif
 }
 
-GAUSSIANBLUR_TYPE gaussianBlur9(in sampler2D tex, in vec2 st, in vec2 offset) {
+GAUSSIANBLUR_TYPE gaussianBlur9(in SAMPLER_TYPE tex, in vec2 st, in vec2 offset) {
 #ifdef GAUSSIANBLUR_2D
     return gaussianBlur2D(tex, st, offset, 5);
 #else
@@ -48,7 +48,7 @@ GAUSSIANBLUR_TYPE gaussianBlur9(in sampler2D tex, in vec2 st, in vec2 offset) {
 #endif
 }
 
-GAUSSIANBLUR_TYPE gaussianBlur5(in sampler2D tex, in vec2 st, in vec2 offset) {
+GAUSSIANBLUR_TYPE gaussianBlur5(in SAMPLER_TYPE tex, in vec2 st, in vec2 offset) {
 #ifdef GAUSSIANBLUR_2D
     return gaussianBlur2D(tex, st, offset, 3);
 #else
@@ -56,7 +56,7 @@ GAUSSIANBLUR_TYPE gaussianBlur5(in sampler2D tex, in vec2 st, in vec2 offset) {
 #endif
 }
 
-GAUSSIANBLUR_TYPE gaussianBlur(in sampler2D tex, in vec2 st, in vec2 offset, const int kernelSize) {
+GAUSSIANBLUR_TYPE gaussianBlur(in SAMPLER_TYPE tex, in vec2 st, in vec2 offset, const int kernelSize) {
 #ifdef GAUSSIANBLUR_2D
     return gaussianBlur2D(tex, st, offset, kernelSize);
 #else
@@ -64,7 +64,7 @@ GAUSSIANBLUR_TYPE gaussianBlur(in sampler2D tex, in vec2 st, in vec2 offset, con
 #endif
 }
 
-GAUSSIANBLUR_TYPE gaussianBlur(in sampler2D tex, in vec2 st, in vec2 offset) {
+GAUSSIANBLUR_TYPE gaussianBlur(in SAMPLER_TYPE tex, in vec2 st, in vec2 offset) {
     return GAUSSIANBLUR_AMOUNT(tex, st, offset);
 }
 #endif

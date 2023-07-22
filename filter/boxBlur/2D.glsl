@@ -3,7 +3,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: simple two dimentional box blur, so can be apply in a single pass
-use: boxBlur2D(<sampler2D> texture, <vec2> st, <vec2> pixel_offset, <int> kernelSize)
+use: boxBlur2D(<SAMPLER_TYPE> texture, <vec2> st, <vec2> pixel_offset, <int> kernelSize)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - BOXBLUR2D_TYPE: Default `vec4`
@@ -31,7 +31,7 @@ examples:
 
 #ifndef FNC_BOXBLUR2D
 #define FNC_BOXBLUR2D
-BOXBLUR2D_TYPE boxBlur2D(in sampler2D tex, in vec2 st, in vec2 pixel, const int kernelSize) {
+BOXBLUR2D_TYPE boxBlur2D(in SAMPLER_TYPE tex, in vec2 st, in vec2 pixel, const int kernelSize) {
     BOXBLUR2D_TYPE color = BOXBLUR2D_TYPE(0.);
 
     #ifndef BOXBLUR2D_KERNELSIZE

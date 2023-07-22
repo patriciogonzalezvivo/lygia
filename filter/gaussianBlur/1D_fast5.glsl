@@ -3,7 +3,7 @@
 /*
 original_author: Matt DesLauriers
 description: adapted versions of gaussian fast blur 13 from https://github.com/Jam3/glsl-fast-gaussian-blur
-use: gaussianBlur1D_fast5(<sampler2D> texture, <vec2> st, <vec2> pixel_direction)
+use: gaussianBlur1D_fast5(<SAMPLER_TYPE> texture, <vec2> st, <vec2> pixel_direction)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - GAUSSIANBLUR1D_FAST5_TYPE
@@ -28,7 +28,7 @@ options:
 
 #ifndef FNC_GAUSSIANBLUR1D_FAST5
 #define FNC_GAUSSIANBLUR1D_FAST5
-GAUSSIANBLUR1D_FAST5_TYPE gaussianBlur1D_fast5(in sampler2D tex, in vec2 st, in vec2 offset) {
+GAUSSIANBLUR1D_FAST5_TYPE gaussianBlur1D_fast5(in SAMPLER_TYPE tex, in vec2 st, in vec2 offset) {
     GAUSSIANBLUR1D_FAST5_TYPE color = GAUSSIANBLUR1D_FAST5_TYPE(0.);
     vec2 off1 = vec2(1.3333333333333333) * offset;
     color += GAUSSIANBLUR1D_FAST5_SAMPLER_FNC(tex, st) * .29411764705882354;

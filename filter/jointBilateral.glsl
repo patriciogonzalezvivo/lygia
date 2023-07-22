@@ -13,7 +13,7 @@ description: |
     https://bartwronski.com/2019/09/22/local-linear-models-guided-filter/
 
 
-use: bilateralBlur(<sampler2D> texture, <vec2> st, <vec2> duv)
+use: bilateralBlur(<SAMPLER_TYPE> texture, <vec2> st, <vec2> duv)
 options:
     - JOINTBILATERAL_TYPE: defaults to vec4
     - JOINTBILATERAL_SAMPLE_FNC(TEX, UV): defaults to sampleClamp2edge(tex, UV)
@@ -54,7 +54,7 @@ options:
 #ifndef FNC_JOINTBILATERAL
 #define FNC_JOINTBILATERAL
 
-JOINTBILATERAL_TYPE jointBilateral(sampler2D tex, sampler2D guide, vec2 uv, vec2 pixel, const int kernelSize) {
+JOINTBILATERAL_TYPE jointBilateral(SAMPLER_TYPE tex, SAMPLER_TYPE guide, vec2 uv, vec2 pixel, const int kernelSize) {
     JOINTBILATERAL_TYPEGUIDE centerGuide = JOINTBILATERAL_SAMPLEGUIDE_FNC(guide, uv);
 
     #ifndef JOINTBILATERAL_KERNELSIZE
