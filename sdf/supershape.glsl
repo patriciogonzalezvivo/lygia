@@ -1,4 +1,4 @@
-#include ../math/spherical.glsl
+#include ../space/cart2polar.glsl
 #include ../math/superFormula.glsl
 
 /*
