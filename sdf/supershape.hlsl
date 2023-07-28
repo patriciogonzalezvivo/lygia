@@ -1,5 +1,5 @@
-#include ../math/spherical.glsl
-#include ../math/superFormula.glsl
+#include ../math/spherical.hlsl
+#include ../math/superFormula.hlsl
 
 /*
 author: Kathy McGuiness
