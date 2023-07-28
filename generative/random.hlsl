@@ -22,12 +22,12 @@ examples:
 #define FNC_RANDOM
 float random(in float x) {
 #if defined(RANDOM_SINLESS)
-    return frac(sin(x) * 43758.5453);
-#else
     x = frac(x * RANDOM_SCALE.x);
     x *= x + 33.33;
     x *= x + x;
     return frac(x);
+#else
+    return frac(sin(x) * 43758.5453);
 #endif
 }
 
