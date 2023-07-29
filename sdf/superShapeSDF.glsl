@@ -1,5 +1,5 @@
-#include ../space/cart2polar.glsl
-#include ../math/superFormula.glsl
+#include "../space/cart2polar.glsl"
+#include "../math/superFormula.glsl"
 
 /*
 original_author: Kathy McGuiness
@@ -18,6 +18,7 @@ use: <float> supershapeSDF(<vec2> st, <float> size s, <float> a, <float> b, <flo
 #ifndef FNC_SUPERSHAPESDF
 #define FNC_SUPERSHAPESDF
 float superShapeSDF( in vec2 st, in float s, in float a, in float b, in float n1, in float n2, in float n3, in float m ) {
+    st = st * 2. - 1.0;
     vec2 polar = cart2polar( st );
     float d = polar.y;
     float theta = polar.x;
