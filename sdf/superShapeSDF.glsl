@@ -13,6 +13,8 @@ description: |
     * `n1>n2,n3` the shape is "bloated"
     * `n1!=n2!=n3` the shape is assymetrical
 use: <float> supershapeSDF(<vec2> st, <float> size s, <float> a, <float> b, <float> n1, <float> n2, <float> n3, <float> m)
+examples:
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/draw_supershape.frag
 */
 
 #ifndef FNC_SUPERSHAPESDF
