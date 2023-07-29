@@ -5,12 +5,12 @@ const RANDOM_SCALE: vec4f = vec4f(.1031, .1030, .0973, .1099);
 fn random(p: f32) -> f32 {
     var x = p;
     if (RANDOM_SINLESS) {
-        return fract(sin(x) * 43758.5453);
-    } else {
         x = fract(x * RANDOM_SCALE.x);
         x *= x + 33.33;
         x *= x + x;
         return fract(x);
+    } else {
+        return fract(sin(x) * 43758.5453);
     }
 }
 
