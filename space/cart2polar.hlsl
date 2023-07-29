@@ -9,7 +9,7 @@ use: cart2polar(<float2> st)
 float2 cart2polar(in float2 st) {
     return float2(atan2(st.y, st.x), length(st));
 }
-float3 cart2polar( in float2 st) 
+float3 cart2polar( in float3 st) 
 {
    float r = length(st);
    float theta = atan( length(st.xy), st.z);
