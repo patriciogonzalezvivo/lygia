@@ -3,7 +3,6 @@ original_author: Patricio Gonzalez Vivo
 description: scale a 2D space variable
 use: scale(<vec2> st, <vec2|float> scale_factor [, <vec2> center])
 options:
-    - CENTER
     - CENTER_2D
     - CENTER_3D
 */
@@ -16,7 +15,7 @@ float scale(in float st, in float s, in float center) {
 
 float scale(in float st, in float s) {
     #ifdef CENTER_2D
-    return scale(st,  s, CENTER);
+    return scale(st,  s, CENTER_2D);
     #else
     return scale(st,  s, .5);
     #endif
