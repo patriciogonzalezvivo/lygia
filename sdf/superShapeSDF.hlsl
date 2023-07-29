@@ -5,7 +5,7 @@
 original_author: Kathy McGuiness
 description: |
     It returns a supershape, which is a mathematical function for modelling natural forms develop by [Paul Bourke](http://paulbourke.net/geometry/) and Johan Gielis. 
-    Some nots about the parameters:
+    Some notes about the parameters:
 
         * `m` determines number of sides/branches
         * `m = 0` yields a circle
@@ -27,4 +27,4 @@ float superShapeSDF( in float2 st, in float s, in float a, in float b, in float 
     float2 q = s * r * float2(cos(theta), sin(theta));
     return d - length(q); 
 }
-#endif
+ #endif
