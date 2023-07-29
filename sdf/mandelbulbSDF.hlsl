@@ -1,4 +1,4 @@
-#include "../space/cart2polarXYZ.glsl"
+#include "../space/cart2polar.glsl"
 
 /*
 original_author: Kathy McGuiness
@@ -8,8 +8,8 @@ use: mandelbulbSDF(<vec2> st)
 
 #ifndef FNC_MANDELBULBSDF
 #define FNC_MANDELBULBSDF
-vec2 mandelbulbSDF( in vec3 st ) {
-   vec3 zeta = st;
+float2 mandelbulbSDF( float3 st ) {
+   float3 zeta = st;
    float m = dot(st,st);
    float dz = 1.0;
    float n = 8.0;
@@ -19,7 +19,7 @@ vec2 mandelbulbSDF( in vec3 st ) {
    float dr = 1.0;
    for (int i = 0; i < maxiterations; i+=1) {
        dz = n*pow(m, 3.5)*dz + 1.0;
-       vec3 sphericalZ = spherical( zeta ); 
+       float3 sphericalZ = spherical( zeta ); 
        float newx = pow(sphericalZ.x, n) * sin(sphericalZ.y*n) * cos(sphericalZ.z*n);
        float newy = pow(sphericalZ.x, n) * sin(sphericalZ.y*n) * sin(sphericalZ.z*n);
        float newz = pow(sphericalZ.x, n) * cos(sphericalZ.y*n);
@@ -33,6 +33,6 @@ vec2 mandelbulbSDF( in vec3 st ) {
    }
  
    // distance estimation through the Hubbard-Douady potential from Inigo Quilez
-   return vec2(0.25*log(m) * sqrt(m) / dz, iterations);
+   return float2(0.25*log(m) * sqrt(m) / dz, iterations);
 }
 #endif
