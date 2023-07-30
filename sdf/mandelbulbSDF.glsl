@@ -8,11 +8,12 @@ use: mandelbulbSDF(<vec2> st)
 
 #ifndef FNC_MANDELBULBSDF
 #define FNC_MANDELBULBSDF
-float mandelbulbSDF( in vec3 st ) {
+vec2 mandelbulbSDF( in vec3 st ) {
    vec3 zeta = st;
    float m = dot(st,st);
    float dz = 1.0;
    float n = 8.0;
+   float interations = 0;
    const int maxiterations = 20;
    float r = 0.0; 
    float dr = 1.0;
@@ -25,11 +26,12 @@ float mandelbulbSDF( in vec3 st ) {
        zeta.x = newx + st.x;
        zeta.y = newy + st.y;
        zeta.z = newz + st.z;
+       iterations += 1.0;
        m = dot(zeta, zeta);
        if ( m > 2.0 )
          break;
    }
    // distance estimation through the Hubbard-Douady potential from Inigo Quilez
-   return 0.25*log(m) * sqrt(m) / dz;
+   return vec2(0.25*log(m) * sqrt(m) / dz, iterations);
 }
 #endif
