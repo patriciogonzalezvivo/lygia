@@ -1,5 +1,4 @@
 #include ../space/cart2polar.hlsl
-#include ../math/superFormula.hlsl
 
 /*
 original_author: Kathy McGuiness
@@ -23,7 +22,12 @@ float superShapeSDF( in float2 st, in float s, in float a, in float b, in float 
     float2 polar = cart2polar( st );
     float d = polar.y;
     float theta = polar.x;
-    float r = superFormula(theta, a, b, n1, n2, n3, m);
+    float t1 = abs((1.0/a) * cos(m * theta / 4.0));
+    t1 = pow(t1, n2);
+    float t2 = abs((1.0/b) * sin(m * theta / 4.0));
+    t2 = pow(t2, n3);
+    float t3 = t1 + t2;
+    float r = pow(t3, -1.0 / n1);
     float2 q = s * r * float2(cos(theta), sin(theta));
     return d - length(q); 
 }
