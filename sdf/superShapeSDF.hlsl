@@ -4,7 +4,7 @@
 original_author: Kathy McGuiness
 description: |
     It returns a supershape, which is a mathematical function for modelling natural forms develop by [Paul Bourke](http://paulbourke.net/geometry/) and Johan Gielis. 
-    Some nots about the parameters:
+    Some notes about the parameters:
 
         * `m` determines number of sides/branches
         * `m = 0` yields a circle
