@@ -3,7 +3,11 @@
 /*
 original_author: Kathy McGuiness
 description: Returns the mandelbulb SDF
+For more information about the mandlebulb, check [this article](https://en.wikipedia.org/wiki/Mandelbulb)
+
 use: mandelbulbSDF(<vec2> st)
+Example:
+https://gist.github.com/kfahn22/4c29e6d2bdc33d639f315edaa934d287
 */
 
 #ifndef FNC_MANDELBULBSDF
