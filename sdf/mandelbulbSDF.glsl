@@ -19,7 +19,7 @@ vec2 mandelbulbSDF( in vec3 st ) {
    float dr = 1.0;
    for (int i = 0; i < maxiterations; i+=1) {
        dz = n*pow(m, 3.5)*dz + 1.0;
-       vec3 sphericalZ = spherical( zeta ); 
+       vec3 sphericalZ = cart2polar( zeta ); 
        float newx = pow(sphericalZ.x, n) * sin(sphericalZ.y*n) * cos(sphericalZ.z*n);
        float newy = pow(sphericalZ.x, n) * sin(sphericalZ.y*n) * sin(sphericalZ.z*n);
        float newz = pow(sphericalZ.x, n) * cos(sphericalZ.y*n);
