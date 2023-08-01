@@ -8,6 +8,7 @@
 #include "sdf/rhombSDF.hlsl"
 #include "sdf/spiralSDF.hlsl"
 #include "sdf/starSDF.hlsl"
+#include "sdf/superShapeSDF.hlsl"
 #include "sdf/triSDF.hlsl"
 #include "sdf/vesicaSDF.hlsl"
 
@@ -23,6 +24,7 @@
 #include "sdf/hexPrismSDF.hlsl"
 #include "sdf/icosahedronSDF.hlsl"
 #include "sdf/linkSDF.hlsl"
+#include "sdf/mandelbulbSDF.hlsl"
 #include "sdf/octahedronSDF.hlsl"
 #include "sdf/octogonPrismSDF.hlsl"
 #include "sdf/planeSDF.hlsl"
