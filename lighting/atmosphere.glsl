@@ -16,7 +16,7 @@ OPTIONS:
     ATMOSPHERE_SUN_POWER: sun power. Default 20.0
     ATMOSPHERE_LIGHT_SAMPLES: Defualt 8 
     ATMOSPHERE_SAMPLES: Defualt 16
-    HENYEYGREENSTEIN_SCATTERING: nan
+    ATMOSPHERE_FAST: by default is false 
 examples:
     - /shaders/lighting_atmosphere.frag
 */
@@ -68,19 +68,27 @@ bool atmosphere_intersect( const in Ray ray, inout float t0, inout float t1) {
     float radius2 = ATMOSPHERE_RADIUS_MAX * ATMOSPHERE_RADIUS_MAX;
     float tca = dot(rc, ray.direction);
     float d2 = dot(rc, rc) - tca * tca;
+
+    #ifndef ATMOSPHERE_FAST
     if (d2 > radius2) 
         return false;
+    #endif
 
     float thc = sqrt(radius2 - d2);
     t0 = tca - thc;
     t1 = tca + thc;
+
     return true;
 }
 
 bool atmosphere_light(const in Ray ray, inout float optical_depthR, inout float optical_depthM) {
     float t0 = 0.0;
     float t1 = 0.0;
-    atmosphere_intersect(ray, t0, t1);
+
+    #ifndef ATMOSPHERE_FAST
+    if (!atmosphere_intersect(ray, t0, t1))
+        return false;
+    #endif
 
     // this is the implementation using classical raymarching 
     float march_pos = 0.;
@@ -90,7 +98,7 @@ bool atmosphere_light(const in Ray ray, inout float optical_depthR, inout float 
         vec3 s =    ray.origin +
                     ray.direction * (march_pos + 0.5 * march_step);
         float height = length(s) - ATMOSPHERE_RADIUS_MIN;
-        if (height < 0.)
+        if (height < 0.0)
             return false;
     
         optical_depthR += exp(-height / ATMOSPHERE_RAYLEIGH_THICKNESS) * march_step;
@@ -106,7 +114,7 @@ vec3 atmosphere(const in Ray ray, vec3 sun_dir) {
     // "pierce" the atmosphere with the viewing ray
     float t0 = 0.0;
     float t1 = 0.0;
-    // atmosphere_intersect(ray, t0, t1);
+
     if (!atmosphere_intersect(ray, t0, t1))
         return vec3(0.0);
 
