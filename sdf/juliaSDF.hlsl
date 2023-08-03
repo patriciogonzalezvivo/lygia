@@ -1,14 +1,15 @@
+#include "../math/pow2.hlsl"
+
 /*
-original_author: VHARIVINAY
 description: |
     Returns the Juia set SDF
     For more information about the Julia set, check [this article](https://en.wikipedia.org/wiki/Julia_set)
     Some values for c:
-        * vec2(−0.8, 0.156)
-        * vec2(0.285, 0.0)
-        * vec2(−0.7269, 0.1889)
-        * vec2(0.27334, 0.00742)
-        * vec2(−0.835, −0.2321)
+        * float2(−0.8, 0.156)
+        * float2(0.285, 0.0)
+        * float2(−0.7269, 0.1889)
+        * float2(0.27334, 0.00742)
+        * float2(−0.835, −0.2321)
 use: juliaSDF(<float2> st, <float2> c, <float> r)
 */
 
@@ -20,11 +21,11 @@ float juliaSDF( float2 st, float2 c, float r) {
     float n = 0.0;
     const int I = 500;
     for (int i = I; i > 0; i --) { 
-        if ( z.x*z.x + z.y*z.y > 4.0 ) { 
+        if ( pow2(z.x) + pow2(z.y) > 4.0 ) { 
         n = float(i)/float(I); 
         break;
         } 
-        z = float2( (z.x*z.x - z.y*z.y) + c.x, (2.0*z.x*z.y) + c.y ); 
+        z = float2( (pow2(z.x) - pow2(z.y)) + c.x, (2.0*z.x*z.y) + c.y ); 
     } 
     return n;
 }

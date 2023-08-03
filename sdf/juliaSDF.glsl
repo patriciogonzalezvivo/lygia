@@ -1,5 +1,6 @@
+#include "../math/pow2.glsl"
+
 /*
-original_author: VHARIVINAY
 description: |
     Returns the Juia set SDF
     For more information about the Julia set, check [this article](https://en.wikipedia.org/wiki/Julia_set)
@@ -20,11 +21,11 @@ float juliaSDF( vec2 st, vec2 c, float r) {
     float n = 0.0;
     const int I = 500;
     for (int i = I; i > 0; i --) { 
-        if ( z.x*z.x + z.y*z.y > 4.0 ) { 
+        if ( pow2(z.x) + pow2(z.y) > 4.0 ) { 
         n = float(i)/float(I); 
         break;
         } 
-        z = vec2( (z.x*z.x - z.y*z.y) + c.x, (2.0*z.x*z.y) + c.y ); 
+        z = vec2( (pow2(z.x) - pow2(z.y)) + c.x, (2.0*z.x*z.y) + c.y ); 
     } 
     return n;
 }
