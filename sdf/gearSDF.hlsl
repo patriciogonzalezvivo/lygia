@@ -8,6 +8,8 @@ description: |
         * b determines the length and roundness of the spokes
         * n is the number of spokes 
 use: gearSDF(<float2> st, <float> b, <int> n_spokes)
+examples:
+    - https://gist.githubusercontent.com/kfahn22/84ded9666e6037fdb62376ccffb6582e/raw/14bd8fb7911b0dc5aec635357693e21fdda512bc/gear.frag
 */
 
 #ifndef FNC_GEARSDF
