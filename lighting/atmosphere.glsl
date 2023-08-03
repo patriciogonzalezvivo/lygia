@@ -21,6 +21,10 @@ examples:
     - /shaders/lighting_atmosphere.frag
 */
 
+#ifndef ATMOSPHERE_ORIGIN
+#define ATMOSPHERE_ORIGIN vec3(0.0)
+#endif
+
 #ifndef ATMOSPHERE_RADIUS_MIN
 #define ATMOSPHERE_RADIUS_MIN 6360e3
 #endif
@@ -64,7 +68,7 @@ examples:
 #define FNC_ATMOSPHERE
 
 bool atmosphere_intersect( const in Ray ray, inout float t0, inout float t1) {
-    vec3 rc = vec3(0.0, 0.0, 0.0) - ray.origin;
+    vec3 rc = ATMOSPHERE_ORIGIN - ray.origin;
     float radius2 = ATMOSPHERE_RADIUS_MAX * ATMOSPHERE_RADIUS_MAX;
     float tca = dot(rc, ray.direction);
     float d2 = dot(rc, rc) - tca * tca;
@@ -83,7 +87,7 @@ bool atmosphere_intersect( const in Ray ray, inout float t0, inout float t1) {
 
 bool atmosphere_light(const in Ray ray, inout float optical_depthR, inout float optical_depthM) {
     float t0 = 0.0;
-    float t1 = 0.0;
+    float t1 = 500000.0;
 
     #ifndef ATMOSPHERE_FAST
     if (!atmosphere_intersect(ray, t0, t1))
@@ -113,10 +117,12 @@ bool atmosphere_light(const in Ray ray, inout float optical_depthR, inout float 
 vec3 atmosphere(const in Ray ray, vec3 sun_dir) {
     // "pierce" the atmosphere with the viewing ray
     float t0 = 0.0;
-    float t1 = 0.0;
+    float t1 = 50000.0;
 
+    #ifndef ATMOSPHERE_FAST
     if (!atmosphere_intersect(ray, t0, t1))
-        return vec3(0.0);
+        return vec3(1.0);
+    #endif
 
     float march_step = t1 / float(ATMOSPHERE_SAMPLES);
 
@@ -135,8 +141,8 @@ vec3 atmosphere(const in Ray ray, vec3 sun_dir) {
     // optical depth (or "average density")
     // represents the accumulated extinction coefficients
     // along the path, multiplied by the length of that path
-    float optical_depthR = 0.;
-    float optical_depthM = 0.;
+    float optical_depthR = 0.0;
+    float optical_depthM = 0.0;
 
     vec3 sumR = vec3(0.0, 0.0, 0.0);
     vec3 sumM = vec3(0.0, 0.0, 0.0);
