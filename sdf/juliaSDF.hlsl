@@ -21,7 +21,7 @@ float juliaSDF( float2 st, float2 c, float r) {
     float n = 0.0;
     const int I = 500;
     for (int i = I; i > 0; i --) { 
-        if ( pow2(z.x) + pow2(z.y) > 4.0 ) { 
+        if ( length(z) > 4.0 ) { 
         n = float(i)/float(I); 
         break;
         } 
