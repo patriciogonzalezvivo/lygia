@@ -12,10 +12,10 @@ vec2 cart2polar(in vec2 st) {
 }
 
 vec3 cart2polar( in vec3 st ) {
-   float r = length(st);
-   float theta = atan(length(st.xy), st.z);
-   float phi = atan(st.y, st.x);
-   return vec3(r, theta, phi);
+    float r = length(st);
+    float theta = acos(st.z/r);
+    float phi = atan(st.y, st.x);
+    return vec3(r, theta, phi);
 }
 
 #endif
