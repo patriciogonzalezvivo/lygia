@@ -8,26 +8,28 @@ use: <float2> kochSDF(<float2> st, <int> iterations)
 
 #ifndef FNC_KOCHSDF
 #define FNC_KOCHSDF
-float2 kochSDF( float2 st, int N ) {
-    st = st * 2.0 - 1.0;
-    st.x = abs(st.x); 
-    st.y += tan(angle)*0.5;
-    float2 n = float2(sin((5.0/6.0)*PI), cos((5.0/6.0)*PI));
-    float d = dot(st- vec2(0.5,0.0), n);
-    st -= n * max(0.0, d) * 2.0;
-    n = float2(sin((2.0/3.0)*PI), cos((2.0/3.0)*PI));
-    float scale = 1.0;
-    st.x += 0.5;
-    #if defined(PLATFORM_WEBGL)
-    if (int i = 0; i < N; i++){
-    #endif
-        st *= 3.0;
-        scale *= 3.0;
-        st.x -= 1.5; 
-        st.x = abs(st.x) - 0.5;;
-        d = dot(st, n);
-        st -= n * min(0.0, d) * 2.0;
+float kochSDF( float2 st, float2 center, int N ) {
+    st -= center;
+    st *= 3.0;
+    float r3 = sqrt(3.);  
+    st = abs(st);
+    st += r3*float2(-st.y,st.x); // 60° rotation, scale 2
+    st.y -= 1.;   
+    float w = .5;    
+    float2x2 m = float2x2(r3,3,-3,r3)*.5;
+    for (int i = 0; i< N; i++) {
+        st = float2(-r3,3)*.5 - m*float2(st.y,abs(st.x));
+        w /= r3;
     }
-    return st / scale;
+    float d = sign(st.y)*length(float2(st.y,max(0.,abs(st.x)-r3)));  
+    return (d*w);
+}
+
+float kochSDF( float2 st, int N ) {
+    #ifdef CENTER_2D
+        return kochSDF(st, CENTER_2D, N);
+    #else
+        return kochSDF(st, float2(0.5, 0.5), N);
+    #endif
 }
 #endif
