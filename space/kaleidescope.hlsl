@@ -8,6 +8,8 @@ use:
     - <float2> kaleidescope(<float2> st)
 */
 
+#ifndef FNC_KALEIDESCOPE
+#define FNC_KALEIDESCOPE
 float2 kaleidescope( float2 st ) {
     st = st * 2.0 - 1.0;
     st = abs(st); 
@@ -22,3 +24,4 @@ float2 kaleidescope( float2 st ) {
     st.y -= tan((1.0/6.0)*PI) * 0.5; 
     return st;
 }
+#endif
