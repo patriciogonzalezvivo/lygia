@@ -18,17 +18,26 @@ use: <float> supershapeSDF(<float2> st, <float> size s, <float> a, <float> b, <f
 
 #ifndef FNC_SUPERSHAPESDF
 #define FNC_SUPERSHAPESDF
-float superShapeSDF( in float2 st, in float s, in float a, in float b, in float n1, in float n2, in float n3, in float m ) {
+float superShapeSDF( in float2 st, in float2 center, in float s, in float a, in float b, in float n1, in float n2, in float n3, in float m ) {
+    st -= center;
     float2 polar = cart2polar( st );
-    float d = polar.y;
+    float d = polar.y * 5.0;
     float theta = polar.x;
-    float t1 = abs((1.0/a) * cos(m * theta / 4.0));
+    float t1 = abs((1.0/a) * cos(m * theta * 0.25));
     t1 = pow(t1, n2);
-    float t2 = abs((1.0/b) * sin(m * theta / 4.0));
+    float t2 = abs((1.0/b) * sin(m * theta * 0.25));
     t2 = pow(t2, n3);
     float t3 = t1 + t2;
     float r = pow(t3, -1.0 / n1);
     float2 q = s * r * float2(cos(theta), sin(theta));
     return d - length(q); 
+}
+
+float superShapeSDF( in float2 st, in float s, in float a, in float b, in float n1, in float n2, in float n3, in float m ) {
+    #ifdef CENTER_2D
+    return superShapeSDF( st, CENTER_2D, s, a, b, n1, n2, n3, m );
+    #else
+    return superShapeSDF( st, float2(0.5, 0.5), s, a, b, n1, n2, n3, m );
+    #endif
 }
 #endif
