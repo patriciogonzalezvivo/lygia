@@ -7,10 +7,12 @@ description: |
     Some values for c:
         * float2(−0.8, 0.156)
         * float2(0.285, 0.0)
-        * float2(−0.7269, 0.1889)
+        * float2(-0.8, 0.156);
         * float2(0.27334, 0.00742)
         * float2(−0.835, −0.2321)
 use: juliaSDF(<float2> st, <float2> c, <float> r)
+examples:
+    - https://gist.githubusercontent.com/kfahn22/246988bac1f346c3112a8ea1cd0b114d/raw/8f3a563e3c88cbbfb267a0277ba9b262a9e63570/julia.frag
 */
 
 #ifndef FNC_JULIASDF
