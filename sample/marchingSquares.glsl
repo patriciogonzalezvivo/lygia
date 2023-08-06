@@ -5,7 +5,9 @@
 
 /*
 Author: Guido Schmidt
-description: 
+description: The Marching Squares algorithm generates contour lines (isolines) of a given input for a
+given grid and a threshhold. Is uses a lookup of 16 cases to decide if a cell is inside, outside or
+a specific corner.
 use: <vec3> marchingSquares(in <vec2> uv) 
 options:
     - SAMPLE_MARCHING_SQUARES_FNC(UV): optional sampling function, defaults so sampling of pnoise
