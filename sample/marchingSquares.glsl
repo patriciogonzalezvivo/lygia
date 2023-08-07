@@ -1,24 +1,25 @@
-#include "../generative/pnoise.glsl"
 #include "../math/const.glsl"
 #include "../math/rotate2d.glsl"
 #include "../sample.glsl"
 
 /*
-Author: Guido Schmidt
-description: The Marching Squares algorithm generates contour lines (isolines) of a given input for a
-given grid and a threshhold. Is uses a lookup of 16 cases to decide if a cell is inside, outside or
-a specific corner.
-use: <vec3> marchingSquares(in <vec2> uv) 
+original_author: Guido Schmidt
+description: |
+    The Marching Squares algorithm generates contour lines (isolines) of a given input for a
+    given grid and a threshhold. Is uses a lookup of 16 cases to decide if a cell is inside, outside or
+    a specific corner.
+use: <vec3> sampleMarchingSquares(in <vec2> uv, in <sampler2D> tex, in <float> cellSize, in <float> threshold, in <vec2> resolution) 
 options:
-    - SAMPLE_MARCHING_SQUARES_FNC(UV): optional sampling function, defaults so sampling of pnoise
+    - FNC_SAMPLEMARCHINGSQUARES(TEX, UV): optional sampling function
 */
 
-#ifndef SAMPLE_MARCHING_SQUARES_FNC
-float defaultSampleFunction(in vec2 uv) {
-    float dv = pnoise(uv * 5.0, vec2(0.0));
-    return dv;
+#ifndef FNC_SAMPLEMARCHINGSQUARES 
+
+float defaultSampleFunction(in sampler2D tex, in vec2 uv) {
+    return SAMPLER_FNC(tex, uv).r;
 }
-#define SAMPLE_MARCHING_SQUARES_FNC(UV) defaultSampleFunction(UV)
+
+#define FNC_SAMPLEMARCHINGSQUARES(TEX, UV) defaultSampleFunction(TEX, UV)
 #endif
 
 #define centerOf(p1, p2, v1, v2) mix(p1, p2, 0.5)
@@ -75,7 +76,7 @@ float sampleTile(in vec2 p, in vec2 cellUv, in vec2 a, in vec2 b, in int tile) {
     }
 }
 
-vec2 marchinSquares(in vec2 uv, in float cellSize, in float threshold, in vec2 resolution) {
+vec2 sampleMarchinSquares(in vec2 uv, in sampler2D tex, in float cellSize, in float threshold, in vec2 resolution) {
     float gridX = resolution.x / cellSize;
     float gridY = resolution.y / cellSize;
     float cellIdx = floor(uv.x * gridX);
@@ -93,10 +94,10 @@ vec2 marchinSquares(in vec2 uv, in float cellSize, in float threshold, in vec2 r
     vec2 p_tr = gridUV + vec2(+gridStep.x, -gridStep.y);
     vec2 p_tl = gridUV + vec2(-gridStep.x, -gridStep.y);
 
-    float v_bl = SAMPLE_MARCHING_SQUARES_FNC(p_bl);
-    float v_br = SAMPLE_MARCHING_SQUARES_FNC(p_br);
-    float v_tl = SAMPLE_MARCHING_SQUARES_FNC(p_tl);
-    float v_tr = SAMPLE_MARCHING_SQUARES_FNC(p_tr);
+    float v_bl = FNC_SAMPLEMARCHINGSQUARES(tex, p_bl);
+    float v_br = FNC_SAMPLEMARCHINGSQUARES(tex, p_br);
+    float v_tl = FNC_SAMPLEMARCHINGSQUARES(tex, p_tl);
+    float v_tr = FNC_SAMPLEMARCHINGSQUARES(tex, p_tr);
 
     float thr = threshold;
     vec2 ms = vec2(0.0);
