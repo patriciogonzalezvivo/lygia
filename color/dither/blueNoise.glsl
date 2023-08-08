@@ -64,7 +64,7 @@ vec3 ditherBlueNoise(SAMPLER_TYPE tex, in vec3 rgb, const HIGHP in float time) {
     #endif
         
     #ifdef DITHER_BLUENOISE_CHROMATIC
-    vec3 bn = SAM_PLER_FNC(tex, st * blueNoiseTexturePixel).rgb;
+    vec3 bn = SAMPLER_FNC(tex, st * blueNoiseTexturePixel).rgb;
     vec3 bn_tri = vec3( remap_noise_tri_erp(bn.x), 
                         remap_noise_tri_erp(bn.y), 
                         remap_noise_tri_erp(bn.z) );
