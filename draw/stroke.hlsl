@@ -7,7 +7,7 @@ use: stroke(<float> sdf, <float> size, <float> width [, <float> edge])
 #ifndef FNC_STROKE
 #define FNC_STROKE
 
-#include "aastep.hlsl"
+#include "../math/aastep.hlsl"
 
 float stroke(float x, float size, float w) {
     float d = aastep(size, x + w * 0.5) - aastep(size, x - w * 0.5);
