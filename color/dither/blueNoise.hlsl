@@ -52,7 +52,7 @@ float3 ditherBlueNoise(SAMPLER_TYPE tex, in float3 rgb, float2 fragcoord, const 
     #endif
         
     #ifdef DITHER_BLUENOISE_CHROMATIC
-    float3 bn = SAM_PLER_FNC(tex, fragcoord * blueNoiseTexturePixel).rgb;
+    float3 bn = SAMPLER_FNC(tex, fragcoord * blueNoiseTexturePixel).rgb;
     float3 bn_tri = float3( remap_noise_tri_erp(bn.x), 
                         remap_noise_tri_erp(bn.y), 
                         remap_noise_tri_erp(bn.z) );
