@@ -19,11 +19,11 @@ float circleSDF(in vec2 st, in vec2 center) {
 }
 
 float circleSDF(in vec2 st) {
-    #ifdef CENTER_2D
+#ifdef CENTER_2D
     return circleSDF(st, CENTER_2D);
-    #else
+#else
     return circleSDF(st, vec2(.5));
-    #endif
+#endif
 }
 
 #endif

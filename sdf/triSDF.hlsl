@@ -11,4 +11,12 @@ float triSDF(in float2 st, float2 center) {
     st = st*2.0 ;
     return max(abs(st.x) * .866025 + st.y * .5, -st.y * .5) - 0.25;
 }
+
+float triSDF(in float2 st) {
+#ifdef CENTER_2D
+    return triSDF(st, CENTER_2D);
+#else
+    return triSDF(st, float2(0.5, 0.5));
+#endif
+}
 #endif

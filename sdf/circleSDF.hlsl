@@ -18,7 +18,11 @@ float circleSDF(in float2 st, in float2 center) {
 }
 
 float circleSDF(in float2 st) {
+#ifdef CENTER_2D
+    return circleSDF(st, CENTER_2D);
+#else
     return circleSDF(st, float2(0.5, 0.5));
+#endif
 }
 
 #endif
