@@ -41,7 +41,11 @@ vec4 sampleEquirect(SAMPLER_TYPE tex, vec3 dir, float lod) {
     vec2 st2 = vec2( dot(st + st - r, vec2(.0002,-0.001)), 0.0 );
 
     float counter = 0.0;
+    #ifdef PLATFORM_WEBGL
+    for (float i = 0.0; i < float(SAMPLEEQUIRET_ITERATIONS); i++) {
+    #else
     for (float i = 0.0; i < float(SAMPLEEQUIRET_ITERATIONS); i += 2.0/i) {
+    #endif
         st2 *= rot;
         color += gamma2linear( SAMPLER_FNC(tex, st + st2 * i / vec2(r.x * 2.0, r.y))) * f;
         counter++;
