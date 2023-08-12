@@ -76,7 +76,7 @@ float sampleTile(in vec2 p, in vec2 cellUv, in vec2 a, in vec2 b, in int tile) {
     }
 }
 
-vec2 sampleMarchinSquares(in vec2 uv, in sampler2D tex, in float cellSize, in float threshold, in vec2 resolution) {
+vec2 sampleMarchinSquares(in sampler2D tex, in vec2 uv, in vec2 resolution, in float cellSize, in float threshold) {
     float gridX = resolution.x / cellSize;
     float gridY = resolution.y / cellSize;
     float cellIdx = floor(uv.x * gridX);
