@@ -18,10 +18,13 @@ examples:
 
 #ifndef FNC_GEARSDF
 #define FNC_GEARSDF
-float gearSDF( vec2 st, vec2 center, float b, int N) {
+float gearSDF( vec2 st, float b, int N) {
     const float e = 2.71828182845904523536;
-    st += 0.5;
-    st -= center;
+#ifdef CENTER_2D
+    st -= CENTER_2D;
+#else
+    st -= 0.5;
+#endif
     st *= 3.0;
     float s = map(b, 1.0, 15.0, 0.066, 0.5);
     float d = length(st) - s;
@@ -30,13 +33,5 @@ float gearSDF( vec2 st, vec2 center, float b, int N) {
     float hyperTan = (l - 1.0) / (l + 1.0);
     float r = (1.0/b) * hyperTan;
     return (d + min(d, r));
-}
-
-float gearSDF(vec2 st, float b, int N) {
-    #ifdef CENTER_2D
-    return gearSDF(st, CENTER_2D, b, N);
-    #else 
-    return gearSDF(st, vec2(0.5), b, N);
-    #endif
 }
 #endif

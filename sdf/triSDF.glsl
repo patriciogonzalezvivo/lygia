@@ -8,17 +8,14 @@ options:
 
 #ifndef FNC_TRISDF
 #define FNC_TRISDF
-float triSDF(in vec2 st, vec2 center) {
-    st -= center;
-    st = st * 2.0 ;
-    return max(abs(st.x) * .866025 + st.y * .5, -st.y * .5) - 0.25;
-}
-
 float triSDF(in vec2 st) {
 #ifdef CENTER_2D
-    return triSDF(st, CENTER_2D);
+    st -= CENTER_2D;
+    st *= 5.0;
 #else
-    return triSDF(st, vec2(0.5));
+    st -= 0.5;
+    st *= 5.0;
 #endif
+    return max(abs(st.x) * .866025 + st.y * .5, -st.y * 0.5);
 }
 #endif

@@ -9,16 +9,16 @@ options:
 
 #ifndef FNC_SCALE
 #define FNC_SCALE
-float scale(in float st, in float s, in float center) {
+vec2 scale(in float st, in float s, in vec2 center) {
     return (st - center) * s + center;
 }
 
-float scale(in float st, in float s) {
-    #ifdef CENTER_2D
+vec2 scale(in float st, in float s) {
+#ifdef CENTER_2D
     return scale(st,  s, CENTER_2D);
-    #else
-    return scale(st,  s, .5);
-    #endif
+#else
+    return scale(st,  s, vec2(0.5));
+#endif
 }
 
 
@@ -31,11 +31,11 @@ vec2 scale(in vec2 st, in float value, in vec2 center) {
 }
 
 vec2 scale(in vec2 st, in vec2 s) {
-    #ifdef CENTER_2D
+#ifdef CENTER_2D
     return scale(st,  s, CENTER_2D);
-    #else
+#else
     return scale(st,  s, vec2(.5));
-    #endif
+#endif
 }
 
 vec2 scale(in vec2 st, in float value) {
@@ -51,11 +51,11 @@ vec3 scale(in vec3 st, in float value, in vec3 center) {
 }
 
 vec3 scale(in vec3 st, in vec3 s) {
-    #ifdef CENTER_3D
+#ifdef CENTER_3D
     return scale(st,  s, CENTER_3D);
-    #else
+#else
     return scale(st,  s, vec3(.5));
-    #endif
+#endif
 }
 
 vec3 scale(in vec3 st, in float value) {
