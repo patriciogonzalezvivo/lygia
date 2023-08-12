@@ -4,6 +4,8 @@
 original_author: Patricio Gonzalez Vivo
 description: Returns a cross-shaped SDF
 use: crossSDF(<vec2> st, size s)
+options:
+    - CENTER_2D : vec2, defaults to vec2(.5)
 */
 
 #ifndef FNC_CROSSSDF

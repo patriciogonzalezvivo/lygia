@@ -14,16 +14,12 @@ options:
 #ifndef FNC_CIRCLESDF
 #define FNC_CIRCLESDF
 
-float circleSDF(in vec2 st, in vec2 center) {
-    return CIRCLESDF_FNC(st - center) * 2.;
-}
-
 float circleSDF(in vec2 st) {
 #ifdef CENTER_2D
-    return circleSDF(st, CENTER_2D);
+    st -= CENTER_2D;
 #else
-    return circleSDF(st, vec2(.5));
+    st -= 0.5;
 #endif
+    return CIRCLESDF_FNC(st) * 2.0;
 }
-
 #endif
