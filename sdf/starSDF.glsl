@@ -5,6 +5,8 @@
 original_author: Patricio Gonzalez Vivo
 description: Returns a star-shaped sdf with V branches
 use: starSDF(<vec2> st, <int> V, <float> scale)
+examples:
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/draw_shapes.frag
 */
 
 #ifndef FNC_STARSDF
@@ -24,6 +26,7 @@ float starSDF(in vec2 st, in int V, in float s) {
     return abs(dot(vec2(cos(a), sin(a)),
                    st));
 }
+
 float starSDF(in vec2 st, in int V) {
     return starSDF( scale(st, 12.0/float(V)), V, 0.1);
 }

@@ -4,6 +4,8 @@ description: Returns a hexagon-shaped SDF
 use: hexSDF(<vec2> st)
 options:
     - CENTER_2D : vec2, defaults to vec2(.5)
+examples:
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/draw_shapes.frag
 */
 
 #ifndef FNC_HEXSDF

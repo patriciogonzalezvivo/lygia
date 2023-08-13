@@ -3,7 +3,9 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: Returns an almond-shaped sdf
-use: vesicaSDF(<vec2> st, <float> w)
+use: <float> vesicaSDF(<vec2> st, <float> w)
+examples:
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/draw_shapes.frag
 */
 
 #ifndef FNC_VESICASDF

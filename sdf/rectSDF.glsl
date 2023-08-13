@@ -6,6 +6,8 @@ use:
     - rectSDF(<vec2> st [, <vec2|float> size, float radius])
 options:
     - CENTER_2D : vec2, defaults to vec2(.5)
+examples:
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/draw_shapes.frag
 */
 
 #ifndef FNC_RECTSDF
