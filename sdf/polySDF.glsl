@@ -6,6 +6,8 @@ description: Returns a sdf for a regular polygon with V sides.
 use: polySDF(<vec2> st, int V)
 options:
     - CENTER_2D : vec2, defaults to vec2(.5)
+examples:
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/draw_shapes.frag
 */
 
 #ifndef FNC_POLYSDF
