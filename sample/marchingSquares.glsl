@@ -20,7 +20,9 @@ options:
 #ifndef FNC_SAMPLEMARCHINGSQUARES
 #define FNC_SAMPLEMARCHINGSQUARES 
 
+#ifndef SAMPLEMARCHINGSQUARES_SAMPLE_FNC
 #define SAMPLEMARCHINGSQUARES_SAMPLE_FNC(TEX, UV) SAMPLER_FNC(TEX, clamp(UV, 0.01, 0.99)).r
+#endif
 
 float sampleMarchingSquares_outline(in vec2 p, in vec2 cellUv, in vec2 a, in vec2 b, in bool straight) {
     float lineStrength = (straight ? 1.3333 : 1.0);
