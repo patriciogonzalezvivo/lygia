@@ -15,6 +15,8 @@ use:
     - <vec3> sampleMarchingSquares(in <vec2> uv, in <sampler2D> tex, in <float> cellSize, in <float> threshold, in <vec2> resolution) 
 options:
     - SAMPLEMARCHINGSQUARES_SAMPLE_FNC(TEX, UV): optional sampling function
+examples:
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/sample_marchinSquares.frag
 */
 
 #ifndef FNC_SAMPLEMARCHINGSQUARES
