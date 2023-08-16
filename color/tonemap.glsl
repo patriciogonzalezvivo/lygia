@@ -17,7 +17,7 @@ options:
 */
 
 #ifndef TONEMAP_FNC
-#if defined(TARGET_MOBILE) || defined(PLATFORM_RPI) || defined(PLATFORM_WEBGL)
+#if defined(TARGET_MOBILE) || defined(PLATFORM_RPI)
     #define TONEMAP_FNC     tonemapUnreal
 #else
     // #define TONEMAP_FNC     tonemapDebug
