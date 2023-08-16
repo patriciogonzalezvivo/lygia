@@ -9,7 +9,12 @@ use: polySDF(<float2> st, int V)
 #ifndef FNC_POLYSDF
 #define FNC_POLYSDF
 float polySDF(in float2 st, in int V) {
-    st = st * 2. - 1.;
+#ifdef CENTER_2D
+    st -= CENTER_2D;
+    st *= 2.0;
+#else
+    st = st * 2.0 - 1.0;
+#endif
     float a = atan2(st.x, st.y) + PI;
     float r = length(st);
     float v = TAU / float(V);

@@ -4,6 +4,10 @@
 original_author: Patricio Gonzalez Vivo
 description: Returns a cross-shaped SDF
 use: crossSDF(<vec2> st, size s)
+options:
+    - CENTER_2D : vec2, defaults to vec2(.5)
+examples:
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/draw_shapes.frag
 */
 
 #ifndef FNC_CROSSSDF

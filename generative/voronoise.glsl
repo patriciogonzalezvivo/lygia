@@ -1,6 +1,5 @@
-
-#include "random.glsl"
 #include "../math/const.glsl"
+#include "random.glsl"
 
 /*
 original_author: Inigo Quiles
@@ -29,7 +28,7 @@ float voronoise( in vec2 p, in float u, float v) {
     for ( float y = -2.0; y <= 2.0; y++ )
     for ( float x = -2.0; x <= 2.0; x++ ) {
         vec2 g = vec2(x, y);
-
+        
     #else
     vec2 g = vec2(-2.0);
     for ( g.y = -2.0; g.y <= 2.0; g.y++ )

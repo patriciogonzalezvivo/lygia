@@ -22,7 +22,7 @@ examples:
 #endif
 
 #ifndef EDGE_SAMPLER_FNC
-#define EDGE_SAMPLER_FNC(TEX, UV) texture(TEX, UV).r
+#define EDGE_SAMPLER_FNC(TEX, UV) sampleClamp2edge(TEX, UV).r
 #endif
 
 #include "edge/prewitt.glsl"

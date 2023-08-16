@@ -1,7 +1,13 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: Returns a rectangular SDF
-use: rectSDF(<vec2> st, <vec2> size)
+use: 
+    - rectSDF(<vec2> st [, <vec2|float> size])
+    - rectSDF(<vec2> st [, <vec2|float> size, float radius])
+options:
+    - CENTER_2D : vec2, defaults to vec2(.5)
+examples:
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/draw_shapes.frag
 */
 
 #ifndef FNC_RECTSDF
@@ -17,7 +23,12 @@ float rectSDF(vec2 p, float b, float r) {
 }
 
 float rectSDF(in vec2 st, in vec2 s) {
-    st = st * 2. - 1.;
+    #ifdef CENTER_2D
+        st -= CENTER_2D;
+        st *= 2.0;
+    #else
+        st = st * 2.0 - 1.0;
+    #endif
     return max( abs(st.x / s.x),
                 abs(st.y / s.y) );
 }
