@@ -9,6 +9,8 @@ options:
     - CENTER_2D
     - CENTER_3D
     - CENTER_4D
+examples:
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/draw_shapes.frag
 */
 
 #ifndef FNC_ROTATE

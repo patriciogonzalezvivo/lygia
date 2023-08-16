@@ -7,7 +7,12 @@ use: heartSDF(<float2> st)
 #ifndef FNC_HEARTSDF
 #define FNC_HEARTSDF
 float heartSDF(float2 st) {
-    st -= float2(0.5, 0.8);
+    #ifdef CENTER_2D
+    st -= CENTER_2D;
+    #else
+    st -= 0.5;
+    #endif
+    st -= float2(0.0, 0.3);
     float r = length(st) * 5.0;
     st = normalize(st);
     return r - ((st.y * pow(abs(st.x), 0.67)) / (st.y + 1.5) - (2.0) * st.y + 1.26);
