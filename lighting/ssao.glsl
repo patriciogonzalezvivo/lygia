@@ -2,6 +2,7 @@
 #include "../space/linearizeDepth.glsl"
 #include "../space/depth2viewZ.glsl"
 #include "../sample.glsl"
+#include "../generative/random.glsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
@@ -28,8 +29,6 @@ options:
 #if defined(GLSLVIEWER)
 #define SSAO_SAMPLES_ARRAY u_ssaoSamples
 uniform vec3 u_ssaoSamples[SSAO_SAMPLES_NUM];
-#else
-#define SSAO_SAMPLES_ARRAY u_samples
 #endif
 #endif
 
@@ -41,8 +40,6 @@ uniform vec3 u_ssaoSamples[SSAO_SAMPLES_NUM];
 #if defined(GLSLVIEWER)
 #define SSAO_NOISE_ARRAY u_ssaoNoise
 uniform vec3 u_ssaoNoise[SSAO_NOISE_NUM];
-#else 
-#define SSAO_NOISE_ARRAY u_noise
 #endif
 #endif
 
@@ -52,6 +49,14 @@ uniform vec3 u_ssaoNoise[SSAO_NOISE_NUM];
 #else
 #define CAMERA_PROJECTION_MATRIX u_projection
 #endif
+#endif
+
+#ifndef SSAO_NOISE2_FNC
+#define SSAO_NOISE2_FNC(ST) random2(ST)
+#endif
+
+#ifndef SSAO_NOISE3_FNC
+#define SSAO_NOISE3_FNC(POS) random3(POS)
 #endif
 
 #ifndef SSAO_DEPTH_BIAS
@@ -65,13 +70,13 @@ uniform vec3 u_ssaoNoise[SSAO_NOISE_NUM];
 
 float ssao(SAMPLER_TYPE texDepth, vec2 st, vec2 pixel, float radius) {
 
-    #if defined(SSAO_NOISE2_FNC) 
-    vec2 noise = SSAO_NOISE2_FNC( st ); 
-    #else
+    #if defined(SSAO_NOISE_ARRAY)
     float noiseS    = sqrt(float(SSAO_NOISE_NUM));
     int  noiseX     = int( mod(gl_FragCoord.x - 0.5, noiseS) );
     int  noiseY     = int( mod(gl_FragCoord.y - 0.5, noiseS) );
     vec2 noise      = SSAO_NOISE_ARRAY[noiseX + noiseY * int(noiseS)].xy;
+    #else
+    vec2 noise = SSAO_NOISE2_FNC( st ); 
     #endif
     noise *= 0.1;
 
@@ -104,17 +109,19 @@ float ssao(SAMPLER_TYPE texDepth, vec2 st, vec2 pixel, float radius) {
 }
 #endif
 
+#if defined(SSAO_SAMPLES_ARRAY)
+
 float ssao(SAMPLER_TYPE texPosition, SAMPLER_TYPE texNormal, vec2 st, float radius) {
     vec4  position  = SAMPLER_FNC(texPosition, st);
     vec3  normal    = SAMPLER_FNC(texNormal, st).rgb;
 
-    #if defined(SSAO_NOISE3_FNC) 
-    vec3  noise     = SSAO_NOISE3_FNC( position.xyz ); 
-    #else
+    #if defined(SSAO_NOISE_ARRAY) 
     float noiseS    = sqrt(float(SSAO_NOISE_NUM));
     int   noiseX    = int( mod(gl_FragCoord.x - 0.5, noiseS) );
     int   noiseY    = int( mod(gl_FragCoord.y - 0.5, noiseS) );
     vec3  noise     = SSAO_NOISE_ARRAY[noiseX + noiseY * int(noiseS)];
+    #else
+    vec3  noise     = SSAO_NOISE3_FNC( position.xyz ); 
     #endif
 
     vec3 tangent    = normalize(noise - normal * dot(noise, normal));
@@ -139,5 +146,6 @@ float ssao(SAMPLER_TYPE texPosition, SAMPLER_TYPE texNormal, vec2 st, float radi
     occlusion /= float(SSAO_SAMPLES_NUM);
     return 1.0-occlusion;
 }
+#endif
 
 #endif
