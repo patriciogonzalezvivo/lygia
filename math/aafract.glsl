@@ -32,4 +32,21 @@ float aafract(float x) {
     return fract(x);
 #endif
 }
+
+vec2 aafract(vec2 x) {
+#if !defined(GL_ES) || __VERSION__ >= 300 || defined(GL_OES_standard_derivatives)
+    vec2 afwidth = 2.0 * length(vec2(dFdx(x), dFdy(x)));
+    vec2 fx = fract(x);
+    vec2 idx = 1. - afwidth;
+    return (fx < idx) ? fx : map(fx, idx, vec2(1.), fx, vec2(0.));
+#elif defined(AA_EDGE)
+    vec2 afwidth = vec2(AA_EDGE);
+    vec2 fx = fract(x);
+    vec2 idx = 1. - afwidth;
+    return (fx < idx) ? fx : map(fx, idx, vec2(1.), fx, vec2(0.));
+#else
+    return fract(x);
+#endif
+}
+
 #endif
