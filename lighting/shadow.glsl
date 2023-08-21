@@ -28,7 +28,7 @@ float shadow(SAMPLER_TYPE shadoMap, const in vec2 size, const in vec2 uv, float 
 
     #if defined(PLATFORM_RPI) 
     return sampleShadow(shadoMap, size, uv, compare);
-    #elif defined(TARGET_MOBILE) || defined(PLATFORM_WEBGL)
+    #elif defined(TARGET_MOBILE)
     return sampleShadowLerp(shadoMap, size, uv, compare);
     #else 
     return sampleShadowPCF(shadoMap, size, uv, compare);
