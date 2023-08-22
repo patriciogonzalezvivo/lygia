@@ -96,7 +96,7 @@ FBM_NOISE_TYPE fbm(vec3 p, float tileLength) {
     const float lacunarity = 2.0;
 
     float amplitude = 0.5;
-    FBM_NOISE_TYPE total = 0.0;
+    FBM_NOISE_TYPE total = FBM_NOISE_TYPE(0.0);
     float normalization = 0.0;
 
     for (int i = 0; i < FBM_OCTAVES; ++i) {
