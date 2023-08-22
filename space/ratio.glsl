@@ -2,6 +2,8 @@
 original_author: Patricio Gonzalez Vivo
 description: Fix the aspect ratio of a space keeping things squared for you.
 use: ratio(vec2 st, vec2 st_size)
+examples:
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/draw_shapes.frag
 */
 
 #ifndef FNC_RATIO

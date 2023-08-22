@@ -7,7 +7,7 @@ use: stroke(<float> sdf, <float> size, <float> width [, <float> edge])
 #ifndef FNC_STROKE
 #define FNC_STROKE
 
-#include "aastep.glsl"
+#include "../math/aastep.glsl"
 #include "../math/saturate.glsl"
 
 float stroke(float x, float size, float w) {
