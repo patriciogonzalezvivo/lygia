@@ -2,7 +2,7 @@
 
 /*
 description: |
-    It returns a kaleidescope pattern.  Based on this [shader](Adapted from  https://www.shadertoy.com/view/ctByWz)
+    It returns a kaleidescope pattern.  Based on this [shader](https://www.shadertoy.com/view/ctByWz)
 
     Some notes about useage:
 
