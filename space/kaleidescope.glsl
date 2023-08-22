@@ -9,8 +9,8 @@ description: |
     Some notes about useage:
 
     * Higher values for zoom and iterations results in more detail
-    * For a more classic kaleidescope effect, use m = 1.75 and n = 1.15;
-    * For a "tie-dye" look, use m = 1.5 and n = 1.3
+    * For a more classic kaleidescope effect, use uv.x, m = 1.75 and n = 1.15;
+    * For a "tie-dye" look, use, uv.x, m = 1.5 and n = 1.3
     * Calling the kaleidescope twice with different parameters creates some interesting effects
     * Clamping the returned value is useful if colors are to bright
 use: kaleidescope(<vec2> st, <vec2> pixel, <float> t, <float> zoom, <float> m, <float> n, <int> interations)
@@ -18,7 +18,7 @@ use: kaleidescope(<vec2> st, <vec2> pixel, <float> t, <float> zoom, <float> m, <
 
 #ifndef FNC_KALEIDESCOPE
 #define FNC_KALEIDESCOPE
-float kaleidescope( vec2 st, vec2 pixel, float t, float zoom, float m, float n, int N) {
+vec2 kaleidescope( vec2 st, vec2 pixel, float t, float zoom, float m, float n, int N) {
     #ifdef CENTER_2D
     st -= CENTER_2D;
     #else
@@ -38,6 +38,6 @@ float kaleidescope( vec2 st, vec2 pixel, float t, float zoom, float m, float n, 
         uv = length( uv )*( uv + n);
 	}
     uv.x = lengthSq( uv ) * 0.5 ;
-    return uv.x;
+    return uv.xy;
 }
 #endif

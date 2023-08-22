@@ -18,7 +18,7 @@ use: kaleidescope(<float2> st, <float2> pixel, <float> t, <float> zoom, <float> 
 
 #ifndef FNC_KALEIDESCOPE
 #define FNC_KALEIDESCOPE
-float kaleidescope( float2 st, float2 pixel, float speed, float zoom, float m, float n, int N) {
+float2 kaleidescope( float2 st, float2 pixel, float speed, float zoom, float m, float n, int N) {
     #ifdef CENTER_2D
     st -= CENTER_2D;
     #else
@@ -33,6 +33,6 @@ float kaleidescope( float2 st, float2 pixel, float speed, float zoom, float m, f
         uv = length( uv )*( uv + n);
 	}
     uv.x = lengthSq(uv) * 0.5;
-    return uv.x;
+    return uv.xy;
 }
 #endif
