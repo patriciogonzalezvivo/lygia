@@ -1,6 +1,8 @@
+#include "..animation/easing/sineIn.glsl"
 #include "../math/lengthSq.glsl"
 
 /*
+original_author:  [shadertoyJiang, Kathy McGuiness]
 description: |
     It returns a kaleidescope pattern  Based on this [shader](https://www.shadertoy.com/view/ctByWz)
 
@@ -11,18 +13,18 @@ description: |
     * For a "tie-dye" look, use m = 1.5 and n = 1.3
     * Calling the kaleidescope twice with different parameters creates some interesting effects
     * Clamping the returned value is useful if colors are to bright
-use: kaleidescope(<vec2> st, <float> speed, <float> zoom, <float> m, <float> n, <int> interations)
+use: kaleidescope(<vec2> st, <vec2> pixel, <float> speed, <float> zoom, <float> m, <float> n, <int> interations)
 */
 
 #ifndef FNC_KALEIDESCOPE
 #define FNC_KALEIDESCOPE
-float kaleidescope( vec2 st, float speed, float zoom, float m, float n, int N) {
+float kaleidescope( vec2 st, vec2 pixel, float speed, float zoom, float m, float n, int N) {
     #ifdef CENTER_2D
     st -= CENTER_2D;
     #else
     st -= 0.5;
     #endif
-    vec3 r = u_resolution.xxx;
+    vec3 r = vec3(pixel.x);
     vec3 uv = vec3((2.0 * st.xyy- r)/r.x * zoom);
     uv.z = sineIn(u_time*speed);
     uv *= 0.35;
@@ -35,7 +37,7 @@ float kaleidescope( vec2 st, float speed, float zoom, float m, float n, int N) {
 		uv = abs( uv ) / lengthSq( uv ) - m; 
         uv = length( uv )*( uv + n);
 	}
-    uv = vec3(lengthSq( uv ) * 0.5) ;
+    uv.x = lengthSq( uv ) * 0.5 ;
     return uv.x;
 }
 #endif
