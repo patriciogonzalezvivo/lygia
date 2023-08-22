@@ -13,12 +13,12 @@ description: |
     * For a "tie-dye" look, use m = 1.5 and n = 1.3
     * Calling the kaleidescope twice with different parameters creates some interesting effects
     * Clamping the returned value is useful if colors are to bright
-use: kaleidescope(<vec2> st, <vec2> pixel, <float> speed, <float> zoom, <float> m, <float> n, <int> interations)
+use: kaleidescope(<vec2> st, <vec2> pixel, <float> t, <float> zoom, <float> m, <float> n, <int> interations)
 */
 
 #ifndef FNC_KALEIDESCOPE
 #define FNC_KALEIDESCOPE
-float kaleidescope( vec2 st, vec2 pixel, float speed, float zoom, float m, float n, int N) {
+float kaleidescope( vec2 st, vec2 pixel, float t, float zoom, float m, float n, int N) {
     #ifdef CENTER_2D
     st -= CENTER_2D;
     #else
@@ -26,7 +26,7 @@ float kaleidescope( vec2 st, vec2 pixel, float speed, float zoom, float m, float
     #endif
     vec3 r = vec3(pixel.x);
     vec3 uv = vec3((2.0 * st.xyy- r)/r.x * zoom);
-    uv.z = sineIn(u_time*speed);
+    uv.z = sineIn(t);
     uv *= 0.35;
     #ifdef PLATFORM_WEBGL
     for (int i = 0; i< 10; i++) {
