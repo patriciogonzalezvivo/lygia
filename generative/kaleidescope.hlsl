@@ -25,8 +25,8 @@ float kaleidescope( float2 st, float speed, float zoom, float m, float n, int N)
     vec3 r = u_resolution.xxx;
     vec3 uv = vec3((2.0 * st.xyy- r)/r.x * zoom);
     uv.z = sineIn(u_time*speed);
-	uv *= 0.35;
-	#ifdef PLATFORM_WEBGL
+    uv *= 0.35;
+    #ifdef PLATFORM_WEBGL
     for (int i = 0; i< 10; i++) {
         if (i >= N) break;
     #else
