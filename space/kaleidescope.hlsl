@@ -27,11 +27,11 @@ float2 kaleidescope( float2 st, float2 pixel, float speed, float zoom, float m, 
     float3 r = float3(pixel.x, pixel.x, pixel.x);
     float3 uv = float3((2.0 * st.xyy - r)/r.x * zoom, (2.0 * st.xyy- r)/r.x * zoom,(2.0 * st.xyy- r)/r.x * zoom);
     uv.z = sineIn(t);
-	uv *= 0.35;
+    uv *= 0.35;
     for (int i = 0; i< N; i++) {
-		uv = abs( uv ) / lengthSq( uv ) - m; 
+	uv = abs( uv ) / lengthSq( uv ) - m; 
         uv = length( uv )*( uv + n);
-	}
+    }
     uv.x = lengthSq(uv) * 0.5;
     return uv.xy;
 }
