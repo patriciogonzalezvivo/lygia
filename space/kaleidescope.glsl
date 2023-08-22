@@ -34,7 +34,7 @@ vec2 kaleidescope( vec2 st, vec2 pixel, float t, float zoom, float m, float n, i
     #else
     for (int i = 0; i< N; i++) {
     #endif
-		uv = abs( uv ) / lengthSq( uv ) - m; 
+	uv = abs( uv ) / lengthSq( uv ) - m; 
         uv = length( uv )*( uv + n);
 	}
     uv.x = lengthSq( uv ) * 0.5 ;
