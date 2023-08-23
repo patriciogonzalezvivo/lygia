@@ -34,7 +34,8 @@ options:
 
 GAUSSIANBLUR1D_TYPE gaussianBlur1D(in SAMPLER_TYPE tex,in vec2 st,in vec2 offset,const int kernelSize){
     GAUSSIANBLUR1D_TYPE accumColor = GAUSSIANBLUR1D_TYPE(0.0);
-    
+
+    float kernelSizef = float(kernelSize);
     float accumWeight = 0.0;
     const float k = 0.39894228;// 1 / sqrt(2*PI)
     for (int i = 0; i < 16; i++) {
