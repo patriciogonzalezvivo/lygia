@@ -8,7 +8,7 @@
 #include "shininess.glsl"
 
 #include "../material.glsl"
-#include "../shadow.glsl"
+// #include "../shadow.glsl"
 #include "../ior.glsl"
 #include "../../sample.glsl"
 
@@ -25,22 +25,12 @@ options:
     - MATERIAL_CLEARCOAT_ROUGHNESS
     - MATERIAL_HAS_CLEAR_COAT_NORMAL
     - SHADING_MODEL_SUBSURFACE
-    - MATERIAL_SUBSURFACE_COLOR
     - SHADING_MODEL_CLOTH
 */
 
 #ifndef SURFACE_POSITION
 #define SURFACE_POSITION vec3(0.0, 0.0, 0.0)
 #endif
-
-#ifndef SHADOW_INIT
-#if defined(LIGHT_SHADOWMAP) && defined(LIGHT_SHADOWMAP_SIZE) && defined(LIGHT_COORD)
-#define SHADOW_INIT shadow(LIGHT_SHADOWMAP, vec2(LIGHT_SHADOWMAP_SIZE), (LIGHT_COORD).xy, (LIGHT_COORD).z)
-#else
-#define SHADOW_INIT 1.0
-#endif
-#endif
-
 
 #ifndef FNC_MATERIAL_NEW
 #define FNC_MATERIAL_NEW
@@ -51,18 +41,13 @@ void materialNew(out Material _mat) {
     _mat.normal             = materialNormal();
 
     #if defined(SCENE_BACK_SURFACE) && defined(RESOLUTION)
-    vec4 back_surface       = SAMPLER_FNC(SCENE_BACK_SURFACE, gl_FragCoord.xy / RESOLUTION);
-    _mat.normal_back        = back_surface.xyz;
-    #if defined(SHADING_MODEL_SUBSURFACE)
-    _mat.thickness          = saturate(gl_FragCoord.z - back_surface.a);
-    #endif
+        vec4 back_surface       = SAMPLER_FNC(SCENE_BACK_SURFACE, gl_FragCoord.xy / RESOLUTION);
+        _mat.normal_back        = back_surface.xyz;
     #else
-    #if defined(SCENE_BACK_SURFACE)
-    _mat.normal_back        = -_mat.normal;
-    #endif
-    #if defined(SHADING_MODEL_SUBSURFACE)
-    _mat.thickness          = 0.5;
-    #endif
+        #if defined(SCENE_BACK_SURFACE)
+        // Naive assumption of the back surface
+        _mat.normal_back        = -_mat.normal;
+        #endif
     #endif
 
     // PBR Properties
@@ -77,7 +62,7 @@ void materialNew(out Material _mat) {
     // Shade
     _mat.ambientOcclusion   = materialOcclusion();
 
-    _mat.shadow             = SHADOW_INIT;
+    // _mat.shadow             = SHADOW_INIT;
 
     // Clear Coat Model
 // #if defined(MATERIAL_HAS_CLEAR_COAT)
@@ -90,15 +75,17 @@ void materialNew(out Material _mat) {
 
     // SubSurface Model
 #if defined(SHADING_MODEL_SUBSURFACE)
+    _mat.subsurfaceColor    = _mat.albedo.rgb;
     _mat.subsurfacePower    = 12.234;
-#endif
+    _mat.thickness          = 0.1;
 
-#if defined(MATERIAL_SUBSURFACE_COLOR)
-    #if defined(SHADING_MODEL_SUBSURFACE)
-    _mat.subsurfaceColor    = vec3(1.0, 1.0, 1.0);
-    #else
-    _mat.subsurfaceColor    = vec3(0.0, 0.0, 0.0);
+    #if defined(LIGHT_SHADOWMAP) && defined(LIGHT_COORD)
+    vec3 shadowCoord = LIGHT_COORD.xyz / LIGHT_COORD.w;
+    float ray_dist = texture2D(LIGHT_SHADOWMAP, LIGHT_COORD.xy).r;
+    vec3 ray_hit = (u_lightMatrix * vec4(0.0, 0.0, ray_dist, 0.0)).xyz;
+    _mat.thickness = length(ray_hit - _mat.position);
     #endif
+
 #endif
 
     // Cloath Model
