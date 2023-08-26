@@ -1,6 +1,6 @@
 #include "../specular.glsl"
 #include "../diffuse.glsl"
-#include "falloff.glsl"
+#include "../shadow.glsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
@@ -26,18 +26,65 @@ options:
 #define LIGHT_INTENSITY 1.0
 #endif
 
+#ifndef STR_LIGHT_DIRECTIONAL
+#define STR_LIGHT_DIRECTIONAL
+struct LightDirectional {
+    vec3    direction;
+    vec3    color;
+    float   intensity;
+
+// Cache
+    float   shadow;
+};
+#endif
+
 #ifndef FNC_LIGHT_DIRECTIONAL
 #define FNC_LIGHT_DIRECTIONAL
-void lightDirectional(const in vec3 _diffuseColor, const in vec3 _specularColor, const in vec3 _N, const in vec3 _V, const in float _NoV, const in float _roughness, const in float _f0, const in float _shadow, inout vec3 _diffuse, inout vec3 _specular) {
-    #ifdef LIGHT_DIRECTION
-    vec3    D = normalize(LIGHT_DIRECTION);
-    #else 
-    vec3    D = normalize(LIGHT_POSITION);
-    #endif
-    float NoL = dot(_N, D);
-    float dif = diffuse(D, _N, _V, _NoV, NoL, _roughness);
-    float spec = specular(D, _N, _V, _NoV, NoL, _roughness, _f0);
-    _diffuse  += max(vec3(0.0), LIGHT_INTENSITY * (_diffuseColor * LIGHT_COLOR * dif) * _shadow);
-    _specular += max(vec3(0.0), LIGHT_INTENSITY * (_specularColor * LIGHT_COLOR * spec) * _shadow);
+
+void lightDirectional(
+    const in vec3 _diffuseColor, const in vec3 _specularColor, 
+    const in vec3 _V,
+    const in vec3 _Ld, const in vec3 _Lc, const in float _Li,
+    const in vec3 _N, const in float _NoV, const in float _NoL, 
+    const in float _roughness, const in float _f0, 
+    inout vec3 _diffuse, inout vec3 _specular) {
+    float dif = diffuse(_Ld, _N, _V, _NoV, _NoL, _roughness);
+    float spec = specular(_Ld, _N, _V, _NoV, _NoL, _roughness, _f0);
+
+    _diffuse  += max(vec3(0.0), _Li * (_diffuseColor * _Lc * dif));
+    _specular += max(vec3(0.0), _Li * (_specularColor * _Lc * spec));
 }
+
+#ifdef STR_MATERIAL
+void lightDirectional(
+    const in vec3 _diffuseColor, const in vec3 _specularColor,
+    LightDirectional _L, const in Material _mat, 
+    inout vec3 _diffuse, inout vec3 _specular) 
+    {
+    float f0    = max(_mat.f0.r, max(_mat.f0.g, _mat.f0.b));
+
+    float NoL   = dot(_mat.normal, _L.direction);
+
+    lightDirectional(
+        _diffuseColor, _specularColor, 
+        _mat.V, 
+        _L.direction, _L.color, _L.intensity * _L.shadow, 
+        _mat.normal, _mat.NoV, NoL, _mat.roughness, f0, 
+        _diffuse, _specular);
+
+    #ifdef SHADING_MODEL_SUBSURFACE
+    vec3  h     = normalize(_mat.V + _L.direction);
+    float NoH   = saturate(dot(_mat.normal, h));
+    float LoH   = saturate(dot(_L.direction, h));
+
+    float scatterVoH = saturate(dot(_mat.V, -_L.direction));
+    float forwardScatter = exp2(scatterVoH * _mat.subsurfacePower - _mat.subsurfacePower);
+    float backScatter = saturate(NoL * _mat.thickness + (1.0 - _mat.thickness)) * 0.5;
+    float subsurface = mix(backScatter, 1.0, forwardScatter) * (1.0 - _mat.thickness);
+    _diffuse += _mat.subsurfaceColor * (subsurface * diffuseLambert());
+    #endif
+}
+#endif
+
+
 #endif

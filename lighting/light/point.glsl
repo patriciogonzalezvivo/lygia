@@ -13,6 +13,7 @@ options:
 
 #include "../specular.glsl"
 #include "../diffuse.glsl"
+#include "../shadow.glsl"
 #include "falloff.glsl"
 
 #ifndef SURFACE_POSITION
@@ -35,31 +36,75 @@ options:
 #define LIGHT_FALLOFF   0.0
 #endif
 
+#ifndef STR_LIGHT_POINT
+#define STR_LIGHT_POINT
+struct LightPoint {
+    vec3    position;
+    vec3    color;
+    float   intensity;
+#ifdef LIGHT_FALLOFF
+    float   falloff;
+#endif
+
+// Cache
+    vec3    direction;
+    float   dist;
+    float   shadow;
+};
+#endif
+
 #ifndef FNC_LIGHT_POINT
 #define FNC_LIGHT_POINT
 
-void lightPoint(const in vec3 _diffuseColor, const in vec3 _specularColor, const in vec3 _N, const in vec3 _V, const in float _NoV, const in float _roughness, const in float _f0, const in float _shadow, inout vec3 _diffuse, inout vec3 _specular) {
-    vec3 toLight = LIGHT_POSITION - (SURFACE_POSITION).xyz;
-    float toLightLength = length(toLight);
-    vec3 s = toLight/toLightLength;
+void lightPoint(
+    const in vec3 _diffuseColor, const in vec3 _specularColor, 
+    const in vec3 _V, 
+    const in vec3 _Lp, const in vec3 _Ld, const in vec3 _Lc, const in float _Li, const in float _Ldist, const in float _Lof, 
+    const in vec3 _N, const in float _NoV, const in float _NoL, const in float _roughness, const in float _f0, 
+    inout vec3 _diffuse, inout vec3 _specular) {
 
-    float NoL = dot(_N, s);
+    float dif   = diffuse(_Ld, _N, _V, _NoV, _NoL, _roughness);// * ONE_OVER_PI;
+    float spec  = specular(_Ld, _N, _V, _NoV, _NoL, _roughness, _f0);
 
-    float dif = diffuse(s, _N, _V, _NoV, NoL, _roughness);// * ONE_OVER_PI;
-    float spec = specular(s, _N, _V, _NoV, NoL, _roughness, _f0);
-
-    vec3 lightContribution = LIGHT_COLOR * LIGHT_INTENSITY * _shadow;
+    vec3 lightContribution = _Lc * _Li;
     #ifdef LIGHT_FALLOFF
-    if (LIGHT_FALLOFF > 0.0)
-        lightContribution *= falloff(toLightLength, LIGHT_FALLOFF);
+    if (_Lof > 0.0)
+        lightContribution *= falloff(_Ldist, _Lof);
     #endif
 
-    _diffuse +=  max(vec3(0.0), _diffuseColor * lightContribution * dif);
-    _specular += max(vec3(0.0), _specularColor * lightContribution * spec);
+    _diffuse    += max(vec3(0.0), _diffuseColor * lightContribution * dif);
+    _specular   += max(vec3(0.0), _specularColor * lightContribution * spec);
 }
 
-void lightPoint(const in vec3 _diffuseColor, const in vec3 _specularColor, const in vec3 _N, const in vec3 _V, const in float _NoV, const in float _roughness, const in float _f0, inout vec3 _diffuse, inout vec3 _specular) {
-    lightPoint(_diffuseColor, _specularColor, _N, _V,  _NoV, _roughness, _f0, 1.0, _diffuse, _specular);
+#ifdef STR_MATERIAL
+void lightPoint(
+    const in vec3 _diffuseColor, const in vec3 _specularColor,
+    LightPoint _L, const in Material _mat, 
+    inout vec3 _diffuse, inout vec3 _specular) 
+    {
+    float f0    = max(_mat.f0.r, max(_mat.f0.g, _mat.f0.b));
+    float NoL   = dot(_mat.normal, _L.direction);
+
+    lightPoint( _diffuseColor, _specularColor, 
+                _mat.V, 
+                _L.position, _L.direction, _L.color, _L.intensity, _L.dist, _L.falloff, 
+                _mat.normal, _mat.NoV, NoL, _mat.roughness, f0, 
+                _diffuse, _specular);
+
+    // TODO:
+    // - make sure that the shadow use a perspective projection
+    #ifdef SHADING_MODEL_SUBSURFACE
+    vec3  h     = normalize(_mat.V + _L.direction);
+    float NoH   = saturate(dot(_mat.normal, h));
+    float LoH   = saturate(dot(_L.direction, h));
+
+    float scatterVoH = saturate(dot(_mat.V, -_L.direction));
+    float forwardScatter = exp2(scatterVoH * _mat.subsurfacePower - _mat.subsurfacePower);
+    float backScatter = saturate(NoL * _mat.thickness + (1.0 - _mat.thickness)) * 0.5;
+    float subsurface = mix(backScatter, 1.0, forwardScatter) * (1.0 - _mat.thickness);
+    _diffuse += _mat.subsurfaceColor * (subsurface * diffuseLambert());
+    #endif
 }
+#endif
 
 #endif
