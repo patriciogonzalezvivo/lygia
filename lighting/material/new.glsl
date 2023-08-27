@@ -79,25 +79,28 @@ void materialNew(out Material _mat) {
     _mat.subsurfacePower    = 12.234;
     _mat.thickness          = 0.1;
 
+    // Simulate Absorption Using Depth Map (shadowmap)
+    // https://developer.nvidia.com/gpugems/gpugems/part-iii-materials/chapter-16-real-time-approximations-subsurface-scattering
     #if defined(LIGHT_SHADOWMAP) && defined(LIGHT_COORD)
     {
         vec3 shadowCoord = LIGHT_COORD.xyz / LIGHT_COORD.w;
-        float ray_dist = SAMPLER_FNC(LIGHT_SHADOWMAP, LIGHT_COORD.xy).r;
-        float delta = saturate(shadowCoord.z - ray_dist);
+        float Di = SAMPLER_FNC(LIGHT_SHADOWMAP, LIGHT_COORD.xy).r;
+        float Do = LIGHT_COORD.z;
+        float delta = Do - Di;
 
         #if defined(LIGHT_SHADOWMAP_SIZE) && !defined(PLATFORM_RPI)
         vec2 shadowmap_pixel = 1.0/vec2(LIGHT_SHADOWMAP_SIZE);
-        shadowmap_pixel *= pow(delta, 0.3) * 5.0;
+        shadowmap_pixel *= pow(delta, 0.6) * 20.0;
 
-        float result = 0.0;
+        Di = 0.0;
         for (float x= -2.0; x <= 2.0; x++)
             for (float y= -2.0; y <= 2.0; y++) 
-                result += SAMPLER_FNC(LIGHT_SHADOWMAP, LIGHT_COORD.xy + vec2(x,y) * shadowmap_pixel).r;
-        ray_dist = result/25.0;
-        delta = saturate(shadowCoord.z - ray_dist);
+                Di += SAMPLER_FNC(LIGHT_SHADOWMAP, LIGHT_COORD.xy + vec2(x,y) * shadowmap_pixel).r;
+        Di *= 0.04; // 1.0/25.0
+        delta = Do - Di;
         #endif
 
-        _mat.thickness = max(delta, 0.01) * 30.0;
+        _mat.thickness = max(Do - Di, 0.005) * 30.0;
 
     }
 
