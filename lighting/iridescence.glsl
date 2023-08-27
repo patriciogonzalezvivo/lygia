@@ -6,6 +6,8 @@
 original_author: Paniq (https://www.shadertoy.com/view/Ms33zj)
 description: based on the picture in http://home.hiroshima-u.ac.jp/kin/publications/TVC01/examples.pdf
 use: <vec3> iridescence(<float> angle, <float> thickness)
+examples:
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/color_iridescence_map.frag
 */
 
 #ifndef FNC_IRIDESCENCE

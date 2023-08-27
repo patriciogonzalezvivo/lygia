@@ -100,8 +100,8 @@ void materialNew(out Material _mat) {
         delta = Do - Di;
         #endif
 
+        // This is pretty much of a hack by overwriting the absorption to the thinkness
         _mat.thickness = max(Do - Di, 0.005) * 30.0;
-
     }
 
 
