@@ -80,10 +80,28 @@ void materialNew(out Material _mat) {
     _mat.thickness          = 0.1;
 
     #if defined(LIGHT_SHADOWMAP) && defined(LIGHT_COORD)
-    vec3 shadowCoord = LIGHT_COORD.xyz / LIGHT_COORD.w;
-    float ray_dist = texture2D(LIGHT_SHADOWMAP, LIGHT_COORD.xy).r;
-    vec3 ray_hit = (u_lightMatrix * vec4(0.0, 0.0, ray_dist, 0.0)).xyz;
-    _mat.thickness = length(ray_hit - _mat.position);
+    {
+        vec3 shadowCoord = LIGHT_COORD.xyz / LIGHT_COORD.w;
+        float ray_dist = SAMPLER_FNC(LIGHT_SHADOWMAP, LIGHT_COORD.xy).r;
+        float delta = saturate(shadowCoord.z - ray_dist);
+
+        #if defined(LIGHT_SHADOWMAP_SIZE) && !defined(PLATFORM_RPI)
+        vec2 shadowmap_pixel = 1.0/vec2(LIGHT_SHADOWMAP_SIZE);
+        shadowmap_pixel *= pow(delta, 0.3) * 5.0;
+
+        float result = 0.0;
+        for (float x= -2.0; x <= 2.0; x++)
+            for (float y= -2.0; y <= 2.0; y++) 
+                result += SAMPLER_FNC(LIGHT_SHADOWMAP, LIGHT_COORD.xy + vec2(x,y) * shadowmap_pixel).r;
+        ray_dist = result/25.0;
+        delta = saturate(shadowCoord.z - ray_dist);
+        #endif
+
+        _mat.thickness = max(delta, 0.01) * 30.0;
+
+    }
+
+
     #endif
 
 #endif

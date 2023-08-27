@@ -1,6 +1,7 @@
 #include "../specular.glsl"
 #include "../diffuse.glsl"
 #include "../shadow.glsl"
+#include "../common/penner.glsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
@@ -82,6 +83,7 @@ void lightDirectional(
     float backScatter = saturate(NoL * _mat.thickness + (1.0 - _mat.thickness)) * 0.5;
     float subsurface = mix(backScatter, 1.0, forwardScatter) * (1.0 - _mat.thickness);
     _diffuse += _mat.subsurfaceColor * (subsurface * diffuseLambert());
+    
     #endif
 }
 #endif
