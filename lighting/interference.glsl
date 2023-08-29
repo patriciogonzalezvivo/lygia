@@ -141,7 +141,7 @@ vec3 interference(vec3 ray, vec3 normal, float thickness, float roughness, float
     vec3 w5 = interference_sampleWeights(wavelengths1.z);
     vec3 col = i0.x * w0 + i0.y * w1 + i0.z * w2 + i1.x * w3 + i1.y * w4 + i1.z * w5;
 
-    return 1.4 * interference_gamma(col);
+    return interference_gamma(col);
 }
 
 vec3 interference(vec3 ray, vec3 normal, float thickness, float roughness) {
@@ -181,7 +181,7 @@ vec3 interference(vec3 ray, vec3 normal, float thickness, float roughness) {
     vec3 w5 = interference_sampleWeights(wavelengths1.z);
     vec3 col = i0.x * w0 + i0.y * w1 + i0.z * w2 + i1.x * w3 + i1.y * w4 + i1.z * w5;
 
-    return 1.4 * interference_gamma(col);
+    return interference_gamma(col);
 }
 
 const int bands = 5;
