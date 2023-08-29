@@ -11,7 +11,7 @@ original_author: Martijn Steinrucken
 description: Spectral Response Function https://www.shadertoy.com/view/wlSBzD
 use: <vec3> spectral(<float> value)
 examples:
-    - https://raw.githubusercontent.com/eduardfossas/lygia-study-examples/main/color/palette/spectral.frag
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/color_wavelength.frag
 */
 
 #ifndef FNC_SPECTRAL

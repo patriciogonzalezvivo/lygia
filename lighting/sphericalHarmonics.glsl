@@ -30,7 +30,7 @@ options:
 #ifndef FNC_SPHERICALHARMONICS
 #define FNC_SPHERICALHARMONICS
 
-vec3 sphericalHarmonics(const vec3[9] sh, const in vec3 n) {
+vec3 sphericalHarmonics(const vec3 sh[9], const in vec3 n) {
     return SPHERICALHARMONICS_TONEMAP ( max(
            0.282095 * sh[0]
 #if SPHERICALHARMONICS_BANDS >= 2

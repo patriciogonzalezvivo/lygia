@@ -2,6 +2,8 @@
 #include "material/normal.glsl"
 #include "material/albedo.glsl"
 
+#include "light/new.glsl"
+
 #include "diffuse.glsl"
 #include "specular.glsl"
 
@@ -49,35 +51,45 @@ options:
 
 #ifndef FNC_GOOCH
 #define FNC_GOOCH
-vec4 gooch(const in vec4 albedo, const in vec3 normal, const in vec3 light, const in vec3 view, const in float roughness, const in float shadow) {
-    vec3 warm = GOOCH_WARM + albedo.rgb * 0.6;
-    vec3 cold = GOOCH_COLD + albedo.rgb * 0.1;
+vec4 gooch(const in vec4 _albedo, const in vec3 _N, const in vec3 _L, const in vec3 _V, const in float _roughness, const in float _Li) {
+    vec3 warm = GOOCH_WARM + _albedo.rgb * 0.6;
+    vec3 cold = GOOCH_COLD + _albedo.rgb * 0.1;
 
-    vec3 l = normalize(light);
-    vec3 n = normalize(normal);
-    vec3 v = normalize(view);
+    vec3 l = normalize(_L);
+    vec3 n = normalize(_N);
+    vec3 v = normalize(_V);
 
     // Lambert Diffuse
-    float diff = diffuse(l, n, v, roughness) * shadow;
+    float diff = diffuse(l, n, v, _roughness) * _Li;
     // Phong Specular
-    float spec = specular(l, n, v, roughness) * shadow;
+    float spec = specular(l, n, v, _roughness) * _Li;
 
-    return vec4(mix(mix(cold, warm, diff), GOOCH_SPECULAR, spec), albedo.a);
+    return vec4(mix(mix(cold, warm, diff), GOOCH_SPECULAR, spec), _albedo.a);
 }
 
 
-vec4 gooch(const in vec4 albedo, const in vec3 normal, const in vec3 light, const in vec3 view, const in float roughness) {
-    return gooch(albedo, normal, light, view, roughness, 1.0);
+vec4 gooch(const in vec4 _albedo, const in vec3 _N, const in vec3 _L, const in vec3 _V, const in float _roughness) {
+    return gooch(_albedo, _N, _L, _V, _roughness, 1.0);
 }
 
-vec4 gooch(Material material) {
-    vec3 pos = CAMERA_POSITION - material.position;
-    #ifdef LIGHT_DIRECTION
-    vec3 lig = LIGHT_DIRECTION;
-    #else
-    vec3 lig = LIGHT_POSITION - material.position;
+vec4 gooch(const in Material _M, const in LightDirectional _L) {
+    vec3 V = normalize(CAMERA_POSITION - _M.position);
+    return gooch(_M.albedo, _M.normal, _L.direction, V, _M.roughness, _L.intensity * _L.shadow);
+}
+
+vec4 gooch(const in Material _M, const in LightPoint _L) {
+    vec3 V = normalize(CAMERA_POSITION - _M.position);
+    return gooch(_M.albedo, _M.normal, _L.direction, V, _M.roughness, _L.intensity * _L.shadow);
+}
+
+vec4 gooch(const in Material _M) {
+    #if defined(LIGHT_DIRECTION)
+    LightDirectional L = LightDirectionalNew();
+    #elif defined(LIGHT_POSITION)
+    LightPoint L = LightPointNew();
     #endif
-    return gooch(material.albedo, material.normal, lig, pos, material.roughness, material.shadow);
+
+    return gooch(_M, L);
 }
 
 #endif

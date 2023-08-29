@@ -14,12 +14,16 @@ license: |
     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+#ifndef SAMPLERSHADOW_FNC
+#define SAMPLERSHADOW_FNC(TEX, UV) SAMPLER_FNC(TEX, UV).r
+#endif
+
 #ifndef FNC_SAMPLESHADOW
 #define FNC_SAMPLESHADOW
 
 float sampleShadow(in SAMPLER_TYPE shadowMap, in vec4 _coord) {
     vec3 shadowCoord = _coord.xyz / _coord.w;
-    return SAMPLER_FNC(shadowMap, shadowCoord.xy).r;
+    return SAMPLERSHADOW_FNC(shadowMap, shadowCoord.xy);
 }
 
 float sampleShadow(in SAMPLER_TYPE shadowMap, in vec3 _coord) {
@@ -27,7 +31,7 @@ float sampleShadow(in SAMPLER_TYPE shadowMap, in vec3 _coord) {
 }
 
 float sampleShadow(in SAMPLER_TYPE shadowMap, in vec2 uv, in float compare) {
-    return step(compare, SAMPLER_FNC(shadowMap, uv).r );
+    return step(compare, SAMPLERSHADOW_FNC(shadowMap, uv) );
 }
 
 float sampleShadow(in SAMPLER_TYPE shadowMap, in vec2 size, in vec2 uv, in float compare) {

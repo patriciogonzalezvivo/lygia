@@ -6,8 +6,7 @@ description: from GPU Gems https://developer.nvidia.com/sites/all/modules/custom
  (https://www.shadertoy.com/view/ls2Bz1)
 use: <vec3> spectral_gems(<float> x)
 examples:
-    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/color_wavelenght.frag
-    - https://raw.githubusercontent.com/eduardfossas/lygia-study-examples/main/color/palette/spectral.frag
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/color_wavelength.frag
 */
 
 #ifndef FNC_SPECTRAL_GEMS

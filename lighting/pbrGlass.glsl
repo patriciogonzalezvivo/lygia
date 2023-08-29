@@ -1,4 +1,5 @@
 #include "material.glsl"
+#include "light/new.glsl"
 #include "ior.glsl"
 #include "specular.glsl"
 #include "fresnelReflection.glsl"
@@ -27,10 +28,6 @@ examples:
     - /shaders/lighting_raymarching_glass.frag
 */
 
-#ifndef LIGHT_COLOR
-#define LIGHT_COLOR     vec3(1.0)
-#endif
-
 #ifndef IBL_LUMINANCE
 #define IBL_LUMINANCE   1.0
 #endif
@@ -39,52 +36,65 @@ examples:
 #define FNC_PBRGLASS
 
 vec4 pbrGlass(const Material _mat) {
-    vec3    V       = normalize(CAMERA_POSITION - _mat.position);   // View
-    vec3    N       = _mat.normal;                                  // Normal front
-    vec3    No      = _mat.normal;                                  // Normal out
+    
+    // Cached
+    Material M  = _mat;
+    M.V         = normalize(CAMERA_POSITION - M.position);  // View
+    M.NoV       = dot(M.normal, M.V);                       // Normal . View
+    M.R         = reflection(M.V, M.normal, M.roughness);   // Reflection
+
+    vec3    Nf      = M.normal;                                  // Normal front
+    vec3    No      = M.normal;                                  // Normal out
 #if defined(SCENE_BACK_SURFACE)
-            No      = normalize( N - _mat.normal_back );
+            No      = normalize(Nf - M.normal_back);
 #endif
 
-    float roughness = _mat.roughness;
-
-    vec3    f0      = ior2f0(_mat.ior);
-    vec3    eta     = ior2eta(_mat.ior);
-    vec3    Re      = reflection(V, N, roughness);
-    vec3    RaG     = refract(-V, No, eta.g);
+    vec3    f0      = ior2f0(M.ior);
+    vec3    eta     = ior2eta(M.ior);
+    vec3    RaG     = refract(-M.V, No, eta.g);
     #if !defined(TARGET_MOBILE) && !defined(PLATFORM_RPI)
-    vec3    RaR     = refract(-V, No, eta.r);
-    vec3    RaB     = refract(-V, No, eta.b);
+    vec3    RaR     = refract(-M.V, No, eta.r);
+    vec3    RaB     = refract(-M.V, No, eta.b);
     #endif
-
-    float   NoV     = dot(N, V);                                    // Normal . View
 
     // Global Ilumination ( mage Based Lighting )
     // ------------------------
-    vec3 E = envBRDFApprox(_mat.albedo.rgb, NoV, roughness);
+    vec3 E = envBRDFApprox(M.albedo.rgb, M);
 
     vec3 Fr = vec3(0.0, 0.0, 0.0);
-    Fr = envMap(Re, roughness) * E;
+    Fr  = envMap(M) * E;
     #if !defined(PLATFORM_RPI)
-    Fr += tonemap( fresnelReflection(Re, _mat.f0, NoV) ) * (1.0-roughness) * 0.2;
+    Fr  += tonemap( fresnelReflection(M) ) * (1.0-M.roughness) * 0.2;
     #endif
 
     vec4 color  = vec4(0.0, 0.0, 0.0, 1.0);
-    color.rgb   = envMap(RaG, roughness);
+    color.rgb   = envMap(RaG, M.roughness);
     #if !defined(TARGET_MOBILE) && !defined(PLATFORM_RPI)
-    color.r     = envMap(RaR, roughness).r;
-    color.b     = envMap(RaB, roughness).b;
+    color.r     = envMap(RaR, M.roughness).r;
+    color.b     = envMap(RaB, M.roughness).b;
     #endif
-    // color.rgb   *= exp( -_mat.thickness * 200.0);
+    // color.rgb   *= exp( -M.thickness * 200.0);
     color.rgb   += Fr * IBL_LUMINANCE;
 
-    #if defined(LIGHT_DIRECTION)
-    color.rgb += LIGHT_COLOR * specular(normalize(LIGHT_DIRECTION), N, V, roughness) * _mat.shadow;
-    #elif defined(LIGHT_POSITION)
-    color.rgb += LIGHT_COLOR * specular(normalize(LIGHT_POSITION - position), N, V, roughness) * _mat.shadow;
-    #endif
+    // TODO: 
+    //  - Add support for multiple lights
+    // 
+    {
+        #if defined(LIGHT_DIRECTION)
+        LightDirectional L = LightDirectionalNew();
+        #elif defined(LIGHT_POSITION)
+        LightPoint L = LightPointNew();
+        #endif
+
+        #if defined(LIGHT_DIRECTION) || defined(LIGHT_POSITION)
+        // lightResolve(diffuseColor, specularColor, M, L, lightDiffuse, lightSpecular);
+        color.rgb += L.color * specular(L.direction, M.normal, M.V, M.roughness);
+        #endif
+    }
 
     return color;
 }
+
+
 
 #endif

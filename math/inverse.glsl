@@ -7,9 +7,9 @@ use: <float|mat2|mat3|mat4> inverse(in <float|mat2|mat3|mat4> m)
 #ifndef FNC_INVERSE
 #define FNC_INVERSE
 
-float inverse(float m) { return 1.0 / m; }
-
 #if (__VERSION__ < 140)
+
+float inverse(float m) { return 1.0 / m; }
 
 mat2 inverse(mat2 m) {
     return mat2(m[1][1],-m[0][1],

@@ -3,8 +3,7 @@ original_author:
 description: 
 use: <vec3> spectral_geoffrey(<float> x)
 examples:
-    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/color_wavelenght.frag
-    - https://raw.githubusercontent.com/eduardfossas/lygia-study-examples/main/color/palette/spectral.frag
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/color_wavelength.frag
 */
 
 #ifndef FNC_SPECTRAL_GEOFFREY
