@@ -30,7 +30,12 @@ float aafloor(float x) {
     float idx = 1. - afwidth;
     return (fx < idx) ? x - fx : map(fx, idx, 1., x-fx, x);
 #else 
-    return fract(x);
+    return floor(x);
 #endif
 }
+
+vec2 aafloor(vec2 x) {
+    return vec2(aafloor(x.x), aafloor(x.y));
+}
+
 #endif

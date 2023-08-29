@@ -32,4 +32,9 @@ float aafract(float x) {
     return fract(x);
 #endif
 }
+
+vec2 aafract(vec2 v) {
+    return vec2(aafract(v.x), aafract(v.y));
+}
+
 #endif

@@ -65,4 +65,10 @@ vec3 fresnelReflection(const in vec3 R, const in float f0, const in float NoV) {
     #endif
 }
 
+#ifdef STR_MATERIAL
+vec3 fresnelReflection(const in Material _M) {
+    return fresnelReflection(_M.R, _M.f0, _M.NoV);
+}
+#endif
+
 #endif

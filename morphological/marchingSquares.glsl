@@ -16,7 +16,7 @@ use:
 options:
     - SAMPLEMARCHINGSQUARES_SAMPLE_FNC(TEX, UV): optional sampling function
 examples:
-    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/sample_marchinSquares.frag
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/morphological_marchinSquares.frag
 */
 
 #ifndef FNC_SAMPLEMARCHINGSQUARES

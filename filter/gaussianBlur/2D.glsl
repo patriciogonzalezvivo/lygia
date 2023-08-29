@@ -37,16 +37,16 @@ GAUSSIANBLUR2D_TYPE gaussianBlur2D(in SAMPLER_TYPE tex, in vec2 st, in vec2 offs
     
     #ifndef GAUSSIANBLUR2D_KERNELSIZE
     
-    #if defined(PLATFORM_WEBGL)
-    #define GAUSSIANBLUR2D_KERNELSIZE 20
-    float kernelSizef = float(kernelSize);
-    #else
-    #define GAUSSIANBLUR2D_KERNELSIZE kernelSize
-    float kernelSizef = float(GAUSSIANBLUR2D_KERNELSIZE);
-    #endif
+        #if defined(PLATFORM_WEBGL)
+            #define GAUSSIANBLUR2D_KERNELSIZE 20
+            float kernelSizef = float(kernelSize);
+        #else
+            #define GAUSSIANBLUR2D_KERNELSIZE kernelSize
+            float kernelSizef = float(GAUSSIANBLUR2D_KERNELSIZE);
+        #endif
 
     #else
-    float kernelSizef = float(GAUSSIANBLUR2D_KERNELSIZE);
+        float kernelSizef = float(GAUSSIANBLUR2D_KERNELSIZE);
     #endif
 
     float accumWeight = 0.;

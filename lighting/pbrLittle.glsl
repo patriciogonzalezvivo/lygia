@@ -42,44 +42,47 @@ options:
 #ifndef FNC_PBR_LITTLE
 #define FNC_PBR_LITTLE
 
-vec4 pbrLittle(vec4 albedo, vec3 position, vec3 normal, float roughness, float metallic, vec3 f0, float shadow ) {
+vec4 pbrLittle(
+        vec4 _albedo, vec3 _position, vec3 _normal, float _roughness, float _metallic, vec3 _f0, // Material
+        float shadow                                                                             // Light       
+        ) {
     #ifdef LIGHT_DIRECTION
     vec3 L = normalize(LIGHT_DIRECTION);
     #else
-    vec3 L = normalize(LIGHT_POSITION - position);
+    vec3 L = normalize(LIGHT_POSITION - _position);
     #endif
-    vec3 N = normalize(normal);
-    vec3 V = normalize(CAMERA_POSITION - position);
+    vec3 N = normalize(_normal);
+    vec3 V = normalize(CAMERA_POSITION - _position);
 
-    float notMetal = 1. - metallic;
-    float smooth = .95 - saturate(roughness);
+    float notMetal = 1. - _metallic;
+    float smooth = .95 - saturate(_roughness);
 
     // DIFFUSE
-    float diff = diffuse(L, N, V, roughness) * shadow;
-    float spec = specular(L, N, V, roughness) * shadow;
+    float diff = diffuse(L, N, V, _roughness) * shadow;
+    float spec = specular(L, N, V, _roughness) * shadow;
 
-    albedo.rgb = albedo.rgb * diff;
+    _albedo.rgb = _albedo.rgb * diff;
 #ifdef SCENE_SH_ARRAY
-    albedo.rgb *= tonemapReinhard( sphericalHarmonics(N) );
+    _albedo.rgb *= tonemapReinhard( sphericalHarmonics(N) );
 #endif
 
     float NoV = dot(N, V); 
 
     // SPECULAR
     // This is a bit of a stilistic proach
-    float specIntensity =   (0.04 * notMetal + 2.0 * metallic) * 
-                            saturate(-1.1 + NoV + metallic) * // Fresnel
-                            (metallic + smooth * 4.0); // make smaller highlights brighter
+    float specIntensity =   (0.04 * notMetal + 2.0 * _metallic) * 
+                            saturate(-1.1 + NoV + _metallic) * // Fresnel
+                            (_metallic + smooth * 4.0); // make smaller highlights brighter
 
     vec3 R = reflect(-V, N);
-    vec3 ambientSpecular = tonemapReinhard( envMap(R, roughness, metallic) ) * specIntensity;
-    ambientSpecular += fresnelReflection(R, f0, NoV) * metallic;
+    vec3 ambientSpecular = tonemapReinhard( envMap(R, _roughness, _metallic) ) * specIntensity;
+    ambientSpecular += fresnelReflection(R, _f0, NoV) * _metallic;
 
-    albedo.rgb = albedo.rgb * notMetal + ( ambientSpecular 
+    _albedo.rgb = _albedo.rgb * notMetal + ( ambientSpecular 
                     + LIGHT_COLOR * 2.0 * spec
-                    ) * (notMetal * smooth + albedo.rgb * metallic);
+                    ) * (notMetal * smooth + _albedo.rgb * _metallic);
 
-    return albedo;
+    return _albedo;
 }
 
 vec4 pbrLittle(vec4 albedo, vec3 position, vec3 normal, float roughness, float metallic, float shadow) {
@@ -95,7 +98,11 @@ vec4 pbrLittle(vec4 albedo, vec3 normal, float roughness, float metallic) {
 }
 
 vec4 pbrLittle(Material material) {
-    return pbrLittle(material.albedo, material.position, material.normal, material.roughness, material.metallic, material.f0, material.ambientOcclusion * material.shadow) + vec4(material.emissive, 0.0);
+    float s = 1.0;
+    #if defined(LIGHT_SHADOWMAP) && defined(LIGHT_SHADOWMAP_SIZE) && defined(LIGHT_COORD)
+    s *= shadow(LIGHT_SHADOWMAP, vec2(LIGHT_SHADOWMAP_SIZE), (LIGHT_COORD).xy, (LIGHT_COORD).z);
+    #endif
+    return pbrLittle(material.albedo, material.position, material.normal, material.roughness, material.metallic, material.f0, material.ambientOcclusion * s) + vec4(material.emissive, 0.0);
 }
 
 #endif

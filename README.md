@@ -2,9 +2,11 @@
 
 # LYGIA Shader Library 
 
-Tired of searching, porting and/or reimplementing the same functions over and over? LYGIA is a shader library of reusable functions that can be included easily into your projects. LYGIA is very granular and designed for reusability, performance, and flexibility. LYGIA can easily be added to any project or framework.
+LYGIA is a shader library of reusable functions that will let you prototype, port or ship a project in just few minutes. It's very granular, flexible and efficient. Support multiple shading languages and can easily be added to any project, enviroment or framework of your choice. 
 
 [![](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub)](https://github.com/sponsors/patriciogonzalezvivo)
+
+Here are a couple of integrations examples:
 
 <p style="text-align: center;" >
     <a href="https://github.com/patriciogonzalezvivo/lygia_unity_examples"><img src="https://lygia.xyz/imgs/unity.png" alt="uUnity" width="64" /></a>
