@@ -1,7 +1,10 @@
 /*
 original_author: Patricio Gonzalez Vivo
-description: Fix the aspect ratio of a space keeping things squared for you.
-use: ratio(float2 st, float2 st_size)
+description: |
+    Fix the aspect ratio of a space keeping things squared for you, 
+    in a similar way that aspect.glsl does, but while scaling the 
+    space to keep the entire 0.0,0.0 ~ 1.0,1.0 range visible
+use: <float2> ratio(<float2> st, <float2> st_size)
 */
 
 #ifndef FNC_RATIO

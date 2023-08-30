@@ -1,7 +1,11 @@
 /*
 original_author: Patricio Gonzalez Vivo
-description: Fix the aspect ratio of a space keeping things squared for you.
-use: ratio(vec2 st, vec2 st_size)
+description: |
+    Fix the aspect ratio of a space keeping things squared for you, 
+    in a similar way that aspect.glsl does, but while scaling the 
+    space to keep the entire 0.0,0.0 ~ 1.0,1.0 range visible
+    
+use: <vec2> ratio(<vec2> st, <vec2> st_size)
 examples:
     - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/draw_shapes.frag
 */
