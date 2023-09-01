@@ -2,8 +2,8 @@
 
 /*
 original_author: Thomas Müller & Alex Evans
-description: returns the centroid of a triangle
-use: <float3> centroid(<Triangle> tri) 
+description: does the position lie within the triangle
+use: <float3> contain(<Triangle> tri, <float3> _pos) 
 */
 
 #ifndef FNC_TRIANGLE_CONTAIN

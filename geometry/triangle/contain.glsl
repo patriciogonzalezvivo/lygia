@@ -2,8 +2,8 @@
 
 /*
 original_author: Thomas Müller & Alex Evans
-description: returns the centroid of a triangle
-use: <vec3> centroid(<Triangle> tri) 
+description: does the position lie within the triangle
+use: <vec3> contain(<Triangle> tri, <vec3> _pos) 
 */
 
 #ifndef FNC_TRIANGLE_CONTAIN

@@ -22,7 +22,7 @@ vec4 poissonFillDownscale(SAMPLER_TYPE tex, vec2 st, vec2 pixel) {
     vec4 color = vec4(0.0);
     for (int dy = -2; dy <= 2; dy++) {
         for (int dx = -2; dx <= 2; dx++) {
-            vec2 uv = st + vec2(float(dx), float(dy)) * pixel;
+            vec2 uv = st + vec2(float(dx), float(dy)) * pixel * 0.5;
             if (uv.x <= 0.0 || uv.x >= 1.0 || uv.y <= 0.0 || uv.y >= 1.0)
                 continue;
             color += SAMPLER_FNC(tex, uv) * h1[ absi(dx) ] * h1[ absi(dy) ];
