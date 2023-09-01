@@ -3,21 +3,21 @@
 
 /*
 original_author: Patricio Gonzalez Vivo
-description: downscale for function for convolution pyramid  https://www.cs.huji.ac.il/labs/cglab/projects/convpyr/data/convpyr-small.pdf
-use: <vec4> convolutionPyramidDownscale(<SAMPLER_TYPE> tex, <vec2> st, <vec2> pixel)
+description: downscale for function for pyramids  https://www.cs.huji.ac.il/labs/cglab/projects/convpyr/data/convpyr-small.pdf
+use: <vec4> pyramidDownscale(<SAMPLER_TYPE> tex, <vec2> st, <vec2> pixel)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
-    - POISSONFILL_H1: 1.0334, 0.6836, 0.1507
+    - PYRAMID_H1: 1.0334, 0.6836, 0.1507
 */
 
-#ifndef POISSONFILL_H1
-#define POISSONFILL_H1 1.0334, 0.6836, 0.1507
+#ifndef PYRAMID_H1
+#define PYRAMID_H1 1.0334, 0.6836, 0.1507
 #endif
  
-#ifndef FNC_POISSONFILL_DOWNSCALE
-#define FNC_POISSONFILL_DOWNSCALE
-vec4 poissonFillDownscale(SAMPLER_TYPE tex, vec2 st, vec2 pixel) {
-    const vec3 h1 = vec3(POISSONFILL_H1);
+#ifndef FNC_PYRAMID_DOWNSCALE
+#define FNC_PYRAMID_DOWNSCALE
+vec4 pyramidDownscale(SAMPLER_TYPE tex, vec2 st, vec2 pixel) {
+    const vec3 h1 = vec3(PYRAMID_H1);
 
     vec4 color = vec4(0.0);
     for (int dy = -2; dy <= 2; dy++) {
