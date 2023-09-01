@@ -26,10 +26,6 @@ options:
     - BILATERAL_SAMPLER_FNC
 */
 
-#ifndef BILATERAL_AMOUNT
-#define BILATERAL_AMOUNT bilateral13
-#endif
-
 #ifndef BILATERAL_TYPE
 #define BILATERAL_TYPE float4
 #endif
