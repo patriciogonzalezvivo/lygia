@@ -7,9 +7,11 @@ description: upscale for function for pyramids  https://www.cs.huji.ac.il/labs/c
 use: <vec4> pyramidUpscale(<SAMPLER_TYPE> tex0, SAMPLER_TYPE tex1, <vec2> st, <vec2> pixel)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
-    - PYRAMID_H1: 1.0334, 0.6836, 0.1507
-    - PYRAMID_H2: 0.0270
-    - PYRAMID_G: 0.7753, 0.0312
+    - PYRAMID_UPSCALE0_SAMPLE_FNC(TEX, UV): sampling function for the previous level of the pyramid 
+    - PYRAMID_UPSCALE1_SAMPLE_FNC(TEX, UV): sampling function for the same level of the pyramid in the downscale direction
+    - PYRAMID_H1: simple average (0.2), for poisson fill (1.0334, 0.6836, 0.1507), for laplacian integration (0.7, 0.5, 0.15)
+    - PYRAMID_H2: for poisson fill (0.0270), for laplacian integration (0.225)
+    - PYRAMID_G: for poisson fill (0.7753, 0.0312), for laplacian integration (0.6, 0.25) (0.547 * 2.0, 0.175 * 2.0)
 */
 
 #ifndef PYRAMID_H1
@@ -22,6 +24,18 @@ options:
 
 #ifndef PYRAMID_G
 #define PYRAMID_G 0.7753, 0.0312
+#endif
+
+#ifndef PYRAMID_SAMPLE_FNC
+#define PYRAMID_SAMPLE_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
+#endif
+
+#ifndef PYRAMID_UPSCALE0_SAMPLE_FNC
+#define PYRAMID_UPSCALE0_SAMPLE_FNC(TEX, UV) PYRAMID_SAMPLE_FNC(TEX, UV)
+#endif
+
+#ifndef PYRAMID_UPSCALE1_SAMPLE_FNC
+#define PYRAMID_UPSCALE1_SAMPLE_FNC(TEX, UV) PYRAMID_SAMPLE_FNC(TEX, UV)
 #endif
 
 #ifndef FNC_PYRAMID_UPSCALE
@@ -38,7 +52,7 @@ vec4 pyramidUpscale(SAMPLER_TYPE tex0, SAMPLER_TYPE tex1, vec2 st, vec2 pixel) {
             if (uv.x <= 0.0 || uv.x >= 1.0 || uv.y <= 0.0 || uv.y >= 1.0)
                 continue;
                 
-            color += SAMPLER_FNC(tex0, uv) * g[ absi(dx) ] * g[ absi(dy) ];
+            color += PYRAMID_UPSCALE0_SAMPLE_FNC(tex0, uv) * g[ absi(dx) ] * g[ absi(dy) ];
         }
     }
 
@@ -48,7 +62,7 @@ vec4 pyramidUpscale(SAMPLER_TYPE tex0, SAMPLER_TYPE tex1, vec2 st, vec2 pixel) {
             if (uv.x <= 0.0 || uv.x >= 1.0 || uv.y <= 0.0 || uv.y >= 1.0)
                 continue;
 
-            color += SAMPLER_FNC(tex1, uv) * h2 * h1[ absi(dx) ] * h1[ absi(dy) ];
+            color += PYRAMID_UPSCALE1_SAMPLE_FNC(tex1, uv) * h2 * h1[ absi(dx) ] * h1[ absi(dy) ];
         }
     }
 

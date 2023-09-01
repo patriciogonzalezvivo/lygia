@@ -27,10 +27,6 @@ examples:
     - /shaders/filter_bilateral2D.frag
 */
 
-#ifndef BILATERAL_AMOUNT
-#define BILATERAL_AMOUNT bilateral13
-#endif
-
 #ifndef BILATERAL_TYPE
 #define BILATERAL_TYPE vec4
 #endif
