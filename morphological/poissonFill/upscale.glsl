@@ -35,13 +35,19 @@ vec4 poissonFillUpscale(SAMPLER_TYPE tex0, SAMPLER_TYPE tex1, vec2 st, vec2 pixe
     for (int dy = -1; dy <= 1; dy++) {
         for (int dx = -1; dx <= 1; dx++) {
             vec2 uv = st + vec2(float(dx), float(dy)) * pixel;
+            if (uv.x <= 0.0 || uv.x >= 1.0 || uv.y <= 0.0 || uv.y >= 1.0)
+                continue;
+                
             color += SAMPLER_FNC(tex0, uv) * g[ absi(dx) ] * g[ absi(dy) ];
         }
     }
 
     for (int dy = -2; dy <= 2; dy++) {
         for (int dx = -2; dx <= 2; dx++) {
-            vec2 uv = st + vec2(float(dx), float(dy)) * pixel * 2.;
+            vec2 uv = st + vec2(float(dx), float(dy)) * pixel * 2.0;
+            if (uv.x <= 0.0 || uv.x >= 1.0 || uv.y <= 0.0 || uv.y >= 1.0)
+                continue;
+
             color += SAMPLER_FNC(tex1, uv) * h2 * h1[ absi(dx) ] * h1[ absi(dy) ];
         }
     }
