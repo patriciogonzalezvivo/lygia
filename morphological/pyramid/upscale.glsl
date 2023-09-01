@@ -3,33 +3,33 @@
 
 /*
 original_author: Patricio Gonzalez Vivo
-description: upscale for function for convolution pyramid  https://www.cs.huji.ac.il/labs/cglab/projects/convpyr/data/convpyr-small.pdf
-use: <vec4> POISSONFILLUpscale(<SAMPLER_TYPE> tex0, SAMPLER_TYPE tex1, <vec2> st, <vec2> pixel)
+description: upscale for function for pyramids  https://www.cs.huji.ac.il/labs/cglab/projects/convpyr/data/convpyr-small.pdf
+use: <vec4> pyramidUpscale(<SAMPLER_TYPE> tex0, SAMPLER_TYPE tex1, <vec2> st, <vec2> pixel)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
-    - POISSONFILL_H1: 1.0334, 0.6836, 0.1507
-    - POISSONFILL_H2: 0.0270
-    - POISSONFILL_G: 0.7753, 0.0312
+    - PYRAMID_H1: 1.0334, 0.6836, 0.1507
+    - PYRAMID_H2: 0.0270
+    - PYRAMID_G: 0.7753, 0.0312
 */
 
-#ifndef POISSONFILL_H1
-#define POISSONFILL_H1 1.0334, 0.6836, 0.1507
+#ifndef PYRAMID_H1
+#define PYRAMID_H1 1.0334, 0.6836, 0.1507
 #endif
 
-#ifndef POISSONFILL_H2
-#define POISSONFILL_H2 0.0270
+#ifndef PYRAMID_H2
+#define PYRAMID_H2 0.0270
 #endif
 
-#ifndef POISSONFILL_G
-#define POISSONFILL_G 0.7753, 0.0312
+#ifndef PYRAMID_G
+#define PYRAMID_G 0.7753, 0.0312
 #endif
 
-#ifndef FNC_POISSONFILL_UPSCALE
-#define FNC_POISSONFILL_UPSCALE
-vec4 poissonFillUpscale(SAMPLER_TYPE tex0, SAMPLER_TYPE tex1, vec2 st, vec2 pixel) {
-    const vec3  h1 = vec3(POISSONFILL_H1);
-    const float h2 = POISSONFILL_H2;
-    const vec2  g  = vec2(POISSONFILL_G);
+#ifndef FNC_PYRAMID_UPSCALE
+#define FNC_PYRAMID_UPSCALE
+vec4 pyramidUpscale(SAMPLER_TYPE tex0, SAMPLER_TYPE tex1, vec2 st, vec2 pixel) {
+    const vec3  h1 = vec3(PYRAMID_H1);
+    const float h2 = PYRAMID_H2;
+    const vec2  g  = vec2(PYRAMID_G);
 
     vec4 color = vec4(0.0);
     for (int dy = -1; dy <= 1; dy++) {
