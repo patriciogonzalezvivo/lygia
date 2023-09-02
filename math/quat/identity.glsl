@@ -7,5 +7,5 @@ use: <QUAT> QUAT_IDENTITY
 */
 
 #ifndef QUAT_IDENTITY
-#define QUAT_IDENTITY QUAT(0, 0, 0, 1)
+#define QUAT_IDENTITY QUAT(0.0, 0.0, 0.0, 1.0)
 #endif

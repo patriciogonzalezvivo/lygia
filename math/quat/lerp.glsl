@@ -11,47 +11,36 @@ use: <QUAT> quatLerp(<QUAT> a, <QUAT> b, <float> t)
 #ifndef FNC_QUATLERP
 #define FNC_QUATLERP
 
-QUAT quatLerp(QUAT a, QUAT b, float t) {
-    // if either input is zero, return the other.
-    if (length(a) == 0.0) {
-        if (length(b) == 0.0) {
-            return QUAT_IDENTITY;
-        }
-        return b;
-    } else if (length(b) == 0.0) {
-        return a;
-    }
+QUAT quatLerp(QUAT qa, QUAT qb, float t) {
+    // qa = normalize(qa);
+    // qb = normalize(qb);
 
-    float cosHalfAngle = a.w * b.w + dot(a.xyz, b.xyz);
+    // Calculate angle between them.
+    float cosHalfTheta = qa.w * qb.w + dot(qa.xyz, qb.xyz);
+    
+    // avoid taking the longer way: choose one representation
+    qb = (cosHalfTheta < 0.0)? -qb : qb;
+    // qb = (cosHalfTheta < 0.0)? quatNeg(qb) : qb;
+    cosHalfTheta = (cosHalfTheta < 0.0)? -cosHalfTheta : cosHalfTheta;
 
-    if (cosHalfAngle >= 1.0 || cosHalfAngle <= -1.0) {
-        return a;
-    } else if (cosHalfAngle < 0.0) {
-        b.xyz = -b.xyz;
-        b.w = -b.w;
-        cosHalfAngle = -cosHalfAngle;
-    }
+    // if qa = qb or qa = -qb then theta = 0 and we can return qa
+    if (abs(cosHalfTheta) >= 1.0) // greater-sign necessary for numerical stability
+        return qa;
 
-    float blendA;
-    float blendB;
-    if (cosHalfAngle < 0.99) {
-        // do proper slerp for big angles
-        float halfAngle = acos(cosHalfAngle);
-        float sinHalfAngle = sin(halfAngle);
-        float oneOverSinHalfAngle = 1.0 / sinHalfAngle;
-        blendA = sin(halfAngle * (1.0 - t)) * oneOverSinHalfAngle;
-        blendB = sin(halfAngle * t) * oneOverSinHalfAngle;
-    } else {
-        // do lerp if angle is really small.
-        blendA = 1.0 - t;
-        blendB = t;
-    }
+    // Calculate temporary values.
+    float halfTheta = acos(cosHalfTheta);
+    float sinHalfTheta = sqrt(1.0 - cosHalfTheta * cosHalfTheta); // NOTE: we checked above that |cosHalfTheta| < 1
+    // if theta = pi then result is not fully defined
+    // we could rotate around any axis normal to qa or qb
+    if (abs(sinHalfTheta) < 0.001/*some epsilon*/)
+        // return quatAdd( quatMul(qa, 0.5), quatMul(qb, 0.5));
+        return normalize( qa * 0.5 + qb * 0.5 );
 
-    QUAT result = QUAT(blendA * a.xyz + blendB * b.xyz, blendA * a.w + blendB * b.w);
-    if (length(result) > 0.0) {
-        return normalize(result);
-    }
-    return QUAT_IDENTITY;
+    float ratioA = sin((1.0 - t) * halfTheta) / sinHalfTheta;
+    float ratioB = sin(t * halfTheta) / sinHalfTheta;
+
+    // return quatNorm( quatAdd( quatMul(qa, ratioA), quatMul(qb, ratioB)) );
+    return normalize( qa * ratioA + qb * ratioB );
 }
 
 #endif
