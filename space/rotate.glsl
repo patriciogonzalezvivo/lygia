@@ -61,4 +61,17 @@ vec4 rotate(in vec4 xyzw, in float radians, in vec3 axis) {
     return rotate(xyzw, radians, axis, vec4(0.));
     #endif
 }
+
+#if defined(FNC_QUATMULT)
+vec3 rotate(QUAT q, vec3 v) {
+    QUAT q_c = QUAT(-q.x, -q.y, -q.z, q.w);
+    return quatMul(q, quatMul(vec4(v, 0), q_c)).xyz;
+}
+
+vec3 rotate(QUAT q, vec3 v, vec3 center) {
+    vec3 dir = v - center;
+    return center + rotate(q, dir);
+}
+#endif
+
 #endif
