@@ -2,6 +2,8 @@
 original_author: Inigo Quiles
 description: inverse quartic polynomial https://iquilezles.org/articles/smoothsteps/
 use: <float|vec2|vec3|vec4> invQuartic(<float|vec2|vec3|vec4> value);
+examples:
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/math_functions.frag
 */
 
 #ifndef FNC_INVQUARTIC

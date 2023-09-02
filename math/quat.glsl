@@ -1,6 +1,16 @@
 #include "quat/mul.glsl"
 #include "quat/identity.glsl"
 
+/*
+original_author: Patricio Gonzalez Vivo
+description: |
+    creates a quaternion (QUAT) from a given angle of rotation about a given axis or from
+    a given forward vector and up vector
+use:
+    - <QUAT> quat(<vec3> axis, <float> angle)
+    - <QUAT> quat(<vec3> forward [, <vec3> up])
+*/
+
 #ifndef FNC_QUAT
 #define FNC_QUAT
 

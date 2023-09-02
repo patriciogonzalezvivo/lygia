@@ -1,7 +1,11 @@
 #include "type.glsl"
 
-// Quaternion multiplication
-// http://mathworld.wolfram.com/Quaternion.html
+/*
+original_author: Patricio Gonzalez Vivo
+description: |
+    Quaternion multiplication. Based on http://mathworld.wolfram.com/Quaternion.html
+use: <QUAT> quatMul(<QUAT> a, <QUAT> b) 
+*/
 
 #ifndef FNC_QUATMUL
 #define FNC_QUATMUL
