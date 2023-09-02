@@ -5,6 +5,8 @@ description: |
 use: 
     - <vec2> brickTile(<vec2> st [, <float> scale])
     - <vec4> brickTile(<vec4> tiles)
+examples:
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/draw_tiles.frag
 */
 
 #ifndef FNC_BRICKTILE

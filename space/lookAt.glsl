@@ -32,4 +32,8 @@ mat3 lookAt(vec3 target, vec3 eye, float roll) {
     return mat3(xaxis, yaxis, zaxis);
 }
 
+mat3 lookAt(vec3 forward) {
+    return lookAt(forward, vec3(0.0, 1.0, 0.0));
+}
+
 #endif
