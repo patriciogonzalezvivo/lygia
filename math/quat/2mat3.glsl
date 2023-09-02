@@ -1,5 +1,11 @@
 #include "type.glsl"
 
+/*
+original_author: Patricio Gonzalez Vivo
+description: given a quaternion, returns a rotation 3x3 matrix
+use: <mat3> quat2mat3(<QUAT> Q)
+*/
+
 #ifndef FNC_QUAT2MAT3
 #define FNC_QUAT2MAT3
 
