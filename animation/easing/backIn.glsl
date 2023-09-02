@@ -2,12 +2,15 @@
 
 /*
 original_author: Hugh Kennedy (https://github.com/hughsk)
-description: sine easing. From https://github.com/stackgl/glsl-easings
-use: sine<In|Out|InOut>(<float> x)
+description: Back in easing. From https://github.com/stackgl/glsl-easings
+use: backIn(<float> x)
 examples:
     - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/animation_easing.frag
 */
 
-#include "sineIn.glsl"
-#include "sineOut.glsl"
-#include "sineInOut.glsl"
+#ifndef FNC_BACKIN
+#define FNC_BACKIN
+float backIn(in float t) {
+    return pow(t, 3.) - t * sin(t * PI);
+}
+#endif
