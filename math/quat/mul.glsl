@@ -15,4 +15,8 @@ QUAT quatMul(QUAT q1, QUAT q2) {
         q1.w * q2.w - dot(q1.xyz, q2.xyz)
     );
 }
+
+QUAT quatMul(QUAT q, float s) {
+    return QUAT(q.xyz * s, q.w * s);
+}
 #endif

@@ -8,9 +8,7 @@ use: <QUAT> quatConj(<QUAT> Q)
 
 #ifndef FNC_QUATCONJ
 #define FNC_QUATCONJ
-
 QUAT quatConj(QUAT q) {
-    return QUAT(-q.x, -q.y, -q.z, q.w);
+    return QUAT(-q.xyz, q.w);
 }
-
 #endif
