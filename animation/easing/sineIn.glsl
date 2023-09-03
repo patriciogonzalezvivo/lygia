@@ -10,7 +10,5 @@ examples:
 
 #ifndef FNC_SINEIN
 #define FNC_SINEIN
-float sineIn(in float t) {
-    return sin((t - 1.0) * HALF_PI) + 1.0;
-}
+float sineIn(in float t) { return sin((t - 1.0) * HALF_PI) + 1.0; }
 #endif

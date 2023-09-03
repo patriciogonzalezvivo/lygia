@@ -10,7 +10,5 @@ examples:
 
 #ifndef FNC_BOUNCEIN
 #define FNC_BOUNCEIN
-float bounceIn(in float t) {
-    return 1.0 - bounceOut(1.0 - t);
-}
+float bounceIn(in float t) { return 1.0 - bounceOut(1.0 - t); }
 #endif

@@ -8,7 +8,5 @@ examples:
 
 #ifndef FNC_CIRCULAROUT
 #define FNC_CIRCULAROUT
-float circularOut(in float t) {
-    return sqrt((2.0 - t) * t);
-}
+float circularOut(in float t) { return sqrt((2.0 - t) * t); }
 #endif

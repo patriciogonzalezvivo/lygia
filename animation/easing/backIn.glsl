@@ -10,7 +10,5 @@ examples:
 
 #ifndef FNC_BACKIN
 #define FNC_BACKIN
-float backIn(in float t) {
-    return pow(t, 3.) - t * sin(t * PI);
-}
+float backIn(in float t) { return pow(t, 3.) - t * sin(t * PI); }
 #endif

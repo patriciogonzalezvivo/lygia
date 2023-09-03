@@ -1,6 +1,6 @@
 #include "../math/powFast.glsl"
 #include "../math/saturate.glsl"
-#include "../color/tonemap.glsl"
+#include "../color/tonemap/reinhard.glsl"
 
 #include "shadow.glsl"
 #include "material.glsl"

@@ -1,6 +1,3 @@
-
-#include "../math/powFast.glsl"
-#include "../color/tonemap.glsl"
 #include "../sample/equirect.glsl"
 
 #include "fakeCube.glsl"

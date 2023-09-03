@@ -1,5 +1,4 @@
 #include "fresnel.hlsl"
-#include "envMap.hlsl"
 #include "fakeCube.hlsl"
 #include "sphericalHarmonics.hlsl"
 

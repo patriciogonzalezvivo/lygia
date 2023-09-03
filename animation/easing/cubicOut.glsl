@@ -9,8 +9,8 @@ examples:
 #ifndef FNC_CUBICOUT
 #define FNC_CUBICOUT
 float cubicOut(in float t) {
-  float f = t - 1.0;
-  return f * f * f + 1.0;
+    float f = t - 1.0;
+    return f * f * f + 1.0;
 }
 #endif
 

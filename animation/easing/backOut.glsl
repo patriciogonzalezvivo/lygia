@@ -10,7 +10,5 @@ examples:
 
 #ifndef FNC_BACKOUT
 #define FNC_BACKOUT
-float backOut(in float t) {
-    return 1. - backIn(1. - t);
-}
+float backOut(in float t) { return 1. - backIn(1. - t); }
 #endif

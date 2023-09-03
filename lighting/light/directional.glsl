@@ -41,7 +41,6 @@ struct LightDirectional {
 
 #ifndef FNC_LIGHT_DIRECTIONAL
 #define FNC_LIGHT_DIRECTIONAL
-
 void lightDirectional(
     const in vec3 _diffuseColor, const in vec3 _specularColor, 
     const in vec3 _V,
@@ -87,6 +86,5 @@ void lightDirectional(
     #endif
 }
 #endif
-
 
 #endif

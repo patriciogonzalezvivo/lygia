@@ -8,7 +8,5 @@ examples:
 
 #ifndef FNC_QUARTICIN
 #define FNC_QUARTICIN
-float quarticIn(in float t) {
-  return pow(t, 4.0);
-}
+float quarticIn(in float t) { return pow(t, 4.0); }
 #endif

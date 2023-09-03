@@ -10,7 +10,5 @@ examples:
 
 #ifndef FNC_ELASTICIN
 #define FNC_ELASTICIN
-float elasticIn(in float t) {
-    return sin(13.0 * t * HALF_PI) * pow(2.0, 10.0 * (t - 1.0));
-}
+float elasticIn(in float t) { return sin(13.0 * t * HALF_PI) * pow(2.0, 10.0 * (t - 1.0)); }
 #endif

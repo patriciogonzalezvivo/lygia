@@ -5,7 +5,6 @@ description: Generic Camera Structure
 
 #ifndef STR_CAMERA
 #define STR_CAMERA
-
 struct Camera {
     float3 pos;
     float3 dir;
@@ -16,5 +15,4 @@ struct Camera {
     float invhalffov;
     float maxdist = 10.0f;
 };
-
 #endif
