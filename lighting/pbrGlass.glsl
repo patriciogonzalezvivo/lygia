@@ -1,6 +1,9 @@
+#include "../color/tonemap.glsl"
+
 #include "material.glsl"
 #include "light/new.glsl"
 #include "ior.glsl"
+#include "envMap.glsl"
 #include "specular.glsl"
 #include "fresnelReflection.glsl"
 

@@ -8,7 +8,5 @@ examples:
 
 #ifndef FNC_LINEARIN
 #define FNC_LINEARIN
-float linearIn(in float t) {
-    return t;
-}
+float linearIn(in float t) { return t; }
 #endif

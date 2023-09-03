@@ -1,5 +1,5 @@
 #include "common/schlick.hlsl"
-#include "envMap.hlsl"
+
 #include "fakeCube.hlsl"
 #include "sphericalHarmonics.hlsl"
 #include "../color/tonemap.hlsl"

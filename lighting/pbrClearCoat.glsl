@@ -1,7 +1,9 @@
 #include "../math/saturate.glsl"
+#include "../color/tonemap.glsl"
 
 #include "material.glsl"
 #include "fresnelReflection.glsl"
+#include "envMap.glsl"
 #include "light/new.glsl"
 #include "light/resolve.glsl"
 

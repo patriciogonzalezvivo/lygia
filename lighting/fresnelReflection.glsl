@@ -1,5 +1,4 @@
 #include "fresnel.glsl"
-#include "envMap.glsl"
 #include "fakeCube.glsl"
 #include "sphericalHarmonics.glsl"
 

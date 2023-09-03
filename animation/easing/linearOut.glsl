@@ -8,7 +8,5 @@ examples:
 
 #ifndef FNC_LINEAROUT
 #define FNC_LINEAROUT
-float linearOut(in float t) {
-    return t;
-}
+float linearOut(in float t) { return t; }
 #endif

@@ -1,5 +1,3 @@
-#include "../color/tonemap.glsl"
-
 /*
 original_author: Patricio Gonzalez Vivo
 description: return the spherical harmonic value facing a normal direction
