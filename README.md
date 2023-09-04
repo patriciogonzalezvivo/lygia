@@ -60,6 +60,15 @@ In your shader `#include` the functions you need:
     
 </div>
 
+Then you need to resovle this dependencies, the fastest way would be to drag&drop your shader file here:
+
+<div class="container">
+    <div class="file-drop-area">
+    <span class="file-msg">Drop you shader file here</span>
+    </div>
+</div>
+
+The other options is using a **local** version that then you can bundle into your project, or use the **server** to resolve the dependencies online.
 
 ### LYGIA Locally
 
@@ -81,7 +90,7 @@ or you may clone LYGIA without the git history and reduce the project size (9MB+
     npx degit https://github.com/patriciogonzalezvivo/lygia.git lygia
 ```
 
-### LYGIA on the cloud
+### LYGIA server
 
 If you are working on a **cloud platform** you probably want to resolve the dependencies without needing to install anything. Just add a link to `https://lygia.xyz/resolve.js` (JS) or `https://lygia.xyz/resolve.esm.js` (ES6 module): 
 
