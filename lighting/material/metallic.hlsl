@@ -11,8 +11,6 @@ options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 */
 
-#ifndef FNC_MATERIAL_METALLIC
-#define FNC_MATERIAL_METALLIC
 
 #ifdef MATERIAL_METALLICMAP
 uniform SAMPLER_TYPE MATERIAL_METALLICMAP;
@@ -28,6 +26,9 @@ uniform SAMPLER_TYPE MATERIAL_ROUGHNESSMETALLICMAP;
 uniform SAMPLER_TYPE MATERIAL_OCCLUSIONROUGHNESSMETALLICMAP;
 #endif
     
+#ifndef FNC_MATERIAL_METALLIC
+#define FNC_MATERIAL_METALLIC
+
 float materialMetallic() {
     float metallic = 0.0;
 
