@@ -11,7 +11,7 @@ description: sample an equirect texture as it was a cubemap
 use: sampleEquirect(<SAMPLER_TYPE> texture, <vec3> dir)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
-    - SAMPLEEQUIRET_ITERATIONS:
+    - SAMPLEEQUIRECT_ITERATIONS:
     - SAMPLEEQUIRECT_FLIP_Y
 */
 
@@ -27,11 +27,11 @@ vec4 sampleEquirect(SAMPLER_TYPE tex, vec3 dir) {
 
 vec4 sampleEquirect(SAMPLER_TYPE tex, vec3 dir, float lod) { 
     
-    #if defined(SAMPLEEQUIRET_ITERATIONS)
+    #if defined(SAMPLEEQUIRECT_ITERATIONS)
     vec4 color = vec4(0.0);
     vec2 st = xyz2equirect(dir);
     #ifdef SAMPLEEQUIRECT_FLIP_Y
-    st.y = 1.0-st.y;
+        st.y = 1.0-st.y;
     #endif
 
     vec2 r = vec2(1.0+lod);
@@ -42,9 +42,9 @@ vec4 sampleEquirect(SAMPLER_TYPE tex, vec3 dir, float lod) {
 
     float counter = 0.0;
     #ifdef PLATFORM_WEBGL
-    for (float i = 0.0; i < float(SAMPLEEQUIRET_ITERATIONS); i++) {
+    for (float i = 0.0; i < float(SAMPLEEQUIRECT_ITERATIONS); i++) {
     #else
-    for (float i = 0.0; i < float(SAMPLEEQUIRET_ITERATIONS); i += 2.0/i) {
+    for (float i = 0.0; i < float(SAMPLEEQUIRECT_ITERATIONS); i += 2.0/i) {
     #endif
         st2 *= rot;
         color += gamma2linear( SAMPLER_FNC(tex, st + st2 * i / vec2(r.x * 2.0, r.y))) * f;
@@ -53,10 +53,11 @@ vec4 sampleEquirect(SAMPLER_TYPE tex, vec3 dir, float lod) {
     return linear2gamma(color / counter);
 
     #else
+
     dir += srandom3( dir ) * 0.01 * lod;
     vec2 st = xyz2equirect(dir);
     #ifdef SAMPLEEQUIRECT_FLIP_Y
-    st.y = 1.0-st.y;
+        st.y = 1.0-st.y;
     #endif
     return SAMPLER_FNC(tex, st);
 
