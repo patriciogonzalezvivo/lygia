@@ -1,6 +1,4 @@
 #include "../toShininess.glsl"
-#include "roughness.glsl"
-#include "metallic.glsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
@@ -17,12 +15,12 @@ float materialShininess() {
 #ifdef MATERIAL_SHININESS
     shininess = MATERIAL_SHININESS;
 
-#elif defined(MATERIAL_METALLIC) && defined(MATERIAL_ROUGHNESS)
+#elif defined(FNC_MATERIAL_METALLIC) && defined(MATERIAL_METALLIC) && defined(FNC_MATERIAL_ROUGHNESS) && defined(MATERIAL_ROUGHNESS)
     float roughness = materialRoughness();
     float metallic = materialMetallic();
-
     shininess = toShininess(roughness, metallic);
 #endif
+
     return shininess;
 }
 

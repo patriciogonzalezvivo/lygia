@@ -44,27 +44,27 @@ vec3 fakeCube(const in vec3 _normal, const in float _shininnes) {
     #else
     vec3 rAbs = abs(_normal);
     return vec3( powFast(max(max(rAbs.x, rAbs.y), rAbs.z) + FAKECUBE_LIGHT_AMOUNT, _shininnes)
-        #if defined(FAKECUBE_NOFLOOR)
+        #ifdef FAKECUBE_NOFLOOR
         * smoothstep(-1.0, 0., _normal.y) 
         #endif
 
-        #if defined(FAKECUBE_NOROOF)
+        #ifdef FAKECUBE_NOROOF
         * smoothstep(1.0, 0., _normal.y) 
         #endif
 
-        #if defined(FAKECUBE_NOXWALL)
+        #ifdef FAKECUBE_NOXWALL
         * smoothstep(1.0, 0.0, _normal.x) 
         #endif
 
-        #if defined(FAKECUBE_NONXWALL)
+        #ifdef FAKECUBE_NONXWALL
         * smoothstep(-1.0, 0., _normal.x) 
         #endif
 
-        #if defined(FAKECUBE_NOZWALL)
+        #ifdef FAKECUBE_NOZWALL
         * smoothstep(-1.0, 0., _normal.z) 
         #endif
 
-        #if defined(FAKECUBE_NONZWALL)
+        #ifdef FAKECUBE_NONZWALL
         * smoothstep(1.0, 0., _normal.z) 
         #endif
     );
