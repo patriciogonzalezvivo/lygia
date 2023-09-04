@@ -64,7 +64,7 @@ Then you need to resovle this dependencies, the fastest way would be to drag&dro
 
 <div class="container">
     <div class="file-drop-area">
-    <span class="file-msg">Drop you shader file here</span>
+    <span class="file-msg">Drop you shader file <a href="https://lygia.xyz/">here</a></span>
     </div>
 </div>
 
