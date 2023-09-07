@@ -22,7 +22,7 @@ examples:
 #endif
 
 #ifndef SAMPLEBRACKETING_SAMPLER_FNC
-#define SAMPLEBRACKETING_SAMPLER_FNC(UV) SAMPLER_FNC(tex, UV)
+#define SAMPLEBRACKETING_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
 #endif
 
 #ifndef FNC_SAMPLEBRACKETING
@@ -40,15 +40,15 @@ SAMPLEBRACKETING_TYPE sampleBracketing(SAMPLER_TYPE tex, vec2 st, vec2 dir, floa
     vec2 uv1 = scale * rotate(st, vAxis1);
     
     // Now sample function/texture
-    SAMPLEBRACKETING_TYPE sample0 = SAMPLEBRACKETING_SAMPLER_FNC(uv0);
-    SAMPLEBRACKETING_TYPE sample1 = SAMPLEBRACKETING_SAMPLER_FNC(uv1);
+    SAMPLEBRACKETING_TYPE sample0 = SAMPLEBRACKETING_SAMPLER_FNC(tex, uv0);
+    SAMPLEBRACKETING_TYPE sample1 = SAMPLEBRACKETING_SAMPLER_FNC(tex, uv1);
 
     // Blend to get final result, based on how close the vector was to the first snapped angle
     SAMPLEBRACKETING_TYPE result = mix( sample0, sample1, blendAlpha);
 
 #ifdef SAMPLEBRACKETING_REPLACE_DIVERGENCE
     float strength = smoothstep(0.0, 0.2, dot(dir, dir)*6.0);
-    result = mix(   SAMPLEBRACKETING_SAMPLER_FNC(scale * rotate(st, -vec2(cos(0.5),sin(0.5)))), 
+    result = mix(   SAMPLEBRACKETING_SAMPLER_FNC(tex, scale * rotate(st, -vec2(cos(0.5),sin(0.5)))), 
                     result, 
                     strength);
 #endif

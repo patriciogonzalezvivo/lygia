@@ -18,7 +18,7 @@ options:
 #endif
 
 #ifndef SAMPLEUNTILE_SAMPLER_FNC
-#define SAMPLEUNTILE_SAMPLER_FNC(UV) SAMPLER_FNC(tex, UV)
+#define SAMPLEUNTILE_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
 #endif
 
 #ifndef SAMPLEUNTILE_RANDOM_FNC 
@@ -47,7 +47,7 @@ SAMPLEUNTILE_TYPE sampleUntile(SAMPLER_TYPE tex, in float2 st, float v) {
         float d = dot(r,r);
         float w = exp(-5.0*d );
         // SAMPLEUNTILE_TYPE c = textureGrad(tex, st + v*o.zw, ddx, ddy );
-        SAMPLEUNTILE_TYPE c = SAMPLEUNTILE_SAMPLER_FNC(st + v*o.zw); 
+        SAMPLEUNTILE_TYPE c = SAMPLEUNTILE_SAMPLER_FNC(tex, st + v*o.zw); 
         va += w*c;
         w1 += w;
         w2 += w*w;

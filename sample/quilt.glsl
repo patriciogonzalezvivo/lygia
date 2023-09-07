@@ -11,7 +11,7 @@ options:
 */
 
 #ifndef SAMPLEQUILT_SAMPLER_FNC
-#define SAMPLEQUILT_SAMPLER_FNC(UV) SAMPLER_FNC(tex, UV)
+#define SAMPLEQUILT_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
 #endif
 
 #ifndef FNC_SAMPLEQUILT
@@ -37,13 +37,13 @@ vec3 sampleQuilt(SAMPLER_TYPE tex, vec4 calibration, vec3 tile, vec2 st, vec2 re
 
     vec3 color = vec3(0.0);
     #ifdef SAMPLEQUILT_FLIPSUBP
-    color.r = SAMPLEQUILT_SAMPLER_FNC( mapQuilt(tile, st, a-2.0*subp2) ).r;
-    color.g = SAMPLEQUILT_SAMPLER_FNC( mapQuilt(tile, st, a-subp2) ).g;
-    color.b = SAMPLEQUILT_SAMPLER_FNC( mapQuilt(tile, st, a) ).b;
+    color.r = SAMPLEQUILT_SAMPLER_FNC(tex, mapQuilt(tile, st, a-2.0*subp2) ).r;
+    color.g = SAMPLEQUILT_SAMPLER_FNC(tex, mapQuilt(tile, st, a-subp2) ).g;
+    color.b = SAMPLEQUILT_SAMPLER_FNC(tex, mapQuilt(tile, st, a) ).b;
     #else
-    color.r = SAMPLEQUILT_SAMPLER_FNC( mapQuilt(tile, st, a) ).r;
-    color.g = SAMPLEQUILT_SAMPLER_FNC( mapQuilt(tile, st, a-subp2) ).g;
-    color.b = SAMPLEQUILT_SAMPLER_FNC( mapQuilt(tile, st, a-2.0*subp2) ).b;
+    color.r = SAMPLEQUILT_SAMPLER_FNC(tex, mapQuilt(tile, st, a) ).r;
+    color.g = SAMPLEQUILT_SAMPLER_FNC(tex, mapQuilt(tile, st, a-subp2) ).g;
+    color.b = SAMPLEQUILT_SAMPLER_FNC(tex, mapQuilt(tile, st, a-2.0*subp2) ).b;
     #endif
     return color;
 }
