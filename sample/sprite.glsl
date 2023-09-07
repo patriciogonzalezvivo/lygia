@@ -16,14 +16,14 @@ options:
 #endif
 
 #ifndef SAMPLESPRITE_SAMPLER_FNC
-#define SAMPLESPRITE_SAMPLER_FNC(UV) SAMPLER_FNC(tex, UV)
+#define SAMPLESPRITE_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
 #endif
 
 #ifndef FNC_SAMPLESPRITE
 #define FNC_SAMPLESPRITE
 
 SAMPLESPRITE_TYPE sampleSprite(SAMPLER_TYPE tex, in vec2 st, in vec2 grid, float frame) {
-    return SAMPLESPRITE_SAMPLER_FNC( sprite(st, grid, frame) );
+    return SAMPLESPRITE_SAMPLER_FNC(tex, sprite(st, grid, frame) );
 }
 
 #endif

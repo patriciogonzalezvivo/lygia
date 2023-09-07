@@ -26,9 +26,9 @@ examples:
 
 #ifndef SAMPLEUNTILE_SAMPLER_FNC
 #if defined(PLATFORM_WEBGL) && __VERSION__ >= 300 && defined(GL_OES_standard_derivatives)
-#define SAMPLEUNTILE_SAMPLER_FNC(UV) textureGrad(tex, UV, ddx, ddy)
+#define SAMPLEUNTILE_SAMPLER_FNC(TEX, UV) textureGrad(TEX, UV, ddx, ddy)
 #else
-#define SAMPLEUNTILE_SAMPLER_FNC(UV) SAMPLER_FNC(tex, UV)
+#define SAMPLEUNTILE_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
 #endif
 #endif
 
@@ -47,7 +47,7 @@ SAMPLEUNTILE_TYPE sampleUntile(SAMPLER_TYPE tex, in vec2 st) {
     #endif
 
     #ifdef SAMPLEUNTILE_FAST
-    float k = SAMPLEUNTILE_SAMPLER_FNC(0.005*st ).x; // cheap (cache friendly) lookup
+    float k = SAMPLEUNTILE_SAMPLER_FNC(tex, 0.005*st ).x; // cheap (cache friendly) lookup
     
     float l = k*8.0;
     float f = fract(l);
@@ -64,8 +64,8 @@ SAMPLEUNTILE_TYPE sampleUntile(SAMPLER_TYPE tex, in vec2 st) {
     vec2 offa = sin(vec2(3.0,7.0) * ia); // can replace with any other hash
     vec2 offb = sin(vec2(3.0,7.0) * ib); // can replace with any other hash
 
-    SAMPLEUNTILE_TYPE cola = SAMPLEUNTILE_SAMPLER_FNC( st + offa );
-    SAMPLEUNTILE_TYPE colb = SAMPLEUNTILE_SAMPLER_FNC( st + offb );
+    SAMPLEUNTILE_TYPE cola = SAMPLEUNTILE_SAMPLER_FNC(tex, st + offa );
+    SAMPLEUNTILE_TYPE colb = SAMPLEUNTILE_SAMPLER_FNC(tex, st + offb );
     return mix( cola, colb, smoothstep(0.2, 0.8, f - 0.1 * sum(cola-colb) ) );
 
     #else 
@@ -85,7 +85,7 @@ SAMPLEUNTILE_TYPE sampleUntile(SAMPLER_TYPE tex, in vec2 st) {
         vec2 r = g - f + o.xy;
         float d = dot(r,r);
         float w = exp(-5.0*d );
-        SAMPLEUNTILE_TYPE c = SAMPLEUNTILE_SAMPLER_FNC(st + o.zw); 
+        SAMPLEUNTILE_TYPE c = SAMPLEUNTILE_SAMPLER_FNC(tex, st + o.zw); 
         va += w*c;
         w1 += w;
         w2 += w*w;
