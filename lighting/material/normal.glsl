@@ -33,6 +33,7 @@ vec3 materialNormal() {
         #if defined(MATERIAL_NORMALMAP_SCALE)
     uv *= (MATERIAL_NORMALMAP_SCALE).xy;
         #endif
+        
     normal = SAMPLER_FNC(MATERIAL_NORMALMAP, uv).xyz;
     normal = v_tangentToWorld * (normal * 2.0 - 1.0);
 

@@ -4,7 +4,5 @@
 
 #ifndef FNC_FRAC
 #define FNC_FRAC
-
 #define frac(X) fract(X)
-
 #endif

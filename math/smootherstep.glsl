@@ -9,8 +9,8 @@ use: smoothstep(<float> in, <float> out, <float> value)
 
 #ifndef FNC_SMOOTHERSTEP
 #define FNC_SMOOTHERSTEP
-float smootherstep(float edge0, float edge1, float x) { return quintic( saturate( (x - edge0)/(edge1 - edge0) )); }
-vec2  smootherstep(vec2  edge0, vec2  edge1, vec2  x) { return quintic( saturate( (x - edge0)/(edge1 - edge0) )); }
-vec3  smootherstep(vec3  edge0, vec3  edge1, vec3  x) { return quintic( saturate( (x - edge0)/(edge1 - edge0) )); }
-vec4  smootherstep(vec4  edge0, vec4  edge1, vec4  x) { return quintic( saturate( (x - edge0)/(edge1 - edge0) )); }
+float smootherstep(float a, float b, float v) { return quintic( saturate( (v - a)/(b - a) )); }
+vec2  smootherstep(vec2  a, vec2  b, vec2  v) { return quintic( saturate( (v - a)/(b - a) )); }
+vec3  smootherstep(vec3  a, vec3  b, vec3  v) { return quintic( saturate( (v - a)/(b - a) )); }
+vec4  smootherstep(vec4  a, vec4  b, vec4  v) { return quintic( saturate( (v - a)/(b - a) )); }
 #endif

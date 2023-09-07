@@ -18,19 +18,19 @@ examples:
 #ifndef FNC_MIRRORTILE
 #define FNC_MIRRORTILE
 
-vec4 mirrorTile(vec4 tile) { return vec4( mirror(tile.xy + tile.zw), tile.z, tile.w); }
-vec4 mirrorTile(vec2 st) { return mirrorTile(sqTile(st)); }
-vec4 mirrorTile(vec2 st, float scale) { return mirrorTile(st * scale); }
-vec4 mirrorTile(vec2 st, vec2 scale) { return mirrorTile(st * scale); }
+vec4 mirrorTile(vec4 t) { return vec4( mirror(t.xy + t.zw), t.z, t.w); }
+vec4 mirrorTile(vec2 v) { return mirrorTile(sqTile(v)); }
+vec4 mirrorTile(vec2 v, float s) { return mirrorTile(v * s); }
+vec4 mirrorTile(vec2 v, vec2 s) { return mirrorTile(v * s); }
 
-vec4 mirrorXTile(vec4 tile) { return vec4( mirror(tile.x + tile.z), tile.y, tile.z, tile.w); }
-vec4 mirrorXTile(vec2 st) { return mirrorXTile(sqTile(st)); }
-vec4 mirrorXTile(vec2 st, float scale) { return mirrorXTile(st * scale); }
-vec4 mirrorXTile(vec2 st, vec2 scale) { return mirrorXTile(st * scale); }
+vec4 mirrorXTile(vec4 t) { return vec4( mirror(t.x + t.z), t.y, t.z, t.w); }
+vec4 mirrorXTile(vec2 v) { return mirrorXTile(sqTile(v)); }
+vec4 mirrorXTile(vec2 v, float s) { return mirrorXTile(v * s); }
+vec4 mirrorXTile(vec2 v, vec2 s) { return mirrorXTile(v * s); }
 
-vec4 mirrorYTile(vec4 tile) { return vec4( tile.x, mirror(tile.y + tile.w), tile.z, tile.w); }
-vec4 mirrorYTile(vec2 st) { return mirrorYTile(sqTile(st)); }
-vec4 mirrorYTile(vec2 st, float scale) { return mirrorYTile(st * scale); }
-vec4 mirrorYTile(vec2 st, vec2 scale) { return mirrorYTile(st * scale); }
+vec4 mirrorYTile(vec4 t) { return vec4( t.x, mirror(t.y + t.w), t.z, t.w); }
+vec4 mirrorYTile(vec2 v) { return mirrorYTile(sqTile(v)); }
+vec4 mirrorYTile(vec2 v, float s) { return mirrorYTile(v * s); }
+vec4 mirrorYTile(vec2 v, vec2 s) { return mirrorYTile(v * s); }
 
 #endif

@@ -1,46 +1,20 @@
-#include "saturate.glsl"
-
 /*
 original_author: Johan Ismael
-description: Map a value between one range to another.
-use: map(<float|vec2|vec3|vec4> value, <float|vec2|vec3|vec4> inMin, <float|vec2|vec3|vec4> inMax, <float|vec2|vec3|vec4> outMin, <float|vec2|vec3|vec4> outMax)
+description: Map a v between one range to another.
+use: map(<float|vec2|vec3|vec4> v, <float|vec2|vec3|vec4> inMin, <float|vec2|vec3|vec4> inMax, <float|vec2|vec3|vec4> outMin, <float|vec2|vec3|vec4> outMax)
 examples:
     - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/math_functions.frag
 */
 
 #ifndef FNC_MAP
 #define FNC_MAP
+float map(float v, float iMin, float iMax ) { return (v-iMin)/(iMax-iMin); }
+vec2 map(vec2 v, vec2 iMin, vec2 iMax ) { return (v-iMin)/(iMax-iMin); }
+vec3 map(vec3 v, vec3 iMin, vec3 iMax ) { return (v-iMin)/(iMax-iMin); }
+vec4 map(vec4 v, vec4 iMin, vec4 iMax ) { return (v-iMin)/(iMax-iMin); }
 
-float map( float value, float inMin, float inMax ) {
-    return saturate( (value-inMin)/(inMax-inMin));
-}
-
-vec2 map( vec2 value, vec2 inMin, vec2 inMax ) {
-    return saturate( (value-inMin)/(inMax-inMin));
-}
-
-vec3 map( vec3 value, vec3 inMin, vec3 inMax ) {
-    return saturate( (value-inMin)/(inMax-inMin));
-}
-
-vec4 map( vec4 value, vec4 inMin, vec4 inMax ) {
-    return saturate( (value-inMin)/(inMax-inMin));
-}
-
-float map(in float value, in float inMin, in float inMax, in float outMin, in float outMax) {
-  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);
-}
-
-vec2 map(in vec2 value, in vec2 inMin, in vec2 inMax, in vec2 outMin, in vec2 outMax) {
-  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);
-}
-
-vec3 map(in vec3 value, in vec3 inMin, in vec3 inMax, in vec3 outMin, in vec3 outMax) {
-  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);
-}
-
-vec4 map(in vec4 value, in vec4 inMin, in vec4 inMax, in vec4 outMin, in vec4 outMax) {
-  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);
-}
-
+float map(in float v, in float iMin, in float iMax, in float oMin, in float oMax) { return oMin + (oMax - oMin) * (v - iMin) / (iMax - iMin); }
+vec2 map(in vec2 v, in vec2 iMin, in vec2 iMax, in vec2 oMin, in vec2 oMax) { return oMin + (oMax - oMin) * (v - iMin) / (iMax - iMin); }
+vec3 map(in vec3 v, in vec3 iMin, in vec3 iMax, in vec3 oMin, in vec3 oMax) { return oMin + (oMax - oMin) * (v - iMin) / (iMax - iMin); }
+vec4 map(in vec4 v, in vec4 iMin, in vec4 iMax, in vec4 oMin, in vec4 oMax) { return oMin + (oMax - oMin) * (v - iMin) / (iMax - iMin); }
 #endif

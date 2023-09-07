@@ -1,29 +1,29 @@
 /*
 original_author: TheTurk
 description: Distance function for an arrow. Returns float. Originally from https://www.shadertoy.com/view/NttcW8
-use: arrowSDF(<vec3> position, <vec3> start, <vec3> end, <float> baseRadius, <float> tipRadius, <float> tipHeight)
+use: arrowSDF(<vec3> v, <vec3> start, <vec3> end, <float> baseRadius, <float> tipRadius, <float> tipHeight)
 */
 
 #ifndef FNC_ARROWSDF
 #define FNC_ARROWSDF
-float arrowSDF(vec3 position, vec3 start, vec3 end, float baseRadius, float tipRadius, float tipHeight){
+float arrowSDF(vec3 v, vec3 start, vec3 end, float baseRadius, float tipRadius, float tipHeight){
     vec3 t = start - end;
     float l = length(t);
     t /= l;
     l = max(l, tipHeight);
     
-    position -= end;
+    v -= end;
     if(t.y + 1. < .0001) {
-        position.y = -position.y;
+        v.y = -v.y;
     } else {
         float k = 1. / (1. + t.y);
         vec3 column1 = vec3( t.z * t.z * k + t.y, t.x, t.z * -t.x * k );
         vec3 column2 = vec3( -t.x , t.y , -t.z );
         vec3 column3 = vec3( -t.x * t.z * k , t.z, t.x * t.x * k + t.y );
-        position = mat3( column1 , column2 , column3 ) * position;
+        v = mat3( column1 , column2 , column3 ) * v;
     }
     
-    vec2 q = vec2( length(position.xz) , position.y );
+    vec2 q = vec2( length(v.xz) , v.y );
     q.x = abs(q.x);
     
     // tip

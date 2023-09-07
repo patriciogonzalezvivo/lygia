@@ -8,19 +8,8 @@ use: levelsOutputRange(<vec3|vec4> color, float minOutput, float maxOutput)
 
 #ifndef FNC_LEVELSOUTPUTRANGE
 #define FNC_LEVELSOUTPUTRANGE
-vec3 levelsOutputRange(in vec3 color, in vec3 minOutput, in vec3 maxOutput) {
-  return mix(minOutput, maxOutput, color);
-}
-
-vec4 levelsOutputRange(in vec4 color, in vec3 minOutput, in vec3 maxOutput) {
-  return vec4(levelsOutputRange(color.rgb, minOutput, maxOutput), color.a);
-}
-
-vec3 levelsOutputRange(in vec3 color, in float minOutput, in float maxOutput) {
-  return levelsOutputRange(color, vec3(minOutput), vec3(maxOutput));
-}
-
-vec4 levelsOutputRange(in vec4 color, in float minOutput, in float maxOutput) {
-  return vec4(levelsOutputRange(color.rgb, minOutput, maxOutput), color.a);
-}
+vec3 levelsOutputRange(in vec3 v, in vec3 oMin, in vec3 oMax) { return mix(oMin, oMax, v); }
+vec4 levelsOutputRange(in vec4 v, in vec3 oMin, in vec3 oMax) { return vec4(levelsOutputRange(v.rgb, oMin, oMax), v.a); }
+vec3 levelsOutputRange(in vec3 v, in float oMin, in float oMax) { return levelsOutputRange(v, vec3(oMin), vec3(oMax)); }
+vec4 levelsOutputRange(in vec4 v, in float oMin, in float oMax) { return vec4(levelsOutputRange(v.rgb, oMin, oMax), v.a); }
 #endif

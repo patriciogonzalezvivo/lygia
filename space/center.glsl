@@ -12,7 +12,7 @@ examples:
 #define FNC_CENTER
 
 float center(float x) { return x * 2.0 - 1.0; }
-vec2  center(vec2 st) { return st * 2.0 - 1.0; }
-vec3  center(vec3 pos) { return pos * 2.0 - 1.0; }
+vec2  center(vec2 v) { return v * 2.0 - 1.0; }
+vec3  center(vec3 v) { return v * 2.0 - 1.0; }
 
 #endif

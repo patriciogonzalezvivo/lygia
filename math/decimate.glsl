@@ -8,7 +8,5 @@ examples:
 
 #ifndef FNC_DECIMATE
 #define FNC_DECIMATE
-
-#define decimate(value, presicion) (floor(value * presicion)/presicion)
-
+#define decimate(V, P) (floor(V * P)/P)
 #endif

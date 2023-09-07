@@ -32,30 +32,14 @@ examples:
 #ifndef FNC_DITHER
 #define FNC_DITHER
 
-float dither(float b, const HIGHP in float time) {
-    return DITHER_FNC(b, time);
-}
-
-vec3 dither(vec3 rgb, const HIGHP in float time) {
-    return DITHER_FNC(rgb, time);
-}
-
-vec4 dither(vec4 rgba, const HIGHP in float time) {
-    return DITHER_FNC(rgba, time);
-}
+float dither(float v, const HIGHP in float time) { return DITHER_FNC(v, time); }
+vec3 dither(vec3 v, const HIGHP in float time) { return DITHER_FNC(v, time); }
+vec4 dither(vec4 v, const HIGHP in float time) { return DITHER_FNC(v, time); }
 
 #ifdef TIME_SECS
-float dither(float b) {
-    return dither(b, TIME_SECS);
-}
-
-vec3 dither(vec3 rgb) {
-    return dither(rgb, TIME_SECS);
-}
-
-vec4 dither(vec4 rgba) {
-    return dither(rgba, TIME_SECS);
-}
+float dither(float v) { return dither(v, TIME_SECS); }
+vec3 dither(vec3 v) { return dither(v, TIME_SECS); }
+vec4 dither(vec4 v) { return dither(v, TIME_SECS); }
 #endif
 
 #endif

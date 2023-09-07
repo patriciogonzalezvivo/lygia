@@ -11,27 +11,27 @@ options:
 
 #ifndef FNC_ROTATEZ
 #define FNC_ROTATEZ
-vec4 rotateZ(in vec4 pos, in float radian, in vec4 center) {
-    return rotate4dZ(radian) * (pos - center) + center;
+vec4 rotateZ(in vec4 v, in float r, in vec4 c) {
+    return rotate4dZ(r) * (v - c) + c;
 }
 
-vec4 rotateZ(in vec4 pos, in float radian) {
+vec4 rotateZ(in vec4 v, in float r) {
     #ifdef CENTER_4D
-    return rotateZ(pos, radian, CENTER_3D);
+    return rotate4dZ(r) * (v - CENTER_3D) + CENTER_3D;
     #else
-    return rotateZ(pos, radian, vec4(.0));
+    return rotate4dZ(r) * v;
     #endif
 }
 
-vec3 rotateZ(in vec3 pos, in float radian, in vec3 center) {
-    return (rotate4dZ(radian) * vec4(pos - center, 0.) ).xyz + center;
+vec3 rotateZ(in vec3 v, in float r, in vec3 c) {
+    return (rotate4dZ(r) * vec4(v - c, 0.0) ).xyz + c;
 }
 
-vec3 rotateZ(in vec3 pos, in float radian) {
+vec3 rotateZ(in vec3 v, in float r) {
     #ifdef CENTER_3D
-    return rotateZ(pos, radian, CENTER_3D);
+    return (rotate4dZ(r) * vec4(v - CENTER_3D, 0.0)).xyz + CENTER_3D;
     #else
-    return rotateZ(pos, radian, vec3(.0));
+    return (rotate4dZ(r) * vec4(v, 0.0)).xyz;
     #endif
 }
 #endif

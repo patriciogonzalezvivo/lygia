@@ -14,27 +14,27 @@ examples:
 
 #ifndef FNC_WINDMILLTILE
 #define FNC_WINDMILLTILE
-vec4 windmillTile(vec4 tile, float turn) {
-    float a = ( abs(mod(tile.z, 2.0)-
-                    mod(tile.w, 2.0))+
-                mod(tile.w, 2.0) * 2.0)*
+vec4 windmillTile(vec4 t, float turn) {
+    float a = ( abs(mod(t.z, 2.0)-
+                    mod(t.w, 2.0))+
+                mod(t.w, 2.0) * 2.0)*
                 0.25;
-    return vec4(rotate(tile.xy, a * turn), tile.zw);
+    return vec4(rotate(t.xy, a * turn), t.zw);
 }
 
-vec4 windmillTile(vec4 tile) {
-    return windmillTile(tile, TAU);
+vec4 windmillTile(vec4 t) {
+    return windmillTile(t, TAU);
 }
 
-vec4 windmillTile(vec2 st) {
-    return windmillTile(sqTile(st));
+vec4 windmillTile(vec2 v) {
+    return windmillTile(sqTile(v));
 }
 
-vec4 windmillTile(vec2 st, float scale) {
-    return windmillTile(st * scale);
+vec4 windmillTile(vec2 v, float s) {
+    return windmillTile(v * s);
 }
 
-vec4 windmillTile(vec2 st, vec2 scale) {
-    return windmillTile(st * scale);
+vec4 windmillTile(vec2 v, vec2 s) {
+    return windmillTile(v * s);
 }
 #endif

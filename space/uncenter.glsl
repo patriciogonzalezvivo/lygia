@@ -10,8 +10,8 @@ examples:
 #ifndef FNC_UNCENTER
 #define FNC_UNCENTER
 
-float uncenter(float x) { return x * 0.5 + 0.5; }
-vec2  uncenter(vec2 st) { return st * 0.5 + 0.5; }
-vec3  uncenter(vec3 pos) { return pos * 0.5 + 0.5; }
+float uncenter(float v) { return v * 0.5 + 0.5; }
+vec2  uncenter(vec2 v) { return v * 0.5 + 0.5; }
+vec3  uncenter(vec3 v) { return v * 0.5 + 0.5; }
 
 #endif

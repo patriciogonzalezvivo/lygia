@@ -59,10 +59,9 @@ void lightDirectional(
 void lightDirectional(
     const in vec3 _diffuseColor, const in vec3 _specularColor,
     LightDirectional _L, const in Material _mat, 
-    inout vec3 _diffuse, inout vec3 _specular) 
-    {
-    float f0    = max(_mat.f0.r, max(_mat.f0.g, _mat.f0.b));
+    inout vec3 _diffuse, inout vec3 _specular) {
 
+    float f0    = max(_mat.f0.r, max(_mat.f0.g, _mat.f0.b));
     float NoL   = dot(_mat.normal, _L.direction);
 
     lightDirectional(
@@ -82,7 +81,6 @@ void lightDirectional(
     float backScatter = saturate(NoL * _mat.thickness + (1.0 - _mat.thickness)) * 0.5;
     float subsurface = mix(backScatter, 1.0, forwardScatter) * (1.0 - _mat.thickness);
     _diffuse += _mat.subsurfaceColor * (subsurface * diffuseLambert());
-    
     #endif
 }
 #endif

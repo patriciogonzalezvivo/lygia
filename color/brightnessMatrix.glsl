@@ -6,10 +6,10 @@ use: brightnessMatrix(<float> amount)
 
 #ifndef FNC_BRIGHTNESSMATRIX
 #define FNC_BRIGHTNESSMATRIX
-mat4 brightnessMatrix(in float amount) {
+mat4 brightnessMatrix(in float a) {
     return mat4(  1., 0., 0., 0.,
                   0., 1., 0., 0.,
                   0., 0., 1., 0.,
-                  amount, amount, amount, 1. );
+                  a, a, a, 1. );
 }
 #endif

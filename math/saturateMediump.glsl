@@ -12,9 +12,9 @@ use: saturateMediump(<float|vec2|vec3|vec4> value)
 #endif
 
 #if defined(TARGET_MOBILE) || defined(PLATFORM_WEBGL) || defined(PLATFORM_RPI)
-#define saturateMediump(x) min(x, MEDIUMP_FLT_MAX)
+#define saturateMediump(V) min(V, MEDIUMP_FLT_MAX)
 #else
-#define saturateMediump(x) x
+#define saturateMediump(V) V
 #endif
 
 #endif

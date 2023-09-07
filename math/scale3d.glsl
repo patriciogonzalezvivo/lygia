@@ -7,11 +7,11 @@ use:
 */
 
 #ifndef FNC_SCALE4D
-mat3 scale3d(float _scale) {
+mat3 scale3d(float s) {
     return mat3(
-        _scale, 0.0, 0.0,
-        0.0, _scale, 0.0,
-        0.0, 0.0, _scale,
+        s, 0.0, 0.0,
+        0.0, s, 0.0,
+        0.0, 0.0, s,
     );
 }
 

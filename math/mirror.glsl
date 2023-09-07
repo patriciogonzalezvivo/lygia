@@ -15,9 +15,9 @@ float mirror(in float x) {
     return f + m - fm * 2.;
 }
 
-vec2 mirror(in vec2 xy) {
-    vec2 f = fract(xy);
-    vec2 m = floor(mod(xy, 2.));
+vec2 mirror(in vec2 v) {
+    vec2 f = fract(v);
+    vec2 m = floor(mod(v, 2.));
     vec2 fm = f * m;
     return f + m - fm * 2.;
 }
