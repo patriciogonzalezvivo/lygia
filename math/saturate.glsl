@@ -8,5 +8,5 @@ examples:
 
 #if !defined(FNC_SATURATE) && !defined(saturate)
 #define FNC_SATURATE
-#define saturate(x) clamp(x, 0.0, 1.0)
+#define saturate(V) clamp(V, 0.0, 1.0)
 #endif

@@ -6,9 +6,9 @@ use: rotate3dX(<float> radians)
 
 #ifndef FNC_ROTATE3DX
 #define FNC_ROTATE3DX
-mat3 rotate3dX(in float phi){
+mat3 rotate3dX(in float r){
     return mat3(vec3(1.0,0.0,0.0),
-                vec3(0.0,cos(phi),-sin(phi)),
-                vec3(0.0,sin(phi),cos(phi)));
+                vec3(0.0,cos(r),-sin(r)),
+                vec3(0.0,sin(r),cos(r)));
 }
 #endif

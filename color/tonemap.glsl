@@ -35,7 +35,7 @@ options:
 #ifndef FNC_TONEMAP
 #define FNC_TONEMAP
 
-vec3 tonemap(const vec3 color) { return TONEMAP_FNC (color); }
-vec4 tonemap(const vec4 color) { return TONEMAP_FNC (color); }
+vec3 tonemap(const vec3 v) { return TONEMAP_FNC(v); }
+vec4 tonemap(const vec4 v) { return TONEMAP_FNC(v); }
 
 #endif

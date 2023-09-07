@@ -25,17 +25,17 @@ options:
 #endif
 
 #ifndef SAMPLEFXAA_SAMPLE_FNC
-#define SAMPLEFXAA_SAMPLE_FNC(UV) SAMPLER_FNC(tex, UV)
+#define SAMPLEFXAA_SAMPLE_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
 #endif
 
 #ifndef FNC_SAMPLEFXAA
 #define FNC_SAMPLEFXAA 
 vec4 sampleFXAA(SAMPLER_TYPE tex, vec2 uv, vec2 pixel) {
-    vec3 rgbNW  = SAMPLEFXAA_SAMPLE_FNC(uv.xy + vec2( -1.0, -1.0 ) * pixel).xyz;
-    vec3 rgbNE  = SAMPLEFXAA_SAMPLE_FNC(uv.xy + vec2( 1.0, -1.0 ) * pixel).xyz;
-    vec3 rgbSW  = SAMPLEFXAA_SAMPLE_FNC(uv.xy + vec2( -1.0, 1.0 ) * pixel).xyz;
-    vec3 rgbSE  = SAMPLEFXAA_SAMPLE_FNC(uv.xy + vec2( 1.0, 1.0 ) * pixel).xyz;
-    vec4 rgbaM  = SAMPLEFXAA_SAMPLE_FNC(uv.xy  * pixel);
+    vec3 rgbNW  = SAMPLEFXAA_SAMPLE_FNC(tex,uv.xy + vec2( -1.0, -1.0 ) * pixel).xyz;
+    vec3 rgbNE  = SAMPLEFXAA_SAMPLE_FNC(tex,uv.xy + vec2( 1.0, -1.0 ) * pixel).xyz;
+    vec3 rgbSW  = SAMPLEFXAA_SAMPLE_FNC(tex,uv.xy + vec2( -1.0, 1.0 ) * pixel).xyz;
+    vec3 rgbSE  = SAMPLEFXAA_SAMPLE_FNC(tex,uv.xy + vec2( 1.0, 1.0 ) * pixel).xyz;
+    vec4 rgbaM  = SAMPLEFXAA_SAMPLE_FNC(tex,uv.xy  * pixel);
     vec3 rgbM   = rgbaM.xyz;
     vec3 luma   = vec3( 0.299, 0.587, 0.114 );
     float lumaNW    = dot( rgbNW, luma );
@@ -55,11 +55,11 @@ vec4 sampleFXAA(SAMPLER_TYPE tex, vec2 uv, vec2 pixel) {
                 max(vec2(-SAMPLEFXAA_SPAN_MAX, -SAMPLEFXAA_SPAN_MAX),
                     dir * rcpDirMin)) * pixel;
 
-    vec4 rgbA = 0.5 * ( SAMPLEFXAA_SAMPLE_FNC( uv.xy + dir * (1.0/3.0 - 0.5)) +
-                        SAMPLEFXAA_SAMPLE_FNC( uv.xy + dir * (2.0/3.0 - 0.5)) );
+    vec4 rgbA = 0.5 * ( SAMPLEFXAA_SAMPLE_FNC(tex, uv.xy + dir * (1.0/3.0 - 0.5)) +
+                        SAMPLEFXAA_SAMPLE_FNC(tex, uv.xy + dir * (2.0/3.0 - 0.5)) );
     vec4 rgbB = rgbA * 0.5 + 0.25 * (
-                        SAMPLEFXAA_SAMPLE_FNC( uv.xy + dir * -0.5) +
-                        SAMPLEFXAA_SAMPLE_FNC( uv.xy + dir * 0.5) );
+                        SAMPLEFXAA_SAMPLE_FNC(tex, uv.xy + dir * -0.5) +
+                        SAMPLEFXAA_SAMPLE_FNC(tex, uv.xy + dir * 0.5) );
 
     float lumaB = dot(rgbB, vec4(luma, 0.0));
     if ( ( lumaB < lumaMin ) || ( lumaB > lumaMax ) )

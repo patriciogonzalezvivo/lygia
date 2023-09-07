@@ -16,12 +16,12 @@ examples:
 #ifndef FNC_CIRCLESDF
 #define FNC_CIRCLESDF
 
-float circleSDF(in vec2 st) {
+float circleSDF(in vec2 v) {
 #ifdef CENTER_2D
-    st -= CENTER_2D;
+    v -= CENTER_2D;
 #else
-    st -= 0.5;
+    v -= 0.5;
 #endif
-    return CIRCLESDF_FNC(st) * 2.0;
+    return CIRCLESDF_FNC(v) * 2.0;
 }
 #endif

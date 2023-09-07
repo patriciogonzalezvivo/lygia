@@ -8,15 +8,7 @@ use: luma(<vec3|vec4> color)
 
 #ifndef FNC_LUMA
 #define FNC_LUMA
-float luma(float color) {
-    return color;
-}
-
-float luma(in vec3 color) {
-    return rgb2luma(color);
-}
-
-float luma(in vec4 color) {
-    return rgb2luma(color.rgb);
-}
+float luma(float v) { return v; }
+float luma(in vec3 v) { return rgb2luma(v); }
+float luma(in vec4 v) { return rgb2luma(v.rgb); }
 #endif

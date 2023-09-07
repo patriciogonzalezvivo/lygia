@@ -14,26 +14,26 @@ use: <vec3|vec4> whiteBalance(<vec3|vec4> rgb, <float> temperature, <float> tint
 #ifndef FNC_WHITEBALANCE
 #define FNC_WHITEBALANCE
 
-vec3 whiteBalance(in vec3 rgb, in float temperature, in float tint) {
+vec3 whiteBalance(in vec3 rgb, in float temp, in float tint) {
 #if defined(TARGET_MOBILE)
-    const vec3 warmFilter = vec3(0.93, 0.54, 0.0);
+    const vec3 w = vec3(0.93, 0.54, 0.0); // warm filter
 
     vec3 yiq = rgb2yiq(rgb);
     // adjust tint
 	yiq.b = clamp(yiq.b + tint * 0.05226, -0.5226, 0.5226);
 	rgb = yiq2rgb(yiq);
     
-    // adjusting temperature
-	vec3 processed = vec3(    (rgb.r < 0.5 ? (2.0 * rgb.r * warmFilter.r) : (1.0 - 2.0 * (1.0 - rgb.r) * (1.0 - warmFilter.r))),
-                    (rgb.g < 0.5 ? (2.0 * rgb.g * warmFilter.g) : (1.0 - 2.0 * (1.0 - rgb.g) * (1.0 - warmFilter.g))),
-                    (rgb.b < 0.5 ? (2.0 * rgb.b * warmFilter.b) : (1.0 - 2.0 * (1.0 - rgb.b) * (1.0 - warmFilter.b))) );
+    // adjusting temp
+	vec3 p = vec3(  (rgb.r < 0.5 ? (2.0 * rgb.r * w.r) : (1.0 - 2.0 * (1.0 - rgb.r) * (1.0 - w.r))),
+                    (rgb.g < 0.5 ? (2.0 * rgb.g * w.g) : (1.0 - 2.0 * (1.0 - rgb.g) * (1.0 - w.g))),
+                    (rgb.b < 0.5 ? (2.0 * rgb.b * w.b) : (1.0 - 2.0 * (1.0 - rgb.b) * (1.0 - w.b))) );
 
-    return mix(rgb, processed, temperature * 0.5);
+    return mix(rgb, p, temp * 0.5);
                         
 #else
     // Get the CIE xy chromaticity of the reference white point.
     // Note: 0.31271 = x value on the D65 white point
-    float x = 0.31271 - temperature * (temperature < 0.0 ? 0.1 : 0.05);
+    float x = 0.31271 - temp * (temp < 0.0 ? 0.1 : 0.05);
     float standardIlluminantY = 2.87 * x - 3.0 * x * x - 0.27509507;
     float y = standardIlluminantY + tint * 0.05;
 
@@ -68,6 +68,6 @@ vec3 whiteBalance(in vec3 rgb, in float temperature, in float tint) {
 #endif
 }
 
-vec4 whiteBalance(in vec4 color, in float temperature, in float tint) { return vec4( whiteBalance(color.rgb, temperature, tint), color.a); }
+vec4 whiteBalance(in vec4 color, in float temp, in float tint) { return vec4( whiteBalance(color.rgb, temp, tint), color.a); }
 
 #endif

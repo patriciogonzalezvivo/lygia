@@ -1,15 +1,15 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: power of 2
-use: pow2(<float|vec2|vec3|vec4> x)
+use: pow2(<float|vec2|vec3|vec4> v)
 */
 
 #ifndef FNC_POW2
 #define FNC_POW2
 
-float pow2(const in float x) { return x * x; }
-vec2 pow2(const in vec2 x) { return x * x; }
-vec3 pow2(const in vec3 x) { return x * x; }
-vec4 pow2(const in vec4 x) { return x * x; }
+float pow2(const in float v) { return v * v; }
+vec2 pow2(const in vec2 v) { return v * v; }
+vec3 pow2(const in vec3 v) { return v * v; }
+vec4 pow2(const in vec4 v) { return v * v; }
 
 #endif

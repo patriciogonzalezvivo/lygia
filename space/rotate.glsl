@@ -3,8 +3,8 @@
 
 /*
 original_author: Patricio Gonzalez Vivo
-description: rotate a 2D space by a radian radians
-use: rotate(<vec3|vec2> st, float radians [, vec2 center])
+description: rotate a 2D space by a radian r
+use: rotate(<vec3|vec2> v, float r [, vec2 c])
 options:
     - CENTER_2D
     - CENTER_3D
@@ -15,50 +15,50 @@ examples:
 
 #ifndef FNC_ROTATE
 #define FNC_ROTATE
-vec2 rotate(in vec2 st, in float radians, in vec2 center) {
-    return rotate2d(radians) * (st - center) + center;
+vec2 rotate(in vec2 v, in float r, in vec2 c) {
+    return rotate2d(r) * (v - c) + c;
 }
 
-vec2 rotate(in vec2 st, in float radians) {
+vec2 rotate(in vec2 v, in float r) {
     #ifdef CENTER_2D
-    return rotate(st, radians, CENTER_2D);
+    return rotate(v, r, CENTER_2D);
     #else
-    return rotate(st, radians, vec2(.5));
+    return rotate(v, r, vec2(.5));
     #endif
 }
 
-vec2 rotate(vec2 st, vec2 x_axis) {
+vec2 rotate(vec2 v, vec2 x_axis) {
     #ifdef CENTER_2D
-    st -= CENTER_2D;
+    v -= CENTER_2D;
     #endif
-    vec2 rta = vec2( dot(st, vec2(-x_axis.y, x_axis.x)), dot(st, x_axis) );
+    vec2 rta = vec2( dot(v, vec2(-x_axis.y, x_axis.x)), dot(v, x_axis) );
     #ifdef CENTER_2D
     rta += CENTER_2D;
     #endif
     return rta;
 }
 
-vec3 rotate(in vec3 xyz, in float radians, in vec3 axis, in vec3 center) {
-    return (rotate4d(axis, radians) * vec4(xyz - center, 1.)).xyz + center;
+vec3 rotate(in vec3 v, in float r, in vec3 axis, in vec3 c) {
+    return (rotate4d(axis, r) * vec4(v - c, 1.)).xyz + c;
 }
 
-vec3 rotate(in vec3 xyz, in float radians, in vec3 axis) {
+vec3 rotate(in vec3 v, in float r, in vec3 axis) {
     #ifdef CENTER_3D
-    return rotate(xyz, radians, axis, CENTER_3D);
+    return rotate(v, r, axis, CENTER_3D);
     #else
-    return rotate(xyz, radians, axis, vec3(0.));
+    return rotate(v, r, axis, vec3(0.));
     #endif
 }
 
-vec4 rotate(in vec4 xyzw, in float radians, in vec3 axis, in vec4 center) {
-    return rotate4d(axis, radians) * (xyzw - center) + center;
+vec4 rotate(in vec4 v, in float r, in vec3 axis, in vec4 c) {
+    return rotate4d(axis, r) * (v - c) + c;
 }
 
-vec4 rotate(in vec4 xyzw, in float radians, in vec3 axis) {
+vec4 rotate(in vec4 v, in float r, in vec3 axis) {
     #ifdef CENTER_4D
-    return rotate(xyzw, radians, axis, CENTER_4D);
+    return rotate(v, r, axis, CENTER_4D);
     #else
-    return rotate(xyzw, radians, axis, vec4(0.));
+    return rotate(v, r, axis, vec4(0.));
     #endif
 }
 
@@ -68,9 +68,9 @@ vec3 rotate(QUAT q, vec3 v) {
     return quatMul(q, quatMul(vec4(v, 0), q_c)).xyz;
 }
 
-vec3 rotate(QUAT q, vec3 v, vec3 center) {
-    vec3 dir = v - center;
-    return center + rotate(q, dir);
+vec3 rotate(QUAT q, vec3 v, vec3 c) {
+    vec3 dir = v - c;
+    return c + rotate(q, dir);
 }
 #endif
 

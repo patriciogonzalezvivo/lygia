@@ -8,6 +8,6 @@ use: <vec3|vec4> tonemapReinhard(<vec3|vec4> x)
 
 #ifndef FNC_TONEMAPREINHARD
 #define FNC_TONEMAPREINHARD
-vec3 tonemapReinhard(const vec3 x) { return x / (1.0 + luminance(x)); }
-vec4 tonemapReinhard(const vec4 x) { return vec4( tonemapReinhard(x.rgb), x.a ); }
+vec3 tonemapReinhard(const vec3 v) { return v / (1.0 + luminance(v)); }
+vec4 tonemapReinhard(const vec4 v) { return vec4( tonemapReinhard(v.rgb), v.a ); }
 #endif

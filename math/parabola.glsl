@@ -9,7 +9,5 @@ examples:
 
 #ifndef FNC_PARABOLA
 #define FNC_PARABOLA
-
 float parabola(const in float x, const in float k ) { return pow( 4.0*x*(1.0-x), k ); }
-
 #endif

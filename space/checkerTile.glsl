@@ -11,20 +11,20 @@ examples:
 
 #ifndef FNC_CHECKERTILE
 #define FNC_CHECKERTILE
-float checkerTile(vec4 tile) {
-    vec2 c = mod(tile.zw,2.);
+float checkerTile(vec4 t) {
+    vec2 c = mod(t.zw,2.);
     return abs(c.x-c.y);
 }
 
-float checkerTile(vec2 st) {
-    return checkerTile(sqTile(st));
+float checkerTile(vec2 v) {
+    return checkerTile(sqTile(v));
 }
 
-float checkerTile(vec2 st, float scale) {
-    return checkerTile(st * scale);
+float checkerTile(vec2 v, float s) {
+    return checkerTile(v * s);
 }
 
-float checkerTile(vec2 st, vec2 scale) {
-    return checkerTile(st * scale);
+float checkerTile(vec2 v, vec2 s) {
+    return checkerTile(v * s);
 }
 #endif

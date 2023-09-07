@@ -12,14 +12,13 @@ use: <vec3|vec4> vibrance(<vec3|vec4> color, <float> v)
 
 #ifndef FNC_VIBRANCE
 #define FNC_VIBRANCE
-
-vec3 vibrance(in vec3 color, in float v) {
-    float max_color = mmax(color);
-    float min_color = mmin(color);
-    float sat = max_color - min_color;
-    float lum = luma(color);
-    return mix(vec3(lum), color, 1.0 + (v * 1.0 - (sign(v) * sat)));
+vec3 vibrance(in vec3 v, in float vi) {
+    float max_v = mmax(v);
+    float min_v = mmin(v);
+    float sat = max_v - min_v;
+    float lum = luma(v);
+    return mix(vec3(lum), v, 1.0 + (vi * 1.0 - (sign(vi) * sat)));
 }
 
-vec4 vibrance(in vec4 color, in float v) { return vec4( vibrance(color.rgb, v), color.a); }
+vec4 vibrance(in vec4 v, in float vi) { return vec4( vibrance(v.rgb, vi), color.a); }
 #endif

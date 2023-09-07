@@ -85,11 +85,9 @@ vec4 pbr(const in Material _mat) {
     {
         #if defined(LIGHT_DIRECTION)
         LightDirectional L = LightDirectionalNew();
+        lightResolve(diffuseColor, specularColor, M, L, lightDiffuse, lightSpecular);
         #elif defined(LIGHT_POSITION)
         LightPoint L = LightPointNew();
-        #endif
-
-        #if defined(LIGHT_DIRECTION) || defined(LIGHT_POSITION)
         lightResolve(diffuseColor, specularColor, M, L, lightDiffuse, lightSpecular);
         #endif
     }

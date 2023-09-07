@@ -6,9 +6,9 @@ use: rotate2d(<float> radians)
 
 #ifndef FNC_ROTATE2D
 #define FNC_ROTATE2D
-mat2 rotate2d(in float radians){
-    float c = cos(radians);
-    float s = sin(radians);
+mat2 rotate2d(in float r){
+    float c = cos(r);
+    float s = sin(r);
     return mat2(c, -s, s, c);
 }
 #endif

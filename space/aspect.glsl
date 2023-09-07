@@ -9,10 +9,8 @@ examples:
 
 #ifndef FNC_ASPECT
 #define FNC_ASPECT
-
 vec2 aspect(vec2 st, vec2 s) {
     st.x = st.x * (s.x / s.y);
     return st;
 }
-
 #endif
