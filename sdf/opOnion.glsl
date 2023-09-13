@@ -1,7 +1,7 @@
 /*
 original_author:  Inigo Quiles
 description: onion operation of one SDFs 
-use: <vec4> opElongate( in <vec3> p, in <vec3> h )
+use: <float> opOnion( in <float> d, in <float> h )
 */
 
 #ifndef FNC_OPONION
