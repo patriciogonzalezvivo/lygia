@@ -2,7 +2,10 @@
 
 /*
 original_author: Patricio Gonzalez Vivo
-description: given a texture return a simple box blured pixel
+description: |
+    Given a texture it performs a moving average or box blur. Which simply averages the pixel values in
+    a KxK window. This is a very common image processing technique that can be used to smooth out noise.
+    
 use: boxBlur(<SAMPLER_TYPE> texture, <vec2> st, <vec2> pixel_offset)
 options:
     - BOXBLUR_2D: default to 1D
