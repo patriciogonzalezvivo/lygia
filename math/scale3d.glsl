@@ -11,7 +11,7 @@ mat3 scale3d(float s) {
     return mat3(
         s, 0.0, 0.0,
         0.0, s, 0.0,
-        0.0, 0.0, s,
+        0.0, 0.0, s
     );
 }
 
@@ -19,7 +19,7 @@ mat3 scale3d(float x, float y, float z) {
     return mat3(
          x, 0.0, 0.0,
         0.0,  y, 0.0,
-        0.0, 0.0,  z,
+        0.0, 0.0,  z
     );
 }
 
@@ -27,7 +27,7 @@ mat3 scale3d(vec3 s) {
     return mat3(
         s.x, 0.0, 0.0,
         0.0, s.y, 0.0,
-        0.0, 0.0, s.z,
+        0.0, 0.0, s.z
     );
 }
 
