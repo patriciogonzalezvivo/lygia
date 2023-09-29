@@ -39,30 +39,30 @@ vec2 barrel(vec2 st, float amt) {
     return barrel(st, amt, lengthSq(st-.5));
 }
 
-BARREL_TYPE barrel(in SAMPLER_TYPE tex, in vec2 st, float offset) {
-    BARREL_TYPE a1 = BARREL_SAMPLER_FNC(tex, barrel(st, .0, offset));
-    BARREL_TYPE a2 = BARREL_SAMPLER_FNC(tex, barrel(st, .2, offset));
-    BARREL_TYPE a3 = BARREL_SAMPLER_FNC(tex, barrel(st, .4, offset));
-    BARREL_TYPE a4 = BARREL_SAMPLER_FNC(tex, barrel(st, .6, offset));
+BARREL_TYPE barrel(in SAMPLER_TYPE tex, in vec2 st, float dist) {
+    BARREL_TYPE a1 = BARREL_SAMPLER_FNC(tex, barrel(st, .0, dist));
+    BARREL_TYPE a2 = BARREL_SAMPLER_FNC(tex, barrel(st, .2, dist));
+    BARREL_TYPE a3 = BARREL_SAMPLER_FNC(tex, barrel(st, .4, dist));
+    BARREL_TYPE a4 = BARREL_SAMPLER_FNC(tex, barrel(st, .6, dist));
 #ifdef BARREL_OCT_1
     return (a1+a2+a3+a4)/4.;
 #endif
-    BARREL_TYPE a5 = BARREL_SAMPLER_FNC(tex, barrel(st, .8, offset));
-    BARREL_TYPE a6 = BARREL_SAMPLER_FNC(tex, barrel(st, 1.0, offset));
-    BARREL_TYPE a7 = BARREL_SAMPLER_FNC(tex, barrel(st, 1.2, offset));
-    BARREL_TYPE a8 = BARREL_SAMPLER_FNC(tex, barrel(st, 1.4, offset));
+    BARREL_TYPE a5 = BARREL_SAMPLER_FNC(tex, barrel(st, .8, dist));
+    BARREL_TYPE a6 = BARREL_SAMPLER_FNC(tex, barrel(st, 1.0, dist));
+    BARREL_TYPE a7 = BARREL_SAMPLER_FNC(tex, barrel(st, 1.2, dist));
+    BARREL_TYPE a8 = BARREL_SAMPLER_FNC(tex, barrel(st, 1.4, dist));
 #ifdef BARREL_OCT_2
     return (a1+a2+a3+a4+a5+a6+a7+a8)/8.;
 #endif
-    BARREL_TYPE a9 = BARREL_SAMPLER_FNC(tex, barrel(st, 1.6, offset));
-    BARREL_TYPE a10 = BARREL_SAMPLER_FNC(tex, barrel(st, 1.8, offset));
-    BARREL_TYPE a11 = BARREL_SAMPLER_FNC(tex, barrel(st, 2.0, offset));
-    BARREL_TYPE a12 = BARREL_SAMPLER_FNC(tex, barrel(st, 2.2, offset));
+    BARREL_TYPE a9 = BARREL_SAMPLER_FNC(tex, barrel(st, 1.6, dist));
+    BARREL_TYPE a10 = BARREL_SAMPLER_FNC(tex, barrel(st, 1.8, dist));
+    BARREL_TYPE a11 = BARREL_SAMPLER_FNC(tex, barrel(st, 2.0, dist));
+    BARREL_TYPE a12 = BARREL_SAMPLER_FNC(tex, barrel(st, 2.2, dist));
     return (a1+a2+a3+a4+a5+a6+a7+a8+a9+a10+a11+a12)/12.;
 }
 
-BARREL_TYPE barrel(in SAMPLER_TYPE tex, in vec2 st, in vec2 offset) {
-    return barrel(tex, st, dot(vec2(.5), offset));
+BARREL_TYPE barrel(in SAMPLER_TYPE tex, in vec2 st, in vec2 dist) {
+    return barrel(tex, st, dot(vec2(.5), dist));
 }
 
 BARREL_TYPE barrel(in SAMPLER_TYPE tex, in vec2 st) {
