@@ -18,4 +18,8 @@ vec4 sampleClamp2edge(SAMPLER_TYPE tex, vec2 st, vec2 texResolution) {
 vec4 sampleClamp2edge(SAMPLER_TYPE tex, vec2 st) { 
     return SAMPLER_FNC( tex, clamp(st, vec2(0.01), vec2(0.99) ) ); 
 }
+
+vec4 sampleClamp2edge(SAMPLER_TYPE tex, vec2 st, float edge) { 
+    return SAMPLER_FNC( tex, clamp(st, vec2(edge), vec2(1.0 - edge) ) ); 
+}
 #endif

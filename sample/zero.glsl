@@ -13,4 +13,8 @@ options:
 vec4 sampleZero(SAMPLER_TYPE tex, vec2 st) { 
     return SAMPLER_FNC( tex, st ) * vec4(1.0,1.0,1.0, (st.x <= 0.0 || st.x >= 1.0 || st.y <= 0.0 || st.y >= 1.0)? 0.0 : 1.0); 
 }
+
+vec4 sampleZero(SAMPLER_TYPE tex, vec2 st, float edge) { 
+    return SAMPLER_FNC( tex, st ) * vec4(1.0,1.0,1.0, (st.x <= edge || st.x >= 1.0-edge || st.y <= edge || st.y >= 1.0-edge)? 0.0 : 1.0); 
+}
 #endif
