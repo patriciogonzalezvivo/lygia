@@ -4,8 +4,8 @@ description: sRGB to linear RGB conversion.
 use: <float|float3\float4> srgb2rgb(<float|float3|float4> srgb)
 */
 
-#ifndef SRGB_EPSILON 
-#define SRGB_EPSILON 0.00000001
+#ifndef SRGB2RGB_EPSILON
+#define SRGB2RGB_EPSILON 0.00000001
 #endif
 
 #ifndef FNC_SRGB2RGB
@@ -19,7 +19,7 @@ float srgb2rgb(float channel) {
 }
 
 float3 srgb2rgb(float3 srgb) {
-    return float3(srgb2rgb(srgb[0] + SRGB_EPSILON), srgb2rgb(srgb[1] + SRGB_EPSILON), srgb2rgb(srgb[2] + SRGB_EPSILON));
+    return float3(srgb2rgb(srgb[0] + SRGB2RGB_EPSILON), srgb2rgb(srgb[1] + SRGB2RGB_EPSILON), srgb2rgb(srgb[2] + SRGB2RGB_EPSILON));
 }
 
 float4 srgb2rgb(float4 srgb) {
