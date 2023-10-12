@@ -42,8 +42,6 @@ options:
 #define BILATERAL_KERNEL_MAXSIZE 20
 #endif
 
-#include "bilateral/2D.hlsl"
-
 #ifndef FNC_BILATERALFILTER
 #define FNC_BILATERALFILTER
 
