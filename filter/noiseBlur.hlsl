@@ -3,6 +3,9 @@
 #ifndef RANDOM_SCALE
 #define RANDOM_SCALE float3(443.897, 441.423, .0973)
 #endif
+#ifndef RANDOM_SCALE_4
+#define RANDOM_SCALE_4 float4(443.897, 441.423, .0973, 1.6334)
+#endif
 #include "../generative/random.hlsl"
 
 #include "../sample.hlsl"
