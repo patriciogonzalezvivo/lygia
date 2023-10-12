@@ -17,6 +17,9 @@ examples:
 #define RANDOM_SCALE float4(443.897, 441.423, 0.0973, 0.1099)
 #endif
 #endif
+#ifndef RANDOM_SCALE_4
+#define RANDOM_SCALE_4 float4(443.897, 441.423, .0973, 1.6334)
+#endif
 
 #ifndef FNC_RANDOM
 #define FNC_RANDOM
