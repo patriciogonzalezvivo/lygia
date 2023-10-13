@@ -7,6 +7,7 @@
 #include "reflection.hlsl"
 #include "common/specularAO.hlsl"
 #include "common/envBRDFApprox.hlsl"
+#include "envMap.hlsl"
 
 /*
 original_author: Patricio Gonzalez Vivo

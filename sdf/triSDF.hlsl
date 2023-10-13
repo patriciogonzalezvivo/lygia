@@ -6,7 +6,7 @@ use: triSDF(<float2> st)
 
 #ifndef FNC_TRISDF
 #define FNC_TRISDF
-float triSDF(in vec2 st) {
+float triSDF(in float2 st) {
 #ifdef CENTER_2D
     st -= CENTER_2D;
     st *= 5.0;
