@@ -1,5 +1,5 @@
-#include "sqTile.glsl"
-
+#include "sqTile.hlsl"
+#include "../math/mod.hlsl"
 /*
 original_author: Patricio Gonzalez Vivo
 description: brick a pattern
