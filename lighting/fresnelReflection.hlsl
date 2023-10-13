@@ -1,6 +1,7 @@
 #include "fresnel.hlsl"
 #include "fakeCube.hlsl"
 #include "sphericalHarmonics.hlsl"
+#include "envMap.hlsl"
 
 /*
 original_author: Patricio Gonzalez Vivo
