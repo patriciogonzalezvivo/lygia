@@ -6,8 +6,8 @@ options:
     CIRCLESDF_LENGHT_FNC(POS_UV) : function used to calculate the SDF, defaults to GLSL length function, use lengthSq for a different slope
 */
 
-#ifndef CIRCLESDF_LENGHT_FNC
-#define CIRCLESDF_LENGHT_FNC(POS_UV) length(POS_UV)
+#ifndef CIRCLESDF_FNC
+#define CIRCLESDF_FNC(POS_UV) length(POS_UV)
 #endif
 
 #ifndef FNC_CIRCLESDF
