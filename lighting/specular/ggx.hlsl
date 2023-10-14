@@ -9,7 +9,7 @@ float commonGGX(float NoH, float linearRoughness) {
     float oneMinusNoHSquared = 1.0 - NoH * NoH;
     float a = NoH * linearRoughness;
     float k = linearRoughness / (oneMinusNoHSquared + a * a);
-    float d = k * k * ONE_OVER_PI;
+    float d = k * k * INV_PI;
     return saturateMediump(d);
 }
 
