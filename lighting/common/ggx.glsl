@@ -11,7 +11,7 @@ float GGX(const in float NoH, const in float roughness) {
     float oneMinusNoHSquared = 1.0 - NoH * NoH;
     float a = NoH * roughness;
     float k = roughness / (oneMinusNoHSquared + a * a);
-    float d = k * k * ONE_OVER_PI;
+    float d = k * k * INV_PI;
     return saturateMediump(d);
 }
 
@@ -36,7 +36,7 @@ float GGX(const in vec3 N, const in vec3 H, const in float NoH, float roughness)
 
     float a = NoH * roughness;
     float k = roughness / (oneMinusNoHSquared + a * a);
-    float d = k * k * ONE_OVER_PI;
+    float d = k * k * INV_PI;
     return saturateMediump(d);
 }
 

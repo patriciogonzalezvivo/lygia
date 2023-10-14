@@ -54,7 +54,7 @@ void lightPoint(float3 _diffuseColor, float3 _specularColor, float3 _N, float3 _
 
     float NoL = dot(_N, s);
 
-    float dif = diffuse(s, _N, _V, _NoV, NoL, _roughness);// * ONE_OVER_PI;
+    float dif = diffuse(s, _N, _V, _NoV, NoL, _roughness);// * INV_PI;
     float spec = specular(s, _N, _V, _NoV, NoL, _roughness, _f0);
 
     float3 lightContribution = LIGHT_COLOR * LIGHT_INTENSITY * _shadow;

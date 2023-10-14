@@ -63,7 +63,7 @@ void lightPoint(
     const in vec3 _N, const in float _NoV, const in float _NoL, const in float _roughness, const in float _f0, 
     inout vec3 _diffuse, inout vec3 _specular) {
 
-    float dif   = diffuse(_Ld, _N, _V, _NoV, _NoL, _roughness);// * ONE_OVER_PI;
+    float dif   = diffuse(_Ld, _N, _V, _NoV, _NoL, _roughness);// * INV_PI;
     float spec  = specular(_Ld, _N, _V, _NoV, _NoL, _roughness, _f0);
 
     vec3 lightContribution = _Lc * _Li;
