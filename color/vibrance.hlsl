@@ -18,7 +18,8 @@ float3 vibrance(in float3 color, in float v) {
     float min_color = mmin(color);
     float sat = max_color - min_color;
     float lum = luma(color);
-    return lerp(float3(lum), color, 1.0 + (v * 1.0 - (sign(v) * sat)));
+    return lerp(float3(lum, lum, lum), color, 1.0 + (v * 1.0 - (sign(v) * sat)));
+
 }
 
 float4 vibrance(in float4 color, in float v) { return float4( vibrance(color.rgb, v), color.a); }
