@@ -1,5 +1,5 @@
 #include "../math/const.hlsl"
-
+#include "../space/scale.hlsl"
 /*
 original_author: Patricio Gonzalez Vivo
 description: Returns a star-shaped sdf with V branches
@@ -18,7 +18,7 @@ float starSDF(in float2 st, in int V, in float s) {
     float a = atan2(st.y, st.x) / TAU;
     float seg = a * float(V);
     a = ((floor(seg) + 0.5) / float(V) +
-        mix(s, -s, step(0.5, frac(seg))))
+        lerp(s, -s, step(0.5, frac(seg))))
         * TAU;
     return abs(dot(float2(cos(a), sin(a)),
                    st));

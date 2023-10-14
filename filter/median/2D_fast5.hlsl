@@ -56,7 +56,7 @@ MEDIAN2D_FAST5_TYPE median2D_fast5(in SAMPLER_TYPE tex, in float2 st, in float2 
         }
     }
 
-    MEDIAN2D_FAST5_TYPE temp = MEDIAN2D_FAST5_TYPE(0.);
+    MEDIAN2D_FAST5_TYPE temp = MEDIAN2D_FAST5_TYPE(0.,0.,0.,0.);
     MEDIAN_25(0,  1,   3, 4,  2,  4,  2,  3,  6,  7);
     MEDIAN_25(5,  7,   5, 6,  9,  7,  1,  7,  1,  4);
     MEDIAN_25(12, 13, 11, 13, 11, 12, 15, 16, 14, 16);

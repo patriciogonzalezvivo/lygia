@@ -2,6 +2,7 @@
 #include "fresnelReflection.hlsl"
 #include "light/point.hlsl"
 #include "light/directional.hlsl"
+#include "envMap.hlsl"
 
 #include "ior/2f0.hlsl"
 
@@ -10,7 +11,6 @@
 #include "common/kelemen.hlsl"
 #include "common/specularAO.hlsl"
 #include "common/envBRDFApprox.hlsl"
-
 /*
 original_author: Patricio Gonzalez Vivo
 description: simple PBR shading model
