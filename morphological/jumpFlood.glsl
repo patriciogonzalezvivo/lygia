@@ -1,4 +1,4 @@
-
+#include "../sample.glsl"
 /*
 original_author: Alexander Griffis 
 description: |
@@ -26,26 +26,28 @@ examples:
 #define JUMPFLOOD_TYPE vec4
 #endif
 
-#ifndef JUMPFLOOD_SAMPLE_FNC
-#define JUMPFLOOD_SAMPLE_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
+#ifndef JUMPFLOOD_ENCODE_FNC
+#define JUMPFLOOD_ENCODE_FNC(VEC) vec4(VEC, 0.0, 1.0)
 #endif
 
-#ifndef JUMPFLOOD_ENCODE_FNC
-#define JUMPFLOOD_ENCODE_FNC(TEX, UV) vec4(UV * SAMPLER_FNC(TEX, UV).a, 0.0, 1.0)
+#ifndef JUMPFLOOD_DECODE_FNC
+#define JUMPFLOOD_DECODE_FNC(VEC) VEC.xy
+#endif
+
+#ifndef JUMPFLOOD_SAMPLE_FNC
+#define JUMPFLOOD_SAMPLE_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
 #endif
 
 #ifndef FNC_JUMPFLOOD
 #define FNC_JUMPFLOOD
 
-JUMPFLOOD_TYPE jumpFloodEncode(SAMPLER_TYPE tex, vec2 st) { return JUMPFLOOD_ENCODE_FNC(tex, st); }
-float jumpFloodSdf(SAMPLER_TYPE tex, vec2 st) { return distance(st, JUMPFLOOD_SAMPLE_FNC(tex, st).xy); }
-
 float jumpFloodCalcIterTotal(vec2 res) { return ceil(log2(max(res.x, res.y)) / log2(2.0)); }
 float jumpFloodCalcIter(float iterTotal, float frame) { return mod(frame, iterTotal); }
 
-JUMPFLOOD_TYPE jumpFloodIterate(SAMPLER_TYPE tex, vec2 st, vec2 pixel, float iterTotal, float iterN) {
-    float jDist = pow(2.0, iterTotal - iterN - 1.0);
+JUMPFLOOD_TYPE jumpFloodEncode(SAMPLER_TYPE tex, vec2 st) { return JUMPFLOOD_ENCODE_FNC(st * JUMPFLOOD_SAMPLE_FNC(tex, st).a); }
+float jumpFloodSdf(SAMPLER_TYPE tex, vec2 st) { return distance(st, JUMPFLOOD_DECODE_FNC(JUMPFLOOD_SAMPLE_FNC(tex, st))); }
 
+JUMPFLOOD_TYPE jumpFloodIterate(SAMPLER_TYPE tex, vec2 st, vec2 pixel, float jump) {
     vec2 offsets[9];
     offsets[0] = vec2(-1.0, -1.0);
     offsets[1] = vec2(-1.0, 0.0);
@@ -58,21 +60,26 @@ JUMPFLOOD_TYPE jumpFloodIterate(SAMPLER_TYPE tex, vec2 st, vec2 pixel, float ite
     offsets[8] = vec2(1.0, 1.0);
     
     float closest_dist = 9999999.9;
-    vec2 closest_pos = vec2(0.0);
     JUMPFLOOD_TYPE closest_data = JUMPFLOOD_TYPE(0.0);
-
     for(int i = 0; i < 9; i++) {
-        vec2 jump = st + (offsets[i] * jDist * pixel);
-        JUMPFLOOD_TYPE seed = JUMPFLOOD_SAMPLE_FNC(tex, jump);
-        vec2 seedpos = seed.xy;
+        vec2 xy = st + offsets[i] * pixel * jump;
+        JUMPFLOOD_TYPE seed = JUMPFLOOD_SAMPLE_FNC(tex, xy);
+        vec2 seedpos = JUMPFLOOD_DECODE_FNC(seed);
         float dist = distance(seedpos, st);
         if (seedpos != vec2(0.0) && dist <= closest_dist) {
             closest_dist = dist;
             closest_data = seed;
         }
     }
-
     return closest_data;
+}
+
+JUMPFLOOD_TYPE jumpFloodIterate(SAMPLER_TYPE tex, vec2 st, vec2 pixel, float iterTotal, float iterN) {
+    return jumpFloodIterate(tex, st, pixel, pow(2.0, iterTotal - iterN - 1.0));
+}
+
+JUMPFLOOD_TYPE jumpFloodIterate(SAMPLER_TYPE tex, vec2 st, vec2 pixel, int iterTotal, int iterN) {
+    return jumpFloodIterate(tex, st, pixel, pow(2.0, float(iterTotal - iterN - 1)));
 }
 
 #endif

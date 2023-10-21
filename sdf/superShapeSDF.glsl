@@ -22,7 +22,7 @@ use:
     - <float> supershapeSDF(<vec2> st, <float> size s, <float> a, <float> b, <float> n1, <float> n2, <float> n3, <float> m)
 
 options:
-    - `CENTER_2D`: center of the shape
+    - CENTER_2D: center of the shape
 examples:
     - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/draw_supershape.frag
 */
