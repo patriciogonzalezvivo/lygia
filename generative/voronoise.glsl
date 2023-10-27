@@ -11,8 +11,8 @@ examples:
     - /shaders/generative_voronoise.frag
 */
 
-#ifndef VORONOI_RANDOM_FNC 
-#define VORONOI_RANDOM_FNC(XYZ) random3(XYZ) 
+#ifndef VORONOISE_RANDOM_FNC 
+#define VORONOISE_RANDOM_FNC(XYZ) random3(XYZ) 
 #endif
 
 #ifndef FNC_VORONOISE
@@ -35,7 +35,7 @@ float voronoise( in vec2 p, in float u, float v) {
     for ( g.x = -2.0; g.x <= 2.0; g.x++ ) {
         
     #endif
-        vec3  o = VORONOI_RANDOM_FNC(i + g) * vec3(u, u, 1.0);
+        vec3  o = VORONOISE_RANDOM_FNC(i + g) * vec3(u, u, 1.0);
         vec2  d = g - f + o.xy;
         float w = pow(1.0-smoothstep(0.0,1.414, length(d)), k );
         a += vec2(o.z*w,w);
@@ -66,7 +66,7 @@ float voronoise(vec3 p, float u, float v)  {
     for (g.x = -2.0; g.x <= 2.0; g.x++ ) {
     #endif
 
-        vec3 o = VORONOI_RANDOM_FNC(i + g) * vec3(u, u, 1.);
+        vec3 o = VORONOISE_RANDOM_FNC(i + g) * vec3(u, u, 1.);
         vec3 d = g - f + o + 0.5;
         float w = pow(1.0 - smoothstep(0.0, 1.414, length(d)), k);
         a += vec2(o.z*w, w);
