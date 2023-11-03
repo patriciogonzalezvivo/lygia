@@ -1,6 +1,6 @@
 {
   "name": "lygia",
-  "version": "1.1.4",
+  "version": "1.1.7",
   "description": "lygia, it's a granular and multi-language shader library designed for performance and flexibility",
   "main": "dist/umd/lygia.main.js",
   "unpkg": "dist/umd/lygia.main.js",
