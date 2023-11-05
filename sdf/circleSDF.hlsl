@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Returns a circle-shaped SDF.
 use: circleSDF(float2 st[, float2 center])
 options:

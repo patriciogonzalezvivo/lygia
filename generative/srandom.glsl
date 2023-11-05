@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Signed Random 
 use: srandomX(<vec2|vec3> x)
 */

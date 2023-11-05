@@ -1,7 +1,7 @@
 #include "rgb2hue.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Converts a RGB rainbow pattern back to a single float value
 use: <float> rgb2heat(<float3|float4> color)
 */

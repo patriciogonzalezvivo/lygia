@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: returns a 4x4 translate matrix
 use: 
     - translate4d(<vec3|vec4> t)

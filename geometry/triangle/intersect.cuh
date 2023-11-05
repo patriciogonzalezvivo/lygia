@@ -6,7 +6,7 @@
 
 #include "../../lighting/ray.cuh"
 /*
-original_author: Inigo Quiles
+contributors: Inigo Quiles
 description: based on https://www.iquilezles.org/www/articles/intersectors/intersectors.htm
 use: <float> intersect(<Triangle> tri, <float3> rayOrigin, <float3> rayDir, out <float3> intersectionPoint)
 */

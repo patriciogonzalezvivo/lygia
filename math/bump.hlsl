@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: bump in a range between -1 and 1
 use: <float> bump(<float> x, <float> k)
 */

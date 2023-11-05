@@ -1,7 +1,7 @@
 #include "../../sample.hlsl"
 
 /*
-original_author: Brad Larson
+contributors: Brad Larson
 description: |
     Adapted version of Sobel edge detection from https://github.com/BradLarson/GPUImage2.
 use: edgeSobel(<SAMPLER_TYPE> texture, <float2> st, <float2> pixels_scale)

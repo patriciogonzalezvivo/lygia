@@ -1,7 +1,7 @@
 #include "circleSDF.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Returns an almond-shaped sdf
 use: vesicaSDF(<float2> st, <float> w)
 */

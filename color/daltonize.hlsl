@@ -2,7 +2,7 @@
 #include "space/lms2rgb.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo  
+contributors: Patricio Gonzalez Vivo  
 description: daltonize functions based on https://web.archive.org/web/20081014161121/http://www.colorjack.com/labs/colormatrix/ http://www.daltonize.org/search/label/Daltonize
 use: <float3|float4> daltonize(<float3|float4> rgb)
 options:

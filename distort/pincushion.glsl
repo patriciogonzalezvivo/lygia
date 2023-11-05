@@ -2,7 +2,7 @@
 #include "../sample.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Pincushion distortion
 use: barrel(SAMPLER_TYPE tex, <vec2> st [, <vec2|float> distance])
 options:

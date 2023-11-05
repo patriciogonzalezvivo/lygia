@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Signed Random 
 use: srandomX(<float2|float3> x)
 */

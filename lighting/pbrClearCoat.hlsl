@@ -12,7 +12,7 @@
 #include "common/specularAO.hlsl"
 #include "common/envBRDFApprox.hlsl"
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: simple PBR shading model
 use: <float4> pbr( <Material> _material ) 
 options:

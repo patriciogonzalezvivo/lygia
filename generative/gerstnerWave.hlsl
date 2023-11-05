@@ -1,7 +1,7 @@
 #include "../math/const.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Gerstner Wave generator based on this tutorial https://catlikecoding.com/unity/tutorials/flow/waves/
 use: 
     - <float3> gerstnerWave (<float2> uv, <float2> dir, <float> steepness, <float> wavelength, <float> _time [, inout <float3> _tangent, inout <float3> _binormal] )

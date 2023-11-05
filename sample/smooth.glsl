@@ -3,7 +3,7 @@
 #include "../sample.glsl"
 
 /*
-original_author: Inigo Quiles
+contributors: Inigo Quiles
 description: avoid the ugly artifacts of bilinear texture filtering. You can find more information here https://iquilezles.org/articles/texture
 use: <vec4> sampleSmooth(<SAMPLER_TYPE> tex, <vec2> st, <vec2> texResolution)
 options:

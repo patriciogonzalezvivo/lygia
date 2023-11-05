@@ -4,7 +4,7 @@
 #include "../sample.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: sample an equirect texture as it was a cubemap
 use: sampleEquirect(<SAMPLER_TYPE> texture, <float3> dir)
 options:

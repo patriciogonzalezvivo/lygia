@@ -2,7 +2,7 @@
 #include "../math/mod.hlsl"
 
 /*
-Author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Use a 2D texture as a 3D one
 use: <float4> sample2DCube(in <SAMPLER_TYPE> lut, in <float3> xyz) 
 options:

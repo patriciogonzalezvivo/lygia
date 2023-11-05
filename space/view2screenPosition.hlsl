@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: get screen coordinates from view position 
 use: <float2> view2screenPosition(<float3> viewPosition )
 options:

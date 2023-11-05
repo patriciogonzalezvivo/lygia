@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: |
     Fix the aspect ratio of a space keeping things squared for you.
 use: <vec2> aspect(<vec2> st, <vec2> st_size)

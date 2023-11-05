@@ -1,7 +1,7 @@
 #include "../sample.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Wrapper around three different edge detection algorithms Sobel, Prewitt, and directional Sobel
 use: edge(<SAMPLER_TYPE> texture, <float2> st, <float2> pixels_scale)
 options:

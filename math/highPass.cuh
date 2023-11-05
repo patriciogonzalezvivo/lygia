@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: bias high pass
 use: highPass(<float> value, <float> bias)
 */

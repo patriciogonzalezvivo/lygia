@@ -2,7 +2,7 @@
 #include "quintic.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: quintic polynomial step function 
 use: smoothstep(<float> in, <float> out, <float> value)
 */

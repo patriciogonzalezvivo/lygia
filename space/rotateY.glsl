@@ -1,7 +1,7 @@
 #include "../math/rotate4dY.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: rotate a 2D space by a radian angle
 use: rotateY(<vec3> pos, float radian [, vec4 center])
 options:

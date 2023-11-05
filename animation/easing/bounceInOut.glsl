@@ -1,7 +1,7 @@
 #include "bounceOut.glsl"
 
 /*
-original_author: Hugh Kennedy (https://github.com/hughsk)
+contributors: Hugh Kennedy (https://github.com/hughsk)
 description: bounce in/out easing. From https://github.com/stackgl/glsl-easings
 use: <float> bounceInOut(<float> x)
 examples:

@@ -8,7 +8,7 @@
 #include "material.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: render with a gooch stylistic shading model
 use: <float4> gooch(<float4> albedo, <float3> normal, <float3> light, <float3> view, <float> roughness)
 options:

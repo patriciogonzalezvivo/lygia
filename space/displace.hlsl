@@ -2,7 +2,7 @@
 #include "../sample.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Displace UV space into a XYZ space using an heightmap
 use: <float3> displace(<SAMPLER_TYPE> tex, <float3> ro, <float3|float2> rd) 
 */

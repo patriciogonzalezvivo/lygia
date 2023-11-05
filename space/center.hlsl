@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: |
     It center the coordinates from 0 to 1 to -1 to 1
     So the center goes from 0.5 to 0.0. 

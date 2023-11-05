@@ -1,7 +1,7 @@
 #include "../sample.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: sample derrivatives
 use: sampleDerivative(<SAMPLER_TYPE> tex, <vec2> st)
 options:

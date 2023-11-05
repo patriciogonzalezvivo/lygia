@@ -1,5 +1,5 @@
 /*
-original_author: Johan Ismael
+contributors: Johan Ismael
 description: |
   Color input range adjustment similar to Levels adjusment tool in Photoshop
   Adapted from Romain Dura (http://mouaif.wordpress.com/?p=94)

@@ -1,6 +1,6 @@
 #include "../math/saturate.glsl"
 /*
-original_author:  Inigo Quiles
+contributors:  Inigo Quiles
 description: generate a SDF of a capsule
 use: <float> capusleSDF( in <vec3> pos, in <vec3> a, <vec3> b, <float> r ) 
 */

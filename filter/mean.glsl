@@ -1,7 +1,7 @@
 #include "../sample.glsl"
 
 /*
-original_author: Brad Larson
+contributors: Brad Larson
 description: adapted version of mean average sampling on four coorners of a sampled point from https://github.com/BradLarson/GPUImage2
 use: mean(<SAMPLER_TYPE> texture, <vec2> st, <vec2> pixel)
 options:

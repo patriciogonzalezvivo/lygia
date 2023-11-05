@@ -1,5 +1,5 @@
 /*
-original_author: Hugh Kennedy (https://github.com/hughsk)
+contributors: Hugh Kennedy (https://github.com/hughsk)
 description: exponential in/out easing. From https://github.com/stackgl/glsl-easings
 use: exponentialInOut(<float> x)
 examples:

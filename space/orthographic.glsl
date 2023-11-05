@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: create orthographic matrix 
 use: <mat4> orthographic(<float> left, <float> right, <float> bottom, <float> top, <float> near, <float> far)
 */

@@ -1,7 +1,7 @@
 #include "../../../math/bump.hlsl"
 
 /*
-original_author: 
+contributors: 
 description: from GPU Gems https://developer.nvidia.com/sites/all/modules/custom/gpugems/books/GPUGems/gpugems_ch08.html
  (https://www.shadertoy.com/view/ls2Bz1)
 use: <float3> spectral_gems(<float> x)

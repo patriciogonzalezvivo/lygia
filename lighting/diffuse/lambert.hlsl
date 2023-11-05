@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: calculate diffuse contribution using lambert equation
 use: 
     - <float> diffuseLambert(<float3> light, <float3> normal [, <float3> view, <float> roughness] )

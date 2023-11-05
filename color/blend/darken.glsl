@@ -1,7 +1,8 @@
 /*
-original_author: Jamie Owen
+contributors: Jamie Owen
 description: Photoshop Darken blend mode mplementations sourced from this article on https://mouaif.wordpress.com/2009/01/05/photoshop-math-with-glsl-shaders/
 use: blendDarken(<float|vec3> base, <float|vec3> blend [, <float> opacity])
+license: MIT License (MIT) Copyright (c) 2015 Jamie Owen
 */
 
 #ifndef FNC_BLENDDARKEN

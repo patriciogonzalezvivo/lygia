@@ -5,7 +5,7 @@
 #include "stroke.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: draw a rectangel filled or not. 
 use: rect(<vec2> st, <vec2> size [, <float> width])
 */

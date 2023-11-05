@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Returns a triangle-shaped sdf
 use: triSDF(<vec2> st)
 options:

@@ -1,7 +1,7 @@
 #include "../../math/saturate.hlsl"
 
 /*
-original_author:  Inigo Quiles
+contributors:  Inigo Quiles
 description: default raymarching renderer
 use: <float4> raymarchDefaultRender( in  float3> ro, in  float3> rd ) 
 options:

@@ -1,5 +1,5 @@
 /*
-original_author: Matt DesLauriers
+contributors: Matt DesLauriers
 description: Performs a smoothstep using standard derivatives for anti-aliased edges at any level of magnification. From https://github.com/glslify/glsl-aastep
 use: aastep(<float> threshold, <float> value)
 option:

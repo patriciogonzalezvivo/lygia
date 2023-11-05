@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: returns a coordinate of a sprite cell
 use: <float2> sprite(<float2> st, <float2> grid, <float> index)
 */

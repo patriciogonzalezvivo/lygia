@@ -1,5 +1,5 @@
 /*
-original_author: Ignacio Castaño
+contributors: Ignacio Castaño
 description: debuging cube http://the-witness.net/news/2012/02/seamless-cube-map-filtering/
 use: <float3> debugCube(<float3> _norma, <float> cube_size, <float> lod)
 */

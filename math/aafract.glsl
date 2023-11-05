@@ -1,7 +1,7 @@
 #include "map.glsl"
 
 /*
-original_author: dahart (https://www.shadertoy.com/user/dahart)
+contributors: dahart (https://www.shadertoy.com/user/dahart)
 description: |
     Anti-aliasing fract function. It clamp except for a 2-pixel wide gradient along the edge
     Based on this example https://www.shadertoy.com/view/4l2BRD

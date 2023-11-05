@@ -1,7 +1,7 @@
 #include "rgb2srgb.glsl"
 
 /*
-original_author: Ronald van Wijnen (@OneDayOfCrypto)
+contributors: Ronald van Wijnen (@OneDayOfCrypto)
 description: Converts a XYZ color to sRGB color space.
 use: xyz2rgb(<vec3|vec4> color)
 */

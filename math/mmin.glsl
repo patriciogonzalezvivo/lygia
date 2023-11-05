@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: extend GLSL min function to add more arguments
 use: 
   - min(<float> A, <float> B, <float> C[, <float> D])

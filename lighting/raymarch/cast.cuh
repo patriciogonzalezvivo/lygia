@@ -1,7 +1,7 @@
 #include "map.cuh"
 
 /*
-original_author:  Inigo Quiles
+contributors:  Inigo Quiles
 description: cast a ray
 use: <float> castRay( in <float3> pos, in <float3> nor ) 
 */

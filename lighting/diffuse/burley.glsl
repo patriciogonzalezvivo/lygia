@@ -1,7 +1,7 @@
 #include "../common/schlick.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: calculate diffuse contribution using burley equation
 use: 
     - <float> diffuseBurley(<vec3> light, <vec3> normal [, <vec3> view, <float> roughness] )

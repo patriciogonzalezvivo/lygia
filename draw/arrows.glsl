@@ -2,7 +2,7 @@
 #include "../math/saturate.glsl"
 
 /*
-original_author: Morgan McGuire, @morgan3d, http://casual-effects.com
+contributors: Morgan McGuire, @morgan3d, http://casual-effects.com
 description: Draw arrows for vector fields from https://www.shadertoy.com/view/4s23DG
 use: <float> arrows(<vec2> position, <vec2> velocity [, <vec2> resolution] )
 options:

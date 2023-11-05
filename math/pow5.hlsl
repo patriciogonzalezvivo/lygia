@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: power of 5
 use: pow5(<float|float2|float3|float4> x)
 */

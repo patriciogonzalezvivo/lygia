@@ -1,7 +1,7 @@
 #include "../../sample.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: nan
 use: 
  - <float4|float3|float> ditherBlueNoise(<float4|float3|float> value, <float2> fragcoord, <float> time)

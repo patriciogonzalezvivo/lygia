@@ -1,5 +1,5 @@
 /*
-original_author: [Ivan Dianov, Kathy McGuiness]
+contributors: [Ivan Dianov, Kathy McGuiness]
 description: cartesian to polar transformation.
 use: <float2|float3> cart2polar(<float2|float3> st)
 */

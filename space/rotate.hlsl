@@ -2,7 +2,7 @@
 #include "../math/rotate4d.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: rotate a 2D space by a radian radians
 use: rotate(<float3|float2> st, float radians [, float2 center])
 options:

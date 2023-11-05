@@ -1,5 +1,5 @@
 /*
-original_author: Michele Morrone
+contributors: Michele Morrone
 description: |
     Fast glsl spatial deNoise filter, with circular gaussian kernel and smart/flexible/adaptable -> full configurable
     * Standard Deviation sigma radius

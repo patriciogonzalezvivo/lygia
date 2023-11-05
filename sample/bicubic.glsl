@@ -1,7 +1,7 @@
 #include "../sample.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: bicubic filter sampling
 use: <vec4> sampleBicubic(<SAMPLER_TYPE> tex, <vec2> st, <vec2> texResolution);
 options:

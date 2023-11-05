@@ -1,5 +1,5 @@
 /*
-original_author:  Inigo Quiles
+contributors:  Inigo Quiles
 description: generate the SDF of a octahedron
 use: <float> octahedronSDF(<vec3> p, <float> s)
 options:

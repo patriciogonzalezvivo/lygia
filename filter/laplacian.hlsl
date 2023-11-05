@@ -1,7 +1,7 @@
 #include "../sample.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: laplacian filter
 use: laplacian(<SAMPLER_TYPE> texture, <float2> st, <float2> pixels_scale [, <float> pixel_padding])
 options:

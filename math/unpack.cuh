@@ -2,7 +2,7 @@
 #include "dot.cuh"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Unpack a 3D vector into a float. Default base is 256.0
 use: <float> unpack(<float3> value [, <float> base])
 */

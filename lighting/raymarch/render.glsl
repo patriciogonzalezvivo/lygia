@@ -6,7 +6,7 @@
 #include "../../math/saturate.glsl"
 
 /*
-original_author:  Inigo Quiles
+contributors:  Inigo Quiles
 description: default raymarching renderer
 use: <vec4> raymarchDefaultRender( in <vec3> ro, in <vec3> rd ) 
 options:

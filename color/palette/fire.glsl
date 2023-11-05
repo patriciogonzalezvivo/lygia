@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Simpler fire color ramp 
 use: <vec3> fire(<float> value)
 examples:

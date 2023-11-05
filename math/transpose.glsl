@@ -1,5 +1,5 @@
 /*
-original_author: Mikola Lysenko
+contributors: Mikola Lysenko
 description: transpose matrixes
 use: <mat3|mat4> transpose(in <mat3|mat4> m)
 */

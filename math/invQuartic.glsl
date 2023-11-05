@@ -1,5 +1,5 @@
 /*
-original_author: Inigo Quiles
+contributors: Inigo Quiles
 description: inverse quartic polynomial https://iquilezles.org/articles/smoothsteps/
 use: <float|vec2|vec3|vec4> invQuartic(<float|vec2|vec3|vec4> value);
 examples:

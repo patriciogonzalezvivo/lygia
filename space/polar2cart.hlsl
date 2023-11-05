@@ -1,5 +1,5 @@
 /*
-original_author: Ivan Dianov
+contributors: Ivan Dianov
 description: polar to cartesian conversion.
 use: polar2cart(<float2> polar)
 */

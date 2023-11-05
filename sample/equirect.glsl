@@ -6,7 +6,7 @@
 #include "../color/space/linear2gamma.glsl"
 #include "../color/space/gamma2linear.glsl"
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: sample an equirect texture as it was a cubemap
 use: sampleEquirect(<SAMPLER_TYPE> texture, <vec3> dir)
 options:

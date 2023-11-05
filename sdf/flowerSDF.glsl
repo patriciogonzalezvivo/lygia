@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Returns a flower shaped SDF
 use: flowerSDF(<vec2> st, <int> n_sides)
 options:

@@ -249,7 +249,7 @@ Here you can find some implementations on different languages:
 ```glsl
 
     /*
-    original_author: <FULL NAME>
+    contributors: <FULL NAME>
     description: [DESCRIPTION + URL]
     use: <vec2> myFunc(<vec2> st, <float> x [, <float> y])
     options:

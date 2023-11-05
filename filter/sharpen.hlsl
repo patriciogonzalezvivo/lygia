@@ -1,7 +1,7 @@
 #include "../sample.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: sharpening filter
 use: sharpen(<SAMPLER_TYPE> texture, <float2> st, <float2> renderSize [, float streanght])
 options:

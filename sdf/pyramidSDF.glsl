@@ -1,7 +1,7 @@
 #include "../math/saturate.glsl"
 
 /*
-original_author:  Inigo Quiles
+contributors:  Inigo Quiles
 description: generate the SDF of s pyramid
 use: <float> pyramidSDF(<vec3> p, <float> h )
 */

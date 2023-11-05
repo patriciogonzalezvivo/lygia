@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Flip Y axis
 use: <float2|float3|float4> flipY(<float2|float3|float4> st)
 */

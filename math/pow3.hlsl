@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: power of 3
 use: pow3(<float|float2|float3|float4> x)
 */

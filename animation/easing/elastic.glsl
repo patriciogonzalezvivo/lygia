@@ -1,5 +1,5 @@
 /*
-original_author: Hugh Kennedy (https://github.com/hughsk)
+contributors: Hugh Kennedy (https://github.com/hughsk)
 description: elastic easing. From https://github.com/stackgl/glsl-easings
 use: elastic<In|Out|InOut>(<float> x)
 examples:

@@ -1,7 +1,7 @@
 #include "../sample.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: given a texture return a simple box blured pixel
 use: boxBlur(<SAMPLER_TYPE> texture, <float2> st, <float2> pixel_offset)
 options:

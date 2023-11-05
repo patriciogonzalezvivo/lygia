@@ -1,7 +1,7 @@
 #include "../sample.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: convertes QUILT of tiles into something the LookingGlass Volumetric display can render
 use: sampleQuilt(<SAMPLER_TYPE> texture, <vec4> calibration, <vec3> tile, <vec2> st, <vec2> resolution)
 options:

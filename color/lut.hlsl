@@ -1,7 +1,7 @@
 #include "../sample.hlsl"
 
 /*
-Author: [Matt DesLauriers, Johan Ismael, Patricio Gonzalez Vivo]
+contributors: [Matt DesLauriers, Johan Ismael, Patricio Gonzalez Vivo]
 description: Use LUT textures to modify colors (float4 and float3) or a position in a gradient (float2 and floats)
 use: lut(<SAMPLER_TYPE> texture, <float4|float3|float2|float> value [, int row])
 options:

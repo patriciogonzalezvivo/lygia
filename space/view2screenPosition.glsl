@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: get screen coordinates from view position 
 use: <vec2> view2screenPosition(<vec3> viewPosition )
 options:

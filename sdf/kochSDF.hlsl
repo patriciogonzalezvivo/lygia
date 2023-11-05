@@ -1,7 +1,7 @@
 #include "../math/const.hlsl"
 
 /*
-original_author: Martijn Steinrucken
+contributors: Martijn Steinrucken
 description: Returns a Koch curve SDF   
 use: <float2> kochSDF(<float2> st, <int> iterations)
 */

@@ -1,7 +1,7 @@
 #include "../sample.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: make a radial blur, with dir as the direction to the center and strength as the amount
 use: radialBlur(<SAMPLER_TYPE> texture, <vec2> st, <vec2> dir [, <float> strength] )
 options:

@@ -1,5 +1,5 @@
 /*
-original_author: Ronja (@totallyRonja)
+contributors: Ronja (@totallyRonja)
 description: Performs a smoothstep using standard derivatives for anti-aliased edges at any level of magnification. https://www.ronja-tutorials.com/post/046-fwidth/#non-aliased-step
 use: aastep(<float> threshold, <float> value)
 */

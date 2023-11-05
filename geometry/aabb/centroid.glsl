@@ -1,7 +1,7 @@
 #include "aabb.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: return center of a AABB
 use: <vec3> centroid(<AABB> box) 
 */

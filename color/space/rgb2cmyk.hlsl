@@ -1,7 +1,7 @@
 #include "../../math/mmin.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: convert CMYK to RGB
 use: rgb2cmyk(<float3|float4> rgba)
 */

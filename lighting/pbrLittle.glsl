@@ -14,7 +14,7 @@
 #include "../math/saturate.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: simple PBR shading model
 use: 
     - <vec4> pbrLittle(<Material> material) 

@@ -3,7 +3,7 @@
 #include "closestPoint.hlsl"
 
 /*
-original_author: 
+contributors: 
 description: returns the signed distance from the surface of a triangle to a point
 use: <float3> closestDistance(<Triangle> tri, <float3> _pos) 
 */

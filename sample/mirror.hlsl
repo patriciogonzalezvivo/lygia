@@ -2,7 +2,7 @@
 #include "../math/mirror.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: fakes a mirror wrapping texture 
 use: <float4> sampleMirror(<SAMPLER_TYPE> tex, <float2> st);
 options:

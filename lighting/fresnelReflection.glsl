@@ -3,7 +3,7 @@
 #include "sphericalHarmonics.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: resolve fresnel coeficient
 use: 
     - <vec3> fresnel(const <vec3> f0, <float> LoH)

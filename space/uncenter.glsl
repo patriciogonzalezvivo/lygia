@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: |
     Moves the center from 0.0 to 0.5
 use: <float|vec2|vec3> uncenter(<float|vec2|vec3> st)

@@ -2,7 +2,7 @@
 #include "../math/const.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: fill alpha with edge colors
 use: <float4> fillAlpha(<SAMPLER_TYPE> texture, <float2> st, <float2> pixel, <int> passes)
 options:

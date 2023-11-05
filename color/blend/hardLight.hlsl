@@ -1,9 +1,10 @@
 #include "overlay.hlsl"
 
 /*
-original_author: Jamie Owen
+contributors: Jamie Owen
 description: Photoshop HardLight blend mode mplementations sourced from this article on https://mouaif.wordpress.com/2009/01/05/photoshop-math-with-glsl-shaders/
 use: blendHardLight(<float|float3> base, <float|float3> blend [, <float> opacity])
+license: MIT License (MIT) Copyright (c) 2015 Jamie Owen
 */
 
 #ifndef FNC_BLENDHARDLIGHT

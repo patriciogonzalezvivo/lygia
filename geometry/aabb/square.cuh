@@ -1,7 +1,7 @@
 #include "diagonal.cuh"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: square a AABB using the longest side
 use: <void> square(<AABB> box) 
 */

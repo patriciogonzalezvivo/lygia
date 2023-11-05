@@ -2,7 +2,7 @@
 #include "space/yiq2rgb.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: [Brad Larson, Ben Cochran, Hugues Lismonde, Keitaroh Kobayashi, Alaric Cole, Matthew Clark, Jacob Gundersen, Chris Williams, Patricio Gonzalez Vivo]
 description: |
     Adjust temperature and tint. 
     On mobile does a cheaper algo using Brad Larson https://github.com/BradLarson/GPUImage/blob/master/framework/Source/GPUImageWhiteBalanceFilter.m 

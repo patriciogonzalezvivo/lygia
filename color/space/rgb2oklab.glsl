@@ -1,5 +1,5 @@
 /*
-original_author: Bjorn Ottosson (@bjornornorn)
+contributors: Bjorn Ottosson (@bjornornorn)
 description: linear rgb ot OKLab https://bottosson.github.io/posts/oklab/
 use: <vec3\vec4> rgb2oklab(<vec3|vec4> srgb)
 */

@@ -12,7 +12,7 @@
 #include "../sample/shadowPCF.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: render with a gooch stylistic shading model
 use: <vec4> gooch(<vec4> albedo, <vec3> normal, <vec3> light, <vec3> view, <float> roughness)
 options:

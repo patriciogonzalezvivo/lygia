@@ -1,7 +1,7 @@
 #include "sqTile.hlsl"
 #include "../math/mod.hlsl"
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: brick a pattern
 use: 
     - <float2> brickTile(<float2> st [, <float> scale])

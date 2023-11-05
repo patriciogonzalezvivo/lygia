@@ -1,5 +1,5 @@
 /*
-original_author:
+contributors:
 description: 
 use: <vec3> spectral_geoffrey(<float> x)
 examples:

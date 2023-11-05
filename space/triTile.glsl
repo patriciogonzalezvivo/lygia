@@ -1,5 +1,5 @@
 /*
-original_author: Mathias Bredholt
+contributors: Mathias Bredholt
 description: |
     make some triangular tiles. XY provide coords inside of the tile. ZW provides tile coords
 use: <vec4> triTile(<vec2> st [, <float> scale])

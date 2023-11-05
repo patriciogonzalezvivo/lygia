@@ -2,7 +2,7 @@
 #include "space/lms2rgb.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo  
+contributors: Patricio Gonzalez Vivo  
 description: daltonize functions based on https://web.archive.org/web/20081014161121/http://www.colorjack.com/labs/colormatrix/ http://www.daltonize.org/search/label/Daltonize
 use: <vec3|vec4> daltonize(<vec3|vec4> rgb)
 options:

@@ -1,7 +1,7 @@
 #include "make.cuh"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: pow for vectors
 use: <float2|float3|float4> pow(<float2|float3|float4> value, <float|float2|float3|float4> e)
 */

@@ -3,7 +3,7 @@
 #include "../../sample.glsl"
 
 /*
-original_author: bacondither
+contributors: bacondither
 description: adaptive sharpening. For strenght values between 0.3 <-> 2.0 are a reasonable range 
 use: sharpen(<SAMPLER_TYPE> texture, <vec2> st, <vec2> renderSize [, float streanght])
 options:

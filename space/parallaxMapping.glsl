@@ -1,7 +1,7 @@
 #include "../sample.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: get parallax mapping coordinates
 use: parallaxMapping(<SAMPLER_TYPE> tex, <vec3> V, <vec2> T, <float> parallaxHeight) 
 options:

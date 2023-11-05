@@ -6,7 +6,7 @@
 #include "specular/ggx.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: calculate specular contribution
 use: 
     - specular(<float3> L, <float3> N, <float3> V, <float> roughness[, <float> fresnel])

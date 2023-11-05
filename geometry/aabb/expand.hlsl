@@ -2,7 +2,7 @@
 #include "aabb.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Expand AABB
 use: <bool> expand(<AABB> box, <AABB|float3|float> point ) 
 */

@@ -1,7 +1,7 @@
 #include "snoise.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Fractal Brownian Motion
 use: fbm(<float2|float3> pos)
 options:

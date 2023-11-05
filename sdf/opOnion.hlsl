@@ -1,5 +1,5 @@
 /*
-original_author:  Inigo Quiles
+contributors:  Inigo Quiles
 description: onion operation of one SDFs 
 use: <float> opOnion( in <float> d, in <float> h )
 */

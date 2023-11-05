@@ -1,7 +1,7 @@
 #include "../../sample.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: two dimension Gaussian Blur to be applied in only one passes
 use: gaussianBlur2D(<SAMPLER_TYPE> texture, <float2> st, <float2> pixel_direction , const int kernelSize)
 options:

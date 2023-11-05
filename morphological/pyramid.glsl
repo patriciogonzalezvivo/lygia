@@ -12,7 +12,7 @@
 #include "pyramid/upscale.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: down and up scaling functions for convolution pyramid  https://www.cs.huji.ac.il/labs/cglab/projects/convpyr/data/convpyr-small.pdf
 use: pyramid(<SAMPLER_TYPE> texture0, <SAMPLER_TYPE> texture1, <vec2> st, <vec2> pixel, <bool> upscale)
 options:

@@ -1,5 +1,5 @@
 /*
-original_author: [Stefan Gustavson, Ian McEwan]
+contributors: [Stefan Gustavson, Ian McEwan]
 description: Fast, accurate inverse square root. 
 use: <float|vec2|vec3|vec4> taylorInvSqrt(<float|vec2|vec3|vec4> x)
 */

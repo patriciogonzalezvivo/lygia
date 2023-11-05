@@ -2,7 +2,7 @@
 #include "aabb.glsl"
 
 /*
-original_author: P
+contributors: P
 description: Compute if point is inside AABB
 use: <bool> contain(<AABB> box, <vec3> point ) 
 */

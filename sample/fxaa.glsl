@@ -1,7 +1,7 @@
 #include "../sample.glsl"
 
 /*
-original_author: Armin Ronacher
+contributors: [Armin Ronacher, Matt DesLauriers]
 description: Basic FXAA implementation based on the code on geeks3d.com with the modification that the texture2DLod stuff was removed since it's unsupported by WebGL from https://github.com/mitsuhiko/webgl-meincraft
 use: sampleFXAA(<SAMPLER_TYPE> tex, <vec2> st, <vec2> pixel)
 options:
@@ -10,6 +10,9 @@ options:
     - SAMPLEFXAA_REDUCE_MUL
     - SAMPLEFXAA_SPAN_MAX
     - SAMPLEFXAA_SAMPLE_FNC
+license: 
+    - BSD licensed (BSD) Copyright (c) 2011 by Armin Ronacher
+    - MIT License (MIT) Copyright (c) 2014 Matt DesLauriers
 */
 
 #ifndef SAMPLEFXAA_REDUCE_MIN

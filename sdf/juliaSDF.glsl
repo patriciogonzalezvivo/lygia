@@ -1,7 +1,7 @@
 #include "../math/pow2.glsl"
 
 /*
-original_author: Kathy McGuiness
+contributors: Kathy McGuiness
 description: |
     Returns the Juia set SDF
     For more information about the Julia set, check [this article](https://en.wikipedia.org/wiki/Julia_set)

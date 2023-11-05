@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: heatmap palette
 use: <vec3> heatmap(<float> value)
 examples:

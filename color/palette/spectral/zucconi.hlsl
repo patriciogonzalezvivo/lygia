@@ -1,7 +1,7 @@
 #include "../../../math/bump.hlsl"
 
 /*
-original_author: Alan Zucconi
+contributors: Alan Zucconi
 description: |
     Spectral Colour Schemes. Convert visible wavelengths of light (400-700 nm) to RGB colours http://www.alanzucconi.com/?p=6703
     Its faster version than spectral_zucconi6 advised for mobile applications.

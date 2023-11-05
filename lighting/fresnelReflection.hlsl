@@ -4,7 +4,7 @@
 #include "envMap.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: resolve fresnel coeficient
 use: 
     - <float3> fresnel(const <float3> f0, <float> LoH)

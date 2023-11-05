@@ -1,7 +1,7 @@
 #include "backIn.glsl"
 
 /*
-original_author: Hugh Kennedy (https://github.com/hughsk)
+contributors: Hugh Kennedy (https://github.com/hughsk)
 description: Back in/out easing. From https://github.com/stackgl/glsl-easings
 use: backInOut(<float> x)
 examples:

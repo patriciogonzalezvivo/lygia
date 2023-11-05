@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: convertes from PBR roughness/metallic to a shininess factor (typaclly use on diffuse/specular/ambient workflow) 
 use: float toShininess(<float> roughness, <float> metallic)
 */

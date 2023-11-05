@@ -3,7 +3,7 @@
 #include "../sample.glsl"
 
 /*
-original_author: Guido Schmidt
+contributors: Guido Schmidt
 description: |
     The Marching Squares algorithm generates contour lines (isolines) of a given input for a
     given grid and a threshhold. Is uses a lookup of 16 cases to decide if a cell is inside, outside or

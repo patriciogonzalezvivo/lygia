@@ -1,5 +1,5 @@
 /*
-original_author: Hugh Kennedy (https://github.com/hughsk)
+contributors: Hugh Kennedy (https://github.com/hughsk)
 description: quartic in easing. From https://github.com/stackgl/glsl-easings
 use: quarticIn(<float> x)
 examples:

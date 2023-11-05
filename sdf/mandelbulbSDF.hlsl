@@ -1,7 +1,7 @@
 #include "../space/cart2polar.glsl"
 
 /*
-original_author: Kathy McGuiness
+contributors: Kathy McGuiness
 description: |
     Returns the mandelbulb SDF
     For more information about the mandlebulb, check [this article](https://en.wikipedia.org/wiki/Mandelbulb)

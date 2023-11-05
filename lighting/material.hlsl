@@ -11,7 +11,7 @@
 #include "material/shininess.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Generic Material Structure
 options:
     - SURFACE_POSITION

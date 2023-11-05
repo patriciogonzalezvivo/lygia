@@ -2,7 +2,7 @@
 #include "aabb.cuh"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Compute if point is inside AABB
 use: <bool> contain(<AABB> box, <vec3> point ) 
 */

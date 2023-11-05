@@ -2,7 +2,7 @@
 #include "../../sample.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors:  [Lingdong Huang, Patricio Gonzalez Vivo]
 description: upscale for function for pyramids  https://www.cs.huji.ac.il/labs/cglab/projects/convpyr/data/convpyr-small.pdf
 use: <vec4> pyramidUpscale(<SAMPLER_TYPE> tex0, SAMPLER_TYPE tex1, <vec2> st, <vec2> pixel)
 options:
@@ -12,6 +12,7 @@ options:
     - PYRAMID_H1: simple average (0.2), for poisson fill (1.0334, 0.6836, 0.1507), for laplacian integration (0.7, 0.5, 0.15)
     - PYRAMID_H2: for poisson fill (0.0270), for laplacian integration (0.225)
     - PYRAMID_G: for poisson fill (0.7753, 0.0312), for laplacian integration (0.6, 0.25) (0.547 * 2.0, 0.175 * 2.0)
+license: MIT License (MIT C)opyright (c) 2020 Lingdong Huang
 */
 
 #ifndef PYRAMID_H1

@@ -3,7 +3,7 @@
 #include "../luma.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Dither using a 8x8 Bayer matrix
 use: 
  - <vec4|vec3|float> ditherBayer(<vec4|vec3|float> value, <vec2> st, <float> time)

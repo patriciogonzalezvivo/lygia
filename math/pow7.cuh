@@ -1,7 +1,7 @@
 #include "operations.cuh"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: power of 7
 use: pow7(<float|float2|float3|float4> x)
 */

@@ -1,7 +1,7 @@
 #include "type.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: given a quaternion, returns a rotation 3x3 matrix
 use: <mat3> quat2mat3(<QUAT> Q)
 */

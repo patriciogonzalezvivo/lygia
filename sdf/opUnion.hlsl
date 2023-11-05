@@ -1,5 +1,5 @@
 /*
-original_author:  Inigo Quiles
+contributors:  Inigo Quiles
 description: Union operation of two SDFs 
 use: <float> opUnion( in <float|float4> d1, in <float|float4> d2 [, <float> smooth_factor] ) 
 */

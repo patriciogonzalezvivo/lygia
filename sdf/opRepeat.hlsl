@@ -1,7 +1,7 @@
 #include "../math/mod.hlsl"
 
 /*
-original_author:  Inigo Quiles
+contributors:  Inigo Quiles
 description: repite operation of one 2D SDFs 
 use: <float4> opElongate( in <float3> p, in <float3> h )
 */

@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: set of dither methods
 use: <vec4|vec3|float> dither(<vec4|vec3|float> value[, <float> time])
 Options:

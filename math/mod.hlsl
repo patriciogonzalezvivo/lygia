@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: An implementation of mod that matches the GLSL mod.
   Note that HLSL's fmod is different.
 use: mod(<float|float2|float3|float4> value, <float|float2|float3|float4> modulus)

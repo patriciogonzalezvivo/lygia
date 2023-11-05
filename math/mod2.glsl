@@ -1,5 +1,5 @@
 /*
-original_author: Mercury
+contributors: Mercury
 description: |
     Two dimensional modulus, returns the remainder of a division of two vectors.
     Found at in Mercury's library https://mercury.sexy/hg_sdf/

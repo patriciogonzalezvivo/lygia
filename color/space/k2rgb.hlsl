@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: blackbody in kelvin to RGB. Range between 0.0 and 40000.0 Kelvin
 use: <float3> w2rgb(<float> wavelength)
 */

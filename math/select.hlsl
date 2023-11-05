@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: |
     Returns A when cond is true, and B otherwise. This is in part to bring a compatibility layer with WGSL 
 use: <float|float2|float3|float4> select(<float|float2|float3|float4> A, <float|float2|float3|float4> B, <bool> cond)

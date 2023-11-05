@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Returns a rectangular SDF
 use: 
     - rectSDF(<vec2> st [, <vec2|float> size])

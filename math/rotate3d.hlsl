@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: returns a 3x3 rotation matrix
 use: rotate3d(<float3> axis, <float> radians)
 */

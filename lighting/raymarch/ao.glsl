@@ -2,7 +2,7 @@
 #include "../../math/saturate.glsl"
 
 /*
-original_author:  Inigo Quiles
+contributors:  Inigo Quiles
 description: calculare Ambient Occlusion
 use: <float> raymarchAO( in <vec3> pos, in <vec3> nor ) 
 examples:

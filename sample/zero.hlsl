@@ -1,7 +1,7 @@
 #include "../sample.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: turns alpha to zero if it's outside the texture normalize coordinates
 use: <float4> sampleZero(<SAMPLER_TYPE> tex, <float2> st);
 options:

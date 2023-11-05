@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: round a value to the nearest integer
 use: round(<float|vec2|vec3|vec4> value)
 */

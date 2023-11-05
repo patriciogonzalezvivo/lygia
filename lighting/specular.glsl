@@ -6,7 +6,7 @@
 #include "specular/ggx.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: calculate specular contribution
 use: 
     - specular(<vec3> L, <vec3> N, <vec3> V, <float> roughness[, <float> fresnel])

@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: returns a 2x2 rotation matrix
 use: rotate2d(<float> radians)
 */

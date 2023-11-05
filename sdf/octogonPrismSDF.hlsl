@@ -1,5 +1,5 @@
 /*
-original_author:  Inigo Quiles
+contributors:  Inigo Quiles
 description: generate the SDF of a octogon prism
 use: <float> octogonPrismSDF( in <float3> p, in <float> r, <float> h )
 */

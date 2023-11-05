@@ -3,7 +3,7 @@
 #include "../math/step.cuh"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Fix the aspect ratio of a space keeping things squared for you.
 use: ratio(float2 st, float2 st_size)
 */

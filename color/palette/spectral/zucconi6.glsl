@@ -1,7 +1,7 @@
 #include "../../../math/bump.glsl"
 
 /*
-original_author: Alan Zucconi
+contributors: Alan Zucconi
 description: |
     Read "Improving the Rainbow" for more information http://www.alanzucconi.com/?p=6703
     This provides the best approximation without including any branching.

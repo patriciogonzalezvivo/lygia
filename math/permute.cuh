@@ -1,7 +1,7 @@
 #include "mod289.cuh"
 
 /*
-original_author: [Stefan Gustavson, Ian McEwan]
+contributors: [Stefan Gustavson, Ian McEwan]
 description: permute
 use: permute(<float|float2|float3|float4> x)
 */

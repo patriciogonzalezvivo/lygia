@@ -1,7 +1,7 @@
 #include "rectSDF.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Returns a cross-shaped SDF
 use: crossSDF(<vec2> st, size s)
 options:

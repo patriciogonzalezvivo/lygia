@@ -2,7 +2,7 @@
 #include "space/hsv2rgb.hlsl"
 
 /*
-original_author: Johan Ismael
+contributors: Johan Ismael
 description: shifts color hue
 use: hueShift(<float3|float4> color, <float> amount)
 */

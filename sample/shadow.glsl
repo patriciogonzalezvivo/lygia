@@ -1,7 +1,7 @@
 #include "../sample.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: sampler shadowMap 
 use: 
     - sampleShadow(<SAMPLER_TYPE> shadowMap, <vec4|vec3> _coord)

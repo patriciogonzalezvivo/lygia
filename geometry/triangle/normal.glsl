@@ -1,7 +1,7 @@
 #include "triangle.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: returns the normal of a triangle
 use: <vec33> getNormal(<Triangle> tri) 
 */

@@ -11,7 +11,7 @@
 #include "../sample.hlsl"
 
 /*
-original_author: Alan Wolfe
+contributors: Alan Wolfe
 description:  white noise blur based on this shader https://www.shadertoy.com/view/XsVBDR
 use: noiseBlur(<SAMPLER_TYPE> texture, <float2> st, <float2> pixel, <float> radius)
 options:

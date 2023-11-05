@@ -2,7 +2,7 @@
 #include "../math/length.cuh"
 
 /*
-original_author:  Inigo Quiles
+contributors:  Inigo Quiles
 description: generate the SDF of a plane
 use: <float> planeSDF( in <float3> pos, in <vec2> h ) 
 */

@@ -2,7 +2,7 @@
 #include "rotate.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: |
     Rotate tiles (in a squared grid pattern) by 45 degrees
 use: 

@@ -1,5 +1,5 @@
 /*
-original_author: Inigo Quiles
+contributors: Inigo Quiles
 description: Segment SDF
 use: lineSDF(<float2> st, <float2> A, <float2> B)
 */

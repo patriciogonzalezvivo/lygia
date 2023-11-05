@@ -1,7 +1,7 @@
 #include "dot.cuh"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Squared length
 use: lengthSq(<float2|float3|float4> v)
 */

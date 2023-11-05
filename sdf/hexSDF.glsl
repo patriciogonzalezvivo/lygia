@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Returns a hexagon-shaped SDF
 use: hexSDF(<vec2> st)
 options:

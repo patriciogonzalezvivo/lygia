@@ -1,5 +1,6 @@
 /*
 function: luminance
+contributor: nan
 description: Computes the luminance of the specified linear RGB color using the luminance coefficients from Rec. 709.
 use: luminance(<vec3|vec4> color)
 */

@@ -1,7 +1,7 @@
 #include "snoise.glsl"
 
 /*
-original_author: Isaac Cohen
+contributors: Isaac Cohen
 description: https://github.com/cabbibo/glsl-curl-noise/blob/master/curl.glsl
 use: curl(<vec3|vec4> pos)
 examples:

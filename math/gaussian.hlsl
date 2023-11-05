@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: gaussian coeficient
 use: <float4|float3|float2|float> gaussian(<float4|float3|float2|float> d, <float> sigma)
 */

@@ -1,7 +1,7 @@
 #include "gamma2linear.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Converts a RGB color to XYZ color space.
 use: rgb2xyz(<vec3|vec4> color)
 */

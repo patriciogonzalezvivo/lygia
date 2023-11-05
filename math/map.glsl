@@ -1,5 +1,5 @@
 /*
-original_author: Johan Ismael
+contributors: Johan Ismael
 description: Map a v between one range to another.
 use: map(<float|vec2|vec3|vec4> v, <float|vec2|vec3|vec4> inMin, <float|vec2|vec3|vec4> inMax, <float|vec2|vec3|vec4> outMin, <float|vec2|vec3|vec4> outMax)
 examples:

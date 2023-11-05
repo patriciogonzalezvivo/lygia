@@ -1,5 +1,5 @@
 /*
-original_author: Hugh Kennedy (https://github.com/hughsk)
+contributors: Hugh Kennedy (https://github.com/hughsk)
 description: cubic in/out easing. From https://github.com/stackgl/glsl-easings
 use: cubicInOut(<float> x)
 examples:

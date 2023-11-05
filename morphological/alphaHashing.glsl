@@ -1,7 +1,7 @@
 #include "lygia/generative/random.glsl"
 
 /*
-original_author: ["Morgan McGuire", "Chris Wyman"]
+contributors: [Morgan McGuire, Chris Wyman]
 description: |
     hashed alpha testing we aim for quality equivalent to stochastic
     alpha testing while simultaneously achieving stability equivalent to

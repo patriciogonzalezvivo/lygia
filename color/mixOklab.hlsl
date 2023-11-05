@@ -2,13 +2,17 @@
 #include "space/rgb2srgb.hlsl"
 
 /*
-original_author: Bjorn Ottosson (@bjornornorn), Inigo Quiles
+contributors: [Bjorn Ottosson, Inigo Quiles]
 description: |
-    Mix function utilizing Bjorn Ottosso's OkLab color space, which is provide smooth stransitions 
+    Mix function by Inigo Quiles (https://www.shadertoy.com/view/ttcyRS) 
+    utilizing Bjorn Ottosso's OkLab color space, which is provide smooth stransitions 
     Learn more about it [his article](https://bottosson.github.io/posts/oklab/)
 options:
     - MIXOKLAB_COLORSPACE_SRGB: by default colA and colB use linear RGB. If you want to use sRGB define this flag
 use: <float3\float4> mixOklab(<float3|float4> colorA, <float3|float4> colorB, float pct)
+license: 
+    - MIT License (MIT) Copyright (c) 2020 Björn Ottosson
+    - MIT License (MIT) Copyright (c) 2020 Inigo Quilez
 */
 
 #ifndef FNC_MIXOKLAB

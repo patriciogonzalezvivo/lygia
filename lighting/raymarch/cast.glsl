@@ -1,7 +1,7 @@
 #include "map.glsl"
 
 /*
-original_author:  Inigo Quiles
+contributors:  Inigo Quiles
 description: cast a ray
 use: <float> castRay( in <vec3> pos, in <vec3> nor ) 
 */

@@ -4,7 +4,7 @@
 #include "../sdf/opIntersection.glsl"
 
 /*
-Author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Use a 2D texture as to encode a 3D SDF (Signed Distance Field) function
 use: <vecSAMPLE3DSDF_TYPE4> sample3DSdf(in <SAMPLER_TYPE> lut, in <vec3> xyz) 
 options:

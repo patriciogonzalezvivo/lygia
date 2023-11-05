@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Simpler chroma spectrum 
 use: <float3> spectral_soft(<float> value)
 */

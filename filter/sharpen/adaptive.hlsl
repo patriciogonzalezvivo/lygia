@@ -2,7 +2,7 @@
 #include "../../sample.hlsl"
 
 /*
-original_author: bacondither
+contributors: bacondither
 description: adaptive sharpening. For strenght values between 0.3 <-> 2.0 are a reasonable range 
 use: sharpen(<SAMPLER_TYPE> texture, <float2> st, <float2> renderSize [, float streanght])
 options:

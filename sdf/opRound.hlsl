@@ -1,5 +1,5 @@
 /*
-original_author:  Inigo Quiles
+contributors:  Inigo Quiles
 description: round SDFs 
 use: <float> opRound( in <float> d, <float> h ) 
 */

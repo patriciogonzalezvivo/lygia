@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Sum elements of a vector
 use: <float> sum(<vec2|vec3|vec4> value)
 */

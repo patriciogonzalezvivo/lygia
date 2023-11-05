@@ -1,5 +1,5 @@
 /*
-original_author: Mikola Lysenko
+contributors: Mikola Lysenko
 description: inverse matrixes
 use: <float|mat2|mat3|mat4> inverse(in <float|mat2|mat3|mat4> m) 
 */

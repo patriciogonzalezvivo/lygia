@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: scale a 2D space variable
 use: scale(<vec2> st, <vec2|float> scale_factor [, <vec2> center])
 options:

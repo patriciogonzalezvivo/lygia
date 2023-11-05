@@ -6,7 +6,7 @@
 #include "toShininess.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: get enviroment map light comming from a normal direction and acording to some roughness/metallic value. If there is no SCENE_CUBEMAP texture it creates a fake cube
 use: <float3> envMap(<float3> _normal, <float> _roughness [, <float> _metallic])
 options:

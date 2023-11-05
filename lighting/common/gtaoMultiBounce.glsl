@@ -2,7 +2,7 @@
 #define FNC_GTAOMULTIBOUNCE
 
 /*
-original_author: NAN
+contributors: NAN
 description: |
     Returns a color ambient occlusion based on a pre-computed visibility term.
     The albedo term is meant to be the diffuse color or f0 for the diffuse and

@@ -2,7 +2,7 @@
 #include "../sample.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: a way to solve the YUV camare texture on iOS
 use: sampleYUV(<SAMPLER_TYPE> tex1, <SAMPLER_TYPE> tex2, <vec2> st)
 options:

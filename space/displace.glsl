@@ -2,7 +2,7 @@
 #include "../sample.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Displace UV space into a XYZ space using an heightmap
 use: <vec3> displace(<SAMPLER_TYPE> tex, <vec3> ro, <vec3|vec2> rd) 
 options:

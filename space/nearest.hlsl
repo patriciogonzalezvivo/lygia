@@ -1,6 +1,6 @@
 /*
 function: nearest
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: sampling function to make a texture behave like GL_NEAREST 
 use: nearest(float2 st, <float2> resolution)
 */

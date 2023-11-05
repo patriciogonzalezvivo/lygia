@@ -1,7 +1,7 @@
 #include "../../math/operations.cuh"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Simpler fire color ramp 
 use: <float3> fire(<float> value)
 */

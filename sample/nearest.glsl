@@ -2,7 +2,7 @@
 #include "../sample.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: fakes a nearest sample
 use: <vec4> sampleNearest(<SAMPLER_TYPE> tex, <vec2> st, <vec2> texResolution);
 options:

@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: generate a matrix to change a the contrast of any color
 use: contrastMatrix(<float> amount)
 */

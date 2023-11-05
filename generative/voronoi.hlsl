@@ -3,7 +3,7 @@
 #include "random.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Voronoi positions and distance to centroids
 use: <float3> voronoi(<float2> pos, <float> time)
 options:

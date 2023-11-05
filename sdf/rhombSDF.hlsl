@@ -3,7 +3,7 @@
 /*
 description: Returns a rhomb-shaped sdf
 use: rhombSDF(<float2> st)
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 */
 
 #ifndef FNC_RHOMBSDF
