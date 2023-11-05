@@ -1,7 +1,7 @@
 #include "../math/const.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Returns a sdf for a regular polygon with V sides.
 use: polySDF(<float2> st, int V)
 */

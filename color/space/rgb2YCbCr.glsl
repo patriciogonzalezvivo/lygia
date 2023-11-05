@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: convert RGB to YCbCr according to https://en.wikipedia.org/wiki/YCbCr
 use: rgb2YCbCr(<vec3|vec4> color)
 */

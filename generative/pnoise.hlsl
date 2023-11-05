@@ -4,7 +4,7 @@
 #include "../math/quintic.hlsl"
 
 /*
-original_author: [Stefan Gustavson, Ian McEwan]
+contributors: [Stefan Gustavson, Ian McEwan]
 description: Classic Perlin Noise with periodic variant https://github.com/stegu/webgl-noise
 use: pnoise(<float2|float3|float4> pos, <float2|float3|float4> periodic)
 license: |

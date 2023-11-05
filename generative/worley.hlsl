@@ -1,7 +1,7 @@
 #include "random.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Worley noise
 use: <float2> worley(<float2|float3> pos)
 */

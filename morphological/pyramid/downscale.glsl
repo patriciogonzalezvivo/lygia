@@ -2,7 +2,7 @@
 #include "../../sample.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: [Lingdong Huang, Patricio Gonzalez Vivo]
 description: downscale for function for pyramids  https://www.cs.huji.ac.il/labs/cglab/projects/convpyr/data/convpyr-small.pdf
 use: <vec4> pyramidDownscale(<SAMPLER_TYPE> tex, <vec2> st, <vec2> pixel)
 options:
@@ -14,6 +14,7 @@ options:
         gaussian weights        0.4, 0.228, 0.056
         poisson fill            1.0334, 0.6836, 0.1507
         laplacian integration   0.7, 0.5, 0.15
+license: MIT License (MIT C)opyright (c) 2020 Lingdong Huang
 */
 
 #ifndef PYRAMID_H1

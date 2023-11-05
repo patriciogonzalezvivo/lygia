@@ -1,7 +1,7 @@
 #include "../sample.glsl"
 
 /*
-Author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: triplanar mapping
 use: <vec4> sample2DCube(in <SAMPLER_TYPE> lut, in <vec3> xyz) 
 options:

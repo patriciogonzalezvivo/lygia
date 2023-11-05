@@ -1,7 +1,7 @@
 #include "../math/const.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: equirect 2D projection to 3D vector 
 use: <float3> equirect2xyz(<float2> uv)
 */

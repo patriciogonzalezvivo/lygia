@@ -1,7 +1,7 @@
 #include "../sample/sprite.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: sample a frame on a sprite sheet
 use: <SPRITELOOP_TYPE> SpriteLOOP(<SAMPLER_TYPE >tex, <vec2> st, <vec2> grid, <float> frame)
 options:

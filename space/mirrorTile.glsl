@@ -2,7 +2,7 @@
 #include "../math/mirror.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: mirror a tiles pattern
 use: 
     - <vec4> mirrorTile(<vec4> tile)

@@ -1,7 +1,7 @@
 #include "triangle.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: returns the area of a triangle
 use: <float3> normal(<Triangle> tri) 
 */

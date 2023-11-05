@@ -1,5 +1,5 @@
 /*
-original_author:  Inigo Quiles
+contributors:  Inigo Quiles
 description: generate the SDF of a cylinder
 use: 
     - <float> cylinderSDF( in <vec3> pos, in <vec2|float> h [, <float> r] ) 

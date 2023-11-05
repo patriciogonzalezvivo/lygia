@@ -2,7 +2,7 @@
 #include "xyz2rgb.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Converts a Lab color to RGB color space.
 use: lab2rgb(<float3|float4> color)
 */

@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: convert from linear to gamma color space.
 use: linear2gamma(<float|float3|float4> color)
 */

@@ -1,7 +1,7 @@
 #include "../sample.hlsl"
 
 /*
-original_author: [Patricio Gonzalez Vivo, Johan Ismael]
+contributors: [Patricio Gonzalez Vivo, Johan Ismael]
 description: Samples multiple times a texture in the specified direction
 use: stretch(<SAMPLER_TYPE> tex, <float2> st, <float2> direction [, int samples])
 options:

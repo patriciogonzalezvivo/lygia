@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo  
+contributors: Patricio Gonzalez Vivo  
 description: sRGB to linear RGB conversion.
 use: <float|float3\float4> srgb2rgb(<float|float3|float4> srgb)
 */

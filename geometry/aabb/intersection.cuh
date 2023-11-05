@@ -4,7 +4,7 @@
 #include "../../math/max.cuh"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: compute the intersection of two AABBs
 use: <float2> intersect(<AABB> box, <float3> rayOrigin, <float3> rayDir)
 */

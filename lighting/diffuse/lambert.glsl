@@ -1,7 +1,7 @@
 #include "../../math/const.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: calculate diffuse contribution using lambert equation
 use: 
     - <float> diffuseLambert(<vec3> light, <vec3> normal [, <vec3> view, <float> roughness] )

@@ -1,7 +1,7 @@
 #include "../palette/spectral.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: wavelength between 400~700 nm to RGB 
 use: <vec3> w2rgb(<float> wavelength)
 options: 

@@ -1,7 +1,7 @@
 #include "../../sample/clamp2edge.glsl"
 
 /*
-original_author: Matt DesLauriers
+contributors: Matt DesLauriers
 description: adapted versions of gaussian fast blur 13 from https://github.com/Jam3/glsl-fast-gaussian-blur
 use: gaussianBlur1D_fast5(<SAMPLER_TYPE> texture, <vec2> st, <vec2> pixel_direction)
 options:

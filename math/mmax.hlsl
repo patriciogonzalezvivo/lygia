@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: extend HLSL Max function to add more arguments
 use: 
   - max(<float> A, <float> B, <float> C[, <float> D])

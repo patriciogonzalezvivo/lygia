@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: change the exposure of a color
 use: exposure(<float|float3|float4> color, float amount)
 */

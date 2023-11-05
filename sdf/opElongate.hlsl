@@ -1,5 +1,5 @@
 /*
-original_author:  Inigo Quiles
+contributors:  Inigo Quiles
 description: elongate operation of two SDFs 
 use: <float4> opElongate( in <float3> p, in <float3> h )
 */

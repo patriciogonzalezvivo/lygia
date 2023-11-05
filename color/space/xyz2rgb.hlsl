@@ -1,7 +1,7 @@
 #include "linear2gamma.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Converts a XYZ color to RGB color space.
 use: xyz2rgb(<float3|float4> color)
 */

@@ -1,7 +1,7 @@
 #include "../math/const.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Returns a sdf for rays with N branches
 use: raysSDF(<float2> st, <int> N)
 */

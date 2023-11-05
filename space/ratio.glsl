@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: |
     Fix the aspect ratio of a space keeping things squared for you, 
     in a similar way that aspect.glsl does, but while scaling the 

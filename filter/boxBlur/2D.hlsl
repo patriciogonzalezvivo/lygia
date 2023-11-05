@@ -1,7 +1,7 @@
 #include "../../sample.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: simple two dimentional box blur, so can be apply in a single pass
 use: boxBlur2D(<SAMPLER_TYPE> texture, <float2> st, <float2> pixel_offset, <int> kernelSize)
 options:

@@ -1,7 +1,7 @@
 #include "../math/const.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: fisheye 2D projection to 3D vector 
 use: <float3> fisheye2xyz(<float2> uv)
 */

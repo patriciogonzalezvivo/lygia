@@ -1,7 +1,7 @@
 #include "../sample.glsl"
 
 /*
-original_author: [Morgan McGuire, Kyle Whitson]
+contributors: [Morgan McGuire, Kyle Whitson]
 description: 3x3 and 5x5 median filter, adapted from "A Fast, Small-Radius GPU Median Filter" by Morgan McGuire in ShaderX6 https://casual-effects.com/research/McGuire2008Median/index.html
 use: median(<SAMPLER_TYPE> texture, <vec2> st, <vec2> pixel)
 options:

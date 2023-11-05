@@ -3,7 +3,7 @@
 #include "../sample.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: sampler the view Positiong from depthmap texture 
 use: <float4> sampleViewPosition(<SAMPLER_TYPE> texDepth, <float2> st [, <float> near, <float> far])
 options:

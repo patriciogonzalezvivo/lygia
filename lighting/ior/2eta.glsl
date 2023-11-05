@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: index of refraction to ratio of index of refraction
 use: <float|vec3|vec4> ior2eta(<float|vec3|vec4> ior)
 */

@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: set of dither methods
 use: <float4|float3|float> dither(<float4|float3|float> value[, <float> time])
 Options:

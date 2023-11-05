@@ -3,7 +3,7 @@
 #include "../luminance.hlsl"
 
 /*
-Author: [Jim Hejl, Richard Burgess-Dawson ]
+contributors: [Jim Hejl, Richard Burgess-Dawson ]
 description: Haarm-Peter Duikers curve from John Hables presentation "Uncharted 2 HDR Lighting", Page 140, http://www.gdcvault.com/play/1012459/Uncharted_2__HDR_Lighting
 use: <float3|float4> tonemapFilmic(<float3|float4> x)
 */

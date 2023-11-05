@@ -3,7 +3,7 @@
 #include "material/shininess.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: creates a fake cube and returns the value giving a normal direction
 use: <vec3> fakeCube(<vec3> _normal [, <float> _shininnes])
 options:

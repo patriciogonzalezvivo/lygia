@@ -2,9 +2,10 @@
 #include "../space/hsv2rgb.glsl"
 
 /*
-original_author: Romain Dura
+contributors: Romain Dura
 description: Luminosity Blend mode creates the result color by combining the hue and luminance of the base color with the saturation of the blend color.
 use: blendLuminosity(<float|vec3> base, <float|vec3> blend [, <float> opacity])
+license: MIT License (MIT) Copyright (c) 2015 Jamie Owen
 */
 
 #ifndef FNC_BLENDLUMINOSITY

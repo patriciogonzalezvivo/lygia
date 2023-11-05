@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: |
    Convert a color in YIQ to linear RGB color. 
    From https://en.wikipedia.org/wiki/YIQ

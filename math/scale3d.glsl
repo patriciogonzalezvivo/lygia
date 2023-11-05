@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: returns a 3x3 scale matrix
 use:
     - scale3d(<float|vec3> radians)

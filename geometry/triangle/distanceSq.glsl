@@ -2,7 +2,7 @@
 #include "../../math/saturate.glsl"
 
 /*
-original_author: Inigo Quiles
+contributors: Inigo Quiles
 description: returns the closest sq distance to the surface of a triangle
 use: <vec3> closestDistanceSq(<Triangle> tri, <vec3> _pos) 
 */

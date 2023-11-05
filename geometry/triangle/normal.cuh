@@ -4,7 +4,7 @@
 #include "../../math/normalize.cuh"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: returns the normal of a triangle
 use: <float3> getNormal(<Triangle> tri) 
 */

@@ -15,7 +15,7 @@
 #include "common/envBRDFApprox.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: simple glass shading model
 use: 
     - <vec4> glass(<Material> material) 

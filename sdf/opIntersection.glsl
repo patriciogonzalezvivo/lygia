@@ -1,7 +1,7 @@
 #include "../math/saturate.glsl"
 
 /*
-original_author:  Inigo Quiles
+contributors:  Inigo Quiles
 description: intersection operation of two SDFs 
 use: <float> opIntersection( in <float> d1, in <float> d2 [, <float> smooth_factor] ) 
 */

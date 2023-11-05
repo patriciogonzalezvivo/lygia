@@ -1,7 +1,7 @@
 #include "../envMap.hlsl"
 
 /*
-original_author:  The Art Of Code
+contributors:  The Art Of Code
 description: |
     Raymarching for glass render. For more info, see the video below link:
     Tutorial 1: https://youtu.be/NCpaaLkmXI8

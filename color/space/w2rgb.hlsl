@@ -2,7 +2,7 @@
 #include "../../color/palette/spectral.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: wavelength to RGB
 use: <float3> w2rgb(<float> wavelength)
 */

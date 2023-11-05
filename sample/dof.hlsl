@@ -3,7 +3,7 @@
 #include "../sample.hlsl"
 
 /*
-original_author: Dennis Gustafsson
+contributors: Dennis Gustafsson
 description:  http://blog.tuxedolabs.com/2018/05/04/bokeh-depth-of-field-in-single-pass.html
 use: sampleDoF(<SAMPLER_TYPE> texture, <SAMPLER_TYPE> depth, <float2> st, <float> focusPoint, <float> focusScale)
 options:

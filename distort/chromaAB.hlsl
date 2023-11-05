@@ -2,7 +2,7 @@
 #include "../sample.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo, Johan Ismael
+contributors: [Patricio Gonzalez Vivo, Johan Ismael]
 description: Chroma Aberration inspired by https://www.shadertoy.com/view/4sX3z4
 use: chromaAB(<SAMPLER_TYPE> texture, <float2> st [, <float|float2> sdf|offset, <float> pct])
 options:

@@ -1,5 +1,5 @@
 /*
-original_author:  Inigo Quiles
+contributors:  Inigo Quiles
 description: elongate operation of two SDFs 
 use: <vec4> opElongate( in <vec3> p, in <vec3> h )
 */

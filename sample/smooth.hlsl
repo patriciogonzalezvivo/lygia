@@ -3,7 +3,7 @@
 #include "../sample.hlsl"
 
 /*
-original_author: Inigo Quiles
+contributors: Inigo Quiles
 description: avoid the ugly artifacts of bilinear texture filtering. You can find more information here https://iquilezles.org/articles/texture
 use: <float4 sampleSmooth(<SAMPLER_TYPE> tex, <float2> st, <float2> texResolution)
 options:

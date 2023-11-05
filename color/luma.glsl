@@ -1,7 +1,7 @@
 #include "space/rgb2luma.glsl"
 
 /*
-original_author: Hugh Kennedy (https://github.com/hughsk)
+contributors: Hugh Kennedy (https://github.com/hughsk)
 description: get the luminosity of a color. From https://github.com/hughsk/glsl-luma/blob/master/index.glsl
 use: luma(<vec3|vec4> color)
 */

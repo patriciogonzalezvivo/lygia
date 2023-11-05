@@ -1,7 +1,7 @@
 #include "../../sample.hlsl"
 
 /*
-original_author: Johan Ismael
+contributors: Johan Ismael
 description: sharpening convolutional operation
 use: sharpen(<SAMPLER_TYPE> texture, <float2> st, <float2> pixel)
 options:

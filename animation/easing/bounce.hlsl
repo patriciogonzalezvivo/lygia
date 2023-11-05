@@ -1,7 +1,7 @@
 #include "../../math/const.hlsl"
 
 /*
-original_author: Hugh Kennedy (https://github.com/hughsk)
+contributors: Hugh Kennedy (https://github.com/hughsk)
 description: bounce easing. From https://github.com/stackgl/glsl-easings
 use: bounce<In|Out|InOut>(<float> x)
 */

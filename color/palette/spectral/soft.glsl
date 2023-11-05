@@ -1,6 +1,6 @@
 #include "../../../math/const.glsl"
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Soft chroma spectrum 
 use: <vec3> spectral_soft(<float> value)
 examples:

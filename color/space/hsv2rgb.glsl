@@ -1,5 +1,5 @@
 /*
-original_author: Inigo Quiles
+contributors: Inigo Quiles
 description: pass a color in HSB and get RGB color. Also use as reference http://lolengine.net/blog/2013/07/27/rgb-to-hsv-in-glsl
 use: hsv2rgb(<vec3|vec4> color)
 */

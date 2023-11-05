@@ -1,7 +1,7 @@
 #include "../../math/pow2.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: index of refraction to reflectance at 0 degree https://handlespixels.wordpress.com/tag/f0-reflectance/
 use: <float|vec3|vec4> ior2f0(<float|vec3|vec4> ior)
 */

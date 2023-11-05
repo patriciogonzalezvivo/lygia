@@ -2,7 +2,7 @@
 #include "xyz2lab.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Converts a RGB color to Lab color space.
 use: rgb2lab(<vec3|vec4> color)
 */

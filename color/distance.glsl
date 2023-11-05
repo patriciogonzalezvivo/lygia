@@ -5,7 +5,7 @@
 #include "space/rgb2oklab.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: perceptual distance between two color according to CIE94 https://en.wikipedia.org/wiki/Color_difference#CIE94
 use: colorDistance(<vec3|vec4> rgbA, <vec3|vec4> rgbA)
 options:

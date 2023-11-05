@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: change the exposure of a color
 use: exposure(<float|vec3|vec4> color, float amount)
 */

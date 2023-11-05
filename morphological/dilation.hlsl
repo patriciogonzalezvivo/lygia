@@ -3,7 +3,7 @@
 #include "../math/sum.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: nan
 description: |
     morphological dilation operation. Based on: 
         https://lettier.github.io/3d-game-shaders-for-beginners/dilation.html

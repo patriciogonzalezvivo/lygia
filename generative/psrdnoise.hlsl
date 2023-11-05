@@ -6,7 +6,7 @@
 #include "../math/greaterThan.hlsl"
 
 /*
-original_author: [Stefan Gustavson, Ian McEwan]
+contributors: [Stefan Gustavson, Ian McEwan]
 description:  |
     Tiling simplex flow noise in 2-D and 3-D from https://github.com/stegu/psrdnoise
     "float2/3 x" is the point to evaluate,

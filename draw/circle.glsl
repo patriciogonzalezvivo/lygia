@@ -5,7 +5,7 @@
 #include "stroke.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: draw a circle filled or not. 
 use: circle(<vec2> st, <float> size [, <float> width])
 */

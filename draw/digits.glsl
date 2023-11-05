@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: |
     Draws all the digits of a floating point number, useful for debugging.
     Requires high precision to work properly.

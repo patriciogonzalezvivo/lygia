@@ -1,5 +1,5 @@
 /*
-original_author: Jamie Owen
+contributors: Jamie Owen
 description: Photoshop Screen blend mode mplementations sourced from this article on https://mouaif.wordpress.com/2009/01/05/photoshop-math-with-glsl-shaders/
 use: blendScreen(<float|float3> base, <float|float3> blend [, <float> opacity])
 */

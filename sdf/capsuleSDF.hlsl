@@ -1,5 +1,5 @@
 /*
-original_author:  Inigo Quiles
+contributors:  Inigo Quiles
 description: generate a SDF of a capsule
 use: <float> capusleSDF( in <float3> pos, in <float3> a, <float3> b, <float> r ) 
 */

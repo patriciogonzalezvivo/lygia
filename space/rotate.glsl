@@ -2,7 +2,7 @@
 #include "../math/rotate4d.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: rotate a 2D space by a radian r
 use: rotate(<vec3|vec2> v, float r [, vec2 c])
 options:

@@ -2,7 +2,7 @@
 #include "../color/dither/bayer.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: sample a texture and dither using a 8x8 Bayer matrix
 use: <vec3> ditherBayer(<SAMPLER_TYPE> tex, <vec2> st, <vec2> resolution)
 options:

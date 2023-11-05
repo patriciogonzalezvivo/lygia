@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: |
     Fix the aspect ratio of a space keeping things squared for you.
 use: <float2> aspect(<float2> st, <float2> st_size)

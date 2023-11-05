@@ -1,7 +1,7 @@
 #include "../sample.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: |
     Given a texture it performs a moving average or box blur. Which simply averages the pixel values in
     a KxK window. This is a very common image processing technique that can be used to smooth out noise.

@@ -2,7 +2,7 @@
 #include "aabb.hlsl"
 
 /*
-original_author: Patrincio Gonzalez Vivo
+contributors: Patrincio Gonzalez Vivo
 description: return the diagonal vector of a AABB
 use: <float> diagonal(<AABB> box ) 
 */

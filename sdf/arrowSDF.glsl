@@ -1,5 +1,5 @@
 /*
-original_author: TheTurk
+contributors: TheTurk
 description: Distance function for an arrow. Returns float. Originally from https://www.shadertoy.com/view/NttcW8
 use: arrowSDF(<vec3> v, <vec3> start, <vec3> end, <float> baseRadius, <float> tipRadius, <float> tipHeight)
 */

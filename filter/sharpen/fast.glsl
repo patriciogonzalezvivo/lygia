@@ -1,7 +1,7 @@
 #include "../../sample.glsl"
 
 /*
-original_author: Johan Ismael
+contributors: Johan Ismael
 description: sharpening convolutional operation
 use: sharpen(<SAMPLER_TYPE> texture, <vec2> st, <vec2> pixel)
 options:

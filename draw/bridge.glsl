@@ -1,7 +1,7 @@
 #include "stroke.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: create a bridge on a given in_value and draw a stroke inside that gap
 use: bridge(<float|vec2|vec3|vec4> in_value, <float> sdf, <float> size, <float> width)
 */

@@ -3,7 +3,7 @@
 #include "../sample.glsl"
 
 /*
-original_author: Xor 
+contributors: Xor 
 description: Fibonacci Bokeh ( https://www.shadertoy.com/view/fljyWd )
 use: <vec4> fibonacciBokeh(<SAMPLER_TYPE> tex, <vec2> st, <vec2> pixel, <float> amount) 
 options:

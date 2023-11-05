@@ -1,7 +1,7 @@
 #include "../sample.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: sampler shadowMap 
 use: 
     - sampleShadow(<SAMPLER_TYPE> shadowMap, <float4|float3> _coord)

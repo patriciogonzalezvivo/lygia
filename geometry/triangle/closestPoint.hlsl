@@ -2,7 +2,7 @@
 #include "barycentric.hlsl"
 
 /*
-original_author: 
+contributors: 
 description: returns the closest point on the surface of a triangle
 use: <float3> closestDistance(<Triangle> tri, <float3> _pos) 
 */

@@ -2,7 +2,7 @@
 #include "aabb.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: expand AABB
 use: <bool> expand(<AABB> box, <AABB|vec3|float> point ) 
 */

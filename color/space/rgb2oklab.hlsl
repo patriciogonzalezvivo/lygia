@@ -1,5 +1,5 @@
 /*
-original_author: Bjorn Ottosson (@bjornornorn)
+contributors: Bjorn Ottosson (@bjornornorn)
 description: linear rgb ot OKLab https://bottosson.github.io/posts/oklab/
 use: <float3\float4> rgb2oklab(<float3|float4> srgb)
 */

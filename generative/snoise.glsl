@@ -4,7 +4,7 @@
 #include "../math/grad4.glsl"
 
 /*
-original_author: [Stefan Gustavson, Ian McEwan]
+contributors: [Stefan Gustavson, Ian McEwan]
 description: Simplex Noise https://github.com/stegu/webgl-noise
 use: snoise(<vec2|vec3|vec4> pos)
 license: |

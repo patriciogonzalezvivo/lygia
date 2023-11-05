@@ -2,7 +2,7 @@
 #include "srandom.hlsl"
 
 /*
-original_author: Inigo Quilez
+contributors: Inigo Quilez
 description: returns 2D/3D value noise in the first channel and in the rest the derivatives. For more details read this nice article http://www.iquilezles.org/www/articles/gradientnoise/gradientnoise.htm
 use: noised(<float2|float3> space)
 options:

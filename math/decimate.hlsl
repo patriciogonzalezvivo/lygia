@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: decimate a value with an specific presicion 
 use: decimate(<float|float2|float3|float4> value, <float|float2|float3|float4> presicion)
 */

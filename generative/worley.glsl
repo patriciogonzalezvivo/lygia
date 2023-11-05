@@ -1,7 +1,7 @@
 #include "random.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Worley noise
 use: <vec2> worley(<vec2|vec3> pos)
 examples:

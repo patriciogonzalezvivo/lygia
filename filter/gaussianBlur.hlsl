@@ -1,7 +1,7 @@
 #include "../sample.hlsl"
 
 /*
-original_author: [Matt DesLauriers, Patricio Gonzalez Vivo]
+contributors: [Matt DesLauriers, Patricio Gonzalez Vivo]
 description: adapted versions from 5, 9 and 13 gaussian fast blur from https://github.com/Jam3/glsl-fast-gaussian-blur
 use: gaussianBlur(<SAMPLER_TYPE> texture, <float2> st, <float2> pixel_direction [, const int kernelSize])
 options:

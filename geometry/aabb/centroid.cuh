@@ -2,7 +2,7 @@
 #include "../../math/operations.cuh"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: return center of a AABB
 use: <float3> centroid(<AABB> box) 
 */

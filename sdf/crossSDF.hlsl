@@ -1,7 +1,7 @@
 #include "rectSDF.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Returns a cross-shaped SDF
 use: crossSDF(<float2> st, size s)
 */

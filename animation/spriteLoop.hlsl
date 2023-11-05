@@ -2,7 +2,7 @@
 #include "../math/mod.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: sample a frame on a sprite sheet
 use: <SPRITELOOP_TYPE> SpriteLOOP(<SAMPLER_TYPE >tex, <float2> st, <float2> grid, <float> frame)
 options:

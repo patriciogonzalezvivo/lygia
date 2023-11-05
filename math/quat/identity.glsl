@@ -1,7 +1,7 @@
 #include "type.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: returns the identity quaternion
 use: <QUAT> QUAT_IDENTITY
 */

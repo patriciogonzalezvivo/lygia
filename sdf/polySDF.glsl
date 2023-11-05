@@ -1,7 +1,7 @@
 #include "../math/const.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Returns a sdf for a regular polygon with V sides.
 use: polySDF(<vec2> st, int V)
 options:

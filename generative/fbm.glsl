@@ -3,7 +3,7 @@
 
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Fractal Brownian Motion
 use: fbm(<vec2> pos)
 options:

@@ -2,7 +2,7 @@
 
 /*
 function: rotateZ
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: rotate a 2D space by a radian angle
 use: rotateZ(<vec3|vec4> pos, float radian [, vec3 center])
 options:

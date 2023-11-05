@@ -1,5 +1,5 @@
 /*
-original_author:  Inigo Quiles
+contributors:  Inigo Quiles
 description: generate the SDF of a bounding box
 use: <float> boxFrameSDF( <vec3> p, <vec3> b, <float> e )
 */

@@ -1,7 +1,7 @@
 #include "../color/space/w2rgb.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: wavelength to RGB
 use: <float3> wavelength(<float> wavelength)
 */

@@ -1,7 +1,7 @@
 #include "identity.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: |
     Linear interpolation between two quaternions.
     This function is based on the implementation of slerp() found in the GLM library.

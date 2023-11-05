@@ -11,7 +11,7 @@
 #include "common/envBRDFApprox.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: simple glass shading model
 use: 
     - <float4> glass(<Material> material) 

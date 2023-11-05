@@ -1,6 +1,6 @@
 #include "../sample.glsl"
 /*
-original_author: Alexander Griffis 
+contributors: Alexander Griffis 
 description: |
     Algorithmic paradigm, that approximate other algorithms in constant-time performance.
     Does not always compute the correct result for every pixel, although in practice errors 

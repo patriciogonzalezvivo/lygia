@@ -1,5 +1,5 @@
 /*
-original_author:  Inigo Quiles
+contributors:  Inigo Quiles
 description: extrude operation of a 2D SDFs into a 3D one
 use: <float> opExtrude( in <vec3> p, in <float> sdf, in <float> h )
 */

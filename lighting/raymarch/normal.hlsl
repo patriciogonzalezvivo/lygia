@@ -1,7 +1,7 @@
 #include "map.hlsl"
 
 /*
-original_author:  Inigo Quiles
+contributors:  Inigo Quiles
 description: calculate normals http://iquilezles.org/www/articles/normalsSDF/normalsSDF.htm
 use: <float> raymarchNormal( in <float3> pos ) 
 */

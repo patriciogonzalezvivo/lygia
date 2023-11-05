@@ -2,7 +2,7 @@
 #include "operations.cuh"
 
 /*
-original_author:
+contributors:
 description: 
 use: 
 */

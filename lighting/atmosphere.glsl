@@ -6,6 +6,7 @@
 #include "common/rayleigh.glsl"
 
 /*
+contributor: nan
 description: |
     Rayleigh and Mie scattering atmosphere system. Implementation of the techniques described here: https://www.scratchapixel.com/lessons/procedural-generation-virtual-worlds/simulating-sky/simulating-colors-of-the-sky
 use: <vec3> atmosphere(<vec3> eye_dir, <vec3> sun_dir)

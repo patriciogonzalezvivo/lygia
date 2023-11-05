@@ -1,5 +1,5 @@
 /*
-original_author: Hugh Kennedy (https://github.com/hughsk)
+contributors: Hugh Kennedy (https://github.com/hughsk)
 description: circular easing. From https://github.com/stackgl/glsl-easings
 use: circular<In|Out|InOut>(<float> x)
 examples:

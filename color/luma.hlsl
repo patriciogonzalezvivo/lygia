@@ -1,7 +1,7 @@
 #include "space/rgb2luma.hlsl"
 
 /*
-original_author: Hugh Kennedy (https://github.com/hughsk)
+contributors: Hugh Kennedy (https://github.com/hughsk)
 description: get the luminosity of a color. From https://github.com/hughsk/glsl-luma/blob/master/index.hlsl
 use: luma(<float3|float4> color)
 */

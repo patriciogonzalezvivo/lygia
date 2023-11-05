@@ -1,7 +1,7 @@
 #include "make.cuh"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Sum elements of a vector
 use: <float> sum(<float2|float3|float4> value)
 */

@@ -2,7 +2,7 @@
 #include "aabb.hlsl"
 
 /*
-original_author: P
+contributors: P
 description: Compute if point is inside AABB
 use: <bool> inside(<AABB> box, <float3> point ) 
 */

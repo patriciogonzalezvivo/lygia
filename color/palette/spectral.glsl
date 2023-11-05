@@ -7,7 +7,7 @@
 #include "../../math/const.glsl"
 
 /*
-original_author: Martijn Steinrucken
+contributors: Martijn Steinrucken
 description: Spectral Response Function https://www.shadertoy.com/view/wlSBzD
 use: <vec3> spectral(<float> value)
 examples:

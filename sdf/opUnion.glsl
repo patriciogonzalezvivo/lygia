@@ -1,7 +1,7 @@
 #include "../math/saturate.glsl"
 
 /*
-original_author:  Inigo Quiles
+contributors:  Inigo Quiles
 description: Union operation of two SDFs 
 use: <float> opUnion( in <float|vec4> d1, in <float|vec4> d2 [, <float> smooth_factor] ) 
 */

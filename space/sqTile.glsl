@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: make some square tiles. XY provide coords inside of the tile. ZW provides tile coords
 use: <vec4> hexTile(<vec2> st [, <float> scale])
 */

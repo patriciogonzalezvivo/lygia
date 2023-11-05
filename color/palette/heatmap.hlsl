@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: heatmap palette
 use: <float3> heatmap(<float> value)
 */

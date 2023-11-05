@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: clamp a value between 0 and 1
 use: saturation(<float|vec2|vec3|vec4> value)
 examples:

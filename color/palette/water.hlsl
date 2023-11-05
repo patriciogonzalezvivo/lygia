@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Simpler water color ramp 
 use: <float3> water(<float> value)
 */

@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: returns a 4x4 rotation matrix
 use: rotate4d(<vec3> axis, <float> radians)
 */

@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Returns a circle-shaped SDF.
 use: circleSDF(vec2 st[, vec2 center])
 options:

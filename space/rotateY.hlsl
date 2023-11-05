@@ -1,7 +1,7 @@
 #include "../math/rotate4dY.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: rotate a 2D space by a radian angle
 use: rotateY(<float3> pos, float radian [, float4 center])
 options:

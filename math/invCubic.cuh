@@ -3,7 +3,7 @@
 #include "asin.cuh"
 
 /*
-original_author: Inigo Quiles
+contributors: Inigo Quiles
 description: inverse cubic polynomial https://iquilezles.org/articles/smoothsteps/
 use: <float|float2|float3|float4> invCubic(<float|float2|float3|float4> value);
 */

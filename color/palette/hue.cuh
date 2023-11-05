@@ -3,7 +3,7 @@
 #include "../../math/smoothstep.cuh"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: |
     Physical Hue. Ratio: 1/3 = neon, 1/4 = refracted, 1/5+ = approximate white
 use: <float3> hue(<float> hue[, <float> ratio])

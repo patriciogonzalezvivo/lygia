@@ -2,7 +2,7 @@
 #include "operations.cuh"
 
 /*
-original_author: [Stefan Gustavson, Ian McEwan]
+contributors: [Stefan Gustavson, Ian McEwan]
 description: modulus of 289
 use: mod289(<float|float2|float3|float4> x)
 */

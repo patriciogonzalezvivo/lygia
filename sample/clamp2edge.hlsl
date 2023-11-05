@@ -1,7 +1,7 @@
 #include "../sample.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: fakes a clamp to edge texture 
 use: <float4> sampleClamp2edge(<SAMPLER_TYPE> tex, <float2> st [, <float2> texResolution]);
 options:

@@ -1,7 +1,7 @@
 #include "derivative.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Converts a RGB normal map into normal vectors
 use: SAMPLEBUMPMap(<SAMPLER_TYPE> texture, <float2> st, <float2> pixel)
 options:

@@ -1,7 +1,7 @@
 #include "../ray.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: creates a new Ray asigning origin and direction
 use: 
     - rayNew(inout <Ray> ray, [<vec3> origin, <vec3> direction])

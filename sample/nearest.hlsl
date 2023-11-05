@@ -2,7 +2,7 @@
 #include "../sample.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: fakes a nearest sample
 use: <float4? sampleNearest(<SAMPLER_TYPE> tex, <float2> st, <float2> texResolution);
 options:

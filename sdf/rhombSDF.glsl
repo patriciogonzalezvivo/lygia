@@ -4,7 +4,7 @@
 /*
 description: Returns a rhomb-shaped sdf
 use: rhombSDF(<vec2> st)
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 examples:
     - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/draw_shapes.frag
 */

@@ -1,7 +1,7 @@
 #include "../sample.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: sample a texture with a looping flow animation, using a direction to push, an elapse time and a cycle.
 use: sampleFlow(<SAMPLER_TYPE> tex, <vec2> st, <vec2> dir, <float> time, <float> cycle)
 options:

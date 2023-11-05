@@ -1,7 +1,7 @@
 #include "../sample.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: turns alpha to zero if it's outside the texture normalize coordinates
 use: <vec4> sampleZero(<SAMPLER_TYPE> tex, <vec2> st);
 options:

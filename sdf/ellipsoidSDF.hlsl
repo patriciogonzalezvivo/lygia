@@ -1,5 +1,5 @@
 /*
-original_author:  Inigo Quiles
+contributors:  Inigo Quiles
 description: generate the SDF of an approximated ellipsoid
 use: <float> ellipsoidSDF( in <float3> p, in <float3> r )
 */

@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Converts a Lab color to XYZ color space.
 use: rgb2xyz(<float3|float4> color)
 */

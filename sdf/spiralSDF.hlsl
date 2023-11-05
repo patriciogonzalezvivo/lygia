@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Returns a spiral SDF
 use: spiralSDF(<float2> st, <float> turns)
 */

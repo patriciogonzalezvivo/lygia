@@ -1,7 +1,7 @@
 #include "type.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: |
     Quaternion multiplication. Based on http://mathworld.wolfram.com/Quaternion.html
 use: <QUAT> quatMul(<QUAT> a, <QUAT> b) 

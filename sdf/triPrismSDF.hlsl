@@ -1,5 +1,5 @@
 /*
-original_author:  Inigo Quiles
+contributors:  Inigo Quiles
 description: generate the SDF of a triangular prism
 use: <float> triPrismSDF( in <float3> pos, in <float2> h ) 
 license: |

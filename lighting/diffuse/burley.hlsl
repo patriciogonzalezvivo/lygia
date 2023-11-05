@@ -1,7 +1,7 @@
 #include "../common/schlick.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: calculate diffuse contribution using burley equation
 use: 
     - <float> diffuseBurley(<float3> light, <float3> normal [, <float3> view, <float> roughness] )

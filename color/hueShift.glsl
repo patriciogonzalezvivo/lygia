@@ -2,7 +2,7 @@
 #include "space/hsv2rgb.glsl"
 
 /*
-original_author: Johan Ismael
+contributors: Johan Ismael
 description: shifts color hue
 use: hueShift(<vec3|vec4> color, <float> amount)
 */

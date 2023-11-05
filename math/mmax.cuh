@@ -1,7 +1,7 @@
 #include "max.cuh"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: extend Max function to add more arguments
 use: 
   - max(<float> A, <float> B, <float> C[, <float> D])

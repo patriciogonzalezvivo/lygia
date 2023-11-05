@@ -2,7 +2,7 @@
 #include "../../math/operations.cuh"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: returns the centroid of a triangle
 use: <float3> centroid(<Triangle> tri) 
 */

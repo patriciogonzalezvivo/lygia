@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: create a look up matrix 
 use: 
     - <mat3> lookAt(<vec3> forward, <vec3> up)

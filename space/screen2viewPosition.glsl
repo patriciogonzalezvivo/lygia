@@ -1,7 +1,7 @@
 #include "../math/inverse.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: derive view surface position from screen coordinates and depth 
 use: <vec3> screen2viewPosition( const in <vec2> screenPosition, const in <float> depth, const in <float> viewZ )
 options:

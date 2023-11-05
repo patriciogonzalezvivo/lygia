@@ -3,7 +3,7 @@
 #include "../color/space/rgb2luma.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: |
     The bilateral filter is a non-linear filter, which means that the intensity of each pixel is
     replaced by a weighted average of intensity values from nearby pixels. The weights are computed

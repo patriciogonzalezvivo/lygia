@@ -1,7 +1,7 @@
 #include "map.cuh"
 
 /*
-original_author:  Inigo Quiles
+contributors:  Inigo Quiles
 description: calculare Ambient Occlusion
 use: <float> raymarchAO( in <float3> pos, in <float3> nor ) 
 */

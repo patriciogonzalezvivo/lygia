@@ -3,7 +3,7 @@
 #include "../sample/clamp2edge.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: |
     Bilinear or Bartlett filter, a low-pass filter, which means that it blurs the image. 
     It's a convolution that uses a piecewise linear kernel, approximating a "tent" or triangle.

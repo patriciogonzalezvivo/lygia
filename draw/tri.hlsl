@@ -5,7 +5,7 @@
 #include "stroke.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: draw a triangle filled or not. 
 use: tri(<float2> st, <float> size [, <float> width])
 */

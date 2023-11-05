@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: pass a color in YUB and get RGB color
 use: yuv2rgb(<float3|float4> color)
 */

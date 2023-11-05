@@ -1,7 +1,7 @@
 #include "../math/map.hlsl"
 
 /*
-original_author: Kathy McGuiness
+contributors: Kathy McGuiness
 description: |
     Returns a gear shaped SDF
     Some notes about the parameters:

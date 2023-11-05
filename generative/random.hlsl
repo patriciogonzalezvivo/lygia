@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: pass a value and get some random normalize value between 0 and 1
 use: float random[2|3](<float|float2|float3> value)
 options:

@@ -3,7 +3,7 @@
 #include "../sample.hlsl"
 
 /*
-original_author: Inigo Quiles
+contributors: Inigo Quiles
 description: |
     Avoiding texture repetition by using Voronoise: a small texture can be used to generate infinite variety instead of tiled repetition. More info:  https://iquilezles.org/articles/texturerepetition/
 use: sampleUNTILE(<SAMPLER_TYPE> texture, <float2> st, <float> noTiling)

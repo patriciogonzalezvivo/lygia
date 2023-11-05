@@ -1,7 +1,7 @@
 #include "mod289.glsl"
 
 /*
-original_author: [Stefan Gustavson, Ian McEwan]
+contributors: [Stefan Gustavson, Ian McEwan]
 description: permute
 use: permute(<float|vec2|vec3|vec4> x)
 examples:

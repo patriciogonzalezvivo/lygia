@@ -2,7 +2,7 @@
 #include "../math/mirror.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: fakes a mirror wrapping texture 
 use: <vec4> sampleMirror(<SAMPLER_TYPE> tex, <vec2> st);
 options:

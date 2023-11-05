@@ -1,7 +1,7 @@
 #include "triangle.hlsl"
 
 /*
-original_author: Inigo Quiles
+contributors: Inigo Quiles
 description: returns the closest sq distance to the surface of a triangle
 use: <float3> closestDistanceSq(<Triangle> tri, <float3> _pos) 
 */

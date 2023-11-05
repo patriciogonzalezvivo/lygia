@@ -2,7 +2,7 @@
 #include "barycentric.glsl"
 
 /*
-original_author: 
+contributors: 
 description: returns the closest point on the surface of a triangle
 use: <vec3> closestDistance(<Triangle> tri, <vec3> _pos) 
 */

@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Squared length
 use: lengthSq(<vec4|vec3|vec2> v)
 */

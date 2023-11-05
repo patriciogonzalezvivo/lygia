@@ -2,7 +2,7 @@
 
 /*
 function: rotateZ
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: rotate a 2D space by a radian angle
 use: rotateZ(<float3|float4> pos, float radian [, float3 center])
 options:

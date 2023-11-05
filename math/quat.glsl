@@ -2,7 +2,7 @@
 #include "quat/identity.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: |
     creates a quaternion (QUAT) from a given radian of rotation about a given axis or from
     a given forward vector and up vector

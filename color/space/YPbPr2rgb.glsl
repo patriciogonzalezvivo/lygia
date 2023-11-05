@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: pass a color in RGB and get it in YPbPr from http://www.equasys.de/colorconversion.html
 use: YPbPr2RGB(<vec3|vec4> color)
 */

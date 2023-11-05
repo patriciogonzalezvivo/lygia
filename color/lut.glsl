@@ -2,7 +2,7 @@
 #include "../sample.glsl"
 
 /*
-Author: [Matt DesLauriers, Johan Ismael, Patricio Gonzalez Vivo]
+contributors: [Matt DesLauriers, Johan Ismael, Patricio Gonzalez Vivo]
 description: Use LUT textures to modify colors (vec4 and vec3) or a position in a gradient (vec2 and floats)
 use: lut(<SAMPLER_TYPE> texture, <vec4|vec3|vec2|float> value [, int row])
 options:

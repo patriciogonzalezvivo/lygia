@@ -2,7 +2,7 @@
 #include "../math/mirror.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: mirror a tiles pattern
 use: 
     - <float4> mirrorTile(<float4> tile)

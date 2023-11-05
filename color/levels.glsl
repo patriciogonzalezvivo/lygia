@@ -3,7 +3,7 @@
 #include "levels/gamma.glsl"
 
 /*
-original_author: Johan Ismael
+contributors: Johan Ismael
 description: |
     Combines inputRange, outputRange and gamma functions into one
     Adapted from Romain Dura (http://mouaif.wordpress.com/?p=94)

@@ -1,7 +1,7 @@
 #include "../ray.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: set the direction (and origin in some cases) of a ray
 use: 
     - rayDirection(inout <Ray> ray, [<vec3> origin,] <vec2> pos, <vec2> resolution, <float> fov)

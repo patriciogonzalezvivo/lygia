@@ -2,7 +2,7 @@
 #include "space/rgb2srgb.glsl"
 
 /*
-original_author: Bjorn Ottosson (@bjornornorn), Inigo Quiles
+contributors: [Bjorn Ottosson, Inigo Quiles]
 description: |
     Mix function by Inigo Quiles (https://www.shadertoy.com/view/ttcyRS) 
     utilizing Bjorn Ottosso's OkLab color space, which is provide smooth stransitions 
@@ -12,6 +12,9 @@ options:
     - MIXOKLAB_COLORSPACE_SRGB: by default colA and colB use linear RGB. If you want to use sRGB define this flag
 examples:
     - /shaders/color_mix.frag
+license: 
+    - MIT License (MIT) Copyright (c) 2020 Björn Ottosson
+    - MIT License (MIT) Copyright (c) 2020 Inigo Quilez
 */
 
 #ifndef FNC_MIXOKLAB

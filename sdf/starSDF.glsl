@@ -2,7 +2,7 @@
 #include "../space/scale.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Returns a star-shaped sdf with V branches
 use: starSDF(<vec2> st, <int> V, <float> scale)
 examples:

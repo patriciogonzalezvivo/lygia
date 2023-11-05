@@ -1,5 +1,5 @@
 /*
-original_author: Unreal Engine 4.0
+contributors: Unreal Engine 4.0
 description:  Adapted to be close to TonemapACES, with similar range. Gamma 2.2 correction is baked in, don't use with sRGB conversion! https://docs.unrealengine.com/4.26/en-US/RenderingAndGraphics/PostProcessEffects/ColorGrading/
 use: <vec3|vec4> tonemapUnreal(<vec3|vec4> x)
 */

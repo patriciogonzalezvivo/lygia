@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: unFix the aspect ratio 
 use: ratio(float2 st, float2 st_size)
 */

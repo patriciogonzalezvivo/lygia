@@ -1,7 +1,7 @@
 #include "srandom.glsl"
 
 /*
-original_author: Inigo Quilez
+contributors: Inigo Quilez
 description: returns 2D/3D value noise in the first channel and in the rest the derivatives. For more details read this nice article http://www.iquilezles.org/www/articles/gradientnoise/gradientnoise.htm
 use: noised(<vec2|vec3> space)
 options:

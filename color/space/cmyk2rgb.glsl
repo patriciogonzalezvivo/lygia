@@ -1,7 +1,7 @@
 #include "../../math/saturate.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: convert CMYK to RGB
 use: cmyk2rgb(<vec4> cmyk)
 */

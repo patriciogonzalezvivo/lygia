@@ -1,7 +1,7 @@
 #include "rgb2srgb.hlsl"
 
 /*
-original_author: Ronald van Wijnen (@OneDayOfCrypto)
+contributors: Ronald van Wijnen (@OneDayOfCrypto)
 description: Converts a XYZ color to sRGB color space.
 use: xyz2rgb(<float3|float4> color)
 */

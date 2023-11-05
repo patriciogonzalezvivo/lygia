@@ -1,7 +1,7 @@
 #include "../space/cart2polar.hlsl"
 
 /*
-original_author: Kathy McGuiness
+contributors: Kathy McGuiness
 description: |
     It returns a supershape, which is a mathematical function for modelling natural forms develop by [Paul Bourke](http://paulbourke.net/geometry/) and Johan Gielis. 
     Some notes about the parameters:

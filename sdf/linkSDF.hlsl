@@ -1,5 +1,5 @@
 /*
-original_author:  Inigo Quiles
+contributors:  Inigo Quiles
 description: generate the SDF of a link
 use: <float> linkSDF( <float3> p, <float> le, <float> r1, <float> r2 ) 
 */

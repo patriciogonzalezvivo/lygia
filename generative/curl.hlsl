@@ -1,7 +1,7 @@
 #include "snoise.hlsl"
 
 /*
-original_author: Isaac Cohen
+contributors: Isaac Cohen
 description: https://github.com/cabbibo/glsl-curl-noise/blob/master/curl.hlsl
 use: curl(<float3|float4> pos)
 */

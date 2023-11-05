@@ -1,5 +1,5 @@
 /*
-original_author:  Inigo Quiles
+contributors:  Inigo Quiles
 description: generate the SDF of a sphere
 use: <float> sphereSDF( in <vec3> pos[], in <float> size] ) 
 */

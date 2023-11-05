@@ -1,7 +1,7 @@
 #include "../math/lengthSq.glsl"
 #include "../sample.glsl"
 /*
-original_author: Patricio Gonzalez Vivo, Johan Ismael
+contributors: [Patricio Gonzalez Vivo, Johan Ismael]
 description: Chroma Aberration inspired by https://www.shadertoy.com/view/4sX3z4
 use: chromaAB(<SAMPLER_TYPE> texture, <vec2> st [, <float|vec2> sdf|offset, <float> pct])
 options:

@@ -1,5 +1,5 @@
 /*
-original_author:  Inigo Quiles
+contributors:  Inigo Quiles
 description: generate the SDF of a cone
 use: <float> coneSDF( in <vec3> pos, in <vec3> c ) 
 */

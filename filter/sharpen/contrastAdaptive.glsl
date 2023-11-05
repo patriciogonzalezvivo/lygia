@@ -2,7 +2,7 @@
 #include "../../sample.glsl"
 
 /*
-original_author: deus0ww
+contributors: deus0ww
 description: |
     Contrast Adaptive Sharpening - deus0ww - 2020-08-04 
     Orginal: https://github.com/GPUOpen-Effects/FidelityFX-CAS

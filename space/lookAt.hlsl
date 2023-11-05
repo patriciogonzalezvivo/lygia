@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: create a look up matrix 
 use: 
     - <float3x3> lookAt(<float3> forward, <float3> up)

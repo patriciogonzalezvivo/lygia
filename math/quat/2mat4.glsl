@@ -3,7 +3,7 @@
 #include "../toMat4.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: given a quaternion, returns a rotation 4x4 matrix
 use: <mat4> quat2mat4(<QUAT> Q)
 */

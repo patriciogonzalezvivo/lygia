@@ -1,5 +1,5 @@
 /*
-original_author:  Inigo Quiles
+contributors:  Inigo Quiles
 description: generate the SDF of a torus
 use: <float> torusSDF( in <vec3> pos, in <vec2> h [, in <float> ra, in <float> rb] ) 
 */

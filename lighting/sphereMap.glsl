@@ -1,7 +1,7 @@
 #include "../sample.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: given a Spherical Map texture and a normal direction returns the right pixel
 use: spheremap(<SAMPLER_TYPE> texture, <vec3> normal)
 options:

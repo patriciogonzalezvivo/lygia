@@ -1,7 +1,7 @@
 #include "type.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: given a quaternion, returns its conjugate
 use: <QUAT> quatConj(<QUAT> Q)
 */

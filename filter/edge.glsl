@@ -1,7 +1,7 @@
 #include "../sample/clamp2edge.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Wrapper around three different edge detection algorithms Sobel, Prewitt, and directional Sobel
 use: edge(<SAMPLER_TYPE> texture, <vec2> st, <vec2> pixels_scale)
 options:

@@ -1,5 +1,5 @@
 /*
-original_author: Johan Ismael
+contributors: Johan Ismael
 description: Similar to step but for an interval instead of a threshold. Returns 1 is x is between left and right, 0 otherwise
 use: within(<float> _min, <float|vec2|vec3|vec4> maxVal, <float|vec2|vec3|vec4> x)
 */

@@ -1,7 +1,7 @@
 #include "../math/const.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: 3D vector to equirect 2D projection 
 use: <vec2> xyz2equirect(<vec2> d)
 */

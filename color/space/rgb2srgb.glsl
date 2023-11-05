@@ -1,7 +1,7 @@
 #include "../../math/saturate.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo  
+contributors: Patricio Gonzalez Vivo  
 description: Converts a linear RGB color to sRGB.
 use: <float|vec3\vec4> rgb2srgb(<float|vec3|vec4> srgb)
 */

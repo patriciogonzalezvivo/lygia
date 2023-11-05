@@ -2,7 +2,7 @@
 #include "random.glsl"
 
 /*
-original_author: Inigo Quiles
+contributors: Inigo Quiles
 description: cell noise https://iquilezles.org/articles/voronoise/
 use: <float> voronoi(<vec3|vec2> pos, float voronoi, float _smoothness);
 options:

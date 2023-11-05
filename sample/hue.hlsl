@@ -2,7 +2,7 @@
 #include "../color/space/rgb2hue.hlsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: samples a hue rainbox pattern color encoded texture and returns a float
 use: <fluat> sampleHue(<SAMPLER_TYPE> tex, <float2> st);
 options:

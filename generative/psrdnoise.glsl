@@ -4,7 +4,7 @@
 #include "../math/grad4.glsl"
 
 /*
-original_author: [Stefan Gustavson, Ian McEwan]
+contributors: [Stefan Gustavson, Ian McEwan]
 description:  |
     Tiling simplex flow noise in 2-D and 3-D from https://github.com/stegu/psrdnoise
     "vec2/3 x" is the point to evaluate,

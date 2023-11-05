@@ -4,7 +4,7 @@
 #include "../math/quintic.glsl"
 
 /*
-original_author: [Stefan Gustavson, Ian McEwan]
+contributors: [Stefan Gustavson, Ian McEwan]
 description: Classic Perlin Noise https://github.com/stegu/webgl-noise
 use: cnoise(<vec2|vec3|vec4> pos)
 license: |

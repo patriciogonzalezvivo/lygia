@@ -1,7 +1,7 @@
 #include "operations.cuh"
 
 /*
-original_author: Inigo Quiles
+contributors: Inigo Quiles
 description: cubic polynomial https://iquilezles.org/articles/smoothsteps/
 use: <float|float2|float3|float4> cubic(<float|float2|float3|float4> value [, <float> in, <float> out]);
 */

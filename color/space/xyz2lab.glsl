@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Converts a XYZ color to Lab color space.
 use: xyz2rgb(<vec3|vec4> color)
 */

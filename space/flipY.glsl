@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Flip Y axis
 use: <vec2|vec3|vec4> flipY(<vec2|vec3|vec4> st)
 */

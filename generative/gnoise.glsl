@@ -4,7 +4,7 @@
 #include "../math/quintic.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: gradient Noise 
 use: gnoise(<float> x)
 */

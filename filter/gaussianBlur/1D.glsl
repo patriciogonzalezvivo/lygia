@@ -2,7 +2,7 @@
 #include "../../sample/clamp2edge.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: one dimension Gaussian Blur to be applied in two passes
 use: gaussianBlur1D(<SAMPLER_TYPE> texture, <vec2> st, <vec2> pixel_direction , const int kernelSize)
 options:

@@ -1,7 +1,7 @@
 #include "../../math/saturate.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Simpler water color ramp 
 use: <vec3> water(<float> value)
 examples:

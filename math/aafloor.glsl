@@ -1,7 +1,7 @@
 #include "map.glsl"
 
 /*
-original_author: dahart (https://www.shadertoy.com/user/dahart)
+contributors: dahart (https://www.shadertoy.com/user/dahart)
 description: |
     Is similar to floor() but has a 2-pixel wide gradient between clamped steps 
     to allow the edges in the result to be anti-aliased.

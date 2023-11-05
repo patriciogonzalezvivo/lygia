@@ -2,7 +2,7 @@
 #include "area.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: returns the centroid of a triangle
 use: <vec3> centroid(<Triangle> tri) 
 */

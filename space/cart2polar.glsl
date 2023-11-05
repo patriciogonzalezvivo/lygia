@@ -1,5 +1,5 @@
 /*
-original_author: [Ivan Dianov, Kathy McGuiness]
+contributors: [Ivan Dianov, Kathy McGuiness]
 description: cartesian to polar transformation.
 use: <vec2|vec3> cart2polar(<vec2|vec3> st)
 */

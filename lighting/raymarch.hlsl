@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: raymarching template where it needs to define a float4 raymarchMSap( in float3 pos ) 
 use: <float4> raymarch(<float3> camera, <float2> st)
 options:

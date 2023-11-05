@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: make some hexagonal tiles. XY provide coordenates of the tile. While Z provides the distance to the center of the tile
 use: <float4> hexTile(<float2> st)
 */

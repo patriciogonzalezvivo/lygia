@@ -1,7 +1,7 @@
 #include "../sample.glsl"
 
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: fakes a repeat wrapping texture 
 use: <vec4> sampleRepeat(<SAMPLER_TYPE> tex, <vec2> st);
 options:

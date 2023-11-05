@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: |
     Gjøl 2016, "Banding in Games: A Noisy Rant"
 use: 

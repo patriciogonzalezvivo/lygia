@@ -1,5 +1,5 @@
 /*
-original_author: Ian Heisters
+contributors: Ian Heisters
 description: Transforms the input signal into a triangle wave. For instance, if x goes between 0 and 2, the returned value will go from 0 to 1, and then 1 to 0 in a triangle shape.
 use: mirror(<vec2|float> x)
 examples:

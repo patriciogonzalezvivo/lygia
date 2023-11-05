@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: Flips the float passed in, 0 becomes 1 and 1 becomes 0
 use: flip(<float> v, <float> pct)
 */

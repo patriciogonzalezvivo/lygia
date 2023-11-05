@@ -3,7 +3,7 @@
 #include "../math/const.hlsl"
 
 /*
-original_author: Inigo Quiles
+contributors: Inigo Quiles
 description: cell noise https://iquilezles.org/articles/voronoise/
 use: <float> voronoi(<float3|float2> pos, float voronoi, float _smoothness);
 options:

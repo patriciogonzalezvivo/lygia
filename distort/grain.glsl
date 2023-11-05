@@ -5,7 +5,7 @@
 #include "../sample.glsl"
 
 /*
-original_author: Matt DesLauriers
+contributors: Matt DesLauriers
 description: Natural looking film grain using 3D noise functions (original source https://github.com/mattdesl/glsl-film-grain). Inspired by [Martins Upitis](http://devlog-martinsh.blogspot.com/2013/05/image-imperfections-and-film-grain-post.html).
 use: 
     - grain(<vec2> texCoord, <vec2> resolution [, <float> t, <float> multiplier])
@@ -14,6 +14,7 @@ options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - GRAIN_TYPE: type of the returned value (vec3 by default)
     - GRAIN_SAMPLER_FNC: grain function for SAMPLER_TYPE
+license: MIT License (MIT) Copyright (c) 2015 Matt DesLauriers
 */
 
 #ifndef GRAIN_TYPE

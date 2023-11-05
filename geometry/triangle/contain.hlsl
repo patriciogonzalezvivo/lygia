@@ -1,7 +1,7 @@
 #include "triangle.hlsl"
 
 /*
-original_author: Thomas Müller & Alex Evans
+contributors: Thomas Müller & Alex Evans
 description: does the position lie within the triangle
 use: <float3> contain(<Triangle> tri, <float3> _pos) 
 */

@@ -1,5 +1,5 @@
 /*
-original_author: Patricio Gonzalez Vivo
+contributors: Patricio Gonzalez Vivo
 description: given a 3x3 returns a 4x4 
 use: <mat4> toMat4(<mat3> m)
 */

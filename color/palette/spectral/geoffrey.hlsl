@@ -1,5 +1,5 @@
 /*
-original_author:
+contributors:
 description: 
 use: <float3> spectral_geoffrey(<float> x)
 */

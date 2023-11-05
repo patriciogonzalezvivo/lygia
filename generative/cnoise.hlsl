@@ -4,7 +4,7 @@
 #include "../math/quintic.hlsl"
 
 /*
-original_author: [Stefan Gustavson, Ian McEwan]
+contributors: [Stefan Gustavson, Ian McEwan]
 description: Classic Perlin Noise https://github.com/stegu/webgl-noise
 use: cnoise(<float2|float3|float4> pos)
 license: |

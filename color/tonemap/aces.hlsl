@@ -1,5 +1,5 @@
 /*
-Author: Narkowicz 2015
+contributors: Narkowicz 2015
 description: ACES Filmic Tone Mapping Curve. https://knarkowicz.wordpress.com/2016/01/06/aces-filmic-tone-mapping-curve/
 use: <float3|float4> tonemapACES(<float3|float4> x)
 */

@@ -1,7 +1,7 @@
 #include "../../sample/clamp2edge.glsl"
 
 /*
-original_author: Brad Larson
+contributors: Brad Larson
 description: Adapted version of Prewitt edge detection from https://github.com/BradLarson/GPUImage2
 use: edgePrewitt(<SAMPLER_TYPE> texture, <vec2> st, <vec2> scale)
 options:

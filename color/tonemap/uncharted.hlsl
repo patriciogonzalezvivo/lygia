@@ -1,5 +1,5 @@
 /*
-original_author: nan
+contributors: nan
 description: NAN
 use: <float3|float4> tonemapUncharted(<float3|float4> x)
 */
