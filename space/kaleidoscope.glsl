@@ -3,11 +3,13 @@
 /*
 contributors: [Mario Carrillo, Daniel Ilett]
 description:
-    Transforms a carteesian coordinates into a kaleidoscope space.
+    Converts carteesian coordinates into polar coordinates 
+    emulating a kaleidoscope visual effect.
     Based on Daniel Ilett's tutorial on reflecting polar coordinates: 
         https://danielilett.com/2020-02-19-tut3-8-crazy-kaleidoscopes/
 */
 
+// Default use when just the coordinates are given, the segment count is set to 8
 vec2 kaleidoscope(in vec2 coord) {
     float segmentCount = 8.0;
     
@@ -25,6 +27,7 @@ vec2 kaleidoscope(in vec2 coord) {
     return kuv;
 }
 
+// Use when when you want to specify the segment count
 vec2 kaleidoscope(in vec2 coord, in float segmentCount) {    
     vec2 uv = coord - 0.5;
     float radius = length(uv);
@@ -40,6 +43,7 @@ vec2 kaleidoscope(in vec2 coord, in float segmentCount) {
     return kuv;
 }
 
+// Use when when you want to specify the segment count and the phase so it helps with animation
 vec2 kaleidoscope(in vec2 coord, in float segmentCount, in float phase) {    
     vec2 uv = coord - 0.5;
     float radius = length(uv);
