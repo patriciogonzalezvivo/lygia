@@ -16,7 +16,7 @@ float henyeyGreenstein(const in float mu) {
 
 float henyeyGreenstein(float mu, float g) {
     float gg = g * g;
-    return (1.0 / (4.0 * PI))  * ((1.0 - gg) / pow(1.0 + gg - 2.0 * g * mu, 1.5));
+    return (1.0 / (4.0 * PI)) * ((1.0 - gg) / pow(1.0 + gg - 2.0 * g * mu, 1.5));
 }
 
 float henyeyGreenstein(float mu, float g, float dual_lobe_weight) {
