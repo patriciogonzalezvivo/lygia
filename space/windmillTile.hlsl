@@ -1,5 +1,6 @@
 #include "../math/const.hlsl"
 #include "rotate.hlsl"
+#include "sqTile.hlsl"
 
 /*
 contributors: Patricio Gonzalez Vivo

@@ -27,14 +27,14 @@ vec2 kaleidoscope(in vec2 coord, in float segmentCount, in float phase) {
     angle = min(angle, segmentAngle - angle);    
     
     vec2 kuv = vec2(cos(angle + phase), sin(angle + phase)) * radius + 0.5;  
-    kuv = max(min(st, 2.0 - st), -st);  
+    kuv = max(min(kuv, 2.0 - kuv), -kuv);  
 
     return kuv;
 }
 
 // Default use when just the coordinates are given, the segment count is set to 8
 vec2 kaleidoscope(in vec2 coord) {
-    return kaleidoscope(coord, 8, 0.0);
+    return kaleidoscope(coord, 8.0, 0.0);
 }
 
 // Use when when you want to specify the segment count
