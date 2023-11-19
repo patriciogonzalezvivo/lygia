@@ -46,12 +46,12 @@ vec3 sphericalHarmonics(const vec3 sh[9], const in vec3 n) {
         , 0.0) );
 }
 
-vec3 sphericalHarmonics(const in vec3 n) {
-#ifdef SCENE_SH_ARRAY
-    return sphericalHarmonics(SCENE_SH_ARRAY, n);
-#else
-    return vec3(1.0);
-#endif
-}
+// vec3 sphericalHarmonics(const in vec3 n) {
+// #ifdef SCENE_SH_ARRAY
+//     return sphericalHarmonics(SCENE_SH_ARRAY, n);
+// #else
+//     return vec3(1.0);
+// #endif
+// }
 
 #endif

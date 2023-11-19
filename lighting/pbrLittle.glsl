@@ -76,12 +76,7 @@ vec4 pbrLittle( vec4 _albedo, vec3 _position, vec3 _normal, float _roughness, fl
 
     vec3 R = reflect(-V, N);
     vec3 ambientSpecular = tonemapReinhard( envMap(R, _roughness, _metallic) ) * specIntensity;
-
-    #if defined(SHADING_MODEL_IRIDESCENCE)
-    ambientSpecular += fresnelIridescentReflection(R, _f0, NoV, thickness, IOR_AIR, ior.g, IOR_AIR, _roughness);
-    #else
-    ambientSpecular += fresnelReflection(R, _f0, NoV) * (1.0-_roughness);
-    #endif
+    ambientSpecular += fresnelReflection(R, _f0, NoV);
 
     _albedo.rgb = _albedo.rgb * notMetal + ( ambientSpecular 
                     + LIGHT_COLOR * 2.0 * spec
