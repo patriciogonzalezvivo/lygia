@@ -6,8 +6,8 @@
 #include "material.glsl"
 #include "fresnelReflection.glsl"
 
+#include "ior.glsl"
 #include "envMap.glsl"
-#include "sphericalHarmonics.glsl"
 #include "diffuse.glsl"
 #include "specular.glsl"
 
@@ -42,10 +42,10 @@ options:
 #ifndef FNC_PBR_LITTLE
 #define FNC_PBR_LITTLE
 
-vec4 pbrLittle(
-        vec4 _albedo, vec3 _position, vec3 _normal, float _roughness, float _metallic, vec3 _f0, // Material
-        float shadow                                                                             // Light       
-        ) {
+vec4 pbrLittle( vec4 _albedo, vec3 _position, vec3 _normal, float _roughness, float _metallic, vec3 _f0, // Material Basic
+                vec3 ior, float thickness,                                                               // Material Iridescence
+                float shadow  ) {                                                                        // Light       
+            
     #ifdef LIGHT_DIRECTION
     vec3 L = normalize(LIGHT_DIRECTION);
     #else
@@ -76,13 +76,22 @@ vec4 pbrLittle(
 
     vec3 R = reflect(-V, N);
     vec3 ambientSpecular = tonemapReinhard( envMap(R, _roughness, _metallic) ) * specIntensity;
-    ambientSpecular += fresnelReflection(R, _f0, NoV) * _metallic;
+
+    #if defined(SHADING_MODEL_IRIDESCENCE)
+    ambientSpecular += fresnelIridescentReflection(R, _f0, NoV, thickness, IOR_AIR, ior.g, IOR_AIR, _roughness);
+    #else
+    ambientSpecular += fresnelReflection(R, _f0, NoV) * (1.0-_roughness);
+    #endif
 
     _albedo.rgb = _albedo.rgb * notMetal + ( ambientSpecular 
                     + LIGHT_COLOR * 2.0 * spec
                     ) * (notMetal * smooth + _albedo.rgb * _metallic);
 
     return _albedo;
+}
+
+vec4 pbrLittle(vec4 albedo, vec3 position, vec3 normal, float roughness, float metallic, vec3 f0, float shadow) {
+    return pbrLittle(albedo, position, normal, roughness, metallic, f0, vec3(IOR_GLASS), 2000.0, shadow);
 }
 
 vec4 pbrLittle(vec4 albedo, vec3 position, vec3 normal, float roughness, float metallic, float shadow) {
@@ -102,7 +111,7 @@ vec4 pbrLittle(Material material) {
     #if defined(LIGHT_SHADOWMAP) && defined(LIGHT_SHADOWMAP_SIZE) && defined(LIGHT_COORD)
     s *= shadow(LIGHT_SHADOWMAP, vec2(LIGHT_SHADOWMAP_SIZE), (LIGHT_COORD).xy, (LIGHT_COORD).z);
     #endif
-    return pbrLittle(material.albedo, material.position, material.normal, material.roughness, material.metallic, material.f0, material.ambientOcclusion * s) + vec4(material.emissive, 0.0);
+    return pbrLittle(material.albedo, material.position, material.normal, material.roughness, material.metallic, material.f0, material.ior, material.thickness, material.ambientOcclusion * s) + vec4(material.emissive, 0.0);
 }
 
 #endif

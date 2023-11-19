@@ -1,5 +1,6 @@
 #include "fresnel.glsl"
-#include "fakeCube.glsl"
+#include "envMap.glsl"
+#include "../color/tonemap.glsl"
 #include "sphericalHarmonics.glsl"
 
 /*
@@ -17,52 +18,46 @@ vec3 fresnelReflection(const in vec3 R, const in vec3 f0, const in float NoV) {
     vec3 frsnl = fresnel(f0, NoV);
 
     vec3 reflectColor = vec3(0.0);
+
     #if defined(FRESNEL_REFLECTION_FNC)
     reflection = FRESNEL_REFLECTION_FNC(R);
 
-    #elif defined(ENVMAP_FNC) 
-    reflectColor = ENVMAP_FNC(R, 0.001, 0.001);
-
-    #elif defined(SCENE_SH_ARRAY)
-    reflectColor = sphericalHarmonics(R);
+    // #elif defined(SCENE_SH_ARRAY)
+    // reflectColor = tonemap( sphericalHarmonics(R) );
 
     #elif defined(SCENE_CUBEMAP)
     reflectColor = SAMPLE_CUBE_FNC( SCENE_CUBEMAP, R, ENVMAP_MAX_MIP_LEVEL ).rgb;
 
     #else
-    reflectColor = fakeCube(R);
+    reflectColor = envMap(R, 0.001, 0.001);
+
     #endif
 
     return reflectColor * frsnl;
 }
 
-vec3 fresnelReflection(const in vec3 R, const in float f0, const in float NoV) {
-    #if defined(TARGET_MOBILE) || defined(PLATFORM_RPI)
-    float frsnl = fresnel(f0, NoV);
+vec3 fresnelIridescentReflection(vec3 R, vec3 f0, float NoV, float thickness, float ior0, float ior1, float ior2, float roughness) {
+    vec3 frsnl = fresnelIridescent(f0, NoV, thickness, ior0, ior1, ior2, roughness);
 
     vec3 reflectColor = vec3(0.0);
+
     #if defined(FRESNEL_REFLECTION_FNC)
     reflection = FRESNEL_REFLECTION_FNC(R);
 
-    #elif defined(ENVMAP_FNC) 
-    reflectColor = ENVMAP_FNC(R, 0.001, 0.001);
+    // #elif defined(SCENE_SH_ARRAY)
+    // reflectColor = tonemap( sphericalHarmonics(R) );
 
     #elif defined(SCENE_CUBEMAP)
     reflectColor = SAMPLE_CUBE_FNC( SCENE_CUBEMAP, R, ENVMAP_MAX_MIP_LEVEL ).rgb;
 
-    #elif defined(SCENE_SH_ARRAY)
-    reflectColor = sphericalHarmonics(R);
-
     #else
-    reflectColor = fakeCube(R);
+    reflectColor = envMap(R, roughness, 0.001);
+
     #endif
 
     return reflectColor * frsnl;
-
-    #else
-    return fresnelReflection(R, vec3(f0, f0, f0), NoV);
-    #endif
 }
+
 
 #ifdef STR_MATERIAL
 vec3 fresnelReflection(const in Material _M) {

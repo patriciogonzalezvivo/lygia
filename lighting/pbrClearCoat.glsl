@@ -96,7 +96,11 @@ vec4 pbrClearCoat(const Material _mat) {
     vec3 Fr = vec3(0.0, 0.0, 0.0);
     Fr = envMap(M) * E * 2.0;
     #if !defined(PLATFORM_RPI)
-    Fr += tonemap( fresnelReflection(M) ) * M.metallic * (1.0-M.roughness) * 0.2;
+    #if defined(SHADING_MODEL_IRIDESCENCE)
+    Fr  += fresnelIridescentReflection(M.R, M.f0, M.NoV, M.thickness, IOR_AIR, M.ior.r, IOR_AIR, M.roughness);
+    #else
+    Fr  += fresnelReflection(M) * (1.0-M.roughness);
+    #endif
     #endif
     Fr *= specAO;
 
@@ -141,7 +145,7 @@ vec4 pbrClearCoat(const Material _mat) {
 
         #if defined(LIGHT_DIRECTION) || defined(LIGHT_POSITION)
         lightResolve(diffuseColor, specularColor, M, L, lightDiffuse, lightSpecular);
-    
+
         color.rgb  += lightDiffuse;     // Diffuse
         color.rgb  += lightSpecular;    // Specular
 
@@ -162,10 +166,9 @@ vec4 pbrClearCoat(const Material _mat) {
         // clear coat specular lobe
         float D         =   GGX(M.normal, h, clearCoatNoH, M.clearCoatRoughness);
         vec3  F         =   fresnel(f0, LoH) * M.clearCoat;
+
         vec3  Fcc       =   F;
-        vec3  clearCoat =   D * 
-                            kelemen(LoH) * 
-                            F;
+        vec3  clearCoat =   vec3(D) * kelemen(LoH);// * F;
         vec3  atten     =   (1.0 - Fcc);
 
         #if defined(MATERIAL_HAS_CLEAR_COAT_NORMAL)
@@ -174,8 +177,7 @@ vec4 pbrClearCoat(const Material _mat) {
         float clearCoatNoL = saturate(dot(clearCoatNormal, L.direction));
         color.rgb = color.rgb * atten * NoL + (clearCoat * clearCoatNoL * L.color) * L.intensity * L.shadow;
         #else
-        // color.rgb = color.rgb * atten + (clearCoat * LIGHT_COLOR) * (LIGHT_INTENSITY * NoL * M.shadow);
-        color.rgb = color.rgb + (clearCoat * L.color) * (L.intensity * L.shadow * NoL);
+        color.rgb = color.rgb * atten + (clearCoat * L.color) * (L.intensity * L.shadow * NoL);
         #endif
 
         #endif
