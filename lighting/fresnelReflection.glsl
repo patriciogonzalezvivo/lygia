@@ -1,7 +1,6 @@
 #include "fresnel.glsl"
 #include "envMap.glsl"
 #include "../color/tonemap.glsl"
-#include "../math/pow5.glsl"
 #include "sphericalHarmonics.glsl"
 
 /*
