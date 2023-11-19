@@ -67,24 +67,6 @@ vec4 pbrGlass(const Material _mat) {
     #endif
 
     vec4 color  = vec4(0.0, 0.0, 0.0, 1.0);
-    #if defined(PBRGLASS_CHROMATIC_LOOP)
-    const int LOOP = 10;
-    for ( int i = 0; i < PBRGLASS_CHROMATIC_LOOP; i ++ ) {
-
-        float slide = float(i + 1) / float(PBRGLASS_CHROMATIC_LOOP);
-        vec3 RaG    = refract(-M.V, No, eta.g);
-        vec3 ref    = envMap( mix(-M.V, RaG, slide), M.roughness);
-        #if !defined(TARGET_MOBILE) && !defined(PLATFORM_RPI)
-        vec3 RaR    = refract(-M.V, No, eta.r);
-        vec3 RaB    = refract(-M.V, No, eta.b);
-        ref.r       = envMap( mix(-M.V, RaR, slide), M.roughness).r;
-        ref.b       = envMap( mix(-M.V, RaB, slide), M.roughness).b;
-        #endif
-
-        color.rgb += ref;
-    }
-    color.rgb /= float(PBRGLASS_CHROMATIC_LOOP);
-    #else
 
     vec3    RaG     = refract(-M.V, No, eta.g);
     color.rgb   = envMap(RaG, M.roughness);
@@ -93,8 +75,6 @@ vec4 pbrGlass(const Material _mat) {
     vec3    RaB     = refract(-M.V, No, eta.b);
     color.r     = envMap(RaR, M.roughness).r;
     color.b     = envMap(RaB, M.roughness).b;
-    #endif
-
     #endif
 
     // color.rgb   *= exp( -M.thickness * 2000.0);

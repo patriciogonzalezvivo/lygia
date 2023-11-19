@@ -1,6 +1,7 @@
 #include "fresnel.glsl"
 #include "envMap.glsl"
 #include "../color/tonemap.glsl"
+#include "../math/pow5.glsl"
 #include "sphericalHarmonics.glsl"
 
 /*
@@ -53,18 +54,17 @@ vec3 fresnelIridescentReflection(vec3 R, vec3 f0, float NoV, float thickness, fl
 }
 
 vec3 fresnelIridescentReflection(vec3 normal, vec3 view, float thickness, float ior1, float ior2) {
-    float cos0 = -dot(view, normal);
-    const vec3 RGB = vec3(612.,549.,464.);
-    // const vec3 RGB = vec3(650.0, 510.0, 475.0);
     
     // Schlick approximation
+    float cos0 = -dot(view, normal);
     float f0 = (ior2-1.)/(ior2+1.);
     float R = schlick(f0 * f0, 1.0, cos0);
     float T = 1.0-R;
 
-    // Simpler formula based on:
+    const vec3 RGB = vec3(612.,549.,464.);
+
+    // Formula based on:
     // https://www.alanzucconi.com/2017/07/25/the-mathematics-of-thin-film-interference/
-    // Looks equivalent to my first attempt one above.
     float a = ior1/ior2;
     float cosi2 = sqrt(1. - a*a*(1. - cos0*cos0));
     vec3 shift = 4.*PI*(thickness/RGB)*ior2*cosi2 + HALF_PI;
@@ -74,13 +74,9 @@ vec3 fresnelIridescentReflection(vec3 normal, vec3 view, float thickness, float 
     
     // Reflection and background
     vec3 ref = envMap(reflect(view, normal), 0.0, 0.0);
-    vec3 bak = envMap(refract(view, normal, 0.99), 0.0, 0.0);
-    
+
     // Specular reflection
-    vec3 spec = pow(ref, vec3(5.));
-    
-    // Final color
-    return ref*irid + spec*irid + T*T*T*T*bak;
+    return (ref + pow5(ref)) * irid;
 }
 
 
