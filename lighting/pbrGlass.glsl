@@ -46,9 +46,10 @@ vec4 pbrGlass(const Material _mat) {
     M.R         = reflection(M.V, M.normal, M.roughness);   // Reflection
     M.NoV       = dot(M.normal, M.V);                       // Normal . View
 
-    vec3    No      = M.normal;                            // Normal out
 #if defined(SCENE_BACK_SURFACE)
     vec3    No      = normalize(M.normal - M.normal_back);
+#else
+    vec3    No      = M.normal;                            // Normal out
 #endif
 
     vec3    f0      = ior2f0(M.ior);
