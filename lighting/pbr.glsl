@@ -63,7 +63,11 @@ vec4 pbr(const in Material _mat) {
     vec3 Fr = vec3(0.0, 0.0, 0.0);
     Fr  = envMap(M) * E * 2.0;
     #if !defined(PLATFORM_RPI)
-    Fr  += tonemap( fresnelReflection(M) ) * M.metallic * (1.0-M.roughness) * 0.2;
+    #if defined(SHADING_MODEL_IRIDESCENCE)
+    Fr  += fresnelIridescentReflection(M.R, M.f0, M.NoV, M.thickness, IOR_AIR, M.ior.r, IOR_AIR, M.roughness);
+    #else
+    Fr  += fresnelReflection(M) * (1.0-M.roughness);
+    #endif
     #endif
     Fr  *= specularAO(M, diffuseAO);
 
