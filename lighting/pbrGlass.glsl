@@ -47,7 +47,7 @@ vec4 pbrGlass(const Material _mat) {
     M.NoV       = dot(M.normal, M.V);                       // Normal . View
 
 #if defined(SCENE_BACK_SURFACE)
-    vec3    No      = normalize(M.normal - M.normal_back);
+    vec3    No      = normalize(M.normal - M.normal_back); // Normal out is the difference between the front and back normals
 #else
     vec3    No      = M.normal;                            // Normal out
 #endif
