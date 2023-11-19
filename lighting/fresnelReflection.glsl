@@ -25,11 +25,8 @@ vec3 fresnelReflection(const in vec3 R, const in vec3 f0, const in float NoV) {
     // #elif defined(SCENE_SH_ARRAY)
     // reflectColor = tonemap( sphericalHarmonics(R) );
 
-    #elif defined(SCENE_CUBEMAP)
-    reflectColor = SAMPLE_CUBE_FNC( SCENE_CUBEMAP, R, ENVMAP_MAX_MIP_LEVEL ).rgb;
-
     #else
-    reflectColor = envMap(R, 0.001, 0.001);
+    reflectColor = envMap(R, 1.0, 0.001);
 
     #endif
 
@@ -47,11 +44,8 @@ vec3 fresnelIridescentReflection(vec3 R, vec3 f0, float NoV, float thickness, fl
     // #elif defined(SCENE_SH_ARRAY)
     // reflectColor = tonemap( sphericalHarmonics(R) );
 
-    #elif defined(SCENE_CUBEMAP)
-    reflectColor = SAMPLE_CUBE_FNC( SCENE_CUBEMAP, R, ENVMAP_MAX_MIP_LEVEL ).rgb;
-
     #else
-    reflectColor = envMap(R, roughness, 0.001);
+    reflectColor = envMap(R, roughness, 0.00001);
 
     #endif
 
