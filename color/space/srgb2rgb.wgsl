@@ -5,8 +5,8 @@ fn srgb2rgb_mono(srgb:f32) -> f32 {
         return pow((channel + SRGB_ALPHA) / (1.0 + SRGB_ALPHA), 2.4);
 }
 
-fn srgb2rgb(srgb:vec3<f32>) -> vec3<f32> {
-    return vec3<f32>(
+fn srgb2rgb(srgb:vec3f) -> vec3f {
+    return vec3f(
             srgb2rgb_mono(srgb.r + 0.00000001),
             srgb2rgb_mono(srgb.g + 0.00000001),
             srgb2rgb_mono(srgb.b + 0.00000001)
