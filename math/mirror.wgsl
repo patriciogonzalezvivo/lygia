@@ -5,7 +5,7 @@ fn mirror(x: f32) -> f32 {
     return f + m - fm * 2.0;
 }
 
-fn mirror2(xy: vec2<f32>) -> vec2<f32> {
+fn mirror2(xy: vec2f) -> vec2f {
     let f = fract(xy);
     let m = floor(xy % 2.0);
     let fm = f * m;
