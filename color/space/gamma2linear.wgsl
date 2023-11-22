@@ -1,3 +1,3 @@
-fn gamma2linear(gamma: vec3<f32>) -> vec3<f32> {
+fn gamma2linear(gamma: vec3f) -> vec3f {
     return pow(gamma, vec3(2.2));
 }
