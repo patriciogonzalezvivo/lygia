@@ -22,3 +22,7 @@
 #include "blend/pinLight.glsl"
 #include "blend/screen.glsl"
 #include "blend/subtract.glsl"
+#include "blend/color.glsl"
+#include "blend/hue.glsl"
+#include "blend/luminosity.glsl"
+#include "blend/saturation.glsl"
