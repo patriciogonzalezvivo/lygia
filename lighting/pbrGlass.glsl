@@ -75,7 +75,7 @@ vec4 pbrGlass(const Material _mat) {
     vec4 color  = vec4(0.0, 0.0, 0.0, 1.0);
 
     // Refraction
-    float T = 1.0-schlick(f0.g * f0.g, 1.0, dot(M.V, No));
+    float T = max(0.0, 1.0-schlick(f0.g * f0.g, 1.0, dot(M.V, No)));
 
     #if defined(GLASS_DISPERSION) && defined(GLASS_DISPERSION_PASSES)
     float pass_step = 1.0/float(GLASS_DISPERSION_PASSES);
@@ -101,7 +101,7 @@ vec4 pbrGlass(const Material _mat) {
     color.r     = envMap(RaR, M.roughness).r;
     color.b     = envMap(RaB, M.roughness).b;
     #endif
-    color.rgb *= T * T * T ;
+    color.rgb *= T*T*T*T;
     #endif
 
 
