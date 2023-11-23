@@ -35,6 +35,12 @@ examples:
 #define IBL_LUMINANCE   1.0
 #endif
 
+#if !defined(GLASS_DISPERSION) && defined(GLASS_DISPERSION_PASSES)
+#define GLASS_DISPERSION 0.05
+#elif defined(GLASS_DISPERSION) && !defined(GLASS_DISPERSION_PASSES)
+#define GLASS_DISPERSION_PASSES 6
+#endif
+
 #ifndef FNC_PBRGLASS
 #define FNC_PBRGLASS
 
@@ -68,6 +74,25 @@ vec4 pbrGlass(const Material _mat) {
 
     vec4 color  = vec4(0.0, 0.0, 0.0, 1.0);
 
+    // Refraction
+    float T = 1.0-schlick(f0.g * f0.g, 1.0, dot(M.V, No));
+
+    #if defined(GLASS_DISPERSION) && defined(GLASS_DISPERSION_PASSES)
+    float pass_step = 1.0/float(GLASS_DISPERSION_PASSES);
+    vec3 bck = vec3(0.0);
+    for ( int i = 0; i < GLASS_DISPERSION_PASSES; i++ ) {
+        float slide = float(i) * pass_step * GLASS_DISPERSION;
+        vec3 RaG    = refract(-M.V, No, eta.g );
+        vec3 ref    = envMap(RaG, M.roughness, 0.0);
+        #if !defined(TARGET_MOBILE) && !defined(PLATFORM_RPI)
+        ref.r       = envMap(refract(-M.V, No, eta.r - slide), M.roughness, 0.0).r;
+        ref.b       = envMap(refract(-M.V, No, eta.b + slide), M.roughness, 0.0).b;
+        #endif
+        bck += ref;
+    }
+    color.rgb = (bck * pass_step ) *T*T*T;
+    #else 
+
     vec3    RaG     = refract(-M.V, No, eta.g);
     color.rgb   = envMap(RaG, M.roughness);
     #if !defined(TARGET_MOBILE) && !defined(PLATFORM_RPI)
@@ -76,6 +101,9 @@ vec4 pbrGlass(const Material _mat) {
     color.r     = envMap(RaR, M.roughness).r;
     color.b     = envMap(RaB, M.roughness).b;
     #endif
+    color.rgb *= T * T * T ;
+    #endif
+
 
     // color.rgb   *= exp( -M.thickness * 2000.0);
     color.rgb   += Fr * IBL_LUMINANCE;
