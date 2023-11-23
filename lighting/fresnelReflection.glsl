@@ -74,13 +74,13 @@ vec3 fresnelIridescentReflection(vec3 normal, vec3 view, float thickness, float 
     
     // Reflection and background
     vec3 ref = envMap(reflect(view, normal), 0.0, 0.0);
-    vec3 bak = envMap(refract(view, normal, 0.99), 0.0, 0.0);
+    // vec3 bak = envMap(refract(view, normal, 0.99), 0.0, 0.0);
     
     // Specular reflection
     vec3 spec = pow(ref, vec3(5.));
     
     // Final color
-    return ref*irid + spec*irid + T*T*T*T*bak;
+    return ref*irid + spec*irid;// + T*T*T*T*bak;
 }
 
 
