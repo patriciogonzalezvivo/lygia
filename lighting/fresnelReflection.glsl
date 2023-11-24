@@ -1,14 +1,14 @@
 #include "fresnel.glsl"
 #include "envMap.glsl"
-#include "../color/tonemap.glsl"
-#include "sphericalHarmonics.glsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
 description: resolve fresnel coeficient
 use: 
-    - <vec3> fresnel(const <vec3> f0, <float> LoH)
-    - <vec3> fresnel(<vec3> _R, <vec3> _f0, <float> _NoV)
+    - <vec3> fresnelReflection(<vec3> R, <vec3> f0, <float> NoV)
+    - <vec3> fresnelIridescentReflection(<vec3> R, <vec3> f0, <float> NoV, <float> thickness, <float> ior0, <float> ior1, <float> ior2, <float> roughness)
+    - <vec3> fresnelIridescentReflection(<vec3> normal, <vec3> view, <float> thickness, <float> ior1, <float> ior2)
+    - <vec3> fresnelReflection(<Material> _M)
 */
 
 #ifndef FNC_FRESNEL_REFLECTION
@@ -21,9 +21,6 @@ vec3 fresnelReflection(const in vec3 R, const in vec3 f0, const in float NoV) {
 
     #if defined(FRESNEL_REFLECTION_FNC)
     reflection = FRESNEL_REFLECTION_FNC(R);
-
-    // #elif defined(SCENE_SH_ARRAY)
-    // reflectColor = tonemap( sphericalHarmonics(R) );
 
     #else
     reflectColor = envMap(R, 1.0, 0.001);
@@ -40,9 +37,6 @@ vec3 fresnelIridescentReflection(vec3 R, vec3 f0, float NoV, float thickness, fl
 
     #if defined(FRESNEL_REFLECTION_FNC)
     reflection = FRESNEL_REFLECTION_FNC(R);
-
-    // #elif defined(SCENE_SH_ARRAY)
-    // reflectColor = tonemap( sphericalHarmonics(R) );
 
     #else
     reflectColor = envMap(R, roughness, 0.00001);
@@ -83,7 +77,7 @@ vec3 fresnelIridescentReflection(vec3 normal, vec3 view, float thickness, float 
 vec3 fresnelReflection(const in Material _M) {
     #if defined(SHADING_MODEL_IRIDESCENCE)
     return fresnelIridescentReflection(_M.R, _M.f0, _M.NoV, _M.thickness, IOR_AIR, _M.ior.g, IOR_AIR, _M.roughness);
-    // return fresnelIridescentReflection(_M.normal, _M.V, _M.thickness, IOR_AIR, _M.ior.g) * (1.0-_M.roughness);
+    // return fresnelIridescentReflection(_M.normal, -_M.V, _M.thickness, IOR_AIR, _M.ior.g) * (1.0-_M.roughness);
     #else
     return fresnelReflection(_M.R, _M.f0, _M.NoV) * (1.0-_M.roughness);
     #endif
