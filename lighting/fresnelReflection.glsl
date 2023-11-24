@@ -10,7 +10,14 @@ use:
     - <vec3> fresnelReflection(<vec3> R, <vec3> f0, <float> NoV)
     - <vec3> fresnelIridescentReflection(<vec3> normal, <vec3> view, <vec3> f0, <vec3> ior1, <vec3> ior2, <float> thickness, <float> roughness)
     - <vec3> fresnelReflection(<Material> _M)
+options:
+    - FRESNEL_REFLECTION_RGB: <vec3> RGB values of the reflection
+
 */
+
+#ifndef FRESNEL_REFLECTION_RGB
+#define FRESNEL_REFLECTION_RGB vec3(612.0, 549.0, 464.0)
+#endif
 
 #ifndef FNC_FRESNEL_REFLECTION
 #define FNC_FRESNEL_REFLECTION
@@ -30,10 +37,9 @@ vec3 fresnelIridescentReflection(vec3 normal, vec3 view, float f0, float ior1, f
     float cos0 = -dot(view, normal);
     float Fr = fresnel(f0, cos0);
     float T = 1.0 - Fr;
-    const vec3 RGB = vec3(612.0, 549.0, 464.0);
     float a = ior1/ior2;
     float cosi2 = sqrt(1.0 - a * a * (1.0 - cos0*cos0));
-    vec3 shift = 4.0 * PI * (thickness/RGB) * ior2 * cosi2 + HALF_PI;
+    vec3 shift = 4.0 * PI * (thickness/FRESNEL_REFLECTION_RGB) * ior2 * cosi2 + HALF_PI;
     vec3 irid = Fr * ( 1.0 + T * ( T + 2.0 * cos(shift) ) );
     vec3 ref = envMap(reflect(view, normal), roughness, 0.0);
     return (ref + pow5(ref)) * irid;
@@ -41,15 +47,11 @@ vec3 fresnelIridescentReflection(vec3 normal, vec3 view, float f0, float ior1, f
 
 vec3 fresnelIridescentReflection(vec3 normal, vec3 view, vec3 f0, vec3 ior1, vec3 ior2, float thickness, float roughness) {
     float cos0 = -dot(view, normal);
-    
     vec3 Fr = fresnel(f0, cos0);
     vec3 T = 1.0 - Fr;
-
-    const vec3 RGB = vec3(612.0, 549.0, 464.0);
-
     vec3 a = ior1/ior2;
     vec3 cosi2 = sqrt(1.0 - a * a * (1.0 - cos0*cos0));
-    vec3 shift = 4.0 * PI * (thickness/RGB) * ior2 * cosi2 + HALF_PI;
+    vec3 shift = 4.0 * PI * (thickness/FRESNEL_REFLECTION_RGB) * ior2 * cosi2 + HALF_PI;
     vec3 irid = Fr * ( 1.0 + T * ( T + 2.0 * cos(shift) ) );
     vec3 ref = envMap(reflect(view, normal), roughness, 0.0);
     return (ref + pow5(ref)) * irid;
