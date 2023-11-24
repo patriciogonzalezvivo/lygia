@@ -24,18 +24,31 @@ options:
 
 vec3 fresnelReflection(const in vec3 R, const in vec3 f0, const in float NoV) {
     vec3 frsnl = fresnel(f0, NoV);
+
     vec3 reflectColor = vec3(0.0);
     #if defined(FRESNEL_REFLECTION_FNC)
     reflection = FRESNEL_REFLECTION_FNC(R);
     #else
     reflectColor = envMap(R, 1.0, 0.001);
     #endif
+
     return reflectColor * frsnl;
 }
 
-vec3 fresnelIridescentReflection(vec3 normal, vec3 view, float f0, float ior1, float ior2, float thickness, float roughness) {
+vec3 fresnelReflection(const in vec3 R, const in vec3 Fr) {
+    vec3 reflectColor = vec3(0.0);
+    #if defined(FRESNEL_REFLECTION_FNC)
+    reflection = FRESNEL_REFLECTION_FNC(R);
+    #else
+    reflectColor = envMap(R, 1.0, 0.001);
+    #endif
+    return reflectColor * Fr;
+}
+
+vec3 fresnelIridescentReflection(vec3 normal, vec3 view, float f0, float ior1, float ior2, float thickness, float roughness, 
+                                 inout float Fr) {
     float cos0 = -dot(view, normal);
-    float Fr = fresnel(f0, cos0);
+    Fr = fresnel(f0, cos0);
     float T = 1.0 - Fr;
     float a = ior1/ior2;
     float cosi2 = sqrt(1.0 - a * a * (1.0 - cos0*cos0));
@@ -45,9 +58,15 @@ vec3 fresnelIridescentReflection(vec3 normal, vec3 view, float f0, float ior1, f
     return (ref + pow5(ref)) * irid;
 }
 
-vec3 fresnelIridescentReflection(vec3 normal, vec3 view, vec3 f0, vec3 ior1, vec3 ior2, float thickness, float roughness) {
+vec3 fresnelIridescentReflection(vec3 normal, vec3 view, float f0, float ior1, float ior2, float thickness, float roughness) {
+    float Fr = 0.0;
+    return fresnelIridescentReflection(normal, view, f0, ior1, ior2, thickness, roughness, Fr);
+}
+
+vec3 fresnelIridescentReflection(vec3 normal, vec3 view, vec3 f0, vec3 ior1, vec3 ior2, float thickness, float roughness,
+                                 inout vec3 Fr) {
     float cos0 = -dot(view, normal);
-    vec3 Fr = fresnel(f0, cos0);
+    Fr = fresnel(f0, cos0);
     vec3 T = 1.0 - Fr;
     vec3 a = ior1/ior2;
     vec3 cosi2 = sqrt(1.0 - a * a * (1.0 - cos0*cos0));
@@ -55,6 +74,11 @@ vec3 fresnelIridescentReflection(vec3 normal, vec3 view, vec3 f0, vec3 ior1, vec
     vec3 irid = Fr * ( 1.0 + T * ( T + 2.0 * cos(shift) ) );
     vec3 ref = envMap(reflect(view, normal), roughness, 0.0);
     return (ref + pow5(ref)) * irid;
+}
+
+vec3 fresnelIridescentReflection(vec3 normal, vec3 view, vec3 f0, vec3 ior1, vec3 ior2, float thickness, float roughness) {
+    vec3 Fr = vec3(0.0);
+    return fresnelIridescentReflection(normal, view, f0, ior1, ior2, thickness, roughness, Fr);
 }
 
 vec3 fresnelIridescentReflection(vec3 normal, vec3 view, float ior1, float ior2, float thickness, float roughness) {
