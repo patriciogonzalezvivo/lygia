@@ -19,9 +19,9 @@ use:
 #ifndef FNC_TRANSPARENT
 #define FNC_TRANSPARENT
 
-vec3 transparent(vec3 normal, vec3 view, vec3 eta, vec3 f0, float roughness) {
+vec3 transparent(vec3 normal, vec3 view, vec3 Fr, vec3 eta, float roughness) {
     vec3 color  = vec3(0.0);
-    vec3 T      = max(vec3(0.0), 1.0-fresnel(f0, -dot(view, normal)));
+    vec3 T      = max(vec3(0.0), 1.0-Fr);
 
     #if defined(TRANSPARENT_DISPERSION) && defined(TRANSPARENT_DISPERSION_PASSES)
         float pass_step = 1.0/float(TRANSPARENT_DISPERSION_PASSES);
@@ -56,9 +56,9 @@ vec3 transparent(vec3 normal, vec3 view, vec3 eta, vec3 f0, float roughness) {
     return color*T*T*T*T;
 }
 
-vec3 transparent(vec3 normal, vec3 view, vec3 eta, float f0, float roughness) {
+vec3 transparent(vec3 normal, vec3 view, float Fr, vec3 eta, float roughness) {
     vec3 color  = vec3(0.0);
-    float T     = max(0.0, 1.0-fresnel(f0, -dot(view, normal)));
+    float T     = max(0.0, 1.0-Fr);
 
     #if defined(TRANSPARENT_DISPERSION) && defined(TRANSPARENT_DISPERSION_PASSES)
         float pass_step = 1.0/float(TRANSPARENT_DISPERSION_PASSES);

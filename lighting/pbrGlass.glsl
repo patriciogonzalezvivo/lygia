@@ -44,13 +44,12 @@ vec4 pbrGlass(const Material _mat) {
     Material M  = _mat;
     M.V         = normalize(CAMERA_POSITION - M.position);  // View
     M.R         = reflection(M.V, M.normal, M.roughness);   // Reflection
-    M.NoV       = dot(M.normal, M.V);                       // Normal . View
-
 #if defined(SCENE_BACK_SURFACE)
     vec3 No     = normalize(M.normal - M.normal_back); // Normal out is the difference between the front and back normals
 #else
     vec3 No     = M.normal;                            // Normal out
 #endif
+    M.NoV       = dot(No, M.V);                        // Normal . View
 
     vec3 eta    = ior2eta(M.ior);
     
@@ -59,17 +58,26 @@ vec4 pbrGlass(const Material _mat) {
     // ------------------------
     vec3 E = envBRDFApprox(M.albedo.rgb, M);
 
-    vec3 Fr = vec3(0.0, 0.0, 0.0);
-    Fr  += envMap(M) * E;
+    vec3 Gi = vec3(0.0, 0.0, 0.0);
+    Gi  += envMap(M) * E;
     #if !defined(PLATFORM_RPI)
-    Fr  += fresnelReflection(M);
+    // Gi  += fresnelReflection(M);
+
+    #if defined(SHADING_MODEL_IRIDESCENCE)
+    vec3 Fr = vec3(0.0);
+    Gi  += fresnelIridescentReflection(M.normal, -M.V, M.f0, vec3(IOR_AIR), M.ior, M.thickness, M.roughness, Fr);
+    #else
+    vec3 Fr = fresnel(M.f0, M.NoV);
+    Gi  += fresnelReflection(M.R, Fr) * (1.0-M.roughness);
+    #endif
+
     #endif
 
     vec4 color  = vec4(0.0, 0.0, 0.0, 1.0);
 
     // Refraction
-    color.rgb   += transparent(No, -M.V, eta, M.f0, M.roughness);
-    color.rgb   += Fr * IBL_LUMINANCE;
+    color.rgb   += transparent(No, -M.V, Fr, eta, M.roughness);
+    color.rgb   += Gi * IBL_LUMINANCE;
 
     // TODO: RaG
     //  - Add support for multiple lights

@@ -14,7 +14,7 @@ use:
 #ifndef FNC_FRESNEL
 #define FNC_FRESNEL
 
-vec3 fresnel(vec3 f0, vec3 normal, vec3 view) {
+vec3 fresnel(const in vec3 f0, vec3 normal, vec3 view) {
    return schlick(f0, 1.0, dot(view, normal));
 }
 
