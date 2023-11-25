@@ -12,7 +12,7 @@ examples:
 #ifndef FNC_CURL
 #define FNC_CURL
 
-vec2 curl( vec2 p ){
+vec2 curl( vec2 p ) {
     const float e = .1;
     vec2 dx = vec2( e   , 0.0 );
     vec2 dy = vec2( 0.0 , e   );
