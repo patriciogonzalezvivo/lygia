@@ -2,7 +2,7 @@
 #include "../sample.glsl"
 /*
 contributors: [Patricio Gonzalez Vivo, Johan Ismael]
-description: Chroma Aberration inspired by https://www.shadertoy.com/view/4sX3z4
+description: Chroma Aberration
 use: chromaAB(<SAMPLER_TYPE> texture, <vec2> st [, <float|vec2> sdf|offset, <float> pct])
 options:
     CHROMAAB_TYPE: return type, defauls to vec3
