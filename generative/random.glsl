@@ -1,5 +1,5 @@
 /*
-contributors: Patricio Gonzalez Vivo
+contributors: ["Patricio Gonzalez Vivo", "David Hoskins", "Inigo Quilez"]
 description: pass a value and get some random normalize value between 0 and 1
 use: float random[2|3](<float|vec2|vec3> value)
 options:
@@ -8,6 +8,8 @@ options:
     - RANDOM_SCALE: by default this scale if for number with a big range. For producing good random between 0 and 1 use bigger range
 examples:
     - /shaders/generative_random.frag
+license:
+    - MIT License (MIT) Copyright 2014, David Hoskins
 */
 
 #ifndef RANDOM_SCALE
