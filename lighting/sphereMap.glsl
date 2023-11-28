@@ -20,8 +20,8 @@ options:
 #define FNC_SPHEREMAP
 vec2 sphereMap(const in vec3 normal, const in vec3 eye) {
     vec3 r = reflect(-eye, normal);
-    r = normalize(r);
-    float m = 2.0 * length(r) + 1.0;
+    r.z = 1.0 + r.z;
+    float m = 2.0 * length(r) + 0.5;
     return r.xy / m - 0.5;
 }
 
