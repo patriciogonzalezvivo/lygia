@@ -6,6 +6,7 @@
 #include "envMap.glsl"
 #include "light/new.glsl"
 #include "light/resolve.glsl"
+#include "sphericalHarmonics.glsl"
 
 #include "ior/2f0.glsl"
 

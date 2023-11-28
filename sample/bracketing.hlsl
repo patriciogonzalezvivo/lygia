@@ -4,7 +4,7 @@
 #include "../sample.hlsl"
 
 /*
-contributors: Huw Bowles ( @hdb1 )
+contributors: Huw Bowles
 description: |
     'Bracketing' technique maps a texture to a plane using any arbitrary 2D vector field to give orientatio. From https://www.shadertoy.com/view/NddcDr
 use: sampleBracketing(<SAMPLER_TYPE> texture, <float2> st, <float2> direction [, <float> scale] )

@@ -27,7 +27,6 @@ options:
 #define FNC_DILATE
 
 DILATION_TYPE dilation(SAMPLER_TYPE tex, vec2 st, vec2 pixel, int radius) {
-
     float invKR = 1.0 / float(radius);
     DILATION_TYPE acc = DILATION_TYPE(0.0);
     float w = 0.0;

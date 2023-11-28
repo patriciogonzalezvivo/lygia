@@ -8,11 +8,11 @@ examples:
     - /shaders/generative_curl.frag
 */
 
-
 #ifndef FNC_CURL
 #define FNC_CURL
 
-vec2 curl( vec2 p ){
+#ifndef CURL_FNC
+vec2 curl( vec2 p ) {
     const float e = .1;
     vec2 dx = vec2( e   , 0.0 );
     vec2 dy = vec2( 0.0 , e   );
@@ -26,8 +26,16 @@ vec2 curl( vec2 p ){
     float y = p_y1.x - p_y0.x;
 
     const float divisor = 1.0 / ( 2.0 * e );
-    return normalize( vec2(x , y) * divisor );
+    return normalize( vec2(x, y) * divisor );
 }
+#else
+vec2 curl( vec2 p ) {
+    vec2 e = vec2(0.1, 0.0);
+    vec3 pos = vec3(p, 0.0);
+    return normalize(vec2(  (CURL_FNC(pos+e.yxy)-CURL_FNC(pos-e.yxy))/(2.0*e.x),
+                           -(CURL_FNC(pos+e.xyy)-CURL_FNC(pos-e.xyy))/(2.0*e.x)));
+}
+#endif
 
 vec3 curl( vec3 p ){
     const float e = .1;

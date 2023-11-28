@@ -14,6 +14,7 @@ description: Include all spectral palettes
 contributors: Martijn Steinrucken
 description: Spectral Response Function https://www.shadertoy.com/view/wlSBzD
 use: <float3> spectral(<float> value)
+license: MIT License Copyright (c) 2020 Martijn Steinrucken
 */
 
 #ifndef FNC_SPECTRAL
