@@ -5,6 +5,7 @@ contributors: Inigo Quiles
 description: |
     Visual approximation on Penner's paper on preintegrated SSS, Siggraph 2011. https://www.shadertoy.com/view/llXBWn
 use: <vec3> penner( <float> NoL, <float> ir )
+license: MIT License (MIT) Copyright 2017 Inigo Quilez
 */
 
 
