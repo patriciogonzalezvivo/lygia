@@ -1,5 +1,4 @@
 #include "common/schlick.glsl"
-#include "common/thinFilmReflectance.glsl"
 
 #include "../math/const.glsl"
 #include "../math/saturate.glsl"
