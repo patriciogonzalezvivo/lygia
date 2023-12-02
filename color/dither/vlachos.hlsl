@@ -12,8 +12,8 @@ options:
 #define DITHER_VLACHOS_ANIMATED
 #endif
 
-#ifndef DITHER_VLACHOS
-#define DITHER_VLACHOS
+#ifndef FNC_DITHER_VLACHOS
+#define FNC_DITHER_VLACHOS
 
 float ditherVlachos(float b, float2 fragcoord, const in float time) {
     #ifdef DITHER_VLACHOS_ANIMATED

@@ -4,31 +4,34 @@ description: |
     Vlachos 2016, "Advanced VR Rendering" http://alex.vlachos.com/graphics/Alex_Vlachos_Advanced_VR_Rendering_GDC2015.pdf
 use: <vec4|vec3|float> ditherShift(<vec4|vec3|float> value, <float> time)
 options:
-    - DITHER_SHIFT_ANIMATED
+    - DITHER_SHIFT_TIME
     - DITHER_SHIFT_CHROMATIC
 examples:
     - /shaders/color_dither.frag
 */
 
+#ifndef DITHER_SHIFT_COORD
+#define DITHER_SHIFT_COORD gl_FragCoord.xy
+#endif
+
+#ifdef DITHER_TIME
+#define DITHER_SHIFT_TIME DITHER_TIME
+#endif
+
 #ifdef DITHER_CHROMATIC
 #define DITHER_SHIFT_CHROMATIC
 #endif
 
+#ifndef FNC_DITHER_SHIFT
+#define FNC_DITHER_SHIFT
 
-#ifdef DITHER_ANIMATED
-#define DITHER_SHIFT_ANIMATED
-#endif
-
-#ifndef DITHER_SHIFT
-#define DITHER_SHIFT
-
-float ditherShift(float b, float time) {
+float ditherShift(float b) {
     //Bit-depth of display. Normally 8 but some LCD monitors are 7 or even 6-bit.	
     float dither_bit = 8.0; 
 
-    vec2 st = gl_FragCoord.xy;
-    #ifdef DITHER_SHIFT_ANIMATED 
-    st += 1337.0*fract(time);
+    vec2 st = DITHER_SHIFT_COORD;
+    #ifdef DITHER_SHIFT_TIME 
+    st += 1337.0*fract(DITHER_SHIFT_TIME);
     #endif
     //Calculate grid position
     float grid_position = fract( dot( st - vec2(0.5,0.5) , vec2(1.0/16.0,10.0/36.0) + 0.25 ) );
@@ -43,14 +46,14 @@ float ditherShift(float b, float time) {
     return b + 0.5/255.0 + dither_shift; 
 }
 
-vec3 ditherShift(vec3 rgb, float time) {
+vec3 ditherShift(vec3 rgb) {
     //Bit-depth of display. Normally 8 but some LCD monitors are 7 or even 6-bit.	
     float dither_bit = 8.0; 
 
     //Calculate grid position
-    vec2 st = gl_FragCoord.xy;
-    #ifdef DITHER_SHIFT_ANIMATED 
-    st += 1337.0*fract(time);
+    vec2 st = DITHER_SHIFT_COORD;
+    #ifdef DITHER_SHIFT_TIME 
+    st += 1337.0*fract(DITHER_SHIFT_TIME);
     #endif
     float grid_position = fract( dot( st - vec2(0.5,0.5) , vec2(1.0/16.0,10.0/36.0) + 0.25 ) );
 
@@ -71,8 +74,8 @@ vec3 ditherShift(vec3 rgb, float time) {
     return rgb + 0.5/255.0 + dither_shift_RGB; 
 }
 
-vec4 ditherShift(vec4 rgba, float time) {
-    return vec4(ditherShift(rgba.rgb, time), rgba.a);
+vec4 ditherShift(vec4 rgba) {
+    return vec4(ditherShift(rgba.rgb), rgba.a);
 }
 
 #endif

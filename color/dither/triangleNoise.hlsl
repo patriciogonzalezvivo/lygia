@@ -19,8 +19,8 @@ use:
 #define RESOLUTION _ScreenParams
 #endif
 
-#ifndef DITHER_TRIANGLENOISE
-#define DITHER_TRIANGLENOISE
+#ifndef FNC_DITHER_TRIANGLENOISE
+#define FNC_DITHER_TRIANGLENOISE
 
 float triangleNoise(in float2 n, const in float time) {
     // triangle noise, in [-1.0..1.0[ range

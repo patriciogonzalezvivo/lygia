@@ -17,8 +17,8 @@ options:
 #define DITHER_SHIFT_ANIMATED
 #endif
 
-#ifndef DITHER_SHIFT
-#define DITHER_SHIFT
+#ifndef FNC_DITHER_SHIFT
+#define FNC_DITHER_SHIFT
 
 float ditherShift(float b, float2 fragcoord, float time) {
     //Bit-depth of display. Normally 8 but some LCD monitors are 7 or even 6-bit.	

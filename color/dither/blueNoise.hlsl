@@ -26,8 +26,8 @@ options:
 #define DITHER_BLUENOISE_CHROMATIC
 #endif
 
-#ifndef DITHER_BLUENOISE
-#define DITHER_BLUENOISE
+#ifndef FNC_DITHER_BLUENOISE
+#define FNC_DITHER_BLUENOISE
 
 float remap_pdf_tri_unity( float v ) {
     v = v*2.0-1.0;
