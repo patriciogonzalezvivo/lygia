@@ -1,4 +1,3 @@
-#include "../../math/saturate.glsl"
 #include "../../math/decimate.glsl"
 
 /*
@@ -56,15 +55,15 @@ vec3 ditherVlachos(vec2 st) {
     #endif
     HIGHP vec3 noise = vec3(dot(vec2(171.0, 231.0), st));
     noise = fract(noise / vec3(103.0, 71.0, 97.0));
-    return noise / 255.0;
+    return noise;
 }
 
-vec3 ditherVlachos(const in vec3 color, const in vec2 xy, const int pres) {
-    return color + ditherVlachos(xy);
-    // float d = float(pres);
-    // vec3 decimated = decimate(color, d);
-    // vec3 diff = (color - decimated) * d;
-    // return saturate(decimate(color + (step(ditherVlachos(xy), diff) / d), d));
+vec3 ditherVlachos(const in vec3 color, const in vec2 st, const int pres) {
+    // return color + ditherVlachos(st) / 255.0;
+
+    float d = float(pres);
+    vec3 ditherPattern = ditherVlachos(st);
+    return decimate(color + ditherPattern / d, d);
 }
 vec3 ditherVlachos(const in vec3 color, const in vec2 xy) {
     return ditherVlachos(color, xy, DITHER_VLACHOS_PRECISION);

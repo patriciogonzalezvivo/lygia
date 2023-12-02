@@ -1,4 +1,3 @@
-#include "../../math/saturate.glsl"
 #include "../../math/decimate.glsl"
 
 /*
@@ -22,7 +21,7 @@ examples:
 #ifdef DITHER_PRECISION
 #define DITHER_BAYER_PRECISION DITHER_PRECISION
 #else
-#define DITHER_BAYER_PRECISION 255
+#define DITHER_BAYER_PRECISION 256
 #endif
 #endif
 
@@ -47,12 +46,12 @@ float ditherBayer(const in vec2 xy) {
     #endif
 }
 
-vec3 ditherBayer(const in vec3 color, const in vec2 xy, const int pres) {
+vec3 ditherBayer(vec3 color, const in vec2 xy, const int pres) {
     float d = float(pres);
     vec3 decimated = decimate(color, d);
     vec3 diff = (color - decimated) * d;
     vec3 ditherPattern = vec3(ditherBayer(xy));
-    return saturate(decimate(color + (step(ditherPattern, diff) / d), d));
+    return decimate(color + (step(ditherPattern, diff) / d), d);
 }
 
 float ditherBayer(const in float val, const in vec2 xy) { return ditherBayer(vec3(val), xy, DITHER_BAYER_PRECISION).r; }
