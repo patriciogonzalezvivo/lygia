@@ -11,9 +11,13 @@ examples:
     - /shaders/color_dither_bayer.frag
 */
 
+#ifndef SAMPLEDITHER_FNC
+#define SAMPLEDITHER_FNC ditherBayer
+#endif
+
 #ifndef FNC_SAMPLEDITHER
 #define FNC_SAMPLEDITHER
 vec3 sampleDither(SAMPLER_TYPE tex, const in vec2 st, const in vec2 resolution) {
-    return ditherBayer(sampleNearest(tex, st, resolution).rgb, st * resolution);
+    return SAMPLEDITHER_FNC( sampleNearest(tex, st, resolution).rgb, st * resolution);
 }
 #endif
