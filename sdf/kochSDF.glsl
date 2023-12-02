@@ -1,8 +1,8 @@
 #include "../math/const.glsl"
 
 /*
-contributors: Nimitz (@stormoid)
-description: Returns a Koch curve SDF. From https://www.shadertoy.com/view/Mlf3RX 
+contributors: Kathy kfahn22
+description: Returns a Koch curve SDF. 
 use: <vec2> kochSDF(<vec2> st, <int> iterations)
 */
 
