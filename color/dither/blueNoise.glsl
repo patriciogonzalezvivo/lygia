@@ -54,36 +54,41 @@ float remap_pdf_tri_unity(float v) {
 
 const vec2 blueNoiseTexturePixel = 1.0/BLUENOISE_TEXTURE_RESOLUTION;
 
-float ditherBlueNoise(SAMPLER_TYPE tex, const in float b, vec2 st) {
+float ditherBlueNoise(SAMPLER_TYPE tex, const in float value, vec2 st, int pres) {
+    float d = float(pres);
     #ifdef DITHER_BLUENOISE_TIME 
     st += 1337.0*fract(DITHER_BLUENOISE_TIME);
     #endif
     float bn = SAMPLER_FNC(tex, st * blueNoiseTexturePixel).r;
     float bn_tri = remap_pdf_tri_unity(bn);
-    return b + (bn_tri*2.0-0.5)/255.0;
+    return value + (bn_tri*2.0-0.5)/d;
 }
 
-vec3 ditherBlueNoise(SAMPLER_TYPE tex, in vec3 rgb, vec2 st) {
+vec3 ditherBlueNoise(SAMPLER_TYPE tex, vec3 color, vec2 st, int pres) {
+    float d = float(pres);
+
     #ifdef DITHER_BLUENOISE_TIME
     st += 1337.0*fract(DITHER_BLUENOISE_TIME * 0.1);
     #endif
         
     #ifdef DITHER_BLUENOISE_CHROMATIC
-    vec3 bn = SAMPLER_FNC(tex, st * blueNoiseTexturePixel).rgb;
+    vec3 bn = SAMPLER_FNC(tex, st * blueNoiseTexturePixel).color;
     vec3 bn_tri = vec3( remap_noise_tri_erp(bn.x), 
                         remap_noise_tri_erp(bn.y), 
                         remap_noise_tri_erp(bn.z) );
-    rgb += (bn_tri*2.0-0.5)/255.0;
+    color += (bn_tri*2.0-1.5)/d;
     #else
     float bn = SAMPLER_FNC(tex, st * blueNoiseTexturePixel).r;
     float bn_tri = remap_pdf_tri_unity(bn);
-    rgb += (bn_tri*2.0-0.5)/255.0;
+    color += (bn_tri*2.0-1.5)/d;
     #endif
 
-    return rgb;
+    return color;
 }
 
-vec4 ditherBlueNoise(SAMPLER_TYPE tex, in vec4 rgba, vec2 st) { return vec4(ditherBlueNoise(tex, rgba.rgb, st), rgba.a); }
+float ditherBlueNoise(SAMPLER_TYPE tex, const in float b, vec2 st) { return ditherBlueNoise(tex, b, st, DITHER_BLUENOISE_PRECISION); }
+vec3 ditherBlueNoise(SAMPLER_TYPE tex, const in vec3 rgb, vec2 st) { return ditherBlueNoise(tex, rgb, st, DITHER_BLUENOISE_PRECISION);}
+vec4 ditherBlueNoise(SAMPLER_TYPE tex, const in vec4 rgba, vec2 st) { return vec4(ditherBlueNoise(tex, rgba.rgb, st), rgba.a); }
 
 float ditherBlueNoise(const in float val) { return ditherBlueNoise(BLUENOISE_TEXTURE, val, DITHER_BLUENOISE_COORD); }
 vec3 ditherBlueNoise(const in vec3 color) { return ditherBlueNoise(BLUENOISE_TEXTURE, color, DITHER_BLUENOISE_COORD); }
