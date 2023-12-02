@@ -1,5 +1,8 @@
 #include "nearest.glsl"
-#include "../color/dither/bayer.glsl"
+#include "../color/dither.glsl"
+
+#include "../color/space/gamma2linear.glsl"
+#include "../color/space/linear2gamma.glsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
@@ -17,7 +20,11 @@ examples:
 
 #ifndef FNC_SAMPLEDITHER
 #define FNC_SAMPLEDITHER
-vec3 sampleDither(SAMPLER_TYPE tex, const in vec2 st, const in vec2 resolution) {
-    return SAMPLEDITHER_FNC( sampleNearest(tex, st, resolution).rgb, st * resolution);
+vec4 sampleDither(SAMPLER_TYPE tex, const in vec2 st, const in vec2 resolution) {
+    vec4 color = sampleNearest(tex, st, resolution);
+    gamma2linear(color);
+    color = SAMPLEDITHER_FNC(color, st * resolution);
+    linear2gamma(color);
+    return color;
 }
 #endif
