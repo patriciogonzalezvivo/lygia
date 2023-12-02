@@ -2,7 +2,7 @@
 #include "../math/saturate.glsl"
 
 /*
-contributors: Morgan McGuire
+contributors: ["Morgan McGuire", "Matthias Reitinger"]
 description: Draw arrows for vector fields from https://www.shadertoy.com/view/4s23DG
 use: <float> arrows(<vec2> position, <vec2> velocity [, <vec2> resolution] )
 options:
@@ -78,9 +78,6 @@ float arrows(vec2 p, vec2 v, vec2 resolution) {
             return step(min(shaft, head), 1.);
 
         #elif defined(ARROWS_STYLE_LINE_TRIANGLE)
-            // Signed distance from a line segment based on https://www.shadertoy.com/view/ls2GWG by 
-            // Matthias Reitinger, @mreitinger
-
             // Line arrow style
             return saturate(1.0 + 
                     max( ARROWS_SHAFT_THICKNESS / 4.0 - 
