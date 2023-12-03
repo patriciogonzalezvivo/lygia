@@ -8,7 +8,7 @@ description: Fibonacci Bokeh inspired on Xor's https://www.shadertoy.com/view/fl
 use: <vec4> fibonacciBokeh(<SAMPLER_TYPE> tex, <vec2> st, <vec2> pixel, <float> amount) 
 options:
     - FIBONACCIBOKEH_TYPE:
-    - FIBONACCIBOKEH_MAXSAMPLES
+    - FIBONACCIBOKEH_MAXSAMPLES:
     - FIBONACCIBOKEH_SAMPLER_FNC(UV):
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 */
