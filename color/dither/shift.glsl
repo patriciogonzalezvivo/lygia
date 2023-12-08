@@ -1,3 +1,5 @@
+#include "../../math/decimate.glsl"
+
 /*
 contributors: Patricio Gonzalez Vivo
 description: |
@@ -22,14 +24,21 @@ examples:
 #define DITHER_SHIFT_CHROMATIC
 #endif
 
+#ifndef DITHER_SHIFT_PRECISION
+#ifdef DITHER_PRECISION
+#define DITHER_SHIFT_PRECISION DITHER_PRECISION
+#else
+#define DITHER_SHIFT_PRECISION 256
+#endif
+#endif
+
 #ifndef FNC_DITHER_SHIFT
 #define FNC_DITHER_SHIFT
 
-float ditherShift(float b) {
-    //Bit-depth of display. Normally 8 but some LCD monitors are 7 or even 6-bit.	
+float ditherShift(const in float b, const in vec2 st, const int pres) {
+    //Bit-depth of display. Normally 8 but some LCD monitors are 7 or even 6-bit.   
     float dither_bit = 8.0; 
 
-    vec2 st = DITHER_SHIFT_COORD;
     #ifdef DITHER_SHIFT_TIME 
     st += 1337.0*fract(DITHER_SHIFT_TIME);
     #endif
@@ -46,12 +55,11 @@ float ditherShift(float b) {
     return b + 0.5/255.0 + dither_shift; 
 }
 
-vec3 ditherShift(vec3 rgb) {
+vec3 ditherShift(const in vec3 color, const in vec2 st, const int pres) {
     //Bit-depth of display. Normally 8 but some LCD monitors are 7 or even 6-bit.	
     float dither_bit = 8.0; 
 
-    //Calculate grid position
-    vec2 st = DITHER_SHIFT_COORD;
+    // Calculate grid position
     #ifdef DITHER_SHIFT_TIME 
     st += 1337.0*fract(DITHER_SHIFT_TIME);
     #endif
@@ -62,20 +70,31 @@ vec3 ditherShift(vec3 rgb) {
 
     //Shift the individual colors differently, thus making it even harder to see the dithering pattern
     #ifdef DITHER_SHIFT_CHROMATIC
-    vec3 dither_shift_RGB = vec3(dither_shift, -dither_shift, dither_shift);
+    vec3 ditherPattern = vec3(dither_shift, -dither_shift, dither_shift);
     #else
-    vec3 dither_shift_RGB = vec3(dither_shift);
+    vec3 ditherPattern = vec3(dither_shift);
     #endif
 
     //modify shift acording to grid position.
-    dither_shift_RGB = mix(2.0 * dither_shift_RGB, -2.0 * dither_shift_RGB, grid_position); //shift acording to grid position.
+    ditherPattern = mix(2.0 * ditherPattern, -2.0 * ditherPattern, grid_position); //shift acording to grid position.
 
     //shift the color by dither_shift
-    return rgb + 0.5/255.0 + dither_shift_RGB; 
+
+    float d = float(pres);
+    float h = 0.5/d;
+    return decimate(color + h + ditherPattern, d);
 }
 
-vec4 ditherShift(vec4 rgba) {
-    return vec4(ditherShift(rgba.rgb), rgba.a);
-}
+float ditherShift(const in float value, const in vec2 xy) {  return ditherShift(value, xy, DITHER_SHIFT_PRECISION); }
+vec3 ditherShift(const in vec3 color, const in vec2 xy) {  return ditherShift(color, xy, DITHER_SHIFT_PRECISION); }
+vec4 ditherShift(const in vec4 color, const in vec2 xy) {  return vec4(ditherShift(color.rgb, xy, DITHER_SHIFT_PRECISION), color.a); }
+
+float ditherShift(const in float val, int pres) { return ditherShift(vec3(val),DITHER_SHIFT_COORD, pres).r; }
+vec3 ditherShift(const in vec3 color, int pres) { return ditherShift(color, DITHER_SHIFT_COORD, pres); }
+vec4 ditherShift(const in vec4 color, int pres) { return vec4(ditherShift(color.rgb, DITHER_SHIFT_COORD, pres), color.a); }
+
+float ditherShift(const in float val) { return ditherShift(vec3(val), DITHER_SHIFT_COORD, DITHER_SHIFT_PRECISION).r; }
+vec3 ditherShift(const in vec3 color) { return ditherShift(color, DITHER_SHIFT_COORD, DITHER_SHIFT_PRECISION); }
+vec4 ditherShift(const in vec4 color) { return vec4(ditherShift(color.rgb), color.a); }
 
 #endif

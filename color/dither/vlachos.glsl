@@ -1,3 +1,5 @@
+#include "../../math/decimate.glsl"
+
 /*
 contributors: Patricio Gonzalez Vivo
 description: |
@@ -18,19 +20,26 @@ examples:
 #endif
 #endif
 
+#ifndef DITHER_VLACHOS_COORD
+#define DITHER_VLACHOS_COORD gl_FragCoord.xy
+#endif
+
 #ifdef DITHER_TIME
 #define DITHER_VLACHOS_TIME DITHER_TIME
 #endif
 
-#ifndef DITHER_VLACHOS_COORD
-#define DITHER_VLACHOS_COORD gl_FragCoord.xy
+#ifndef DITHER_VLACHOS_PRECISION
+#ifdef DITHER_PRECISION
+#define DITHER_VLACHOS_PRECISION DITHER_PRECISION
+#else
+#define DITHER_VLACHOS_PRECISION 256
+#endif
 #endif
 
 #ifndef FNC_DITHER_VLACHOS
 #define FNC_DITHER_VLACHOS
 
-float ditherVlachos(float b) {
-    vec2 st = DITHER_VLACHOS_COORD;
+float ditherVlachos(float b, vec2 st) {
     #ifdef DITHER_VLACHOS_TIME
     st += 1337.0*fract(DITHER_VLACHOS_TIME);
     #endif
@@ -40,18 +49,30 @@ float ditherVlachos(float b) {
     return b + (noise / 255.0);
 }
 
-vec3 ditherVlachos(vec3 color) {
-    vec2 st = DITHER_VLACHOS_COORD;
+vec3 ditherVlachos(vec2 st) {
     #ifdef DITHER_VLACHOS_TIME
     st += 1337.0*fract(DITHER_VLACHOS_TIME);
     #endif
     HIGHP vec3 noise = vec3(dot(vec2(171.0, 231.0), st));
     noise = fract(noise / vec3(103.0, 71.0, 97.0));
-    return color.rgb + (noise / 255.0);
+    return noise;
 }
 
-vec4 ditherVlachos(vec4 color) {
-    return vec4(ditherVlachos(color.rgb), color.a);
+vec3 ditherVlachos(const in vec3 color, const in vec2 st, const int pres) {
+    // return color + ditherVlachos(st) / 255.0;
+
+    float d = float(pres);
+    vec3 ditherPattern = ditherVlachos(st);
+    return decimate(color + ditherPattern / d, d);
 }
+vec3 ditherVlachos(const in vec3 color, const in vec2 xy) {
+    return ditherVlachos(color, xy, DITHER_VLACHOS_PRECISION);
+}
+
+vec4 ditherVlachos(vec4 color, vec2 st) { return vec4(ditherVlachos(color.rgb, st), color.a);}
+
+float ditherVlachos(float val) { return ditherVlachos(val, DITHER_VLACHOS_COORD);}
+vec3 ditherVlachos(vec3 color) { return ditherVlachos(color, DITHER_VLACHOS_COORD);}
+vec4 ditherVlachos(vec4 color) { return vec4(ditherVlachos(color.rgb), color.a);}
 
 #endif

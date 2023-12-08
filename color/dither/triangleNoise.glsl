@@ -1,3 +1,5 @@
+#include "../../math/decimate.glsl"
+
 /*
 contributors: Patricio Gonzalez Vivo
 description: |
@@ -9,8 +11,8 @@ examples:
     - /shaders/color_dither.frag
 */
 
-#ifndef DITHER_CHROMATIC_COORD
-#define DITHER_CHROMATIC_COORD gl_FragCoord.xy
+#ifndef DITHER_TRIANGLENOISE_COORD
+#define DITHER_TRIANGLENOISE_COORD gl_FragCoord.xy
 #endif
 
 #ifdef DITHER_TIME
@@ -21,64 +23,55 @@ examples:
 #define DITHER_TRIANGLENOISE_CHROMATIC
 #endif
 
+#ifndef DITHER_TRIANGLENOISE_PRECISION
+#ifdef DITHER_PRECISION
+#define DITHER_TRIANGLENOISE_PRECISION DITHER_PRECISION
+#else
+#define DITHER_TRIANGLENOISE_PRECISION 255
+#endif
+#endif
+
 #ifndef FNC_DITHER_TRIANGLENOISE
 #define FNC_DITHER_TRIANGLENOISE
 
-float triangleNoise(HIGHP in vec2 n) {
-    // triangle noise, in [-1.0..1.0[ range
+float triangleNoise(HIGHP in vec2 st) {
+    st = floor(st);
     #ifdef DITHER_TRIANGLENOISE_TIME
-    n += vec2(0.07 * fract(DITHER_TRIANGLENOISE_TIME));
+    st += vec2(0.07 * fract(DITHER_TRIANGLENOISE_TIME));
     #endif
-    n  = fract(n * vec2(5.3987, 5.4421));
-    n += dot(n.yx, n.xy + vec2(21.5351, 14.3137));
+    st  = fract(st * vec2(5.3987, 5.4421));
+    st += dot(st.yx, st.xy + vec2(21.5351, 14.3137));
 
-    HIGHP float xy = n.x * n.y;
-    // compute in [0..2[ and remap to [-1.0..1.0[
-    return fract(xy * 95.4307) + fract(xy * 75.04961) - 1.0;
+    HIGHP float xy = st.x * st.y;
+    return (fract(xy * 95.4307) + fract(xy * 75.04961) - 1.0);
 }
 
-float ditherTriangleNoise(const in float b, const HIGHP in vec2 st) {
-    return b + triangleNoise(st) / 255.0;
-}
-
-vec3 ditherTriangleNoise(const in vec3 rgb, const HIGHP in vec2 st) {
+vec3 ditherTriangleNoise(const in vec3 color, const HIGHP in vec2 st, const int pres) {
     
     #ifdef DITHER_TRIANGLENOISE_CHROMATIC 
-    vec3 dither = vec3(
+    vec3 ditherPattern = vec3(
             triangleNoise(st),
             triangleNoise(st + 0.1337),
             triangleNoise(st + 0.3141));
     #else
-    vec3 dither = vec3(triangleNoise(st));
+    vec3 ditherPattern = vec3(triangleNoise(st));
     #endif
-            
-    return rgb + dither / 255.0;
+    
+    // return color + ditherPattern / 255.0;
+    float d = float(pres);
+    float h = 0.5/d;
+    return decimate(color - h + ditherPattern / d, d);
 }
 
-vec4 ditherTriangleNoise(const in vec4 rgba, const HIGHP in vec2 st) {
-    #ifdef DITHER_TRIANGLENOISE_CHROMATIC 
-    vec3 dither = vec3(
-            triangleNoise(st),
-            triangleNoise(st + 0.1337),
-            triangleNoise(st + 0.3141));
-    #else
-    vec3 dither = vec3(triangleNoise(st));
-    #endif
-    return (rgba + vec4(dither, dither.x)) / 255.0;
-}
+float ditherTriangleNoise(const in float b, const HIGHP in vec2 st) { return b + triangleNoise(st) / float(DITHER_TRIANGLENOISE_PRECISION); }
+vec3 ditherTriangleNoise(const in vec3 color, const in vec2 xy) {  return ditherTriangleNoise(color, xy, DITHER_TRIANGLENOISE_PRECISION); }
+vec4 ditherTriangleNoise(const in vec4 color, const in vec2 xy) {  return vec4(ditherTriangleNoise(color.rgb, xy, DITHER_TRIANGLENOISE_PRECISION), color.a); }
 
-#if defined(RESOLUTION)
-float ditherTriangleNoise(const in float b) {
-    return ditherTriangleNoise(b, DITHER_CHROMATIC_COORD / RESOLUTION);
-}
+float ditherTriangleNoise(const in float val, int pres) { return ditherTriangleNoise(vec3(val),DITHER_TRIANGLENOISE_COORD, pres).r; }
+vec3 ditherTriangleNoise(const in vec3 color, int pres) { return ditherTriangleNoise(color, DITHER_TRIANGLENOISE_COORD, pres); }
+vec4 ditherTriangleNoise(const in vec4 color, int pres) { return vec4(ditherTriangleNoise(color.rgb, DITHER_TRIANGLENOISE_COORD, pres), color.a); }
 
-vec3 ditherTriangleNoise(const in vec3 rgb) {
-    return ditherTriangleNoise(rgb, DITHER_CHROMATIC_COORD / RESOLUTION);
-}
-
-vec4 ditherTriangleNoise(const in vec4 b) {
-    return ditherTriangleNoise(b, gl_FragCoord.xy / RESOLUTION);
-}
-#endif
-
+float ditherTriangleNoise(const in float val) { return ditherTriangleNoise(vec3(val), DITHER_TRIANGLENOISE_COORD, DITHER_TRIANGLENOISE_PRECISION).r; }
+vec3 ditherTriangleNoise(const in vec3 color) { return ditherTriangleNoise(color, DITHER_TRIANGLENOISE_COORD, DITHER_TRIANGLENOISE_PRECISION); }
+vec4 ditherTriangleNoise(const in vec4 color) { return vec4(ditherTriangleNoise(color.rgb), color.a); }
 #endif
