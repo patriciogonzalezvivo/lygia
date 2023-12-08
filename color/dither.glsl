@@ -9,6 +9,7 @@ Options:
     - BLUENOISE_TEXTURE
     - DITHER_TIME: followed with an elipsed secods uniform
     - DITHER_CHROMATIC
+    - DITHER_PRECISION
     - SAMPLER_FNC
 examples:
     - /shaders/color_dither.frag
