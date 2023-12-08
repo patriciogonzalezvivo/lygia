@@ -69,7 +69,8 @@ vec4 colorCheckerMacbeth (vec2 uv) {
                 stroke(rectSDF(uv, vec2(1.015, 0.68)), 1., 0.01) -
                 rect(uv, vec2(.966, 1.)) - rect(uv, vec2(1.1, .63))
             );
-    return vec4(saturate(color), rect(uv, vec2(1.035,0.7)));
+    float alpha = rect(uv, vec2(1.03,0.69));
+    return vec4(saturate(color) * alpha, alpha);
 }
 
 vec4 colorCheckerSpyder(vec2 uv) {
@@ -122,7 +123,8 @@ vec4 colorCheckerSpyder(vec2 uv) {
                 stroke(rectSDF(uv, vec2(1.015, 0.68)), 1., 0.01) -
                 rect(uv, vec2(.966, 1.)) - rect(uv, vec2(1.1, .63))
             );
-    return vec4(saturate(color), rect(uv, vec2(1.035,0.7)));
+    float alpha = rect(uv, vec2(1.03,0.69));
+    return vec4(saturate(color) * alpha, alpha);
 }
 
 vec4 colorChecker (vec2 uv){
