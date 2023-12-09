@@ -73,7 +73,61 @@ vec4 colorCheckerMacbeth (vec2 uv) {
     return vec4(saturate(color) * alpha, alpha);
 }
 
-vec4 colorCheckerSpyder(vec2 uv) {
+vec4 colorCheckerSpyderA(vec2 uv) {
+    vec3 colors[24];
+    colors[0] = LOW_SAT_RED;
+    colors[1] = LOW_SAT_YELLOW;
+    colors[2] = LOW_SAT_GREEN;
+    colors[3] = LOW_SAT_CYAN;
+    colors[4] = LOW_SAT_BLUE;
+    colors[5] = LOW_SAT_MAGENTA;
+
+    colors[6] = RED_TINT_10;
+    colors[7] = GREEN_TINT_10;
+    colors[8] = BLUE_TINT_10;
+    colors[9] = RED_TONE_90;
+    colors[10] = GREEN_TONE_90;
+    colors[11] = BLUE_TONE_90;
+    
+    colors[12] = LIGHTEST_SKIN;
+    colors[13] = LIGHTER_SKIN;
+    colors[14] = MODERATE_SKIN;
+    colors[15] = MEDIUM_SKIN;
+    colors[16] = DEEP_SKIN;
+    colors[17] = GRAY_95;
+
+    colors[18] = GRAY_05;
+    colors[19] = GRAY_10;
+    colors[20] = GRAY_30;
+    colors[21] = GRAY_50;
+    colors[22] = GRAY_70;
+    colors[23] = GRAY_90;
+
+    vec2 st = uv;
+    st = scale(st, vec2(1.0,1.5));
+    st *= vec2(6.0, 4.0);
+    vec2 st_i = floor(st);
+    vec2 st_f = fract(st);
+
+    vec3 color = vec3(0.0);
+    int index = 6 * int(st_i.y) + int(st_i.x);
+    #if defined(PLATFORM_WEBGL)
+    for (int i = 0; i < 64; i++)
+        if (i == index) color = colors[i];
+    #else
+    color = colors[index];
+    #endif
+    color *= rect(st_f, 0.8);
+    color += fill(crossSDF(uv, 2.), .015);
+    color += saturate(
+                stroke(rectSDF(uv, vec2(1.015, 0.68)), 1., 0.01) -
+                rect(uv, vec2(.966, 1.)) - rect(uv, vec2(1.1, .63))
+            );
+    float alpha = rect(uv, vec2(1.03,0.69));
+    return vec4(saturate(color) * alpha, alpha);
+}
+
+vec4 colorCheckerSpyderB(vec2 uv) {
     vec3 colors[24];
     colors[0] = AQUA;
     colors[1] = LAVANDER;
@@ -125,6 +179,10 @@ vec4 colorCheckerSpyder(vec2 uv) {
             );
     float alpha = rect(uv, vec2(1.03,0.69));
     return vec4(saturate(color) * alpha, alpha);
+}
+
+vec4 colorCheckerSpyder(vec2 uv) {
+    return colorCheckerSpyderB(uv);
 }
 
 vec4 colorChecker (vec2 uv){
