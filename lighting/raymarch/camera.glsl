@@ -13,8 +13,7 @@ examples:
 
 mat3 raymarchCamera( in vec3 ro, in vec3 ta, in vec3 up ) {
     vec3 cw = normalize(ta-ro);
-    vec3 cp = up;
-    vec3 cu = normalize( cross(cw,cp) );
+    vec3 cu = normalize( cross(cw,up) );
     vec3 cv = normalize( cross(cu,cw) );
     return mat3( cu, cv, cw );
 }

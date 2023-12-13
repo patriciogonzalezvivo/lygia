@@ -1,10 +1,6 @@
 #include "../math/const.glsl"
 #include "../math/saturate.glsl"
 
-#include "ray.glsl"
-#include "common/henyeyGreenstein.glsl"
-#include "common/rayleigh.glsl"
-
 // Stars deps
 #include "../math/mod2.glsl"
 #include "../math/rotate3dX.glsl"
@@ -12,6 +8,11 @@
 #include "../space/cart2polar.glsl"
 #include "../color/space/k2rgb.glsl"
 #include "../generative/random.glsl"
+
+#include "ray.glsl"
+#include "common/rayleigh.glsl"
+#include "common/henyeyGreenstein.glsl"
+
 
 /*
 contributor: Patricio Gonzalez Vivo

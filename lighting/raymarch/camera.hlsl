@@ -1,5 +1,3 @@
-#include "../../space/lookAt.hlsl"
-
 /*
 contributors:  Inigo Quiles
 description: set a camera for raymarching 
