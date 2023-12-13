@@ -15,7 +15,7 @@ options:
 use: <float3\float4> mixSpectral(<float3|float4> colorA, <float3|float4> colorB, float pct)
 examples:
     - /shaders/color_mix.frag
-license: license: MIT License Copyright (c) 2023 Ronald van Wijnen
+license: MIT License Copyright (c) 2023 Ronald van Wijnen
 */
 
 #ifndef FNC_MIXSPECTRA

@@ -4,6 +4,7 @@
 #include "material.glsl"
 #include "envMap.glsl"
 #include "fresnelReflection.glsl"
+#include "sphericalHarmonics.glsl"
 #include "light/new.glsl"
 #include "light/resolve.glsl"
 
