@@ -88,21 +88,24 @@ vec4 pbr(const in Material _mat) {
         LightPoint L = LightPointNew();
         lightResolve(diffuseColor, specularColor, M, L, lightDiffuse, lightSpecular);
         #endif
+
+        #if defined(LIGHT_POINTS) && defined(LIGHT_POINTS_TOTAL)
+        for (int i = 0; i < LIGHT_POINTS_TOTAL; i++) {
+            LightPoint L = LIGHT_POINTS[i];
+            lightResolve(diffuseColor, specularColor, M, L, lightDiffuse, lightSpecular);
+        }
+        #endif
     }
 
-    #if defined(LIGHT_POINTS) && defined(LIGHT_POINTS_TOTAL)
-    for (int i = 0; i < LIGHT_POINTS_TOTAL; i++) {
-        LightPoint L = LIGHT_POINTS[i];
-        lightResolve(diffuseColor, specularColor, M, L, lightDiffuse, lightSpecular);
-    }
-    #endif
     
     // Final Sum
     // ------------------------
     vec4 color  = vec4(0.0, 0.0, 0.0, 1.0);
+
     // Diffuse
     color.rgb  += Fd * IBL_LUMINANCE;
-    color.rgb  += lightDiffuse;     
+    color.rgb  += lightDiffuse;
+
     // Specular
     color.rgb  += Fr * IBL_LUMINANCE;
     color.rgb  += lightSpecular;    

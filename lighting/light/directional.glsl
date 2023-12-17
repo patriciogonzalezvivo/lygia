@@ -21,9 +21,6 @@ struct LightDirectional {
     vec3    direction;
     vec3    color;
     float   intensity;
-
-// Cache
-    float   shadow;
 };
 #endif
 
@@ -55,7 +52,7 @@ void lightDirectional(
     lightDirectional(
         _diffuseColor, _specularColor, 
         _mat.V, 
-        _L.direction, _L.color, _L.intensity * _L.shadow, 
+        _L.direction, _L.color, _L.intensity,
         _mat.normal, _mat.NoV, NoL, _mat.roughness, f0, 
         _diffuse, _specular);
 

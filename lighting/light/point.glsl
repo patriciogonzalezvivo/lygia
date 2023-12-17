@@ -22,11 +22,7 @@ struct LightPoint {
     vec3    position;
     vec3    color;
     float   intensity;
-
     float   falloff;
-
-// // Cache
-//     float   shadow;
 };
 #endif
 

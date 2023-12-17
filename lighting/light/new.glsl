@@ -27,9 +27,8 @@ void lightNew(out LightDirectional _L) {
     _L.intensity    = 1.0;
     #endif
     
-    _L.shadow       = 1.0;
     #if defined(LIGHT_SHADOWMAP) && defined(LIGHT_SHADOWMAP_SIZE) && defined(LIGHT_COORD)
-    _L.shadow *= shadow(LIGHT_SHADOWMAP, vec2(LIGHT_SHADOWMAP_SIZE), (LIGHT_COORD).xy, (LIGHT_COORD).z);
+    _L.intensity *= shadow(LIGHT_SHADOWMAP, vec2(LIGHT_SHADOWMAP_SIZE), (LIGHT_COORD).xy, (LIGHT_COORD).z);
     #endif
 }
 
@@ -66,11 +65,9 @@ void lightNew(out LightPoint _L) {
     _L.falloff      = 0.0;
     #endif
 
-    // _L.shadow       = 1.0;
-
-    // #if defined(LIGHT_SHADOWMAP) && defined(LIGHT_SHADOWMAP_SIZE) && defined(LIGHT_COORD)
-    // _L.shadow *= shadow(LIGHT_SHADOWMAP, vec2(LIGHT_SHADOWMAP_SIZE), (LIGHT_COORD).xy, (LIGHT_COORD).z);
-    // #endif
+    #if defined(LIGHT_SHADOWMAP) && defined(LIGHT_SHADOWMAP_SIZE) && defined(LIGHT_COORD)
+    _L.intensity *= shadow(LIGHT_SHADOWMAP, vec2(LIGHT_SHADOWMAP_SIZE), (LIGHT_COORD).xy, (LIGHT_COORD).z);
+    #endif
 }
 
 LightPoint LightPointNew() {
