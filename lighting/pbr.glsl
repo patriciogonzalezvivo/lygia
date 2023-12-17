@@ -80,9 +80,6 @@ vec4 pbr(const in Material _mat) {
     vec3 lightDiffuse = vec3(0.0, 0.0, 0.0);
     vec3 lightSpecular = vec3(0.0, 0.0, 0.0);
     
-    // TODO: 
-    //  - Add support for multiple lights
-    // 
     {
         #if defined(LIGHT_DIRECTION)
         LightDirectional L = LightDirectionalNew();
@@ -92,6 +89,13 @@ vec4 pbr(const in Material _mat) {
         lightResolve(diffuseColor, specularColor, M, L, lightDiffuse, lightSpecular);
         #endif
     }
+
+    #if defined(LIGHT_POINTS) && defined(LIGHT_POINTS_TOTAL)
+    for (int i = 0; i < LIGHT_POINTS_TOTAL; i++) {
+        LightPoint L = LIGHT_POINTS[i];
+        lightResolve(diffuseColor, specularColor, M, L, lightDiffuse, lightSpecular);
+    }
+    #endif
     
     // Final Sum
     // ------------------------
