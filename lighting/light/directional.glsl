@@ -15,18 +15,6 @@ options:
     - LIGHT_INTENSITY: in GlslViewer is u_lightIntensity
 */
 
-#ifndef LIGHT_POSITION
-#define LIGHT_POSITION vec3(0.0, 10.0, -50.0)
-#endif
-
-#ifndef LIGHT_COLOR
-#define LIGHT_COLOR vec3(0.5)
-#endif
-
-#ifndef LIGHT_INTENSITY
-#define LIGHT_INTENSITY 1.0
-#endif
-
 #ifndef STR_LIGHT_DIRECTIONAL
 #define STR_LIGHT_DIRECTIONAL
 struct LightDirectional {
