@@ -1,135 +1,388 @@
+/*
+contributors: Patricio Gonzalez Vivo
+description: |
+    MacBeth and SpyderCheckr Color Palettes.
+    MacBeth values from:
+    - http://en.wikipedia.org/wiki/ColorChecker
+    - http://kurtmunger.com/color_checkerid277.html
+
+    SpyderChecker values from:
+    - https://www.northlight-images.co.uk/datacolor-spydercheckr-colour-test-card-review/
+    - https://www.bartneck.de/2017/10/24/patch-color-definitions-for-datacolor-spydercheckr-48/
+
+*/
 
 // MACBETH COLOR PALETTE
 //
-// Values from:
-//  - http://en.wikipedia.org/wiki/ColorChecker
-//  - http://kurtmunger.com/color_checkerid277.html
 
-//Dark skin		3 YR 3.7/3.2	0.400 0.350 10.1	#735244
+// Dark skin		
+// Munsell: 3 YR 3.7/3.2	
+// CIE xyY: 0.400 0.350 10.1	
+// sRGB: #735244
+// sRGB: 115 82 68
 #ifndef DARK_SKIN
 #define DARK_SKIN vec3(0.454, 0.311, 0.255)
 #endif
+// XYZ: 12.354 10.896 5.498
+#ifndef DARK_SKIN_XYZ
+#ifdef CIE_D50
+#define DARK_SKIN_XYZ vec3(12.354,10.896,5.498)
+#else
+#define DARK_SKIN_XYZ vec3(11.684,10.637,7.242)
+#endif
+#endif
 
-//Light skin	2.2 YR 6.47/4.1	0.377 0.345 35.8	#c29682
+// Light skin	
+// Munsell: 2.2 YR 6.47/4.1	
+// CIE xyY 0.377 0.345 35.8	
+// sRGB: #c29682
+// sRGB: 194 150 130
 #ifndef LIGHT_SKIN
 #define LIGHT_SKIN vec3(0.773, 0.563, 0.497)
 #endif
 
-//Blue sky		4.3 PB 4.95/5.5	0.247 0.251 19.3	#627a9d
+#ifndef LIGHT_SKIN_XYZ
+#ifdef CIE_D50
+#define LIGHT_SKIN_XYZ vec3(39.602, 35.073, 19.617)
+#else
+#define LIGHT_SKIN_XYZ vec3(37.29	34.404	25.454)
+#endif
+#endif
+
+// Blue sky		
+// Munsell: 4.3 PB 4.95/5.5	
+// CIE xyY: 0.247 0.251 19.3
+// sRGB: #627a9d
+// sRGB: 98 122 157
 #ifndef BLUE_SKY
 #define BLUE_SKY vec3(0.356, 0.472, 0.609)
 #endif
 
-//Foliage		6.7 GY 4.2/4.1	0.337 0.422 13.3	#576c43
+#ifndef BLUE_SKY_XYZ
+#ifdef CIE_D50
+#define BLUE_SKY_XYZ vec3(17.275,18.663,26.177)
+#else
+#define BLUE_SKY_XYZ vec3(17.916,19.032,34.703)
+#endif
+#endif
+
+// Foliage		6.7 GY 4.2/4.1	0.337 0.422 13.3	
+// sRGB #576c43
+// sRGB: 87 108 67
 #ifndef FOLIAGE
 #define FOLIAGE vec3(0.359, 0.425, 0.250)
 #endif
 
-//Blue flower	9.7 PB 5.47/6.7	0.265 0.240 24.3	#8580b1
+#ifndef FOLIAGE_XYZ
+#ifdef CIE_D50
+#define FOLIAGE_XYZ vec3(11.284,13.786,5.479)
+#else
+#define FOLIAGE_XYZ vec3(10.906,13.784,7.155)
+#endif
+#endif
+
+// Blue flower	9.7 PB 5.47/6.7	0.265 0.240 24.3	
+// sRGB: #8580b1
+// sRGB: 133 128 177
 #ifndef BLUE_FLOWER
 #define BLUE_FLOWER vec3(0.514, 0.498, 0.685)
 #endif
 
-//Bluish green	2.5 BG 7/6		0.261 0.343 43.1	#67bdaa
+#ifndef BLUE_FLOWER_XYZ
+#ifdef CIE_D50
+#define BLUE_FLOWER_XYZ vec3(24.969,23.688,33.857)
+#else
+#define BLUE_FLOWER_XYZ vec3(25.42,23.896,44.94)
+#endif
+#endif
+
+// Bluish green	2.5 BG 7/6		0.261 0.343 43.1	
+// sRGB: #67bdaa
+// sRGB: 103 189 170
 #ifndef BLUISH_GREEN
 #define BLUISH_GREEN vec3(0.374, 0.740, 0.673)
 #endif
 
-//Orange		5 YR 6/11		0.506 0.407 30.1	#d67e2c
+#ifndef BLUISH_GREEN_XYZ
+#ifdef CIE_D50
+#define BLUISH_GREEN_XYZ vec3(30.838,42.168,35.407)
+#else
+#define BLUISH_GREEN_XYZ vec3(31.342,43.112,46.048)
+#endif
+#endif
+
+// Orange		5 YR 6/11		0.506 0.407 30.1	
+// sRGB: #d67e2c
+// sRGB: 214 126 44
 #ifndef ORANGE
 #define ORANGE vec3(0.879, 0.487, 0.189)
 #endif
 
-//Purplish blue	7.5 PB 4/10.7	0.211 0.175 12.0	#505ba6
+#ifndef ORANGE_XYZ
+#ifdef CIE_D50
+#define ORANGE_XYZ vec3(41.4,32.052,5.12)
+#else
+#define ORANGE_XYZ vec3(38.041,30.531,6.671)
+#endif
+#endif
+
+// Purplish blue	7.5 PB 4/10.7	0.211 0.175 12.0	
+// sRGB: #505ba6
+// sRGB: 80 91 166
 #ifndef PURPLISH_BLUE
 #define PURPLISH_BLUE vec3(0.269, 0.351, 0.656)
 #endif
 
-//Moderate red	2.5 R 5/10		0.453 0.306 19.8	#c15a63
+#ifndef PURPLISH_BLUE_XYZ
+#ifdef CIE_D50
+#define PURPLISH_BLUE_XYZ vec3(12.767,11.597,30.374)
+#else
+#define PURPLISH_BLUE_XYZ vec3(14.025,12.012,40.373)
+#endif
+#endif
+
+// Moderate red	2.5 R 5/10		0.453 0.306 19.8	
+// sRGB: #c15a63
+// sRGB: 193 90 99
 #ifndef MODERATE_RED
 #define MODERATE_RED vec3(0.774, 0.313, 0.373)
 #endif
 
-//Purple		5 P 3/7			0.285 0.202 6.6		#5e3c6c
+#ifndef MODERATE_RED_XYZ
+#ifdef CIE_D50
+#define MODERATE_RED_XYZ vec3(30.96,20.368,10.532)
+#else
+#define MODERATE_RED_XYZ vec3(28.491,19.254,13.978)
+#endif
+#endif
+
+// Purple		5 P 3/7			0.285 0.202 6.6		
+// sRGB: #5e3c6c
+// sRGB: 94 60 108
 #ifndef PURPLE
 #define PURPLE vec3(0.364, 0.227, 0.407)
 #endif
 
-//Yellow green	5 GY 7.1/9.1	0.380 0.489 44.3	#9dbc40
+#ifndef PURPLE_XYZ
+#ifdef CIE_D50
+#define PURPLE_XYZ vec3(8.795,6.668,10.99)
+#else
+#define PURPLE_XYZ vec3(8.81,6.597,14.816)
+#endif
+#endif
+
+// Yellow green	5 GY 7.1/9.1	0.380 0.489 44.3
+// sRGB: #9dbc40
+// sRGB: 157 188 64
 #ifndef YELLOW_GREEN
 #define YELLOW_GREEN vec3(0.612, 0.734, 0.228)
 #endif
 
-//Orange Yellow	10 YR 7/10.5	0.473 0.438 43.1	#e0a32e
+#ifndef YELLOW_GREEN_XYZ
+#ifdef CIE_D50
+#define YELLOW_GREEN_XYZ vec3(35.701,45.082,9.377)
+#else
+#define YELLOW_GREEN_XYZ vec3(33.992,44.969,11.835)
+#endif
+#endif
+
+// Orange Yellow	10 YR 7/10.5	0.473 0.438 43.1
+// sRGB: #e0a32e
+// sRGB: 224 163 46
 #ifndef ORANGE_YELLOW
 #define ORANGE_YELLOW vec3(0.892, 0.633, 0.153)
 #endif
 
-//Blue			7.5 PB 2.9/12.7	0.187 0.129 6.1		#383d96
+#ifndef ORANGE_YELLOW_XYZ
+#ifdef CIE_D50
+#define ORANGE_YELLOW_XYZ vec3(49.37,44.438,6.215)
+#else
+#define ORANGE_YELLOW_XYZ vec3(45.74,42.941,8.056)
+#endif
+#endif
+
+// Blue			7.5 PB 2.9/12.7	0.187 0.129 6.1	
+// sRGB: #383d96
+// sRGB: 56 61 150
 #ifndef BLUE
 #define BLUE vec3(0.156, 0.241, 0.570)
 #endif
 
-//Green			0.25 G 5.4/9.6	0.305 0.478 23.4	#469449
+#ifndef BLUE_XYZ
+#ifdef CIE_D50
+#define BLUE_XYZ vec3(7.305,6.022,22.182)
+#else
+#define BLUE_XYZ vec3(8.374,6.347,29.467)
+#endif
+#endif
+
+// Green			0.25 G 5.4/9.6	0.305 0.478 23.4
+// sRGB: #469449
+// sRGB: 70 148 73
 #ifndef GREEN
 #define GREEN vec3(0.238, 0.577, 0.275)
 #endif
 
-//Red			5 R 4/12		0.539 0.313 12.0	#af363c
+#ifndef GREEN_XYZ
+#ifdef CIE_D50
+#define GREEN_XYZ vec3(15.229,23.542,8.222)
+#else
+#define GREEN_XYZ vec3(14.881,23.932,10.401)
+#endif
+#endif
+
+// Red			5 R 4/12		0.539 0.313 12.0
+// sRGB: #af363c
+// sRGB: 175 54 60
 #ifndef RED
 #define RED vec3(0.699, 0.210, 0.222)
 #endif
 
-//Yellow		5 Y 8/11.1		0.448 0.470 59.1	#e7c71f
+#ifndef RED_XYZ
+#ifdef CIE_D50
+#define RED_XYZ vec3(22.59,13.543,4.08)
+#else
+#define RED_XYZ vec3(20.197,12.553,5.383)
+#endif
+#endif
+
+// Yellow		5 Y 8/11.1		0.448 0.470 59.1
+// sRGB: #e7c71f
+// sRGB: 231 199 31
 #ifndef YELLOW
 #define YELLOW vec3(0.927, 0.782, 0.057)
 #endif
 
-//Magenta		2.5 RP 5/12		0.364 0.233 19.8	#bb5695
+#ifndef YELLOW_XYZ
+#ifdef CIE_D50
+#define YELLOW_XYZ vec3(60.014,60.949,7.554)
+#else
+#define YELLOW_XYZ vec3(55.779,59.612,9.448)
+#endif
+#endif
+
+// Magenta		2.5 RP 5/12		0.364 0.233 19.8
+// sRGB #bb5695
+// sRGB: 187 86 149
 #ifndef MAGENTA
 #define MAGENTA vec3(0.750, 0.309, 0.574)
 #endif
 
-//Cyan			5 B 5/8			0.196 0.252 19.8	#0885a1
+#ifndef MAGENTA_XYZ
+#ifdef CIE_D50
+#define MAGENTA_XYZ vec3(32.305,20.971,23.891)
+#else
+#define MAGENTA_XYZ vec3(30.689,20.117,32.074)
+#endif
+#endif
+
+// Cyan			5 B 5/8			0.196 0.252 19.8
+// sRGB: #0885a1
+// sRGB: 8 133 161
 #ifndef CYAN
 #define CYAN vec3(0.000, 0.521, 0.648)
 #endif
 
-//White			N 9.5/			0.310 0.316 90.0	#f3f3f2
+#ifndef CYAN_XYZ
+#ifdef CIE_D50
+#define CYAN_XYZ vec3(13.964,19.428,31.039)
+#else
+#define CYAN_XYZ vec3(15.131,20.357,40.473)
+#endif
+#endif
+
+// White			N 9.5/			0.310 0.316 90.0
+// sRGB: #f3f3f2
+// sRGB: 243 243 242
 #ifndef WHITE
 #define WHITE vec3(0.945, 0.948, 0.923)
 #endif
 
-//Neutral 8		N 8/			0.310 0.316 59.1	#c8c8c8
+#ifndef WHITE_XYZ
+#ifdef CIE_D50
+#define WHITE_XYZ vec3(87.473,90.892,73.275)
+#else
+#define WHITE_XYZ vec3(86.047,90.868,96.433)
+#endif
+#endif
+
+// Neutral 8		N 8/			0.310 0.316 59.1
+// sRGB: #c8c8c8
+// sRGB: 200 200 200
 #ifndef NEUTRAL_80
 #define NEUTRAL_80 vec3(0.789, 0.793, 0.788)
 #endif
 
-//Neutral 6.5	N 6.5/			0.310 0.316 36.2	#a0a0a0
+#ifndef NEUTRAL_80_XYZ
+#ifdef CIE_D50
+#define NEUTRAL_80_XYZ vec3(57.342,59.788,49.481)
+#else
+#define NEUTRAL_80_XYZ vec3(56.562,59.821,65.218)
+#endif
+#endif
+
+// Neutral 6.5	N 6.5/			0.310 0.316 36.2
+// sRGB: #a0a0a0
+// sRGB: 160 160 160
 #ifndef NEUTRAL_65
 #define NEUTRAL_65 vec3(0.632, 0.640, 0.638)
 #endif
 
-//Neutral 5		N 5/			0.310 0.316 19.8	#7a7a79
+#ifndef NEUTRAL_65_XYZ
+#ifdef CIE_D50
+#define NEUTRAL_65_XYZ vec3(35.589,37.181,30.911)
+#else
+#define NEUTRAL_65_XYZ vec3(35.144,37.209,40.764)
+#endif
+#endif
+
+// Neutral 5		N 5/			0.310 0.316 19.8
+// sRGB: #7a7a79
+// sRGB: 122 122 121
 #ifndef NEUTRAL_50
 #define NEUTRAL_50 vec3(0.473, 0.474, 0.473)
 #endif
 
-//Neutral 3.5	N 3.5/			0.310 0.316 9.0		#555555
+#ifndef NEUTRAL_50_XYZ
+#ifdef CIE_D50
+#define NEUTRAL_50_XYZ vec3(18.752,19.493,16.152)
+#else
+#define NEUTRAL_50_XYZ vec3(18.505,19.497,21.306)
+#endif
+#endif
+
+// Neutral 3.5	N 3.5/			0.310 0.316 9.0
+// sRGB: #555555
+// sRGB: 85 85 85
 #ifndef NEUTRAL_35
 #define NEUTRAL_35 vec3(0.324, 0.330, 0.331)
 #endif
 
-//Black			N 2/			0.310 0.316 3.1		#343434
+#ifndef NEUTRAL_35_XYZ
+#ifdef CIE_D50
+#define NEUTRAL_35_XYZ vec3(8.833,9.223,7.82)
+#else
+#define NEUTRAL_35_XYZ vec3(88.737,9.233,10.323)
+#endif 
+#endif
+
+// Black			N 2/			0.310 0.316 3.1
+// sRGB: #343434
+// sRGB: 52 52 52
 #ifndef BLACK
 #define BLACK vec3(0.194, 0.195, 0.197)
 #endif
 
+#ifndef BLACK_XYZ
+#ifdef CIE_D50
+#define BLACK_XYZ vec3(3.225,3.34,2.822)
+#else
+#define BLACK_XYZ vec3(3.185,3.342,3.727)
+#endif
+#endif
+
 // 48 SPYDERCHECKR COLOR PALETTE
 // 
-// Values from:
-//  - https://www.northlight-images.co.uk/datacolor-spydercheckr-colour-test-card-review/
-//  - https://www.bartneck.de/2017/10/24/patch-color-definitions-for-datacolor-spydercheckr-48/
 
 // A1
 // Lab: 61.35,  34.81,  18.38
