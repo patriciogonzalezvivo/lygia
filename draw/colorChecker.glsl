@@ -13,6 +13,8 @@ use:
     - colorCheckerSpyder(<vec2> uv)
 options:
     - COLORCHECKER_FNC: function to use to draw the color checker
+examples:
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/draw_colorChecker.frag
 */
 
 #ifndef COLORCHECKER_FNC
