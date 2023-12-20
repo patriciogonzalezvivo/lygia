@@ -10,22 +10,22 @@ use: linear2gamma(<float|vec3|vec4> color)
 
 #ifndef FNC_LINEAR2GAMMA
 #define FNC_LINEAR2GAMMA
-vec3 linear2gamma(in vec3 v) {
+vec3 linear2gamma(const in vec3 v) {
 #ifdef GAMMA
-    return pow(v, vec3(1. / GAMMA));
+    return pow(v, vec3(1.0/GAMMA));
 #else
     // assume gamma 2.0
     return sqrt(v);
 #endif
 }
 
-vec4 linear2gamma(in vec4 v) {
+vec4 linear2gamma(const in vec4 v) {
     return vec4(linear2gamma(v.rgb), v.a);
 }
 
-float linear2gamma(in float v) {
+float linear2gamma(const in float v) {
 #ifdef GAMMA
-    return pow(v, 1. / GAMMA);
+    return pow(v, 1.0/GAMMA);
 #else
     // assume gamma 2.0
     return sqrt(v);

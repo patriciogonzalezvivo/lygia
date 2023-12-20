@@ -4,28 +4,25 @@ description: pass a color in RGB and get it in YPbPr from http://www.equasys.de/
 use: YPbPr2RGB(<float3|float4> color)
 */
 
-#ifndef FNC_YPBPR2RGB
-#define FNC_YPBPR2RGB
-
+#ifndef MAT_YPBPR2RGB
+#define MAT_YPBPR2RGB
 #ifdef YPBPR_SDTV
-const float3x3 YPbPr2rgb_mat = float3x3( 
-    1.,     1.,       1.,
-    0.,     -.344,    1.772,
-    1.402,  -.714,    0.
+const float3x3 YPBPR2RGB = float3x3( 
+    1.0,     1.0,       1.0,
+    0.0,    -0.344,     1.772,
+    1.402,  -0.714,     0.0
 );
 #else
-const float3x3 YPbPr2rgb_mat = float3x3( 
-    1.,     1.,       1.,
-    0.,     -.187,    1.856,
-    1.575,  -.468,    0.
+const float3x3 YPBPR2RGB = float3x3( 
+    1.0,     1.0,       1.0,
+    0.0,    -0.187,     1.856,
+    1.575,  -0.468,     0.0
 );
 #endif
+#endif
 
-float3 YPbPr2rgb(in float3 rgb) {
-    return mul(YPbPr2rgb_mat, rgb);
-}
-
-float4 YPbPr2rgb(in float4 rgb) {
-    return float4(YPbPr2rgb(rgb.rgb),rgb.a);
-}
+#ifndef FNC_YPBPR2RGB
+#define FNC_YPBPR2RGB
+float3 YPbPr2rgb(in float3 rgb) { return mul(YPBPR2RGB, rgb); }
+float4 YPbPr2rgb(in float4 rgb) { return float4(YPbPr2rgb(rgb.rgb),rgb.a); }
 #endif

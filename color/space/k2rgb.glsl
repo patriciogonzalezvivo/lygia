@@ -9,7 +9,7 @@ use: <vec3> k2rgb(<float> wavelength)
 #ifndef FNC_K2RGB
 #define FNC_K2RGB
 
-vec3 k2rgb(float t) {
+vec3 k2rgb(const in float t) {
     float p = pow(t, -1.5);
     float l = log(t);
     vec3 color = vec3(

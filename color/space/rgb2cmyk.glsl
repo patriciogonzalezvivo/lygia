@@ -9,7 +9,7 @@ use: rgb2cmyk(<vec3|vec4> rgba)
 
 #ifndef FNC_RGB2CMYK
 #define FNC_RGB2CMYK
-vec4 rgb2cmyk(vec3 rgb) {
+vec4 rgb2cmyk(const in vec3 rgb) {
     float k = mmin(1.0 - rgb);
     float invK = 1.0 - k;
     vec3 cmy = (1.0 - rgb - k) / invK;

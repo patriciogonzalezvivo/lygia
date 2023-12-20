@@ -6,7 +6,7 @@ use: rgb2xyz(<vec3|vec4> color)
 
 #ifndef FNC_LAB2XYZ
 #define FNC_LAB2XYZ
-vec3 lab2xyz(in vec3 c) {
+vec3 lab2xyz(const in vec3 c) {
     vec3 f = vec3(0.0);
     f.y = (c.x + 16.0) / 116.0;
     f.x = c.y / 500.0 + f.y;
