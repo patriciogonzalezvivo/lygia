@@ -6,7 +6,7 @@ use: YCbCr2rgb(<vec3|vec4> color)
 
 #ifndef FNC_YCBCR2RGB
 #define FNC_YCBCR2RGB
-vec3 YCbCr2rgb(in vec3 ycbcr) {
+vec3 YCbCr2rgb(const in vec3 ycbcr) {
     float cb = ycbcr.y - .5;
     float cr = ycbcr.z - .5;
     float y = ycbcr.x;
@@ -16,7 +16,7 @@ vec3 YCbCr2rgb(in vec3 ycbcr) {
     return vec3(r, g, b) + y;
 }
 
-vec4 YCbCr2rgb(in vec4 ycbcr) {
+vec4 YCbCr2rgb(const in vec4 ycbcr) {
     return vec4(YCbCr2rgb(ycbcr.rgb),ycbcr.a);
 }
 #endif

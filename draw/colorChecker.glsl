@@ -75,6 +75,58 @@ vec4 colorCheckerMacbeth (vec2 uv) {
     return vec4(saturate(color) * alpha, alpha);
 }
 
+
+vec4 colorCheckerMacbethXYZ(vec2 uv) {
+    vec3 colors[24];
+    colors[0] = DARK_SKIN_XYZ;
+    colors[1] = LIGHT_SKIN_XYZ;
+    colors[2] = BLUE_SKY_XYZ;
+    colors[3] = FOLIAGE_XYZ;
+    colors[4] = BLUE_FLOWER_XYZ;
+    colors[5] = BLUISH_GREEN_XYZ;
+    colors[6] = ORANGE_XYZ;
+    colors[7] = PURPLISH_BLUE_XYZ;
+    colors[8] = MODERATE_RED_XYZ;
+    colors[9] = PURPLE_XYZ;
+    colors[10] = YELLOW_GREEN_XYZ;
+    colors[11] = ORANGE_YELLOW_XYZ;
+    colors[12] = BLUE_XYZ;
+    colors[13] = GREEN_XYZ;
+    colors[14] = RED_XYZ;
+    colors[15] = YELLOW_XYZ;
+    colors[16] = MAGENTA_XYZ;
+    colors[17] = CYAN_XYZ;
+    colors[18] = WHITE_XYZ;
+    colors[19] = NEUTRAL_80_XYZ;
+    colors[20] = NEUTRAL_65_XYZ;
+    colors[21] = NEUTRAL_50_XYZ;
+    colors[22] = NEUTRAL_35_XYZ;
+    colors[23] = BLACK_XYZ;
+
+    vec2 st = vec2(uv.x, 1.0-uv.y);
+    st = scale(st, vec2(1.0,1.5));
+    st *= vec2(6.0, 4.0);
+    vec2 st_i = floor(st);
+    vec2 st_f = fract(st);
+
+    vec3 color = vec3(0.0);
+    int index = 6 * int(st_i.y) + int(st_i.x);
+    #if defined(PLATFORM_WEBGL)
+    for (int i = 0; i < 64; i++)
+        if (i == index) color = colors[i];
+    #else
+    color = colors[index];
+    #endif
+    color *= rect(st_f, 0.8);
+    color += fill(crossSDF(uv, 2.), .015);
+    color += saturate(
+                stroke(rectSDF(uv, vec2(1.015, 0.68)), 1., 0.01) -
+                rect(uv, vec2(.966, 1.)) - rect(uv, vec2(1.1, .63))
+            );
+    float alpha = rect(uv, vec2(1.03,0.69));
+    return vec4(saturate(color) * alpha, alpha);
+}
+
 vec4 colorCheckerSpyderA(vec2 uv) {
     vec3 colors[24];
     colors[0] = LOW_SAT_RED;

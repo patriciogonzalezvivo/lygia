@@ -43,9 +43,9 @@ description: |
 
 #ifndef LIGHT_SKIN_XYZ
 #ifdef CIE_D50
-#define LIGHT_SKIN_XYZ vec3(39.602, 35.073, 19.617)
+#define LIGHT_SKIN_XYZ vec3(39.602,35.073,19.617)
 #else
-#define LIGHT_SKIN_XYZ vec3(37.29	34.404	25.454)
+#define LIGHT_SKIN_XYZ vec3(37.29,34.404,25.454)
 #endif
 #endif
 
