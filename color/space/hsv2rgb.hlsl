@@ -2,7 +2,7 @@
 /*
 contributors: Inigo Quiles
 description: |
-    Convert from HSB to linear RGB
+    Convert from HSV to linear RGB
 use: <float3|float4> hsv2rgb(<float3|float4> hsv)
 */
 
