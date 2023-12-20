@@ -113,7 +113,7 @@ vec4 colorCheckerMacbethXYZ(vec2 uv) {
     int index = 6 * int(st_i.y) + int(st_i.x);
     #if defined(PLATFORM_WEBGL)
     for (int i = 0; i < 64; i++)
-        if (i == index) color = xyz_values[i];
+        if (i == index) xyz = xyz_values[i];
     #else
     xyz = xyz_values[index];
     #endif
