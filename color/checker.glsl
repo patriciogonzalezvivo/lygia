@@ -362,7 +362,7 @@ description: |
 #ifdef CIE_D50
 #define NEUTRAL_35_XYZ vec3(8.833,9.223,7.82)
 #else
-#define NEUTRAL_35_XYZ vec3(88.737,9.233,10.323)
+#define NEUTRAL_35_XYZ vec3(8.737,9.233,10.323)
 #endif 
 #endif
 
