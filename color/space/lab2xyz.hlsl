@@ -4,11 +4,14 @@ description: Converts a Lab color to XYZ color space.
 use: rgb2xyz(<float3|float4> color)
 */
 
+#ifndef VEC_CIE_WHITE
+#define VEC_CIE_WHITE
 #ifdef CIE_D50
 const float3 CIE_WHITE = float3(0.96429567643, 1.0, 0.82510460251);
 #else
 // D65
 const float3 CIE_WHITE = float3(0.95045592705, 1.0, 1.08905775076);
+#endif
 #endif
 
 #ifndef FNC_LAB2XYZ

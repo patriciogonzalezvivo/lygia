@@ -6,11 +6,14 @@ description: |
 use: rgb2xyz(<vec3|vec4> color)
 */
 
+#ifndef VEC_CIE_WHITE
+#define VEC_CIE_WHITE
 #ifdef CIE_D50
 const vec3 CIE_WHITE = vec3(0.96429567643, 1.0, 0.82510460251);
 #else
 // D65
 const vec3 CIE_WHITE = vec3(0.95045592705, 1.0, 1.08905775076);
+#endif
 #endif
 
 #ifndef FNC_LAB2XYZ
