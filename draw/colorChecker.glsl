@@ -167,6 +167,52 @@ vec4 colorCheckerMacbethLAB(vec2 uv) {
     return vec4(lab * alpha, alpha);
 }
 
+vec4 colorCheckerMacbethLCH(vec2 uv) {
+    vec3 lch_values[24];
+    lch_values[0] = DARK_SKIN_LCH;
+    lch_values[1] = LIGHT_SKIN_LCH;
+    lch_values[2] = BLUE_SKY_LCH;
+    lch_values[3] = FOLIAGE_LCH;
+    lch_values[4] = BLUE_FLOWER_LCH;
+    lch_values[5] = BLUISH_GREEN_LCH;
+    lch_values[6] = ORANGE_LCH;
+    lch_values[7] = PURPLISH_BLUE_LCH;
+    lch_values[8] = MODERATE_RED_LCH;
+    lch_values[9] = PURPLE_LCH;
+    lch_values[10] = YELLOW_GREEN_LCH;
+    lch_values[11] = ORANGE_YELLOW_LCH;
+    lch_values[12] = BLUE_LCH;
+    lch_values[13] = GREEN_LCH;
+    lch_values[14] = RED_LCH;
+    lch_values[15] = YELLOW_LCH;
+    lch_values[16] = MAGENTA_LCH;
+    lch_values[17] = CYAN_LCH;
+    lch_values[18] = WHITE_LCH;
+    lch_values[19] = NEUTRAL_80_LCH;
+    lch_values[20] = NEUTRAL_65_LCH;
+    lch_values[21] = NEUTRAL_50_LCH;
+    lch_values[22] = NEUTRAL_35_LCH;
+    lch_values[23] = BLACK_LCH;
+
+    vec2 st = vec2(uv.x, 1.0-uv.y);
+    st = scale(st, vec2(1.0,1.5));
+    st *= vec2(6.0, 4.0);
+    vec2 st_i = floor(st);
+    vec2 st_f = fract(st);
+
+    vec3 lch = vec3(0.0);
+    int index = 6 * int(st_i.y) + int(st_i.x);
+    #if defined(PLATFORM_WEBGL)
+    for (int i = 0; i < 64; i++)
+        if (i == index) lch = lch_values[i];
+    #else
+    lch = lch_values[index];
+    #endif
+    lch *= rect(st_f, 0.8);
+    float alpha = rect(uv, vec2(1.03,0.69));
+    return vec4(lch * alpha, alpha);
+}
+
 vec4 colorCheckerMacbethXYY(vec2 uv) {
     vec3 xyY_values[24];
     xyY_values[0] = DARK_SKIN_XYY;

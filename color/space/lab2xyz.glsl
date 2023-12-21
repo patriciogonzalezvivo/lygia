@@ -6,16 +6,23 @@ description: |
 use: rgb2xyz(<vec3|vec4> color)
 */
 
+#ifdef CIE_D50
+const vec3 CIE_WHITE = vec3(0.96429567643, 1.0, 0.82510460251);
+#else
+// D65
+const vec3 CIE_WHITE = vec3(0.95045592705, 1.0, 1.08905775076);
+#endif
+
 #ifndef FNC_LAB2XYZ
 #define FNC_LAB2XYZ
 vec3 lab2xyz(const in vec3 c) {
     float fy = ( c.x + 16.0 ) / 116.0;
     float fx = c.y / 500.0 + fy;
     float fz = fy - c.z / 200.0;
-    return vec3(
-         95.047 * (( fx > 0.206897 ) ? fx * fx * fx : ( fx - 16.0 / 116.0 ) / 7.787),
-        100.000 * (( fy > 0.206897 ) ? fy * fy * fy : ( fy - 16.0 / 116.0 ) / 7.787),
-        108.883 * (( fz > 0.206897 ) ? fz * fz * fz : ( fz - 16.0 / 116.0 ) / 7.787)
+    return CIE_WHITE * 100.0 * vec3(
+        ( fx > 0.206897 ) ? fx * fx * fx : ( fx - 16.0 / 116.0 ) / 7.787,
+        ( fy > 0.206897 ) ? fy * fy * fy : ( fy - 16.0 / 116.0 ) / 7.787,
+        ( fz > 0.206897 ) ? fz * fz * fz : ( fz - 16.0 / 116.0 ) / 7.787
     );
 }
 

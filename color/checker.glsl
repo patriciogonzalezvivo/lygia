@@ -18,9 +18,9 @@ description: |
 //
 
 // Dark skin (3 YR 3.7/3.2)
-// sRGB: 115 82 68
 #ifndef DARK_SKIN
-#define DARK_SKIN vec3(0.454, 0.311, 0.255)
+// sRGB: 117	84	70
+#define DARK_SKIN vec3(0.46017,0.33059,0.27477)
 #endif
 
 #ifndef DARK_SKIN_XYZ
@@ -32,7 +32,19 @@ description: |
 #endif
 
 #ifndef DARK_SKIN_LAB
-#define DARK_SKIN_LAB vec3(37.986,13.555,14.059)
+#ifdef CIE_D50
+#define DARK_SKIN_LAB vec3(39.4,13.26,14.44)
+#else
+#define DARK_SKIN_LAB vec3(38.96,11.7,13.73)
+#endif
+#endif
+
+#ifndef DARK_SKIN_LCH
+#ifdef CIE_D50
+#define DARK_SKIN_LCH vec3(39.4,19.61,47.45)
+#else
+#define DARK_SKIN_LCH vec3(38.96,18.04,49.57)
+#endif
 #endif
 
 #ifndef DARK_SKIN_XYY
@@ -40,9 +52,9 @@ description: |
 #endif
 
 // Light skin (2.2 YR 6.47/4.1)
-// sRGB: 194 150 130
 #ifndef LIGHT_SKIN
-#define LIGHT_SKIN vec3(0.773, 0.563, 0.497)
+// sRGB: 196	147	129
+#define LIGHT_SKIN vec3(0.769, 0.576, 0.506)
 #endif
 
 #ifndef LIGHT_SKIN_XYZ
@@ -53,18 +65,30 @@ description: |
 #endif
 #endif
 
+#ifndef LIGHT_SKIN_LAB
+#ifdef CIE_D50
+#define LIGHT_SKIN_LAB vec3(65.81,19.06,17.15)
+#else
+#define LIGHT_SKIN_LAB vec3(65.28,15.68,16.94)
+#endif
+#endif
+
+#ifndef LIGHT_SKIN_LCH
+#ifdef CIE_D50
+#define LIGHT_SKIN_LCH vec3(65.81,25.64,41.99)
+#else
+#define LIGHT_SKIN_LCH vec3(65.28,23.08,47.21)
+#endif
+#endif
+
 #ifndef LIGHT_SKIN_XYY
 #define LIGHT_SKIN_XYY vec3(0.377, 0.345, 35.8)
 #endif
 
 
-#ifndef LIGHT_SKIN_LAB
-#define LIGHT_SKIN_LAB vec3(65.711,18.13,17.81)
-#endif
-
 // Blue sky	(4.3 PB 4.95/5.5)	
-// sRGB: 98 122 157
 #ifndef BLUE_SKY
+// sRGB: 98 122 157
 #define BLUE_SKY vec3(0.356, 0.472, 0.609)
 #endif
 
@@ -77,7 +101,19 @@ description: |
 #endif
 
 #ifndef BLUE_SKY_LAB
-#define BLUE_SKY_LAB vec3(49.927,-4.88,-21.925)
+#ifdef CIE_D50
+#define BLUE_SKY_LAB vec3(50.29,-3.86,-22.11)
+#else
+#define BLUE_SKY_LAB vec3(50.73,-0.92,-21.57)
+#endif
+#endif
+
+#ifndef BLUE_SKY_LCH
+#ifdef CIE_D50
+#define BLUE_SKY_LCH vec3(50.29,22.44,260.08)
+#else
+#define BLUE_SKY_LCH vec3(50.73,21.59,267.55)
+#endif
 #endif
 
 #ifndef BLUE_SKY_XYY
@@ -85,9 +121,9 @@ description: |
 #endif
 
 // Foliage		(6.7 GY 4.2/4.1)	
-// sRGB: 87 108 67
 #ifndef FOLIAGE
-#define FOLIAGE vec3(0.359, 0.425, 0.250)
+// sRGB: 91	109	65
+#define FOLIAGE vec3(0.357, 0.427, 0.247)
 #endif
 
 #ifndef FOLIAGE_XYZ
@@ -99,7 +135,19 @@ description: |
 #endif
 
 #ifndef FOLIAGE_LAB
-#define FOLIAGE_LAB vec3(43.139,-13.095,21.905)
+#ifdef CIE_D50
+#define FOLIAGE_LAB vec3(43.92,-13.73,22.33)
+#else
+#define FOLIAGE_LAB vec3(43.92,-15.31,22.61)
+#endif
+#endif
+
+#ifndef FOLIAGE_LCH
+#ifdef CIE_D50
+#define FOLIAGE_LCH vec3(43.92,26.22,121.59)
+#else
+#define FOLIAGE_LCH vec3(43.92,27.31,124.12)
+#endif
 #endif
 
 #ifndef FOLIAGE_XYY
@@ -107,9 +155,9 @@ description: |
 #endif
 
 // Blue flower	(9.7 PB 5.47/6.7)
-// sRGB: 133 128 177
 #ifndef BLUE_FLOWER
-#define BLUE_FLOWER vec3(0.514, 0.498, 0.685)
+// sRGB: 132	129	177
+#define BLUE_FLOWER vec3(0.518, 0.506, 0.694)
 #endif
 
 #ifndef BLUE_FLOWER_XYZ
@@ -121,7 +169,19 @@ description: |
 #endif
 
 #ifndef BLUE_FLOWER_LAB
-#define BLUE_FLOWER_LAB vec3(55.112,8.844,-25.399)
+#ifdef CIE_D50
+#define BLUE_FLOWER_LAB vec3(55.77,9.33,-24.86)
+#else
+#define BLUE_FLOWER_LAB vec3(55.98,11.87,-24.81)
+#endif
+#endif
+
+#ifndef BLUE_FLOWER_LCH
+#ifdef CIE_D50
+#define BLUE_FLOWER_LCH vec3(55.77,26.56,290.56)
+#else
+#define BLUE_FLOWER_LCH vec3(55.98,27.5,295.57)
+#endif
 #endif
 
 #ifndef BLUE_FLOWER_XYY
@@ -129,9 +189,9 @@ description: |
 #endif
 
 // Bluish green	(2.5 BG 7/6)
-// sRGB: 103 189 170
 #ifndef BLUISH_GREEN
-#define BLUISH_GREEN vec3(0.374, 0.740, 0.673)
+// sRGB: 98	191	172
+#define BLUISH_GREEN vec3(0.384, 0.749, 0.675)
 #endif
 
 #ifndef BLUISH_GREEN_XYZ
@@ -143,7 +203,19 @@ description: |
 #endif
 
 #ifndef BLUISH_GREEN_LAB
-#define BLUISH_GREEN_LAB vec3(70.719,-33.397,-0.199)
+#ifdef CIE_D50
+#define BLUISH_GREEN_LAB vec3(70.99,-33.01,-0.87)
+#else
+#define BLUISH_GREEN_LAB vec3(71.63,-32.29,0.96)
+#endif
+#endif
+
+#ifndef BLUISH_GREEN_LCH
+#ifdef CIE_D50
+#define BLUISH_GREEN_LCH vec3(70.99,33.02,181.51)
+#else
+#define BLUISH_GREEN_LCH vec3(71.63,32.3,178.29)
+#endif
 #endif
 
 #ifndef BLUISH_GREEN_XYY
@@ -151,9 +223,9 @@ description: |
 #endif
 
 // Orange		(5 YR 6/11)
-// sRGB: 214 126 44
 #ifndef ORANGE
-#define ORANGE vec3(0.879, 0.487, 0.189)
+// sRGB: 221	125	47
+#define ORANGE vec3(0.867, 0.487, 0.184)
 #endif
 
 #ifndef ORANGE_XYZ
@@ -165,7 +237,19 @@ description: |
 #endif
 
 #ifndef ORANGE_LAB
-#define ORANGE_LAB vec3(62.661,36.067,57.096)
+#ifdef CIE_D50
+#define ORANGE_LAB vec3(63.39,35.03,57.69)
+#else
+#define ORANGE_LAB vec3(62.11,31.79,55.83)
+#endif
+#endif
+
+#ifndef ORANGE_LCH
+#ifdef CIE_D50
+#define ORANGE_LCH vec3(63.39,67.49,58.74)
+#else
+#define ORANGE_LCH vec3(62.11,64.24,60.34)
+#endif
 #endif
 
 #ifndef ORANGE_XYY
@@ -173,9 +257,9 @@ description: |
 #endif
 
 // Purplish blue	(7.5 PB 4/10.7)	
-// sRGB: 80 91 166
 #ifndef PURPLISH_BLUE
-#define PURPLISH_BLUE vec3(0.269, 0.351, 0.656)
+// sRGB: 74	91	171
+#define PURPLISH_BLUE vec3(0.290, 0.357, 0.671)
 #endif
 
 #ifndef PURPLISH_BLUE_XYZ
@@ -187,18 +271,29 @@ description: |
 #endif
 
 #ifndef PURPLISH_BLUE_LAB
-#define PURPLISH_BLUE_LAB vec3(40.02,10.41,-45.964)
+#ifdef CIE_D50
+#define PURPLISH_BLUE_LAB vec3(40.57,11.01,-45.8)
+#else
+#define PURPLISH_BLUE_LAB vec3(41.23,17.51,-45.0)
+#endif
+#endif
+
+#ifndef PURPLISH_BLUE_LCH
+#ifdef CIE_D50
+#define PURPLISH_BLUE_LCH vec3(40.57,47.1,283.528)
+#else
+#define PURPLISH_BLUE_LCH vec3(41.23,48.29,291.26)
+#endif
 #endif
 
 #ifndef PURPLISH_BLUE_XYY
 #define PURPLISH_BLUE_XYY vec3(0.211, 0.175, 12.0)
 #endif
 
-
 // Moderate red	(2.5 R 5/10)
-// sRGB: 193 90 99
 #ifndef MODERATE_RED
-#define MODERATE_RED vec3(0.774, 0.313, 0.373)
+// sRGB: 196	85	98
+#define MODERATE_RED vec3(0.769, 0.333, 0.384)
 #endif
 
 #ifndef MODERATE_RED_XYZ
@@ -210,7 +305,19 @@ description: |
 #endif
 
 #ifndef MODERATE_RED_LAB
-#define MODERATE_RED_LAB vec3(51.124,48.239,16.248)
+#ifdef CIE_D50
+#define MODERATE_RED_LAB vec3(52.25,48.2,16.989)
+#else
+#define MODERATE_RED_LAB vec3(50.98,45.91,14.6)
+#endif
+#endif
+
+#ifndef MODERATE_RED_LCH
+#ifdef CIE_D50
+#define MODERATE_RED_LCH vec3(52.25,51.1,19.4)
+#else
+#define MODERATE_RED_LCH vec3(50.98,48.17,17.64)
+#endif
 #endif
 
 #ifndef MODERATE_RED_XYY
@@ -218,9 +325,9 @@ description: |
 #endif
 
 // Purple		(5 P 3/7)
-// sRGB: 94 60 108
 #ifndef PURPLE
-#define PURPLE vec3(0.364, 0.227, 0.407)
+// sRGB: 93	59	107
+#define PURPLE vec3(0.365, 0.231, 0.420)
 #endif
 
 #ifndef PURPLE_XYZ
@@ -232,7 +339,19 @@ description: |
 #endif
 
 #ifndef PURPLE_LAB
-#define PURPLE_LAB vec3(30.325,22.976,-21.587)
+#ifdef CIE_D50
+#define PURPLE_LAB vec3(31.04,22.31,-21.03)
+#else
+#define PURPLE_LAB vec3(30.87,24.25,-22.06)
+#endif
+#endif
+
+#ifndef PURPLE_LCH
+#ifdef CIE_D50
+#define PURPLE_LCH vec3(31.04,30.66,316.69)
+#else
+#define PURPLE_LCH vec3(30.87,32.78,317.71)
+#endif
 #endif
 
 #ifndef PURPLE_XYY
@@ -240,9 +359,9 @@ description: |
 #endif
 
 // Yellow green	(5 GY 7.1/9.1)
-// sRGB: 157 188 64
 #ifndef YELLOW_GREEN
-#define YELLOW_GREEN vec3(0.612, 0.734, 0.228)
+// sRGB: 159	190	64
+#define YELLOW_GREEN vec3(0.624, 0.745, 0.227)
 #endif
 
 #ifndef YELLOW_GREEN_XYZ
@@ -254,7 +373,19 @@ description: |
 #endif
 
 #ifndef YELLOW_GREEN_LAB
-#define YELLOW_GREEN_LAB vec3(72.532,-23.709,57.255)
+#ifdef CIE_D50
+#define YELLOW_GREEN_LAB vec3(72.95,-24.35,56.48)
+#else
+#define YELLOW_GREEN_LAB vec3(72.87,-28.16,57.78)
+#endif
+#endif
+
+#ifndef YELLOW_GREEN_LCH
+#ifdef CIE_D50
+#define YELLOW_GREEN_LCH vec3(72.95,61.51,113.32)
+#else
+#define YELLOW_GREEN_LCH vec3(72.87,64.28,115.98)
+#endif
 #endif
 
 #ifndef YELLOW_GREEN_XYY
@@ -262,9 +393,9 @@ description: |
 #endif
 
 // Orange Yellow	(10 YR 7/10.5)
-// sRGB: 224 163 46
 #ifndef ORANGE_YELLOW
-#define ORANGE_YELLOW vec3(0.892, 0.633, 0.153)
+// sRGB: 228	162	41
+#define ORANGE_YELLOW vec3(0.894, 0.635, 0.160)
 #endif
 
 #ifndef ORANGE_YELLOW_XYZ
@@ -276,7 +407,19 @@ description: |
 #endif
 
 #ifndef ORANGE_YELLOW_LAB
-#define ORANGE_YELLOW_LAB vec3(71.941,19.363,67.857)
+#ifdef CIE_D50
+#define ORANGE_YELLOW_LAB vec3(72.52,18.45,68.16)
+#else
+#define ORANGE_YELLOW_LAB vec3(71.51,14.6,66.93)
+#endif
+#endif
+
+#ifndef ORANGE_YELLOW_LCH
+#ifdef CIE_D50
+#define ORANGE_YELLOW_LCH vec3(72.52,70.62,74.85)
+#else
+#define ORANGE_YELLOW_LCH vec3(71.51,68.5,77.69)
+#endif
 #endif
 
 #ifndef ORANGE_YELLOW_XYY
@@ -284,9 +427,9 @@ description: |
 #endif
 
 // Blue	(7.5 PB 2.9/12.7)
-// sRGB: 56 61 150
 #ifndef BLUE
-#define BLUE vec3(0.156, 0.241, 0.570)
+// sRGB: 45	63	149
+#define BLUE vec3(0.176, 0.247, 0.584)
 #endif
 
 #ifndef BLUE_XYZ
@@ -298,7 +441,19 @@ description: |
 #endif
 
 #ifndef BLUE_LAB
-#define BLUE_LAB vec3(28.778,14.179,-50.297)
+#ifdef CIE_D50
+#define BLUE_LAB vec3(29.47,15.59,-50.68)
+#else
+#define BLUE_LAB vec3(30.27,23.04,-49.59)
+#endif
+#endif
+
+#ifndef BLUE_LCH
+#ifdef CIE_D50
+#define BLUE_LCH vec3(29.47,53.03,287.1)
+#else
+#define BLUE_LCH vec3(30.27,54.68,294.92)
+#endif
 #endif
 
 #ifndef BLUE_XYY
@@ -306,9 +461,9 @@ description: |
 #endif
 
 // Green (0.25 G 5.4/9.6)
-// sRGB: 70 148 73
 #ifndef GREEN
-#define GREEN vec3(0.238, 0.577, 0.275)
+// sRGB: 70	150	74
+#define GREEN vec3(0.239, 0.588, 0.290)
 #endif
 
 #ifndef GREEN_XYZ
@@ -320,7 +475,19 @@ description: |
 #endif
 
 #ifndef GREEN_LAB
-#define GREEN_LAB vec3(55.261,-38.342,31.37)
+#ifdef CIE_D50
+#define GREEN_LAB vec3(55.63,-38.46,30.77)
+#else
+#define GREEN_LAB vec3(56.02,-40.94,32.75)
+#endif
+#endif
+
+#ifndef GREEN_LCH
+#ifdef CIE_D50
+#define GREEN_LCH vec3(55.63,49.26,141.34)
+#else
+#define GREEN_LCH vec3(56.02,52.43,141.35)
+#endif
 #endif
 
 #ifndef GREEN_XYY
@@ -328,9 +495,9 @@ description: |
 #endif
 
 // Red (5 R 4/12)
-// sRGB: 175 54 60
 #ifndef RED
-#define RED vec3(0.699, 0.210, 0.222)
+// sRGB: 176	57	58
+#define RED vec3(0.690, 0.224, 0.227)
 #endif
 
 #ifndef RED_XYZ
@@ -342,7 +509,19 @@ description: |
 #endif
 
 #ifndef RED_LAB
-#define RED_LAB vec3(53.232,80.109,67.22)
+#ifdef CIE_D50
+#define RED_LAB vec3(43.57,51.47,29.3)
+#else
+#define RED_LAB vec3(42.08,48.02,26.74)
+#endif
+#endif
+
+#ifndef RED_LCH
+#ifdef CIE_D50
+#define RED_LCH vec3(43.57,59.22,29.65)
+#else
+#define RED_LCH vec3(42.08,54.96,29.11)
+#endif
 #endif
 
 #ifndef RED_XYY
@@ -350,9 +529,9 @@ description: |
 #endif
 
 // Yellow (5 Y 8/11.1)
-// sRGB: 231 199 31
 #ifndef YELLOW
-#define YELLOW vec3(0.927, 0.782, 0.057)
+// SRGB: 236	200	24
+#define YELLOW vec3(0.925, 0.784, 0.094)
 #endif
 
 #ifndef YELLOW_XYZ
@@ -364,7 +543,19 @@ description: |
 #endif
 
 #ifndef YELLOW_LAB
-#define YELLOW_LAB vec3(81.733,4.039,79.819)
+#ifdef CIE_D50
+#define YELLOW_LAB vec3(82.35,2.97,79.44)
+#else
+#define YELLOW_LAB vec3(81.63,-2.19,79.78)
+#endif
+#endif
+
+#ifndef YELLOW_LCH
+#ifdef CIE_D50
+#define YELLOW_LCH vec3(82.35,79.49,87.86)
+#else
+#define YELLOW_LCH vec3(81.63,79.81,91.57)
+#endif
 #endif
 
 #ifndef YELLOW_XYY
@@ -372,9 +563,9 @@ description: |
 #endif
 
 // Magenta (2.5 RP 5/12)
-// sRGB: 187 86 149
 #ifndef MAGENTA
-#define MAGENTA vec3(0.750, 0.309, 0.574)
+// sRGB: 191	86	152
+#define MAGENTA vec3(0.749, 0.309, 0.598)
 #endif
 
 #ifndef MAGENTA_XYZ
@@ -386,7 +577,19 @@ description: |
 #endif
 
 #ifndef MAGENTA_LAB
-#define MAGENTA_LAB vec3(51.935,49.986,-14.574)
+#ifdef CIE_D50
+#define MAGENTA_LAB vec3(52.92,50.21,-13.48)
+#else
+#define MAGENTA_LAB vec3(51.97,50.05,-15.89)
+#endif
+#endif
+
+#ifndef MAGENTA_LCH
+#ifdef CIE_D50
+#define MAGENTA_LCH vec3(52.92,51.99,344.97)
+#else
+#define MAGENTA_LCH vec3(51.97,52.51,342.39)
+#endif
 #endif
 
 #ifndef MAGENTA_XYY
@@ -394,9 +597,9 @@ description: |
 #endif
 
 // Cyan (5 B 5/8)
-// sRGB: 8 133 161
 #ifndef CYAN
-#define CYAN vec3(0.000, 0.521, 0.648)
+// sRGB: 0	137	168
+#define CYAN vec3(0.000, 0.537, 0.659)
 #endif
 
 #ifndef CYAN_XYZ
@@ -408,18 +611,29 @@ description: |
 #endif
 
 #ifndef CYAN_LAB
-#define CYAN_LAB vec3(51.038,-28.631,-28.638)
+#ifdef CIE_D50
+#define CYAN_LAB vec3(51.18,-27.02,-28.54)
+#else
+#define CYAN_LAB vec3(52.24,-23.14,-26.15)
+#endif
+#endif
+
+#ifndef CYAN_LCH
+#ifdef CIE_D50
+#define CYAN_LCH vec3(51.18,39.29,226.57)
+#else
+#define CYAN_LCH vec3(52.24,34.92,228.49)
+#endif
 #endif
 
 #ifndef CYAN_XYY
 #define CYAN_XYY vec3(0.196, 0.252, 19.8)
 #endif
 
-
 // White (N 9.5/)
-// sRGB: 243 243 242
 #ifndef WHITE
-#define WHITE vec3(0.945, 0.948, 0.923)
+// sRGB: 244	244	241
+#define WHITE vec3(0.956, 0.956, 0.945)
 #endif
 
 #ifndef WHITE_XYZ
@@ -431,7 +645,19 @@ description: |
 #endif
 
 #ifndef WHITE_LAB
-#define WHITE_LAB vec3(96.539,-0.425,1.186)
+#ifdef CIE_D50
+#define WHITE_LAB vec3(96.37,-0.31,1.5)
+#else
+#define WHITE_LAB vec3(96.36,-0.6,1.65)
+#endif
+#endif
+
+#ifndef WHITE_LCH
+#ifdef CIE_D50
+#define WHITE_LCH vec3(96.37,1.53,101.57)
+#else
+#define WHITE_LCH vec3(96.36,1.76,109.99)
+#endif
 #endif
 
 #ifndef WHITE_XYY
@@ -439,17 +665,9 @@ description: |
 #endif
 
 // Neutral 8 (N 8/)
-// sRGB: 200 200 200
 #ifndef NEUTRAL_80
-#define NEUTRAL_80 vec3(0.789, 0.793, 0.788)
-#endif
-
-#ifndef NEUTRAL_80_LAB
-#define NEUTRAL_80_LAB vec3(81.257,-0.638,-0.335)
-#endif
-
-#ifndef NEUTRAL_80_XYY
-#define NEUTRAL_80_XYY vec3(0.310, 0.316, 59.1)
+// sRGB: 201	203	203
+#define NEUTRAL_80 vec3(0.789, 0.797, 0.797)
 #endif
 
 #ifndef NEUTRAL_80_XYZ
@@ -460,10 +678,30 @@ description: |
 #endif
 #endif
 
+#ifndef NEUTRAL_80_LAB
+#ifdef CIE_D50
+#define NEUTRAL_80_LAB vec3(81.72,-0.75,-0.16)
+#else
+#define NEUTRAL_80_LAB vec3(81.74,-0.73,-0.07)
+#endif
+#endif
+
+#ifndef NEUTRAL_80_LCH
+#ifdef CIE_D50
+#define NEUTRAL_80_LCH vec3(81.72,0.77,192.3)
+#else
+#define NEUTRAL_80_LCH vec3(81.74,0.74,185.65)
+#endif
+#endif
+
+#ifndef NEUTRAL_80_XYY
+#define NEUTRAL_80_XYY vec3(0.310, 0.316, 59.1)
+#endif
+
 // Neutral 6.5	(N 6.5/)
-// sRGB: 160 160 160
 #ifndef NEUTRAL_65
-#define NEUTRAL_65 vec3(0.632, 0.640, 0.638)
+// sRGB: 162	164	164
+#define NEUTRAL_65 vec3(0.635, 0.643, 0.643)
 #endif
 
 #ifndef NEUTRAL_65_XYZ
@@ -475,18 +713,29 @@ description: |
 #endif
 
 #ifndef NEUTRAL_65_LAB
-#define NEUTRAL_65_LAB vec3(66.766,-0.734,-0.504)
+#ifdef CIE_D50
+#define NEUTRAL_65_LAB vec3(67.41,-0.88,-0.36)
+#else
+#define NEUTRAL_65_LAB vec3(67.43,-0.75,-0.29)
+#endif
+#endif
+
+#ifndef NEUTRAL_65_LCH
+#ifdef CIE_D50
+#define NEUTRAL_65_LCH vec3(67.41,0.95,202.11)
+#else
+#define NEUTRAL_65_LCH vec3(67.43,0.81,201.35)
+#endif
 #endif
 
 #ifndef NEUTRAL_65_XYY
 #define NEUTRAL_65_XYY vec3(0.310, 0.316, 36.2)
 #endif
 
-
 // Neutral 5 (N 5/)
-// sRGB: 122 122 121
 #ifndef NEUTRAL_50
-#define NEUTRAL_50 vec3(0.473, 0.474, 0.473)
+// sRGB: 121	122	122
+#define NEUTRAL_50 vec3(0.475, 0.478, 0.478)
 #endif
 
 #ifndef NEUTRAL_50_XYZ
@@ -498,7 +747,19 @@ description: |
 #endif
 
 #ifndef NEUTRAL_50_LAB
-#define NEUTRAL_50_LAB vec3(50.867,-0.153,-0.27)
+#ifdef CIE_D50
+#define NEUTRAL_50_LAB vec3(51.26,-0.22,-0.16)
+#else
+#define NEUTRAL_50_LAB vec3(51.26,-0.14,-0.14)
+#endif
+#endif
+
+#ifndef NEUTRAL_50_LCH
+#ifdef CIE_D50
+#define NEUTRAL_50_LCH vec3(51.26,0.28,215.6)
+#else
+#define NEUTRAL_50_LCH vec3(51.26,0.2,225.42)
+#endif
 #endif
 
 #ifndef NEUTRAL_50_XYY
@@ -507,9 +768,9 @@ description: |
 
 
 // Neutral 3.5	(N 3.5/)
-// sRGB: 85 85 85
 #ifndef NEUTRAL_35
-#define NEUTRAL_35 vec3(0.324, 0.330, 0.331)
+// sRGB: 84	85	86
+#define NEUTRAL_35  vec3(0.329, 0.333, 0.337)
 #endif
 
 #ifndef NEUTRAL_35_XYZ
@@ -521,7 +782,19 @@ description: |
 #endif
 
 #ifndef NEUTRAL_35_LAB
-#define NEUTRAL_35_LAB vec3(35.656,-0.421,-1.231)
+#ifdef CIE_D50
+#define NEUTRAL_35_LAB vec3(36.41,-0.5,-0.82)
+#else
+#define NEUTRAL_35_LAB vec3(36.43,-0.33,-0.8)
+#endif
+#endif
+
+#ifndef NEUTRAL_35_LCH
+#ifdef CIE_D50
+#define NEUTRAL_35_LCH vec3(36.41,0.96,238.548)
+#else
+#define NEUTRAL_35_LCH vec3(36.43,0.87,247.43)
+#endif
 #endif
 
 #ifndef NEUTRAL_35_XYY
@@ -529,9 +802,9 @@ description: |
 #endif
 
 // Black (N 2/)
-// sRGB: 52 52 52
 #ifndef BLACK
-#define BLACK vec3(0.194, 0.195, 0.197)
+// sRGB: 51	51	52
+#define BLACK vec3(0.200, 0.200, 0.204)
 #endif
 
 #ifndef BLACK_XYZ
@@ -543,7 +816,19 @@ description: |
 #endif
 
 #ifndef BLACK_LAB
-#define BLACK_LAB vec3(20.461,-0.079,-0.973)
+#ifdef CIE_D50
+#define BLACK_LAB vec3(21.36,0.07,-0.5)
+#else
+#define BLACK_LAB vec3(21.36,0.14,-0.51)
+#endif
+#endif
+
+#ifndef BLACK_LCH
+#ifdef CIE_D50
+#define BLACK_LCH vec3(21.36,0.51,278.09)
+#else
+#define BLACK_LCH vec3(21.36,0.53,285.38)
+#endif
 #endif
 
 #ifndef BLACK_XYY
