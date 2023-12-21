@@ -14,5 +14,5 @@ vec3 xyY2xyz(const in vec3 xyY) {
     float z = Y * (1.0 - xyY.x - xyY.y) * f;
     return vec3(x, Y, z);
 }
-vec4 xyY2xyz(const in vec4 xyY) { return vec4(xyY2xyz(xyY.xyz), xyY.w); }
+vec4 xyY2xyz(const in vec4 xyY) { return vec4(xyY2xyz(xyY.xyz), xyY.a); }
 #endif
