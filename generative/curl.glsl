@@ -26,14 +26,25 @@ vec2 curl( vec2 p ) {
     float y = p_y1.x - p_y0.x;
 
     const float divisor = 1.0 / ( 2.0 * e );
+    #ifndef CURL_UNNORMALIZED
     return normalize( vec2(x, y) * divisor );
+    #else
+    return vec2(x, y) * divisor;
+    #endif
 }
 #else
 vec2 curl( vec2 p ) {
     vec2 e = vec2(0.1, 0.0);
     vec3 pos = vec3(p, 0.0);
-    return normalize(vec2(  (CURL_FNC(pos+e.yxy)-CURL_FNC(pos-e.yxy))/(2.0*e.x),
-                           -(CURL_FNC(pos+e.xyy)-CURL_FNC(pos-e.xyy))/(2.0*e.x)));
+    vec2 C = vec2(  (CURL_FNC(pos+e.yxy)-CURL_FNC(pos-e.yxy))/(2.0*e.x),
+                   -(CURL_FNC(pos+e.xyy)-CURL_FNC(pos-e.xyy))/(2.0*e.x));
+
+    #ifndef CURL_UNNORMALIZED
+    return normalize(C);
+    #else
+    float divisor = 1.0 / (2.0 * e.x);
+    return C * divisor;
+    #endif
 }
 #endif
 
@@ -55,7 +66,11 @@ vec3 curl( vec3 p ){
     float z = p_x1.y - p_x0.y - p_y1.x + p_y0.x;
 
     const float divisor = 1.0 / ( 2.0 * e );
+    #ifndef CURL_UNNORMALIZED
     return normalize( vec3( x , y , z ) * divisor );
+    #else
+    return vec3( x , y , z ) * divisor;
+    #endif
 }
 
 vec3 curl( vec4 p ){
@@ -76,7 +91,11 @@ vec3 curl( vec4 p ){
     float z = p_x1.y - p_x0.y - p_y1.x + p_y0.x;
 
     const float divisor = 1.0 / ( 2.0 * e );
+    #ifndef CURL_UNNORMALIZED
     return normalize( vec3( x , y , z ) * divisor );
+    #else
+    return vec3( x , y , z ) * divisor;
+    #endif
 }
 
 #endif
