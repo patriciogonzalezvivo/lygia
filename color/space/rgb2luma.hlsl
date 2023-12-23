@@ -1,16 +1,12 @@
 /*
-contributors: Hugh Kennedy (https://github.com/hughsk)
-description: get's the luminosity of a color. From https://github.com/hughsk/glsl-luma/blob/master/index.hlsl
-use: rgb2luma(<float3 float4> color)
+contributors: Patricio Gonzalez Vivo
+description: |
+    Get's the luminosity from linear RGB, based on Rec709 luminance (see https://en.wikipedia.org/wiki/Grayscale)
+use: <float> rgb2luma(<float3|float4> rgb)
 */
 
 #ifndef FNC_RGB2LUMA
 #define FNC_RGB2LUMA
-float rgb2luma(in float3 color) {
-    return dot(color, float3(0.299, 0.587, 0.114));
-}
-
-float rgb2luma(in float4 color) {
-    return rgb2luma(color.rgb);
-}
+float rgb2luma(const in float3 rgb) { return dot(rgb, float3(0.2126, 0.7152, 0.0722)); }
+float rgb2luma(const in float4 rgb) { return rgb2luma(rgb.rgb); }
 #endif

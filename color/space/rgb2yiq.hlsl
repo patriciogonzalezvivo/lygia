@@ -6,19 +6,16 @@ description: |
 use: <float3|float4> rgb2yiq(<float3|float4> color)
 */
 
-#ifndef FNC_RGB2YIQ
-#define FNC_RGB2YIQ
-const float3x3 rgb2yiq_mat = float3x3(
+#ifndef MAT_RGB2YIQ
+#define MAT_RGB2YIQ
+const float3x3 RGB2YIQ = float3x3(
     0.300,  0.5900,  0.1100, 
     0.599, -0.2773, -0.3217, 
-    0.213, -0.5251,  0.3121
-);
+    0.213, -0.5251,  0.3121);
+#endif
 
-float3 rgb2yiq(in float3 rgb) {
-  return mul(rgb2yiq_mat, rgb);
-}
-
-float4 rgb2yiq(in float4 rgb) {
-    return float4(rgb2yiq(rgb.rgb), rgb.a);
-}
+#ifndef FNC_RGB2YIQ
+#define FNC_RGB2YIQ
+float3 rgb2yiq(in float3 rgb) { return mul(RGB2YIQ, rgb); }
+float4 rgb2yiq(in float4 rgb) { return float4(rgb2yiq(rgb.rgb), rgb.a); }
 #endif

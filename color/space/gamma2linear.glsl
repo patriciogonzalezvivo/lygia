@@ -10,7 +10,7 @@ use: gamma2linear(<float|vec3|vec4> color)
 
 #ifndef FNC_GAMMA2LINEAR
 #define FNC_GAMMA2LINEAR
-float gamma2linear(in float v) {
+float gamma2linear(const in float v) {
 #ifdef GAMMA
     return pow(v, GAMMA);
 #else
@@ -19,7 +19,7 @@ float gamma2linear(in float v) {
 #endif
 }
 
-vec3 gamma2linear(in vec3 v) {
+vec3 gamma2linear(const in vec3 v) {
 #ifdef GAMMA
     return pow(v, vec3(GAMMA));
 #else
@@ -28,7 +28,7 @@ vec3 gamma2linear(in vec3 v) {
 #endif
 }
 
-vec4 gamma2linear(in vec4 v) {
+vec4 gamma2linear(const in vec4 v) {
     return vec4(gamma2linear(v.rgb), v.a);
 }
 #endif
