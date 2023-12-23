@@ -8,7 +8,7 @@ use: cmyk2rgb(<vec4> cmyk)
 
 #ifndef FNC_CMYK2RGB
 #define FNC_CMYK2RGB
-vec3 cmyk2rgb(vec4 cmyk) {
+vec3 cmyk2rgb(const in vec4 cmyk) {
     float invK = 1.0 - cmyk.w;
     return saturate(1.0-min(vec3(1.0), cmyk.xyz * invK + cmyk.w));
 }

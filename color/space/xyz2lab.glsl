@@ -6,7 +6,7 @@ use: xyz2rgb(<vec3|vec4> color)
 
 #ifndef FNC_XYZ2LAB
 #define FNC_XYZ2LAB
-vec3 xyz2lab(in vec3 c) {
+vec3 xyz2lab(const in vec3 c) {
     vec3 n = c / vec3(95.047, 100.0, 108.883);
     vec3 c0 = pow(n, vec3(1.0 / 3.0));
     vec3 c1 = (7.787 * n) + (16.0 / 116.0);
@@ -16,5 +16,5 @@ vec3 xyz2lab(in vec3 c) {
                 200.0 * (v.y - v.z));
 }
 
-vec4 xyz2lab(in vec4 c) { return vec4(xyz2lab(c.xyz), c.w); }
+vec4 xyz2lab(const in vec4 c) { return vec4(xyz2lab(c.xyz), c.w); }
 #endif

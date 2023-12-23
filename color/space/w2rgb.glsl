@@ -11,7 +11,7 @@ options:
 #ifndef FNC_W2RGB
 #define FNC_W2RGB
 
-vec3 w2rgb(float w) {
+vec3 w2rgb(const in float w) {
 
 #if defined( W2RGB_FNC )
     float x = saturate((w - 400.0) * 0.00333333333);

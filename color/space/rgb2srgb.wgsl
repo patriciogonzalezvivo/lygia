@@ -1,3 +1,4 @@
+// 1.0 / 2.4 = 0.4166666666666667 
 fn rgb2srgb_mono(channel: f32) -> f32 {
     if (channel <= 0.0031308)
         return 12.92 * channel;

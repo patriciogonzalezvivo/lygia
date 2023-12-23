@@ -1,22 +1,28 @@
-#include "gamma2linear.glsl"
-
 /*
 contributors: Patricio Gonzalez Vivo
-description: Converts a RGB color to XYZ color space.
-use: rgb2xyz(<vec3|vec4> color)
+description: |
+    Converts a linear RGB color to XYZ color space.
+    Based on http://www.brucelindbloom.com/index.html?Eqn_RGB_XYZ_Matrix.html
+use: <vec3|vec4> rgb2xyz(<vec3|vec4> rgb)
 */
+
+#ifndef RGB2XYZ_MAT
+#define RGB2XYZ_MAT
+#ifdef CIE_D50
+const mat3 RGB2XYZ = mat3(  
+    0.4360747, 0.2225045, 0.0139322,
+    0.3850649, 0.7168786, 0.0971045,
+    0.1430804, 0.0606169, 0.7141733);
+#else
+const mat3 RGB2XYZ = mat3(  
+    0.4124564, 0.2126729, 0.0193339,
+    0.3575761, 0.7151522, 0.1191920,
+    0.1804375, 0.0721750, 0.9503041);
+#endif
+#endif
 
 #ifndef FNC_RGB2XYZ
 #define FNC_RGB2XYZ
-vec3 rgb2xyz(in vec3 c) {
-    const mat3 mat = mat3(  0.4124564, 0.2126729, 0.0193339,
-                            0.3575761, 0.7151522, 0.1191920,
-                            0.1804375, 0.0721750, 0.9503041);
-    vec3 c0 = gamma2linear((c + 0.055) / 1.055);
-    vec3 c1 = c / 12.92;
-    vec3 tmp = mix(c0, c1, step(c, vec3(0.04045)));
-    return mat * (100.0 * tmp);
-}
-
-vec4 rgb2xyz(in vec4 rgb) { return vec4(rgb2xyz(rgb.rgb),rgb.a); }
+vec3 rgb2xyz(const in vec3 rgb) { return RGB2XYZ * rgb;}
+vec4 rgb2xyz(const in vec4 rgb) { return vec4(rgb2xyz(rgb.rgb),rgb.a); }
 #endif

@@ -16,7 +16,7 @@ examples:
 #ifndef FNC_PALETTE_HUE
 #define FNC_PALETTE_HUE
 vec3 hue(float x, float r) { 
-    vec3 v = abs( mod(x + vec3(0.0,1.0,2.0) * r, 1.0) * 2.0 - 1.0); 
+    vec3 v = abs( mod(fract(1.0-x) + vec3(0.0,1.0,2.0) * r, 1.0) * 2.0 - 1.0); 
     return v*v*(3.0-2.0*v);
 }
 vec3 hue(float x) { return hue(x, 0.33333); }
