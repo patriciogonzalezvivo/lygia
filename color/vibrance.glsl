@@ -21,5 +21,5 @@ vec3 vibrance(in vec3 v, in float vi) {
     return mix(vec3(lum), v, 1.0 + (vi * 1.0 - (sign(vi) * sat)));
 }
 
-vec4 vibrance(in vec4 v, in float vi) { return vec4( vibrance(v.rgb, vi), color.a); }
+vec4 vibrance(in vec4 v, in float vi) { return vec4( vibrance(v.rgb, vi), v.a); }
 #endif
