@@ -1,11 +1,11 @@
-#include "../sample.glsl"
-#include "../math/const.glsl"
-#include "../color/space/rgb2hsv.glsl"
+#include "../sample.hlsl"
+#include "../math/const.hlsl"
+#include "../color/space/rgb2hsv.hlsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
 description: sample an optical flow direction where the angle is encoded in the Hue and magnitude in the Saturation
-use: sampleFlow(<SAMPLER_TYPE> tex, <vec2> st)
+use: sampleFlow(<SAMPLER_TYPE> tex, <float2> st)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 */
@@ -17,12 +17,12 @@ options:
 
 #ifndef FNC_SAMPLEOPTICALFLOW
 #define FNC_SAMPLEOPTICALFLOW
-vec2 sampleOpticalFlow(SAMPLER_TYPE tex, vec2 st) {
-    vec3 data = SAMPLEOPTICALFLOW_SAMPLE_FNC(tex, st);
-    vec3 hsv = rgb2hsv(data.rgb);
+float2 sampleOpticalFlow(SAMPLER_TYPE tex, float2 st) {
+    float3 data = SAMPLEOPTICALFLOW_SAMPLE_FNC(tex, st);
+    float3 hsv = rgb2hsv(data.rgb);
     float a = (hsv.x * 2.0 - 1.0) * PI;
-    return vec2(cos(a), -sin(a)) * hsv.y;
+    return float2(cos(a), -sin(a)) * hsv.y;
 }
 
-vec2 sampleOpticalFlow(SAMPLER_TYPE tex, vec2 st, vec2 resolution, float max_dist) { return sampleOpticalFlow(tex, st) * (max_dist / resolution); }
+float2 sampleOpticalFlow(SAMPLER_TYPE tex, float2 st, float2 resolution, float max_dist) { return sampleOpticalFlow(tex, st) * (max_dist / resolution); }
 #endif
