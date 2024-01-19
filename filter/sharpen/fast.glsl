@@ -37,11 +37,11 @@ options:
 
 #ifndef FNC_SHARPENFAST
 #define FNC_SHARPENFAST
-SHARPENFAST_TYPE sharpenFast(in SAMPLER_TYPE tex, in vec2 coords, in vec2 pixel, float strenght) {
+SHARPENFAST_TYPE sharpenFast(in SAMPLER_TYPE tex, in vec2 coords, in vec2 pixel, float strength) {
     SHARPENFAST_TYPE sum = SHARPENFAST_TYPE(0.);
     for (int i = 0; i < SHARPENFAST_KERNELSIZE; i++) {
         float f_size = float(i) + 1.;
-        f_size *= strenght;
+        f_size *= strength;
         sum += -1. * SHARPENFAST_SAMPLER_FNC(tex, coords + vec2( -1., 0.) * pixel * f_size);
         sum += -1. * SHARPENFAST_SAMPLER_FNC(tex, coords + vec2( 0., -1.) * pixel * f_size);
         sum +=  5. * SHARPENFAST_SAMPLER_FNC(tex, coords + vec2( 0., 0.) * pixel * f_size);
