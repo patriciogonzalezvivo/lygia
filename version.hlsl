@@ -3,9 +3,9 @@
 #endif
 
 #ifndef LYGIA_VERSION_MINOR
-#define LYGIA_VERSION_MINOR 1
+#define LYGIA_VERSION_MINOR 2
 #endif
 
 #ifndef LYGIA_VERSION_PATCH
-#define LYGIA_VERSION_PATCH 7
+#define LYGIA_VERSION_PATCH 0
 #endif
