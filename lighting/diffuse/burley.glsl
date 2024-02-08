@@ -2,7 +2,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: calculate diffuse contribution using burley equation
+description: Calculate diffuse contribution using burley equation
 use: 
     - <float> diffuseBurley(<vec3> light, <vec3> normal [, <vec3> view, <float> roughness] )
     - <float> diffuseBurley(<vec3> L, <vec3> N, <vec3> V, <float> NoV, <float> NoL, <float> roughness)
