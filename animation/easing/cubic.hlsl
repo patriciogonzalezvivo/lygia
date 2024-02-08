@@ -1,6 +1,6 @@
 /*
 contributors: Hugh Kennedy (https://github.com/hughsk)
-description: cubic easing. From https://github.com/stackgl/glsl-easings
+description: Cubic easing. From https://github.com/stackgl/glsl-easings
 use: cubic<In|Out|InOut>(<float> x)
 */
 
