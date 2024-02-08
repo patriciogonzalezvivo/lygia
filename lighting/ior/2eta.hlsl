@@ -1,6 +1,6 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: index of refraction to ratio of index of refraction
+description: Index of refraction to ratio of index of refraction
 use: <float|float3|float4> ior2eta(<float|float3|float4> ior)
 */
 
