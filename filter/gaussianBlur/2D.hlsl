@@ -2,7 +2,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: two dimension Gaussian Blur to be applied in only one passes
+description: Two dimension Gaussian Blur to be applied in only one passes
 use: gaussianBlur2D(<SAMPLER_TYPE> texture, <float2> st, <float2> pixel_direction , const int kernelSize)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
