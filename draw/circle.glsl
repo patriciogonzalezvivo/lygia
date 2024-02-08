@@ -6,7 +6,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: draw a circle filled or not. 
+description: Draw a circle filled or not. 
 use: circle(<vec2> st, <float> size [, <float> width])
 */
 

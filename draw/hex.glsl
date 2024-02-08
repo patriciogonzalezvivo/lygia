@@ -6,7 +6,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: draw a hexagon filled or not. 
+description: Draw a hexagon filled or not. 
 use: hex(<vec2> st, <float> size [, <float> width])
 */
 

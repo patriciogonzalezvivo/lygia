@@ -6,7 +6,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: draw a triangle filled or not. 
+description: Draw a triangle filled or not. 
 use: tri(<vec2> st, <float> size [, <float> width])
 */
 
