@@ -2,7 +2,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: sharpening filter
+description: Sharpening filter
 use: sharpen(<SAMPLER_TYPE> texture, <vec2> st, <vec2> renderSize [, float streanght])
 options:
     - SHARPEN_KERNELSIZE: Defaults 2
