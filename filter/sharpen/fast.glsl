@@ -2,7 +2,7 @@
 
 /*
 contributors: Johan Ismael
-description: sharpening convolutional operation
+description: Sharpening convolutional operation
 use: sharpen(<SAMPLER_TYPE> texture, <vec2> st, <vec2> pixel)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
