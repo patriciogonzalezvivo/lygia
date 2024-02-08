@@ -2,7 +2,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: given a Spherical Map texture and a normal direction returns the right pixel
+description: Given a Spherical Map texture and a normal direction returns the right pixel
 use: spheremap(<SAMPLER_TYPE> texture, <float3> normal)
 */
 

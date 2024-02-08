@@ -7,7 +7,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: calculate specular contribution
+description: Calculate specular contribution
 use: 
     - specular(<vec3> L, <vec3> N, <vec3> V, <float> roughness[, <float> fresnel])
     - specular(<vec3> L, <vec3> N, <vec3> V, <float> NoV, <float> NoL, <float> roughness, <float> fresnel)
