@@ -1,6 +1,6 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: modify brightness and contrast
+description: Modify brightness and contrast
 use: brightnessContrast(<float|vec3|vec4> color, <float> brightness, <float> amcontrastount)
 */
 

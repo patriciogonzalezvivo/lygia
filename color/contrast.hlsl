@@ -1,6 +1,6 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: bias high pass
+description: Bias high pass
 use: <float4|float3|float> contrast(<float4|float3|float> value, <float> amount)
 */
 
