@@ -4,7 +4,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: get material shininess property from GlslViewer's defines https://github.com/patriciogonzalezvivo/glslViewer/wiki/GlslViewer-DEFINES#material-defines 
+description: Get material shininess property from GlslViewer's defines https://github.com/patriciogonzalezvivo/glslViewer/wiki/GlslViewer-DEFINES#material-defines 
 use: float4 materialShininess()
 */
 
