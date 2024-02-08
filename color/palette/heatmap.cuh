@@ -2,7 +2,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: heatmap palette
+description: Heatmap palette
 use: <float3> heatmap(<float> value)
 */
 
