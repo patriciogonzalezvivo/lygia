@@ -2,7 +2,7 @@
 
 /*
 contributors:  Inigo Quiles
-description: cast a ray
+description: Cast a ray
 use: <float> castRay( in <float3> pos, in <float3> nor ) 
 */
 
