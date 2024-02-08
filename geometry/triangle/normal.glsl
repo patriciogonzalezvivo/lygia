@@ -2,7 +2,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: returns the normal of a triangle
+description: Returns the normal of a triangle
 use: <vec33> getNormal(<Triangle> tri) 
 */
 
