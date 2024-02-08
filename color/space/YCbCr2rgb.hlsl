@@ -1,6 +1,6 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: convert YCbCr to RGB according to https://en.wikipedia.org/wiki/YCbCr
+description: Converts YCbCr to RGB according to https://en.wikipedia.org/wiki/YCbCr
 use: YCbCr2rgb(<float3|float4> color)
 */
 

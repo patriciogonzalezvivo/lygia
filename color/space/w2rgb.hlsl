@@ -3,7 +3,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: wavelength to RGB
+description: Wavelength to RGB
 use: <float3> w2rgb(<float> wavelength)
 */
 
