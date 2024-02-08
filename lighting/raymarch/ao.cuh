@@ -2,7 +2,7 @@
 
 /*
 contributors:  Inigo Quiles
-description: calculare Ambient Occlusion
+description: Calculare Ambient Occlusion
 use: <float> raymarchAO( in <float3> pos, in <float3> nor ) 
 */
 
