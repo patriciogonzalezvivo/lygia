@@ -16,7 +16,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: simple glass shading model
+description: Simple glass shading model
 use: 
     - <vec4> glass(<Material> material) 
     

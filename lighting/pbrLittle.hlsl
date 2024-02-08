@@ -11,7 +11,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: simple PBR shading model
+description: Simple PBR shading model
 use: 
     - <float4> pbrLittle(<Material> material) 
     - <float4> pbrLittle(<float4> albedo, <float3> normal, <float> roughness, <float> metallic [, <float3> f0] ) 

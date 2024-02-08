@@ -3,7 +3,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: creates a fake cube and returns the value giving a normal direction
+description: Creates a fake cube and returns the value giving a normal direction
 use: <float3> fakeCube(<float3> _normal [, <float> _shininnes])
 */
 
