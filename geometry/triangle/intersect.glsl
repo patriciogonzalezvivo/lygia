@@ -3,7 +3,7 @@
 
 /*
 contributors: Inigo Quiles
-description: based on https://www.iquilezles.org/www/articles/intersectors/intersectors.htm
+description: Based on https://www.iquilezles.org/www/articles/intersectors/intersectors.htm
 use: <float> intersect(<Triangle> tri, <vec3> rayOrigin, <vec3> rayDir, out <vec3> intersectionPoint)
 */
 

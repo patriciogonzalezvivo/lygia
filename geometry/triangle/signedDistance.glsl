@@ -4,7 +4,7 @@
 
 /*
 contributors: 
-description: returns the signed distance from the surface of a triangle to a point
+description: Returns the signed distance from the surface of a triangle to a point
 use: <vec3> closestDistance(<Triangle> tri, <vec3> _pos) 
 */
 
