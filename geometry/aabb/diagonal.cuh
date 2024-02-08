@@ -5,7 +5,7 @@
 
 /*
 contributors: Patrincio Gonzalez Vivo
-description: return the diagonal vector of a AABB
+description: Return the diagonal vector of a AABB
 use: <float> diagonal(<AABB> box ) 
 */
 

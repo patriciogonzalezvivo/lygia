@@ -2,7 +2,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: return center of a AABB
+description: Return center of a AABB
 use: <vec3> centroid(<AABB> box) 
 */
 
