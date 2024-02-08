@@ -1,7 +1,7 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: |
-   Convert a color in YIQ to linear RGB color. 
+   Converts a color in YIQ to linear RGB color. 
    From https://en.wikipedia.org/wiki/YIQQ
 use: <float3|float4> yiq2rgb(<float3|float4> color)
 */
