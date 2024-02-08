@@ -3,7 +3,7 @@
 
 /*
 contributors: Johan Ismael
-description: shifts color hue
+description: Shifts color hue
 use: hueShift(<float3|float4> color, <float> amount)
 */
 
