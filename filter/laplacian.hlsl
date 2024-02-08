@@ -2,7 +2,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: laplacian filter
+description: Laplacian filter
 use: laplacian(<SAMPLER_TYPE> texture, <float2> st, <float2> pixels_scale [, <float> pixel_padding])
 options:
     - LAPLACIAN_TYPE: Return type, defaults to float
