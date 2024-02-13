@@ -170,7 +170,6 @@ The functions are divided into different categories:
 * [`sample/`](https://lygia.xyz/sample): sample operations
 * [`filter/`](https://lygia.xyz/filter): typical filter operations: different kind of blurs, mean and median filters.
 * [`distort/`](https://lygia.xyz/distort): distort sampling operations
-* [`simulate/`](https://lygia.xyz/simulate): simulate sampling operations
 * [`lighting/`](https://lygia.xyz/lighting): different lighting models and functions for foward/deferred/raymarching rendering
 * [`geometry/`](https://lygia.xyz/geometry): operation related to geometries: intersections and AABB accelerating structures.
 * [`morphological/`](https://lygia.xyz/morphological): morphological filters: dilation, erosion, alpha and poisson fill.
