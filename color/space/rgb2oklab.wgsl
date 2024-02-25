@@ -8,4 +8,4 @@ description: |
 use: <vec3\vec4> rgb2oklab(<vec3|vec4> srgb)
 */
 
-fn rgb2oklab(rgb: vec3f) -> vec3f { srgb2oklab( rgb2srgb(rgb) ); }
+fn rgb2oklab(rgb: vec3f) -> vec3f { return srgb2oklab( rgb2srgb(rgb) ); }
