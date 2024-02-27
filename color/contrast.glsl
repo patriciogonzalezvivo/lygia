@@ -1,6 +1,6 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: bias high pass
+description: Bias high pass
 use: <vec4|vec3|float> contrast(<vec4|vec3|float> value, <float> amount)
 */
 

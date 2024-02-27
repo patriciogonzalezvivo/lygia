@@ -1,6 +1,6 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: generate a matrix to change a the brightness of any color
+description: Generate a matrix to change a the brightness of any color
 use: brightnessMatrix(<float> amount)
 */
 

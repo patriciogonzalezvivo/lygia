@@ -1,6 +1,6 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: convert from linear to gamma color space.
+description: Convert from linear to gamma color space.
 use: linear2gamma(<float|vec3|vec4> color)
 */
 

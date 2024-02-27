@@ -1,6 +1,6 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: calculate diffuse contribution using lambert equation
+description: Calculate diffuse contribution using lambert equation
 use: 
     - <float> diffuseLambert(<float3> light, <float3> normal [, <float3> view, <float> roughness] )
     - <float> diffuseLambert(<float3> L, <float3> N, <float3> V, <float> NoV, <float> NoL, <float> roughness)

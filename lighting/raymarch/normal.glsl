@@ -2,7 +2,7 @@
 
 /*
 contributors:  Inigo Quiles
-description: calculate normals http://iquilezles.org/www/articles/normalsSDF/normalsSDF.htm
+description: Calculate normals http://iquilezles.org/www/articles/normalsSDF/normalsSDF.htm
 use: <float> raymarchNormal( in <vec3> pos ) 
 examples:
     - /shaders/lighting_raymarching.frag

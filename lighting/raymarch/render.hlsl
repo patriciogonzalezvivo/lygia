@@ -6,7 +6,7 @@
 
 /*
 contributors:  Inigo Quiles
-description: default raymarching renderer
+description: Default raymarching renderer
 use: <float4> raymarchDefaultRender( in <float3> ro, in <float3> rd ) 
 options:
     - LIGHT_COLOR: float3(0.5) or u_lightColor in glslViewer

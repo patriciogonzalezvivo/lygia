@@ -1,6 +1,6 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: pass a color in YUB and get RGB color
+description: Pass a color in YUB and get RGB color
 use: yuv2rgb(<vec3|vec4> color)
 */
 

@@ -3,7 +3,7 @@
 /*
 function: gaussianBlur1D_fast13
 contributors: Matt DesLauriers
-description: adapted versions of gaussian fast blur 13 from https://github.com/Jam3/glsl-fast-gaussian-blur
+description: Adapted versions of gaussian fast blur 13 from https://github.com/Jam3/glsl-fast-gaussian-blur
 use: gaussianBlur1D_fast13(<SAMPLER_TYPE> texture, <float2> st, <float2> pixel_direction)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))

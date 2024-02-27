@@ -2,7 +2,7 @@
 
 /*
 contributors:  Inigo Quiles
-description: default raymarching renderer
+description: Default raymarching renderer
 use: <float4> raymarchDefaultRender( in  float3> ro, in  float3> rd ) 
 options:
     - RAYMARCH_MATERIAL_FNC(RGB) float3(RGB)

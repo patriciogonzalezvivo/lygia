@@ -1,6 +1,6 @@
 /*
 contributors:  Inigo Quiles
-description: map of SDF functions to be declare
+description: Map of SDF functions to be declare
 use: <vec4> raymarchMap( in <vec3> pos ) 
 examples:
     - /shaders/lighting_raymarching.frag

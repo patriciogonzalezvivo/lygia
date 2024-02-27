@@ -12,7 +12,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: simple glass shading model
+description: Simple glass shading model
 use: 
     - <float4> glass(<Material> material) 
     
