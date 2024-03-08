@@ -24,17 +24,16 @@ license: MIT License Copyright (c) 2023 Ronald van Wijnen
 #define MIXSPECTRAL_EPSILON 0.0001
 
 void mixSpectral_linear_to_reflectance(vec3 lrgb, inout float R[MIXSPECTRAL_SIZE]) {
-    float w, c, m, y, r, g, b = 0.0;
-    w = min(lrgb.r, min(lrgb.g, lrgb.b));
-
+    float w = min(lrgb.r, min(lrgb.g, lrgb.b));
     lrgb -= w;
 
-    c = min(lrgb.g, lrgb.b);
-    m = min(lrgb.r, lrgb.b);
-    y = min(lrgb.r, lrgb.g);
-    r = min(max(0., lrgb.r - lrgb.b), max(0., lrgb.r - lrgb.g));
-    g = min(max(0., lrgb.g - lrgb.b), max(0., lrgb.g - lrgb.r));
-    b = min(max(0., lrgb.b - lrgb.g), max(0., lrgb.b - lrgb.r));
+    float c = min(lrgb.g, lrgb.b);
+    float m = min(lrgb.r, lrgb.b);
+    float y = min(lrgb.r, lrgb.g);
+
+    float r = min(max(0.0, lrgb.r - lrgb.b), max(0.0, lrgb.r - lrgb.g));
+    float g = min(max(0.0, lrgb.g - lrgb.b), max(0.0, lrgb.g - lrgb.r));
+    float b = min(max(0.0, lrgb.b - lrgb.g), max(0.0, lrgb.b - lrgb.r));
     
     R[ 0] = max(MIXSPECTRAL_EPSILON, w + c * 0.96853629 + m * 0.51567122 + y * 0.02055257 + r * 0.03147571 + g * 0.49108579 + b * 0.97901834);
     R[ 1] = max(MIXSPECTRAL_EPSILON, w + c * 0.96855103 + m * 0.54015520 + y * 0.02059936 + r * 0.03146636 + g * 0.46944057 + b * 0.97901649);
@@ -129,7 +128,7 @@ vec3 mixSpectral(vec3 color1, vec3 color2, float t) {
 
     float R1[MIXSPECTRAL_SIZE];
     float R2[MIXSPECTRAL_SIZE];
-    
+
     for (int i = 0; i < MIXSPECTRAL_SIZE; i++) {
         R1[i] = 0.0;
         R2[i] = 0.0;
