@@ -116,12 +116,6 @@ float3 mixSpectral_reflectance_to_xyz(float R[MIXSPECTRAL_SIZE]) {
             R[37] * float3(0.00002000, 0.00000722, 0.00000000);
 }
 
-float mixSpectral_linear_to_concentration(float l1, float l2, float t) {
-    float t1 = l1 * pow(1.0 - t, 2.0);
-    float t2 = l2 * pow(t, 2.0);
-    return t2 / (t1 + t2);
-}
-
 float3 mixSpectral(float3 color1, float3 color2, float t) {
     float3 lrgb1 = srgb2rgb(color1);
     float3 lrgb2 = srgb2rgb(color2);
@@ -140,7 +134,9 @@ float3 mixSpectral(float3 color1, float3 color2, float t) {
     float l1 = mixSpectral_reflectance_to_xyz(R1)[1];
     float l2 = mixSpectral_reflectance_to_xyz(R2)[1];
 
-    t = mixSpectral_linear_to_concentration(l1, l2, t);
+    float t1 = l1 * pow(1.0 - t, 2.0);
+    float t2 = l2 * pow(t, 2.0);
+    t = t2 / (t1 + t2);
 
     float R[MIXSPECTRAL_SIZE];
 
