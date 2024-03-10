@@ -10,8 +10,8 @@ description: |
     how light interacts with paint to produce lifelike color mixing. 
     Find more informatiom on Ronald van Wijnen's [original repository](https://github.com/rvanwijnen/spectral.js)
 options:
-    - MIXSPECTRAL_COLORSPACE_SRGB: by default colA and colB are linear RGB. If you want to use sRGB, define this flag.
-use: <vec3\vec4> mixSpectral(<vec3|vec4> colA, <vec3|vec4> colB, float pct)
+    - MIXSPECTRAL_SRGB: by default A and B are linear RGB. If you want to use sRGB, define this flag.
+use: <vec3\vec4> mixSpectral(<vec3|vec4> A, <vec3|vec4> B, float pct)
 examples:
     - /shaders/color_mix.frag
 license: MIT License Copyright (c) 2023 Ronald van Wijnen
@@ -116,15 +116,14 @@ vec3 mixSpectral_reflectance_to_xyz(float R[MIXSPECTRAL_SIZE]) {
             R[37] * vec3(0.00002000, 0.00000722, 0.00000000);
 }
 
-float mixSpectral_linear_to_concentration(float l1, float l2, float t) {
-    float t1 = l1 * pow(1.0 - t, 2.0);
-    float t2 = l2 * pow(t, 2.0);
-    return t2 / (t1 + t2);
-}
-
-vec3 mixSpectral(vec3 color1, vec3 color2, float t) {
-    vec3 lrgb1 = srgb2rgb(color1);
-    vec3 lrgb2 = srgb2rgb(color2);
+vec3 mixSpectral(vec3 A, vec3 B, float t) {
+    #ifdef MIXSPECTRAL_SRGB
+    vec3 lrgb1 = srgb2rgb(A);
+    vec3 lrgb2 = srgb2rgb(B);
+    #else
+    vec3 lrgb1 = A;
+    vec3 lrgb2 = B;
+    #endif
 
     float R1[MIXSPECTRAL_SIZE];
     float R2[MIXSPECTRAL_SIZE];
@@ -139,8 +138,9 @@ vec3 mixSpectral(vec3 color1, vec3 color2, float t) {
 
     float l1 = mixSpectral_reflectance_to_xyz(R1)[1];
     float l2 = mixSpectral_reflectance_to_xyz(R2)[1];
-
-    t = mixSpectral_linear_to_concentration(l1, l2, t);
+    float t1 = l1 * pow(1.0 - t, 2.0);
+    float t2 = l2 * pow(t, 2.0);
+    t = t2 / (t1 + t2);
 
     float R[MIXSPECTRAL_SIZE];
 
@@ -150,11 +150,17 @@ vec3 mixSpectral(vec3 color1, vec3 color2, float t) {
         R[i] = KM;
     }
 
-    return rgb2srgb(XYZ2RGB * mixSpectral_reflectance_to_xyz(R));
+    vec3 rgb = XYZ2RGB * mixSpectral_reflectance_to_xyz(R);
+
+    #ifdef MIXSPECTRAL_SRGB
+    return rgb2srgb(rgb);
+    #else
+    return rgb;
+    #endif
 }
 
-vec4 mixSpectral(vec4 color1, vec4 color2, float t) {
-    return vec4(mixSpectral(color1.rgb, color2.rgb, t), mix(color1.a, color2.a, t));
+vec4 mixSpectral(vec4 A, vec4 B, float t) {
+    return vec4(mixSpectral(A.rgb, B.rgb, t), mix(A.a, B.a, t));
 }
 
 #endif
