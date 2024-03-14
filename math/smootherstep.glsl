@@ -4,7 +4,7 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: quintic polynomial step function 
-use: smoothstep(<float> in, <float> out, <float> value)
+use: <float|vec2|vec3|vec4> smoothstep(<float|vec2|vec3|vec4> in, <float|vec2|vec3|vec4> out, <float|vec2|vec3|vec4> value)
 */
 
 #ifndef FNC_SMOOTHERSTEP

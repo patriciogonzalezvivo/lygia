@@ -1,7 +1,7 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: power of 3
-use: pow3(<float|float2|float3|float4> x)
+use: <float|float2|float3|float4> pow3(<float|float2|float3|float4> x)
 */
 
 #ifndef FNC_POW3

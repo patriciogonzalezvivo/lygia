@@ -2,8 +2,8 @@
 contributors: Patricio Gonzalez Vivo
 description: extend GLSL Max function to add more arguments
 use: 
-    - max(<float> A, <float> B, <float> C[, <float> D])
-    - max(<vec2|vec3|vec4> A)
+    - <float> mmax(<float> A, <float> B, <float> C[, <float> D])
+    - <vec2|vec3|vec4> mmax(<vec2|vec3|vec4> A)
 */
 
 #ifndef FNC_MMAX

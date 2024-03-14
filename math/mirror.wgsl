@@ -1,3 +1,13 @@
+/*
+contributors: Ian Heisters
+description: Transforms the input signal into a triangle wave. For instance, if x goes between 0 and 2, the returned value will go from 0 to 1, and then 1 to 0 in a triangle shape.
+use: 
+    - mirror(x: f32) -> f32
+    - mirror2(xy: vec2f) -> vec2f
+examples:
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/math_functions.frag
+*/
+
 fn mirror(x: f32) -> f32 {
     let f = fract(x);
     let m = floor(x % 2.0);

@@ -7,10 +7,8 @@ use: <float> gain(<float> x, <float> k)
 
 #ifndef FNC_GAIN
 #define FNC_GAIN
-
 float gain(float x, float k) {
     const float a = 0.5*pow(2.0*((x<0.5)?x:1.0-x), k);
     return (x<0.5)?a:1.0-a;
 }
-
 #endif

@@ -1,7 +1,7 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: power of 3
-use: pow3(<float|vec2|vec3|vec4> v)
+use: <float|vec2|vec3|vec4> pow3(<float|vec2|vec3|vec4> v)
 */
 
 #ifndef FNC_POW3

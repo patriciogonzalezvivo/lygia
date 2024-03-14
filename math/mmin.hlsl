@@ -2,8 +2,8 @@
 contributors: Patricio Gonzalez Vivo
 description: extend HLSL min function to add more arguments
 use: 
-  - min(<float> A, <float> B, <float> C[, <float> D])
-  - min(<float2|float3|float4> A)
+  - <float> mmin(<float> A, <float> B, <float> C[, <float> D])
+  - <float2|float3|float4> mmin(<float2|float3|float4> A)
 */
 
 #ifndef FNC_MMIN

@@ -1,7 +1,7 @@
 /*
 contributors: Ian Heisters
 description: Transforms the input signal into a triangle wave. For instance, if x goes between 0 and 2, the returned value will go from 0 to 1, and then 1 to 0 in a triangle shape.
-use: mirror(<vec2|float> x)
+use: <float|vec2> mirror(<float|vec2> x)
 examples:
     - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/math_functions.frag
 */

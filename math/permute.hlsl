@@ -3,7 +3,7 @@
 /*
 contributors: [Stefan Gustavson, Ian McEwan]
 description: permute
-use: permute(<float|float2|float3|float4> x)
+use: <float|float2|float3|float4> permute(<float|float2|float3|float4> x)
 */
 
 #ifndef FNC_PERMUTE

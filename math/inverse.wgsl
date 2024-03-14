@@ -1,3 +1,9 @@
+/*
+contributors: Mikola Lysenko
+description: inverse matrixes
+use: inverse(mat3x3<f32>) -> mat3x3<f32>
+*/
+
 fn inverse(m: mat3x3<f32>) -> mat3x3<f32> {
     let a00 = m[0][0];
     let a01 = m[0][1];

@@ -7,5 +7,5 @@
 #endif
 
 #ifndef LYGIA_VERSION_PATCH
-#define LYGIA_VERSION_PATCH 0
+#define LYGIA_VERSION_PATCH 1
 #endif
