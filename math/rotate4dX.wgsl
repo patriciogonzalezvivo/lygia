@@ -1,7 +1,6 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: returns a 4x4 rotation matrix
-use: rotate4dX(r: f32) -> mat4x4<f32>
 */
 
 fn rotate4dX(r: f32) -> mat4x4<f32> {

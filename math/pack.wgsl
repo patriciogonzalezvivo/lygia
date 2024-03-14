@@ -2,7 +2,6 @@
 contributors: Ricardo Caballero
 description: |
     Pack a float into a 4D vector. From https://github.com/mrdoob/three.js/blob/acdda10d5896aa10abdf33e971951dbf7bd8f074/src/renderers/shaders/ShaderChunk/packing.glsl
-use: <vec4> pack(<float> v)
 */
 
 const PackUpscale: f32 = 256. / 255.; // fraction -> 0..1 (including 1)

@@ -1,11 +1,6 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: does the position lie within the triangle
-use:
-    - inside(x: f32, min: f32, max: f32) -> bool
-    - inside2(v: vec2f, min: vec2f, max: vec2f) -> bool
-    - inside3(v: vec3f, min: vec3f, max: vec3f) -> bool
-    - insideAABB(v: vec2f, aabb: vec4f) -> bool
 */
 
 fn inside(_x: f32, _min: f32, _max: f32) -> bool { return !(_x < _min || _x > _max); }

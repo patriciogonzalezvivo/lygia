@@ -1,7 +1,6 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: Unpack a 3D vector into a float. Default base is 256.0
-use: <float> unpack(<vec3> v, [, <float> base])
 */
 
 // https://github.com/mrdoob/three.js/blob/acdda10d5896aa10abdf33e971951dbf7bd8f074/src/renderers/shaders/ShaderChunk/packing.glsl

@@ -1,8 +1,6 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: returns a 3x3 scale matrix
-use:
-    - scale3d(s: vec3f) -> mat3x3<f32>
 */
 
 fn scale3d(s: vec3f) -> mat3x3<f32> {

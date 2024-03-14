@@ -1,9 +1,6 @@
 /*
 contributors: Inigo Quiles
 description: inverse quartic polynomial https://iquilezles.org/articles/smoothsteps/
-use: <float|vec2|vec3|vec4> invQuartic(<float|vec2|vec3|vec4> value);
-examples:
-    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/math_functions.frag
 */
 
 fn invQuartic(v: f32) -> f32 { return sqrt(1.0-sqrt(1.0-v)); }

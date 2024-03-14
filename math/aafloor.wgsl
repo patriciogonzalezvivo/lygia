@@ -6,9 +6,6 @@ description: |
     Is similar to floor() but has a 2-pixel wide gradient between clamped steps 
     to allow the edges in the result to be anti-aliased.
     Based on examples https://www.shadertoy.com/view/4l2BRD and https://www.shadertoy.com/view/3tSGWy
-use:
-    - aafloor(x: f32) -> f32
-    - aafloor2(x: vec2f) -> vec2f
 */
 
 fn aafloor(x: f32) -> f32 {
