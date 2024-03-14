@@ -1,7 +1,7 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: power of 2
-use: pow2(<float|vec2|vec3|vec4> v)
+use: <float|vec2|vec3|vec4> pow2(<float|vec2|vec3|vec4> v)
 */
 
 #ifndef FNC_POW2

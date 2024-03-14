@@ -9,10 +9,8 @@ use: <float> gain(<float> x, <float> k)
 
 #ifndef FNC_GAIN
 #define FNC_GAIN
-
 inline __host__ __device__ float gain(float x, float k) {
     const float a = 0.5f * pow(2.0f * ((x < 0.5f)? x : 1.0f - x), k);
     return (x < 0.5f)? a : 1.0f - a;
 }
-
 #endif

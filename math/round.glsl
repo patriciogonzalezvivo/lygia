@@ -1,7 +1,7 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: round a value to the nearest integer
-use: round(<float|vec2|vec3|vec4> value)
+use: <float|vec2|vec3|vec4> round(<float|vec2|vec3|vec4> value)
 */
 
 #ifndef FNC_ROUND

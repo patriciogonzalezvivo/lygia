@@ -11,9 +11,5 @@ use: <mat4> quat2mat4(<QUAT> Q)
 
 #ifndef FNC_QUAT2MAT4
 #define FNC_QUAT2MAT4
-
-mat4 quat2mat4(QUAT q) {
-    return toMat4(quat2mat3(q));
-}
-
+mat4 quat2mat4(QUAT q) { return toMat4(quat2mat3(q)); }
 #endif

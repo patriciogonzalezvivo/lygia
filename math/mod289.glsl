@@ -1,7 +1,7 @@
 /*
 contributors: [Stefan Gustavson, Ian McEwan]
 description: modulus of 289
-use: mod289(<float|vec2|vec3|vec4> x)
+use: <float|vec2|vec3|vec4> mod289(<float|vec2|vec3|vec4> x)
 */
 
 #ifndef FNC_MOD289

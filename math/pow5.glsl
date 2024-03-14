@@ -1,7 +1,7 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: power of 5
-use: pow5(<float|vec2|vec3|vec4> v)
+use: <float|vec2|vec3|vec4> pow5(<float|vec2|vec3|vec4> v)
 */
 
 #ifndef FNC_POW5

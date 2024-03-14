@@ -1,7 +1,7 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: fast approximation to pow()
-use: powFast(<float> x, <float> exp)
+use: <float> powFast(<float> x, <float> exp)
 */
 
 #ifndef FNC_POWFAST

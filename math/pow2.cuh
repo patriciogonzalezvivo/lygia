@@ -3,7 +3,7 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: power of 2
-use: pow2(<float|float2|float3|float4> x)
+use: <float|float2|float3|float4> pow2(<float|float2|float3|float4> x)
 */
 
 #ifndef FNC_POW2
