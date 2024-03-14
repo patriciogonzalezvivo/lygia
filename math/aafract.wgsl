@@ -5,9 +5,6 @@ contributors: dahart (https://www.shadertoy.com/user/dahart)
 description: |
     Anti-aliasing fract function. It clamp except for a 2-pixel wide gradient along the edge
     Based on this example https://www.shadertoy.com/view/4l2BRD
-use:
-    - aafract(x: f32) -> f32
-    - aafract2(v: vec2f) -> vec2f
 */
 
 fn aafract(x: f32) -> f32 {

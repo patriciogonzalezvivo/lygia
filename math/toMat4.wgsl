@@ -1,7 +1,6 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: given a 3x3 returns a 4x4 
-use: toMat4(m: mat3x3<f32>) -> mat4x4<f32>
 */
 
 fn toMat4(m: mat3x3<f32>) -> mat4x4<f32> {

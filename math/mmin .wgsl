@@ -1,10 +1,6 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: extend GLSL min function to add more arguments
-use: 
-  - mmin2(vec2f) -> f32
-  - mmin3(vec3f) -> f32
-  - mmin4(vec4f) -> f32
 */
 
 fn mmin2(v: vec2f) -> f32 { return min(v.x, v.y); }

@@ -1,7 +1,6 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: returns a 3x3 rotation matrix
-use: rotate3dX(r: f32) -> mat3x3<f32>
 */
 
 fn rotate3dX(r: f32) -> mat3x3<f32> {

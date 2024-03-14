@@ -4,11 +4,6 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: quintic polynomial step function 
-use:
-    - smoothstep(a: f32, b: f32, v: f32) -> f32
-    - smoothstep2(a: vec2f, b: vec2f, v: vec2f) -> vec2f
-    - smoothstep3(a: vec3f, b: vec3f, v: vec3f) -> vec3f
-    - smoothstep4(a: vec4f, b: vec4f, v: vec4f) -> vec4f
 */
 
 fn smootherstep(a: f32, b: f32, v: f32) -> f32 { return quintic( saturate( (v - a)/(b - a) )); }

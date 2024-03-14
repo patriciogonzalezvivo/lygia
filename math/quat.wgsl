@@ -6,9 +6,6 @@ contributors: Patricio Gonzalez Vivo
 description: |
     creates a quaternion (QUAT) from a given radian of rotation about a given axis or from
     a given forward vector and up vector
-use:
-    - quat(axis: vec3f, r: f32) -> vec4f
-    - quatFowardUp(f: vec3f, _up: vec3f) -> vec4f
 */
 
 // A given r of rotation about a given axis

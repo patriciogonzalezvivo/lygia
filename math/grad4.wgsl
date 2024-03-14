@@ -1,7 +1,6 @@
 /*
 contributors: [Stefan Gustavson, Ian McEwan]
 description: grad4, used for snoise(vec4 v)
-use: <vec4f> grad4(<f32> j, <vec4f> ip)
 */
 
 fn grad4(j: f32, ip: vec4f) -> vec4f {

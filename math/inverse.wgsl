@@ -1,7 +1,6 @@
 /*
 contributors: Mikola Lysenko
 description: inverse matrixes
-use: inverse(mat3x3<f32>) -> mat3x3<f32>
 */
 
 fn inverse(m: mat3x3<f32>) -> mat3x3<f32> {

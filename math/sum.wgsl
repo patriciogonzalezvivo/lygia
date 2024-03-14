@@ -1,11 +1,6 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: Sum elements of a vector
-use:
-    - sum(v: f32) -> f32
-    - sum2(v: vec2f) -> f32
-    - sum3(v: vec3f) -> f32
-    - sum4(v: vec4f) -> f32
 */
 
 fn sum(v: f32 ) -> f32 { return v; }
