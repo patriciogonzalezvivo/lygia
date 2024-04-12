@@ -10,7 +10,7 @@
 #include "math/gaussian.glsl"
 #include "math/grad4.glsl"
 #include "math/highPass.glsl"
-#include "math/inside.hlsl"
+#include "math/inside.glsl"
 #include "math/invCubic.glsl"
 #include "math/inverse.glsl"
 #include "math/invQuartic.glsl"
