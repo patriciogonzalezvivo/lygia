@@ -80,7 +80,7 @@ float2 random2(float p)
 
 float2 random2(float2 p)
 {
-    float3 p3 = frac(float3(p.x, p.x, p.x) * RANDOM_SCALE.xyz);
+    float3 p3 = frac(float3(p.x, p.y, p.x) * RANDOM_SCALE.xyz);
     p3 += dot(p3, p3.yzx + 19.19);
     return frac((p3.xx + p3.yz) * p3.zy);
 }
