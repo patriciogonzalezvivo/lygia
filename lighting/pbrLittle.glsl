@@ -55,7 +55,7 @@ vec4 pbrLittle( vec4 _albedo, vec3 _position, vec3 _normal, float _roughness, fl
     vec3 V = normalize(CAMERA_POSITION - _position);
 
     float notMetal = 1. - _metallic;
-    float smooth = .95 - saturate(_roughness);
+    float smoothness = .95 - saturate(_roughness);
 
     // DIFFUSE
     float diff = diffuse(L, N, V, _roughness) * shadow;
@@ -72,7 +72,7 @@ vec4 pbrLittle( vec4 _albedo, vec3 _position, vec3 _normal, float _roughness, fl
     // This is a bit of a stilistic proach
     float specIntensity =   (0.04 * notMetal + 2.0 * _metallic) * 
                             saturate(-1.1 + NoV + _metallic) * // Fresnel
-                            (_metallic + smooth * 4.0); // make smaller highlights brighter
+                            (_metallic + smoothness * 4.0); // make smaller highlights brighter
 
     vec3 R = reflect(-V, N);
     vec3 ambientSpecular = tonemapReinhard( envMap(R, _roughness, _metallic) ) * specIntensity;
@@ -80,7 +80,7 @@ vec4 pbrLittle( vec4 _albedo, vec3 _position, vec3 _normal, float _roughness, fl
 
     _albedo.rgb = _albedo.rgb * notMetal + ( ambientSpecular 
                     + LIGHT_COLOR * 2.0 * spec
-                    ) * (notMetal * smooth + _albedo.rgb * _metallic);
+                    ) * (notMetal * smoothness + _albedo.rgb * _metallic);
 
     return _albedo;
 }
