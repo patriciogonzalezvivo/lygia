@@ -1,5 +1,5 @@
-#include "../space/rgb2hsv.glsl"
-#include "../space/hsv2rgb.glsl"
+#include "../space/rgb2hsv.msl"
+#include "../space/hsv2rgb.msl"
 
 /*
 contributors: Romain Dura
@@ -10,7 +10,7 @@ license: MIT License (MIT) Copyright (c) 2015 Jamie Owen
 
 #ifndef FNC_BLENDCOLOR
 #define FNC_BLENDCOLOR
-vec3 blendColor(float3 base, float3 blend) {
+float3 blendColor(float3 base, float3 blend) {
   float3 baseHSL = rgb2hsv(base);
   float3 blendHSL = rgb2hsv(blend);
   return hsv2rgb(
