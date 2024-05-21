@@ -3,7 +3,7 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: |
-    Converts a hue value to a RGB vec3 color.
+    Converts a hue value to a RGB float3 color.
 use: <float3> hue2rgb(<float> hue)
 */
 
