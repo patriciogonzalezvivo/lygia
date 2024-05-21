@@ -4,7 +4,7 @@
 contributors: Inigo Quiles
 description: |
     Convert from HSV to linear RGB
-use: <float3|vec4> hsv2rgb(<float3|float4> hsv)
+use: <float3|float4> hsv2rgb(<float3|float4> hsv)
 */
 
 #ifndef FNC_HSV2RGB
