@@ -1,5 +1,5 @@
-#include "triangle.hlsl"
-#include "../../lighting/ray.hlsl"
+#include "triangle.glsl"
+#include "../../lighting/ray.glsl"
 
 /*
 contributors: Inigo Quiles

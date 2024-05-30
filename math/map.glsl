@@ -1,7 +1,7 @@
 /*
 contributors: Johan Ismael
 description: Map a v between one range to another.
-use: map(<float|vec2|vec3|vec4> v, <float|vec2|vec3|vec4> inMin, <float|vec2|vec3|vec4> inMax, <float|vec2|vec3|vec4> outMin, <float|vec2|vec3|vec4> outMax)
+use: <float|vec2|vec3|vec4> map(<float|vec2|vec3|vec4> v, <float|vec2|vec3|vec4> inMin, <float|vec2|vec3|vec4> inMax, <float|vec2|vec3|vec4> outMin, <float|vec2|vec3|vec4> outMax)
 examples:
     - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/math_functions.frag
 */

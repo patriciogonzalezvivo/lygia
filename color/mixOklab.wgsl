@@ -1,23 +1,17 @@
-fn mixOklab( colA: vec3f, colB: vec3f, h: f32 ) -> vec3f {
-    let kCONEtoLMS = mat3x3<f32>(                
-        vec3f(0.4121656120,  0.2118591070,  0.0883097947),
-        vec3f(0.5362752080,  0.6807189584,  0.2818474174),
-        vec3f(0.0514575653,  0.1074065790,  0.6302613616) );
+#include "space/srgb2rgb.wgsl"
+#include "space/rgb2srgb.wgsl"
 
-    let kLMStoCONE = mat3x3<f32>(
-        vec3f(4.0767245293, -1.2681437731, -0.0041119885),
-        vec3f(-3.3072168827,  2.6093323231, -0.7034763098),
-        vec3f(0.2307590544, -0.3411344290,  1.7068625689));
-                    
+#include "space/oklab2rgb.wgsl"
+#include "space/rgb2oklab.wgsl"
+
+fn mixOklab( colA: vec3f, colB: vec3f, h: f32 ) -> vec3f {
+    
     // rgb to cone (arg of pow can't be negative)
-    let lmsA = pow( kCONEtoLMS*colA, vec3f(1.0/3.0) );
-    let lmsB = pow( kCONEtoLMS*colB, vec3f(1.0/3.0) );
+    let lmsA = pow( RGB2OKLAB_B*colA, vec3f(0.33333) );
+    let lmsB = pow( RGB2OKLAB_B*colB, vec3f(0.33333) );
 
     let lms = mix( lmsA, lmsB, h );
-    
-    // gain in the middle (no oaklab anymore, but looks better?)
-    //lms *= 1.0+0.2*h*(1.0-h);
 
     // cone to rgb
-    return kLMStoCONE*(lms*lms*lms);
+    return OKLAB2RGB_B*(lms*lms*lms);
 }

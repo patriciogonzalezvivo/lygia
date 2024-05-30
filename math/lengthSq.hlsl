@@ -1,7 +1,7 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: Squared length
-use: lengthSq(<float2|float3|float4> v)
+use: <float2|float3|float4> lengthSq(<float2|float3|float4> v)
 */
 
 #ifndef FNC_LENGTHSQ

@@ -1,0 +1,36 @@
+/*
+contributors: Patricio Gonzalez Vivo
+description: does the position lie within the triangle
+use:
+    - bool inside(<float|float2|float3> value, <float|float2|float3> min, <float|float2|float3> max) 
+    - bool inside(<float2|float3> value, <vec4|AABB> aabb)
+*/
+
+#ifndef FNC_INSIDE
+#define FNC_INSIDE
+bool inside(float _x, float _min, float _max) {
+    return !(_x < _min || _x > _max);
+}
+
+bool inside(float2 _v, float2 _min, float2 _max) {
+    return !(_v.x < _min.x || _v.x > _max.x || 
+             _v.y < _min.y || _v.y > _max.y);
+}
+
+bool inside(float3 _v, float3 _min, float3 _max) {
+    return !(_v.x < _min.x || _v.x > _max.x || 
+             _v.y < _min.y || _v.y > _max.y ||
+             _v.z < _min.z || _v.z > _max.z);
+}
+
+bool inside(float2 _v, float4 _aabb) {
+    return inside(_v, _aabb.xy, _aabb.zw);
+}
+
+#ifdef STR_AABB
+bool inside(float3 _v, AABB _aabb) {
+    return inside(_v, _aabb.min, _aabb.max);
+}
+#endif
+
+#endif

@@ -11,7 +11,6 @@ float2  cubic(const in float2 v)  { return v*v*(3.0-2.0*v); }
 float3  cubic(const in float3 v)  { return v*v*(3.0-2.0*v); }
 float4  cubic(const in float4 v)  { return v*v*(3.0-2.0*v); }
 
-
 float cubic(const in float value, in float slope0, in float slope1) {
     float a = slope0 + slope1 - 2.;
     float b = -2. * slope0 - slope1 + 3.;

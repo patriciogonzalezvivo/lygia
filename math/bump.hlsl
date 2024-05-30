@@ -1,7 +1,7 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: bump in a range between -1 and 1
-use: <float> bump(<float> x, <float> k)
+use: <float|float3> bump(<float|float3> x [, <float|float3> k])
 */
 
 #ifndef FNC_BUMP

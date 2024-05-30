@@ -30,10 +30,10 @@ OPTIONS:
     ATMOSPHERE_SUN_POWER: sun power. Default 20.0
     ATMOSPHERE_LIGHT_SAMPLES: Defualt 8 
     ATMOSPHERE_SAMPLES: Defualt 16
-    ATMOSPHERE_GROUND: Ex: vec3( 0.37, 0.35, 0.34 )
-    ATMOSPHERE_STARS_LAYERS: Ex: 3
-    ATMOSPHERE_STARS_ELEVATION: Ex: u_time * 0.01
-    ATMOSPHERE_STARS_AZIMUTH: Ex: u_time * 0.05
+    ATMOSPHERE_GROUND: Example vec3( 0.37, 0.35, 0.34 )
+    ATMOSPHERE_STARS_LAYERS: Example 3
+    ATMOSPHERE_STARS_ELEVATION: Example u_time * 0.01
+    ATMOSPHERE_STARS_AZIMUTH: Example u_time * 0.05
     
 examples:
     - /shaders/lighting_atmosphere.frag

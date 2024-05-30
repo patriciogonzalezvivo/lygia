@@ -21,7 +21,7 @@ vec3 barycentric(vec3 _a, vec3 _b, vec3 _c ) {
     float denom = daa * dbb - dab * dab;
     float y = (dbb * dca - dab * dcb) / denom;
     float z = (daa * dcb - dab * dca) / denom;
-    return make_vec3( 1.0f - y - z, y, z);
+    return vec3( 1.0f - y - z, y, z);
 }
 
 vec3 barycentric(Triangle _tri) { return barycentric(_tri.a, _tri.b, _tri.c); }
@@ -31,7 +31,7 @@ vec3 barycentric(Triangle _tri, vec3 _pos) {
     vec3 f1 = _tri.b - _pos;
     vec3 f2 = _tri.c - _pos;
 
-    return make_vec3( length(cross(f1, f2)),                      // p1's triangle area / a
+    return vec3( length(cross(f1, f2)),                      // p1's triangle area / a
                         length(cross(f2, f0)),                      // p2's triangle area / a 
                         length(cross(f0, f1)) ) / area(_tri) ;      // p3's triangle area / a
 }

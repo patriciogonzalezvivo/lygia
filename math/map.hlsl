@@ -1,7 +1,7 @@
 /*
 contributors: Johan Ismael
 description: Map a value between one range to another.
-use: map(<float|float2|float3|float4> value, <float|float2|float3|float4> inMin, <float|float2|float3|float4> inMax, <float|float2|float3|float4> outMin, <float|float2|float3|float4> outMax)
+use: <float|float2|float3|float4> map(<float|float2|float3|float4> value, <float|float2|float3|float4> inMin, <float|float2|float3|float4> inMax, <float|float2|float3|float4> outMin, <float|float2|float3|float4> outMax)
 */
 
 #ifndef FNC_MAP
