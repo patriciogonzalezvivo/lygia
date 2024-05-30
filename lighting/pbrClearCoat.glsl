@@ -18,7 +18,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: simple PBR shading model
+description: Simple PBR shading model
 use: <vec4> pbr( <Material> _material ) 
 options:
     - DIFFUSE_FNC: diffuseOrenNayar, diffuseBurley, diffuseLambert (default)

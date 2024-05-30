@@ -6,7 +6,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: draw a color checker (Macbeth or Spyder)
+description: Draw a color checker (Macbeth or Spyder)
 use: 
     - colorChecker(<vec2> uv)
     - colorCheckerMacbeth(<vec2> uv)

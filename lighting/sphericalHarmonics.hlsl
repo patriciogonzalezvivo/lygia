@@ -1,6 +1,6 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: return the spherical harmonic value facing a normal direction
+description: Return the spherical harmonic value facing a normal direction
 use: sphericalHarmonics( <float3> normal)
 options:
   SPHERICALHARMONICS_BANDS: 2 for RaspberryPi and WebGL for the rest is 3

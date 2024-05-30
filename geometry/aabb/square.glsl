@@ -2,7 +2,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: square a AABB using the longest side
+description: Square an AABB using the longest side
 use: <void> square(<AABB> box) 
 */
 

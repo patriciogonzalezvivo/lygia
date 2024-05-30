@@ -1,6 +1,6 @@
 /*
 contributors: Hugh Kennedy (https://github.com/hughsk)
-description: quadrtic in easing. From https://github.com/stackgl/glsl-easings
+description: Quadrtic in easing. From https://github.com/stackgl/glsl-easings
 use: quadraticIn(<float> x)
 examples:
     - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/animation_easing.frag

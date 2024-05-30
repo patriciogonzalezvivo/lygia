@@ -1,6 +1,6 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: fill a stroke in a SDF. From PixelSpiritDeck https://github.com/patriciogonzalezvivo/PixelSpiritDeck
+description: Fill a stroke in a SDF. From PixelSpiritDeck https://github.com/patriciogonzalezvivo/PixelSpiritDeck
 use: stroke(<float> sdf, <float> size, <float> width [, <float> edge])
 */
 

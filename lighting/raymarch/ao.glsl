@@ -3,7 +3,7 @@
 
 /*
 contributors:  Inigo Quiles
-description: calculare Ambient Occlusion
+description: Calculare Ambient Occlusion
 use: <float> raymarchAO( in <vec3> pos, in <vec3> nor ) 
 examples:
     - /shaders/lighting_raymarching.frag

@@ -1,6 +1,6 @@
 /*
 contributors: Hugh Kennedy (https://github.com/hughsk)
-description: quartic easing. From https://github.com/stackgl/glsl-easings
+description: Quartic easing. From https://github.com/stackgl/glsl-easings
 use: quartic<In|Out|InOut>(<float> x)
 */
 

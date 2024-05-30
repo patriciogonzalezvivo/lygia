@@ -1,6 +1,6 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: modify brightness and contrast
+description: Modify brightness and contrast
 use: brightnessContrast(<float|float3|float4> color, <float> brightness, <float> amcontrastount)
 */
 

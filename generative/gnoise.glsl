@@ -5,7 +5,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: gradient Noise 
+description: Gradient Noise 
 use: gnoise(<float> x)
 */
 

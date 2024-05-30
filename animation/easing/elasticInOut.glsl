@@ -2,7 +2,7 @@
 
 /*
 contributors: Hugh Kennedy (https://github.com/hughsk)
-description: elastic in/out easing. From https://github.com/stackgl/glsl-easings
+description: Elastic in/out easing. From https://github.com/stackgl/glsl-easings
 use: elasticInOut(<float> x)
 examples:
     - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/animation_easing.frag

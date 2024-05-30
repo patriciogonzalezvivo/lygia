@@ -2,7 +2,7 @@
 
 /*
 contributors: Hugh Kennedy (https://github.com/hughsk)
-description: sine in easing. From https://github.com/stackgl/glsl-easings
+description: Sine in easing. From https://github.com/stackgl/glsl-easings
 use: sineIn(<float> x)
 examples:
     - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/animation_easing.frag
