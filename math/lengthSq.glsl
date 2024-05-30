@@ -1,7 +1,7 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: Squared length
-use: lengthSq(<vec4|vec3|vec2> v)
+use: <vec4|vec3|vec2> lengthSq(<vec4|vec3|vec2> v)
 */
 
 #ifndef FNC_LENGTHSQ

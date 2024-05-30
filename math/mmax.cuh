@@ -4,8 +4,8 @@
 contributors: Patricio Gonzalez Vivo
 description: extend Max function to add more arguments
 use: 
-  - max(<float> A, <float> B, <float> C[, <float> D])
-  - max(<float2|float3|float4> A)
+  - <float> mmax(<float> A, <float> B, <float> C[, <float> D])
+  - <float2|float3|float4> mmax(<float2|float3|float4> A)
 */
 
 #ifndef FNC_MMAX

@@ -1,0 +1,12 @@
+#include "saturate.wgsl"
+#include "quintic.wgsl"
+
+/*
+contributors: Patricio Gonzalez Vivo
+description: quintic polynomial step function 
+*/
+
+fn smootherstep(a: f32, b: f32, v: f32) -> f32 { return quintic( saturate( (v - a)/(b - a) )); }
+fn smootherstep2(a: vec2f, b: vec2f, v: vec2f) -> vec2f { return quintic( saturate( (v - a)/(b - a) )); }
+fn smootherstep3(a: vec3f, b: vec3f, v: vec3f) -> vec3f { return quintic( saturate( (v - a)/(b - a) )); }
+fn smootherstep4(a: vec4f, b: vec4f, v: vec4f) -> vec4f { return quintic( saturate( (v - a)/(b - a) )); }

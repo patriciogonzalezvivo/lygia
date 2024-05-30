@@ -76,8 +76,6 @@ QUAT quat(vec3 f, vec3 up) {
     return q;
 }
 
-QUAT quat(vec3 f) {
-    return quat(f, vec3(0.0, 1.0, 0.0));
-}
+QUAT quat(vec3 f) { return quat(f, vec3(0.0, 1.0, 0.0)); }
 
 #endif

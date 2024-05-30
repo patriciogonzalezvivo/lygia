@@ -7,7 +7,5 @@ use: <float> parabola(<float> x, <float> k)
 
 #ifndef FNC_PARABOLA
 #define FNC_PARABOLA
-
 float parabola( float x, float k ) { return pow( 4.0*x*(1.0-x), k ); }
-
 #endif

@@ -3,7 +3,7 @@
 /*
 contributors: ["Jos Stam", "Alias Systems"]
 description: |
-	From Chap 8 "Simulating Diffraction" from GPU Gems https://developer.nvidia.com/gpugems/gpugems/part-i-natural-effects/chapter-8-simulating-diffraction
+    From Chap 8 "Simulating Diffraction" from GPU Gems https://developer.nvidia.com/gpugems/gpugems/part-i-natural-effects/chapter-8-simulating-diffraction
 use: <float3> spectral_gems(<float> x)
 */
 

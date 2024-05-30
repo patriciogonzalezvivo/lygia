@@ -1,4 +1,4 @@
-fn edgePrewitt(tex: texture_2d<f32>, samp: sampler, uv: vec2f, offset: vec2f) -> vec3f {
+fn edgePrewitt(tExample texture_2d<f32>, samp: sampler, uv: vec2f, offset: vec2f) -> vec3f {
     let top_left = textureSample(tex, samp, uv + vec2f(-offset.x, offset.y)).xyz;
     let left = textureSample(tex, samp, uv + vec2f(-offset.x, 0.)).xyz;
     let bottom_left = textureSample(tex, samp, uv + vec2f(-offset.x, -offset.y)).xyz;
