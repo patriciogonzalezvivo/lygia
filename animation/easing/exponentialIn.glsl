@@ -1,6 +1,6 @@
 /*
 contributors: Hugh Kennedy (https://github.com/hughsk)
-description: exponential in easing. From https://github.com/stackgl/glsl-easings
+description: Exponential in easing. From https://github.com/stackgl/glsl-easings
 use: exponentialIn(<float> x)
 examples:
     - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/animation_easing.frag

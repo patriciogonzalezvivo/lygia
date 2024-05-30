@@ -1,6 +1,6 @@
 /*
 contributors: Hugh Kennedy (https://github.com/hughsk)
-description: cubic in/out easing. From https://github.com/stackgl/glsl-easings
+description: Cubic in/out easing. From https://github.com/stackgl/glsl-easings
 use: cubicInOut(<float> x)
 examples:
     - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/animation_easing.frag

@@ -1,6 +1,6 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: set of dither methods
+description: Set of dither methods
 use: <float4|float3|float> dither(<float4|float3|float> value[, <float> time])
 Options:
     - DITHER_FNC

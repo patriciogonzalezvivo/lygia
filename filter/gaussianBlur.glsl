@@ -2,7 +2,7 @@
 
 /*
 contributors: [Matt DesLauriers, Patricio Gonzalez Vivo]
-description: adapted versions from 5, 9 and 13 gaussian fast blur from https://github.com/Jam3/glsl-fast-gaussian-blur
+description: Adapted versions from 5, 9 and 13 gaussian fast blur from https://github.com/Jam3/glsl-fast-gaussian-blur
 use: gaussianBlur(<SAMPLER_TYPE> texture, <vec2> st, <vec2> pixel_direction [, const int kernelSize])
 options:
     - GAUSSIANBLUR_AMOUNT: gaussianBlur5 gaussianBlur9 gaussianBlur13 

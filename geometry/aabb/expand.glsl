@@ -3,7 +3,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: expand AABB
+description: Expand AABB
 use: <bool> expand(<AABB> box, <AABB|vec3|float> point ) 
 */
 

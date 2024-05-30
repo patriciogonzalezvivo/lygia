@@ -2,7 +2,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: wavelength between 400~700 nm to RGB 
+description: Wavelength between 400~700 nm to RGB 
 use: <vec3> w2rgb(<float> wavelength)
 options: 
     W2RGB_FNC(X): spectral_zucconi, spectral_zucconi6, spectral_gems, spectral_geoffrey, 

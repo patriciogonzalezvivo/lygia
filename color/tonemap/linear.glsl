@@ -1,6 +1,6 @@
 /*
 contributors: nan
-description: linear tonempa (no modifications are applied)
+description: Linear tonemap (no modifications are applied)
 use: <vec3|vec4> tonemapLinear(<vec3|vec4> x)
 */
 

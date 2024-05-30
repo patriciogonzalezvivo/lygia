@@ -1,6 +1,6 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: change the exposure of a color
+description: Change the exposure of a color
 use: exposure(<float|float3|float4> color, float amount)
 */
 

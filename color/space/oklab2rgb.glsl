@@ -1,6 +1,6 @@
 /*
 contributors: Bjorn Ottosson (@bjornornorn)
-description: oklab to linear RGB https://bottosson.github.io/posts/oklab/
+description: Oklab to linear RGB https://bottosson.github.io/posts/oklab/
 use: <vec3\vec4> oklab2rgb(<vec3|vec4> oklab)
 */
 

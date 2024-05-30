@@ -2,7 +2,7 @@
 
 /*
 contributors:  Inigo Quiles
-description: default raymarching renderer
+description: Default raymarching renderer
 use: <vec4> raymarchDefaultRender( in <vec3> ro, in <vec3> rd ) 
 options:
     - RAYMARCH_MATERIAL_FNC(RGB) vec3(RGB)

@@ -5,7 +5,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: resolve fresnel coeficient
+description: Resolve fresnel coeficient
 use: 
     - <float|vec3> fresnel(const <float|vec3> f0, <float> NoV)
 */

@@ -5,7 +5,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: returns the normal of a triangle
+description: Returns the normal of a triangle
 use: <float3> getNormal(<Triangle> tri) 
 */
 

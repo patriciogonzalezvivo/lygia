@@ -4,7 +4,7 @@
 
 /*
 contributors:  Inigo Quiles
-description: calculate normals http://iquilezles.org/www/articles/normalsSDF/normalsSDF.htm
+description: Calculate normals http://iquilezles.org/www/articles/normalsSDF/normalsSDF.htm
 use: <float> raymarchNormal( in <float3> pos ) 
 */
 

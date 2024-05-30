@@ -5,7 +5,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: compute the intersection of two AABBs
+description: Compute the intersection of two AABBs
 use: <float2> intersect(<AABB> box, <float3> rayOrigin, <float3> rayDir)
 */
 

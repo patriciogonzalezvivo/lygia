@@ -2,7 +2,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: convert CMYK to RGB
+description: Convert CMYK to RGB
 use: rgb2cmyk(<float3|float4> rgba)
 */
 

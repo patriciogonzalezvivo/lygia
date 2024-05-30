@@ -1,6 +1,6 @@
 /*
 contributors: nan
-description: linear tonempa (no modifications are applied)
+description: Linear tonemap (no modifications are applied)
 use: <float3|float4> tonemapLinear(<float3|float4> x)
 */
 

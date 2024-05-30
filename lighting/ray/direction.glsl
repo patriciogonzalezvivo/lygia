@@ -2,7 +2,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: set the direction (and origin in some cases) of a ray
+description: Set the direction (and origin in some cases) of a ray
 use: 
     - rayDirection(inout <Ray> ray, [<vec3> origin,] <vec2> pos, <vec2> resolution, <float> fov)
     - <Ray> rayDirection(<vec3> origin, <vec2> pos, <vec2> resolution, <float> fov) 

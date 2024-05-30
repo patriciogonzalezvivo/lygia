@@ -1,7 +1,7 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: |
-    convert from xyY to XYZ
+    Converts from xyY to XYZ
 use: <float3|float4> xyY2xyz(<float3|float4> color)
 */
 

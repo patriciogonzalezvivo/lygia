@@ -1,6 +1,6 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: generate a matrix to change a the saturation of any color
+description: Generate a matrix to change a the saturation of any color
 use: saturationMatrix(<float> amount)
 */
 

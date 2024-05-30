@@ -1,6 +1,6 @@
 /*
 contributors: Hugh Kennedy (https://github.com/hughsk)
-description: quartic out easing. From https://github.com/stackgl/glsl-easings
+description: Quartic out easing. From https://github.com/stackgl/glsl-easings
 use: quarticOut<float> x)
 examples:
     - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/animation_easing.frag

@@ -1,6 +1,6 @@
 /*
 contributors: Sam Hocevar
-description: pass a color in RGB and get HSB color. From http://lolengine.net/blog/2013/07/27/rgb-to-hsv-in-glsl
+description: Pass a color in RGB and get HSB color. From http://lolengine.net/blog/2013/07/27/rgb-to-hsv-in-glsl
 use: <float> rgb2hue(<float3|float4> color)
 */
 

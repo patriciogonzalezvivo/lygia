@@ -2,7 +2,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: return center of a AABB
+description: Return center of a AABB
 use: <float3> centroid(<AABB> box) 
 */
 

@@ -1,7 +1,7 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: |
-    convert from xyY to XYZ
+    Converts from xyY to XYZ
 use: <vec3|vec4> xyY2xyz(<vec3|vec4> color)
 */
 

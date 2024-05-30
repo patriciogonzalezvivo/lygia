@@ -1,6 +1,6 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: convert CMYK to RGB
+description: Convert CMYK to RGB
 use: cmyk2rgb(<float 4> cmyk)
 */
 

@@ -1,6 +1,6 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: pass a color in RGB and get it in YUB
+description: Pass a color in RGB and get it in YUB
 use: rgb2yuv(<float3|float4> color)
 */
 

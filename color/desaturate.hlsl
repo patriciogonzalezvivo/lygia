@@ -1,6 +1,6 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: change saturation of a color
+description: Change saturation of a color
 use: desaturate(<float|float3|float4> color, float amount)
 */
 

@@ -7,7 +7,7 @@
 
 /*
 contributors:  Inigo Quiles
-description: default raymarching renderer
+description: Default raymarching renderer
 use: <vec4> raymarchDefaultRender( in <vec3> ro, in <vec3> rd ) 
 options:
     - LIGHT_COLOR: vec3(0.5) or u_lightColor in GlslViewer

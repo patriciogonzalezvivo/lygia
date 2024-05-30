@@ -5,7 +5,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: calculate directional light
+description: Calculate directional light
 use: lightDirectional(<vec3> _diffuseColor, <vec3> _specularColor, <vec3> _N, <vec3> _V, <float> _NoV, <float> _f0, out <vec3> _diffuse, out <vec3> _specular)
 options:
     - DIFFUSE_FNC: diffuseOrenNayar, diffuseBurley, diffuseLambert (default)

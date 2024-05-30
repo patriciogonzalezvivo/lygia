@@ -1,6 +1,6 @@
 /*
 contributors: Hugh Kennedy (https://github.com/hughsk)
-description: quintic easing. From https://github.com/stackgl/glsl-easings
+description: Quintic easing. From https://github.com/stackgl/glsl-easings
 use: quintic<In|Out|InOut>(<float> x)
 */
 

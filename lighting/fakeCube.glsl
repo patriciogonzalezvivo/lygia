@@ -4,7 +4,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: creates a fake cube and returns the value giving a normal direction
+description: Creates a fake cube and returns the value giving a normal direction
 use: <vec3> fakeCube(<vec3> _normal [, <float> _shininnes])
 options:
     - FAKECUBE_LIGHT_AMOUNT: amount of light to fake

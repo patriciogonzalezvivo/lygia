@@ -2,7 +2,7 @@
 
 /*
 contributors: Inigo Quilez
-description: returns 2D/3D value noise in the first channel and in the rest the derivatives. For more details read this nice article http://www.iquilezles.org/www/articles/gradientnoise/gradientnoise.htm
+description: Returns 2D/3D value noise in the first channel and in the rest the derivatives. For more details read this nice article http://www.iquilezles.org/www/articles/gradientnoise/gradientnoise.htm
 use: noised(<vec2|vec3> space)
 options:
     NOISED_QUINTIC_INTERPOLATION: Quintic interpolation on/off. Default is off.

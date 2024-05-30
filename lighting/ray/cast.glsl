@@ -2,7 +2,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: cast ray by specific distance
+description: Cast ray by specific distance
 use: <vec3> rayCast(<Ray> ray, <float> dist)
 */
 

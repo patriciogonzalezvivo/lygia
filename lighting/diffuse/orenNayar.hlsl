@@ -1,6 +1,6 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: calculate diffuse contribution using Oren and Nayar equation https://en.wikipedia.org/wiki/Oren%E2%80%93Nayar_reflectance_model
+description: Calculate diffuse contribution using Oren and Nayar equation https://en.wikipedia.org/wiki/Oren%E2%80%93Nayar_reflectance_model
 use: 
     - <float> diffuseOrenNayar(<float3> light, <float3> normal, <float3> view, <float> roughness )
     - <float> diffuseOrenNayar(<float3> L, <float3> N, <float3> V, <float> NoV, <float> NoL, <float> roughness)
