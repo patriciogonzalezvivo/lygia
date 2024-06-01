@@ -1,17 +1,18 @@
-#include "../sample.glsl"
+#include "../sample.hlsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
 description: triplanar mapping
-use: <vec4> sample2DCube(in <SAMPLER_TYPE> lut, in <vec3> xyz) 
+use: <float4> sample2DCube(in <SAMPLER_TYPE> lut, in <float3> xyz) 
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
-    - SAMPLETRIPLANAR_TYPE: optional depending the target version of GLSL (vec4 or vec3)
+    - SAMPLETRIPLANAR_TYPE: optional depending the target version of GLSL (vec4 or float4)
     - SAMPLETRIPLANAR_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 */
 
+
 #ifndef SAMPLETRIPLANAR_TYPE
-#define SAMPLETRIPLANAR_TYPE vec4
+#define SAMPLETRIPLANAR_TYPE float4
 #endif
 
 #ifndef SAMPLETRIPLANAR_FNC
