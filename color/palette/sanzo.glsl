@@ -1279,7 +1279,7 @@ vec3 sanzo( const int index ) {
     colors[156] = BLACK;
     
     #if defined(PLATFORM_WEBGL)
-    for (int i = 0; i < 24; i++)
+    for (int i = 0; i < SANZO_TOTAL; i++)
         if (i == index) return colors[i];
     #else
     return colors[index];
@@ -1447,7 +1447,7 @@ vec4 sanzoCMYK( const int index ) {
     colors[156] = BLACK_CMYK;
 
     #if defined(PLATFORM_WEBGL)
-    for (int i = 0; i < 24; i++)
+    for (int i = 0; i < SANZO_TOTAL; i++)
         if (i == index) return colors[i];
     #else
     return colors[index];
