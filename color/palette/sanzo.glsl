@@ -1277,7 +1277,13 @@ vec3 sanzo( const int index ) {
     colors[154] = WARM_GRAY;
     colors[155] = SLATE_COLOR;
     colors[156] = BLACK;
+    
+    #if defined(PLATFORM_WEBGL)
+    for (int i = 0; i < 24; i++)
+        if (i == index) return colors[i];
+    #else
     return colors[index];
+    #endif
 }
 
 vec4 sanzoCMYK( const int index ) {
@@ -1439,7 +1445,13 @@ vec4 sanzoCMYK( const int index ) {
     colors[154] = WARM_GRAY_CMYK;
     colors[155] = SLATE_COLOR_CMYK;
     colors[156] = BLACK_CMYK;
+
+    #if defined(PLATFORM_WEBGL)
+    for (int i = 0; i < 24; i++)
+        if (i == index) return colors[i];
+    #else
     return colors[index];
+    #endif
 }
 
 #endif
