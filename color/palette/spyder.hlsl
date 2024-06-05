@@ -13,6 +13,8 @@ use:
     - <float3> spyderLAB (<int> index)
     - <float3> spyderALAB (<int> index)
     - <float3> spyderBLAB (<int> index)
+examples:
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/draw_colorChecker.frag
 */
 
 // A1

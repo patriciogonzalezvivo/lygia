@@ -11,10 +11,9 @@ use:
     - <float3> macbethXYZ (<int> index)
     - <float3> macbethLAB (<int> index)
     - <float3> macbethLCH (<int> index)
+examples:
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/draw_colorChecker.frag
 */
-
-// MACBETH COLOR PALETTE
-//
 
 // Dark skin (3 YR 3.7/3.2)
 #ifndef DARK_SKIN
