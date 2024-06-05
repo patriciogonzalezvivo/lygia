@@ -8,6 +8,8 @@ use:
     - <float4> sanzoCMYK (<int> index)
 defines:
     - SANZO_TOTAL
+examples:
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/draw_sanzo.frag
 */
 
 #ifndef SANZO_TOTAL 

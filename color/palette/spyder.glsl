@@ -13,6 +13,8 @@ use:
     - <vec3> spyderLAB (<int> index)
     - <vec3> spyderALAB (<int> index)
     - <vec3> spyderBLAB (<int> index)
+examples:
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/draw_colorChecker.frag
 */
 
 // A1
