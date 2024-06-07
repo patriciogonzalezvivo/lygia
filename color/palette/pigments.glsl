@@ -1,3 +1,19 @@
+/*
+contributors: Patricio Gonzalez Vivo
+description: | 
+    Basic default color pigments.
+    For specific manufacturer pigments you can use the following:
+    - winsor_oil
+    - rembrandt_oil
+    - gamblin_oil
+    - winsor_acrylics
+    - golden_acrylics
+    - liquitex_acrylics
+    - winsor_gouache
+examples:
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/color_pigments.frag
+*/
+
 #ifndef CADMIUM_YELLOW
 #define CADMIUM_YELLOW vec3(0.996, 0.925, 0.000)
 #endif 
