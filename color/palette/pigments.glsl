@@ -14,6 +14,10 @@ examples:
     - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/color_pigments.frag
 */
 
+#ifndef TITANIUM_WHITE
+#define TITANIUM_WHITE vec3(0.973, 0.961, 0.929)
+#endif
+
 #ifndef CADMIUM_YELLOW
 #define CADMIUM_YELLOW vec3(0.996, 0.925, 0.000)
 #endif 
@@ -21,6 +25,10 @@ examples:
 #ifndef HANSA_YELLOW
 #define HANSA_YELLOW vec3(0.988, 0.827, 0.000)
 #endif 
+
+#ifndef YELLOW_OCHRE
+#define YELLOW_OCHRE vec3(0.706, 0.486, 0.188)
+#endif
 
 #ifndef CADMIUM_ORANGE
 #define CADMIUM_ORANGE vec3(1.000, 0.412, 0.000)
@@ -65,3 +73,7 @@ examples:
 #ifndef BURNT_SIENNA
 #define BURNT_SIENNA vec3(0.482, 0.282, 0.000)
 #endif 
+
+#ifndef IVORY_BLACK
+#define IVORY_BLACK vec3(0.180, 0.180, 0.180)
+#endif
