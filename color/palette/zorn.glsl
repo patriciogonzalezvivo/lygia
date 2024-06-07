@@ -11,18 +11,19 @@ description: |
 */
 
 #ifndef ZORN_TOTAL
-#define ZORN_TOTAL 3
+#define ZORN_TOTAL 4
 #endif
 
 #ifndef FNC_ZORN
 #define FNC_ZORN
+vec3 zorn(int index) {
+    vec3 colors[4];
+    colors[0] = TITANIUM_WHITE;
+    colors[1] = YELLOW_OCHRE;
+    colors[2] = CADMIUM_RED;
+    colors[3] = IVORY_BLACK;
 
-vec3 zorn(const int index) {
-    vec3 color[4];
-    color[0] = TITANIUM_WHITE
-    color[1] = YELLOW_OCHER;
-    color[2] = CADMIUM_RED;
-    color[3] = IVORY_BLACK;
+    index = int(mod(float(index), float(ZORN_TOTAL)));
 
     #if defined(PLATFORM_WEBGL)
     for (int i = 0; i < ZORN_TOTAL; i++)
@@ -31,5 +32,4 @@ vec3 zorn(const int index) {
     return colors[index];
     #endif
 }
-
 #endif
