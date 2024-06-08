@@ -2,7 +2,7 @@
 contributors: Patricio Gonzalez Vivo
 description: Set of dither methods
 use: <float4|float3|float> dither(<float4|float3|float> value[, <float> time])
-Options:
+options:
     - DITHER_FNC
     - TIME_SECS: elapsed time in seconds
     - RESOLUTION: view port resolution
