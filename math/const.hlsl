@@ -1,3 +1,8 @@
+/*
+contributors: Patricio Gonzalez Vivo
+description: some useful math constants
+*/
+
 #ifndef QTR_PI
 #define QTR_PI 0.78539816339
 #endif

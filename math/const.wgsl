@@ -1,3 +1,8 @@
+/*
+contributors: Patricio Gonzalez Vivo
+description: some useful math constants
+*/
+
 const QTR_PI: f32 = 0.78539816339;
 const HALF_PI: f32 = 1.5707963267948966192313216916398;
 const PI: f32 = 3.1415926535897932384626433832795;
