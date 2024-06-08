@@ -1,16 +1,17 @@
+#include "../space/srgb2rgb.glsl"
+#include "../space/rgb2srgb.glsl"
+
 /*
 contributors: Patricio Gonzalez Vivo
 description: linear interpolation between colors in a palette
 options:
     - PALETTE_LERP_SIZE: number of colors in the palette
-    - PALETTE_LERP_MIX_FNC: mix function to use (default: mix)
+    - PALETTE_LERP_MIX_FNC: mix function to use (default is mix)
     - PALETTE_LERP_SRGB: if defined, the palette is in sRGB space
 examples:
     - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/color_palette_lerp.frag
 */
 
-#include "../space/srgb2rgb.glsl"
-#include "../space/rgb2srgb.glsl"
 
 #ifndef PALETTE_LERP_MIX_FNC
 #define PALETTE_LERP_MIX_FNC(A, B, T) mix(A, B, T)
