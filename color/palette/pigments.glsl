@@ -20,7 +20,7 @@ examples:
 
 #ifndef CADMIUM_YELLOW
 #define CADMIUM_YELLOW vec3(0.996, 0.925, 0.000)
-#endif 
+#endif
 
 #ifndef HANSA_YELLOW
 #define HANSA_YELLOW vec3(0.988, 0.827, 0.000)
