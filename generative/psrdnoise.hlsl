@@ -16,7 +16,7 @@ description:  |
     the "out gradient" argument returns the first order derivatives,
     and "out dg" returns the second order derivatives as (dn2/dx2, dn2/dy2, dn2/dxy)
 use: <float> psrdnoise(<float2|float3> x, <float2|float3> period, <float> alpha, out <float2|float3> gradient [, out <float3> dg])
-Options:
+options:
     - PSRDNOISE_PERLIN_GRID
     - PSRDNOISE_FAST_ROTATION
 license: |

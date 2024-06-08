@@ -2,7 +2,7 @@
 contributors: Patricio Gonzalez Vivo
 description: Set of dither methods
 use: <vec4|vec3|float> dither(<vec4|vec3|float> value[, <float> time])
-Options:
+options:
     - DITHER_FNC
     - RESOLUTION: view port resolution
     - BLUENOISE_TEXTURE_RESOLUTION
