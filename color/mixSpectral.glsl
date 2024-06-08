@@ -138,6 +138,8 @@ vec3 mixSpectral(vec3 A, vec3 B, float t) {
 
     float l1 = mixSpectral_reflectance_to_xyz(R1)[1];
     float l2 = mixSpectral_reflectance_to_xyz(R2)[1];
+
+    // spectral_linear_to_concentration
     float t1 = l1 * pow(1.0 - t, 2.0);
     float t2 = l2 * pow(t, 2.0);
     t = t2 / (t1 + t2);
