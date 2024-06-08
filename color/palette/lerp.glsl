@@ -9,7 +9,7 @@ options:
     - PALETTE_LERP_MIX_FNC: mix function to use (default is mix)
     - PALETTE_LERP_SRGB: if defined, the palette is in sRGB space
 examples:
-    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/color_palette_lerp.frag
+    - /shaders/color_palette_lerp.frag
 */
 
 
