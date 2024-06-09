@@ -17,8 +17,8 @@ license:
   - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-#ifndef FNC_HUESHIFT_RYB
-#define FNC_HUESHIFT_RYB
+#ifndef FNC_HUESHIFTRYB
+#define FNC_HUESHIFTRYB
 vec3 hueShiftRYB( vec3 color, float a){
     vec3 rgb = rgb2ryb(color);
     rgb = hueShift(rgb, PI);
