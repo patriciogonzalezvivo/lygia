@@ -5,9 +5,12 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: 
+description: null
 use:
-    - <vec3> transparent(<vec3> normal, <vec3> view, <vec3> ior, <float> roughness)
+  - <vec3> transparent(<vec3> normal, <vec3> view, <vec3> ior, <float> roughness)
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #if !defined(TRANSPARENT_DISPERSION) && defined(TRANSPARENT_DISPERSION_PASSES)

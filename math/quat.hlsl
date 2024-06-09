@@ -3,12 +3,16 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: |
-    creates a quaternion (QUAT) from a given radian of rotation about a given axis or from
-    a given forward vector and up vector
+description: 'creates a quaternion (QUAT) from a given radian of rotation about a
+  given axis or from
+
+  a given forward vector and up vector'
 use:
-    - <QUAT> quat(<float3> axis, <float> r)
-    - <QUAT> quat(<float3> forward [, <float3> up])
+  - <QUAT> quat(<float3> axis, <float> r)
+  - <QUAT> quat(<float3> forward [, <float3> up])
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_QUAT

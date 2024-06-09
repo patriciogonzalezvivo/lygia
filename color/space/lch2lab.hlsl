@@ -1,9 +1,11 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: |
-    Converts a Lch ot Lab color space. 
-    Note: LCh is simply Lab but converted to polar coordinates (in degrees).
+description: "Converts a Lch ot Lab color space. \nNote: LCh is simply Lab but converted\
+  \ to polar coordinates (in degrees).\n"
 use: <float3|float4> lch2lab(<float3|float4> color)
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_LCH2LAB

@@ -3,9 +3,13 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: Set the direction (and origin in some cases) of a ray
-use: 
-    - rayDirection(inout <Ray> ray, [<vec3> origin,] <vec2> pos, <vec2> resolution, <float> fov)
-    - <Ray> rayDirection(<vec3> origin, <vec2> pos, <vec2> resolution, <float> fov) 
+use:
+  - rayDirection(inout <Ray> ray, [<vec3> origin,] <vec2> pos, <vec2> resolution,
+    <float> fov)
+  - <Ray> rayDirection(<vec3> origin, <vec2> pos, <vec2> resolution, <float> fov)
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_RAYDIRECTION

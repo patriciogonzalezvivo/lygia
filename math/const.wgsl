@@ -1,6 +1,9 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: some useful math constants
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 const QTR_PI: f32 = 0.78539816339;

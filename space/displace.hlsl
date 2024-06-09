@@ -4,7 +4,10 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: Displace UV space into a XYZ space using an heightmap
-use: <float3> displace(<SAMPLER_TYPE> tex, <float3> ro, <float3|float2> rd) 
+use: <float3> displace(<SAMPLER_TYPE> tex, <float3> ro, <float3|float2> rd)
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef DISPLACE_DEPTH

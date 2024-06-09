@@ -2,6 +2,9 @@
 contributors: Patricio Gonzalez Vivo
 description: Bias high pass
 use: <vec4|vec3|float> contrast(<vec4|vec3|float> value, <float> amount)
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_CONTRAST

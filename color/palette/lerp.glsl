@@ -5,11 +5,14 @@
 contributors: Patricio Gonzalez Vivo
 description: linear interpolation between colors in a palette
 options:
-    - PALETTE_LERP_SIZE: number of colors in the palette
-    - PALETTE_LERP_MIX_FNC: mix function to use (default is mix)
-    - PALETTE_LERP_SRGB: if defined, the palette is in sRGB space
+  - PALETTE_LERP_SIZE: number of colors in the palette
+  - PALETTE_LERP_MIX_FNC: mix function to use (default is mix)
+  - PALETTE_LERP_SRGB: if defined, the palette is in sRGB space
 examples:
-    - /shaders/color_palette_lerp.frag
+  - /shaders/color_palette_lerp.frag
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 

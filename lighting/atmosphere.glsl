@@ -13,7 +13,6 @@
 #include "common/rayleigh.glsl"
 #include "common/henyeyGreenstein.glsl"
 
-
 /*
 contributor: Patricio Gonzalez Vivo
 description: |
@@ -34,7 +33,6 @@ OPTIONS:
     ATMOSPHERE_STARS_LAYERS: Example 3
     ATMOSPHERE_STARS_ELEVATION: Example u_time * 0.01
     ATMOSPHERE_STARS_AZIMUTH: Example u_time * 0.05
-    
 examples:
     - /shaders/lighting_atmosphere.frag
 */

@@ -1,8 +1,11 @@
 #include "../math/saturate.glsl"
 /*
 contributors: Patricio Gonzalez Vivo
-description: Convert diffuse/specular/glossiness workflow to PBR metallic factor 
+description: Convert diffuse/specular/glossiness workflow to PBR metallic factor
 use: <float> toMetallic(<vec3> diffuse, <vec3> specular, <float> maxSpecular)
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef TOMETALLIC_MIN_REFLECTANCE

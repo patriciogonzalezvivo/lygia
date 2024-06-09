@@ -1,20 +1,22 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: |
-    SpyderChecker values from:
-    - https://www.northlight-images.co.uk/datacolor-spydercheckr-colour-test-card-review/
-    - https://www.bartneck.de/2017/10/24/patch-color-definitions-for-datacolor-spydercheckr-48/
+description: 'SpyderChecker values from:
 
-use: 
-    - <vec3> spyder (<int> index)
-    - <vec3> spyderA (<int> index)
-    - <vec3> spyderB (<int> index)
+  - https://www.northlight-images.co.uk/datacolor-spydercheckr-colour-test-card-review/
 
-    - <vec3> spyderLAB (<int> index)
-    - <vec3> spyderALAB (<int> index)
-    - <vec3> spyderBLAB (<int> index)
+  - https://www.bartneck.de/2017/10/24/patch-color-definitions-for-datacolor-spydercheckr-48/'
+use:
+  - <vec3> spyder (<int> index)
+  - <vec3> spyderA (<int> index)
+  - <vec3> spyderB (<int> index)
+  - <vec3> spyderLAB (<int> index)
+  - <vec3> spyderALAB (<int> index)
+  - <vec3> spyderBLAB (<int> index)
 examples:
-    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/draw_colorChecker.frag
+  - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/draw_colorChecker.frag
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 // A1

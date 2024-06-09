@@ -9,7 +9,11 @@ contributors: Patricio Gonzalez Vivo
 description: Perceptual distance between two color according to CIE94 https://en.wikipedia.org/wiki/Color_difference#CIE94
 use: colorDistance(<vec3|vec4> rgbA, <vec3|vec4> rgbA)
 options:
-    COLORDISTANCE_FNC: colorDistanceLABCIE94, colorDistanceLAB, colorDistanceYCbCr, colorDistanceYPbPr, colorDistanceYUV, colorDistanceOKLAB
+  COLORDISTANCE_FNC: colorDistanceLABCIE94, colorDistanceLAB, colorDistanceYCbCr,
+    colorDistanceYPbPr, colorDistanceYUV, colorDistanceOKLAB
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef COLORDISTANCE_FNC

@@ -1,11 +1,13 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: |
-    Vlachos 2016, "Advanced VR Rendering" http://alex.vlachos.com/graphics/Alex_Vlachos_Advanced_VR_Rendering_GDC2015.pdf
+description: 'Vlachos 2016, "Advanced VR Rendering" http://alex.vlachos.com/graphics/Alex_Vlachos_Advanced_VR_Rendering_GDC2015.pdf'
 use: <float4|float3|float> ditherVlachos(<float4|float3|float> value, <float> time)
 options:
-    - DITHER_VLACHOS_ANIMATED
-    - DITHER_VLACHOS_CHROMATIC
+  - DITHER_VLACHOS_ANIMATED
+  - DITHER_VLACHOS_CHROMATIC
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifdef DITHER_ANIMATED

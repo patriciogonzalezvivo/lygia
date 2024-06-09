@@ -5,18 +5,24 @@
 #include "../generative/random.glsl"
 
 /*
-contributors: ["Alan Wolfe", "Patricio Gonzalez Vivo"]
+contributors:
+  - Alan Wolfe
+  - Patricio Gonzalez Vivo
 description: Generic blur using a noise function inspired on https://www.shadertoy.com/view/XsVBDR
 use: noiseBlur(<SAMPLER_TYPE> texture, <vec2> st, <vec2> pixel, <float> radius)
 options:
-    - NOISEBLUR_TYPE: default to vec3
-    - NOISEBLUR_GAUSSIAN_K: no gaussian by default
-    - NOISEBLUR_RANDOM23_FNC(UV): defaults to random2(UV)
-    - NOISEBLUR_SAMPLER_FNC(UV): defualts to texture2D(tex, UV).rgb
-    - NOISEBLUR_SAMPLES: default to 4
-    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
+  - NOISEBLUR_TYPE: default to vec3
+  - NOISEBLUR_GAUSSIAN_K: no gaussian by default
+  - NOISEBLUR_RANDOM23_FNC(UV): defaults to random2(UV)
+  - NOISEBLUR_SAMPLER_FNC(UV): defualts to texture2D(tex, UV).rgb
+  - NOISEBLUR_SAMPLES: default to 4
+  - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
+      or texture(...))
 examples:
-    - /shaders/filter_noiseBlur2D.frag
+  - /shaders/filter_noiseBlur2D.frag
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef NOISEBLUR_SAMPLES

@@ -5,9 +5,12 @@ contributors: Patricio Gonzalez Vivo
 description: bicubic filter sampling
 use: <vec4> sampleBicubic(<SAMPLER_TYPE> tex, <vec2> st, <vec2> texResolution);
 options:
-    - SAMPLER_FNC(TEX, UV)
+  - SAMPLER_FNC(TEX, UV)
 examples:
-    - /shaders/sample_filter_bicubic.frag
+  - /shaders/sample_filter_bicubic.frag
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_SAMPLEBICUBIC

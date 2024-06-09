@@ -4,10 +4,20 @@
 #ifndef FNC_CLAMP
 #define FNC_CLAMP
 
-////////////////////////////////////////////////////////////////////////////////
-// clamp
-// - clamp the value v to be in the range [a, b]
-////////////////////////////////////////////////////////////////////////////////
+/*
+contributors: Patricio Gonzalez Vivo
+description: this file contains the definition of the clamp function for float2, float3, and float4 types, to match GLSL's behavior.
+use: 
+  - <float2|float3|float4> clamp(<float2|float3|float4> value, float min, float max);
+  - <float2|float3|float4> clamp(<float2|float3|float4> value, <float2|float3|float4> min, <float2|float3|float4> max);
+  - <int2|int3|int4> clamp(<int2|int3|int4> value, int min, int max);
+  - <int2|int3|int4> clamp(<int2|int3|int4> value, <int2|int3|int4> min, <int2|int3|int4> max);
+  - <uint2|uint3|uint4> clamp(<uint2|uint3|uint4> value, uint min, uint max);
+  - <uint2|uint3|uint4> clamp(<uint2|uint3|uint4> value, <uint2|uint3|uint4> min, <uint2|uint3|uint4> max);
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
 
 inline __device__ __host__ float clamp(float f, float a, float b) { return max(a, min(f, b)); }
 inline __device__ __host__ int clamp(int f, int a, int b) { return max(a, min(f, b)); }

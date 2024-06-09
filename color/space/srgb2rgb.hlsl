@@ -1,7 +1,10 @@
 /*
-contributors: Patricio Gonzalez Vivo  
+contributors: Patricio Gonzalez Vivo
 description: sRGB to linear RGB conversion.
 use: <float|float3\float4> srgb2rgb(<float|float3|float4> srgb)
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef SRGB2RGB_EPSILON

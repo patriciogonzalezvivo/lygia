@@ -7,14 +7,17 @@ contributors: Patricio Gonzalez Vivo
 description: Fractal Brownian Motion
 use: fbm(<vec2> pos)
 options:
-    FBM_OCTAVES: numbers of octaves. Default is 4.
-    FBM_NOISE_FNC(UV): noise function to use Default 'snoise(UV)' (simplex noise)
-    FBM_VALUE_INITIAL: initial value. Default is 0.
-    FBM_SCALE_SCALAR: scalar. Defualt is 2.
-    FBM_AMPLITUD_INITIAL: initial amplitud value. Default is 0.5
-    FBM_AMPLITUD_SCALAR: amplitud scalar. Default is 0.5
+  FBM_OCTAVES: numbers of octaves. Default is 4.
+  FBM_NOISE_FNC(UV): noise function to use Default 'snoise(UV)' (simplex noise)
+  FBM_VALUE_INITIAL: initial value. Default is 0.
+  FBM_SCALE_SCALAR: scalar. Defualt is 2.
+  FBM_AMPLITUD_INITIAL: initial amplitud value. Default is 0.5
+  FBM_AMPLITUD_SCALAR: amplitud scalar. Default is 0.5
 examples:
-    - /shaders/generative_fbm.frag
+  - /shaders/generative_fbm.frag
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FBM_OCTAVES
