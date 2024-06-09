@@ -1,3 +1,9 @@
+/*
+contributors: Sam Hocevar
+description: Pass a color in RGB and get HSB color. From http://lolengine.net/blog/2013/07/27/rgb-to-hsv-in-glsl
+license: null
+*/
+
 fn rgb2hsv(c: vec3f) -> vec3f {
     let K = vec4f(0.0, -0.33333333333333333333, 0.6666666666666666666, -1.0);
     let p = mix(vec4f(c.bg, K.wz), vec4f(c.gb, K.xy), step(c.b, c.g));

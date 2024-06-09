@@ -1,3 +1,11 @@
+/*
+contributors: Patricio Gonzalez Vivo
+description: Blackbody in kelvin to RGB. Range between 0.0 and 40000.0 Kelvin
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
+
 fn k2rgb(t : f32) -> vec3f {
     let p = pow(t, -1.5);
     let l = log(t);
