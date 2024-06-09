@@ -1,6 +1,6 @@
 #include "hueShift.glsl"
-#include "lygia/color/space/rgb2ryb.glsl"
-#include "lygia/color/space/ryb2rgb.glsl"
+#include "space/rgb2ryb.glsl"
+#include "space/ryb2rgb.glsl"
 
 /*
 contributors:
