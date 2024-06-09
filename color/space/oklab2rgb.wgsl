@@ -1,3 +1,9 @@
+/*
+contributors: Bjorn Ottosson (@bjornornorn)
+description: Oklab to linear RGB https://bottosson.github.io/posts/oklab/
+license: null
+*/
+
 const OKLAB2RGB_A : mat3x3<f32>  = mat3x3<f32>(
     vec3f(1.0, 1.0, 1.0),
     vec3f(0.3963377774, -0.1055613458, -0.0894841775),

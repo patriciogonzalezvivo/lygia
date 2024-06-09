@@ -1,3 +1,11 @@
+/*
+contributors: Patricio Gonzalez Vivo
+description: Converts a linear RGB color to sRGB.
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
+
 fn rgb2srgb_mono(channel: f32) -> f32 {
     if (channel < 0.0031308) {
         return 12.92 * channel;
