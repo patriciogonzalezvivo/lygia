@@ -4,15 +4,18 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: mirror a tiles pattern
-use: 
-    - <vec4> mirrorTile(<vec4> tile)
-    - <vec4> mirrorTile(<vec2> st [, <float|vec2> scale])
-    - <vec4> mirrorXTile(<vec4> tile)
-    - <vec4> mirrorXTile(<vec2> st [, <float|vec2> scale])
-    - <vec4> mirrorYTile(<vec4> tile)
-    - <vec4> mirrorYTile(<vec2> st [, <float|vec2> scale])
+use:
+  - <vec4> mirrorTile(<vec4> tile)
+  - <vec4> mirrorTile(<vec2> st [, <float|vec2> scale])
+  - <vec4> mirrorXTile(<vec4> tile)
+  - <vec4> mirrorXTile(<vec2> st [, <float|vec2> scale])
+  - <vec4> mirrorYTile(<vec4> tile)
+  - <vec4> mirrorYTile(<vec2> st [, <float|vec2> scale])
 examples:
-    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/draw_tiles.frag
+  - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/draw_tiles.frag
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_MIRRORTILE

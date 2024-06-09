@@ -6,6 +6,9 @@
 contributors: Patricio Gonzalez Vivo
 description: Fix the aspect ratio of a space keeping things squared for you.
 use: ratio(float2 st, float2 st_size)
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_RATIO

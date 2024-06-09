@@ -9,11 +9,16 @@
 #include "tonemap/unreal.glsl"
 
 /*
-contributors: Patricio Gonzalez Vivo  
-description: Tone maps the specified RGB color (meaning convert from HDR to LDR) inside the range [0..~8] to [0..1]. The input must be in linear HDR pre-exposed.
+contributors: Patricio Gonzalez Vivo
+description: Tone maps the specified RGB color (meaning convert from HDR to LDR) inside
+  the range [0..~8] to [0..1]. The input must be in linear HDR pre-exposed.
 use: tonemap(<vec3|vec4> rgb)
 options:
-    TONEMAP_FNC: tonemapLinear, tonemapReinhard, tonemapUnreal, tonemapACES, tonemapDebug, tonemapUncharter
+  TONEMAP_FNC: tonemapLinear, tonemapReinhard, tonemapUnreal, tonemapACES, tonemapDebug,
+    tonemapUncharter
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef TONEMAP_FNC

@@ -1,10 +1,13 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: create a look up matrix 
-use: 
-    - <float3x3> lookAt(<float3> forward, <float3> up)
-    - <float3x3> lookAt(<float3> target, <float3> eye, <float3> up)
-    - <float3x3> lookAt(<float3> target, <float3> eye, <float> rolle)
+description: create a look up matrix
+use:
+  - <float3x3> lookAt(<float3> forward, <float3> up)
+  - <float3x3> lookAt(<float3> target, <float3> eye, <float3> up)
+  - <float3x3> lookAt(<float3> target, <float3> eye, <float> rolle)
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_LOOKAT

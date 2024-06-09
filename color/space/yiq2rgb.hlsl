@@ -1,9 +1,10 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: |
-   Converts a color in YIQ to linear RGB color. 
-   From https://en.wikipedia.org/wiki/YIQQ
+description: "Converts a color in YIQ to linear RGB color. \nFrom https://en.wikipedia.org/wiki/YIQQ\n"
 use: <float3|float4> yiq2rgb(<float3|float4> color)
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef MAT_YIQ2RGB

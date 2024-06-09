@@ -1,8 +1,13 @@
 #include "make.cuh"
 
-////////////////////////////////////////////////////////////////////////////////
-// dot product
-////////////////////////////////////////////////////////////////////////////////
+/*
+contributors: Patricio Gonzalez Vivo
+description: this file contains the definition of the dot function for float2, float3, and float4 types, to match GLSL's behavior.
+use: <float|int|uint> dot(<float2|int2|uint2|float3|int3|uint3|float4|int4|uint4> a, <float2|int2|uint2|float3|int3|uint3|float4|int4|uint4> b);
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
 
 #ifndef FNC_DOT
 #define FNC_DOT

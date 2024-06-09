@@ -1,15 +1,24 @@
 #include "../sample.hlsl"
 
 /*
-contributors: [Matt DesLauriers, Johan Ismael, Patricio Gonzalez Vivo]
-description: Use LUT textures to modify colors (float4 and float3) or a position in a gradient (float2 and floats)
+contributors:
+  - Matt DesLauriers
+  - Johan Ismael
+  - Patricio Gonzalez Vivo
+description: Use LUT textures to modify colors (float4 and float3) or a position in
+  a gradient (float2 and floats)
 use: lut(<SAMPLER_TYPE> texture, <float4|float3|float2|float> value [, int row])
 options:
-    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
-    - LUT_N_ROWS: only useful on row LUTs to stack several of those one on top of each other 
-    - LUT_CELL_SIZE: cell side. DEfault. 32
-    - LUT_SQUARE: the LUT have a SQQUARE shape and not just a long row
-    - LUT_FLIP_Y: hen defined it expects a vertically flipled texture 
+  - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
+      or texture(...))
+  - LUT_N_ROWS: only useful on row LUTs to stack several of those one on top of each
+      other
+  - LUT_CELL_SIZE: cell side. DEfault. 32
+  - LUT_SQUARE: the LUT have a SQQUARE shape and not just a long row
+  - LUT_FLIP_Y: hen defined it expects a vertically flipled texture
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_LUT

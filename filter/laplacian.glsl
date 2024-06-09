@@ -5,11 +5,16 @@ contributors: Patricio Gonzalez Vivo
 description: Laplacian filter
 use: laplacian(<SAMPLER_TYPE> texture, <vec2> st, <vec2> pixels_scale [, <float> pixel_padding])
 options:
-    - LAPLACIAN_TYPE: Return type, defaults to float
-    - LAPLACIAN_SAMPLER_FNC: Function used to sample the input texture, defaults to texture2D(tex,TEX, UV).r
-    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
+  - LAPLACIAN_TYPE: Return type, defaults to float
+  - LAPLACIAN_SAMPLER_FNC: Function used to sample the input texture, defaults to
+      texture2D(tex,TEX, UV).r
+  - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
+      or texture(...))
 examples:
-    - /shaders/filter_laplacian2D.frag
+  - /shaders/filter_laplacian2D.frag
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef LAPLACIAN_TYPE

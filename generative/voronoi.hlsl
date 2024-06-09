@@ -7,7 +7,10 @@ contributors: Patricio Gonzalez Vivo
 description: Voronoi positions and distance to centroids
 use: <float3> voronoi(<float2> pos, <float> time)
 options:
-    VORONOI_RANDOM_FNC: 
+  VORONOI_RANDOM_FNC: null
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef VORONOI_RANDOM_FNC 

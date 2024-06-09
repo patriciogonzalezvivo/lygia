@@ -2,10 +2,13 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: Simpler water color ramp 
+description: Simpler water color ramp
 use: <vec3> water(<float> value)
 examples:
-    - https://raw.githubusercontent.com/eduardfossas/lygia-study-examples/main/color/palette/water.frag
+  - https://raw.githubusercontent.com/eduardfossas/lygia-study-examples/main/color/palette/water.frag
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_WATER

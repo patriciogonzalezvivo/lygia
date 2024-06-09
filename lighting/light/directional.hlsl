@@ -5,13 +5,17 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: Calculate directional light
-use: lightDirectional(<float3> _diffuseColor, <float3> _specularColor, <float3> _N, <float3> _V, <float> _NoV, <float> _f0, out <float3> _diffuse, out <float3> _specular)
+use: lightDirectional(<float3> _diffuseColor, <float3> _specularColor, <float3> _N,
+  <float3> _V, <float> _NoV, <float> _f0, out <float3> _diffuse, out <float3> _specular)
 options:
-    - DIFFUSE_FNC: diffuseOrenNayar, diffuseBurley, diffuseLambert (default)
-    - LIGHT_POSITION: Position
-    - LIGHT_DIRECTION
-    - LIGHT_COLOR: Color
-    - LIGHT_INTENSITY: Intensity
+  - DIFFUSE_FNC: diffuseOrenNayar, diffuseBurley, diffuseLambert (default)
+  - LIGHT_POSITION: Position
+  - LIGHT_DIRECTION
+  - LIGHT_COLOR: Color
+  - LIGHT_INTENSITY: Intensity
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef LIGHT_POSITION

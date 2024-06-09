@@ -14,11 +14,15 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: down and up scaling functions for convolution pyramid  https://www.cs.huji.ac.il/labs/cglab/projects/convpyr/data/convpyr-small.pdf
-use: pyramid(<SAMPLER_TYPE> texture0, <SAMPLER_TYPE> texture1, <vec2> st, <vec2> pixel, <bool> upscale)
+use: pyramid(<SAMPLER_TYPE> texture0, <SAMPLER_TYPE> texture1, <vec2> st, <vec2> pixel,
+  <bool> upscale)
 options:
-    - PYRAMID_H1: 1.0334, 0.6836, 0.1507
-    - PYRAMID_H2: 0.0270
-    - PYRAMID_G: 0.7753, 0.0312
+  - PYRAMID_H1: 1.0334, 0.6836, 0.1507
+  - PYRAMID_H2: 0.027
+  - PYRAMID_G: 0.7753, 0.0312
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_PYRAMID

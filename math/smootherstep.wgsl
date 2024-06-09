@@ -3,7 +3,10 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: quintic polynomial step function 
+description: quintic polynomial step function
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 fn smootherstep(a: f32, b: f32, v: f32) -> f32 { return quintic( saturate( (v - a)/(b - a) )); }

@@ -1,6 +1,9 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: round a value to the nearest integer
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 fn round(x: f32) -> f32 { return sign(x)*floor(abs(x)+0.5); }

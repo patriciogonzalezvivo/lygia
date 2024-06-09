@@ -2,6 +2,9 @@
 contributors: Patricio Gonzalez Vivo
 description: given a quaternion, returns a rotation 3x3 matrix
 use: <mat3> quat2mat3(<QUAT> Q)
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 fn quat2mat3(q: vec4f) -> mat3x3<f32> {

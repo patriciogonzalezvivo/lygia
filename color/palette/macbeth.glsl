@@ -1,18 +1,24 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: |
-    MacBeth values from:
-    - http://en.wikipedia.org/wiki/ColorChecker
-    - http://kurtmunger.com/color_checkerid277.html
-    - http://www.rags-int-inc.com/phototechstuff/macbethtarget/
-    - https://babelcolor.com/index_htm_files/RGB%20Coordinates%20of%20the%20Macbeth%20ColorChecker.pdf
-use: 
-    - <vec3> macbeth (<int> index)
-    - <vec3> macbethXYZ (<int> index)
-    - <vec3> macbethLAB (<int> index)
-    - <vec3> macbethLCH (<int> index)
+description: 'MacBeth values from:
+
+  - http://en.wikipedia.org/wiki/ColorChecker
+
+  - http://kurtmunger.com/color_checkerid277.html
+
+  - http://www.rags-int-inc.com/phototechstuff/macbethtarget/
+
+  - https://babelcolor.com/index_htm_files/RGB%20Coordinates%20of%20the%20Macbeth%20ColorChecker.pdf'
+use:
+  - <vec3> macbeth (<int> index)
+  - <vec3> macbethXYZ (<int> index)
+  - <vec3> macbethLAB (<int> index)
+  - <vec3> macbethLCH (<int> index)
 examples:
-    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/draw_colorChecker.frag
+  - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/draw_colorChecker.frag
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 // Dark skin (3 YR 3.7/3.2)

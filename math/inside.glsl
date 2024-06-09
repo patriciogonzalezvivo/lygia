@@ -2,8 +2,12 @@
 contributors: Patricio Gonzalez Vivo
 description: does the position lie within the triangle
 use:
-    - bool inside(<float|vec2|vec3> value, <float|vec2|vec3> min, <float|vec2|vec3> max) 
-    - bool inside(<vec2|vec3> value, <vec4|AABB> aabb)
+  - bool inside(<float|vec2|vec3> value, <float|vec2|vec3> min, <float|vec2|vec3>
+    max)
+  - bool inside(<vec2|vec3> value, <vec4|AABB> aabb)
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_INSIDE

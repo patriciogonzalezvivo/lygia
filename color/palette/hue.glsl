@@ -1,16 +1,13 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: |
-    Physical Hue. 
-    
-    Ratio: 
-    * 1/3 = neon
-    * 1/4 = refracted
-    * 1/5+ = approximate white
-
+description: "Physical Hue. \n\nRatio: \n* 1/3 = neon\n* 1/4 = refracted\n* 1/5+ =\
+  \ approximate white\n"
 use: <vec3> hue(<float> hue[, <float> ratio])
 examples:
-    - https://raw.githubusercontent.com/eduardfossas/lygia-study-examples/main/color/palette/hue.frag
+  - https://raw.githubusercontent.com/eduardfossas/lygia-study-examples/main/color/palette/hue.frag
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_PALETTE_HUE

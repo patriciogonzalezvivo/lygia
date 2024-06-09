@@ -1,14 +1,21 @@
 #include "../math/lengthSq.glsl"
 #include "../sample.glsl"
 /*
-contributors: [Patricio Gonzalez Vivo, Johan Ismael]
+contributors:
+  - Patricio Gonzalez Vivo
+  - Johan Ismael
 description: Chroma Aberration
-use: chromaAB(<SAMPLER_TYPE> texture, <vec2> st [, <float|vec2> sdf|offset, <float> pct])
+use: chromaAB(<SAMPLER_TYPE> texture, <vec2> st [, <float|vec2> sdf|offset, <float>
+  pct])
 options:
-    CHROMAAB_TYPE: return type, defauls to vec3
-    CHROMAAB_PCT: amount of aberration, defaults to 1.5
-    CHROMAAB_SAMPLER_FNC: function used to sample the input texture, defaults to texture2D(TEX, UV)
-    CHROMAAB_CENTER_BUFFER: scalar to attenuate the sdf passed in   
+  CHROMAAB_TYPE: return type, defauls to vec3
+  CHROMAAB_PCT: amount of aberration, defaults to 1.5
+  CHROMAAB_SAMPLER_FNC: function used to sample the input texture, defaults to texture2D(TEX,
+    UV)
+  CHROMAAB_CENTER_BUFFER: scalar to attenuate the sdf passed in
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef CHROMAAB_PCT

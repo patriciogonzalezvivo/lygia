@@ -3,9 +3,14 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: Gerstner Wave generator based on this tutorial https://catlikecoding.com/unity/tutorials/flow/waves/
-use: 
-    - <vec3> gerstnerWave (<vec2> uv, <vec2> dir, <float> steepness, <float> wavelength, <float> _time [, inout <vec3> _tangent, inout <vec3> _binormal] )
-    - <vec3> gerstnerWave (<vec2> uv, <vec2> dir, <float> steepness, <float> wavelength, <float> _time [, inout <vec3> _normal] )
+use:
+  - <vec3> gerstnerWave (<vec2> uv, <vec2> dir, <float> steepness, <float> wavelength,
+    <float> _time [, inout <vec3> _tangent, inout <vec3> _binormal] )
+  - <vec3> gerstnerWave (<vec2> uv, <vec2> dir, <float> steepness, <float> wavelength,
+    <float> _time [, inout <vec3> _normal] )
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_GERSTNERWAVE

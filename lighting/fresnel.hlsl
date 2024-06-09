@@ -7,9 +7,12 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: Resolve fresnel coeficient
-use: 
-    - <float3> fresnel(const <float3> f0, <float> LoH)
-    - <float3> fresnel(<float3> _R, <float3> _f0, <float> _NoV)
+use:
+  - <float3> fresnel(const <float3> f0, <float> LoH)
+  - <float3> fresnel(<float3> _R, <float3> _f0, <float> _NoV)
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_FRESNEL

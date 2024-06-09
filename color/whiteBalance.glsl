@@ -2,13 +2,23 @@
 #include "space/yiq2rgb.glsl"
 
 /*
-contributors: [Brad Larson, Ben Cochran, Hugues Lismonde, Keitaroh Kobayashi, Alaric Cole, Matthew Clark, Jacob Gundersen, Chris Williams, Patricio Gonzalez Vivo]
-description: |
-    Adjust temperature and tint. 
-    On mobile does a cheaper algo using Brad Larson https://github.com/BradLarson/GPUImage/blob/master/framework/Source/GPUImageWhiteBalanceFilter.m 
-    On non mobile deas a more accurate ajustment using https://docs.unity3d.com/Packages/com.unity.shadergraph@6.9/manual/White-Balance-Node.html
-    
+contributors:
+  - Brad Larson
+  - Ben Cochran
+  - Hugues Lismonde
+  - Keitaroh Kobayashi
+  - Alaric Cole
+  - Matthew Clark
+  - Jacob Gundersen
+  - Chris Williams
+  - Patricio Gonzalez Vivo
+description: "Adjust temperature and tint. \nOn mobile does a cheaper algo using Brad\
+  \ Larson https://github.com/BradLarson/GPUImage/blob/master/framework/Source/GPUImageWhiteBalanceFilter.m\
+  \ \nOn non mobile deas a more accurate ajustment using https://docs.unity3d.com/Packages/com.unity.shadergraph@6.9/manual/White-Balance-Node.html\n"
 use: <vec3|vec4> whiteBalance(<vec3|vec4> rgb, <float> temperature, <float> tint))
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_WHITEBALANCE

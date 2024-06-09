@@ -4,22 +4,34 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: |
-    This is a two dimensioanl Bilateral filter (for a single pass) It's a non-linear, edge-preserving, and noise-reducing
-    smoothing filter for images. It replaces the intensity of each pixel with a weighted average of
-    intensity values from nearby pixels. This filter is very effective at noise removal while
-    preserving edges. It is very similar to the Gaussian blur, but it also takes into account the
-    intensity differences between a pixel and its neighbors. This is what makes it particularly
-    effective at noise removal while preserving edges.
+description: 'This is a two dimensioanl Bilateral filter (for a single pass) It''s
+  a non-linear, edge-preserving, and noise-reducing
+
+  smoothing filter for images. It replaces the intensity of each pixel with a weighted
+  average of
+
+  intensity values from nearby pixels. This filter is very effective at noise removal
+  while
+
+  preserving edges. It is very similar to the Gaussian blur, but it also takes into
+  account the
+
+  intensity differences between a pixel and its neighbors. This is what makes it particularly
+
+  effective at noise removal while preserving edges.'
 use: bilateral(<SAMPLER_TYPE> texture, <vec2> st, <vec2> duv [, <int> kernelSize]])
 options:
-    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
-    - BILATERAL_TYPE: default is vec3
-    - BILATERAL_SAMPLER_FNC(TEX, UV): default texture2D(TEX, UV)
-    - BILATERAL_LUMA(RGB): default rgb2luma
-    - BILATERAL_KERNEL_MAXSIZE: default 20
+  - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
+      or texture(...))
+  - BILATERAL_TYPE: default is vec3
+  - BILATERAL_SAMPLER_FNC(TEX, UV): default texture2D(TEX, UV)
+  - BILATERAL_LUMA(RGB): default rgb2luma
+  - BILATERAL_KERNEL_MAXSIZE: default 20
 examples:
-    - /shaders/filter_bilateral2D.frag
+  - /shaders/filter_bilateral2D.frag
+license:
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef BILATERAL_TYPE
