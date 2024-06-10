@@ -4,8 +4,8 @@ description: 'Converts a XYZ color to linear RGB.
 
   From http://www.brucelindbloom.com/index.html?Eqn_RGB_XYZ_Matrix.html'
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 const XYZ2RGB = mat3x3<f32>(    vec3f( 3.2404542, -0.9692660,  0.0556434),

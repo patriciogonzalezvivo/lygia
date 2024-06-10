@@ -5,14 +5,14 @@ contributors: Patricio Gonzalez Vivo
 description: triplanar mapping
 use: <vec4> sample2DCube(in <SAMPLER_TYPE> lut, in <vec3> xyz)
 options:
-  - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
       or texture(...))
-  - SAMPLETRIPLANAR_TYPE: optional depending the target version of GLSL (vec4 or vec3)
-  - SAMPLETRIPLANAR_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
+    - SAMPLETRIPLANAR_TYPE: optional depending the target version of GLSL (vec4 or vec3)
+    - SAMPLETRIPLANAR_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
       or texture(...))
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef SAMPLETRIPLANAR_TYPE

@@ -10,26 +10,26 @@ description: ScreenSpace Reflections
 use: <float> ssao(<SAMPLER_TYPE> texPosition, <SAMPLER_TYPE> texNormal, vec2 <st>
   [, <float> radius, float <bias>])
 options:
-  - CAMERA_POSITION
-  - CAMERA_NEAR_CLIP: camera near clip distance
-  - CAMERA_FAR_CLIP: camera far clip distance
-  - CAMERA_ORTHOGRAPHIC_PROJECTION, if it's not present is consider a PERECPECTIVE
+    - CAMERA_POSITION
+    - CAMERA_NEAR_CLIP: camera near clip distance
+    - CAMERA_FAR_CLIP: camera far clip distance
+    - CAMERA_ORTHOGRAPHIC_PROJECTION, if it's not present is consider a PERECPECTIVE
     camera
-  - CAMERA_PROJECTION_MATRIX: mat4 matrix with camera projection
-  - CAMERA_VIEW_MATRIX
-  - INVERSE_CAMERA_VIEW_MATRIX
-  - INVERSE_CAMERA_PROJECTION_MATRIX: mat4 matrix with the inverse camara projection
-  - LIGHT_POSITION (optional)
-  - LIGHT_MATRIX
-  - LIGHT_SHADOWMAP
-  - VOLUMETRICLIGHTSCATTERING_FACTOR
-  - VOLUMETRICLIGHTSCATTERING_STEPS
-  - VOLUMETRICLIGHTSCATTERING_NOISE_FNC
-  - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
+    - CAMERA_PROJECTION_MATRIX: mat4 matrix with camera projection
+    - CAMERA_VIEW_MATRIX
+    - INVERSE_CAMERA_VIEW_MATRIX
+    - INVERSE_CAMERA_PROJECTION_MATRIX: mat4 matrix with the inverse camara projection
+    - LIGHT_POSITION (optional)
+    - LIGHT_MATRIX
+    - LIGHT_SHADOWMAP
+    - VOLUMETRICLIGHTSCATTERING_FACTOR
+    - VOLUMETRICLIGHTSCATTERING_STEPS
+    - VOLUMETRICLIGHTSCATTERING_NOISE_FNC
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
       or texture(...))
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef VOLUMETRICLIGHTSCATTERING_FACTOR

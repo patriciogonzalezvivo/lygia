@@ -6,14 +6,14 @@ contributors: Patricio Gonzalez Vivo
 description: Use a 2D texture as a 3D one
 use: <vec4> sample2DCube(in <SAMPLER_TYPE> lut, in <vec3> xyz)
 options:
-  - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
       or texture(...))
-  - SAMPLE2DCUBE_CELL_SIZE
-  - SAMPLE2DCUBE_CELLS_PER_SIDE: defaults to 8
-  - SAMPLE2DCUBE_FNC
+    - SAMPLE2DCUBE_CELL_SIZE
+    - SAMPLE2DCUBE_CELLS_PER_SIDE: defaults to 8
+    - SAMPLE2DCUBE_FNC
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef SAMPLE2DCUBE_CELLS_PER_SIDE

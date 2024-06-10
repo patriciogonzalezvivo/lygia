@@ -4,20 +4,20 @@ description: Raymarching template where it needs to define a vec4 raymarchMap( i
   vec3 pos )
 use: <vec4> raymarch(<vec3> camera, <vec2> st)
 options:
-  - LIGHT_POSITION: in glslViewer is u_light
-  - LIGHT_DIRECTION
-  - LIGHT_COLOR: in glslViewer is u_lightColor
-  - RAYMARCH_AMBIENT: defualt vec3(1.0)
-  - RAYMARCH_MULTISAMPLE: null
-  - RAYMARCH_BACKGROUND: default vec3(0.0)
-  - RAYMARCH_CAMERA_MATRIX_FNC(RO, TA): default raymarchCamera(RO, TA)
-  - RAYMARCH_RENDER_FNC(RO, RD): default raymarchDefaultRender(RO, RD)
-  - RESOLUTION: nan
+    - LIGHT_POSITION: in glslViewer is u_light
+    - LIGHT_DIRECTION
+    - LIGHT_COLOR: in glslViewer is u_lightColor
+    - RAYMARCH_AMBIENT: defualt vec3(1.0)
+    - RAYMARCH_MULTISAMPLE: null
+    - RAYMARCH_BACKGROUND: default vec3(0.0)
+    - RAYMARCH_CAMERA_MATRIX_FNC(RO, TA): default raymarchCamera(RO, TA)
+    - RAYMARCH_RENDER_FNC(RO, RD): default raymarchDefaultRender(RO, RD)
+    - RESOLUTION: nan
 examples:
-  - /shaders/lighting_raymarching.frag
+    - /shaders/lighting_raymarching.frag
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef RAYMARCH_CAMERA_MATRIX_FNC

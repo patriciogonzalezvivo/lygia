@@ -4,24 +4,24 @@ description: 'Basic default color pigments.
 
   For specific manufacturer pigments you can use the following:
 
-  - winsor_oil
+    - winsor_oil
 
-  - rembrandt_oil
+    - rembrandt_oil
 
-  - gamblin_oil
+    - gamblin_oil
 
-  - winsor_acrylics
+    - winsor_acrylics
 
-  - golden_acrylics
+    - golden_acrylics
 
-  - liquitex_acrylics
+    - liquitex_acrylics
 
-  - winsor_gouache'
+    - winsor_gouache'
 examples:
-  - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/color_pigments.frag
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/color_pigments.frag
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef TITANIUM_WHITE

@@ -5,13 +5,13 @@
 contributors: Patricio Gonzalez Vivo
 description: this file contains the definition of the smoothstep function for float, float2, float3, and float4 types, to match GLSL's behavior.
 use: 
-  - <float> smoothstep(<float> a, <float> b, <float> x);
-  - <float2> smoothstep(<float2> a, <float2> b, <float2> x);
-  - <float3> smoothstep(<float3> a, <float3> b, <float3> x);
-  - <float4> smoothstep(<float4> a, <float4> b, <float4> x);
+    - <float> smoothstep(<float> a, <float> b, <float> x);
+    - <float2> smoothstep(<float2> a, <float2> b, <float2> x);
+    - <float3> smoothstep(<float3> a, <float3> b, <float3> x);
+    - <float4> smoothstep(<float4> a, <float4> b, <float4> x);
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_SMOOTHSTEP

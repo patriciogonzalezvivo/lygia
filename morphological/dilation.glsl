@@ -5,16 +5,16 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: "morphological dilation operation. Based on: \n    https://lettier.github.io/3d-game-shaders-for-beginners/dilation.html\n\
-  \    https://www.shadertoy.com/view/WsyXWc\n"
+    \    https://www.shadertoy.com/view/WsyXWc\n"
 use: dilation(<SAMPLER_TYPE> texture, <float2> st, <float2> pixels_scale, <int> passes)
 options:
-  - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
       or texture(...))
-  - DILATION_TYPE
-  - DILATION_SAMPLE_FNC(TEX, UV)
+    - DILATION_TYPE
+    - DILATION_SAMPLE_FNC(TEX, UV)
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef DILATION_TYPE

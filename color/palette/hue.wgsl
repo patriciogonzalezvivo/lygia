@@ -3,12 +3,12 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: "Physical Hue. \n\nRatio: \n* 1/3 = neon\n* 1/4 = refracted\n* 1/5+ =\
-  \ approximate white\n"
+    \ approximate white\n"
 examples:
-  - https://raw.githubusercontent.com/eduardfossas/lygia-study-examples/main/color/palette/hue.frag
+    - https://raw.githubusercontent.com/eduardfossas/lygia-study-examples/main/color/palette/hue.frag
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 fn hue(x: f32, r: f32) -> vec3f { 

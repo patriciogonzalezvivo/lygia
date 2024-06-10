@@ -6,21 +6,21 @@ contributors: Patricio Gonzalez Vivo
 description: Barrel distortion
 use: barrel(SAMPLER_TYPE tex, <vec2> st [, <vec2|float> sdf])
 options:
-  - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
       or texture(...))
-  - BARREL_DISTANCE: function used to shape the distortion, defaults to radial shape
+    - BARREL_DISTANCE: function used to shape the distortion, defaults to radial shape
       with lengthSq
-  - BARREL_TYPE: return type, defaults to vec3
-  - BARREL_SAMPLER_FNC: function used to sample the input texture, defaults to texture2D(TEX,
+    - BARREL_TYPE: return type, defaults to vec3
+    - BARREL_SAMPLER_FNC: function used to sample the input texture, defaults to texture2D(TEX,
       UV).rgb
-  - BARREL_OCT_1: one octave of distortion
-  - BARREL_OCT_2: two octaves of distortion
-  - BARREL_OCT_3: three octaves of distortion
+    - BARREL_OCT_1: one octave of distortion
+    - BARREL_OCT_2: two octaves of distortion
+    - BARREL_OCT_3: three octaves of distortion
 examples:
-  - https://raw.githubusercontent.com/eduardfossas/lygia-study-examples/main/distort/barrel.frag
+    - https://raw.githubusercontent.com/eduardfossas/lygia-study-examples/main/distort/barrel.frag
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef BARREL_DISTANCE

@@ -4,8 +4,8 @@ description: 'Get''s the luminosity from linear RGB, based on Rec709 luminance (
   https://en.wikipedia.org/wiki/Grayscale)'
 use: <float> rgb2luma(<float3|float4> rgb)
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_RGB2LUMA

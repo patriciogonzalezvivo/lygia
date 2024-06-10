@@ -4,13 +4,13 @@
 contributors: Patricio Gonzalez Vivo
 description: 'Brick a squared pattern'
 use:
-  - <vec2> brickTile(<vec2> st [, <float> scale])
-  - <vec4> brickTile(<vec4> tiles)
+    - <vec2> brickTile(<vec2> st [, <float> scale])
+    - <vec4> brickTile(<vec4> tiles)
 examples:
-  - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/draw_tiles.frag
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/draw_tiles.frag
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_BRICKTILE

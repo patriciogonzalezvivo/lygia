@@ -6,14 +6,14 @@ contributors: Patricio Gonzalez Vivo
 description: fill alpha with edge colors
 use: <vec4> fillAlpha(<SAMPLER_TYPE> texture, <vec2> st, <vec2> pixel, <int> passes)
 options:
-  - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
       or texture(...))
-  - ALPHAFILL_RADIUS
+    - ALPHAFILL_RADIUS
 examples:
-  - /shaders/morphological_alphaFill.frag
+    - /shaders/morphological_alphaFill.frag
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef ALPHAFILL_RADIUS

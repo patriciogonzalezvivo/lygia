@@ -3,10 +3,10 @@ contributors: Patricio Gonzalez Vivo
 description: get screen coordinates from view position
 use: <float2> view2screenPosition(<float3> viewPosition )
 options:
-  - CAMERA_PROJECTION_MATRIX: float4x4 matrix with camera projection
+    - CAMERA_PROJECTION_MATRIX: float4x4 matrix with camera projection
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef CAMERA_PROJECTION_MATRIX

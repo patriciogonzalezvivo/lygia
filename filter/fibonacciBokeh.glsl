@@ -4,19 +4,19 @@
 
 /*
 contributors:
-  - Xor
-  - Patricio Gonzalez Vivo
+    - Xor
+    - Patricio Gonzalez Vivo
 description: Fibonacci Bokeh inspired on Xor's https://www.shadertoy.com/view/fljyWd
 use: <vec4> fibonacciBokeh(<SAMPLER_TYPE> tex, <vec2> st, <vec2> pixel, <float> amount)
 options:
-  - FIBONACCIBOKEH_TYPE: null
-  - FIBONACCIBOKEH_MAXSAMPLES: null
-  - FIBONACCIBOKEH_SAMPLER_FNC(UV): null
-  - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
+    - FIBONACCIBOKEH_TYPE: null
+    - FIBONACCIBOKEH_MAXSAMPLES: null
+    - FIBONACCIBOKEH_SAMPLER_FNC(UV): null
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
       or texture(...))
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FIBONACCIBOKEH_TYPE

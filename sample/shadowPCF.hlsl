@@ -4,15 +4,15 @@
 contributors: Patricio Gonzalez Vivo
 description: sample shadow map using PCF
 use:
-  - <float> sampleShadowPCF(<SAMPLER_TYPE> depths, <float2> size, <float2> uv, <float>
+    - <float> sampleShadowPCF(<SAMPLER_TYPE> depths, <float2> size, <float2> uv, <float>
     compare)
-  - <float> sampleShadowPCF(<float3> lightcoord)
+    - <float> sampleShadowPCF(<float3> lightcoord)
 options:
-  - LIGHT_SHADOWMAP_BIAS
-  - SAMPLESHADOWPCF_SAMPLER_FNC
+    - LIGHT_SHADOWMAP_BIAS
+    - SAMPLESHADOWPCF_SAMPLER_FNC
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef SAMPLESHADOWPCF_SAMPLER_FNC

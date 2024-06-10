@@ -9,10 +9,10 @@ use: <vec3> voronoi(<vec2> pos, <float> time)
 options:
   VORONOI_RANDOM_FNC: nan
 examples:
-  - /shaders/generative_voronoi.frag
+    - /shaders/generative_voronoi.frag
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef VORONOI_RANDOM_FNC 

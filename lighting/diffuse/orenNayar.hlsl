@@ -2,13 +2,13 @@
 contributors: Patricio Gonzalez Vivo
 description: Calculate diffuse contribution using Oren and Nayar equation https://en.wikipedia.org/wiki/Oren%E2%80%93Nayar_reflectance_model
 use:
-  - <float> diffuseOrenNayar(<float3> light, <float3> normal, <float3> view, <float>
+    - <float> diffuseOrenNayar(<float3> light, <float3> normal, <float3> view, <float>
     roughness )
-  - <float> diffuseOrenNayar(<float3> L, <float3> N, <float3> V, <float> NoV, <float>
+    - <float> diffuseOrenNayar(<float3> L, <float3> N, <float3> V, <float> NoV, <float>
     NoL, <float> roughness)
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_DIFFUSE_ORENNAYAR

@@ -21,17 +21,17 @@ description: 'This is a two dimensioanl Bilateral filter (for a single pass) It'
   effective at noise removal while preserving edges.'
 use: bilateral(<SAMPLER_TYPE> texture, <vec2> st, <vec2> duv [, <int> kernelSize]])
 options:
-  - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
       or texture(...))
-  - BILATERAL_TYPE: default is vec3
-  - BILATERAL_SAMPLER_FNC(TEX, UV): default texture2D(TEX, UV)
-  - BILATERAL_LUMA(RGB): default rgb2luma
-  - BILATERAL_KERNEL_MAXSIZE: default 20
+    - BILATERAL_TYPE: default is vec3
+    - BILATERAL_SAMPLER_FNC(TEX, UV): default texture2D(TEX, UV)
+    - BILATERAL_LUMA(RGB): default rgb2luma
+    - BILATERAL_KERNEL_MAXSIZE: default 20
 examples:
-  - /shaders/filter_bilateral2D.frag
+    - /shaders/filter_bilateral2D.frag
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef BILATERAL_TYPE

@@ -9,16 +9,16 @@
 contributors: Patricio Gonzalez Vivo
 description: Draw a color checker (Macbeth or Spyder)
 use:
-  - colorChecker(<vec2> uv)
-  - colorCheckerMacbeth(<vec2> uv)
-  - colorCheckerSpyder(<vec2> uv)
+    - colorChecker(<vec2> uv)
+    - colorCheckerMacbeth(<vec2> uv)
+    - colorCheckerSpyder(<vec2> uv)
 options:
-  - COLORCHECKER_FNC: function to use to draw the color checker
+    - COLORCHECKER_FNC: function to use to draw the color checker
 examples:
-  - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/draw_colorChecker.frag
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/draw_colorChecker.frag
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef COLORCHECKER_FNC

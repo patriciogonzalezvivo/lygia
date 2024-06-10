@@ -7,12 +7,12 @@ description: sample a frame on a sprite sheet
 use: <SAMPLESPRITE_TYPE> sampleSprite(<SAMPLER_TYPE >tex, <float2> st, <float2> grid,
   <float> frame)
 options:
-  - SAMPLER_FNC(TEX, UV)
-  - SAMPLESPRITE_TYPE: float4
-  - SAMPLESPRITE_SAMPLER_FNC(UV)
+    - SAMPLER_FNC(TEX, UV)
+    - SAMPLESPRITE_TYPE: float4
+    - SAMPLESPRITE_SAMPLER_FNC(UV)
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef SAMPLESPRITE_TYPE

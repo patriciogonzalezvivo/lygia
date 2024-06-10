@@ -8,18 +8,18 @@ contributors: Patricio Gonzalez Vivo
 description: Use a 2D texture as to encode a 3D SDF (Signed Distance Field) function
 use: <vecSAMPLE3DSDF_TYPE4> sample3DSdf(in <SAMPLER_TYPE> lut, in <float3> xyz)
 options:
-  - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
       or texture(...))
-  - SAMPLE_2DCUBE_CELL_SIZE
-  - SAMPLE_2DCUBE_CELLS_PER_SIDE: default 8
-  - SAMPLE_2DCUBE_FNC
-  - SAMPLE3DSDF_TYPE: defaults to float
-  - SAMPLE3DSDF_FNC(TEX, POS): defaults to sample2DCube(TEX, POS).r
+    - SAMPLE_2DCUBE_CELL_SIZE
+    - SAMPLE_2DCUBE_CELLS_PER_SIDE: default 8
+    - SAMPLE_2DCUBE_FNC
+    - SAMPLE3DSDF_TYPE: defaults to float
+    - SAMPLE3DSDF_FNC(TEX, POS): defaults to sample2DCube(TEX, POS).r
 examples:
-  - /shaders/sample_3Dsdf.frag
+    - /shaders/sample_3Dsdf.frag
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef SAMPLE3DSDF_TYPE

@@ -6,10 +6,10 @@ contributors: Patricio Gonzalez Vivo
 description: samples a hue rainbox pattern color encoded texture and returns a float
 use: <fluat> sampleHue(<SAMPLER_TYPE> tex, <float2> st);
 options:
-  - SAMPLER_FNC(TEX, UV)
+    - SAMPLER_FNC(TEX, UV)
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef SAMPLEHUE_SAMPLE_FNC

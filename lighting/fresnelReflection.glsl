@@ -4,17 +4,17 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: "Resolve fresnel coeficient and apply it to a reflection. It can apply\
-  \ iridescence to \nusing a formula based on https://www.alanzucconi.com/2017/07/25/the-mathematics-of-thin-film-interference/\n"
+    \ iridescence to \nusing a formula based on https://www.alanzucconi.com/2017/07/25/the-mathematics-of-thin-film-interference/\n"
 use:
-  - <vec3> fresnelReflection(<vec3> R, <vec3> f0, <float> NoV)
-  - <vec3> fresnelIridescentReflection(<vec3> normal, <vec3> view, <vec3> f0, <vec3>
+    - <vec3> fresnelReflection(<vec3> R, <vec3> f0, <float> NoV)
+    - <vec3> fresnelIridescentReflection(<vec3> normal, <vec3> view, <vec3> f0, <vec3>
     ior1, <vec3> ior2, <float> thickness, <float> roughness)
-  - <vec3> fresnelReflection(<Material> _M)
+    - <vec3> fresnelReflection(<Material> _M)
 options:
-  - FRESNEL_REFLECTION_RGB: <vec3> RGB values of the reflection
+    - FRESNEL_REFLECTION_RGB: <vec3> RGB values of the reflection
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FRESNEL_REFLECTION_RGB

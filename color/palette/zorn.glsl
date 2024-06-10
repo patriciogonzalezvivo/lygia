@@ -5,16 +5,16 @@ contributors: Patricio Gonzalez Vivo
 description: '[Zorn palette](https://www.jacksonsart.com/blog/2021/02/02/colour-mixing-exploring-the-zorn-palette/)
   where:
 
-  - 0: Titanium White
+    - 0: Titanium White
 
-  - 1: Yellow Ocher
+    - 1: Yellow Ocher
 
-  - 2: Cadmium Red
+    - 2: Cadmium Red
 
-  - 3: Ivory Black'
+    - 3: Ivory Black'
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef ZORN_TOTAL
