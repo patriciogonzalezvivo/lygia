@@ -7,7 +7,7 @@ contributors: Patricio Gonzalez Vivo
 description: Convert from HSV to RYB color space
 use: <float3> hsv2ryb(<float3> hsv)
 options:
-    HSV2RGB_CMY_BIAS: if this is defined, the function will use the CMY bias version of the HSV2RGB function
+    HSV2RYB_SMOOTH: if this is defined, the function will use the CMY bias version of the HSV2RGB function
 examples:
     - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/color_ryb.frag
 license:
@@ -18,7 +18,7 @@ license:
 #ifndef FNC_HSV2RYB
 #define FNC_HSV2RYB
 float3 hsv2ryb( in float3 v ) {
-    #ifdef HSV2RGB_CMY_BIAS
+    #ifndef HSV2RYB_SMOOTH
     float3 rgb = hsv2rgb(v);
     return ryb2rgb(rgb);
 

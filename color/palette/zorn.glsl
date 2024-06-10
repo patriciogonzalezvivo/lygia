@@ -12,6 +12,8 @@ description: '[Zorn palette](https://www.jacksonsart.com/blog/2021/02/02/colour-
     - 2: Cadmium Red
 
     - 3: Ivory Black'
+examples:
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/color_zorn.frag
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
