@@ -2,8 +2,8 @@
 contributors: Patricio Gonzalez Vivo
 description: gaussian coeficient
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 fn gaussian(d: f32, sigma: f32) -> f32 { return exp(-(d*d) / (2.0 * sigma * sigma)); }

@@ -14,18 +14,18 @@
 contributors: Patricio Gonzalez Vivo
 description: Simple glass shading model
 use:
-  - <float4> glass(<Material> material)
+    - <float4> glass(<Material> material)
 options:
-  - SPECULAR_FNC: specularGaussian, specularBeckmann, specularCookTorrance (default),
+    - SPECULAR_FNC: specularGaussian, specularBeckmann, specularCookTorrance (default),
       specularPhongRoughness, specularBlinnPhongRoughnes (default on mobile)
-  - SCENE_BACK_SURFACE: null
-  - LIGHT_POSITION: in GlslViewer is u_light
-  - LIGHT_DIRECTION: null
-  - LIGHT_COLOR in GlslViewer is u_lightColor
-  - CAMERA_POSITION: in GlslViewer is u_camera
+    - SCENE_BACK_SURFACE: null
+    - LIGHT_POSITION: in GlslViewer is u_light
+    - LIGHT_DIRECTION: null
+    - LIGHT_COLOR in GlslViewer is u_lightColor
+    - CAMERA_POSITION: in GlslViewer is u_camera
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef CAMERA_POSITION

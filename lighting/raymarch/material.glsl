@@ -10,19 +10,19 @@ contributors: Patricio Gonzalez Vivo
 description: Material Constructor. Designed to integrate with GlslViewer's defines
   https://github.com/patriciogonzalezvivo/glslViewer/wiki/GlslViewer-DEFINES#material-defines
 use:
-  - void raymarchMaterial(in <vec3> ro, in <vec3> rd, out material _mat)
-  - material raymarchMaterial(in <vec3> ro, in <vec3> rd)
+    - void raymarchMaterial(in <vec3> ro, in <vec3> rd, out material _mat)
+    - material raymarchMaterial(in <vec3> ro, in <vec3> rd)
 options:
-  - LIGHT_POSITION: in glslViewer is u_light
-  - LIGHT_DIRECTION
-  - LIGHT_COLOR
-  - RAYMARCH_AMBIENT
-  - RAYMARCH_MATERIAL_FNC(RAY, POSITION, NORMAL, ALBEDO)
+    - LIGHT_POSITION: in glslViewer is u_light
+    - LIGHT_DIRECTION
+    - LIGHT_COLOR
+    - RAYMARCH_AMBIENT
+    - RAYMARCH_MATERIAL_FNC(RAY, POSITION, NORMAL, ALBEDO)
 examples:
-  - /shaders/lighting_raymarching.frag
+    - /shaders/lighting_raymarching.frag
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef LIGHT_POSITION

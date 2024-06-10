@@ -4,17 +4,17 @@
 
 /*
 contributors:
-  - Johan Ismael
-  - Patricio Gonzalez Vivo
+    - Johan Ismael
+    - Patricio Gonzalez Vivo
 description: Shifts color hue in the RYB color space
 use: hueShift(<vec3|vec4> color, <float> angle)
 optionas:
-  - HUESHIFT_AMOUNT: if defined, it uses a normalized value instead of an angle
+    - HUESHIFT_AMOUNT: if defined, it uses a normalized value instead of an angle
 examples:
-  - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/color_ryb.frag
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/color_ryb.frag
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_HUESHIFTRYB

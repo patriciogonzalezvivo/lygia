@@ -4,14 +4,14 @@ description: Calculate spot light
 use: lightSpot(<vec3> _diffuseColor, <vec3> _specularColor, <vec3> _N, <vec3> _V,
   <float> _NoV, <float> _f0, out <vec3> _diffuse, out <vec3> _specular)
 options:
-  - DIFFUSE_FNC: diffuseOrenNayar, diffuseBurley, diffuseLambert (default)
-  - SURFACE_POSITION: in glslViewer is v_position
-  - LIGHT_POSITION: in glslViewer is u_light
-  - LIGHT_COLOR: in glslViewer is u_lightColor
-  - LIGHT_INTENSITY: in glslViewer is  u_lightIntensity
+    - DIFFUSE_FNC: diffuseOrenNayar, diffuseBurley, diffuseLambert (default)
+    - SURFACE_POSITION: in glslViewer is v_position
+    - LIGHT_POSITION: in glslViewer is u_light
+    - LIGHT_COLOR: in glslViewer is u_lightColor
+    - LIGHT_INTENSITY: in glslViewer is  u_lightIntensity
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #include "../specular.glsl"

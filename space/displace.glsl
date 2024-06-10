@@ -6,14 +6,14 @@ contributors: Patricio Gonzalez Vivo
 description: Displace UV space into a XYZ space using an heightmap
 use: <vec3> displace(<SAMPLER_TYPE> tex, <vec3> ro, <vec3|vec2> rd)
 options:
-  - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
       or texture(...))
-  - BILATERALBLUR_AMOUNT
-  - BILATERALBLUR_TYPE
-  - BILATERALBLUR_SAMPLER_FNC
+    - BILATERALBLUR_AMOUNT
+    - BILATERALBLUR_TYPE
+    - BILATERALBLUR_SAMPLER_FNC
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef DISPLACE_DEPTH

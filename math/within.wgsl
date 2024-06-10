@@ -2,8 +2,8 @@
 contributors: Johan Ismael
 description: Similar to step but for an interval instead of a threshold. Returns 1 is x is between left and right, 0 otherwise
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 fn within(x: f32, _min: f32, _max: f32) -> f32 {

@@ -17,17 +17,17 @@ contributors: Patricio Gonzalez Vivo
 description: Simple PBR shading model
 use: <vec4> pbr( <Material> _material )
 options:
-  - DIFFUSE_FNC: diffuseOrenNayar, diffuseBurley, diffuseLambert (default)
-  - SPECULAR_FNC: specularGaussian, specularBeckmann, specularCookTorrance (default),
+    - DIFFUSE_FNC: diffuseOrenNayar, diffuseBurley, diffuseLambert (default)
+    - SPECULAR_FNC: specularGaussian, specularBeckmann, specularCookTorrance (default),
       specularPhongRoughness, specularBlinnPhongRoughnes (default on mobile)
-  - LIGHT_POSITION: in GlslViewer is u_light
-  - LIGHT_COLOR in GlslViewer is u_lightColor
-  - CAMERA_POSITION: in GlslViewer is u_camera
+    - LIGHT_POSITION: in GlslViewer is u_light
+    - LIGHT_COLOR in GlslViewer is u_lightColor
+    - CAMERA_POSITION: in GlslViewer is u_camera
 examples:
-  - /shaders/lighting_raymarching_pbr.frag
+    - /shaders/lighting_raymarching_pbr.frag
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef CAMERA_POSITION

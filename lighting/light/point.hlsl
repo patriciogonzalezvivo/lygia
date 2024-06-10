@@ -4,15 +4,15 @@ description: Calculate point light
 use: lightPoint(<float3> _diffuseColor, <float3> _specularColor, <float3> _N, <float3>
   _V, <float> _NoV, <float> _f0, out <float3> _diffuse, out <float3> _specular)
 options:
-  - DIFFUSE_FNC: diffuseOrenNayar, diffuseBurley, diffuseLambert (default)
-  - SURFACE_POSITION: in glslViewer is v_position
-  - LIGHT_POSITION: in glslViewer is u_light
-  - LIGHT_COLOR: in glslViewer is u_lightColor
-  - LIGHT_INTENSITY: in glslViewer is  u_lightIntensity
-  - LIGHT_FALLOFF: in glslViewer is u_lightFalloff
+    - DIFFUSE_FNC: diffuseOrenNayar, diffuseBurley, diffuseLambert (default)
+    - SURFACE_POSITION: in glslViewer is v_position
+    - LIGHT_POSITION: in glslViewer is u_light
+    - LIGHT_COLOR: in glslViewer is u_lightColor
+    - LIGHT_INTENSITY: in glslViewer is  u_lightIntensity
+    - LIGHT_FALLOFF: in glslViewer is u_lightFalloff
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #include "../specular.hlsl"

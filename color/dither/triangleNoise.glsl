@@ -4,14 +4,14 @@
 contributors: Patricio Gonzalez Vivo
 description: "2016, Banding in Games: A Noisy Rant"
 use:
-  - <vec4|vec3|float> ditherTriangleNoise(<vec4|vec3|float> value, <vec2> st, <float>
+    - <vec4|vec3|float> ditherTriangleNoise(<vec4|vec3|float> value, <vec2> st, <float>
     time)
-  - <vec4|vec3|float> ditherTriangleNoise(<vec4|vec3|float> value, <float> time)
+    - <vec4|vec3|float> ditherTriangleNoise(<vec4|vec3|float> value, <float> time)
 examples:
-  - /shaders/color_dither.frag
+    - /shaders/color_dither.frag
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef DITHER_TRIANGLENOISE_COORD

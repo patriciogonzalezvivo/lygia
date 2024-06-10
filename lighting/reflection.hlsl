@@ -7,8 +7,8 @@ description: |
     If MODEL_VERTEX_TANGENT is defined, it will use the tangentToWorld matrix to calculate the anisotropy direction.
 use: <float3> reflection(<float3> vector, <float3> normal, <float> roughness);
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_REFLECTION

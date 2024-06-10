@@ -12,15 +12,15 @@ description: 'Joint Bilateral Filter
   Interesting article about it and their uses: https://bartwronski.com/2019/09/22/local-linear-models-guided-filter/'
 use: bilateralBlur(<SAMPLER_TYPE> texture, <vec2> st, <vec2> duv)
 options:
-  - JOINTBILATERAL_TYPE: defaults to vec4
-  - JOINTBILATERAL_SAMPLE_FNC(TEX, UV): defaults to sampleClamp2edge(tex, UV)
-  - JOINTBILATERAL_TYPEGUIDE: defualts to vec3
-  - JOINTBILATERAL_SAMPLEGUIDE_FNC(TEX, UV): defaults to sampleClamp2edge(TEX, UV).rgb
-  - JOINTBILATERAL_KERNELSIZE: defaults to  9
-  - JOINTBILATERAL_INTENSITY_SIGMA: defaults to 0.026
+    - JOINTBILATERAL_TYPE: defaults to vec4
+    - JOINTBILATERAL_SAMPLE_FNC(TEX, UV): defaults to sampleClamp2edge(tex, UV)
+    - JOINTBILATERAL_TYPEGUIDE: defualts to vec3
+    - JOINTBILATERAL_SAMPLEGUIDE_FNC(TEX, UV): defaults to sampleClamp2edge(TEX, UV).rgb
+    - JOINTBILATERAL_KERNELSIZE: defaults to  9
+    - JOINTBILATERAL_INTENSITY_SIGMA: defaults to 0.026
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef JOINTBILATERAL_TYPE

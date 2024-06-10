@@ -8,8 +8,8 @@ use:
     - sampleShadow(<SAMPLER_TYPE> shadowMap, <float2> _coord , float compare)
     - sampleShadow(<SAMPLER_TYPE> shadowMap, <float2> _shadowMapSize, <float2> _coord , float compare)
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_SAMPLESHADOW

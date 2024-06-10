@@ -17,19 +17,19 @@ contributors: Patricio Gonzalez Vivo
 description: Material Constructor. Designed to integrate with GlslViewer's defines
   https://github.com/patriciogonzalezvivo/glslViewer/wiki/GlslViewer-DEFINES#material-defines
 use:
-  - void materialNew(out <material> _mat)
-  - <material> materialNew()
+    - void materialNew(out <material> _mat)
+    - <material> materialNew()
 options:
-  - SURFACE_POSITION
-  - SHADING_SHADOWS
-  - MATERIAL_HAS_CLEAR_COAT
-  - MATERIAL_CLEARCOAT_ROUGHNESS
-  - MATERIAL_HAS_CLEAR_COAT_NORMAL
-  - SHADING_MODEL_SUBSURFACE
-  - SHADING_MODEL_CLOTH
+    - SURFACE_POSITION
+    - SHADING_SHADOWS
+    - MATERIAL_HAS_CLEAR_COAT
+    - MATERIAL_CLEARCOAT_ROUGHNESS
+    - MATERIAL_HAS_CLEAR_COAT_NORMAL
+    - SHADING_MODEL_SUBSURFACE
+    - SHADING_MODEL_CLOTH
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef SURFACE_POSITION

@@ -2,10 +2,10 @@
 contributors: Patricio Gonzalez Vivo
 description: "RGB colors from Rembrandt's oil paint colors. \nBased on https://sensuallogic.com/artistcolordata\n"
 examples:
-  - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/color_pigments.frag
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/color_pigments.frag
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef REMBRANDT_OIL_TITANIUM_WHITE

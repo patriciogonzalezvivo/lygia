@@ -4,17 +4,17 @@ description: Raymarching template where it needs to define a float4 raymarchMSap
   in float3 pos )
 use: <float4> raymarch(<float3> camera, <float2> st)
 options:
-  - LIGHT_POSITION: in glslViewer is u_light
-  - LIGHT_DIRECTION
-  - LIGHT_COLOR: in glslViewer is u_lightColor
-  - RAYMARCH_AMBIENT: defualt float3(1.0)
-  - RAYMARCH_MULTISAMPLE: null
-  - RAYMARCH_BACKGROUND: default float3(0.0)
-  - RAYMARCH_CAMERA_MATRIX_FNC(RO, TA): default raymarchCamera(RO, TA)
-  - RAYMARCH_RENDER_FNC(RO, RD): default raymarchDefaultRender(RO, RD)
+    - LIGHT_POSITION: in glslViewer is u_light
+    - LIGHT_DIRECTION
+    - LIGHT_COLOR: in glslViewer is u_lightColor
+    - RAYMARCH_AMBIENT: defualt float3(1.0)
+    - RAYMARCH_MULTISAMPLE: null
+    - RAYMARCH_BACKGROUND: default float3(0.0)
+    - RAYMARCH_CAMERA_MATRIX_FNC(RO, TA): default raymarchCamera(RO, TA)
+    - RAYMARCH_RENDER_FNC(RO, RD): default raymarchDefaultRender(RO, RD)
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef RAYMARCH_CAMERA_MATRIX_FNC

@@ -1,12 +1,12 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: "Fix the aspect ratio of a space keeping things squared for you, \nin\
-  \ a similar way that aspect.glsl does, but while scaling the \nspace to keep the\
-  \ entire 0.0,0.0 ~ 1.0,1.0 range visible\n"
+    \ a similar way that aspect.glsl does, but while scaling the \nspace to keep the\
+    \ entire 0.0,0.0 ~ 1.0,1.0 range visible\n"
 use: <float2> ratio(<float2> st, <float2> st_size)
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_RATIO

@@ -2,8 +2,8 @@
 contributors: Patricio Gonzalez Vivo
 description: Refractive index of different materials based on https://en.wikipedia.org/wiki/Refractive_index
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 #ifndef IOR_AIR
 #define IOR_AIR 1.000293

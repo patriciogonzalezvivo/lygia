@@ -5,10 +5,10 @@ contributors: Patricio Gonzalez Vivo
 description: Converts a RGB normal map into normal vectors
 use: SAMPLEBUMPMap(<SAMPLER_TYPE> texture, <float2> st, <float2> pixel)
 options:
-  - SAMPLEBUMPMAP_Z: Steepness of z before normalization, defaults to .01
+    - SAMPLEBUMPMAP_Z: Steepness of z before normalization, defaults to .01
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 #ifndef SAMPLEBUMPMAP_Z
 #define SAMPLEBUMPMAP_Z .01

@@ -13,16 +13,16 @@ description: Render with a gooch stylistic shading model
 use: <float4> gooch(<float4> albedo, <float3> normal, <float3> light, <float3> view,
   <float> roughness)
 options:
-  - GOOCH_WARM: defualt float3(0.25, 0.15, 0.0)
-  - GOOCH_COLD: defualt float3(0.0, 0.0, 0.2)
-  - GOOCH_SPECULAR: defualt float3(1.0, 1.0, 1.0)
-  - DIFFUSE_FNC: diffuseOrenNayar, diffuseBurley, diffuseLambert (default)
-  - LIGHT_COORD: in GlslViewer is  v_lightCoord
-  - LIGHT_SHADOWMAP: in GlslViewer is u_lightShadowMap
-  - LIGHT_SHADOWMAP_SIZE: in GlslViewer is 1024.0
+    - GOOCH_WARM: defualt float3(0.25, 0.15, 0.0)
+    - GOOCH_COLD: defualt float3(0.0, 0.0, 0.2)
+    - GOOCH_SPECULAR: defualt float3(1.0, 1.0, 1.0)
+    - DIFFUSE_FNC: diffuseOrenNayar, diffuseBurley, diffuseLambert (default)
+    - LIGHT_COORD: in GlslViewer is  v_lightCoord
+    - LIGHT_SHADOWMAP: in GlslViewer is u_lightShadowMap
+    - LIGHT_SHADOWMAP_SIZE: in GlslViewer is 1024.0
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef CAMERA_POSITION

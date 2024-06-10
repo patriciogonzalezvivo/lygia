@@ -9,17 +9,17 @@ description: sampler the view Positiong from depthmap texture
 use: <vec4> sampleViewPosition(<SAMPLER_TYPE> texDepth, <vec2> st [, <float> near,
   <float> far])
 options:
-  - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
       or texture(...))
-  - CAMERA_NEAR_CLIP: required
-  - CAMERA_FAR_CLIP: required
-  - CAMERA_ORTHOGRAPHIC_PROJECTION, if it's not present is consider a PERECPECTIVE
+    - CAMERA_NEAR_CLIP: required
+    - CAMERA_FAR_CLIP: required
+    - CAMERA_ORTHOGRAPHIC_PROJECTION, if it's not present is consider a PERECPECTIVE
     camera
-  - CAMERA_PROJECTION_MATRIX: mat4 matrix with camera projection
-  - INVERSE_CAMERA_PROJECTION_MATRIX: mat4 matrix with the inverse camara projection
+    - CAMERA_PROJECTION_MATRIX: mat4 matrix with camera projection
+    - INVERSE_CAMERA_PROJECTION_MATRIX: mat4 matrix with the inverse camara projection
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_SAMPLEVIEWPOSITION

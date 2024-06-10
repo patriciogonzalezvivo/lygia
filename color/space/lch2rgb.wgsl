@@ -4,10 +4,10 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: "Converts a Lch to linear RGB color space. \nNote: LCh is simply Lab\
-  \ but converted to polar coordinates (in degrees).\n"
+    \ but converted to polar coordinates (in degrees).\n"
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 

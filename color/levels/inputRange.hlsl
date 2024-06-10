@@ -5,8 +5,8 @@ description: |
   Adapted from Romain Dura (http://mouaif.wordpress.com/?p=94)
 use: levelsInputRange(<float3|float4> color, <float|float3> minInput, <float|float3> maxInput)
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_LEVELSINPUTRANGE

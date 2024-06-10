@@ -7,20 +7,20 @@ contributors: Patricio Gonzalez Vivo
 description: Creates a fake cube and returns the value giving a normal direction
 use: <vec3> fakeCube(<vec3> _normal [, <float> _shininnes])
 options:
-  - FAKECUBE_LIGHT_AMOUNT: amount of light to fake
-  - FAKECUBE_ONLYXWALL: only the x wall is lit
-  - FAKECUBE_ONLYYWALL: only the y wall is lit
-  - FAKECUBE_ONLYZWALL: only the z wall is lit
-  - FAKECUBE_NOFLOOR: removes the floor from the fake cube
-  - FAKECUBE_NOROOF: removes the floor from the fake cube
-  - FAKECUBE_NOXWALL: removes the x wall from the fake cube
-  - FAKECUBE_NONXWALL: removes the -x wall from the fake cube
-  - FAKECUBE_NOZWALL: removes the z wall from the fake cube
-  - FAKECUBE_NOMZWALL: removes the -z wall from the fake cube
-  - FAKECUBE_TEXTURE2D: function to sample the fake cube
+    - FAKECUBE_LIGHT_AMOUNT: amount of light to fake
+    - FAKECUBE_ONLYXWALL: only the x wall is lit
+    - FAKECUBE_ONLYYWALL: only the y wall is lit
+    - FAKECUBE_ONLYZWALL: only the z wall is lit
+    - FAKECUBE_NOFLOOR: removes the floor from the fake cube
+    - FAKECUBE_NOROOF: removes the floor from the fake cube
+    - FAKECUBE_NOXWALL: removes the x wall from the fake cube
+    - FAKECUBE_NONXWALL: removes the -x wall from the fake cube
+    - FAKECUBE_NOZWALL: removes the z wall from the fake cube
+    - FAKECUBE_NOMZWALL: removes the -z wall from the fake cube
+    - FAKECUBE_TEXTURE2D: function to sample the fake cube
 license:
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
-  - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FAKECUBE_LIGHT_AMOUNT
