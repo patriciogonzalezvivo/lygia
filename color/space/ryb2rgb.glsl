@@ -23,12 +23,12 @@ vec3 ryb2rgb(vec3 ryb) {
     float max_y = mmax(ryb);
         
     // Get the green out of the yellow & blue
-    float g = min(ryb.g, ryb.b);
+    float g = mmin(ryb.gb);
     vec3 rgb = ryb - vec3(0., g, g);
         
     if (rgb.b > 0. && g > 0.) {
-        rgb.b   *= 2.;
-        g   *= 2.;
+        rgb.b *= 2.;
+        g *= 2.;
     }
 
     // Redistribute the remaining yellow.

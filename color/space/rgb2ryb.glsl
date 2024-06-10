@@ -4,7 +4,7 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: Converts a color from RGB to RYB color space. Based on http://nishitalab.org/user/UEI/publication/Sugita_IWAIT2015.pdf
-use: <vec3> ryb2rgb(<vec3> ryb)
+use: <vec3|float4> ryb2rgb(<vec3|float4> ryb)
 examples:
     - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/color_ryb.frag
 license:
@@ -23,18 +23,18 @@ vec3 rgb2ryb(vec3 rgb) {
     float max_g = mmax(rgb);
 
     // Get the yellow out of the red & green
-    float y = min(rgb.r, rgb.g);
+    float y = mmin(rgb.rg);
     vec3 ryb = rgb - vec3(y, y, 0.);
 
     // If this unfortunate conversion combines blue and green, then cut each in half to preserve the value's maximum range.
     if (ryb.b > 0. && ryb.y > 0.) {
-        ryb.b   *= 0.5;
-        ryb.y   *= 0.5;
+        ryb.b *= .5;
+        ryb.y *= .5;
     }
 
     // Redistribute the remaining green.
-    ryb.b   += ryb.y;
-    ryb.y   += y;
+    ryb.b += ryb.y;
+    ryb.y += y;
 
     // Normalize to values.
     float max_y = mmax(ryb);

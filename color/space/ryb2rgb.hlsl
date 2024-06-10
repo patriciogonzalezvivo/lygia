@@ -16,24 +16,31 @@ license:
 #define FNC_RYB2RGB
 
 float3 ryb2rgb(float3 ryb) {
-    float3 rgb = float3(0.0, 0.0, 0.0);
-    
-    // Remove white component
-    float3 v = ryb - mmin(ryb);
-    
-    // Derive rgb
-    float yb = min(v.y, v.b);
-    rgb.r = v.r + v.y - yb;
-    rgb.g = v.y + (2.0 * yb);
-    rgb.b = 2.0 * (v.b - yb);
-    
-    // Normalize
-    float n = mmax(rgb) / mmax(v);
-    if (n > 0.0)
-        rgb /= n;
-    
-    // Add black
-    return rgb + mmin(1.0 - ryb);
+    // Remove the white from the color
+    float w = mmin(ryb);
+    ryb -= w;
+
+    float max_y = mmax(ryb);
+        
+    // Get the green out of the yellow & blue
+    float g = mmin(ryb.gb);
+    float3 rgb = ryb - float3(0., g, g);
+        
+    if (rgb.b > 0. && g > 0.) {
+        rgb.b *= 2.;
+        g *= 2.;
+    }
+
+    // Redistribute the remaining yellow.
+    rgb.r += rgb.g;
+    rgb.g += g;
+
+    // Normalize to values.
+    float max_g = mmax(rgb);
+    rgb *= (max_g > 0.) ? max_y / max_g : 1.;
+
+    // Add the white back in.        
+    return rgb + w;
 }
 
 float4 ryb2rgb(float4 ryb) { return float4(ryb2rgb(ryb.rgb), ryb.a); }
