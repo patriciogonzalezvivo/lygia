@@ -31,7 +31,6 @@ vec3 zorn(int index) {
     colors[3] = IVORY_BLACK;
 
     index = int(mod(float(index), float(ZORN_TOTAL)));
-
     #if defined(PLATFORM_WEBGL)
     for (int i = 0; i < ZORN_TOTAL; i++)
         if (i == index) return colors[i];
