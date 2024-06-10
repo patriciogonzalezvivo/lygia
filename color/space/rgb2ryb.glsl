@@ -3,8 +3,13 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: Converts a color from RGB to RYB color space. Based on http://nishitalab.org/user/UEI/publication/Sugita_IWAIT2015.pdf
+description: |
+    Converts a color from RGB to RYB color space. 
+    Based on http://nishitalab.org/user/UEI/publication/Sugita_IWAIT2015.pdf 
+    and https://bahamas10.github.io/ryb/assets/ryb.pdf
 use: <vec3|float4> ryb2rgb(<vec3|float4> ryb)
+options:
+    - RYB_HOMOGENEOUS: Use a non-homogeneous version of the conversion. Default is the homogeneous version.
 examples:
     - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/color_ryb.frag
 license:
@@ -18,6 +23,7 @@ license:
 vec3 rgb2ryb(vec3 rgb) {
     // Remove the white from the color
     float w = mmin(rgb);
+    float bl = mmin(1.0 - rgb);
     rgb -= w;
         
     float max_g = mmax(rgb);
@@ -41,7 +47,12 @@ vec3 rgb2ryb(vec3 rgb) {
     ryb *= (max_y > 0.) ? max_g / max_y : 1.;
 
     // Add the white back in.
+
+#ifdef RYB_SMOOTH
+    return ryb + bl;
+#else
     return ryb + w;
+#endif
 }
 
 vec4 rgb2ryb(vec4 rgb) { return vec4(rgb2ryb(rgb.rgb), rgb.a); }
