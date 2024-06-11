@@ -1,5 +1,6 @@
 #include "../../math/mmin.glsl"
 #include "../../math/mmax.glsl"
+#include "../../math/cubicMix.glsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
@@ -17,8 +18,14 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
+#ifndef RYB_LERP 
+#define RYB_LERP(A, B, t) cubicMix(A, B, t)
+#endif
+
 #ifndef FNC_RGB2RYB
 #define FNC_RGB2RYB
+
+#ifdef RYB_FAST
 
 vec3 rgb2ryb(vec3 rgb) {
     // Remove the white from the color
@@ -53,6 +60,28 @@ vec3 rgb2ryb(vec3 rgb) {
     return ryb + bl;
 #endif
 }
+
+#else
+
+vec3 rgb2ryb(vec3 rgb) {
+    const vec3 rgb000 = vec3(1., 1., 1.);       // Black
+    const vec3 rgb100 = vec3(1., 0., 0.);       // Red          
+    const vec3 rgb010 = vec3(0., 1., .483);     // Green
+    const vec3 rgb110 = vec3(0., 1., 0.);       // Yellow
+    const vec3 rgb001 = vec3(0., 0., 1.);       // Blue
+    const vec3 rgb101 = vec3(.309, 0., .469);   // Magenta
+    const vec3 rgb011 = vec3(0., .053, .210);   // Turquoise
+    const vec3 rgb111 = vec3(0., 0., 0.);       // White
+    return RYB_LERP(RYB_LERP(
+        RYB_LERP(rgb000, rgb001, rgb.z),
+        RYB_LERP(rgb010, rgb011, rgb.z),
+        rgb.y), RYB_LERP(
+        RYB_LERP(rgb100, rgb101, rgb.z),
+        RYB_LERP(rgb110, rgb111, rgb.z),
+        rgb.y), rgb.x);
+}
+
+#endif
 
 vec4 rgb2ryb(vec4 rgb) { return vec4(rgb2ryb(rgb.rgb), rgb.a); }
 

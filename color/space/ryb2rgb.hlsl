@@ -1,5 +1,6 @@
 #include "../../math/mmin.hlsl"
 #include "../../math/mmax.hlsl"
+#include "../../math/cubicMix.hlsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
@@ -13,6 +14,10 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
+
+#ifndef RYB_LERP 
+#define RYB_LERP(A, B, t) cubicMix(A, B, t)
+#endif
 
 #ifndef FNC_RYB2RGB
 #define FNC_RYB2RGB
@@ -58,12 +63,12 @@ float3 ryb2rgb(float3 ryb) {
     const float3 ryb101 = float3(.5, 0., .5);       // Violet
     const float3 ryb110 = float3(1., .5, 0.);       // Orange
     const float3 ryb111 = float3(0., 0., 0.);       // Black
-    return lerp(lerp(
-        lerp(ryb000, ryb001, ryb.z),
-        lerp(ryb010, ryb011, ryb.z),
-        ryb.y), lerp(
-        lerp(ryb100, ryb101, ryb.z),
-        lerp(ryb110, ryb111, ryb.z),
+    return RYB_LERP(RYB_LERP(
+        RYB_LERP(ryb000, ryb001, ryb.z),
+        RYB_LERP(ryb010, ryb011, ryb.z),
+        ryb.y), RYB_LERP(
+        RYB_LERP(ryb100, ryb101, ryb.z),
+        RYB_LERP(ryb110, ryb111, ryb.z),
         ryb.y), ryb.x);
 }
 

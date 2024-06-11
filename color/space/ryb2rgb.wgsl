@@ -1,3 +1,5 @@
+#include "../../math/cubicMix.wgsl"
+
 /*
 contributors: Patricio Gonzalez Vivo
 description: Convert from RYB to RGB color space. Based on http://nishitalab.org/user/UEI/publication/Sugita_IWAIT2015.pdf http://vis.computer.org/vis2004/DVD/infovis/papers/gossett.pdf
@@ -10,19 +12,19 @@ license:
 */
 
 fn ryb2rgb(ryb: vec3f) -> vec3f {
-    let ryb000 = vec3f(1., 1., 1.);       // white
-    let ryb001 = vec3f(.163, .373, .6);   // blue
+    let ryb000 = vec3f(1., 1., 1.);       // White
+    let ryb001 = vec3f(.163, .373, .6);   // Blue
     let ryb010 = vec3f(1., 1., 0.);       // Yellow
     let ryb100 = vec3f(1., 0., 0.);       // Red          
     let ryb011 = vec3f(0., .66, .2);      // Green
     let ryb101 = vec3f(.5, 0., .5);       // Violet
     let ryb110 = vec3f(1., .5, 0.);       // Orange
     let ryb111 = vec3f(0., 0., 0.);       // Black
-    return mix(mix(
-        mix(ryb000, ryb001, ryb.z),
-        mix(ryb010, ryb011, ryb.z),
-        ryb.y), mix(
-        mix(ryb100, ryb101, ryb.z),
-        mix(ryb110, ryb111, ryb.z),
+    return cubicMix(cubicMix(
+        cubicMix(ryb000, ryb001, ryb.z),
+        cubicMix(ryb010, ryb011, ryb.z),
+        ryb.y), cubicMix(
+        cubicMix(ryb100, ryb101, ryb.z),
+        cubicMix(ryb110, ryb111, ryb.z),
         ryb.y), ryb.x);
 }
