@@ -7,12 +7,12 @@
 contributors:
     - Bjorn Ottosson
     - Inigo Quiles
-description: "Mix function by Inigo Quiles (https://www.shadertoy.com/view/ttcyRS)\
-    \ \nutilizing Bjorn Ottosso's OkLab color space, which is provide smooth stransitions\
-    \ \nLearn more about it [his article](https://bottosson.github.io/posts/oklab/)\n"
+description: |
+    Mix function by Inigo Quiles (https://www.shadertoy.com/view/ttcyRS) 
+    utilizing Bjorn Ottosso's OkLab color space, which is provide smooth stransitions 
+    Learn more about it [his article](https://bottosson.github.io/posts/oklab/)
 options:
-    - MIXOKLAB_SRGB: by default colA and colB use linear RGB. If you want to use sRGB
-      define this flag
+    - MIXOKLAB_SRGB: by default colA and colB use linear RGB. If you want to use sRGB define this flag
 examples:
     - /shaders/color_mix.frag
 license:
