@@ -1,5 +1,6 @@
 #include "../../math/mmin.wgsl"
 #include "../../math/mmax.wgsl"
+#include "../../math/cubicMix.wgsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
@@ -12,32 +13,20 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-fn rgb2ryb(_rgb: vec3f) -> vec3f {
-    // Remove the white from the color
-    let w = min3(_rgb);
-    let bl = mmin3(1.0 - rgb);
-    let rgb = _rgb - w;
-        
-    let max_g = mmax3(rgb);
-
-    // Get the yellow out of the red & green
-    let y = mmin2(rgb.rg);
-    var ryb = rgb - vec3f(y, y, 0.);
-
-    // If this unfortunate conversion combines blue and green, then cut each in half to preserve the value's maximum range.
-    if (ryb.b > 0. && ryb.y > 0.) {
-        ryb.b *= .5;
-        ryb.y *= .5;
-    }
-
-    // Redistribute the remaining green.
-    ryb.b += ryb.y;
-    ryb.y += y;
-
-    // Normalize to values.
-    let max_y = mmax3(ryb);
-    ryb *= (max_y > 0.) ? max_g / max_y : 1.;
-
-    // Add the white back in.
-    return ryb + bl;
+fn rgb2ryb(rgb: vec3f) -> vec3f {
+    let rgb000 = vec3f(1., 1., 1.);       // Black
+    let rgb100 = vec3f(1., 0., 0.);       // Red          
+    let rgb010 = vec3f(0., 1., .483);     // Green
+    let rgb110 = vec3f(0., 1., 0.);       // Yellow
+    let rgb001 = vec3f(0., 0., 1.);       // Blue
+    let rgb101 = vec3f(.309, 0., .469);   // Magenta
+    let rgb011 = vec3f(0., .053, .210);   // Turquoise
+    let rgb111 = vec3f(0., 0., 0.);       // White
+    return cubeMix3(cubeMix3(
+        cubeMix3(rgb000, rgb001, rgb.z),
+        cubeMix3(rgb010, rgb011, rgb.z),
+        rgb.y), cubeMix3(
+        cubeMix3(rgb100, rgb101, rgb.z),
+        cubeMix3(rgb110, rgb111, rgb.z),
+        rgb.y), rgb.x);
 }
