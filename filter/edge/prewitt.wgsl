@@ -2,11 +2,9 @@
 contributors: Brad Larson
 description: Adapted version of Prewitt edge detection from https://github.com/BradLarson/GPUImage2
 options:
-    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
-      or texture(...))
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - EDGEPREWITT_TYPE: Return type, defaults to float
-    - EDGEPREWITT_SAMPLER_FNC: Function used to sample the input texture, defaults to
-      texture2D(tex,TEX, UV).r
+    - EDGEPREWITT_SAMPLER_FNC: Function used to sample the input texture, defaults to texture2D(tex,TEX, UV).r
 examples:
     - /shaders/filter_edge2D.frag
 license: null
