@@ -13,7 +13,7 @@ use:
     - <vec4> mixRYB(<vec4> colA, <vec4> colB, <vec4> colC, <vec4> colD)
     - <vec3> mixRYB(<vec3> colA, <vec3> colB, <vec3> colC, <vec3> colD, <vec4> p) 
 options:
-    - RYB_SMOOTH: Use smooth interpolation between colors.
+    - RYB_FAST: Use a faster approximation of the RYB space
 examples:
     - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/color_zorn.frag
 license:

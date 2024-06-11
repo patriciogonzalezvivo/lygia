@@ -3,8 +3,13 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: Converts a color from RGB to RYB color space. Based on http://nishitalab.org/user/UEI/publication/Sugita_IWAIT2015.pdf
-use: <float3> ryb2rgb(<float3> ryb)
+description: |
+    Converts a color from RGB to RYB color space. 
+    Based on http://nishitalab.org/user/UEI/publication/Sugita_IWAIT2015.pdf 
+    and https://bahamas10.github.io/ryb/assets/ryb.pdf
+use: <float3|float4> ryb2rgb(<float3|float4> ryb)
+options:
+    - RYB_HOMOGENEOUS: Use a non-homogeneous version of the conversion. Default is the homogeneous version.
 examples:
     - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/color_ryb.frag
 license:
@@ -18,6 +23,7 @@ license:
 float3 rgb2ryb(float3 rgb) {
     // Remove the white from the color
     float w = mmin(rgb);
+    float bl = mmin(1.0 - rgb);
     rgb -= w;
         
     float max_g = mmax(rgb);
@@ -41,7 +47,11 @@ float3 rgb2ryb(float3 rgb) {
     ryb *= (max_y > 0.) ? max_g / max_y : 1.;
 
     // Add the white back in.
+#ifdef RYB_FAST
     return ryb + w;
+#else
+    return ryb + bl;
+#endif
 }
 
 float4 rgb2ryb(float4 rgb) { return float4(rgb2ryb(rgb.rgb), rgb.a); }
