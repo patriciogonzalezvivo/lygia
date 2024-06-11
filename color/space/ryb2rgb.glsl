@@ -1,13 +1,12 @@
 #include "../../math/mmin.glsl"
 #include "../../math/mmax.glsl"
-#include "../../math/cubicMix.glsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: Convert from RYB to RGB color space. Based on http://nishitalab.org/user/UEI/publication/Sugita_IWAIT2015.pdf
+description: Convert from RYB to RGB color space. Based on http://nishitalab.org/user/UEI/publication/Sugita_IWAIT2015.pdf http://vis.computer.org/vis2004/DVD/infovis/papers/gossett.pdf
 use: <vec3|vec4> ryb2rgb(<vec3|vec4> ryb)
 options:
-    - RYB_SMOOTH: Use a non-homogeneous version of the conversion. Default is the homogeneous version.
+    - RYB_FAST: Use a non-homogeneous version of the conversion. Default is the homogeneous version.
 examples:
     - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/color_ryb.frag
 license:
@@ -18,7 +17,7 @@ license:
 #ifndef FNC_RYB2RGB
 #define FNC_RYB2RGB
 
-#ifndef RYB_SMOOTH
+#ifdef RYB_FAST
 
 vec3 ryb2rgb(vec3 ryb) {
     // Remove the white from the color
@@ -51,20 +50,21 @@ vec3 ryb2rgb(vec3 ryb) {
 #else
 
 vec3 ryb2rgb(vec3 ryb) {
-    vec3 rgb = vec3(0.0, 0.0, 0.0);
-    //red
-    vec4 X = cubicMix(vec4(1.0), vec4(0.163, 0.0, 0.5, 0.2), ryb.z);
-    vec2 Y = cubicMix(X.xz, X.yw, ryb.y);
-    rgb.r  = cubicMix(Y.x, Y.y, ryb.x);
-    //green
-    X      = cubicMix(vec4(1.0, 1.0, 0.0, 0.5), vec4(0.373, 0.66, 0.0, 0.094), ryb.z);
-    Y      = cubicMix(X.xz, X.yw, ryb.y);
-    rgb.g  = cubicMix(Y.x, Y.y, ryb.x);
-    //blue
-    X      = cubicMix(vec4(1.0, 0.0, 0.0, 0.0), vec4(0.6, 0.2, 0.5, 0.0), ryb.z);
-    Y      = cubicMix(X.xz, X.yw, ryb.y);
-    rgb.b  = cubicMix(Y.x, Y.y, ryb.x);
-    return rgb;
+    const vec3 ryb000 = vec3(1., 1., 1.);       // white
+    const vec3 ryb001 = vec3(.163, .373, .6);   // blue
+    const vec3 ryb010 = vec3(1., 1., 0.);       // Yellow
+    const vec3 ryb100 = vec3(1., 0., 0.);       // Red          
+    const vec3 ryb011 = vec3(0., .66, .2);      // Green
+    const vec3 ryb101 = vec3(.5, 0., .5);       // Violet
+    const vec3 ryb110 = vec3(1., .5, 0.);       // Orange
+    const vec3 ryb111 = vec3(0., 0., 0.);       // Black
+    return mix(mix(
+        mix(ryb000, ryb001, ryb.z),
+        mix(ryb010, ryb011, ryb.z),
+        ryb.y), mix(
+        mix(ryb100, ryb101, ryb.z),
+        mix(ryb110, ryb111, ryb.z),
+        ryb.y), ryb.x);
 }
 
 #endif

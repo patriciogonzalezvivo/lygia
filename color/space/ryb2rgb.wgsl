@@ -1,6 +1,6 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: Convert from RYB to RGB color space. Based on http://nishitalab.org/user/UEI/publication/Sugita_IWAIT2015.pdf
+description: Convert from RYB to RGB color space. Based on http://nishitalab.org/user/UEI/publication/Sugita_IWAIT2015.pdf http://vis.computer.org/vis2004/DVD/infovis/papers/gossett.pdf
 use: <vec3> ryb2rgb(<vec3> ryb)
 examples:
     - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/color_ryb.frag
@@ -9,30 +9,20 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-fn ryb2rgb(_ryb: vec3f) -> vec3f {
-    // Remove the white from the color
-    let w = min(_ryb.x, min(_ryb.y, _ryb.z);
-    let ryb = _ryb - w;
-
-    let max_y = max(ryb.x, max(ryb.y, ryb.z));
-        
-    // Get the green out of the yellow & blue
-    var g = min(ryb.g, ryb.b);
-    var rgb = ryb - vec3f(0., g, g);
-        
-    if (rgb.b > 0. && g > 0.) {
-        rgb.b *= 2.;
-        g *= 2.;
-    }
-
-    // Redistribute the remaining yellow.
-    rgb.r += rgb.g;
-    rgb.g += g;
-
-    // Normalize to values.
-    let max_g = max(rgb.x, max(rgb.y, rgb.z));
-    rgb *= (max_g > 0.) ? max_y / max_g : 1.;
-
-    // Add the white back in.        
-    return rgb + w;
+fn ryb2rgb(ryb: vec3f) -> vec3f {
+    let ryb000 = vec3f(1., 1., 1.);       // white
+    let ryb001 = vec3f(.163, .373, .6);   // blue
+    let ryb010 = vec3f(1., 1., 0.);       // Yellow
+    let ryb100 = vec3f(1., 0., 0.);       // Red          
+    let ryb011 = vec3f(0., .66, .2);      // Green
+    let ryb101 = vec3f(.5, 0., .5);       // Violet
+    let ryb110 = vec3f(1., .5, 0.);       // Orange
+    let ryb111 = vec3f(0., 0., 0.);       // Black
+    return mix(mix(
+        mix(ryb000, ryb001, ryb.z),
+        mix(ryb010, ryb011, ryb.z),
+        ryb.y), mix(
+        mix(ryb100, ryb101, ryb.z),
+        mix(ryb110, ryb111, ryb.z),
+        ryb.y), ryb.x);
 }
