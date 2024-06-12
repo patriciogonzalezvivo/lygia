@@ -1,8 +1,7 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: 'Jimenez 2014, "Next Generation Post-Processing in Call of Duty" http://advances.realtimerendering.com/s2014/index.html'
-use: <float4|float3|float> interleavedGradientNoise(<float4|float3|float> value, <float>
-  time)
+use: <float4|float3|float> interleavedGradientNoise(<float4|float3|float> value, <float> time)
 options:
     - DITHER_INTERLEAVEDGRADIENTNOISE_ANIMATED
 license:

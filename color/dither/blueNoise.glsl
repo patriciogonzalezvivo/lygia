@@ -6,8 +6,7 @@
 contributors: Patricio Gonzalez Vivo
 description: blue noise dithering
 use:
-    - <vec4|vec3|float> ditherBlueNoise(<vec4|vec3|float> value, <vec2> st, <float>
-    time)
+    - <vec4|vec3|float> ditherBlueNoise(<vec4|vec3|float> value, <vec2> st, <float> time)
     - <vec4|vec3|float> ditherBlueNoise(<vec4|vec3|float> value, <float> time)
 options:
     - SAMPLER_FNC
