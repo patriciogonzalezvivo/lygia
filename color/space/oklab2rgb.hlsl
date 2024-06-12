@@ -2,6 +2,8 @@
 contributors: Bjorn Ottosson (@bjornornorn)
 description: Oklab to linear RGB https://bottosson.github.io/posts/oklab/
 use: <float3\float4> oklab2rgb(<float3|float4> oklab)
+license: 
+    - MIT License (MIT) Copyright (c) 2020 Björn Ottosson
 */
 
 #ifndef MAT_OKLAB2RGB

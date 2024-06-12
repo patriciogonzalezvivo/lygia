@@ -10,13 +10,10 @@ contributors:
 description: Simplex Noise https://github.com/stegu/webgl-noise
 examples:
     - /shaders/generative_snoise.frag
-license: 'Copyright 2021-2023 by Stefan Gustavson and Ian McEwan.
-
-  Published under the terms of the MIT license:
-
-  https://opensource.org/license/mit/
-
-  '
+license: |
+    Copyright 2021-2023 by Stefan Gustavson and Ian McEwan.
+    Published under the terms of the MIT license:
+    https://opensource.org/license/mit/
 */
 
 

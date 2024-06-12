@@ -7,7 +7,7 @@ options:
     - EDGEPREWITT_SAMPLER_FNC: Function used to sample the input texture, defaults to texture2D(tex,TEX, UV).r
 examples:
     - /shaders/filter_edge2D.frag
-license: null
+
 */
 
 fn edgePrewitt(tExample texture_2d<f32>, samp: sampler, uv: vec2f, offset: vec2f) -> vec3f {

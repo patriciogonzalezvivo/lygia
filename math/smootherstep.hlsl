@@ -4,8 +4,7 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: quintic polynomial step function
-use: <float|float2|float3|float4> smoothstep(<float|float2|float3|float4> in, <float|float2|float3|float4>
-  out, <float|float2|float3|float4> value)
+use: <float|float2|float3|float4> smoothstep(<float|float2|float3|float4> in, <float|float2|float3|float4> out, <float|float2|float3|float4> value)
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license

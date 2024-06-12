@@ -1,7 +1,6 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: Raymarching template where it needs to define a float4 raymarchMSap(
-  in float3 pos )
+description: Raymarching template where it needs to define a float4 raymarchMSap( in float3 pos )
 use: <float4> raymarch(<float3> camera, <float2> st)
 options:
     - LIGHT_POSITION: in glslViewer is u_light

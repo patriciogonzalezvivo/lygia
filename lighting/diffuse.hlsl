@@ -5,8 +5,7 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: Calculate diffuse contribution
-use: lightSpot(<float3> _diffuseColor, <float3> _specularColor, <float3> _N, <float3>
-  _V, <float> _NoV, <float> _f0, out <float3> _diffuse, out <float3> _specular)
+use: lightSpot(<float3> _diffuseColor, <float3> _specularColor, <float3> _N, <float3> _V, <float> _NoV, <float> _f0, out <float3> _diffuse, out <float3> _specular)
 options:
     - DIFFUSE_FNC: diffuseOrenNayar, diffuseBurley, diffuseLambert (default)
 license:

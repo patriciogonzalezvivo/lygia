@@ -2,9 +2,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: 'Convert from linear RGB to HSL
-
-  Based on work by Sam Hocevar and Emil Persson'
+description: 'Convert from linear RGB to HSL. Based on work by Sam Hocevar and Emil Persson'
 use: <float3|float4> rgb2hsl(<float3|float4> rgb)
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0

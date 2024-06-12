@@ -7,8 +7,7 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: ScreenSpace Reflections
-use: <float> ssao(<SAMPLER_TYPE> texPosition, <SAMPLER_TYPE> texNormal, vec2 <st>
-  [, <float> radius, float <bias>])
+use: <float> ssao(<SAMPLER_TYPE> texPosition, <SAMPLER_TYPE> texNormal, vec2 <st> [, <float> radius, float <bias>])
 options:
     - SSR_MAX_STEP: number max number of raymarching steps (int)
     - SSR_MAX_DISTANCE: max distance (float)

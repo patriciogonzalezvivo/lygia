@@ -1,7 +1,6 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: 'Physical Hue. Ratio: 1/3 = neon, 1/4 = refracted, 1/5+ = approximate
-  white'
+description: 'Physical Hue. Ratio: 1/3 = neon, 1/4 = refracted, 1/5+ = approximate white'
 use: <float3> hue(<float> hue[, <float> ratio])
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0

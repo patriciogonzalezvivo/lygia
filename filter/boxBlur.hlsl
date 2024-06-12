@@ -7,8 +7,7 @@ use: boxBlur(<SAMPLER_TYPE> texture, <float2> st, <float2> pixel_offset)
 options:
     - BOXBLUR_2D: default to 1D
     - BOXBLUR_ITERATIONS: default 3
-    - SAMPLER_FNC(TEX, UV): optional depending the target version of HLSL (tex2D(...)
-      or texture(...))
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of HLSL (tex2D(...) or texture(...))
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license

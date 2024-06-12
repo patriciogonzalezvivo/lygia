@@ -1,7 +1,6 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: "Converts a LCh to Lab color space. \nNote: LCh is simply Lab but converted\
-    \ to polar coordinates (in degrees).\n"
+description: "Converts a LCh to Lab color space. \nNote: LCh is simply Lab but converted to polar coordinates (in degrees).\n"
 use: <float3|float4> lab2rgb(<float3|float4> color)
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0

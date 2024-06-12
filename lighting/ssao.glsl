@@ -7,8 +7,7 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: ScreenSpace Ambient Occlusion
-use: <float> ssao(<SAMPLER_TYPE> texPosition, <SAMPLER_TYPE> texNormal, vec2 <st>
-  [, <float> radius, float <bias>])
+use: <float> ssao(<SAMPLER_TYPE> texPosition, <SAMPLER_TYPE> texNormal, vec2 <st> [, <float> radius, float <bias>])
 options:
     - SSAO_SAMPLES_NUM: number of half-sphere offsets samples
     - SSAO_SAMPLES_ARRAY: array of weighted vec3 half-sphere offsets

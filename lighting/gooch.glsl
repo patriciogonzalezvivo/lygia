@@ -14,8 +14,7 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: Render with a gooch stylistic shading model
-use: <vec4> gooch(<vec4> albedo, <vec3> normal, <vec3> light, <vec3> view, <float>
-  roughness)
+use: <vec4> gooch(<vec4> albedo, <vec3> normal, <vec3> light, <vec3> view, <float> roughness)
 options:
     - GOOCH_WARM: defualt vec3(0.25, 0.15, 0.0)
     - GOOCH_COLD: defualt vec3(0.0, 0.0, 0.2)

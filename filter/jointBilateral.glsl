@@ -3,13 +3,11 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: 'Joint Bilateral Filter
-
-  This is a joint bilateral filter that uses a 2D gaussian kernel to approximate the
-
-  bilateral filter. It is based on the paper "Fast Bilateral Filtering for the GPU"
-
-  Interesting article about it and their uses: https://bartwronski.com/2019/09/22/local-linear-models-guided-filter/'
+description: |
+    Joint Bilateral Filter
+    This is a joint bilateral filter that uses a 2D gaussian kernel to approximate the
+    bilateral filter. It is based on the paper "Fast Bilateral Filtering for the GPU"
+    Interesting article about it and their uses: https://bartwronski.com/2019/09/22/local-linear-models-guided-filter/
 use: bilateralBlur(<SAMPLER_TYPE> texture, <vec2> st, <vec2> duv)
 options:
     - JOINTBILATERAL_TYPE: defaults to vec4

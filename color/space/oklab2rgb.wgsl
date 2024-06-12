@@ -1,7 +1,8 @@
 /*
 contributors: Bjorn Ottosson (@bjornornorn)
 description: Oklab to linear RGB https://bottosson.github.io/posts/oklab/
-license: null
+license: 
+    - MIT License (MIT) Copyright (c) 2020 Björn Ottosson
 */
 
 const OKLAB2RGB_A : mat3x3<f32>  = mat3x3<f32>(

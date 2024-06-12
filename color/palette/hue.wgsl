@@ -2,8 +2,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: "Physical Hue. \n\nRatio: \n* 1/3 = neon\n* 1/4 = refracted\n* 1/5+ =\
-    \ approximate white\n"
+description: "Physical Hue. \n\nRatio: \n* 1/3 = neon\n* 1/4 = refracted\n* 1/5+ =\ approximate white\n"
 examples:
     - https://raw.githubusercontent.com/eduardfossas/lygia-study-examples/main/color/palette/hue.frag
 license:

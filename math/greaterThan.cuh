@@ -4,8 +4,8 @@
 contributors: [Stefan Gustavson, Ian McEwan]
 description: greaterThan, returns 1 if x > y, 0 otherwise
 use: greaterThan(<float|float2|float3|float4> x, y)
-
 */
+
 #ifndef FNC_GREATERTHAN
 #define FNC_GREATERTHAN
 inline __host__ __device__ float greaterThan(float x, float y) { return step(y, x); }

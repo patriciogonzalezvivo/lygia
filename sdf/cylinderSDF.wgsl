@@ -1,7 +1,7 @@
 /*
 contributors: Inigo Quiles
 description: generate the SDF of a cylinder
-license: null
+
 */
 
 fn cylinderSDF(p: vec3f, h: vec2f) -> f32 {

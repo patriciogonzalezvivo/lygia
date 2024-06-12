@@ -6,7 +6,7 @@ contributors: Patricio Gonzalez Vivo
 description: Daltonize functions based on https://web.archive.org/web/20081014161121/http://www.colorjack.com/labs/colormatrix/ http://www.daltonize.org/search/label/Daltonize
 use: <float3|float4> daltonize(<float3|float4> rgb)
 options:
-    DALTONIZE_FNC: |
+    - DALTONIZE_FNC: |
         daltonizeProtanope, daltonizeProtanopia, daltonizeProtanomaly, daltonizeDeuteranope,
         daltonizeDeuteranopia, daltonizeDeuteranomaly, daltonizeTritanope, daltonizeTritanopia,
         daltonizeTritanomaly, daltonizeAchromatopsia and daltonizeAchromatomaly

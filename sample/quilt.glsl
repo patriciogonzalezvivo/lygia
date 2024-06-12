@@ -8,8 +8,7 @@ use: sampleQuilt(<SAMPLER_TYPE> texture, <vec4> calibration, <vec3> tile, <vec2>
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - SAMPLEQUILT_FLIPSUBP: null
-    - SAMPLEQUILT_SAMPLER_FNC(POS_UV): Function used to sample into the normal map texture,
-      defaults to texture2D(tex,POS_UV)
+    - SAMPLEQUILT_SAMPLER_FNC(POS_UV): Function used to sample into the normal map texture, defaults to texture2D(tex,POS_UV)
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license

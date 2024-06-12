@@ -1,22 +1,21 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: 'Basic default color pigments.
+description: |
+    Basic default color pigments. For specific manufacturer pigments you can use the following:
 
-  For specific manufacturer pigments you can use the following:
+        - winsor_oil
 
-    - winsor_oil
+        - rembrandt_oil
 
-    - rembrandt_oil
+        - gamblin_oil
 
-    - gamblin_oil
+        - winsor_acrylics
 
-    - winsor_acrylics
+        - golden_acrylics
 
-    - golden_acrylics
+        - liquitex_acrylics
 
-    - liquitex_acrylics
-
-    - winsor_gouache'
+        - winsor_gouache
 examples:
     - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/color_pigments.frag
 license:

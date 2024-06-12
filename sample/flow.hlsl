@@ -3,10 +3,8 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: sample a texture with a looping flow animation, using a direction to
-  push, an elapse time and a cycle.
-use: sampleFlow(<SAMPLER_TYPE> tex, <float2> st, <float2> dir, <float> time, <float>
-  cycle)
+description: sample a texture with a looping flow animation, using a direction to push, an elapse time and a cycle.
+use: sampleFlow(<SAMPLER_TYPE> tex, <float2> st, <float2> dir, <float> time, <float> cycle)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 license:

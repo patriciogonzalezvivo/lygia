@@ -17,8 +17,7 @@ description: Simple PBR shading model
 use: <float4> pbr( <Material> _material )
 options:
     - DIFFUSE_FNC: diffuseOrenNayar, diffuseBurley, diffuseLambert (default)
-    - SPECULAR_FNC: specularGaussian, specularBeckmann, specularCookTorrance (default),
-      specularPhongRoughness, specularBlinnPhongRoughnes (default on mobile)
+    - SPECULAR_FNC: specularGaussian, specularBeckmann, specularCookTorrance (default), specularPhongRoughness, specularBlinnPhongRoughnes (default on mobile)
     - LIGHT_POSITION: in hlslViewer is u_light
     - LIGHT_COLOR in hlslViewer is u_lightColor
     - CAMERA_POSITION: in hlslViewer is u_camera

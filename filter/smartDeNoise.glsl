@@ -6,7 +6,6 @@ description: |
     * K factor sigma coefficient
     * Edge sharpening threshold
     More about it at https://github.com/BrutPitt/glslSmartDeNoise/
-
 use: <vec4> smartDeNoise(<sampler2D> tex, <vec2> uv, <vec2> pixel, <float> sigma, <float> kSigma, <float> threshold)
 options:
     - SMARTDENOISE_TYPE

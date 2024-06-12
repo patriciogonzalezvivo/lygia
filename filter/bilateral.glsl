@@ -4,21 +4,13 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: 'This is a two dimensioanl Bilateral filter (for a single pass) It''s
-  a non-linear, edge-preserving, and noise-reducing
-
-  smoothing filter for images. It replaces the intensity of each pixel with a weighted
-  average of
-
-  intensity values from nearby pixels. This filter is very effective at noise removal
-  while
-
-  preserving edges. It is very similar to the Gaussian blur, but it also takes into
-  account the
-
-  intensity differences between a pixel and its neighbors. This is what makes it particularly
-
-  effective at noise removal while preserving edges.'
+description: |
+    This is a two dimensioanl Bilateral filter (for a single pass) It's a non-linear, edge-preserving, and noise-reducing
+    smoothing filter for images. It replaces the intensity of each pixel with a weighted average of
+    intensity values from nearby pixels. This filter is very effective at noise removal while
+    preserving edges. It is very similar to the Gaussian blur, but it also takes into account the
+    intensity differences between a pixel and its neighbors. This is what makes it particularly
+    effective at noise removal while preserving edges.
 use: bilateral(<SAMPLER_TYPE> texture, <vec2> st, <vec2> duv [, <int> kernelSize]])
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))

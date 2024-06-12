@@ -1,8 +1,8 @@
 /*
 contributors: Johan Ismael
 description: |
-  Color output range adjustment similar to Levels adjusment in Photoshop
-  Adapted from Romain Dura (http://mouaif.wordpress.com/?p=94)
+    Color output range adjustment similar to Levels adjusment in Photoshop
+    Adapted from Romain Dura (http://mouaif.wordpress.com/?p=94)
 use: levelsOutputRange(<float3|float4> color, float minOutput, float maxOutput)
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0

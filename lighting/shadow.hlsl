@@ -4,8 +4,7 @@
 contributors: Patricio Gonzalez Vivo
 description: Sample shadow map using PCF
 use:
-    - <float> sampleShadowPCF(<SAMPLER_TYPE> depths, <float2> size, <float2> uv, <float>
-    compare)
+    - <float> sampleShadowPCF(<SAMPLER_TYPE> depths, <float2> size, <float2> uv, <float> compare)
     - <float> sampleShadowPCF(<float3> lightcoord)
 options:
     - SHADOWMAP_BIAS

@@ -3,10 +3,9 @@
 
 /*
 contributors: Bjorn Ottosson (@bjornornorn)
-description: 'sRGB to OKLab https://bottosson.github.io/posts/oklab/
-
-  '
-license: null
+description: 'sRGB to OKLab https://bottosson.github.io/posts/oklab/'
+license: 
+    - MIT License (MIT) Copyright (c) 2020 Björn Ottosson
 */
 
 
