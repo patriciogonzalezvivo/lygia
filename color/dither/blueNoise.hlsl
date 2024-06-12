@@ -4,8 +4,7 @@
 contributors: Patricio Gonzalez Vivo
 description: blue noise dithering
 use:
-    - <float4|float3|float> ditherBlueNoise(<float4|float3|float> value, <float2> fragcoord,
-    <float> time)
+    - <float4|float3|float> ditherBlueNoise(<float4|float3|float> value, <float2> fragcoord, <float> time)
     - <float4|float3|float> ditherBlueNoise(<float4|float3|float> value, <float> time)
 options:
     - SAMPLER_FNC

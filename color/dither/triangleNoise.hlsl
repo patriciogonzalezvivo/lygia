@@ -2,8 +2,7 @@
 contributors: Patricio Gonzalez Vivo
 description: "2016 Banding in Games: A Noisy Rant"
 use:
-    - <float4|float3|float> ditherTriangleNoise(<float4|float3|float> value, <float2>
-    fragcoord, <float> time)
+    - <float4|float3|float> ditherTriangleNoise(<float4|float3|float> value, <float2> fragcoord, <float> time)
     - <float4|float3|float> ditherTriangleNoise(<float4|float3|float> value, <float>
     time)
 license:
