@@ -1,6 +1,6 @@
 #include "../math/cubic.glsl"
 #include "../math/quintic.glsl"
-#include "../sample.glsl"
+#include "../sampler.glsl"
 
 /*
 contributors: Inigo Quiles

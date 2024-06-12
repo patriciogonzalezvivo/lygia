@@ -1,6 +1,6 @@
 #include "../color/space/linear2gamma.glsl"
 #include "../color/space/gamma2linear.glsl"
-#include "../sample.glsl"
+#include "../sampler.glsl"
 
 /*
 contributors:
@@ -12,8 +12,7 @@ options:
     - FIBONACCIBOKEH_TYPE: null
     - FIBONACCIBOKEH_MAXSAMPLES: null
     - FIBONACCIBOKEH_SAMPLER_FNC(UV): null
-    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
-      or texture(...))
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license

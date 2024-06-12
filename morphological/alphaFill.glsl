@@ -1,4 +1,4 @@
-#include "../sample.glsl"
+#include "../sampler.glsl"
 #include "../math/const.glsl"
 
 /*
@@ -6,8 +6,7 @@ contributors: Patricio Gonzalez Vivo
 description: fill alpha with edge colors
 use: <vec4> fillAlpha(<SAMPLER_TYPE> texture, <vec2> st, <vec2> pixel, <int> passes)
 options:
-    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
-      or texture(...))
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - ALPHAFILL_RADIUS
 examples:
     - /shaders/morphological_alphaFill.frag

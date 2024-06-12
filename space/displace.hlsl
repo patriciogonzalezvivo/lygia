@@ -1,5 +1,5 @@
 #include "../lighting/raymarch/camera.hlsl"
-#include "../sample.hlsl"
+#include "../sampler.hlsl"
 
 /*
 contributors: Patricio Gonzalez Vivo

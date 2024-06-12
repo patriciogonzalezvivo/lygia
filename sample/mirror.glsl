@@ -1,4 +1,4 @@
-#include "../sample.glsl"
+#include "../sampler.glsl"
 #include "../math/mirror.glsl"
 
 /*

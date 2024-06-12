@@ -1,13 +1,12 @@
 #include "../math/const.glsl"
-#include "../sample.glsl"
+#include "../sampler.glsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
 description: Pincushion distortion
 use: barrel(SAMPLER_TYPE tex, <vec2> st [, <vec2|float> distance])
 options:
-    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
-      or texture(...))
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - PINCUSHION_TYPE: return type, defaults to vec3
     - PINCUSHION_SAMPLER_FNC: function used to sample the input texture, defaults to
       texture2D(TEX, UV).rgb

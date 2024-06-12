@@ -2,7 +2,7 @@
 #include "../space/view2screenPosition.glsl"
 #include "../sdf/lineSDF.glsl"
 #include "../sdf/planeSDF.glsl"
-#include "../sample.glsl"
+#include "../sampler.glsl"
 
 /*
 contributors: Patricio Gonzalez Vivo

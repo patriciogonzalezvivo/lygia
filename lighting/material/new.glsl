@@ -10,7 +10,7 @@
 #include "../material.glsl"
 // #include "../shadow.glsl"
 #include "../ior.glsl"
-#include "../../sample.glsl"
+#include "../../sampler.glsl"
 
 /*
 contributors: Patricio Gonzalez Vivo

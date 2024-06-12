@@ -1,12 +1,11 @@
-#include "../sample.glsl"
+#include "../sampler.glsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
 description: sample derrivatives
 use: sampleDerivative(<SAMPLER_TYPE> tex, <vec2> st)
 options:
-    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (tex2D(...)
-      or texture(...))
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (tex2D(...) or texture(...))
     - USE_DERIVATIVES
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0

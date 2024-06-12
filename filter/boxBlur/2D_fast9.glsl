@@ -1,12 +1,11 @@
-#include "../../sample.glsl"
+#include "../../sampler.glsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
 description: Simple two dimentional box blur, so can be apply in a single pass
 use: boxBlur1D_fast9(<SAMPLER_TYPE> texture, <vec2> st, <vec2> pixel_direction)
 options:
-    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
-      or texture(...))
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - BOXBLUR2D_FAST9_TYPE: Default is `vec4`
     - BOXBLUR2D_FAST9_SAMPLER_FNC(TEX, UV): Default is `texture2D(tex, TEX, UV)`
 examples:

@@ -1,4 +1,4 @@
-#include "../sample.glsl"
+#include "../sampler.glsl"
 /*
 contributors: Alexander Griffis 
 description: |

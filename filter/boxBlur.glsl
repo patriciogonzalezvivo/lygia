@@ -1,4 +1,4 @@
-#include "../sample.glsl"
+#include "../sampler.glsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
@@ -11,8 +11,7 @@ use: boxBlur(<SAMPLER_TYPE> texture, <vec2> st, <vec2> pixel_offset)
 options:
     - BOXBLUR_2D: default to 1D
     - BOXBLUR_ITERATIONS: default 3
-    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
-      or texture(...))
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 examples:
     - /shaders/filter_boxBlur2D.frag
 license:

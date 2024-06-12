@@ -1,4 +1,4 @@
-#include "../sample.glsl"
+#include "../sampler.glsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
@@ -11,8 +11,7 @@ options:
     - RADIALBLUR_STRENGTH: Default 0.125
     - RADIALBLUR_TYPE: Default `vec4`
     - RADIALBLUR_SAMPLER_FNC(TEX, UV): Default `texture2D(tex, TEX, UV)`
-    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
-      or texture(...))
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 examples:
     - /shaders/filter_radialBlur2D.frag
 license:

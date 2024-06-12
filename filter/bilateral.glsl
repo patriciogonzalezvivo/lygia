@@ -21,8 +21,7 @@ description: 'This is a two dimensioanl Bilateral filter (for a single pass) It'
   effective at noise removal while preserving edges.'
 use: bilateral(<SAMPLER_TYPE> texture, <vec2> st, <vec2> duv [, <int> kernelSize]])
 options:
-    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
-      or texture(...))
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - BILATERAL_TYPE: default is vec3
     - BILATERAL_SAMPLER_FNC(TEX, UV): default texture2D(TEX, UV)
     - BILATERAL_LUMA(RGB): default rgb2luma

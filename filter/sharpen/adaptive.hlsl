@@ -1,5 +1,5 @@
 #include "../../math/mmax.hlsl"
-#include "../../sample.hlsl"
+#include "../../sampler.hlsl"
 
 /*
 contributors: bacondither

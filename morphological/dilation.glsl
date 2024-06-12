@@ -1,4 +1,4 @@
-#include "../sample.glsl"
+#include "../sampler.glsl"
 #include "../math/saturate.glsl"
 #include "../math/sum.glsl"
 
@@ -8,8 +8,7 @@ description: "morphological dilation operation. Based on: \n    https://lettier.
     \    https://www.shadertoy.com/view/WsyXWc\n"
 use: dilation(<SAMPLER_TYPE> texture, <float2> st, <float2> pixels_scale, <int> passes)
 options:
-    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
-      or texture(...))
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - DILATION_TYPE
     - DILATION_SAMPLE_FNC(TEX, UV)
 license:

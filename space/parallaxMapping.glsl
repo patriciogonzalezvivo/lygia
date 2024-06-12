@@ -1,12 +1,11 @@
-#include "../sample.glsl"
+#include "../sampler.glsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
 description: get parallax mapping coordinates
 use: parallaxMapping(<SAMPLER_TYPE> tex, <vec3> V, <vec2> T, <float> parallaxHeight)
 options:
-    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
-      or texture(...))
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - PARALLAXMAPPING_FNC()
     - PARALLAXMAPPING_SAMPLER_FNC(UV)
     - PARALLAXMAPPING_SCALE

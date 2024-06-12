@@ -1,7 +1,7 @@
 #include "../space/xyz2equirect.glsl"
 #include "../generative/random.glsl"
 #include "../generative/srandom.glsl"
-#include "../sample.glsl"
+#include "../sampler.glsl"
 
 #include "../color/space/linear2gamma.glsl"
 #include "../color/space/gamma2linear.glsl"
@@ -10,8 +10,7 @@ contributors: Patricio Gonzalez Vivo
 description: sample an equirect texture as it was a cubemap
 use: sampleEquirect(<SAMPLER_TYPE> texture, <vec3> dir)
 options:
-    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
-      or texture(...))
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - SAMPLEEQUIRECT_ITERATIONS: null
     - SAMPLEEQUIRECT_FLIP_Y
 license:

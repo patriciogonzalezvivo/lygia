@@ -1,4 +1,4 @@
-#include "../../sample.hlsl"
+#include "../../sampler.hlsl"
 
 /*
 function: gaussianBlur1D_fast13

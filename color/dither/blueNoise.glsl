@@ -1,4 +1,4 @@
-#include "../../sample.glsl"
+#include "../../sampler.glsl"
 #include "../../math/decimate.glsl"
 #include "../../math/saturate.glsl"
 

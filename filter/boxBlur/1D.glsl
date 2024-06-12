@@ -1,12 +1,11 @@
-#include "../../sample.glsl"
+#include "../../sampler.glsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
 description: Simple one dimentional box blur, to be applied in two passes
 use: boxBlur1D(<SAMPLER_TYPE> texture, <vec2> st, <vec2> pixel_offset, <int> kernelSize)
 options:
-    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
-      or texture(...))
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - BOXBLUR1D_TYPE: default is vec4
     - BOXBLUR1D_SAMPLER_FNC(TEX, UV): default texture2D(tex, TEX, UV)
     - BOXBLUR1D_KERNELSIZE: Use only for WebGL 1.0 and OpenGL ES 2.0 . For example RaspberryPis

@@ -1,4 +1,4 @@
-#include "../sample.glsl"
+#include "../sampler.glsl"
 #include "../color/space/rgb2hue.glsl"
 
 /*

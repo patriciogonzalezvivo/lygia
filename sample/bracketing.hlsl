@@ -1,7 +1,7 @@
 #include "../space/rotate.hlsl"
 #include "../space/braketing.hlsl"
 
-#include "../sample.hlsl"
+#include "../sampler.hlsl"
 
 /*
 contributors: Huw Bowles
