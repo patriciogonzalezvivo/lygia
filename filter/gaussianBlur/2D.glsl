@@ -7,8 +7,7 @@ description: Two dimension Gaussian Blur to be applied in only one passes
 use: gaussianBlur2D(<SAMPLER_TYPE> texture, <vec2> st, <vec2> pixel_direction , const
   int kernelSize)
 options:
-    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
-      or texture(...))
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - GAUSSIANBLUR2D_TYPE: Default `vec4`
     - GAUSSIANBLUR2D_SAMPLER_FNC(TEX, UV): Default `texture2D(tex, TEX, UV)`
     - GAUSSIANBLUR2D_KERNELSIZE: Use only for WebGL 1.0 and OpenGL ES 2.0 . For example

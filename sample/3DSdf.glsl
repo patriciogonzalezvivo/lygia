@@ -8,8 +8,7 @@ contributors: Patricio Gonzalez Vivo
 description: Use a 2D texture as to encode a 3D SDF (Signed Distance Field) function
 use: <vecSAMPLE3DSDF_TYPE4> sample3DSdf(in <SAMPLER_TYPE> lut, in <vec3> xyz)
 options:
-    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
-      or texture(...))
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - SAMPLE_2DCUBE_CELL_SIZE
     - SAMPLE_2DCUBE_CELLS_PER_SIDE: default 8
     - SAMPLE_2DCUBE_FNC

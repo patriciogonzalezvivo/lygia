@@ -1,5 +1,5 @@
 #include "../../math/saturate.glsl"
-#include "../../sample.glsl"
+#include "../../sampler.glsl"
 
 /*
 contributors: deus0ww

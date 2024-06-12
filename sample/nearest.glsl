@@ -1,5 +1,5 @@
 #include "../space/nearest.glsl"
-#include "../sample.glsl"
+#include "../sampler.glsl"
 
 /*
 contributors: Patricio Gonzalez Vivo

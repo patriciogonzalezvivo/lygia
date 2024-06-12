@@ -7,8 +7,7 @@ description: One dimension Gaussian Blur to be applied in two passes
 use: gaussianBlur1D(<SAMPLER_TYPE> texture, <vec2> st, <vec2> pixel_direction , const
   int kernelSize)
 options:
-    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
-      or texture(...))
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - GAUSSIANBLUR1D_TYPE: null
     - GAUSSIANBLUR1D_SAMPLER_FNC(TEX, UV): null
 license:

@@ -9,8 +9,7 @@ contributors: Patricio Gonzalez Vivo
 description: sample a texture and dither using a 8x8 Bayer matrix
 use: <vec3> ditherBayer(<SAMPLER_TYPE> tex, <vec2> st, <vec2> resolution)
 options:
-    - DITHERBAKER_LUT(COLOR): function that returns a vec3 with the color to use for
-      the dithering
+    - DITHERBAKER_LUT(COLOR): function that returns a vec3 with the color to use for the dithering
 examples:
     - /shaders/color_dither_bayer.frag
 license:

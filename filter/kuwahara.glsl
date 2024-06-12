@@ -1,4 +1,4 @@
-#include "../sample.glsl"
+#include "../sampler.glsl"
 
 /*
 contributors: [Brad Larson, Ben Cochran, Hugues Lismonde, Keitaroh Kobayashi, Alaric Cole, Matthew Clark, Jacob Gundersen, Chris Williams.]

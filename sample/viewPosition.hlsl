@@ -1,19 +1,16 @@
 #include "../space/depth2viewZ.hlsl"
 #include "../space/screen2viewPosition.hlsl"
-#include "../sample.hlsl"
+#include "../sampler.hlsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
 description: sampler the view Positiong from depthmap texture
-use: <float4> sampleViewPosition(<SAMPLER_TYPE> texDepth, <float2> st [, <float> near,
-  <float> far])
+use: <float4> sampleViewPosition(<SAMPLER_TYPE> texDepth, <float2> st [, <float> near, <float> far])
 options:
-    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
-      or texture(...))
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - CAMERA_NEAR_CLIP: required
     - CAMERA_FAR_CLIP: required
-    - CAMERA_ORTHOGRAPHIC_PROJECTION, if it's not present is consider a PERECPECTIVE
-    camera
+    - CAMERA_ORTHOGRAPHIC_PROJECTION, if it's not present is consider a PERECPECTIVE camera
     - CAMERA_PROJECTION_MATRIX: float4x4 matrix with camera projection
     - INVERSE_CAMERA_PROJECTION_MATRIX: float4x4 matrix with the inverse camara projection
 license:

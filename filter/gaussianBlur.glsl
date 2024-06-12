@@ -1,4 +1,4 @@
-#include "../sample.glsl"
+#include "../sampler.glsl"
 
 /*
 contributors:
@@ -10,8 +10,7 @@ use: gaussianBlur(<SAMPLER_TYPE> texture, <vec2> st, <vec2> pixel_direction [, c
 options:
     - GAUSSIANBLUR_AMOUNT: gaussianBlur5 gaussianBlur9 gaussianBlur13
     - GAUSSIANBLUR_2D: default to 1D
-    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
-      or texture(...))
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 examples:
     - /shaders/filter_gaussianBlur2D.frag
 license:

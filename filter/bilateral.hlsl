@@ -40,8 +40,7 @@ description: 'The bilateral filter is a non-linear filter, which means that the 
   slightly larger than the radius of the neighborhood of the pixel.'
 use: bilateral(<SAMPLER_TYPE> texture, <float2> st, <float2> duv)
 options:
-    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
-      or texture(...))
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - BILATERAL_AMOUNT
     - BILATERAL_TYPE
     - BILATERAL_SAMPLER_FNC

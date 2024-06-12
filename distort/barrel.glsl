@@ -1,13 +1,12 @@
 #include "../math/lengthSq.glsl"
-#include "../sample.glsl"
+#include "../sampler.glsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
 description: Barrel distortion
 use: barrel(SAMPLER_TYPE tex, <vec2> st [, <vec2|float> sdf])
 options:
-    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
-      or texture(...))
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - BARREL_DISTANCE: function used to shape the distortion, defaults to radial shape
       with lengthSq
     - BARREL_TYPE: return type, defaults to vec3

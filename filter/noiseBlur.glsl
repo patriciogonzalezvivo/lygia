@@ -1,5 +1,5 @@
 #include "../math/const.glsl"
-#include "../sample.glsl"
+#include "../sampler.glsl"
 #include "../sample/nearest.glsl"
 
 #include "../generative/random.glsl"
@@ -16,8 +16,7 @@ options:
     - NOISEBLUR_RANDOM23_FNC(UV): defaults to random2(UV)
     - NOISEBLUR_SAMPLER_FNC(UV): defualts to texture2D(tex, UV).rgb
     - NOISEBLUR_SAMPLES: default to 4
-    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
-      or texture(...))
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 examples:
     - /shaders/filter_noiseBlur2D.frag
 license:

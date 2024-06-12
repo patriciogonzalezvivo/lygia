@@ -1,5 +1,5 @@
 #include "../math/lengthSq.hlsl"
-#include "../sample.hlsl"
+#include "../sampler.hlsl"
 
 /*
 contributors:

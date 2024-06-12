@@ -1,4 +1,4 @@
-#include "../sample.hlsl"
+#include "../sampler.hlsl"
 #include "../math/saturate.hlsl"
 #include "../math/sum.hlsl"
 

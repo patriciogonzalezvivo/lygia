@@ -18,7 +18,7 @@ license: |
     All rights reserved.
 */
 
-#include "../sample.glsl"
+#include "../sampler.glsl"
 #include "../math/const.glsl"
 
 #ifndef SMARTDENOISE_TYPE

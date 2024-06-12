@@ -1,11 +1,10 @@
 #include "../space/sprite.hlsl"
-#include "../sample.hlsl"
+#include "../sampler.hlsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
 description: sample a frame on a sprite sheet
-use: <SAMPLESPRITE_TYPE> sampleSprite(<SAMPLER_TYPE >tex, <float2> st, <float2> grid,
-  <float> frame)
+use: <SAMPLESPRITE_TYPE> sampleSprite(<SAMPLER_TYPE >tex, <float2> st, <float2> grid, <float> frame)
 options:
     - SAMPLER_FNC(TEX, UV)
     - SAMPLESPRITE_TYPE: float4

@@ -2,7 +2,7 @@
 #include "../generative/pnoise.hlsl"
 #include "../color/luma.hlsl"
 #include "../color/blend/softLight.hlsl"
-#include "../sample.hlsl"
+#include "../sampler.hlsl"
 
 /*
 contributors: Matt DesLauriers

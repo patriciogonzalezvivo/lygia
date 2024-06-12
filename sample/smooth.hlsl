@@ -1,6 +1,6 @@
 #include "../math/cubic.hlsl"
 #include "../math/quintic.hlsl"
-#include "../sample.hlsl"
+#include "../sampler.hlsl"
 
 /*
 contributors: Inigo Quiles

@@ -1,4 +1,4 @@
-#include "../sample.hlsl"
+#include "../sampler.hlsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
@@ -9,8 +9,7 @@ options:
     - LAPLACIAN_TYPE: Return type, defaults to float
     - LAPLACIAN_SAMPLER_FNC: Function used to sample the input texture, defaults to
       texture2D(tex,TEX, UV).r
-    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
-      or texture(...))
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license

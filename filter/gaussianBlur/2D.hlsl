@@ -1,4 +1,4 @@
-#include "../../sample.hlsl"
+#include "../../sampler.hlsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
@@ -6,8 +6,7 @@ description: Two dimension Gaussian Blur to be applied in only one passes
 use: gaussianBlur2D(<SAMPLER_TYPE> texture, <float2> st, <float2> pixel_direction
   , const int kernelSize)
 options:
-    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
-      or texture(...))
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - GAUSSIANBLUR2D_TYPE: Default `float4`
     - GAUSSIANBLUR2D_SAMPLER_FNC(TEX, UV): Default `texture2D(tex, TEX, UV)`
     - GAUSSIANBLUR2D_KERNELSIZE: Use only for WebGL 1.0 and OpenGL ES 2.0 . For example

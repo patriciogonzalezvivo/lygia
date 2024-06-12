@@ -1,5 +1,5 @@
 #include "../../math/absi.glsl"
-#include "../../sample.glsl"
+#include "../../sampler.glsl"
 
 /*
 contributors:  [Lingdong Huang, Patricio Gonzalez Vivo]

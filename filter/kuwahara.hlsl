@@ -1,4 +1,4 @@
-#include "../sample.hlsl"
+#include "../sampler.hlsl"
 
 /*
 contributors: [Brad Larson, Ben Cochran, Hugues Lismonde, Keitaroh Kobayashi, Alaric Cole, Matthew Clark, Jacob Gundersen, Chris Williams.]

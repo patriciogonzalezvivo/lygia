@@ -1,7 +1,7 @@
 #include "../math/saturate.glsl"
 #include "../space/linearizeDepth.glsl"
 #include "../space/depth2viewZ.glsl"
-#include "../sample.glsl"
+#include "../sampler.glsl"
 #include "../generative/random.glsl"
 
 /*
@@ -19,8 +19,7 @@ options:
     - CAMERA_PROJECTION_MATRIX: camera projection mat4 matrix
     - CAMERA_NEAR_CLIP: required for depth only SSAO
     - CAMERA_FAR_CLIP: required for depth only SSAO
-    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
-      or texture(...))
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license

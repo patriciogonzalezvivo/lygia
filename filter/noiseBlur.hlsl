@@ -8,7 +8,7 @@
 #endif
 #include "../generative/random.hlsl"
 
-#include "../sample.hlsl"
+#include "../sampler.hlsl"
 
 /*
 contributors:

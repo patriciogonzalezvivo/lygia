@@ -1,4 +1,4 @@
-#include "../sample.hlsl"
+#include "../sampler.hlsl"
 
 /*
 contributors:
@@ -7,8 +7,7 @@ contributors:
 description: Samples multiple times a texture in the specified direction
 use: stretch(<SAMPLER_TYPE> tex, <float2> st, <float2> direction [, int samples])
 options:
-    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...)
-      or texture(...))
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - STRETCH_SAMPLES: number of samples taken, defaults to 20
     - STRETCH_TYPE: return type, defauls to float4
     - STRETCH_SAMPLER_FNC(TEX, UV): function used to sample the input texture, defaults
