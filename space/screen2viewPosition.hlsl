@@ -3,8 +3,7 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: derive view surface position from screen coordinates and depth
-use: <float3> screen2viewPosition( const in <float2> screenPosition, const in <float>
-  depth, const in <float> viewZ )
+use: <float3> screen2viewPosition( const in <float2> screenPosition, const in <float> depth, const in <float> viewZ )
 options:
     - CAMERA_PROJECTION_MATRIX: float4x4 matrix with camera projection
     - INVERSE_CAMERA_PROJECTION_MATRIX: float4x4 matrix with the inverse camara projection
