@@ -3,7 +3,6 @@
 /*
 contributors: Hugh Kennedy (https://github.com/hughsk)
 description: Get the luminosity of a color. From https://github.com/hughsk/glsl-luma/blob/master/index.glsl
-license: null
 */
 
 
