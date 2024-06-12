@@ -15,8 +15,8 @@ options:
     - MIXOKLAB_SRGB: by default colA and colB use linear RGB. If you want to use sRGB define this flag
 examples:
     - /shaders/color_mix.frag
-license:
-    - "MIT License (MIT) Copyright (c) 2020 Bj\xF6rn Ottosson"
+license: 
+    - MIT License (MIT) Copyright (c) 2020 Björn Ottosson
     - MIT License (MIT) Copyright (c) 2020 Inigo Quilez
 */
 

@@ -2,10 +2,8 @@
 
 /*
 contributors: Inigo Quiles
-description: 'Convert from HSV to linear RGB
+description: 'Convert from HSV to linear RGB'
 
-  '
-license: null
 */
 
 

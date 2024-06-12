@@ -3,9 +3,8 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: 'Converts a Lab color to RGB color space.
-
-  https://en.wikipedia.org/wiki/CIELAB_color_space'
+description: |
+    Converts a Lab color to RGB color space. https://en.wikipedia.org/wiki/CIELAB_color_space
 use: <float3|float4> lab2srgb(<float3|float4> color)
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0

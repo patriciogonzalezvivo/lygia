@@ -3,8 +3,8 @@ contributors: Patricio Gonzalez Vivo
 description: Return the spherical harmonic value facing a normal direction
 use: sphericalHarmonics( <float3> normal)
 options:
-  SPHERICALHARMONICS_BANDS: 2 for RaspberryPi and WebGL for the rest is 3
-  SCENE_SH_ARRAY: in GlslViewer is u_SH
+        SPHERICALHARMONICS_BANDS: 2 for RaspberryPi and WebGL for the rest is 3
+        SCENE_SH_ARRAY: in GlslViewer is u_SH
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license

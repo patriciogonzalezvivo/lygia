@@ -1,8 +1,6 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: 'Converts a linear RGB color to XYZ color space.
-
-  Based on http://www.brucelindbloom.com/index.html?Eqn_RGB_XYZ_Matrix.html'
+description: 'Converts a linear RGB color to XYZ color space. Based on http://www.brucelindbloom.com/index.html?Eqn_RGB_XYZ_Matrix.html'
 use: <vec3|vec4> rgb2xyz(<vec3|vec4> rgb)
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0

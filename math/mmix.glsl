@@ -1,8 +1,7 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: expands mix to linearly mix more than two values
-use: <float|vec2|vec3|vec4> mmix(<float|vec2|vec3|vec4> a, <float|vec2|vec3|vec4>
-  b, <float|vec2|vec3|vec4> c [, <float|vec2|vec3|vec4> d], <float> pct)
+use: <float|vec2|vec3|vec4> mmix(<float|vec2|vec3|vec4> a, <float|vec2|vec3|vec4> b, <float|vec2|vec3|vec4> c [, <float|vec2|vec3|vec4> d], <float> pct)
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license

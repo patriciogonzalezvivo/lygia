@@ -1,7 +1,7 @@
 /*
 contributors: Inigo Quiles
 description: generate the SDF of a box
-license: null
+
 */
 
 fn boxSDF( p: vec3f, b: vec3f ) -> f32 {

@@ -2,8 +2,8 @@
 /*
 contributors: Johan Ismael
 description: |
-  Color gamma correction similar to Levels adjusment in Photoshop
-  Adapted from Romain Dura (http://mouaif.wordpress.com/?p=94)
+    Color gamma correction similar to Levels adjusment in Photoshop
+    Adapted from Romain Dura (http://mouaif.wordpress.com/?p=94)
 use: levelsGamma(<float3|float4> color, <float|float3> gamma)
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0

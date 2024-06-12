@@ -2,10 +2,8 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: Make a radial blur, with dir as the direction to the center and strength
-  as the amount
-use: radialBlur(<SAMPLER_TYPE> texture, <float2> st, <float2> dir [, <float> strength]
-  )
+description: Make a radial blur, with dir as the direction to the center and strength as the amount
+use: radialBlur(<SAMPLER_TYPE> texture, <float2> st, <float2> dir [, <float> strength])
 options:
     - RADIALBLUR_KERNELSIZE: Default 64
     - RADIALBLUR_STRENGTH: Default 0.125

@@ -7,14 +7,12 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: ScreenSpace Reflections
-use: <float> ssao(<SAMPLER_TYPE> texPosition, <SAMPLER_TYPE> texNormal, vec2 <st>
-  [, <float> radius, float <bias>])
+use: <float> ssao(<SAMPLER_TYPE> texPosition, <SAMPLER_TYPE> texNormal, vec2 <st> [, <float> radius, float <bias>])
 options:
     - CAMERA_POSITION
     - CAMERA_NEAR_CLIP: camera near clip distance
     - CAMERA_FAR_CLIP: camera far clip distance
-    - CAMERA_ORTHOGRAPHIC_PROJECTION, if it's not present is consider a PERECPECTIVE
-    camera
+    - CAMERA_ORTHOGRAPHIC_PROJECTION, if it's not present is consider a PERECPECTIVE camera
     - CAMERA_PROJECTION_MATRIX: mat4 matrix with camera projection
     - CAMERA_VIEW_MATRIX
     - INVERSE_CAMERA_VIEW_MATRIX

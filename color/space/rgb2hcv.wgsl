@@ -1,8 +1,6 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: 'Convert from RGB to HCV (Hue, Chroma, Value)
-
-  Based on work by Sam Hocevar and Emil Persson'
+description: 'Convert from RGB to HCV (Hue, Chroma, Value). Based on work by Sam Hocevar and Emil Persson'
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license

@@ -7,8 +7,8 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: Material Constructor. Designed to integrate with GlslViewer's defines
-  https://github.com/patriciogonzalezvivo/glslViewer/wiki/GlslViewer-DEFINES#material-defines
+description: |
+    Material Constructor. Designed to integrate with GlslViewer's defines https://github.com/patriciogonzalezvivo/glslViewer/wiki/GlslViewer-DEFINES#material-defines
 use:
     - void raymarchMaterial(in <vec3> ro, in <vec3> rd, out material _mat)
     - material raymarchMaterial(in <vec3> ro, in <vec3> rd)

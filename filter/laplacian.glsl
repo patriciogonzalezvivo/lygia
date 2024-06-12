@@ -6,8 +6,7 @@ description: Laplacian filter
 use: laplacian(<SAMPLER_TYPE> texture, <vec2> st, <vec2> pixels_scale [, <float> pixel_padding])
 options:
     - LAPLACIAN_TYPE: Return type, defaults to float
-    - LAPLACIAN_SAMPLER_FNC: Function used to sample the input texture, defaults to
-      texture2D(tex,TEX, UV).r
+    - LAPLACIAN_SAMPLER_FNC: Function used to sample the input texture, defaults to texture2D(tex,TEX, UV).r
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 examples:
     - /shaders/filter_laplacian2D.frag

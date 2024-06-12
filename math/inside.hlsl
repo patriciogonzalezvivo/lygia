@@ -2,8 +2,7 @@
 contributors: Patricio Gonzalez Vivo
 description: does the position lie within the triangle
 use:
-    - bool inside(<float|float2|float3> value, <float|float2|float3> min, <float|float2|float3>
-    max)
+    - bool inside(<float|float2|float3> value, <float|float2|float3> min, <float|float2|float3> max)
     - bool inside(<float2|float3> value, <vec4|AABB> aabb)
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0

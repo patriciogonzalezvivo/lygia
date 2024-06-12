@@ -2,6 +2,8 @@
 contributors: Bjorn Ottosson (@bjornornorn)
 description: Oklab to linear RGB https://bottosson.github.io/posts/oklab/
 use: <vec3\vec4> oklab2rgb(<vec3|vec4> oklab)
+license: 
+    - MIT License (MIT) Copyright (c) 2020 Björn Ottosson
 */
 
 #ifndef MAT_OKLAB2RGB

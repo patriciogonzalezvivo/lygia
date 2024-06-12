@@ -1,7 +1,7 @@
 /*
 contributors: Inigo Quiles
 description: generate the SDF of a torus
-license: null
+
 */
 
 fn torusSDF(p: vec3f, t: vec2f ) -> f32 { 

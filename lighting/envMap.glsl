@@ -5,9 +5,10 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: Get enviroment map light comming from a normal direction and acording
-  to some roughness/metallic value. If there is no SCENE_CUBEMAP texture it creates
-  a fake cube
+description: |
+    Get enviroment map light comming from a normal direction and acording
+    to some roughness/metallic value. If there is no SCENE_CUBEMAP texture it creates
+    a fake cube
 use: <vec3> envMap(<vec3> _normal, <float> _roughness [, <float> _metallic])
 options:
     - SCENE_CUBEMAP: pointing to the cubemap texture

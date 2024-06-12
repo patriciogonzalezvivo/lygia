@@ -3,6 +3,8 @@ contributors: Bjorn Ottosson (@bjornornorn)
 description: |
     Linear rgb to OKLab https://bottosson.github.io/posts/oklab/
 use: <vec3\vec4> rgb2oklab(<vec3|vec4> rgb)
+license: 
+    - MIT License (MIT) Copyright (c) 2020 Björn Ottosson
 */
 
 const inv_oklab_A : mat3x3<f32>  = mat3x3<f32>( vec3f(0.2104542553, 1.9779984951, 0.0259040371),

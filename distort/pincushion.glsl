@@ -8,8 +8,7 @@ use: barrel(SAMPLER_TYPE tex, <vec2> st [, <vec2|float> distance])
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - PINCUSHION_TYPE: return type, defaults to vec3
-    - PINCUSHION_SAMPLER_FNC: function used to sample the input texture, defaults to
-      texture2D(TEX, UV).rgb
+    - PINCUSHION_SAMPLER_FNC: function used to sample the input texture, defaults to texture2D(TEX, UV).rgb
     - PINCUSHION_OCT_1: one octave of distortion
     - PINCUSHION_OCT_2: two octaves of distortion
     - PINCUSHION_OCT_3: three octaves of distortion

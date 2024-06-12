@@ -1,14 +1,11 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: 'MacBeth values from:
-
-    - http://en.wikipedia.org/wiki/ColorChecker
-
-    - http://kurtmunger.com/color_checkerid277.html
-
-    - http://www.rags-int-inc.com/phototechstuff/macbethtarget/
-
-    - https://babelcolor.com/index_htm_files/RGB%20Coordinates%20of%20the%20Macbeth%20ColorChecker.pdf'
+description: | 
+    MacBeth values from:
+        - http://en.wikipedia.org/wiki/ColorChecker
+        - http://kurtmunger.com/color_checkerid277.html
+        - http://www.rags-int-inc.com/phototechstuff/macbethtarget/
+        - https://babelcolor.com/index_htm_files/RGB%20Coordinates%20of%20the%20Macbeth%20ColorChecker.pdf
 use:
     - <vec3> macbeth (<int> index)
     - <vec3> macbethXYZ (<int> index)

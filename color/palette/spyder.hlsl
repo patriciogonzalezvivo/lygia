@@ -1,10 +1,9 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: 'SpyderChecker values from:
-
+description: |
+    SpyderChecker values from:
     - https://www.northlight-images.co.uk/datacolor-spydercheckr-colour-test-card-review/
-
-    - https://www.bartneck.de/2017/10/24/patch-color-definitions-for-datacolor-spydercheckr-48/'
+    - https://www.bartneck.de/2017/10/24/patch-color-definitions-for-datacolor-spydercheckr-48/
 use:
     - <float3> spyder (<int> index)
     - <float3> spyderA (<int> index)

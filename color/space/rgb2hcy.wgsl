@@ -8,9 +8,7 @@ contributors:
     - Patricio Gonzalez Vivo
 description: 'Convert from linear RGB to HCY (Hue, Chroma, Luminance)
 
-  HCY is a cylindrica. From: https://github.com/tobspr/GLSL-Color-Spaces/blob/master/ColorSpaces.inc.glsl
-
-  '
+  HCY is a cylindrica. From: https://github.com/tobspr/GLSL-Color-Spaces/blob/master/ColorSpaces.inc.glsl'
 license:
     - MIT License (MIT) Copyright (c) 2015 tobspr
 */

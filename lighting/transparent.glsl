@@ -5,7 +5,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: null
+description: This function simulates the refraction of light through a transparent material. It uses the Schlick's approximation to calculate the Fresnel reflection and the Snell's law to calculate the refraction. It also uses the envMap function to simulate the dispersion of light through the material.
 use:
     - <vec3> transparent(<vec3> normal, <vec3> view, <vec3> ior, <float> roughness)
 license:

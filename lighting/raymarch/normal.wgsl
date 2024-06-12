@@ -3,7 +3,7 @@ contributors: Inigo Quiles
 description: Calculate normals http://iquilezles.org/www/articles/normalsSDF/normalsSDF.htm
 examples:
     - /shaders/lighting_raymarching.frag
-license: null
+
 */
 
 // #include "map.wgls"

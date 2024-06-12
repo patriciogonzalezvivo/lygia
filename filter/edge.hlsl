@@ -2,12 +2,10 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: Wrapper around three different edge detection algorithms Sobel, Prewitt,
-  and directional Sobel
+description: Wrapper around three different edge detection algorithms Sobel, Prewitt, and directional Sobel
 use: edge(<SAMPLER_TYPE> texture, <float2> st, <float2> pixels_scale)
 options:
-    - EDGE_FNC: Edge detection algorithm, defaults to edgeSobel, edgePrewitt & edgeSobel_directional
-      also available
+    - EDGE_FNC: Edge detection algorithm, defaults to edgeSobel, edgePrewitt & edgeSobel_directional also available
     - EDGE_TYPE: Return type, defaults to float
     - EDGE_SAMPLER_FNC: Function used to sample the input texture, defaults to texture2D(tex,POS_UV).r
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))

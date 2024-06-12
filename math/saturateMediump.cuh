@@ -1,8 +1,7 @@
 #include "min.cuh"
 /*
 contributors: Patricio Gonzalez Vivo
-description: clamp a value between 0 and the medium precision max (65504.0) for floating
-  points
+description: clamp a value between 0 and the medium precision max (65504.0) for floating points
 use: <float|vec2|vec3|vec4> saturateMediump(<float|vec2|vec3|vec4> value)
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0

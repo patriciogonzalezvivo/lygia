@@ -1,7 +1,6 @@
 /*
 contributors: Inigo Quiles
 description: Cast a ray
-license: null
 */
 
 // #include "map.wgls"
