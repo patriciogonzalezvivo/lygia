@@ -6,13 +6,11 @@ contributors:
     - Matt DesLauriers
     - Johan Ismael
     - Patricio Gonzalez Vivo
-description: Use LUT textures to modify colors (vec4 and vec3) or a position in a
-  gradient (vec2 and floats)
+description: Use LUT textures to modify colors (vec4 and vec3) or a position in a gradient (vec2 and floats)
 use: lut(<SAMPLER_TYPE> texture, <vec4|vec3|vec2|float> value [, int row])
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
-    - LUT_N_ROWS: only useful on row LUTs to stack several of those one on top of each
-      other
+    - LUT_N_ROWS: only useful on row LUTs to stack several of those one on top of each other
     - LUT_CELL_SIZE: cell side. DEfault. 32
     - LUT_SQUARE: the LUT have a SQQUARE shape and not just a long row
     - LUT_FLIP_Y: hen defined it expects a vertically flipled texture
