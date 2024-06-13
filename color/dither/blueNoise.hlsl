@@ -1,17 +1,20 @@
-#include "../../sample.hlsl"
+#include "../../sampler.hlsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: nan
-use: 
- - <float4|float3|float> ditherBlueNoise(<float4|float3|float> value, <float2> fragcoord, <float> time)
- - <float4|float3|float> ditherBlueNoise(<float4|float3|float> value, <float> time)
+description: blue noise dithering
+use:
+    - <float4|float3|float> ditherBlueNoise(<float4|float3|float> value, <float2> fragcoord, <float> time)
+    - <float4|float3|float> ditherBlueNoise(<float4|float3|float> value, <float> time)
 options:
     - SAMPLER_FNC
     - BLUENOISE_TEXTURE
     - BLUENOISE_TEXTURE_RESOLUTION
     - DITHER_BLUENOISE_CHROMATIC
     - DITHER_BLUENOISE_ANIMATED
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef BLUENOISE_TEXTURE_RESOLUTION

@@ -1,6 +1,6 @@
 /*
 contributors: Ignacio Castaño
-description: debuging cube http://the-witness.net/news/2012/02/seamless-cube-map-filtering/
+description: Debuging cube http://the-witness.net/news/2012/02/seamless-cube-map-filtering/
 use: <vec3> debugCube(<vec3> _normal, <float> cube_size, <float> lod)
 */
 

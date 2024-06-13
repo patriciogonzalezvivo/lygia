@@ -4,6 +4,9 @@ description: Map a v between one range to another.
 use: <float|vec2|vec3|vec4> map(<float|vec2|vec3|vec4> v, <float|vec2|vec3|vec4> inMin, <float|vec2|vec3|vec4> inMax, <float|vec2|vec3|vec4> outMin, <float|vec2|vec3|vec4> outMax)
 examples:
     - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/math_functions.frag
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_MAP

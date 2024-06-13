@@ -5,9 +5,12 @@
 /*
 contributors: Johan Ismael
 description: |
-  Combines inputRange, outputRange and gamma functions into one
-  Adapted from Romain Dura (http://mouaif.wordpress.com/?p=94)
+    Combines inputRange, outputRange and gamma functions into one
+    Adapted from Romain Dura (http://mouaif.wordpress.com/?p=94)
 use: levelsControl(<float3|float4> color, <float|float3> minInput, <float|float3> gamma, <float|float3 maxInput, <float|float3 minOutput, <float|float3 maxOutput)
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/licenses
 */
 
 #ifndef FNC_LEVELSCONTROL

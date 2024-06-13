@@ -1,7 +1,10 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: generate a matrix to change a the saturation of any color
+description: Generate a matrix to change a the saturation of any color
 use: saturationMatrix(<float> amount)
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_SATURATIONMATRIX

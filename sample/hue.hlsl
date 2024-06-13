@@ -1,4 +1,4 @@
-#include "../sample.hlsl"
+#include "../sampler.hlsl"
 #include "../color/space/rgb2hue.hlsl"
 
 /*
@@ -7,6 +7,9 @@ description: samples a hue rainbox pattern color encoded texture and returns a f
 use: <fluat> sampleHue(<SAMPLER_TYPE> tex, <float2> st);
 options:
     - SAMPLER_FNC(TEX, UV)
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef SAMPLEHUE_SAMPLE_FNC

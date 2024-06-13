@@ -2,6 +2,9 @@
 contributors: Patricio Gonzalez Vivo
 description: Converts a Lab color to XYZ color space.
 use: rgb2xyz(<float3|float4> color)
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef CIE_WHITE

@@ -1,6 +1,9 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: does the position lie within the triangle
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 fn inside(_x: f32, _min: f32, _max: f32) -> bool { return !(_x < _min || _x > _max); }

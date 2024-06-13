@@ -1,7 +1,7 @@
 #include "../space/rotate.glsl"
 #include "../space/bracketing.glsl"
 
-#include "../sample.glsl"
+#include "../sampler.glsl"
 
 /*
 contributors: Huw Bowles

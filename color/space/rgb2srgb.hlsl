@@ -1,7 +1,10 @@
 /*
-contributors: Patricio Gonzalez Vivo  
+contributors: Patricio Gonzalez Vivo
 description: Converts a linear RGB color to sRGB color space.
 use: <float|float3\float4> rgb2srgb(<float|float3|float4> rgb)
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef RGB2SRGB_EPSILON

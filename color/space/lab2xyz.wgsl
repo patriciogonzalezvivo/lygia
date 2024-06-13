@@ -1,3 +1,11 @@
+/*
+contributors: Patricio Gonzalez Vivo
+description: 'Converts a Lab color to XYZ color space. https://en.wikipedia.org/wiki/CIELAB_color_space'
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
+
 fn lab2xyz(c : vec3f) -> vec3f {
     var f = vec3f(0.0);
     f.y = (c.x + 16.0) / 116.0;

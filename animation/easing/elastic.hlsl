@@ -2,7 +2,7 @@
 
 /*
 contributors: Hugh Kennedy (https://github.com/hughsk)
-description: elastic easing. From https://github.com/stackgl/glsl-easings
+description: Elastic easing. From https://github.com/stackgl/glsl-easings
 use: elastic<In|Out|InOut>(<float> x)
 */
 

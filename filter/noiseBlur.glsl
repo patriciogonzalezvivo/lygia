@@ -1,11 +1,13 @@
 #include "../math/const.glsl"
-#include "../sample.glsl"
+#include "../sampler.glsl"
 #include "../sample/nearest.glsl"
 
 #include "../generative/random.glsl"
 
 /*
-contributors: ["Alan Wolfe", "Patricio Gonzalez Vivo"]
+contributors:
+    - Alan Wolfe
+    - Patricio Gonzalez Vivo
 description: Generic blur using a noise function inspired on https://www.shadertoy.com/view/XsVBDR
 use: noiseBlur(<SAMPLER_TYPE> texture, <vec2> st, <vec2> pixel, <float> radius)
 options:
@@ -17,6 +19,9 @@ options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 examples:
     - /shaders/filter_noiseBlur2D.frag
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef NOISEBLUR_SAMPLES

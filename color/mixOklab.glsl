@@ -12,7 +12,7 @@ description: |
     Learn more about it [his article](https://bottosson.github.io/posts/oklab/)
 use: <vec3\vec4> mixOklab(<vec3|vec4> colorA, <vec3|vec4> colorB, float pct)
 options:
-    - MIXOKLAB_SRGB: by default colA and colB use linear RGB. If you want to use sRGB define this flag
+    - MIXOKLAB_SRGB: color argument are in sRGB and returns sRGB
 examples:
     - /shaders/color_mix.frag
 license: 

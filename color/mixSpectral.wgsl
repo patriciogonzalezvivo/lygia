@@ -1,5 +1,20 @@
 #include "space/xyz2srgb.wgsl"
 
+/*
+contributors: Ronald van Wijnen (@OneDayOfCrypto)
+description: | 
+    Spectral mix allows you to achieve realistic color mixing in your projects. 
+    It is based on the Kubelka-Munk theory, a proven scientific model that simulates 
+    how light interacts with paint to produce lifelike color mixing. 
+    Find more informatiom on Ronald van Wijnen's [original repository](https://github.com/rvanwijnen/spectral.js)
+options:
+    - MIXSPECTRAL_SRGB: by default A and B are linear RGB. If you want to use sRGB, define this flag.
+examples:
+    - /shaders/color_mix.frag
+license: MIT License Copyright (c) 2023 Ronald van Wijnen
+*/
+
+
 const MIXSPECTRAL_EPSILON = 0.0001;
 
 fn mixSpectral_linear_to_reflectance(rgb: vec3f) -> array<f32,38> {

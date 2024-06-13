@@ -9,12 +9,13 @@
 
 #include "../material.hlsl"
 #include "../ior.hlsl"
-#include "../../sample.hlsl"
+#include "../../sampler.hlsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: Material Constructor. Designed to integrate with GlslViewer's defines https://github.com/patriciogonzalezvivo/glslViewer/wiki/GlslViewer-DEFINES#material-defines 
-use: 
+description: |
+    Material Constructor. Designed to integrate with GlslViewer's defines https://github.com/patriciogonzalezvivo/glslViewer/wiki/GlslViewer-DEFINES#material-defines
+use:
     - void materialNew(out <material> _mat)
     - <material> materialNew()
 options:
@@ -26,6 +27,9 @@ options:
     - SHADING_MODEL_SUBSURFACE
     - MATERIAL_SUBSURFACE_COLOR
     - SHADING_MODEL_CLOTH
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef SURFACE_POSITION

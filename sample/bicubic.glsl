@@ -1,4 +1,4 @@
-#include "../sample.glsl"
+#include "../sampler.glsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
@@ -8,6 +8,9 @@ options:
     - SAMPLER_FNC(TEX, UV)
 examples:
     - /shaders/sample_filter_bicubic.frag
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_SAMPLEBICUBIC

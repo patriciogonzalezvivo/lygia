@@ -3,6 +3,20 @@
 #include "../math/taylorInvSqrt.wgsl"
 #include "../math/grad4.wgsl"
 
+/*
+contributors:
+    - Stefan Gustavson
+    - Ian McEwan
+description: Simplex Noise https://github.com/stegu/webgl-noise
+examples:
+    - /shaders/generative_snoise.frag
+license: |
+    Copyright 2021-2023 by Stefan Gustavson and Ian McEwan.
+    Published under the terms of the MIT license:
+    https://opensource.org/license/mit/
+*/
+
+
 fn snoise2(v: vec2f) -> f32 {
     let C = vec4(0.211324865405187,  // (3.0-sqrt(3.0))/6.0
                         0.366025403784439,  // 0.5*(sqrt(3.0)-1.0)

@@ -6,6 +6,9 @@ description: bump in a range between -1 and 1
 use: <float|vec3> bump(<float|vec3> x[], <float|vec3> k])
 examples:
     - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/math_functions.frag
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_BUMP

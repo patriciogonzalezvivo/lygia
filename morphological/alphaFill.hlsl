@@ -1,4 +1,4 @@
-#include "../sample.hlsl"
+#include "../sampler.hlsl"
 #include "../math/const.hlsl"
 
 /*
@@ -8,6 +8,9 @@ use: <float4> fillAlpha(<SAMPLER_TYPE> texture, <float2> st, <float2> pixel, <in
 options:
     - SAMPLER_FNC(TEX, UV)
     - ALPHAFILL_RADIUS
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef ALPHAFILL_RADIUS

@@ -5,25 +5,21 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: |
-    The bilateral filter is a non-linear filter, which means that the intensity of each pixel is
-    replaced by a weighted average of intensity values from nearby pixels. The weights are computed
-    using a Gaussian function of the spatial distance between pixels (the 'd' variable in the code
-    below) and a Gaussian function of the intensity difference between pixels (the 'r' variable in
-    the code below). The spatial Gaussian function is the same as the one used in the Gaussian blur.
-    The intensity Gaussian is defined by the standard deviation of the intensity values in the
-    neighborhood of the pixel (the 'sigma_r' variable in the code below). The 'sigma_r' variable is
-    usually set to a small value, such as 0.1. The 'sigma_d' variable is the standard deviation of the
-    spatial Gaussian function. It is usually set to a value slightly larger than the radius of the
-    neighborhood of the pixel. The 'sigma_d' variable is usually set to a value slightly larger than
-    the radius of the neighborhood of the pixel. The 'sigma_d' variable is usually set to a value
-    slightly larger than the radius of the neighborhood of the pixel.
-    
+    This is a two dimensioanl Bilateral filter (for a single pass) It's a non-linear, edge-preserving, and noise-reducing
+    smoothing filter for images. It replaces the intensity of each pixel with a weighted average of
+    intensity values from nearby pixels. This filter is very effective at noise removal while
+    preserving edges. It is very similar to the Gaussian blur, but it also takes into account the
+    intensity differences between a pixel and its neighbors. This is what makes it particularly
+    effective at noise removal while preserving edges.
 use: bilateral(<SAMPLER_TYPE> texture, <float2> st, <float2> duv)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - BILATERAL_AMOUNT
     - BILATERAL_TYPE
     - BILATERAL_SAMPLER_FNC
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef BILATERAL_TYPE

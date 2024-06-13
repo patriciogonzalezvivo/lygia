@@ -13,14 +13,17 @@
 #include "common/envBRDFApprox.hlsl"
 /*
 contributors: Patricio Gonzalez Vivo
-description: simple PBR shading model
-use: <float4> pbr( <Material> _material ) 
+description: Simple PBR shading model
+use: <float4> pbr( <Material> _material )
 options:
     - DIFFUSE_FNC: diffuseOrenNayar, diffuseBurley, diffuseLambert (default)
     - SPECULAR_FNC: specularGaussian, specularBeckmann, specularCookTorrance (default), specularPhongRoughness, specularBlinnPhongRoughnes (default on mobile)
     - LIGHT_POSITION: in hlslViewer is u_light
     - LIGHT_COLOR in hlslViewer is u_lightColor
     - CAMERA_POSITION: in hlslViewer is u_camera
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef CAMERA_POSITION

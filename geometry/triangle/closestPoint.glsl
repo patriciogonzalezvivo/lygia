@@ -3,7 +3,7 @@
 
 /*
 contributors: 
-description: returns the closest point on the surface of a triangle
+description: Returns the closest point on the surface of a triangle
 use: <vec3> closestDistance(<Triangle> tri, <vec3> _pos) 
 */
 

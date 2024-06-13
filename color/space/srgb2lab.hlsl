@@ -5,6 +5,9 @@
 contributors: Patricio Gonzalez Vivo
 description: Converts a sRGB color to Lab
 use: <float3|float4> srgb2lab(<float3|float4> rgb)
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_SRGB2LAB

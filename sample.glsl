@@ -1,11 +1,31 @@
-#ifndef SAMPLER_FNC
-#if __VERSION__ >= 300
-#define SAMPLER_FNC(TEX, UV) texture(TEX, UV)
-#else
-#define SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
-#endif
-#endif
 
-#ifndef SAMPLER_TYPE
-#define SAMPLER_TYPE sampler2D
-#endif
+#include "sample/2DCube.glsl"
+#include "sample/derivative.glsl"
+#include "sample/heatmap.glsl"
+#include "sample/quilt.glsl" 
+#include "sample/sprite.glsl"
+#include "sample/3DSdf.glsl" 
+#include "sample/dither.glsl"
+#include "sample/hue.glsl"    
+#include "sample/repeat.glsl"
+#include "sample/triplanar.glsl"
+#include "sample/bicubic.glsl"   
+#include "sample/dof.glsl"   
+#include "sample/mirror.glsl" 
+#include "sample/shadow.glsl"
+#include "sample/untile.glsl"
+#include "sample/bracketing.glsl"
+#include "sample/equirect.glsl"  
+#include "sample/nearest.glsl"
+#include "sample/shadowLerp.glsl"
+#include "sample/viewPosition.glsl"
+#include "sample/bumpMap.glsl"   
+#include "sample/flow.glsl"
+#include "sample/normalMap.glsl"  
+#include "sample/shadowPCF.glsl" 
+#include "sample/yuv.glsl"
+#include "sample/clamp2edge.glsl"
+#include "sample/fxaa.glsl"  
+#include "sample/opticalFlow.glsl"
+#include "sample/smooth.glsl"
+#include "sample/zero.glsl"

@@ -1,3 +1,11 @@
+/*
+contributors: Patricio Gonzalez Vivo
+description: Converts a XYZ color to Lab color space.
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
+
 fn xyz2lab(c: vec3f) -> vec3f {
     let n = c / vec3f(95.047, 100.0, 108.883);
     let c0 = pow(n, vec3f(1.0 / 3.0));

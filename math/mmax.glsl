@@ -1,9 +1,12 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: extend GLSL Max function to add more arguments
-use: 
+use:
     - <float> mmax(<float> A, <float> B, <float> C[, <float> D])
     - <vec2|vec3|vec4> mmax(<vec2|vec3|vec4> A)
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_MMAX

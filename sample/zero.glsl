@@ -1,4 +1,4 @@
-#include "../sample.glsl"
+#include "../sampler.glsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
@@ -6,6 +6,9 @@ description: turns alpha to zero if it's outside the texture normalize coordinat
 use: <vec4> sampleZero(<SAMPLER_TYPE> tex, <vec2> st);
 options:
     - SAMPLER_FNC(TEX, UV)
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_SAMPLEZERO

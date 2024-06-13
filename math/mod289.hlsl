@@ -2,8 +2,8 @@
 contributors: [Stefan Gustavson, Ian McEwan]
 description: modulus of 289
 use: <float|float2|float3|float4> mod289(<float|float2|float3|float4> x)
-
 */
+
 #ifndef FNC_MOD289
 #define FNC_MOD289
 

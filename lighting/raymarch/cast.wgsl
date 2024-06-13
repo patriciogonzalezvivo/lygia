@@ -1,3 +1,8 @@
+/*
+contributors: Inigo Quiles
+description: Cast a ray
+*/
+
 // #include "map.wgls"
 
 fn raymarchCast(ro: vec3f, rd: vec3f ) -> f32 {

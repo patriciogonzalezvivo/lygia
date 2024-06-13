@@ -3,8 +3,10 @@
 
 /*
 contributors: Bjorn Ottosson (@bjornornorn)
-description: oklab to sRGB https://bottosson.github.io/posts/oklab/
+description: Oklab to sRGB https://bottosson.github.io/posts/oklab/
 use: <float3\float4> oklab2srgb(<float3|float4> oklab)
+license: 
+    - MIT License (MIT) Copyright (c) 2020 Björn Ottosson
 */
 
 #ifndef FNC_OKLAB2SRGB

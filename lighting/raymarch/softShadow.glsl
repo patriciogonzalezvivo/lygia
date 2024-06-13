@@ -3,7 +3,7 @@
 
 /*
 contributors:  Inigo Quiles
-description: calculate soft shadows http://iquilezles.org/www/articles/rmshadows/rmshadows.htm
+description: Calculate soft shadows http://iquilezles.org/www/articles/rmshadows/rmshadows.htm
 use: <float> raymarchSoftshadow( in <vec3> ro, in <vec3> rd, in <float> tmin, in <float> tmax) 
 examples:
     - /shaders/lighting_raymarching.frag

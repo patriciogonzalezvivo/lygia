@@ -4,9 +4,11 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: |
-    Converts a Lab color to RGB color space.
-    https://en.wikipedia.org/wiki/CIELAB_color_space
+    Converts a Lab color to RGB color space. https://en.wikipedia.org/wiki/CIELAB_color_space
 use: lab2rgb(<vec3|vec4> color)
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_LAB2RGB

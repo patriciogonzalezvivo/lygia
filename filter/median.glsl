@@ -1,4 +1,4 @@
-#include "../sample.glsl"
+#include "../sampler.glsl"
 
 /*
 contributors: [Morgan McGuire, Kyle Whitson]

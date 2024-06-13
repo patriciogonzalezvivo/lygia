@@ -2,8 +2,11 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: 3D vector to equirect 2D projection 
+description: 3D vector to equirect 2D projection
 use: <vec2> xyz2equirect(<vec2> d)
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_XYZ2EQUIRECT

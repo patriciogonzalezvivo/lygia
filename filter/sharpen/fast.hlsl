@@ -1,8 +1,8 @@
-#include "../../sample.hlsl"
+#include "../../sampler.hlsl"
 
 /*
 contributors: Johan Ismael
-description: sharpening convolutional operation
+description: Sharpening convolutional operation
 use: sharpen(<SAMPLER_TYPE> texture, <float2> st, <float2> pixel)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))

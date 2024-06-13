@@ -1,11 +1,14 @@
-#include "../sample.glsl"
+#include "../sampler.glsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: given a Spherical Map texture and a normal direction returns the right pixel
+description: Given a Spherical Map texture and a normal direction returns the right pixel
 use: spheremap(<SAMPLER_TYPE> texture, <vec3> normal)
 options:
     SPHEREMAP_EYETOPOINT: where the eye is looking
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef SPHEREMAP_TYPE

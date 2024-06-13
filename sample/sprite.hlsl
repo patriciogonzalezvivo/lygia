@@ -1,5 +1,5 @@
 #include "../space/sprite.hlsl"
-#include "../sample.hlsl"
+#include "../sampler.hlsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
@@ -9,6 +9,9 @@ options:
     - SAMPLER_FNC(TEX, UV)
     - SAMPLESPRITE_TYPE: float4
     - SAMPLESPRITE_SAMPLER_FNC(UV)
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef SAMPLESPRITE_TYPE

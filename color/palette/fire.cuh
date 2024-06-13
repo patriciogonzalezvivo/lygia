@@ -2,8 +2,11 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: Simpler fire color ramp 
+description: Simpler fire color ramp
 use: <float3> fire(<float> value)
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_FIRE

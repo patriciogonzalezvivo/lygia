@@ -1,6 +1,6 @@
 /*
 contributors: Hugh Kennedy (https://github.com/hughsk)
-description: exponential easing. From https://github.com/stackgl/glsl-easings
+description: Exponential easing. From https://github.com/stackgl/glsl-easings
 use: exponential<In|Out|InOut>(<float> x)
 */
 

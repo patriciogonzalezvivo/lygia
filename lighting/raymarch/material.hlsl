@@ -6,8 +6,9 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: Material Constructor. Designed to integrate with GlslViewer's defines https://github.com/patriciogonzalezvivo/glslViewer/wiki/GlslViewer-DEFINES#material-defines 
-use: 
+description: |
+    Material Constructor. Designed to integrate with GlslViewer's defines https://github.com/patriciogonzalezvivo/glslViewer/wiki/GlslViewer-DEFINES#material-defines
+use:
     - void raymarchMaterial(in <float3> ro, in <float3> rd, out material _mat)
     - material raymarchMaterial(in <float3> ro, in <float3> rd)
 options:
@@ -16,6 +17,9 @@ options:
     - LIGHT_COLOR
     - RAYMARCH_AMBIENT
     - RAYMARCH_MATERIAL_FNC(RAY, POSITION, NORMAL, ALBEDO)
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef LIGHT_POSITION

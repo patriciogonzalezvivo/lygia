@@ -1,6 +1,6 @@
 /*
 contributors:  Inigo Quiles
-description: set a camera for raymarching 
+description: Set a camera for raymarching 
 use: <float3x3> raymarchCamera(in <float3> ro, [in <float3> ta [, in <float3> up] ])
 */
 

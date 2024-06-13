@@ -1,5 +1,5 @@
 #include "../math/lengthSq.hlsl"
-#include "../sample.hlsl"
+#include "../sampler.hlsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
@@ -13,6 +13,9 @@ options:
     - BARREL_OCT_1: one octave of distortion
     - BARREL_OCT_2: two octaves of distortion
     - BARREL_OCT_3: three octaves of distortion
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef BARREL_DISTANCE

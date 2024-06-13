@@ -1,7 +1,9 @@
-#include "../sample.hlsl"
+#include "../sampler.hlsl"
 
 /*
-contributors: [Patricio Gonzalez Vivo, Johan Ismael]
+contributors:
+    - Patricio Gonzalez Vivo
+    - Johan Ismael
 description: Samples multiple times a texture in the specified direction
 use: stretch(<SAMPLER_TYPE> tex, <float2> st, <float2> direction [, int samples])
 options:
@@ -10,6 +12,9 @@ options:
     - STRETCH_TYPE: return type, defauls to float4
     - STRETCH_SAMPLER_FNC(TEX, UV): function used to sample the input texture, defaults to texture2D(tex, TEX, UV)
     - STRETCH_WEIGHT: shaping equation to multiply the sample weight.
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef STRETCH_SAMPLES

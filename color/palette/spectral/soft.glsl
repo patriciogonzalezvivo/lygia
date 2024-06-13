@@ -1,10 +1,13 @@
 #include "../../../math/const.glsl"
 /*
 contributors: Patricio Gonzalez Vivo
-description: Soft chroma spectrum 
+description: Soft chroma spectrum
 use: <vec3> spectral_soft(<float> value)
 examples:
     - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/color_wavelength.frag
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_CHROMA

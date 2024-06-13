@@ -2,7 +2,7 @@
 #include "../math/inverse.glsl"
 #include "../space/screen2viewPosition.glsl"
 #include "../space/depth2viewZ.glsl"
-#include "../sample.glsl"
+#include "../sampler.glsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
@@ -24,6 +24,9 @@ options:
     - VOLUMETRICLIGHTSCATTERING_STEPS
     - VOLUMETRICLIGHTSCATTERING_NOISE_FNC
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef VOLUMETRICLIGHTSCATTERING_FACTOR

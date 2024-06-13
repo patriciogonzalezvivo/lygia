@@ -1,7 +1,7 @@
 #include "../space/xyz2equirect.hlsl"
 #include "../generative/random.hlsl"
 #include "../generative/srandom.hlsl"
-#include "../sample.hlsl"
+#include "../sampler.hlsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
@@ -9,7 +9,10 @@ description: sample an equirect texture as it was a cubemap
 use: sampleEquirect(<SAMPLER_TYPE> texture, <float3> dir)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
-    - SAMPLEEQUIRET_ITERATIONS:
+    - SAMPLEEQUIRET_ITERATIONS: null
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_SAMPLEEQUIRECT

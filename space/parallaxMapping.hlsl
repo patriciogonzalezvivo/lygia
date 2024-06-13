@@ -1,15 +1,18 @@
-#include "../sample.hlsl"
+#include "../sampler.hlsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
 description: get parallax mapping coordinates
-use: parallaxMapping(<SAMPLER_TYPE> tex, <float3> V, <float2> T, <float> parallaxHeight) 
+use: parallaxMapping(<SAMPLER_TYPE> tex, <float3> V, <float2> T, <float> parallaxHeight)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - PARALLAXMAPPING_FNC()
     - PARALLAXMAPPING_SAMPLER_FNC(UV)
     - PARALLAXMAPPING_SCALE
     - PARALLAXMAPPING_NUMSEARCHES
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef PARALLAXMAPPING_SAMPLER_FNC
