@@ -4,17 +4,17 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: |
-    Bilinear or Bartlett filter, a low-pass filter, which means that it blurs the image. 
-    It's a convolution that uses a piecewise linear kernel, approximating a "tent" or triangle.
-    Based on https://www.shadertoy.com/view/3djSDt
-
+description: "Bilinear or Bartlett filter, a low-pass filter, which means that it\
+    \ blurs the image. \nIt's a convolution that uses a piecewise linear kernel, approximating\
+    \ a \"tent\" or triangle.\nBased on https://www.shadertoy.com/view/3djSDt\n"
 use: bilinear(<SAMPLER_TYPE> texture, <vec2> st, <vec2> duv [, <int> kernelSize]])
-
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - BILINEAR_TYPE: default is vec3
     - BILINEAR_SAMPLER_FNC(TEX, UV): default texture2D(TEX, UV)
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef BILINEAR_TYPE

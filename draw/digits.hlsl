@@ -1,12 +1,15 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: |
-  Draws all the digits of a floating point number, useful for debugging.
-  Requires high precision to work properly.
+    Draws all the digits of a floating point number, useful for debugging.
+    Requires high precision to work properly.
 use: digits(<float2> st, <float> value [, <float> nDecDigit])
 options:
-  DIGITS_DECIMALS: number of decimals after the point, defaults to 2
-  DIGITS_SIZE: size of the font, defaults to float2(.025)
+    DIGITS_DECIMALS: number of decimals after the point, defaults to 2
+    DIGITS_SIZE: size of the font, defaults to float2(.025)
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef DIGITS_SIZE

@@ -1,6 +1,6 @@
 /*
 author: John Hable
-description: tonemapping function from presentation. Uncharted 2 HDR Lighting, Page 142 to 143
+description: Tonemapping function from presentation. Uncharted 2 HDR Lighting, Page 142 to 143
 use: <float3|float4> tonemapUncharted2(<float3|float4> x)
 */
 

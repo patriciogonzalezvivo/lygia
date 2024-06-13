@@ -3,6 +3,9 @@
 contributors: Johan Ismael
 description: Similar to step but for an interval instead of a threshold. Returns 1 is x is between left and right, 0 otherwise
 use: <float> within(<float> minVal, <float|float2|float3|float4> maxVal, <float|float2|float3|float4> x)
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_WITHIN

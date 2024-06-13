@@ -1,6 +1,6 @@
 /*
 contributors: nan
-description: NAN
+description: Uncharted 2 tonemapping operator
 use: <vec3|vec4> tonemapUncharted(<vec3|vec4> x)
 */
 

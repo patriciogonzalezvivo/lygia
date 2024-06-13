@@ -1,6 +1,6 @@
 #include "../color/palette/heatmap.hlsl"
 
-#include "../sample.hlsl"
+#include "../sampler.hlsl"
 
 /*
 contributors: Dennis Gustafsson

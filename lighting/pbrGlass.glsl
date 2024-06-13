@@ -16,19 +16,21 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: simple glass shading model
-use: 
-    - <vec4> glass(<Material> material) 
-    
+description: Simple glass shading model
+use:
+    - <vec4> glass(<Material> material)
 options:
     - SPECULAR_FNC: specularGaussian, specularBeckmann, specularCookTorrance (default), specularPhongRoughness, specularBlinnPhongRoughnes (default on mobile)
-    - SCENE_BACK_SURFACE: 
+    - SCENE_BACK_SURFACE: null
     - LIGHT_POSITION: in GlslViewer is u_light
-    - LIGHT_DIRECTION: 
+    - LIGHT_DIRECTION: null
     - LIGHT_COLOR in GlslViewer is u_lightColor
     - CAMERA_POSITION: in GlslViewer is u_camera
 examples:
     - /shaders/lighting_raymarching_glass.frag
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef IBL_LUMINANCE

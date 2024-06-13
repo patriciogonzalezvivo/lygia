@@ -15,6 +15,9 @@ options:
     FBM_AMPLITUD_SCALAR: amplitud scalar. Default is 0.5
 examples:
     - /shaders/generative_fbm.frag
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FBM_OCTAVES

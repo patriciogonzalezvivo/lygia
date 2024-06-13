@@ -2,11 +2,13 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: |
-    Return a black or white in a square checker patter
-use: 
+description: 'Return a black or white in a square checker patter'
+use:
     - <float4> checkerTile(<float4> tile)
     - <float4> checkerTile(<float2> st [, <float2> scale])
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_CHECKERTILE

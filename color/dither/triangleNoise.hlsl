@@ -1,10 +1,12 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: |
-    Gjøl 2016, "Banding in Games: A Noisy Rant"
-use: 
- - <float4|float3|float> ditherTriangleNoise(<float4|float3|float> value, <float2> fragcoord, <float> time)
- - <float4|float3|float> ditherTriangleNoise(<float4|float3|float> value, <float> time)
+description: "2016 Banding in Games: A Noisy Rant"
+use:
+    - <float4|float3|float> ditherTriangleNoise(<float4|float3|float> value, <float2> fragcoord, <float> time)
+    - <float4|float3|float> ditherTriangleNoise(<float4|float3|float> value, <float> time)
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifdef DITHER_ANIMATED

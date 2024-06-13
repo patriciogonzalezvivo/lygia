@@ -1,7 +1,7 @@
 #include "../math/saturate.glsl"
 #include "../space/linearizeDepth.glsl"
 #include "../space/depth2viewZ.glsl"
-#include "../sample.glsl"
+#include "../sampler.glsl"
 #include "../generative/random.glsl"
 
 /*
@@ -10,7 +10,7 @@ description: ScreenSpace Ambient Occlusion
 use: <float> ssao(<SAMPLER_TYPE> texPosition, <SAMPLER_TYPE> texNormal, vec2 <st> [, <float> radius, float <bias>])
 options:
     - SSAO_SAMPLES_NUM: number of half-sphere offsets samples
-    - SSAO_SAMPLES_ARRAY: array of weighted vec3 half-sphere offsets   
+    - SSAO_SAMPLES_ARRAY: array of weighted vec3 half-sphere offsets
     - SSAO_NOISE_NUM: number of vec3 noise offsets
     - SSAO_NOISE_ARRAY: array of vec3 noise offsets
     - SSAO_NOISE2_FNC(ST): (random2(ST * 100.) * 0.1)
@@ -19,6 +19,9 @@ options:
     - CAMERA_NEAR_CLIP: required for depth only SSAO
     - CAMERA_FAR_CLIP: required for depth only SSAO
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef SSAO_SAMPLES_NUM

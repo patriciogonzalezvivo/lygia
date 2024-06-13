@@ -1,7 +1,10 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: modify brightness and contrast
+description: Modify brightness and contrast
 use: brightnessContrast(<float|vec3|vec4> color, <float> brightness, <float> amcontrastount)
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_BRIGHTNESSCONTRAST

@@ -16,7 +16,7 @@ description:  |
     For the original code please visit: https://github.com/stegu/psrdnoise
 
 use: <float> psrdnoise(<vec2|vec3> x, <vec2|vec3> period, <float> alpha, out <vec2|vec3> gradient [, out <vec3> dg])
-Options:
+options:
     - PSRDNOISE_PERLIN_GRID
     - PSRDNOISE_FAST_ROTATION
 license: |

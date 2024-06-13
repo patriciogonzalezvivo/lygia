@@ -12,6 +12,9 @@ options:
     - DITHERBAKER_LUT(COLOR): function that returns a vec3 with the color to use for the dithering
 examples:
     - /shaders/color_dither_bayer.frag
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef SAMPLEDITHER_FNC

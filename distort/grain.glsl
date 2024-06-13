@@ -2,7 +2,7 @@
 #include "../generative/pnoise.glsl"
 #include "../color/luma.glsl"
 #include "../color/blend/softLight.glsl"
-#include "../sample.glsl"
+#include "../sampler.glsl"
 
 /*
 contributors: Matt DesLauriers

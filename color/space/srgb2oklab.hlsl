@@ -5,6 +5,8 @@
 contributors: Bjorn Ottosson (@bjornornorn)
 description: sRGB to OKLab https://bottosson.github.io/posts/oklab/
 use: <float3\float4> srgb2oklab(<float3|float4> srgb)
+license: 
+    - MIT License (MIT) Copyright (c) 2020 Björn Ottosson
 */
 
 #ifndef FNC_SRGB2OKLAB

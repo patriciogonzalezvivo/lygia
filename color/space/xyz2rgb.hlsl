@@ -1,9 +1,10 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: |
-    Converts a XYZ color to linear RGB.
-    From http://www.brucelindbloom.com/index.html?Eqn_RGB_XYZ_Matrix.html
+description: 'Converts a XYZ color to linear RGB. From http://www.brucelindbloom.com/index.html?Eqn_RGB_XYZ_Matrix.html'
 use: xyz2rgb(<float3|float4> color)
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef MAT_XYZ2RGB

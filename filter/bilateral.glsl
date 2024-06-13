@@ -20,6 +20,9 @@ options:
     - BILATERAL_KERNEL_MAXSIZE: default 20
 examples:
     - /shaders/filter_bilateral2D.frag
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef BILATERAL_TYPE

@@ -5,8 +5,11 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: compute the intersection of two AABBs
+description: Compute the intersection of two AABBs
 use: <float2> intersect(<AABB> box, <float3> rayOrigin, <float3> rayDir)
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_AABB_INTERSECTION

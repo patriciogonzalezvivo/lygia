@@ -1,13 +1,13 @@
-#include "../../sample.glsl"
+#include "../../sampler.glsl"
 #include "../../math/decimate.glsl"
 #include "../../math/saturate.glsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: nan
-use: 
- - <vec4|vec3|float> ditherBlueNoise(<vec4|vec3|float> value, <vec2> st, <float> time)
- - <vec4|vec3|float> ditherBlueNoise(<vec4|vec3|float> value, <float> time)
+description: blue noise dithering
+use:
+    - <vec4|vec3|float> ditherBlueNoise(<vec4|vec3|float> value, <vec2> st, <float> time)
+    - <vec4|vec3|float> ditherBlueNoise(<vec4|vec3|float> value, <float> time)
 options:
     - SAMPLER_FNC
     - BLUENOISE_TEXTURE
@@ -16,6 +16,9 @@ options:
     - DITHER_BLUENOISE_TIME
 examples:
     - /shaders/color_dither.frag
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef DITHER_BLUENOISE_COORD

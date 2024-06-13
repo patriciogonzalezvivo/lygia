@@ -6,6 +6,8 @@ contributors: Bjorn Ottosson (@bjornornorn)
 description: |
     sRGB to OKLab https://bottosson.github.io/posts/oklab/
 use: <vec3\vec4> srgb2oklab(<vec3|vec4> srgb)
+license: 
+    - MIT License (MIT) Copyright (c) 2020 Björn Ottosson
 */
 
 #ifndef FNC_SRGB2OKLAB

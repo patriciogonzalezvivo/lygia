@@ -1,5 +1,14 @@
 #include "hue2rgb.wgsl"
 
+/*
+contributors: Patricio Gonzalez Vivo
+description: Converts a HCY color to linear RGB
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
+
+
 fn hcy2rgb(hcy: vec3f) -> vec3f {
     var rta = hcy;
     let HCYwts = vec3f(0.299, 0.587, 0.114);

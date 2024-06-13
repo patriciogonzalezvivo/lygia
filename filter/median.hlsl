@@ -1,4 +1,4 @@
-#include "../sample.hlsl"
+#include "../sampler.hlsl"
 
 /*
 contributors: [Morgan McGuire, Kyle Whitson]

@@ -2,7 +2,7 @@
 
 /*
 contributors: Thomas Müller & Alex Evans
-description: does the position lie within the triangle
+description: Does the position lie within the triangle
 use: <vec3> contain(<Triangle> tri, <vec3> _pos) 
 */
 

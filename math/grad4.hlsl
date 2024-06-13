@@ -2,8 +2,8 @@
 contributors: [Stefan Gustavson, Ian McEwan]
 description: grad4, used for snoise(float4 v)
 use: <float4> grad4(<float> j, <float4> ip)
-
 */
+
 #ifndef FNC_GRAD4
 #define FNC_GRAD4
 

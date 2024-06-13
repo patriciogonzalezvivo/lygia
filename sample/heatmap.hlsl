@@ -1,4 +1,4 @@
-#include "../sample.hlsl"
+#include "../sampler.hlsl"
 #include "../color/space/rgb2heat.hlsl"
 
 /*
@@ -7,6 +7,9 @@ description: sample a value encoded on a heatmap
 use: sampleFlow(<SAMPLER_TYPE> tex, <float2> st)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef SAMPLEHEATMAP_SAMPLE_FNC

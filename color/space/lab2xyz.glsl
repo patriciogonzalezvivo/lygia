@@ -1,9 +1,10 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: |
-    Converts a Lab color to XYZ color space.
-    https://en.wikipedia.org/wiki/CIELAB_color_space
+description: 'Converts a Lab color to XYZ color space. https://en.wikipedia.org/wiki/CIELAB_color_space'
 use: rgb2xyz(<vec3|vec4> color)
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef CIE_WHITE

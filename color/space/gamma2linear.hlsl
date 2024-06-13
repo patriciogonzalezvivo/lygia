@@ -1,7 +1,10 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: convert from gamma to linear color space.
+description: Convert from gamma to linear color space.
 use: gamma2linear(<float|float3|float4> color)
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #if !defined(GAMMA) && !defined(TARGET_MOBILE) && !defined(PLATFORM_RPI) && !defined(PLATFORM_WEBGL)

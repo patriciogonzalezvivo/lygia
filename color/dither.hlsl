@@ -1,8 +1,8 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: set of dither methods
+description: Set of dither methods
 use: <float4|float3|float> dither(<float4|float3|float> value[, <float> time])
-Options:
+options:
     - DITHER_FNC
     - TIME_SECS: elapsed time in seconds
     - RESOLUTION: view port resolution
@@ -11,6 +11,9 @@ Options:
     - DITHER_ANIMATED
     - DITHER_CHROMATIC
     - SAMPLER_FNC
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef TIME_SECS

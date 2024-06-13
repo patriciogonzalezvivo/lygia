@@ -1,15 +1,20 @@
-#include "../sample.glsl"
+#include "../sampler.glsl"
 
 /*
-contributors: [Matt DesLauriers, Patricio Gonzalez Vivo]
-description: adapted versions from 5, 9 and 13 gaussian fast blur from https://github.com/Jam3/glsl-fast-gaussian-blur
+contributors:
+    - Matt DesLauriers
+    - Patricio Gonzalez Vivo
+description: Adapted versions from 5, 9 and 13 gaussian fast blur from https://github.com/Jam3/glsl-fast-gaussian-blur
 use: gaussianBlur(<SAMPLER_TYPE> texture, <vec2> st, <vec2> pixel_direction [, const int kernelSize])
 options:
-    - GAUSSIANBLUR_AMOUNT: gaussianBlur5 gaussianBlur9 gaussianBlur13 
+    - GAUSSIANBLUR_AMOUNT: gaussianBlur5 gaussianBlur9 gaussianBlur13
     - GAUSSIANBLUR_2D: default to 1D
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 examples:
     - /shaders/filter_gaussianBlur2D.frag
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef GAUSSIANBLUR_AMOUNT

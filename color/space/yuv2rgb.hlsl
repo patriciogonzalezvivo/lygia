@@ -1,7 +1,10 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: pass a color in YUB and get RGB color
+description: Pass a color in YUB and get RGB color
 use: yuv2rgb(<float3|float4> color)
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef MAT_YUV2RGB

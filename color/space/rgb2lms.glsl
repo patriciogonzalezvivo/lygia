@@ -1,9 +1,13 @@
 /*
-contributors: Patricio Gonzalez Vivo  
-description: |
-    Convert rgb to LMS. LMS (long, medium, short), is a color space which represents the response of the three types of cones of the human eye, named for their responsivity (sensitivity) peaks at long, medium, and short wavelengths. 
-    Refs https://en.wikipedia.org/wiki/LMS_color_space https://arxiv.org/pdf/1711.10662
+contributors: Patricio Gonzalez Vivo
+description: "Convert rgb to LMS. LMS (long, medium, short), is a color space which\
+    \ represents the response of the three types of cones of the human eye, named for\
+    \ their responsivity (sensitivity) peaks at long, medium, and short wavelengths.\
+    \ \nRefs https://en.wikipedia.org/wiki/LMS_color_space https://arxiv.org/pdf/1711.10662\n"
 use: <vec3|vec4> rgb2lms(<vec3|vec4> rgb)
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef MAT_RGB2LMS

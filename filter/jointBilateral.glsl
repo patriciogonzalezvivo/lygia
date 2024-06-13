@@ -16,6 +16,9 @@ options:
     - JOINTBILATERAL_SAMPLEGUIDE_FNC(TEX, UV): defaults to sampleClamp2edge(TEX, UV).rgb
     - JOINTBILATERAL_KERNELSIZE: defaults to  9
     - JOINTBILATERAL_INTENSITY_SIGMA: defaults to 0.026
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef JOINTBILATERAL_TYPE

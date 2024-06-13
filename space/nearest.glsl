@@ -1,8 +1,10 @@
 /*
-function: nearest
 contributors: Patricio Gonzalez Vivo
-description: sampling function to make a texture behave like GL_NEAREST 
+description: sampling function to make a texture behave like GL_NEAREST
 use: nearest(vec2 st, <vec2> res)
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef NEAREST_FLOOR_FNC

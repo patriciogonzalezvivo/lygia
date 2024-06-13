@@ -2,7 +2,7 @@
 #include "../space/view2screenPosition.glsl"
 #include "../sdf/lineSDF.glsl"
 #include "../sdf/planeSDF.glsl"
-#include "../sample.glsl"
+#include "../sampler.glsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
@@ -14,7 +14,10 @@ options:
     - CAMERA_PROJECTION_MATRIX: camera projection mat4 matrix
     - CAMERA_NEAR_CLIP: camera near clip distance
     - CAMERA_FAR_CLIP: camera far clip distance
-    - SSR_FRESNEL: if define scale the opacity based on the fresnel angle 
+    - SSR_FRESNEL: if define scale the opacity based on the fresnel angle
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 // #define SSR_FRESNEL

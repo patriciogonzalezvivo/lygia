@@ -8,10 +8,12 @@
 #endif
 #include "../generative/random.hlsl"
 
-#include "../sample.hlsl"
+#include "../sampler.hlsl"
 
 /*
-contributors: ["Alan Wolfe", "Patricio Gonzalez Vivo"]
+contributors:
+    - Alan Wolfe
+    - Patricio Gonzalez Vivo
 description: Generic blur using a noise function inspired on https://www.shadertoy.com/view/XsVBDR
 use: noiseBlur(<SAMPLER_TYPE> texture, <float2> st, <float2> pixel, <float> radius)
 options:
@@ -21,6 +23,9 @@ options:
     - NOISEBLUR_SAMPLER_FNC(UV): defualts to texture2D(tex, UV).rgb
     - NOISEBLUR_SAMPLES: default to 4
     - SAMPLER_FNC(TEX, UV): optional depending the target version of HLSL
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef NOISEBLUR_SAMPLES

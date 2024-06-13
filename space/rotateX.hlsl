@@ -6,6 +6,9 @@ description: rotate a 2D space by a radian angle
 use: rotateX(<float3|float4> pos, float radian [, float3 center])
 options:
     - CENTER_3D
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_ROTATEX

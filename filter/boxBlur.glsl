@@ -1,11 +1,11 @@
-#include "../sample.glsl"
+#include "../sampler.glsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
 description: |
-    Given a texture it performs a moving average or box blur. Which simply averages the pixel values in
-    a KxK window. This is a very common image processing technique that can be used to smooth out noise.
-    
+    Given a texture it performs a moving average or box blur. 
+    Which simply averages the pixel values in a KxK window. 
+    This is a very common image processing technique that can be used to smooth out noise.
 use: boxBlur(<SAMPLER_TYPE> texture, <vec2> st, <vec2> pixel_offset)
 options:
     - BOXBLUR_2D: default to 1D
@@ -13,6 +13,9 @@ options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
 examples:
     - /shaders/filter_boxBlur2D.frag
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef BOXBLUR_ITERATIONS

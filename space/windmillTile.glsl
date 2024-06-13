@@ -4,13 +4,15 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: |
-    Rotate tiles (in a squared grid pattern) by 45 degrees
-use: 
+description: 'Rotate tiles (in a squared grid pattern) by 45 degrees'
+use:
     - <vec4> windmillTile(<vec4> tiles[, <float> fullturn = TAU])
     - <vec2> windmillTile(<vec2> st [, <float|vec2> scale])
 examples:
     - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/draw_tiles.frag
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef FNC_WINDMILLTILE

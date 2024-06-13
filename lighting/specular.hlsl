@@ -7,12 +7,15 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: calculate specular contribution
-use: 
+description: Calculate specular contribution
+use:
     - specular(<float3> L, <float3> N, <float3> V, <float> roughness[, <float> fresnel])
     - specular(<float3> L, <float3> N, <float3> V, <float> NoV, <float> NoL, <float> roughness, <float> fresnel)
 options:
     - SPECULAR_FNC: specularGaussian, specularBeckmann, specularCookTorrance (default), specularPhongRoughness, specularBlinnPhongRoughnes (default on mobile)
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef SPECULAR_FNC

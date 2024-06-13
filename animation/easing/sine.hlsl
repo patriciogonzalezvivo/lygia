@@ -2,7 +2,7 @@
 
 /*
 contributors: Hugh Kennedy (https://github.com/hughsk)
-description: sine easing. From https://github.com/stackgl/glsl-easings
+description: Sine easing. From https://github.com/stackgl/glsl-easings
 use: sine<In|Out|InOut>(<float> x)
 */
 

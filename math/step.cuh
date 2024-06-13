@@ -1,8 +1,20 @@
 #include "make.cuh"
 
-////////////////////////////////////////////////////////////////////////////////
-// absolute value
-////////////////////////////////////////////////////////////////////////////////
+/*
+contributors: Patricio Gonzalez Vivo
+description: this file contains the definition of the step function for float, float2, float3, and float4 types, to match GLSL's behavior.
+use: 
+    - <float> step(<float> a, <float> b);
+    - <float2> step(<float2> a, <float2> b);
+    - <float3> step(<float3> a, <float3> b);
+    - <float4> step(<float4> a, <float4> b);
+    - <float2> step(<float2> a, <float> b);
+    - <float3> step(<float3> a, <float> b);
+    - <float4> step(<float4> a, <float> b);
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
 
 #ifndef FNC_STEP
 #define FNC_STEP
