@@ -5,7 +5,7 @@ description: |
 use: 
     - <ivec3> wadaTriads (<int> index)
 defines:
-    - WADA_TRIADS_TOTAL
+    - WADA_TRIAD_TOTAL
 examples:
     - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/color_wada.frag
 license:
@@ -13,15 +13,15 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-#ifndef WADA_TRIADS_TOTAL
-#define WADA_TRIADS_TOTAL 112
+#ifndef WADA_TRIAD_TOTAL
+#define WADA_TRIAD_TOTAL 112
 #endif
 
 #ifndef FNC_PALETTE_WADA_TRIAD
 #define FNC_PALETTE_WADA_TRIAD
     
 ivec3 wadaTriad( const int index ) {
-    ivec3 t[WADA_TRIADS_TOTAL];
+    ivec3 t[WADA_TRIAD_TOTAL];
     t[0] = ivec3(2,3,150);
     t[1] = ivec3(54,61,124);
     t[2] = ivec3(45,135,136);
@@ -136,7 +136,7 @@ ivec3 wadaTriad( const int index ) {
     t[111] = ivec3(86,90,94);
 
     #if defined(PLATFORM_WEBGL)
-    for (int i = 0; i < WADA_TRIADS_TOTAL; i++)
+    for (int i = 0; i < WADA_TRIAD_TOTAL; i++)
         if (i == index) return t[i];
     #else
     return t[index];

@@ -5,7 +5,7 @@ description: |
 use:
     - <int4> wadaTetrads (<int> index)
 defines:
-    - WADA_TETRADS_TOTAL
+    - WADA_TETRAD_TOTAL
 examples:
     - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/color_wada.frag
 license:
@@ -13,15 +13,15 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-#ifndef WADA_TETRADS_TOTAL
-#define WADA_TETRADS_TOTAL 99
+#ifndef WADA_TETRAD_TOTAL
+#define WADA_TETRAD_TOTAL 99
 #endif
 
 #ifndef FNC_PALETTE_WADA_TETRAD
 #define FNC_PALETTE_WADA_TETRAD
                 
 int4 wadaTetrad( const int index ) {
-    int4 t[WADA_TETRADS_TOTAL];
+    int4 t[WADA_TETRAD_TOTAL];
     t[0] = int4(2,3,115,125);
     t[1] = int4(1,114,135,136);
     t[2] = int4(8,135,136,148);

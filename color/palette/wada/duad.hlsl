@@ -5,7 +5,7 @@ description: |
 use:
     - <int2> wadaDuads (<int> index)
 defines:
-    - WADA_DUADS_TOTAL
+    - WADA_DUAD_TOTAL
 examples:
     - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/color_wada.frag
 license:
@@ -13,14 +13,14 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-#ifndef WADA_DUADS_TOTAL
-#define WADA_DUADS_TOTAL 124
+#ifndef WADA_DUAD_TOTAL
+#define WADA_DUAD_TOTAL 124
 #endif
 
 #ifndef FNC_PALETTE_WADA_DUAD
 #define FNC_PALETTE_WADA_DUAD            
 int2 wadaDuad( const int index ) {
-    int2 d[WADA_DUADS_TOTAL];
+    int2 d[WADA_DUAD_TOTAL];
     d[0] = int2(65,115);
     d[1] = int2(13,39);
     d[2] = int2(50,148);

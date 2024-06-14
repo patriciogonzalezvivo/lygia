@@ -5,7 +5,7 @@ description: |
 use:
     - <ivec2> wadaDuads (<int> index)
 defines:
-    - WADA_DUADS_TOTAL
+    - WADA_DUAD_TOTAL
 examples:
     - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/color_wada.frag
 license:
@@ -13,14 +13,14 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-#ifndef WADA_DUADS_TOTAL
-#define WADA_DUADS_TOTAL 124
+#ifndef WADA_DUAD_TOTAL
+#define WADA_DUAD_TOTAL 124
 #endif
 
 #ifndef FNC_PALETTE_WADA_DUAD
 #define FNC_PALETTE_WADA_DUAD            
 ivec2 wadaDuad( const int index ) {
-    ivec2 d[WADA_DUADS_TOTAL];
+    ivec2 d[WADA_DUAD_TOTAL];
     d[0] = ivec2(65,115);
     d[1] = ivec2(13,39);
     d[2] = ivec2(50,148);
@@ -147,7 +147,7 @@ ivec2 wadaDuad( const int index ) {
     d[123] = ivec2(7,38);
 
     #if defined(PLATFORM_WEBGL)
-    for (int i = 0; i < WADA_DUADS_TOTAL; i++)
+    for (int i = 0; i < WADA_DUAD_TOTAL; i++)
         if (i == index) return d[i];
     #else
     return d[index];    
