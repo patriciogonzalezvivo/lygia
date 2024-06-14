@@ -129,3 +129,4 @@ ivec4 wadaTetrad( const int index ) {
     return t[index];
     #endif                   
 }
+#endif

@@ -2382,6 +2382,6 @@ float4 wadaCMYK( const int index ) {
     colors[155] = WADA_SLATE_COLOR_CMYK;
     colors[156] = WADA_BLACK_CMYK;
 
-return colors[index];
+    return colors[index];
 }
 #endif

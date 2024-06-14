@@ -142,3 +142,4 @@ ivec3 wadaTriad( const int index ) {
     return t[index];
     #endif
 }
+#endif

@@ -146,4 +146,6 @@ int2 wadaDuad( const int index ) {
     d[122] = int2(62,125);
     d[123] = int2(7,38);
 
-return d[index];
+    return d[index];
+}
+#endif

@@ -135,4 +135,6 @@ int3 wadaTriad( const int index ) {
     t[110] = int3(19,41,80);
     t[111] = int3(86,90,94);
 
-return t[index];
+    return t[index];
+}
+#endif
