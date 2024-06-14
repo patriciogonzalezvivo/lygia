@@ -122,4 +122,6 @@ int4 wadaTetrad( const int index ) {
     t[97] = int4(92,97,121,134);
     t[98] = int4(52,104,107,149);
 
-return t[index];
+    return t[index];
+}
+#endif

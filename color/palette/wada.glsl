@@ -1,4 +1,4 @@
-#include "wada/values.glsl"
-#include "wada/duads.glsl"
-#include "wada/tetrads.glsl"
-#include "wada/triads.glsl"
+#include "wada/value.glsl"
+#include "wada/duad.glsl"
+#include "wada/triad.glsl"
+#include "wada/tetrad.glsl"

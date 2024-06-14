@@ -1,4 +1,4 @@
-#include "wada/values.hlsl"
-#include "wada/duads.hlsl"
-#include "wada/tetrads.hlsl"
-#include "wada/triads.hlsl"
+#include "wada/value.hlsl"
+#include "wada/duad.hlsl"
+#include "wada/triad.hlsl"
+#include "wada/tetrad.hlsl"

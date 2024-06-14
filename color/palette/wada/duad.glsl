@@ -153,3 +153,4 @@ ivec2 wadaDuad( const int index ) {
     return d[index];    
     #endif
 }
+#endif
