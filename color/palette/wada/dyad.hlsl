@@ -1,26 +1,26 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: |
-    Sanzo Wada's color duads from ["A Dictionary of Color Combinations"](https://sanzo-wada.dmbk.io/)
+    Sanzo Wada's color dyad. from ["A Dictionary of Color Combinations"](https://sanzo-wada.dmbk.io/)
 use:
     - <int2> wadaDuads (<int> index)
 defines:
-    - WADA_DUAD_TOTAL
+    - WADA_DYAD_TOTAL
 examples:
-    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/color_wada_duads.frag
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/color_wada_dyads.frag
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-#ifndef WADA_DUAD_TOTAL
-#define WADA_DUAD_TOTAL 124
+#ifndef WADA_DYAD_TOTAL
+#define WADA_DYAD_TOTAL 124
 #endif
 
 #ifndef FNC_PALETTE_WADA_DUAD
 #define FNC_PALETTE_WADA_DUAD            
-int2 wadaDuad( const int index ) {
-    int2 d[WADA_DUAD_TOTAL];
+int2 wadaDyad( const int index ) {
+    int2 d[WADA_DYAD_TOTAL];
     d[0] = int2(65,115);
     d[1] = int2(13,39);
     d[2] = int2(50,148);
