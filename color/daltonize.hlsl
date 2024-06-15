@@ -10,6 +10,8 @@ options:
         daltonizeProtanope, daltonizeProtanopia, daltonizeProtanomaly, daltonizeDeuteranope,
         daltonizeDeuteranopia, daltonizeDeuteranomaly, daltonizeTritanope, daltonizeTritanopia,
         daltonizeTritanomaly, daltonizeAchromatopsia and daltonizeAchromatomaly
+examples:
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/color_daltonize.frag
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
