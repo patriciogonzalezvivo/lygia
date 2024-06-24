@@ -20,7 +20,9 @@ float opUnion( float d1, float d2, float k ) {
 
 vec4 opUnion( vec4 d1, vec4 d2, float k ) {
     float h = saturate( 0.5 + 0.5*(d2.a - d1.a)/k );
-    return mix( d2, d1, h ) - k*h*(1.0-h); 
+    vec4 result = mix(d2, d1, h);
+    result.w -= k * h * (1.0 - h);
+    return result;
 }
 
 #endif
