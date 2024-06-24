@@ -22,7 +22,9 @@ inline __host__ __device__ float opUnion( float d1, float d2, float k ) {
 
 inline __host__ __device__ float4 opUnion( float4 d1, float4 d2, float k ) {
     float h = clamp( 0.5f + 0.5f * (d2.w - d1.w)/k, 0.0f, 1.0f );
-    return mix( d2, d1, h ) - k * h * (1.0f-h); 
+    float4 result = mix( d2, d1, h ); 
+    result.w -= k * h * (1.0f-h);
+    return result;
 }
 
 #endif

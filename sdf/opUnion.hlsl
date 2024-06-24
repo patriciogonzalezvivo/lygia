@@ -18,7 +18,9 @@ float opUnion( float d1, float d2, float k ) {
 
 float4 opUnion( float4 d1, float4 d2, float k ) {
     float h = saturate( 0.5 + 0.5*(d2.a - d1.a)/k );
-    return lerp( d2, d1, h ) - k*h*(1.0-h); 
+    float4 result = lerp( d2, d1, h ); 
+    result.a -= k*h*(1.0-h);
+    return result;
 }
 
 #endif
