@@ -8,8 +8,6 @@ use: <float3|float4> hsv2rgb(<float3|float4> hsv)
 
 #ifndef FNC_HSV2RGB
 #define FNC_HSV2RGB
-float3 hsv2rgb(in float3 hsb) {
-    return ((hue2rgb(hsb.x) - 1.0) * hsv.y + 1.0) * hsv.z;
-}
-float4 hsv2rgb(in float4 hsb) { return float4(hsv2rgb(hsb.rgb), hsb.a); }
+float3 hsv2rgb(in float3 hsv) { return ((hue2rgb(hsv.x) - 1.0) * hsv.y + 1.0) * hsv.z; }
+float4 hsv2rgb(in float4 hsv) { return float4(hsv2rgb(hsv.rgb), hsv.a); }
 #endif
