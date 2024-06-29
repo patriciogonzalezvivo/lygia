@@ -66,7 +66,7 @@ vec4 pbrLittle( vec4 _albedo, vec3 _position, vec3 _normal, float _roughness, fl
 
     _albedo.rgb = _albedo.rgb * diff;
 #ifdef SCENE_SH_ARRAY
-    _albedo.rgb *= tonemapReinhard( sphericalHarmonics(N) );
+    _albedo.rgb += tonemapReinhard( sphericalHarmonics(N) );
 #endif
 
     float NoV = dot(N, V); 
