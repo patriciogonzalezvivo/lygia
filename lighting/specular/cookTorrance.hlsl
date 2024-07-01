@@ -1,4 +1,5 @@
 #include "../common/beckmann.hlsl"
+#include "../common/ggx.hlsl"
 #include "../../math/powFast.hlsl"
 #include "../../math/const.hlsl"
 
@@ -10,6 +11,14 @@
 #define SPECULAR_POW(A,B) pow(A,B)
 #endif
 #endif
+
+#ifndef SPECULAR_COOKTORRANCE_DIFFUSE_FNC
+#if defined(PLATFORM_RPI)
+#define SPECULAR_COOKTORRANCE_DIFFUSE_FNC beckmann
+#else
+#define SPECULAR_COOKTORRANCE_DIFFUSE_FNC GGX
+#endif
+#endif 
 
 #ifndef FNC_SPECULAR_COOKTORRANCE
 #define FNC_SPECULAR_COOKTORRANCE
@@ -31,7 +40,7 @@ float specularCookTorrance(float3 _L, float3 _N, float3 _V, float _NoV, float _N
     float G = min(1.0, min(x * NoV, x * NoL));
     
     //Distribution term
-    float D = beckmann(NoH, _roughness);
+    float D = SPECULAR_COOKTORRANCE_DIFFUSE_FNC(_N, H, NoH, _roughness);
 
     //Fresnel term
     float F = SPECULAR_POW(1.0 - NoV, _fresnel);
