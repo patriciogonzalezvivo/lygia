@@ -34,7 +34,6 @@ float specularCookTorrance(float3 _L, float3 _N, float3 _V, float _NoV, float _N
     //Geometric term
     float NoH = max(dot(_N, H), 0.0);
     float VoH = max(dot(_V, H), 0.000001);
-    float LoH = max(dot(_L, H), 0.000001);
 
     float x = 2.0 * NoH / VoH;
     float G = min(1.0, min(x * NoV, x * NoL));
