@@ -43,7 +43,7 @@ float3 spectral( in float x, const in float l ) {
     + .5 * cos( PI * min( 1., ( l + 3. ) * abs( -.1666666 * l + x - .3333333 ) ) ) + .5,
     // GREEN, BLUE
     .5 + .5 * cos( PI * min(
-    float2( 1.0, 1.0), abs( float2( x, x ) - ( .5, ( 1.0 - ( ( 2. + l ) / 3. ) * .5 ) ) )
+    float2( 1.0, 1.0), abs( float2( x, x ) - float2( .5, ( 1.0 - ( ( 2. + l ) / 3. ) * .5 ) ) )
     * ( float2(3., 3.) + l ) ) ) );
 }
 
