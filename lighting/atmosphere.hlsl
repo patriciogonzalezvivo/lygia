@@ -176,10 +176,10 @@ float3 atmosphere(Ray ray, float3 sun_dir) {
     #endif
 
     #ifdef ATMOSPHERE_STARS_ELEVATION
-    dir = rotate3dX(ATMOSPHERE_STARS_ELEVATION) * dir;
+    dir = mul(rotate3dX(ATMOSPHERE_STARS_ELEVATION), dir);
     #endif
     #ifdef ATMOSPHERE_STARS_AZIMUTH
-    dir = rotate3dZ(ATMOSPHERE_STARS_AZIMUTH) * dir;
+    dir = mul(rotate3dZ(ATMOSPHERE_STARS_AZIMUTH), dir);
     #endif
     float2 sp = cart2polar(dir.xzy).yz;
     for (float i = 0.0; i < m; ++i) {
