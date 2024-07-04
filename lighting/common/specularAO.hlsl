@@ -11,4 +11,11 @@ float specularAO(float NoV, float ao, float roughness) {
     return 1.0;
 #endif
 }
+
+#ifdef STR_MATERIAL
+float specularAO(const in Material _M, const in float _ao) {
+    return specularAO(_M.NoV, _M.roughness, _ao);
+}
+#endif
+
 #endif
