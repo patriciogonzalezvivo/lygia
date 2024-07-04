@@ -102,10 +102,14 @@ void materialNew(out Material _mat) {
     #endif
 #endif
 
-    // Cloath Model
+    // Cloth Model
 #if defined(SHADING_MODEL_CLOTH)
     _mat.sheenColor         = sqrt(_mat.albedo.rgb);
 #endif
+
+    _mat.V                  = float3(0.0, 0.0, 0.0);
+    _mat.R                  = float3(0.0, 0.0, 0.0);
+    _mat.NoV                = 0;
 }
 
 Material materialNew() {
