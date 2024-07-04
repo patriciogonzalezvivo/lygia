@@ -38,6 +38,16 @@ license:
 #define LIGHT_INTENSITY 1.0
 #endif
 
+#ifndef STR_LIGHT_DIRECTIONAL
+#define STR_LIGHT_DIRECTIONAL
+struct LightDirectional
+{
+    float3 direction;
+    float3 color;
+    float intensity;
+};
+#endif
+
 #ifndef FNC_LIGHT_DIRECTIONAL
 #define FNC_LIGHT_DIRECTIONAL
 
