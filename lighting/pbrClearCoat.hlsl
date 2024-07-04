@@ -90,7 +90,7 @@ float4 pbrClearCoat(const Material _mat) {
 //     ssao = ssao(SCENE_DEPTH, gl_FragCoord.xy*pixel, pixel, 1.);
 // #endif 
     float diffuseAO = min(_mat.ambientOcclusion, ssao);
-    float specAO = specularAO(NoV, diffuseAO, _mat.roughness);
+    float specAO = specularAO(NoV, _mat.roughness, diffuseAO);
 
     // Global Ilumination ( mage Based Lighting )
     // ------------------------
