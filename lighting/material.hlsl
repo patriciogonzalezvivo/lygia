@@ -43,7 +43,8 @@ struct Material {
     
     float3  ior;                // Index of Refraction
     float3  f0;                 // reflectance at 0 degree
-
+    float   thickness;          // default to 0.5
+    
     float   roughness;
     float   metallic;
     float   ambientOcclusion;   // default 1.0
@@ -73,5 +74,9 @@ struct Material {
     float   glossiness;
 #endif
 
+// Cache
+    float3 V;
+    float3 R;
+    float NoV;
 };
 #endif
