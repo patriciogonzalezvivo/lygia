@@ -43,7 +43,6 @@ struct Material {
     
     float3  ior;                // Index of Refraction
     float3  f0;                 // reflectance at 0 degree
-    float   thickness;          // default to 0.5
     
     float   roughness;
     float   metallic;
