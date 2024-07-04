@@ -47,6 +47,17 @@ license:
 #define LIGHT_FALLOFF   0.0
 #endif
 
+#ifndef STR_LIGHT_POINT
+#define STR_LIGHT_POINT
+struct LightPoint
+{
+    float3 position;
+    float3 color;
+    float intensity;
+    float falloff;
+};
+#endif
+
 #ifndef FNC_LIGHT_POINT
 #define FNC_LIGHT_POINT
 
