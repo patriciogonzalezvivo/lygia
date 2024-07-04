@@ -4,9 +4,10 @@
 
 #ifndef FNC_SPECULARAO
 #define FNC_SPECULARAO
-float specularAO(float NoV, float ao, float roughness) {
+float specularAO(const in float _NoV, const in float _roughness, const in float _ao)
+{
 #if !defined(TARGET_MOBILE) && !defined(PLATFORM_RPI) && !defined(PLATFORM_WEBGL)
-    return saturate(pow(NoV + ao, exp2(-16.0 * roughness - 1.0)) - 1.0 + ao);
+    return saturate(pow(_NoV + _ao, exp2(-16.0 * _roughness - 1.0)) - 1.0 + _ao);
 #else
     return 1.0;
 #endif
