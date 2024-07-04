@@ -1,5 +1,6 @@
 #include "common/schlick.glsl"
 
+#include "../math/pow5.hlsl"
 #include "../math/const.glsl"
 #include "../math/saturate.glsl"
 
@@ -8,6 +9,7 @@ contributors: Patricio Gonzalez Vivo
 description: Resolve fresnel coeficient
 use:
     - <float|vec3> fresnel(const <float|vec3> f0, <float> NoV)
+    - <float|vec3> fresnel(const <float|vec3> f0, <float> NoV, float roughness)
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
@@ -31,6 +33,14 @@ vec3 fresnel(const in vec3 f0, const in float NoV) {
 
 float fresnel(const in float f0, const in float NoV) {
     return schlick(f0, 1.0, NoV);
+}
+
+// Roughness-adjusted fresnel function to attenuate high speculars at glancing angles
+// Very useful when used with filtered environment maps
+// See https://seblagarde.wordpress.com/2011/08/17/hello-world/
+vec3 fresnel(vec3 f0, float NoV, float roughness)
+{
+    return f0 + (max(1.0 - roughness, f0) - f0) * pow5(1.0 - NoV);
 }
 
 #endif
