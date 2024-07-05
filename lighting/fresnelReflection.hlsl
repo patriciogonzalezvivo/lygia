@@ -41,4 +41,10 @@ float3 fresnelReflection(float3 R, float3 f0, float NoV) {
     return reflectColor * frsnl;
 }
 
+#ifdef STR_MATERIAL
+float3 fresnelReflection(const in Material _M) {
+    return fresnelReflection(_M.R, _M.f0, _M.NoV) * (1.0-_M.roughness);
+}
+#endif
+
 #endif
