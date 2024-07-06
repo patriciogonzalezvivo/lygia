@@ -8,9 +8,9 @@
 
 #ifndef LIGHT_DIRECTION
 #if defined(UNITY_COMPILER_HLSL)
-#define LIGHT_DIRECTION -_WorldSpaceLightPos0.xyz
+#define LIGHT_DIRECTION _WorldSpaceLightPos0.xyz
 #else
-#define LIGHT_DIRECTION  -float3(0.0, 10.0, -50.0)
+#define LIGHT_DIRECTION float3(0.0, 10.0, -50.0)
 #endif
 #endif
 
