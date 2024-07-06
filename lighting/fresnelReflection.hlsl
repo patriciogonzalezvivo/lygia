@@ -29,7 +29,7 @@ float3 fresnelReflection(float3 R, float3 f0, float NoV) {
     reflectColor = ENVMAP_FNC(R, 0.001, 0.001);
     
     #elif defined(SCENE_CUBEMAP)
-    reflectColor = SAMPLE_CUBE_FNC( SCENE_CUBEMAP, R, ENVMAP_MAX_MIP_LEVEL).rgb;
+    reflectColor = envMap( R, 1.0 ).rgb;
 
     #elif defined(SCENE_SH_ARRAY)
     reflectColor = sphericalHarmonics(R);
