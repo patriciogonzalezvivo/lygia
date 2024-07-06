@@ -1,6 +1,6 @@
 #include "common/schlick.glsl"
 
-#include "../math/pow5.hlsl"
+#include "../math/pow5.glsl"
 #include "../math/const.glsl"
 #include "../math/saturate.glsl"
 
@@ -38,9 +38,8 @@ float fresnel(const in float f0, const in float NoV) {
 // Roughness-adjusted fresnel function to attenuate high speculars at glancing angles
 // Very useful when used with filtered environment maps
 // See https://seblagarde.wordpress.com/2011/08/17/hello-world/
-vec3 fresnel(vec3 f0, float NoV, float roughness)
-{
-    return f0 + (max(1.0 - roughness, f0) - f0) * pow5(1.0 - NoV);
+vec3 fresnel(vec3 f0, float NoV, float roughness) {
+    return f0 + (max(vec3(1.0 - roughness), f0) - f0) * pow5(1.0 - NoV);
 }
 
 #endif

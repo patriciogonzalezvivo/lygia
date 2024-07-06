@@ -175,9 +175,9 @@ vec4 pbrClearCoat(const Material _mat) {
         // If the material has a normal map, we want to use the geometric normal
         // instead to avoid applying the normal map details to the clear coat layer
         float clearCoatNoL = saturate(dot(clearCoatNormal, L.direction));
-        color.rgb = color.rgb * atten * NoL + (clearCoat * clearCoatNoL * L.color) * L.intensity * L.shadow;
+        color.rgb = color.rgb * atten * NoL + (clearCoat * clearCoatNoL * L.color) * L.intensity;// * L.shadow;
         #else
-        color.rgb = color.rgb * atten + (clearCoat * L.color) * (L.intensity * L.shadow * NoL);
+        color.rgb = color.rgb * atten + (clearCoat * L.color) * (L.intensity * NoL);//(L.intensity * L.shadow * NoL);
         #endif
 
         #endif
