@@ -107,7 +107,7 @@ float4 pbrClearCoat(const Material _mat)
     float specAO = specularAO(M, diffAO);
 
     float3 Fr = float3(0.0, 0.0, 0.0);
-    Fr = envMap(M) * E * 2.0;
+    Fr = envMap(M) * E;
 #if !defined(PLATFORM_RPI)
     Fr += fresnelReflection(M);
 #endif
