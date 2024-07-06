@@ -98,7 +98,7 @@ vec4 pbrClearCoat(const Material _mat) {
     float specAO = specularAO(M, diffAO);
 
     vec3 Fr = vec3(0.0, 0.0, 0.0);
-    Fr = envMap(M) * E;
+    Fr = envMap(M) * E * 2.0;
     #if !defined(PLATFORM_RPI)
     Fr  += fresnelReflection(M);
     #endif
@@ -175,9 +175,9 @@ vec4 pbrClearCoat(const Material _mat) {
         // If the material has a normal map, we want to use the geometric normal
         // instead to avoid applying the normal map details to the clear coat layer
         float clearCoatNoL = saturate(dot(clearCoatNormal, L.direction));
-        color.rgb = color.rgb * atten * NoL + (clearCoat * clearCoatNoL * L.color) * L.intensity * _mat.shadow;
+        color.rgb = color.rgb * atten * NoL + (clearCoat * clearCoatNoL * L.color) * L.intensity;// * L.shadow;
         #else
-        color.rgb = color.rgb * atten + (clearCoat * L.color) * (L.intensity * _mat.shadow * NoL);
+        color.rgb = color.rgb * atten + (clearCoat * L.color) * (L.intensity * NoL);//(L.intensity * L.shadow * NoL);
         #endif
 
         #endif
