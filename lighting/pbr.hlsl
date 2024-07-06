@@ -8,9 +8,9 @@
 
 #ifndef LIGHT_DIRECTION
 #if defined(UNITY_COMPILER_HLSL)
-#define LIGHT_DIRECTION -_WorldSpaceLightPos0.xyz
+#define LIGHT_DIRECTION _WorldSpaceLightPos0.xyz
 #else
-#define LIGHT_DIRECTION  -float3(0.0, 10.0, -50.0)
+#define LIGHT_DIRECTION float3(0.0, 10.0, -50.0)
 #endif
 #endif
 
@@ -83,7 +83,7 @@ float4 pbr(const Material _mat) {
     float diffuseAO = min(M.ambientOcclusion, ssao);
     
     float3 Fr = float3(0.0, 0.0, 0.0);
-    Fr  = envMap(M) * E * 2.0;
+    Fr = envMap(M) * E;
     #if !defined(PLATFORM_RPI)
     Fr  += fresnelReflection(M);
     #endif

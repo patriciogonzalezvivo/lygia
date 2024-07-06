@@ -39,8 +39,8 @@ void lightDirectional(
     float dif = diffuse(_Ld, _N, _V, _NoV, _NoL, _roughness);
     float spec = specular(_Ld, _N, _V, _NoV, _NoL, _roughness, _f0);
 
-    _diffuse  += max(vec3(0.0), _Li * (_diffuseColor * _Lc * dif));
-    _specular += max(vec3(0.0), _Li * (_specularColor * _Lc * spec));
+    _diffuse  += max(vec3(0.0), _Li * (_diffuseColor * _Lc * dif) * _NoL);
+    _specular += max(vec3(0.0), _Li * (_specularColor * _Lc * spec) * _NoL);
 }
 
 #ifdef STR_MATERIAL
