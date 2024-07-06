@@ -22,11 +22,11 @@ license:
 */
 
 #ifndef SAMPLE_CUBE_FNC
-// #define SAMPLE_CUBE_FNC(CUBEMAP, NORM, LOD) texCUBE(CUBEMAP, NORM)
-#define SAMPLE_CUBE_FNC(CUBEMAP, NORM, LOD) texCUBElod(CUBEMAP, float4(NORM, LOD) )
+//#define SAMPLE_CUBE_FNC(CUBEMAP, NORM, LOD) texCUBElod(CUBEMAP, float4(NORM, LOD) )
+#define SAMPLE_CUBE_FNC(CUBEMAP, NORM, LOD) CUBEMAP.SampleLevel(sampler##CUBEMAP, NORM, LOD)
 #endif
 
-#ifndef ENVMAP_MAX_MIP_LEVEL
+#if defined(ENVMAP_MAX_MIP_LEVEL) && !defined(UNITY_COMPILER_HLSL)
 #define ENVMAP_MAX_MIP_LEVEL 3.0
 #endif
 
@@ -39,6 +39,12 @@ float3 envMap(float3 _normal, float _roughness, float _metallic) {
     return ENVMAP_FNC(_normal, _roughness, _metallic);
 
 // Cubemap sampling
+#elif defined(SCENE_CUBEMAP) && !defined(ENVMAP_MAX_MIP_LEVEL)
+    uint width, height, levels;
+    SCENE_CUBEMAP.GetDimensions(0, width, height, levels);
+    float lod = levels * _roughness;
+    return SAMPLE_CUBE_FNC( SCENE_CUBEMAP, _normal, lod).rgb;
+    
 #elif defined(SCENE_CUBEMAP)
     float lod = ENVMAP_MAX_MIP_LEVEL * _roughness;
     return SAMPLE_CUBE_FNC( SCENE_CUBEMAP, _normal, lod).rgb;
