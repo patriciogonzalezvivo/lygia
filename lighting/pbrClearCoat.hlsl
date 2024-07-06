@@ -1,6 +1,8 @@
 #include "material.hlsl"
 #include "fresnelReflection.hlsl"
 #include "light/point.hlsl"
+#include "light/new.hlsl"
+#include "light/resolve.hlsl"
 #include "light/directional.hlsl"
 #include "envMap.hlsl"
 
