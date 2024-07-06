@@ -98,7 +98,7 @@ vec4 pbrClearCoat(const Material _mat) {
     float specAO = specularAO(M, diffAO);
 
     vec3 Fr = vec3(0.0, 0.0, 0.0);
-    Fr = envMap(M) * E * 2.0;
+    Fr = envMap(M) * E;
     #if !defined(PLATFORM_RPI)
     Fr  += fresnelReflection(M);
     #endif
