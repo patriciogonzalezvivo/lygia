@@ -77,12 +77,12 @@ vec4 gooch(const in vec4 _albedo, const in vec3 _N, const in vec3 _L, const in v
 
 vec4 gooch(const in Material _M, const in LightDirectional _L) {
     vec3 V = normalize(CAMERA_POSITION - _M.position);
-    return gooch(_M.albedo, _M.normal, _L.direction, V, _M.roughness, _L.intensity * _L.shadow);
+    return gooch(_M.albedo, _M.normal, _L.direction, V, _M.roughness, _L.intensity * _M.shadow);
 }
 
 vec4 gooch(const in Material _M, const in LightPoint _L) {
     vec3 V = normalize(CAMERA_POSITION - _M.position);
-    return gooch(_M.albedo, _M.normal, _L.direction, V, _M.roughness, _L.intensity * _L.shadow);
+    return gooch(_M.albedo, _M.normal, _L.direction, V, _M.roughness, _L.intensity * _M.shadow);
 }
 
 vec4 gooch(const in Material _M) {
