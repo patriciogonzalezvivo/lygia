@@ -96,7 +96,7 @@ void lightPoint(
     float dif = diffuse(_Ld, _N, _V, _NoV, _NoL, _roughness); // * INV_PI;
     float spec = specular(_Ld, _N, _V, _NoV, _NoL, _roughness, _f0);
 
-    float3 lightContribution = _Lc * _Li;
+    float3 lightContribution = _Lc * _Li * _NoL;
     if (_Lof > 0.0)
         lightContribution *= falloff(_Ldist, _Lof);
 
