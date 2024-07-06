@@ -29,8 +29,8 @@ float3 mixOklab( float3 colA, float3 colB, float h ) {
     colB = srgb2rgb(colB);
     #endif
 
-    float3 lmsA = pow( mul(RGB2OKLAB_B, colA), float3(0.33333) );
-    float3 lmsB = pow( mul(RGB2OKLAB_B, colB), float3(0.33333) );
+    float3 lmsA = pow(mul(RGB2OKLAB_B, colA), float3(0.33333, 0.33333, 0.33333));
+    float3 lmsB = pow(mul(RGB2OKLAB_B, colB), float3(0.33333, 0.33333, 0.33333));
     float3 lms = lerp( lmsA, lmsB, h );
     
     // cone to rgb
@@ -44,6 +44,6 @@ float3 mixOklab( float3 colA, float3 colB, float h ) {
 }
 
 float4 mixOklab( float4 colA, float4 colB, float h ) {
-    return float4( mixOklab(colA.rgb, colB.rgb, h), mix(colA.a, colB.a, h) );
+    return float4( mixOklab(colA.rgb, colB.rgb, h), lerp(colA.a, colB.a, h) );
 }
 #endif

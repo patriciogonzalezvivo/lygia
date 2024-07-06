@@ -24,7 +24,7 @@ const float3x3 RGB2OKLAB_B = float3x3(
 #define FNC_RGB2OKLAB
 float3 rgb2oklab(float3 rgb) {
     float3 lms = mul(RGB2OKLAB_B, rgb);
-    return mul(RGB2OKLAB_A, sign(lms)*pow(abs(lms), float3(0.3333333333333)));
+    return mul(RGB2OKLAB_A, sign(lms) * pow(abs(lms), float3(0.3333333333333, 0.3333333333333, 0.3333333333333)));
 
 }
 float4 rgb2oklab(float4 rgb) { return float4(rgb2oklab(rgb.rgb), rgb.a); }
