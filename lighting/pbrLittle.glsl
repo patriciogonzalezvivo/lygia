@@ -5,6 +5,7 @@
 #include "shadow.glsl"
 #include "material.glsl"
 #include "fresnelReflection.glsl"
+#include "sphericalHarmonics.glsl"
 
 #include "ior.glsl"
 #include "envMap.glsl"
@@ -65,9 +66,9 @@ vec4 pbrLittle( vec4 _albedo, vec3 _position, vec3 _normal, float _roughness, fl
     float spec = specular(L, N, V, _roughness) * shadow;
 
     _albedo.rgb = _albedo.rgb * diff;
-#ifdef SCENE_SH_ARRAY
-    _albedo.rgb += tonemapReinhard( sphericalHarmonics(N) );
-#endif
+// #ifdef SCENE_SH_ARRAY
+    // _albedo.rgb = _albedo.rgb + tonemapReinhard( sphericalHarmonics(N) ) * 0.25;
+// #endif
 
     float NoV = dot(N, V); 
 
