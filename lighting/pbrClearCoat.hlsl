@@ -62,25 +62,29 @@ license:
 #ifndef FNC_PBRCLEARCOAT
 #define FNC_PBRCLEARCOAT
 
-float4 pbrClearCoat(const Material _mat) {
+float4 pbrClearCoat(const Material _mat)
+{
     // Calculate Color
-    float3    diffuseColor = _mat.albedo.rgb * (float3(1.0, 1.0, 1.0) - _mat.f0) * (1.0 - _mat.metallic);
-    float3    specularColor = lerp(_mat.f0, _mat.albedo.rgb, _mat.metallic);
+    float3 diffuseColor = _mat.albedo.rgb * (float3(1.0, 1.0, 1.0) - _mat.f0) * (1.0 - _mat.metallic);
+    float3 specularColor = lerp(_mat.f0, _mat.albedo.rgb, _mat.metallic);
 
-    float3    N     = _mat.normal;                                  // Normal
-    float3    V     = normalize(CAMERA_POSITION - _mat.position);   // View
-    float   NoV     = saturate(dot(N, V));                          // Normal . View
-    float3    f0    = ior2f0(_mat.ior);
-    float3    R     = reflection(V, N, _mat.roughness);
+    // Cached
+    Material M = _mat;
+    M.V = normalize(CAMERA_POSITION - M.position); // View
+    M.NoV = dot(M.normal, M.V); // Normal . View
+    M.R = reflection(M.V, M.normal, M.roughness); // Reflection
 
-    #if defined(MATERIAL_HAS_NORMAL) || defined(MATERIAL_HAS_CLEAR_COAT_NORMAL)
+    float3 f0 = ior2f0(M.ior);
+    float3 R = reflection(M.V, M.normal, M.roughness);
+
+#if defined(MATERIAL_HAS_NORMAL) || defined(MATERIAL_HAS_CLEAR_COAT_NORMAL)
     // We want to use the geometric normal for the clear coat layer
-    float clearCoatNoV      = clampNoV(dot(_mat.clearCoatNormal, V));
-    float3 clearCoatNormal  = _mat.clearCoatNormal;
-    #else
-    float clearCoatNoV      = NoV;
-    float3 clearCoatNormal  = N;
-    #endif
+    float clearCoatNoV      = clampNoV(dot(M.clearCoatNormal, M.V));
+    float3 clearCoatNormal    = M.clearCoatNormal;
+#else
+    float clearCoatNoV = M.NoV;
+    float3 clearCoatNormal = M.normal;
+#endif
 
     // Ambient Occlusion
     // ------------------------
@@ -89,113 +93,109 @@ float4 pbrClearCoat(const Material _mat) {
 //     float2 pixel = 1.0/RESOLUTION;
 //     ssao = ssao(SCENE_DEPTH, gl_FragCoord.xy*pixel, pixel, 1.);
 // #endif 
-    float diffuseAO = min(_mat.ambientOcclusion, ssao);
-    float specAO = specularAO(NoV, _mat.roughness, diffuseAO);
 
     // Global Ilumination ( mage Based Lighting )
     // ------------------------
-    float3 E = envBRDFApprox(specularColor, NoV, _mat.roughness);
+    float3 E = envBRDFApprox(specularColor, M);
 
-    // This is a bit of a hack to pop the metalics
-    float specIntensity =   (2.0 * _mat.metallic) * 
-                            saturate(-1.1 + NoV + _mat.metallic) *          // Fresnel
-                            (_mat.metallic + (.95 - _mat.roughness) * 2.0); // make smaller highlights brighter
+    // // This is a bit of a hack to pop the metalics
+    // float specIntensity =   (2.0 * M.metallic) * 
+    //                         saturate(-1.1 + NoV + M.metallic) *          // Fresnel
+    //                         (M.metallic + (.95 - M.roughness) * 2.0); // make smaller highlights brighter
 
+    float diffAO = min(M.ambientOcclusion, ssao);
+    float specAO = specularAO(M, diffAO);
 
     float3 Fr = float3(0.0, 0.0, 0.0);
-    Fr = tonemap( envMap(R, _mat.roughness, _mat.metallic) ) * E * specIntensity;
-    Fr += tonemap( fresnelReflection(R, f0, NoV) ) * _mat.metallic * (1.0-_mat.roughness) * 0.2;
+    Fr = envMap(M) * E * 2.0;
+#if !defined(PLATFORM_RPI)
+    Fr += fresnelReflection(M);
+#endif
     Fr *= specAO;
 
-    float3 Fd = float3(0.0, 0.0, 0.0);
-    Fd = diffuseColor;
-    #if defined(SCENE_SH_ARRAY)
-    Fd *= tonemap( sphericalHarmonics(N) );
-    #endif
-    Fd *= diffuseAO;
+    float3 Fd = diffuseColor;
+#if defined(SCENE_SH_ARRAY)
+    Fd *= tonemap( sphericalHarmonics(M.normal) );
+#endif
+    Fd *= diffAO;
     Fd *= (1.0 - E);
 
-    float3 Fc = fresnel(f0, clearCoatNoV) * _mat.clearCoat;
+    float3 Fc = fresnel(f0, clearCoatNoV) * M.clearCoat;
     float3 attenuation = 1.0 - Fc;
     Fd *= attenuation;
     Fr *= attenuation;
 
     // float3 clearCoatLobe = isEvaluateSpecularIBL(p, clearCoatNormal, V, clearCoatNoV);
-    float3 clearCoatR = reflection(V, clearCoatNormal, _mat.clearCoatRoughness);
-    float3 clearCoatE = envBRDFApprox(f0, clearCoatNoV, _mat.clearCoatRoughness);
+    float3 clearCoatR = reflection(M.V, clearCoatNormal, M.clearCoatRoughness);
+    float3 clearCoatE = envBRDFApprox(f0, clearCoatNoV, M.clearCoatRoughness);
     float3 clearCoatLobe = float3(0.0, 0.0, 0.0);
-    clearCoatLobe += tonemap( envMap(clearCoatR, _mat.clearCoatRoughness, 1.0) ) * clearCoatE;
-    clearCoatLobe += tonemap( fresnelReflection(clearCoatR, f0, clearCoatNoV) ) * (1.0-_mat.clearCoatRoughness);
-    Fr += clearCoatLobe * (specAO * _mat.clearCoat);
+    clearCoatLobe += envMap(clearCoatR, M.clearCoatRoughness, 1.0) * clearCoatE * 3.;
+    clearCoatLobe += tonemap(fresnelReflection(clearCoatR, f0, clearCoatNoV)) * (1.0 - M.clearCoatRoughness) * 0.2;
+    Fr += clearCoatLobe * (specAO * M.clearCoat);
 
-    float4 color  = float4(0.0, 0.0, 0.0, 1.0);
-    color.rgb  += Fd * IBL_LUMINANCE;    // Diffuse
-    color.rgb  += Fr * IBL_LUMINANCE;    // Specular
+    float4 color = float4(0.0, 0.0, 0.0, 1.0);
+    color.rgb += Fd * IBL_LUMINANCE; // Diffuse
+    color.rgb += Fr * IBL_LUMINANCE; // Specular
 
     // LOCAL ILUMINATION
     // ------------------------
     float3 lightDiffuse = float3(0.0, 0.0, 0.0);
     float3 lightSpecular = float3(0.0, 0.0, 0.0);
     
+    // TODO: 
+    //  - Add support for multiple lights
+    // 
     {
-        #if defined(LIGHT_DIRECTION)
-        float f0 = max(_mat.f0.r, max(_mat.f0.g, _mat.f0.b));
-        lightDirectional(diffuseColor, specularColor, N, V, NoV, _mat.roughness, f0, _mat.shadow, lightDiffuse, lightSpecular);
-        #elif defined(LIGHT_POSITION)
-        float f0 = max(_mat.f0.r, max(_mat.f0.g, _mat.f0.b));
-        lightPoint(diffuseColor, specularColor, N, V, NoV, _mat.roughness , f0, _mat.shadow, lightDiffuse, lightSpecular);
-        #endif
+#if defined(LIGHT_DIRECTION)
+        LightDirectional L = LightDirectionalNew();
+#elif defined(LIGHT_POSITION)
+        LightPoint L = LightPointNew();
+#endif
+
+#if defined(LIGHT_DIRECTION) || defined(LIGHT_POSITION)
+        lightResolve(diffuseColor, specularColor, M, L, lightDiffuse, lightSpecular);
+
+        color.rgb += lightDiffuse; // Diffuse
+        color.rgb += lightSpecular; // Specular
+
+        float3 h = normalize(M.V + L.direction);
+        float NoH = saturate(dot(M.normal, h));
+        float NoL = saturate(dot(M.normal, L.direction));
+        float LoH = saturate(dot(L.direction, h));
+
+#if defined(MATERIAL_HAS_CLEAR_COAT_NORMAL)
+        // If the material has a normal map, we want to use the geometric normal
+        // instead to avoid applying the normal map details to the clear coat layer
+        N = clearCoatNormal;
+        float clearCoatNoH = saturate(dot(clearCoatNormal, h));
+#else
+        float clearCoatNoH = saturate(dot(M.normal, M.V));
+#endif
+
+        // clear coat specular lobe
+        float D = GGX(M.normal, h, clearCoatNoH, M.clearCoatRoughness);
+        float3 F = fresnel(f0, LoH) * M.clearCoat;
+
+        float3 Fcc = F;
+        float3 clearCoat = float3(D, D, D) * kelemen(LoH); // * F;
+        float3 atten = (1.0 - Fcc);
+
+#if defined(MATERIAL_HAS_CLEAR_COAT_NORMAL)
+        // If the material has a normal map, we want to use the geometric normal
+        // instead to avoid applying the normal map details to the clear coat layer
+        float clearCoatNoL = saturate(dot(clearCoatNormal, L.direction));
+        color.rgb = color.rgb * atten * NoL + (clearCoat * clearCoatNoL * L.color) * L.intensity * _mat.shadow;
+#else
+        color.rgb = color.rgb * atten + (clearCoat * L.color) * (L.intensity * _mat.shadow * NoL);
+#endif
+
+#endif
     }
     
-    color.rgb  += lightDiffuse;     // Diffuse
-    color.rgb  += lightSpecular;    // Specular
-
-    // Clear Coat
-    #if defined(LIGHT_DIRECTION) || defined(LIGHT_POSITION)
-    #if defined(LIGHT_DIRECTION)
-    float3 L = normalize(LIGHT_DIRECTION);
-    #elif defined(LIGHT_POSITION)
-    float3 L = normalize(LIGHT_POSITION - _mat.position);
-    #endif
-
-    float3 H = normalize(V + L);
-    float NoL = saturate(dot(N, L));
-    float LoH = saturate(dot(L, H));
-
-    #if defined(MATERIAL_HAS_CLEAR_COAT_NORMAL)
-    // If the material has a normal map, we want to use the geometric normal
-    // instead to avoid applying the normal map details to the clear coat layer
-    N = clearCoatNormal;
-    float clearCoatNoH = saturate(dot(clearCoatNormal, H));
-    #else
-    float clearCoatNoH = saturate(dot(N, V));
-    #endif
-
-    // clear coat specular lobe
-    float D             =   GGX(N, H, clearCoatNoH, _mat.clearCoatRoughness);
-    float3  F           =   fresnel(f0, LoH) * _mat.clearCoat;
-    float3  Fcc         =   F;
-    float3  clearCoat   =   D * 
-                            kelemen(LoH) * 
-                            F;
-    float3  atten       =   (1.0 - Fcc);
-
-    #if defined(MATERIAL_HAS_CLEAR_COAT_NORMAL)
-    // If the material has a normal map, we want to use the geometric normal
-    // instead to avoid applying the normal map details to the clear coat layer
-    float clearCoatNoL = saturate(dot(clearCoatNormal, L));
-    color.rgb   = color.rgb * atten * NoL + (clearCoat * clearCoatNoL * LIGHT_COLOR) * (LIGHT_INTENSITY * _mat.shadow);
-    #else
-    // color.rgb = color.rgb * atten + (clearCoat * LIGHT_COLOR) * (LIGHT_INTENSITY * NoL * _mat.shadow);
-    color.rgb   = color.rgb + (clearCoat * LIGHT_COLOR) * (LIGHT_INTENSITY * NoL * _mat.shadow);
-    #endif
-
-    #endif
-
     // Final
-    color.rgb  *= _mat.ambientOcclusion;
-    color.rgb  += _mat.emissive;
-    color.a     = _mat.albedo.a;
+    color.rgb *= M.ambientOcclusion;
+    color.rgb += M.emissive;
+    color.a = M.albedo.a;
 
     return color;
 }
