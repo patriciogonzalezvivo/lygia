@@ -73,9 +73,9 @@ float4 pbrLittle(float4 albedo, float3 position, float3 normal, float roughness,
     albedo.rgb = albedo.rgb * diff;
     #if defined(UNITY_COMPILER_HLSL)
     albedo.rgb += ShadeSH9(half4(N,1));
-    #elif defined(SCENE_SH_ARRAY)
-    albedo.rgb = albedo.rgb + tonemapReinhard( sphericalHarmonics(N) ) * 0.25;
-    #endif
+    // #elif defined(SCENE_SH_ARRAY)
+    // albedo.rgb = albedo.rgb + tonemapReinhard( sphericalHarmonics(N) ) * 0.25;
+    // #endif
 
     float NoV = dot(N, V); 
 
