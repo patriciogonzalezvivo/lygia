@@ -1,10 +1,8 @@
-#include "map.glsl"
-
 /*
-contributors: dahart (https://www.shadertoy.com/user/dahart)
+contributors: Fabrice Neyret
 description: |
-    Anti-aliasing fract function. It clamp except for a 2-pixel wide gradient along the edge
-    Based on this example https://www.shadertoy.com/view/4l2BRD
+    Anti-aliasing fract function, including Shannon-Nyquiest filtering for high frequencies.
+    Based on this example https://www.shadertoy.com/view/3tSGWy
 use: <float> aafract(<float> x)
 option:
     AA_EDGE: in the absence of derivatives you can specify the antialiasing factor
@@ -17,17 +15,26 @@ option:
 #extension GL_OES_standard_derivatives : enable
 #endif
 
+#ifndef NYQUIST_FNC
+#define NYQUIST_BIAS -.0  // < 0: prefer a bit of aliasing to blur 
+#define NYQUIST_SPREAD 1. // < 1: transition more brutal 
+// w = pixel width = grad(continous signal) . c = possibly fracted signal.
+#define NYQUIST_FNC(w,c) mix(.5, c, clamp((.5-NYQUIST_BIAS-(w))/.25/NYQUIST_SPREAD,0.,1.) )
+#endif
+
 float aafract(float x) {
 #if !defined(GL_ES) || __VERSION__ >= 300 || defined(GL_OES_standard_derivatives)
-    float afwidth = 2.0 * length(vec2(dFdx(x), dFdy(x)));
-    float fx = fract(x);
-    float idx = 1. - afwidth;
-    return (fx < idx) ? fx : map(fx, idx, 1., fx, 0.);
+    float v = fract(x),
+          w = length(vec2(dFdx(x),dFdy(x))),      // pixel width. NB: x must not be discontinuous or factor discont out
+          c = v < 1.-w ? v/(1.-w) : (1.-v)/w; // replace right step by down slope (-> chainsaw is continuous).
+               // shortened slope : added downslope near v=1 
+    return NYQUIST_FNC(w,c);
 #elif defined(AA_EDGE)
-    float afwidth = AA_EDGE;
-    float fx = fract(x);
-    float idx = 1. - afwidth;
-    return (fx < idx) ? fx : map(fx, idx, 1., fx, 0.);
+    float v = fract(x),
+          w = AA_EDGE,      // pixel width. NB: x must not be discontinuous or factor discont out
+          c = v < 1.-w ? v/(1.-w) : (1.-v)/w; // replace right step by down slope (-> chainsaw is continuous).
+               // shortened slope : added downslope near v=1 
+    return NYQUIST_FNC(w,c);
 #else 
     return fract(x);
 #endif
