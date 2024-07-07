@@ -5,8 +5,7 @@ use: <float> viewZ2depth( <float> viewZ, [, <float> near, <float> far] )
 options:
     - CAMERA_NEAR_CLIP
     - CAMERA_FAR_CLIP
-    - CAMERA_ORTHOGRAPHIC_PROJECTION, if it's not present is consider a PERECPECTIVE
-    camera
+    - CAMERA_ORTHOGRAPHIC_PROJECTION, if it's not present is consider a PERECPECTIVE camera
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
