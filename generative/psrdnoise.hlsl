@@ -228,11 +228,11 @@ float psrdnoise(float3 x, float3 period, float alpha, out float3 gradient) {
 
 #ifndef PSRDNOISE_PERLIN_GRID
     // Transformation matrices for the axis-aligned simplex grid
-    const float3x3 M = float3x3(0.0, 1.0, 1.0,
+    static const float3x3 M = float3x3(0.0, 1.0, 1.0,
                                 1.0, 0.0, 1.0,
                                 1.0, 1.0, 0.0);
 
-    const float3x3 Mi = float3x3(-0.5, 0.5, 0.5,
+    static const float3x3 Mi = float3x3(-0.5, 0.5, 0.5,
                                 0.5,-0.5, 0.5,
                                 0.5, 0.5,-0.5);
 #endif
@@ -431,11 +431,11 @@ float psrdnoise(float3 x, float3 period, float alpha, out float3 gradient, out f
 
 #ifndef PSRDNOISE_PERLIN_GRID
     // Transformation matrices for the axis-aligned simplex grid
-    const float3x3 M = float3x3(0.0, 1.0, 1.0,
+    static const float3x3 M = float3x3(0.0, 1.0, 1.0,
                         1.0, 0.0, 1.0,
                         1.0, 1.0, 0.0);
 
-    const float3x3 Mi = float3x3(-0.5, 0.5, 0.5,
+    static const float3x3 Mi = float3x3(-0.5, 0.5, 0.5,
                             0.5,-0.5, 0.5,
                             0.5, 0.5,-0.5);
 #endif

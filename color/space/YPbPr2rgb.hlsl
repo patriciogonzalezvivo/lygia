@@ -10,13 +10,13 @@ license:
 #ifndef MAT_YPBPR2RGB
 #define MAT_YPBPR2RGB
 #ifdef YPBPR_SDTV
-const float3x3 YPBPR2RGB = float3x3( 
+static const float3x3 YPBPR2RGB = float3x3( 
     1.0,     1.0,       1.0,
     0.0,    -0.344,     1.772,
     1.402,  -0.714,     0.0
 );
 #else
-const float3x3 YPBPR2RGB = float3x3( 
+static const float3x3 YPBPR2RGB = float3x3( 
     1.0,     1.0,       1.0,
     0.0,    -0.187,     1.856,
     1.575,  -0.468,     0.0
