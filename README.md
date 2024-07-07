@@ -64,7 +64,7 @@ If you just need to resovle the dependencies of a shader file you got, the faste
 
 <div class="container">
     <div class="file-drop-area">
-    <span class="file-msg">Drop you shader file <a href="https://lygia.xyz/">here</a></span>
+    <span class="file-msg">Drop your shader file <a href="https://lygia.xyz/">here</a></span>
     </div>
 </div>
 
