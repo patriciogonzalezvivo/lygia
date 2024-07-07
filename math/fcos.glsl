@@ -9,8 +9,7 @@ use: fcos(<float> value)
 #ifndef FNC_FCOS
 #define FNC_FCOS
 
-float fcos(in float x)
-{
+float fcos(in float x){
     float w = fwidth(x);
     return cos(x) * smoothstep( TWO_PI, 0.0, w );
 }
