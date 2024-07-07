@@ -220,9 +220,9 @@ If you have doubts please reaching out to patriciogonzalezvivo at gmail dot com
 
 Created and mantained by [Patricio Gonzalez Vivo](https://patriciogonzalezvivo.com/)( <a rel="me" href="https://merveilles.town/@patricio">Mastodon</a> | [Twitter](https://twitter.com/patriciogv) | [Instagram](https://www.instagram.com/patriciogonzalezvivo/) | [GitHub](https://github.com/sponsors/patriciogonzalezvivo) ) and every direct or indirect [contributors](https://github.com/patriciogonzalezvivo/lygia/graphs/contributors) to the GitHub. 
 
-This library has been built in many cases on top of the work of brilliant and generous people like: [Inigo Quiles](https://www.iquilezles.org/), [Morgan McGuire](https://casual-effects.com/), [Alan Wolfe](https://blog.demofox.org/), [Hugh Kennedy](https://github.com/hughsk), [Matt DesLauriers](https://www.mattdesl.com/), and many others.
+This library has been built in many cases on top of the work of brilliant and generous people like: [Inigo Quiles](https://www.iquilezles.org/), [Morgan McGuire](https://casual-effects.com/), [Alan Wolfe](https://blog.demofox.org/), [Matt DesLauriers](https://www.mattdesl.com/), [Bjorn Ottosson](https://github.com/bottosson), [Hugh Kennedy](https://github.com/hughsk), and many others.
 
-Also is being constantly mantain, translated and/or extended by generous contributors like: [Shadi El Hajj](https://github.com/shadielhajj), [Kathy](https://github.com/kfahn22), [Bonsak Schiledrop](https://github.com/bonsak), [Amin Shazrin](https://github.com/ammein), 
+Also is being constantly mantain, translated and/or extended by generous contributors like: [Shadi El Hajj](https://github.com/shadielhajj), [Kathy](https://github.com/kfahn22), [Bonsak Schiledrop](https://github.com/bonsak), [Amin Shazrin](https://github.com/ammein), [Guido Schmidt](https://github.com/guidoschmidt), and many others.
 
 
 
