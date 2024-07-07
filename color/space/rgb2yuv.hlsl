@@ -10,13 +10,13 @@ license:
 #ifndef MAT_RGB2YUV
 #define MAT_RGB2YUV
 #ifdef YUV_SDTV
-const float3x3 RGB2YUV = float3x3(
+static const float3x3 RGB2YUV = float3x3(
     0.299, -0.14713,  0.615,
     0.587, -0.28886, -0.51499,
     0.114,  0.436,   -0.10001
 );
 #else
-const float3x3 RGB2YUV = float3x3(
+static const float3x3 RGB2YUV = float3x3(
     0.2126,  -0.09991, 0.615,
     0.7152,  -0.33609,-0.55861,
     0.0722,   0.426,  -0.05639
