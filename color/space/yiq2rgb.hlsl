@@ -9,7 +9,7 @@ license:
 
 #ifndef MAT_YIQ2RGB
 #define MAT_YIQ2RGB
-const float3x3 YIQ2RGB = float3x3(  1.0,  0.9469,  0.6235, 
+static const float3x3 YIQ2RGB = float3x3(  1.0,  0.9469,  0.6235, 
                                     1.0, -0.2747, -0.6357, 
                                     1.0, -1.1085,  1.7020 );
 #endif
