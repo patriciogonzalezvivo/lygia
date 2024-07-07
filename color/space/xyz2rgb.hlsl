@@ -10,14 +10,14 @@ license:
 #ifndef MAT_XYZ2RGB
 #define MAT_XYZ2RGB
 #ifdef CIE_D50
-const float3x3 XYZ2RGB = float3x3(
+static const float3x3 XYZ2RGB = float3x3(
      3.1338561,-0.9787684, 0.0719453,
     -1.6168667, 1.9161415,-0.2289914,
     -0.4906146, 0.0334540, 1.4052427
 );
 #else
 // CIE D65
-const float3x3 XYZ2RGB = float3x3(
+static const float3x3 XYZ2RGB = float3x3(
      3.2404542,-0.9692660, 0.0556434,
     -1.5371385, 1.8760108,-0.2040259,
     -0.4985314, 0.0415560, 1.0572252
