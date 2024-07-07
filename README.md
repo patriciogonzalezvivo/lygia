@@ -6,27 +6,40 @@ LYGIA is the biggest shader library. Battle proof and cross platform and multi-l
 
 [![](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub)](https://github.com/sponsors/patriciogonzalezvivo)
 
-Here are a couple of integrations examples:
+Engines & Frameworks:
+
+<p style="text-align: center;" >
+    <a href="https://github.com/patriciogonzalezvivo/lygia_unity_examples"><img src="https://lygia.xyz/imgs/unity.png" alt="unity" width="64" /></a>
+    <a href="https://github.com/franklzt/lygia_unreal_engine_examples"><img src="https://lygia.xyz/imgs/unreal.png" alt="unreal" width="64" /></a>
+    <a href="https://www.curseforge.com/minecraft/search?page=1&pageSize=20&sortType=1&search=LYGIA%20Shader%20Library"><img src="https://lygia.xyz/imgs/minecraft.png" alt="minecraft" width="64" /></a>
+    <a href="https://github.com/patriciogonzalezvivo/lygia_examples"><img src="https://lygia.xyz/imgs/glslViewer.png" alt="glslViewer" width="64" /></a>
+    <a href="https://github.com/irmf/irmf-examples/tree/master/examples/028-lygia"><img src="https://lygia.xyz/imgs/irmf.png" alt="irmf" width="64" /></a>
+</p>
 
 <p style="text-align: center;" >
     <a href="https://github.com/guidoschmidt/lygia_threejs_examples"><img src="https://lygia.xyz/imgs/threejs.png" alt="threejs" width="64" /></a>
-    <a href="https://github.com/patriciogonzalezvivo/lygia_unity_examples"><img src="https://lygia.xyz/imgs/unity.png" alt="unity" width="64" /></a>
-    <a href="https://github.com/franklzt/lygia_unreal_engine_examples"><img src="https://lygia.xyz/imgs/unreal.png" alt="unreal" width="64" /></a>
+    <a href="https://github.com/kujohn/lygia_ogl_examples"><img src="https://lygia.xyz/imgs/ogl.png" alt="ogl" width="64" /></a>
+    <a href="https://www.npmjs.com/package/lygia"><img src="https://lygia.xyz/imgs/npm.png" alt="npm" width="64" /></a>
+    <a href="https://codesandbox.io/s/lygia-react-starter-fftx6p"><img src="https://lygia.xyz/imgs/r3f.png" alt="r3rf" width="64" /></a>
+</p>
+
+<p style="text-align: center;" >
     <a href="https://github.com/patriciogonzalezvivo/lygia_p5_examples"><img src="https://lygia.xyz/imgs/p5.png" alt="p5" width="64" /></a>
     <a href="https://editor.p5js.org/patriciogonzalezvivo/sketches"><img src="https://lygia.xyz/imgs/p5js.png" alt="p5js" width="64" /></a>
     <a href="https://github.com/patriciogonzalezvivo/lygia_of_examples"><img src="https://lygia.xyz/imgs/of.png" alt="openFrameworks" width="64" /></a>
-    <a href="https://www.curseforge.com/minecraft/search?page=1&pageSize=20&sortType=1&search=LYGIA%20Shader%20Library"><img src="https://lygia.xyz/imgs/minecraft.png" alt="minecraft" width="64" /></a>
-    <a href="https://www.figma.com/community/plugin/1138854718618193875"><img src="https://lygia.xyz/imgs/figma.png" alt="figma" width="64" /></a>
     <a href="https://github.com/vectorsize/lygia-td"><img title="static-resolver by vectorsize" src="https://lygia.xyz/imgs/td.png" alt="touchDesigner" width="64" /></a>
-    <a href="https://github.com/kujohn/lygia_ogl_examples"><img src="https://lygia.xyz/imgs/ogl.png" alt="ogl" width="64" /></a>
-    <a href="https://www.npmjs.com/package/lygia"><img src="https://lygia.xyz/imgs/npm.png" alt="npm" width="64" /></a>
-    <a href="https://github.com/patriciogonzalezvivo/lygia_examples"><img src="https://lygia.xyz/imgs/glslViewer.png" alt="glslViewer" width="64" /></a>
-    <a href="https://observablehq.com/@radames/hello-lygia-shader-library"><img src="https://lygia.xyz/imgs/ob.png" alt="observable" width="64" /></a>
-    <a href="https://codesandbox.io/s/lygia-react-starter-fftx6p"><img src="https://lygia.xyz/imgs/r3f.png" alt="r3rf" width="64" /></a>
-    <a href="https://github.com/irmf/irmf-examples/tree/master/examples/028-lygia"><img src="https://lygia.xyz/imgs/irmf.png" alt="irmf" width="64" /></a>
     <a href="https://github.com/ossia/score-examples"><img src="https://lygia.xyz/imgs/ossia.png" alt="ossia" width="64" /></a>
+</p>
+
+
+Shader editors:
+
+<p style="text-align: center;" >
+    <a href="https://www.figma.com/community/plugin/1138854718618193875"><img src="https://lygia.xyz/imgs/figma.png" alt="figma" width="64" /></a>
+    <a href="https://observablehq.com/@radames/hello-lygia-shader-library"><img src="https://lygia.xyz/imgs/ob.png" alt="observable" width="64" /></a>
     <a href="https://www.productioncrate.com/laforge/"><img src="https://lygia.xyz/imgs/laforge.png" alt="laforge" width="64" /></a>
     <a href="https://synesthesia.live/"><img src="https://lygia.xyz/imgs/synesthesia.png" alt="synesthesia" width="64" /></a>
+    <a href="https://glsl.app/"><img src="https://glsl.app/icon-256.png" alt="glslApp" width="64"/></a>
 </p>
 
 ## How to use it?
