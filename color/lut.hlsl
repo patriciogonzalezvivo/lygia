@@ -42,9 +42,9 @@ float4 lut(in SAMPLER_TYPE tex, in float4 color, in int offset) {
 
 #else
 // Data about how the LUTs rows are encoded
-const float LUT_WIDTH = LUT_CELL_SIZE*LUT_CELL_SIZE;
-const float LUT_OFFSET = 1./ float( LUT_N_ROWS);
-const float4 LUT_SIZE = float4(LUT_WIDTH, LUT_CELL_SIZE, 1./LUT_WIDTH, 1./LUT_CELL_SIZE);
+static const float LUT_WIDTH = LUT_CELL_SIZE*LUT_CELL_SIZE;
+static const float LUT_OFFSET = 1./ float( LUT_N_ROWS);
+static const float4 LUT_SIZE = float4(LUT_WIDTH, LUT_CELL_SIZE, 1./LUT_WIDTH, 1./LUT_CELL_SIZE);
 
 // Apply LUT to a COLOR
 // ------------------------------------------------------------
