@@ -38,7 +38,7 @@ float remap_pdf_tri_unity( float v ) {
     return 0.5 + 0.5*v;
 }
 
-const float2 blueNoiseTexturePixel = 1.0/BLUENOISE_TEXTURE_RESOLUTION;
+static const float2 blueNoiseTexturePixel = 1.0/BLUENOISE_TEXTURE_RESOLUTION;
 
 float ditherBlueNoise(SAMPLER_TYPE tex, in float b, float2 fragcoord, const in float time) {
     #ifdef DITHER_BLUENOISE_ANIMATED 
