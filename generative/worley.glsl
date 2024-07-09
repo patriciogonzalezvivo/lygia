@@ -1,9 +1,12 @@
 #include "random.glsl"
+#include "../math/distance.glsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
 description: Worley noise
 use: <vec2> worley(<vec2|vec3> pos)
+options:
+    - DIST_FNC: change the distance function, currently implemented are euclidean, manhattan, chebychev and minkowski
 examples:
     - /shaders/generative_worley.frag
 license:
@@ -13,6 +16,10 @@ license:
 
 #ifndef FNC_WORLEY
 #define FNC_WORLEY
+
+#ifndef DIST_FNC
+#define DIST_FNC euclidean
+#endif
 
 float worley(vec2 p){
     vec2 n = floor( p );
@@ -24,7 +31,7 @@ float worley(vec2 p){
                 vec2  g = vec2(i,j);
                 vec2  o = random2( n + g );
                 vec2  delta = g + o - f;
-                float d = length(delta);
+                float d = DIST_FNC(g+o, f);
                 dis = min(dis,d);
     }
 
@@ -41,8 +48,7 @@ float worley(vec3 p) {
             for( int i=-1; i <= 1; i++ ) {	
                 vec3  g = vec3(i,j,k);
                 vec3  o = random3( n + g );
-                vec3  delta = g+o-f;
-                float d = length(delta);
+                float d = DIST_FNC(g+o, f);
                 dis = min(dis,d);
     }
 
