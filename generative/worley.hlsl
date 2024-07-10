@@ -1,5 +1,5 @@
 #include "random.hlsl"
-#include "../math/distance.hlsl"
+#include "../math/dist.hlsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
@@ -15,8 +15,8 @@ license:
 #ifndef FNC_WORLEY
 #define FNC_WORLEY
 
-#ifndef DIST_FNC
-#define DIST_FNC euclidean
+#ifndef WORLEY_DIST_FNC
+#define WORLEY_DIST_FNC distEuclidean
 #endif
 
 float worley(float2 p){
@@ -28,7 +28,7 @@ float worley(float2 p){
         for( int i=-1; i <= 1; i++ ) {	
                 float2  g = float2(i,j);
                 float2  o = random2( n + g );
-                float d = DIST_FNC(g+o, f);
+                float d = WORLEY_DIST_FNC(g+o, f);
                 dis = min(dis,d);
     }
 
@@ -45,7 +45,7 @@ float worley(float3 p){
             for( int i=-1; i <= 1; i++ ) {	
                 float3  g = float3(i,j,k);
                 float3  o = random3( n + g );
-                float d = DIST_FNC(g+o, f);
+                float d = WORLEY_DIST_FNC(g+o, f);
                 dis = min(dis,d);
     }
 
