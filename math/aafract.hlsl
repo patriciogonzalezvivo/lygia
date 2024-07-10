@@ -1,4 +1,4 @@
-#include "map.hlsl"
+#include "nyquist.hlsl"
 
 /*
 contributors: dahart (https://www.shadertoy.com/user/dahart)
@@ -17,11 +17,12 @@ float aafract(float x) {
 #if defined(AA_EDGE)
     float afwidth = AA_EDGE;
 #else 
-    float afwidth = 2.0 * fwidth(x);
+    float afwidth = 2.0 * length(float2(ddx(x), ddy(x)));
 #endif
     float fx = frac(x);
     float idx = 1. - afwidth;
-    return (fx < idx) ? fx : map(fx, idx, 1., fx, 0.);
+    float v = (fx < idx) ? fx/idx : (1.0-fx)/afwidth;
+    return nyquist(v, afwidth);
 }
 
 float2 aafract(float2 v) { return float2(aafract(v.x), aafract(v.y)); }

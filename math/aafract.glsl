@@ -1,4 +1,4 @@
-#include "map.glsl"
+#include "nyquist.glsl"
 
 /*
 contributors: dahart (https://www.shadertoy.com/user/dahart)
@@ -22,12 +22,14 @@ float aafract(float x) {
     float afwidth = 2.0 * length(vec2(dFdx(x), dFdy(x)));
     float fx = fract(x);
     float idx = 1. - afwidth;
-    return (fx < idx) ? fx : map(fx, idx, 1., fx, 0.);
+    float v = (fx < idx) ? fx/idx : (1.0-fx)/afwidth;
+    return nyquist(v, afwidth);
 #elif defined(AA_EDGE)
     float afwidth = AA_EDGE;
     float fx = fract(x);
     float idx = 1. - afwidth;
-    return (fx < idx) ? fx : map(fx, idx, 1., fx, 0.);
+    float v = (fx < idx) ? fx/idx : (1.0-fx)/afwidth;
+    return nyquist(v, afwidth);
 #else 
     return fract(x);
 #endif
