@@ -6,7 +6,8 @@ contributors: Patricio Gonzalez Vivo
 description: Worley noise
 use: <float2> worley(<float2|float3> pos)
 options:
-    - DIST_FNC: change the distance function, currently implemented are euclidean, manhattan, chebychev and minkowski
+    - WORLEY_JITTER: amount of pattern randomness. With 1.0 being the default and 0.0 resulting in a perfectly symmetrical pattern.
+    - WORLEY_DIST_FNC: change the distance function, currently implemented are euclidean, manhattan, chebychev and minkowski
 examples:
     - /shaders/generative_worley.frag
 license:
@@ -16,6 +17,10 @@ license:
 
 #ifndef FNC_WORLEY
 #define FNC_WORLEY
+
+#ifndef WORLEY_DIST_FNC
+#define WORLEY_DIST_FNC distEuclidean
+#endif
 
 #ifndef WORLEY_DIST_FNC
 #define WORLEY_DIST_FNC distEuclidean
@@ -32,7 +37,7 @@ float2 worley(float2 p){
     for( int j= -1; j <= 1; j++ ) {
         for( int i=-1; i <= 1; i++ ) {	
             float2  g = float2(i,j);
-            float2  o = random2( n + g );
+            float2  o = random2( n + g ) * WORLEY_JITTER;
             float2  p = g + o;
             float d = WORLEY_DIST_FNC(p, f);
             if (d < distF1) {
@@ -66,7 +71,7 @@ float2 worley(float3 p) {
         for( int j= -1; j <= 1; j++ ) {
             for( int i=-1; i <= 1; i++ ) {	
                 float3  g = float3(i,j,k);
-                float3  o = random3( n + g );
+                float3  o = random3( n + g ) * WORLEY_JITTER;
                 float3  p = g + o;
                 float d = WORLEY_DIST_FNC(p, f);
                 if (d < distF1) {
