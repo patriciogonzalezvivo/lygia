@@ -8,7 +8,7 @@ description: Commonly used distance functions.
 #endif
 
 #ifndef DIST_MINKOWSKI_P
-#define DIST_MINKOWSKI_P 2 // 1: Manhattan, 2: Euclidean, Infinity: Chebychev
+#define DIST_MINKOWSKI_P 2.0 // 1: Manhattan, 2: Euclidean, Infinity: Chebychev
 #endif
 
 #ifndef FNC_DIST
