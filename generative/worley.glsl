@@ -3,8 +3,8 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: Worley noise
-use: <vec2> worley(<vec2|vec3> pos)
+description: Worley noise. Returns vec2(F1, F2)
+use: <vec2> worley2(<vec2|vec3> pos)
 options:
     - WORLEY_JITTER: amount of pattern randomness. With 1.0 being the default and 0.0 resulting in a perfectly symmetrical pattern.
     - WORLEY_DIST_FNC: change the distance function, currently implemented are euclidean, manhattan, chebychev and minkowski
