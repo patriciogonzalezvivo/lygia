@@ -18,8 +18,8 @@ license:
 #ifndef FNC_WORLEY
 #define FNC_WORLEY
 
-#ifndef WORLEY_DIST_FNC
-#define WORLEY_DIST_FNC distEuclidean
+#ifndef WORLEY_JITTER
+#define WORLEY_JITTER 1.0
 #endif
 
 #ifndef WORLEY_DIST_FNC
