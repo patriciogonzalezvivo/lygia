@@ -89,8 +89,8 @@ float4 pbrGlass(const Material _mat) {
     // Gi  += fresnelReflection(M);
 
     #if defined(SHADING_MODEL_IRIDESCENCE)
-    float3 Fr = float3(0.0);
-    Gi  += fresnelIridescentReflection(M.normal, -M.V, M.f0, float3(IOR_AIR), M.ior, M.thickness, M.roughness, Fr);
+    float3 Fr = float3(0.0, 0.0, 0.0);
+    Gi  += fresnelIridescentReflection(M.normal, -M.V, M.f0, float3(IOR_AIR, IOR_AIR, IOR_AIR), M.ior, M.thickness, M.roughness, Fr);
     #else
     float3 Fr = fresnel(M.f0, M.NoV);
     Gi  += fresnelReflection(M.R, Fr) * (1.0-M.roughness);

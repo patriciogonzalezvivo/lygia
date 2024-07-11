@@ -20,7 +20,6 @@ options:
     - MATERIAL_CLEARCOAT_ROUGHNESS
     - MATERIAL_HAS_CLEAR_COAT_NORMAL
     - SHADING_MODEL_SUBSURFACE
-    - MATERIAL_SUBSURFACE_COLOR
     - SHADING_MODEL_CLOTH
     - SHADING_MODEL_SPECULAR_GLOSSINESS
 license:
@@ -42,12 +41,12 @@ struct Material {
     #endif
     
     float3  ior;                // Index of Refraction
-    float3  f0;                 // reflectance at 0 degree
+    float3  f0;                 // reflectance at 0 degree 
     
     float   roughness;
     float   metallic;
     float   ambientOcclusion;   // default 1.0
-    float   shadow;             // default 1.0
+    // float   shadow;             // default 1.0
 
     float   clearCoat;
     float   clearCoatRoughness;
@@ -55,17 +54,18 @@ struct Material {
     float3  clearCoatNormal;    // default float3(0.0, 0.0, 1.0)
     #endif
 
-#if defined(SHADING_MODEL_SUBSURFACE) || defined(SCENE_BACK_SURFACE)
-    float   thickness;          // default 0.5;
-    float   subsurfacePower;    // default 12.234;
+#if defined(SHADING_MODEL_IRIDESCENCE)
+    float   thickness; // default to 300.0
+#endif
+    
+#if defined(SHADING_MODEL_SUBSURFACE)
+    vec3    subsurfaceColor;    // defualt vec3(1.0)
+    float   subsurfacePower;    // default to 12.234
+    float   subsurfaceThickness;// default to 1.0
 #endif
 
 #if defined(SHADING_MODEL_CLOTH)
     float3  sheenColor;
-#endif
-
-#if defined(MATERIAL_SUBSURFACE_COLOR)
-    float3  subsurfaceColor;// = float3(1.0);
 #endif
 
 #if defined(SHADING_MODEL_SPECULAR_GLOSSINESS)
