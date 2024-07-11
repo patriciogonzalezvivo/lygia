@@ -33,20 +33,20 @@ vec2 worley(vec2 p){
         for( int i=-1; i <= 1; i++ ) {	
             vec2  g = vec2(i,j);
             vec2  o = random2( n + g );
-            vec2  point = g + o;
-            float d = WORLEY_DIST_FNC(point, f);
+            vec2  p = g + o;
+            float d = WORLEY_DIST_FNC(p, f);
             if (d < distF1) {
                 distF2 = distF1;
                 distF1 = d;
                 off2 = off1;
                 off1 = g;
                 pos2 = pos1;
-                pos1 = point;
+                pos1 = p;
             }
             else if (d < distF2) {
                 distF2 = d;
                 off2 = g;
-                pos2 = point;
+                pos2 = p;
             }
         }
     }
@@ -67,20 +67,20 @@ vec2 worley(vec3 p) {
             for( int i=-1; i <= 1; i++ ) {	
                 vec3  g = vec3(i,j,k);
                 vec3  o = random3( n + g );
-                vec3  point = g + o;
-                float d = WORLEY_DIST_FNC(point, f);
+                vec3  p = g + o;
+                float d = WORLEY_DIST_FNC(p, f);
                 if (d < distF1) {
                     distF2 = distF1;
                     distF1 = d;
                     off2 = off1;
                     off1 = g;
                     pos2 = pos1;
-                    pos1 = point;
+                    pos1 = p;
                 }
                 else if (d < distF2) {
                     distF2 = d;
                     off2 = g;
-                    pos2 = point;
+                    pos2 = p;
                 }
             }
         }

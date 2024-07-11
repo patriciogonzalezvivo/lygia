@@ -7,6 +7,8 @@ description: Worley noise
 use: <float2> worley(<float2|float3> pos)
 options:
     - DIST_FNC: change the distance function, currently implemented are euclidean, manhattan, chebychev and minkowski
+examples:
+    - /shaders/generative_worley.frag
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
@@ -19,37 +21,72 @@ license:
 #define WORLEY_DIST_FNC distEuclidean
 #endif
 
-float worley(float2 p){
+float2 worley(float2 p){
     float2 n = floor( p );
     float2 f = frac( p );
 
-    float dis = 1.0;
-    for( int j= -1; j <= 1; j++ )
+    float distF1 = 1.0;
+    float distF2 = 1.0;
+    float2 off1, pos1;
+    float2 off2, pos2;
+    for( int j= -1; j <= 1; j++ ) {
         for( int i=-1; i <= 1; i++ ) {	
-                float2  g = float2(i,j);
-                float2  o = random2( n + g );
-                float d = WORLEY_DIST_FNC(g+o, f);
-                dis = min(dis,d);
+            float2  g = float2(i,j);
+            float2  o = random2( n + g );
+            float2  p = g + o;
+            float d = WORLEY_DIST_FNC(p, f);
+            if (d < distF1) {
+                distF2 = distF1;
+                distF1 = d;
+                off2 = off1;
+                off1 = g;
+                pos2 = pos1;
+                pos1 = p;
+            }
+            else if (d < distF2) {
+                distF2 = d;
+                off2 = g;
+                pos2 = p;
+            }
+        }
     }
 
-    return 1.0-dis;
+    return float2(distF1, distF2);
 }
 
-float worley(float3 p){
+float2 worley(float3 p) {
     float3 n = floor( p );
     float3 f = frac( p );
 
-    float dis = 1.0;
-    for( int k = -1; k <= 1; k++ )
-        for( int j= -1; j <= 1; j++ )
+    float distF1 = 1.0;
+    float distF2 = 1.0;
+    float3 off1, pos1;
+    float3 off2, pos2;
+    for( int k = -1; k <= 1; k++ ) {
+        for( int j= -1; j <= 1; j++ ) {
             for( int i=-1; i <= 1; i++ ) {	
                 float3  g = float3(i,j,k);
                 float3  o = random3( n + g );
-                float d = WORLEY_DIST_FNC(g+o, f);
-                dis = min(dis,d);
+                float3  p = g + o;
+                float d = WORLEY_DIST_FNC(p, f);
+                if (d < distF1) {
+                    distF2 = distF1;
+                    distF1 = d;
+                    off2 = off1;
+                    off1 = g;
+                    pos2 = pos1;
+                    pos1 = p;
+                }
+                else if (d < distF2) {
+                    distF2 = d;
+                    off2 = g;
+                    pos2 = p;
+                }
+            }
+        }
     }
 
-    return 1.0-dis;
+    return float2(distF1, distF2);
 }
 
 #endif
