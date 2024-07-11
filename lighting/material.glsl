@@ -42,7 +42,6 @@ struct Material {
     
     vec3    ior;            // Index of Refraction
     vec3    f0;             // reflectance at 0 degree
-    float   thickness;      // default to 0.5
 
     float   roughness;
     float   metallic;
@@ -56,6 +55,10 @@ struct Material {
     vec3    clearCoatNormal;    // default vec3(0.0, 0.0, 1.0);
     #endif
 // #endif
+
+#if defined(SHADING_MODEL_IRIDESCENCE)
+    float   thickness; // default to 300.0
+#endif
 
 #if defined(SHADING_MODEL_SUBSURFACE)
     vec3    subsurfaceColor;    // defualt vec3(1.0)
