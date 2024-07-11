@@ -21,38 +21,72 @@ license:
 #define WORLEY_DIST_FNC distEuclidean
 #endif
 
-float worley(vec2 p){
+vec2 worley(vec2 p){
     vec2 n = floor( p );
     vec2 f = fract( p );
 
-    float dis = 1.0;
-    for( int j= -1; j <= 1; j++ )
+    float distF1 = 1.0;
+    float distF2 = 1.0;
+    vec2 off1, pos1;
+    vec2 off2, pos2;
+    for( int j= -1; j <= 1; j++ ) {
         for( int i=-1; i <= 1; i++ ) {	
-                vec2  g = vec2(i,j);
-                vec2  o = random2( n + g );
-                vec2  delta = g + o - f;
-                float d = WORLEY_DIST_FNC(g+o, f);
-                dis = min(dis,d);
+            vec2  g = vec2(i,j);
+            vec2  o = random2( n + g );
+            vec2  point = g + o;
+            float d = WORLEY_DIST_FNC(point, f);
+            if (d < distF1) {
+                distF2 = distF1;
+                distF1 = d;
+                off2 = off1;
+                off1 = g;
+                pos2 = pos1;
+                pos1 = point;
+            }
+            else if (d < distF2) {
+                distF2 = d;
+                off2 = g;
+                pos2 = point;
+            }
+        }
     }
 
-    return 1.0-dis;
+    return vec2(distF1, distF2);
 }
 
-float worley(vec3 p) {
+vec2 worley(vec3 p) {
     vec3 n = floor( p );
     vec3 f = fract( p );
 
-    float dis = 1.0;
-    for( int k = -1; k <= 1; k++ )
-        for( int j= -1; j <= 1; j++ )
+    float distF1 = 1.0;
+    float distF2 = 1.0;
+    vec3 off1, pos1;
+    vec3 off2, pos2;
+    for( int k = -1; k <= 1; k++ ) {
+        for( int j= -1; j <= 1; j++ ) {
             for( int i=-1; i <= 1; i++ ) {	
                 vec3  g = vec3(i,j,k);
                 vec3  o = random3( n + g );
-                float d = WORLEY_DIST_FNC(g+o, f);
-                dis = min(dis,d);
+                vec3  point = g + o;
+                float d = WORLEY_DIST_FNC(point, f);
+                if (d < distF1) {
+                    distF2 = distF1;
+                    distF1 = d;
+                    off2 = off1;
+                    off1 = g;
+                    pos2 = pos1;
+                    pos1 = point;
+                }
+                else if (d < distF2) {
+                    distF2 = d;
+                    off2 = g;
+                    pos2 = point;
+                }
+            }
+        }
     }
 
-    return 1.0-dis;
+    return vec2(distF1, distF2);
 }
 
 #endif
