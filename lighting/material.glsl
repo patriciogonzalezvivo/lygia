@@ -61,7 +61,7 @@ struct Material {
 #endif
 
 #if defined(SHADING_MODEL_SUBSURFACE)
-    vec3    subsurfaceColor;    // defualt vec3(1.0)
+    vec3    subsurfaceColor;    // default vec3(1.0)
     float   subsurfacePower;    // default to 12.234
     float   subsurfaceThickness;// default to 1.0
 #endif
