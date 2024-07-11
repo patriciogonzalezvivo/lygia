@@ -56,7 +56,7 @@ vec4 pbrGlass(const Material _mat) {
     vec3 eta    = ior2eta(M.ior);
     
 
-    // Global Ilumination ( mage Based Lighting )
+    // Global Ilumination ( Image Based Lighting )
     // ------------------------
     vec3 E = envBRDFApprox(M.albedo.rgb, M);
 
