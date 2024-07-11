@@ -26,7 +26,7 @@ license:
 #define WORLEY_DIST_FNC distEuclidean
 #endif
 
-vec2 worley(vec2 p){
+vec2 worley2(vec2 p){
     vec2 n = floor( p );
     vec2 f = fract( p );
 
@@ -59,7 +59,11 @@ vec2 worley(vec2 p){
     return vec2(distF1, distF2);
 }
 
-vec2 worley(vec3 p) {
+float worley(vec2 p){
+    return 1.0-worley2(p).x;
+}
+
+vec2 worley2(vec3 p) {
     vec3 n = floor( p );
     vec3 f = fract( p );
 
@@ -92,6 +96,10 @@ vec2 worley(vec3 p) {
     }
 
     return vec2(distF1, distF2);
+}
+
+float worley(vec3 p){
+    return 1.0-worley2(p).x;
 }
 
 #endif
