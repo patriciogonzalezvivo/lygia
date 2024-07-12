@@ -1,3 +1,5 @@
+#include "../../math/const.glsl"
+
 /*
 contributors: Patricio Gonzalez Vivo
 description: Calculate diffuse contribution using lambert equation
@@ -11,6 +13,7 @@ license:
 
 #ifndef FNC_DIFFUSE_LAMBERT
 #define FNC_DIFFUSE_LAMBERT
+float diffuseLambert() { return INV_PI; }
 float diffuseLambert(float3 L, float3 N) { return max(0.0, dot(N, L)); }
 float diffuseLambert(float3 L, float3 N, float3 V, float roughness) { return diffuseLambert(L, N); }
 float diffuseLambert(float3 L, float3 N, float3 V, float NoV, float NoL, float roughness) { return diffuseLambert(L, N); }

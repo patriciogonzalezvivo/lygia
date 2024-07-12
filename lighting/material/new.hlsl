@@ -25,7 +25,6 @@ options:
     - MATERIAL_CLEARCOAT_ROUGHNESS
     - MATERIAL_HAS_CLEAR_COAT_NORMAL
     - SHADING_MODEL_SUBSURFACE
-    - MATERIAL_SUBSURFACE_COLOR
     - SHADING_MODEL_CLOTH
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
@@ -36,15 +35,6 @@ license:
 #define SURFACE_POSITION float3(0.0, 0.0, 0.0)
 #endif
 
-#ifndef SHADOW_INIT
-#if defined(LIGHT_SHADOWMAP) && defined(LIGHT_SHADOWMAP_SIZE) && defined(LIGHT_COORD)
-#define SHADOW_INIT shadow(LIGHT_SHADOWMAP, float2(LIGHT_SHADOWMAP_SIZE), (LIGHT_COORD).xy, (LIGHT_COORD).z)
-#else
-#define SHADOW_INIT 1.0
-#endif
-#endif
-
-
 #ifndef FNC_MATERIAL_NEW
 #define FNC_MATERIAL_NEW
 
@@ -54,18 +44,13 @@ void materialNew(out Material _mat) {
     _mat.normal             = materialNormal();
 
     #if defined(SCENE_BACK_SURFACE) && defined(RESOLUTION)
-    float4 back_surface       = SAMPLER_FNC(SCENE_BACK_SURFACE, gl_FragCoord.xy / RESOLUTION);
-    _mat.normal_back        = back_surface.xyz;
-    #if defined(SHADING_MODEL_SUBSURFACE)
-    _mat.thickness          = saturate(gl_FragCoord.z - back_surface.a);
-    #endif
-    #else 
-    #if defined(SCENE_BACK_SURFACE)
-    _mat.normal_back        = -_mat.normal;
-    #endif
-    #if defined(SHADING_MODEL_SUBSURFACE)
-    _mat.thickness          = 0.5;
-    #endif
+        float4 back_surface       = SAMPLER_FNC(SCENE_BACK_SURFACE, gl_FragCoord.xy / RESOLUTION);
+        _mat.normal_back        = back_surface.xyz;
+    #else
+        #if defined(SCENE_BACK_SURFACE)
+        // Naive assumption of the back surface
+        _mat.normal_back        = -_mat.normal;
+        #endif
     #endif
 
     // PBR Properties
@@ -80,7 +65,7 @@ void materialNew(out Material _mat) {
     // Shade
     _mat.ambientOcclusion   = materialOcclusion();
 
-    _mat.shadow             = SHADOW_INIT;
+    // _mat.shadow             = SHADOW_INIT;
 
     // Clear Coat Model
     _mat.clearCoat          = 0.0;
@@ -90,18 +75,45 @@ void materialNew(out Material _mat) {
 #endif
 
     // SubSurface Model
+#if defined(SHADING_MODEL_IRIDESCENCE)
+    _mat.thickness          = 300.0;
+#endif
+    
 #if defined(SHADING_MODEL_SUBSURFACE)
+    _mat.subsurfaceColor    = _mat.albedo.rgb;
     _mat.subsurfacePower    = 12.234;
-#endif
+    _mat.subsurfaceThickness = 20.0;
 
-#if defined(MATERIAL_SUBSURFACE_COLOR)
-    #if defined(SHADING_MODEL_SUBSURFACE)
-    _mat.subsurfaceColor    = float3(1.0, 1.0, 1.0);
-    #else
-    _mat.subsurfaceColor    = float3(0.0, 0.0, 0.0);
+    // Simulate Absorption Using Depth Map (shadowmap)
+    // https://developer.nvidia.com/gpugems/gpugems/part-iii-materials/chapter-16-real-time-approximations-subsurface-scattering
+    #if defined(LIGHT_SHADOWMAP) && defined(LIGHT_COORD)
+    {
+        float3 shadowCoord = LIGHT_COORD.xyz / LIGHT_COORD.w;
+        float Di = SAMPLER_FNC(LIGHT_SHADOWMAP, LIGHT_COORD.xy).r;
+        float Do = LIGHT_COORD.z;
+        float delta = Do - Di;
+
+        #if defined(LIGHT_SHADOWMAP_SIZE) && !defined(PLATFORM_RPI)
+        float2 shadowmap_pixel = 1.0/float2(LIGHT_SHADOWMAP_SIZE, LIGHT_SHADOWMAP_SIZE);
+        shadowmap_pixel *= pow(delta, 0.6) * 20.0;
+
+        Di = 0.0;
+        for (float x= -2.0; x <= 2.0; x++)
+            for (float y= -2.0; y <= 2.0; y++) 
+                Di += SAMPLER_FNC(LIGHT_SHADOWMAP, LIGHT_COORD.xy + float2(x,y) * shadowmap_pixel).r;
+        Di *= 0.04; // 1.0/25.0
+        delta = Do - Di;
+        #endif
+
+        // This is pretty much of a hack by overwriting the absorption to the thinkness
+        _mat.subsurfaceThickness = max(Do - Di, 0.005) * 30.0;
+    }
+
+
     #endif
-#endif
 
+#endif
+    
     // Cloth Model
 #if defined(SHADING_MODEL_CLOTH)
     _mat.sheenColor         = sqrt(_mat.albedo.rgb);

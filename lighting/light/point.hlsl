@@ -78,8 +78,8 @@ void lightPoint(
 
     float scatterVoH = saturate(dot(_mat.V, -L));
     float forwardScatter = exp2(scatterVoH * _mat.subsurfacePower - _mat.subsurfacePower);
-    float backScatter = saturate(NoL * _mat.thickness + (1.0 - _mat.thickness)) * 0.5;
-    float subsurface = lerp(backScatter, 1.0, forwardScatter) * (1.0 - _mat.thickness);
+    float backScatter = saturate(NoL * _mat.subsurfaceThickness + (1.0 - _mat.subsurfaceThickness)) * 0.5;
+    float subsurface = lerp(backScatter, 1.0, forwardScatter) * (1.0 - _mat.subsurfaceThickness);
     _diffuse += _mat.subsurfaceColor * (subsurface * diffuseLambert());
 #endif
 }

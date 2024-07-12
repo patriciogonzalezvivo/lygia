@@ -1,7 +1,11 @@
+#include "../color/tonemap.hlsl"
+
 #include "material.hlsl"
-#include "ior.hlsl"
+#include "light/new.hlsl"
+#include "envMap.hlsl"
 #include "specular.hlsl"
 #include "fresnelReflection.hlsl"
+#include "transparent.hlsl"
 
 #include "ior/2eta.hlsl"
 #include "ior/2f0.hlsl"
@@ -60,50 +64,64 @@ license:
 #define FNC_PBRGLASS
 
 float4 pbrGlass(const Material _mat) {
-    float3    V       = normalize(CAMERA_POSITION - _mat.position);   // View
-
-    float3    N       = _mat.normal;                                  // Normal front
-    float3    No      = _mat.normal;                                  // Normal out
-
+    
+    // Cached
+    Material M  = _mat;
+    M.V         = normalize(CAMERA_POSITION - M.position);  // View
+    M.R         = reflection(M.V, M.normal, M.roughness);   // Reflection
 #if defined(SCENE_BACK_SURFACE)
-              No      = normalize( N - _mat.normal_back );
+    float3 No     = normalize(M.normal - M.normal_back); // Normal out is the difference between the front and back normals
+#else
+    float3 No     = M.normal;                            // Normal out
 #endif
+    M.NoV       = dot(No, M.V);                        // Normal . View
 
-    float roughness = _mat.roughness;
+    float3 eta    = ior2eta(M.ior);
+    
 
-    float3    f0      = ior2f0(_mat.ior);
-    float3    eta     = ior2eta(_mat.ior);
-    float3    Re      = reflection(V, N, roughness);
-    float3    RaR     = refract(-V, No, eta.r);
-    float3    RaG     = refract(-V, No, eta.g);
-    float3    RaB     = refract(-V, No, eta.b);
-
-    float   NoV     = dot(N, V);                                    // Normal . View
-
-    // Global Ilumination ( mage Based Lighting )
+    // Global Ilumination ( Image Based Lighting )
     // ------------------------
-    float3 E = envBRDFApprox(_mat.albedo.rgb, NoV, roughness);
+    float3 E = envBRDFApprox(M.albedo.rgb, M);
 
+    float3 Gi = float3(0.0, 0.0, 0.0);
+    Gi  += envMap(M) * E;
+    #if !defined(PLATFORM_RPI)
+    // Gi  += fresnelReflection(M);
+
+    #if defined(SHADING_MODEL_IRIDESCENCE)
     float3 Fr = float3(0.0, 0.0, 0.0);
-    Fr = tonemap( envMap(Re, roughness) ) * E;
-    Fr += tonemap( fresnelReflection(Re, _mat.f0, NoV) ) * (1.0-roughness);
+    Gi  += fresnelIridescentReflection(M.normal, -M.V, M.f0, float3(IOR_AIR, IOR_AIR, IOR_AIR), M.ior, M.thickness, M.roughness, Fr);
+    #else
+    float3 Fr = fresnel(M.f0, M.NoV);
+    Gi  += fresnelReflection(M.R, Fr) * (1.0-M.roughness);
+    #endif
+
+    #endif
 
     float4 color  = float4(0.0, 0.0, 0.0, 1.0);
-    color.rgb   = envMap(RaG, roughness);
-    #if !defined(TARGET_MOBILE) && !defined(PLATFORM_RPI)
-    color.r     = envMap(RaR, roughness).r;
-    color.b     = envMap(RaB, roughness).b;
-    #endif
-    color.rgb   = tonemap(color.rgb); 
 
-    // color.rgb   *= exp( -_mat.thickness * 200.0);
-    color.rgb   += Fr * IBL_LUMINANCE;
+    // Refraction
+    color.rgb   += transparent(No, -M.V, Fr, eta, M.roughness);
+    color.rgb   += Gi * IBL_LUMINANCE;
 
-    #if defined(LIGHT_DIRECTION)
-    color.rgb += LIGHT_COLOR * specular(normalize(LIGHT_DIRECTION), N, V, roughness) * _mat.shadow;
-    #elif defined(LIGHT_POSITION)
-    color.rgb += LIGHT_COLOR * specular(normalize(LIGHT_POSITION - position), N, V, roughness) * _mat.shadow;
-    #endif
+    // TODO: RaG
+    //  - Add support for multiple lights
+    // 
+    {
+        #if defined(LIGHT_DIRECTION)
+        LightDirectional L = LightDirectionalNew();
+        #elif defined(LIGHT_POSITION)
+        LightPoint L = LightPointNew();
+        #endif
+
+        #if defined(LIGHT_DIRECTION) || defined(LIGHT_POSITION)
+        // lightResolve(diffuseColor, specularColor, M, L, lightDiffuse, lightSpecular);
+        float spec = specular(L.direction, M.normal, M.V, M.roughness);
+
+        color.rgb += L.color * spec;
+
+        #endif
+    }
 
     return color;
 }
