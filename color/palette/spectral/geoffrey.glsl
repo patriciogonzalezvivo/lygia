@@ -1,6 +1,6 @@
 /*
-contributors:
-description: 
+contributors: none
+description: none
 use: <vec3> spectral_geoffrey(<float> x)
 examples:
     - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/color_wavelength.frag
