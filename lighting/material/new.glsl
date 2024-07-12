@@ -117,7 +117,7 @@ void materialNew(out Material _mat) {
 
 #endif
 
-    // Cloath Model
+    // Cloth Model
 #if defined(SHADING_MODEL_CLOTH)
     _mat.sheenColor         = sqrt(_mat.albedo.rgb);
 #endif
