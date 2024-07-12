@@ -1,6 +1,6 @@
 /*
-contributors:
-description: 
+contributors: none
+description: none
 use: <float3> spectral_geoffrey(<float> x)
 */
 
