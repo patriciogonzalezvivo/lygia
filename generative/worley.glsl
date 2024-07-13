@@ -7,7 +7,7 @@ description: Worley noise. Returns vec2(F1, F2)
 use: <vec2> worley2(<vec2|vec3> pos)
 options:
     - WORLEY_JITTER: amount of pattern randomness. With 1.0 being the default and 0.0 resulting in a perfectly symmetrical pattern.
-    - WORLEY_DIST_FNC: change the distance function, currently implemented are euclidean, manhattan, chebychev and minkowski
+    - WORLEY_DIST_FNC: change the distance function, currently implemented are distEuclidean, distManhattan, distChebychev and distMinkowski
 examples:
     - /shaders/generative_worley.frag
 license:
@@ -32,8 +32,10 @@ vec2 worley2(vec2 p){
 
     float distF1 = 1.0;
     float distF2 = 1.0;
-    vec2 off1, pos1;
-    vec2 off2, pos2;
+    vec2 off1 = vec2(0.0); 
+    vec2 pos1 = vec2(0.0);
+    vec2 off2 = vec2(0.0);
+    vec2 pos2 = vec2(0.0);
     for( int j= -1; j <= 1; j++ ) {
         for( int i=-1; i <= 1; i++ ) {	
             vec2  g = vec2(i,j);
@@ -59,9 +61,7 @@ vec2 worley2(vec2 p){
     return vec2(distF1, distF2);
 }
 
-float worley(vec2 p){
-    return 1.0-worley2(p).x;
-}
+float worley(vec2 p){ return 1.0-worley2(p).x; }
 
 vec2 worley2(vec3 p) {
     vec3 n = floor( p );
@@ -69,8 +69,10 @@ vec2 worley2(vec3 p) {
 
     float distF1 = 1.0;
     float distF2 = 1.0;
-    vec3 off1, pos1;
-    vec3 off2, pos2;
+    vec3 off1 = vec3(0.0);
+    vec3 pos1 = vec3(0.0);
+    vec3 off2 = vec3(0.0);
+    vec3 pos2 = vec3(0.0);
     for( int k = -1; k <= 1; k++ ) {
         for( int j= -1; j <= 1; j++ ) {
             for( int i=-1; i <= 1; i++ ) {	
@@ -98,8 +100,6 @@ vec2 worley2(vec3 p) {
     return vec2(distF1, distF2);
 }
 
-float worley(vec3 p){
-    return 1.0-worley2(p).x;
-}
+float worley(vec3 p){ return 1.0-worley2(p).x; }
 
 #endif
