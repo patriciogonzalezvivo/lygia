@@ -7,7 +7,7 @@ description: Worley noise. Returns float2(F1, F2)
 use: <float2> worley2(<float2|float3> pos)
 options:
     - WORLEY_JITTER: amount of pattern randomness. With 1.0 being the default and 0.0 resulting in a perfectly symmetrical pattern.
-    - WORLEY_DIST_FNC: change the distance function, currently implemented are euclidean, manhattan, chebychev and minkowski
+    - WORLEY_DIST_FNC: change the distance function, currently implemented are distEuclidean, distManhattan, distChebychev and distMinkowski
 examples:
     - /shaders/generative_worley.frag
 license:
