@@ -30,6 +30,7 @@ Engines & Frameworks:
     <a href="https://editor.p5js.org/patriciogonzalezvivo/sketches"><img src="https://lygia.xyz/imgs/p5js.png" alt="p5js" width="64" /></a>
     <a href="https://github.com/patriciogonzalezvivo/lygia_of_examples"><img src="https://lygia.xyz/imgs/of.png" alt="openFrameworks" width="64" /></a>
     <a href="https://github.com/vectorsize/lygia-td"><img title="static-resolver by vectorsize" src="https://lygia.xyz/imgs/td.png" alt="touchDesigner" width="64" /></a>
+    <a href="https://github.com/patriciogonzalezvivo/comfyui_glslnodes"><img src="https://lygia.xyz/imgs/comfy.png" alt="comfyui" width="64" /></a>
     <a href="https://github.com/ossia/score-examples"><img src="https://lygia.xyz/imgs/ossia.png" alt="ossia" width="64" /></a>
 </p>
 
