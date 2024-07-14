@@ -43,6 +43,7 @@ Shader editors:
     <a href="https://www.productioncrate.com/laforge/"><img src="https://lygia.xyz/imgs/laforge.png" alt="laforge" width="64" /></a>
     <a href="https://synesthesia.live/"><img src="https://lygia.xyz/imgs/synesthesia.png" alt="synesthesia" width="64" /></a>
     <a href="https://glsl.app/"><img src="https://glsl.app/icon-256.png" alt="glslApp" width="64"/></a>
+    <a href="https://dev.shader.app/"><img src="https://dev.shaders.app/apple-touch-icon.png" alt="shaderApp" width="64"/></a>
 </p>
 
 ## How to use it?
