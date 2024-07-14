@@ -4,9 +4,7 @@
 
 LYGIA is the biggest shader library. Battle proof, cross platform and multi-language. Is made of reusable functions that will let you prototype, port and ship projects in just few minutes. It's very granular, flexible and efficient. Support multiple shading languages and can easily be added to virtually any project. There are already integrations for almost all mayor enviroments, engines and frameworks. 
 
-Best of all, LYGIA grows and improves every day thanks to the support of the community.
-
-[![](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub)](https://github.com/sponsors/patriciogonzalezvivo)
+Best of all, LYGIA grows and improves every day thanks to the support of the community. Become a [Contributor](https://github.com/patriciogonzalezvivo/lygia) or [![](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub)](https://github.com/sponsors/patriciogonzalezvivo)
 
 ## How to use it?
 
