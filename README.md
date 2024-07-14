@@ -8,41 +8,6 @@ Best of all, LYGIA grows and improves every day thanks to the support of the com
 
 [![](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub)](https://github.com/sponsors/patriciogonzalezvivo)
 
-Engines, frameworks and online editors that already support LYGIA:
-
-<p style="text-align: center;" >
-    <a href="https://github.com/patriciogonzalezvivo/lygia_unity_examples"><img src="https://lygia.xyz/imgs/unity.png" alt="unity" title="unity" width="64" /></a>
-    <a href="https://github.com/franklzt/lygia_unreal_engine_examples"><img src="https://lygia.xyz/imgs/unreal.png" alt="unreal" title="unreal" width="64" /></a>
-    <a href="https://www.curseforge.com/minecraft/search?page=1&pageSize=20&sortType=1&search=LYGIA%20Shader%20Library"><img src="https://lygia.xyz/imgs/minecraft.png" alt="minecraft" title="minecraft" width="64" /></a>
-    <a href="https://github.com/patriciogonzalezvivo/lygia_examples"><img src="https://lygia.xyz/imgs/glslViewer.png" alt="glslViewer" title="glslViewer" width="64" /></a>
-    <a href="https://github.com/irmf/irmf-examples/tree/master/examples/028-lygia"><img src="https://lygia.xyz/imgs/irmf.png" alt="irmf" title="irmf" width="64" /></a>
-</p>
-
-<p style="text-align: center;" >
-    <a href="https://github.com/guidoschmidt/lygia_threejs_examples"><img src="https://lygia.xyz/imgs/threejs.png" alt="threejs" title="threejs" width="64" /></a>
-    <a href="https://github.com/kujohn/lygia_ogl_examples"><img src="https://lygia.xyz/imgs/ogl.png" alt="ogl" title="ogl" width="64" /></a>
-    <a href="https://www.npmjs.com/package/lygia"><img src="https://lygia.xyz/imgs/npm.png" alt="npm" title="npm" width="64" /></a>
-    <a href="https://codesandbox.io/s/lygia-react-starter-fftx6p"><img src="https://lygia.xyz/imgs/r3f.png" alt="r3rf" title="r3rf" width="64" /></a>
-</p>
-
-<p style="text-align: center;" >
-    <a href="https://github.com/patriciogonzalezvivo/lygia_p5_examples"><img src="https://lygia.xyz/imgs/p5.png" alt="p5" title="processing" width="64" /></a>
-    <a href="https://editor.p5js.org/patriciogonzalezvivo/sketches"><img src="https://lygia.xyz/imgs/p5js.png" alt="p5js" title="p5js" width="64" /></a>
-    <a href="https://github.com/patriciogonzalezvivo/lygia_of_examples"><img src="https://lygia.xyz/imgs/of.png" alt="openFrameworks" tittle="openframeworks" width="64" /></a>
-    <a href="https://github.com/vectorsize/lygia-td"><img title="static-resolver by vectorsize" src="https://lygia.xyz/imgs/td.png" alt="touchDesigner" title="touchDesigner" width="64" /></a>
-    <a href="https://github.com/patriciogonzalezvivo/comfyui_glslnodes"><img src="https://lygia.xyz/imgs/comfy.png" alt="comfyui" title="comfyUI" width="64" /></a>
-    <a href="https://github.com/ossia/score-examples"><img src="https://lygia.xyz/imgs/ossia.png" alt="ossia" title="ossia" width="64" /></a>
-</p>
-
-<p style="text-align: center;" >
-    <a href="https://www.figma.com/community/plugin/1138854718618193875"><img src="https://lygia.xyz/imgs/figma.png" alt="figma" title="figma" width="64" /></a>
-    <a href="https://observablehq.com/@radames/hello-lygia-shader-library"><img src="https://lygia.xyz/imgs/ob.png" alt="observable" title="observable" width="64" /></a>
-    <a href="https://www.productioncrate.com/laforge/"><img src="https://lygia.xyz/imgs/laforge.png" alt="laforge" title="laforge" width="64" /></a>
-    <a href="https://synesthesia.live/"><img src="https://lygia.xyz/imgs/synesthesia.png" alt="synesthesia" title="synesthesia" width="64" /></a>
-    <a href="https://glsl.app/"><img src="https://glsl.app/icon-256.png" alt="glslApp" title="glslApp" width="64"/></a>
-    <a href="https://dev.shader.app/"><img src="https://dev.shaders.app/apple-touch-icon.png" alt="shaderApp" title="shaderApp" width="64"/></a>
-</p>
-
 ## How to use it?
 
 In your shader just `#include` the functions you need and then use them:
@@ -82,8 +47,42 @@ If you just need to resovle the dependencies of a shader file you got, the faste
     </div>
 </div>
 
-If you are working on a project and want to use LYGIA, you have to options. Cloning a **local** version that then you can bundle into your project, or using the **server** to resolve the dependencies online. How each one works?
+LYGIA have been integrated into the following Engines, Frameworks, Creative Tools and online editors:
 
+<p style="text-align: center;" >
+    <a href="https://github.com/patriciogonzalezvivo/lygia_unity_examples"><img src="https://lygia.xyz/imgs/unity.png" alt="unity" title="unity" width="64" /></a>
+    <a href="https://github.com/franklzt/lygia_unreal_engine_examples"><img src="https://lygia.xyz/imgs/unreal.png" alt="unreal" title="unreal" width="64" /></a>
+    <a href="https://www.curseforge.com/minecraft/search?page=1&pageSize=20&sortType=1&search=LYGIA%20Shader%20Library"><img src="https://lygia.xyz/imgs/minecraft.png" alt="minecraft" title="minecraft" width="64" /></a>
+    <a href="https://github.com/patriciogonzalezvivo/lygia_examples"><img src="https://lygia.xyz/imgs/glslViewer.png" alt="glslViewer" title="glslViewer" width="64" /></a>
+    <a href="https://github.com/irmf/irmf-examples/tree/master/examples/028-lygia"><img src="https://lygia.xyz/imgs/irmf.png" alt="irmf" title="irmf" width="64" /></a>
+</p>
+
+<p style="text-align: center;" >
+    <a href="https://github.com/guidoschmidt/lygia_threejs_examples"><img src="https://lygia.xyz/imgs/threejs.png" alt="threejs" title="threejs" width="64" /></a>
+    <a href="https://github.com/kujohn/lygia_ogl_examples"><img src="https://lygia.xyz/imgs/ogl.png" alt="ogl" title="ogl" width="64" /></a>
+    <a href="https://www.npmjs.com/package/lygia"><img src="https://lygia.xyz/imgs/npm.png" alt="npm" title="npm" width="64" /></a>
+    <a href="https://codesandbox.io/s/lygia-react-starter-fftx6p"><img src="https://lygia.xyz/imgs/r3f.png" alt="r3rf" title="r3rf" width="64" /></a>
+</p>
+
+<p style="text-align: center;" >
+    <a href="https://github.com/patriciogonzalezvivo/lygia_p5_examples"><img src="https://lygia.xyz/imgs/p5.png" alt="p5" title="processing" width="64" /></a>
+    <a href="https://editor.p5js.org/patriciogonzalezvivo/sketches"><img src="https://lygia.xyz/imgs/p5js.png" alt="p5js" title="p5js" width="64" /></a>
+    <a href="https://github.com/patriciogonzalezvivo/lygia_of_examples"><img src="https://lygia.xyz/imgs/of.png" alt="openFrameworks" tittle="openframeworks" width="64" /></a>
+    <a href="https://github.com/vectorsize/lygia-td"><img title="static-resolver by vectorsize" src="https://lygia.xyz/imgs/td.png" alt="touchDesigner" title="touchDesigner" width="64" /></a>
+    <a href="https://github.com/patriciogonzalezvivo/comfyui_glslnodes"><img src="https://lygia.xyz/imgs/comfy.png" alt="comfyui" title="comfyUI" width="64" /></a>
+    <a href="https://github.com/ossia/score-examples"><img src="https://lygia.xyz/imgs/ossia.png" alt="ossia" title="ossia" width="64" /></a>
+</p>
+
+<p style="text-align: center;" >
+    <a href="https://www.figma.com/community/plugin/1138854718618193875"><img src="https://lygia.xyz/imgs/figma.png" alt="figma" title="figma" width="64" /></a>
+    <a href="https://observablehq.com/@radames/hello-lygia-shader-library"><img src="https://lygia.xyz/imgs/ob.png" alt="observable" title="observable" width="64" /></a>
+    <a href="https://www.productioncrate.com/laforge/"><img src="https://lygia.xyz/imgs/laforge.png" alt="laforge" title="laforge" width="64" /></a>
+    <a href="https://synesthesia.live/"><img src="https://lygia.xyz/imgs/synesthesia.png" alt="synesthesia" title="synesthesia" width="64" /></a>
+    <a href="https://glsl.app/"><img src="https://glsl.app/icon-256.png" alt="glslApp" title="glslApp" width="64"/></a>
+    <a href="https://dev.shader.app/"><img src="https://dev.shaders.app/apple-touch-icon.png" alt="shaderApp" title="shaderApp" width="64"/></a>
+</p>
+
+If you are working on a project and want to use LYGIA, you have two options: cloning a **local** version that then you can bundle into your project; or using the **server** ( https://lygia.xyz ) to resolve the dependencies online. How each one works?
 
 ### LYGIA Locally
 
