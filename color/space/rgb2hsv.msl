@@ -1,0 +1,28 @@
+// #include "rgb2hcv.glsl"
+
+/*
+contributors: Sam Hocevar
+description: pass a color in RGB and get HSB color. From http://lolengine.net/blog/2013/07/27/rgb-to-hsv-in-glsl
+use: rgb2hsv(<float3|float4> color)
+*/
+
+#ifndef HCV_EPSILON
+#define HCV_EPSILON 1e-10
+#endif
+
+#ifndef FNC_RGB2HSV
+#define FNC_RGB2HSV
+float3 rgb2hsv(const in float3 c) {
+    // float3 HCV = rgb2hcv(rgb);
+    // float S = HCV.y / (HCV.z + HCV_EPSILON);
+    // return float3(HCV.x, S, HCV.z);
+    float4 K = float4(0., -0.33333333333333333333, 0.6666666666666666666, -1.0);
+    float4 p = c.g < c.b ? float4(c.bg, K.wz) : float4(c.gb, K.xy);
+    float4 q = c.r < p.x ? float4(p.xyw, c.r) : float4(c.r, p.yzx);
+    float d = q.x - min(q.w, q.y);
+    return float3(abs(q.z + (q.w - q.y) / (6. * d + HCV_EPSILON)), 
+                d / (q.x + HCV_EPSILON), 
+                q.x);
+}
+float4 rgb2hsv(const in float4 c) { return float4(rgb2hsv(c.rgb), c.a); }
+#endif
