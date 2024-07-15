@@ -1,6 +1,5 @@
-
+#include "../sampler.hlsl"
 #include "../math/powFast.hlsl"
-#include "../color/tonemap.hlsl"
 
 #include "fakeCube.hlsl"
 #include "toShininess.hlsl"
@@ -22,8 +21,7 @@ license:
 */
 
 #ifndef SAMPLE_CUBE_FNC
-//#define SAMPLE_CUBE_FNC(CUBEMAP, NORM, LOD) texCUBElod(CUBEMAP, float4(NORM, LOD) )
-#define SAMPLE_CUBE_FNC(CUBEMAP, NORM, LOD) CUBEMAP.SampleLevel(sampler##CUBEMAP, NORM, LOD)
+#define SAMPLE_CUBE_FNC(CUBEMAP, NORM, LOD) CUBEMAP.SampleLevel(DEFAULT_SAMPLER_STATE, NORM, LOD)
 #endif
 
 #if defined(ENVMAP_MAX_MIP_LEVEL) && !defined(UNITY_COMPILER_HLSL)
