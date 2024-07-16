@@ -29,3 +29,4 @@
 #include "sample/opticalFlow.hlsl"
 #include "sample/smooth.hlsl"
 #include "sample/zero.hlsl"
+#include "sample/normalFromTexture.hlsl"
