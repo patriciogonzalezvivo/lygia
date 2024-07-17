@@ -4,7 +4,7 @@
 /*
 contributors: Shadi El Hajj
 description: Given a height map texture, calculate normal at point (s, t) 
-use: normalFromTexture(<SAMPLER_TYPE> heightMap, <vec2> st, <float> strength, <float> offset)
+use: normalFromHeightMap(<SAMPLER_TYPE> heightMap, <vec2> st, <float> strength, <float> offset)
 options:
     - SAMPLE_CHANNEL: texture channel to sample from. Defaults to 0 (red)
 */
@@ -13,7 +13,7 @@ options:
 #define SAMPLE_CHANNEL 0
 #endif
 
-float3 normalFromTexture(SAMPLER_TYPE heightMap, float2 st, float strength, float offset)
+float3 normalFromHeightMap(SAMPLER_TYPE heightMap, float2 st, float strength, float offset)
 {
     offset = pow3(offset) * 0.1;
     
@@ -27,8 +27,8 @@ float3 normalFromTexture(SAMPLER_TYPE heightMap, float2 st, float strength, floa
     return normalize(cross(a, b));
 }
 
-float3 normalFromTexture(SAMPLER_TYPE heightMap, float2 st, float strength)
+float3 normalFromHeightMap(SAMPLER_TYPE heightMap, float2 st, float strength)
 {
-    return normalFromTexture(heightMap, st, strength, 0.5);
+    return normalFromHeightMap(heightMap, st, strength, 0.5);
 
 }
