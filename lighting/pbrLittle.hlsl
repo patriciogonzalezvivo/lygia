@@ -75,13 +75,13 @@ float4 pbrLittle(float4 albedo, float3 position, float3 normal, float roughness,
     albedo.rgb += ShadeSH9(half4(N,1));
     // #elif defined(SCENE_SH_ARRAY)
     // albedo.rgb = albedo.rgb + tonemapReinhard( sphericalHarmonics(N) ) * 0.25;
-    // #endif
+    #endif
 
     float NoV = dot(N, V); 
 
     // SPECULAR
-    float3 specIntensity =  float3(1.0, 1.0, 1.0) *
-                            (0.04 * notMetal + 2.0 * metallic) * 
+    // This is a bit of a stylistic approach
+    float specIntensity = (0.04 * notMetal + 2.0 * metallic) *
                             saturate(-1.1 + NoV + metallic) * // Fresnel
                             (metallic + smoothness * 4.0); // make smaller highlights brighter
 
@@ -101,7 +101,11 @@ float4 pbrLittle(float4 albedo, float3 position, float3 normal, float roughness,
 }
 
 float4 pbrLittle(Material material) {
-    return pbrLittle(material.albedo, material.position, material.normal, material.roughness, material.metallic, material.f0, material.ambientOcclusion * material.shadow) + float4(material.emissive, 0.0);
+    float s = 1.0;
+    #if defined(LIGHT_SHADOWMAP) && defined(LIGHT_SHADOWMAP_SIZE) && defined(LIGHT_COORD)
+    s *= shadow(LIGHT_SHADOWMAP, vec2(LIGHT_SHADOWMAP_SIZE), (LIGHT_COORD).xy, (LIGHT_COORD).z);
+    #endif
+    return pbrLittle(material.albedo, material.position, material.normal, material.roughness, material.metallic, material.f0, material.ambientOcclusion * s) + float4(material.emissive, 0.0);
 }
 
 #endif
