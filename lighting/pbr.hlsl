@@ -52,6 +52,7 @@ options:
     - LIGHT_POSITION: in glslViewer is u_light
     - LIGHT_COLOR in glslViewer is u_lightColor
     - CAMERA_POSITION: in glslViewer is u_camera
+    - RAYMARCH_AO: enabled raymarched ambient occlusion
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
