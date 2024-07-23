@@ -24,6 +24,7 @@ options:
     - LIGHT_POSITION: in GlslViewer is u_light
     - LIGHT_COLOR in GlslViewer is u_lightColor
     - CAMERA_POSITION: in GlslViewer is u_camera
+    - RAYMARCH_AO: enabled raymarched ambient occlusion
 examples:
     - /shaders/lighting_raymarching_pbr.frag
 license:
