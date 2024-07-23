@@ -6,7 +6,7 @@
 /*
 contributors: [Stefan Gustavson, Ian McEwan]
 description: Classic Perlin Noise with periodic variant https://github.com/stegu/webgl-noise
-use: pnoise2/3/4(<vec2|vec3|vec4> pos, <vec2|vec3|vec4> periodic)
+use: pnoise2/3/4(<vec2f|vec3f|vec4f> pos, <vec2f|vec3f|vec4f> periodic)
 license: |
     Copyright 2021-2023 by Stefan Gustavson and Ian McEwan.
     Published under the terms of the MIT license:

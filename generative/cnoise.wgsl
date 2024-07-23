@@ -6,7 +6,7 @@
 /*
 contributors: [Stefan Gustavson, Ian McEwan]
 description: Classic Perlin Noise https://github.com/stegu/webgl-noise
-use: cnoise2/3/4(<vec2|vec3|vec4> pos)
+use: cnoise2/3/4(<vec2f|vec3f|vec4f> pos)
 license: |
     Copyright 2021-2023 by Stefan Gustavson and Ian McEwan.
     Published under the terms of the MIT license:
