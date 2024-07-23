@@ -39,7 +39,7 @@ void lightDirectional(
     
     float intensity = _Li;
     #ifdef RAYMARCH_SHADOWS    
-    intensity = raymarchSoftShadow(_P, _Ld, 0.02, 2.5);
+    intensity = raymarchSoftShadow(_P, _Ld);
     #endif 
 
     float dif = diffuse(_Ld, _N, _V, _NoV, _NoL, _roughness);
