@@ -4,12 +4,9 @@
 #include "../math/grad4.wgsl"
 
 /*
-contributors:
-    - Stefan Gustavson
-    - Ian McEwan
+contributors: [Stefan Gustavson, Ian McEwan]
 description: Simplex Noise https://github.com/stegu/webgl-noise
-examples:
-    - /shaders/generative_snoise.frag
+use: snoise2/3/4(<vec2f|vec3f|vec4f> pos)
 license: |
     Copyright 2021-2023 by Stefan Gustavson and Ian McEwan.
     Published under the terms of the MIT license:

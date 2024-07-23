@@ -1,21 +1,22 @@
-#include "../math/mod289.wgsl"
-#include "../math/permute.wgsl"
-#include "../math/taylorInvSqrt.wgsl"
-#include "../math/quintic.wgsl"
+#include "../math/mod289.hlsl"
+#include "../math/permute.hlsl"
+#include "../math/taylorInvSqrt.hlsl"
+#include "../math/quintic.hlsl"
 
 /*
 contributors: [Stefan Gustavson, Ian McEwan]
-description: Classic Perlin Noise https://github.com/stegu/webgl-noise
-use: cnoise2/3/4(<vec2f|vec3f|vec4f> pos)
+description: Classic Perlin Noise with periodic variant https://github.com/stegu/webgl-noise
+use: pnoise2/3/4(<vec2f|vec3f|vec4f> pos, <vec2f|vec3f|vec4f> periodic)
 license: |
     Copyright 2021-2023 by Stefan Gustavson and Ian McEwan.
     Published under the terms of the MIT license:
     https://opensource.org/license/mit/
 */
 
-fn cnoise2(P: vec2f) -> f32 {
+fn pnoise2(P: vec2f, rep: vec2f) -> f32 {
   var Pi = floor(P.xyxy) + vec4(0.0, 0.0, 1.0, 1.0);
   let Pf = fract(P.xyxy) - vec4(0.0, 0.0, 1.0, 1.0);
+  Pi = Pi % rep.xyxy; // To create noise with explicit period
   Pi = mod289_4(Pi); // To avoid truncation effects in permutation
   let ix = Pi.xzxz;
   let iy = Pi.yyww;
@@ -51,9 +52,9 @@ fn cnoise2(P: vec2f) -> f32 {
   return 2.3 * n_xy;
 }
 
-fn cnoise3(P: vec3f) -> f32 {
-  var Pi0 = floor(P); // Integer part for indexing
-  var Pi1 = Pi0 + vec3(1.0); // Integer part + 1
+fn pnoise3(P: vec3f, rep: vec3f)-> f32 {
+  var Pi0 = floor(P) % rep; // Integer part, modulo period
+  var Pi1 = (Pi0 + vec3(1.0)) % rep; // Integer part + 1, mod period
   Pi0 = mod289_3(Pi0);
   Pi1 = mod289_3(Pi1);
   let Pf0 = fract(P); // Fractional part for interpolation
@@ -70,16 +71,16 @@ fn cnoise3(P: vec3f) -> f32 {
   var gx0 = ixy0 * (1.0 / 7.0);
   var gy0 = fract(floor(gx0) * (1.0 / 7.0)) - 0.5;
   gx0 = fract(gx0);
-  let gz0 = vec4(0.5) - abs(gx0) - abs(gy0);
-  let sz0 = step(gz0, vec4(0.0));
+  var gz0 = vec4(0.5) - abs(gx0) - abs(gy0);
+  var sz0 = step(gz0, vec4(0.0));
   gx0 = gx0 - (sz0 * (step(vec4(0.0), gx0) - 0.5));
   gy0 = gy0 - (sz0 * (step(vec4(0.0), gy0) - 0.5));
 
   var gx1 = ixy1 * (1.0 / 7.0);
   var gy1 = fract(floor(gx1) * (1.0 / 7.0)) - 0.5;
   gx1 = fract(gx1);
-  let gz1 = vec4(0.5) - abs(gx1) - abs(gy1);
-  let sz1 = step(gz1, vec4(0.0));
+  var gz1 = vec4(0.5) - abs(gx1) - abs(gy1);
+  var sz1 = step(gz1, vec4(0.0));
   gx1 = gx1 - (sz1 * (step(vec4(0.0), gx1) - 0.5));
   gy1 = gy1 - (sz1 * (step(vec4(0.0), gy1) - 0.5));
 
@@ -92,12 +93,12 @@ fn cnoise3(P: vec3f) -> f32 {
   var g011 = vec3(gx1.z,gy1.z,gz1.z);
   var g111 = vec3(gx1.w,gy1.w,gz1.w);
 
-  let norm0 = taylorInvSqrt4(vec4(dot(g000, g000), dot(g010, g010), dot(g100, g100), dot(g110, g110)));
+  var norm0 = taylorInvSqrt4(vec4(dot(g000, g000), dot(g010, g010), dot(g100, g100), dot(g110, g110)));
   g000 = g000 * norm0.x;
   g010 = g010 * norm0.y;
   g100 = g100 * norm0.z;
   g110 = g110 * norm0.w;
-  let norm1 = taylorInvSqrt4(vec4(dot(g001, g001), dot(g011, g011), dot(g101, g101), dot(g111, g111)));
+  var norm1 = taylorInvSqrt4(vec4(dot(g001, g001), dot(g011, g011), dot(g101, g101), dot(g111, g111)));
   g001 = g001 * norm1.x;
   g011 = g011 * norm1.y;
   g101 = g101 * norm1.z;
@@ -119,9 +120,9 @@ fn cnoise3(P: vec3f) -> f32 {
   return 2.2 * n_xyz;
 }
 
-fn cnoise4(P: vec4f) -> f32 {
-  var Pi0 = floor(P); // Integer part for indexing
-  var Pi1 = Pi0 + 1.0; // Integer part + 1
+fn pnoise4(P: vec4f, rep: vec4f) -> f32 {
+  var Pi0 = floor(P) % rep; // Integer part modulo rep
+  var Pi1 = (Pi0 + 1.0) % rep; // Integer part + 1 mod rep
   Pi0 = mod289_4(Pi0);
   Pi1 = mod289_4(Pi1);
   let Pf0 = fract(P); // Fractional part for interpolation
@@ -202,25 +203,25 @@ fn cnoise4(P: vec4f) -> f32 {
   var g0111 = vec4(gx11.z,gy11.z,gz11.z,gw11.z);
   var g1111 = vec4(gx11.w,gy11.w,gz11.w,gw11.w);
 
-  let norm00 = taylorInvSqrt4(vec4(dot(g0000, g0000), dot(g0100, g0100), dot(g1000, g1000), dot(g1100, g1100)));
+  var norm00 = taylorInvSqrt4(vec4(dot(g0000, g0000), dot(g0100, g0100), dot(g1000, g1000), dot(g1100, g1100)));
   g0000 = g0000 * norm00.x;
   g0100 = g0100 * norm00.y;
   g1000 = g1000 * norm00.z;
   g1100 = g1100 * norm00.w;
 
-  let norm01 = taylorInvSqrt4(vec4(dot(g0001, g0001), dot(g0101, g0101), dot(g1001, g1001), dot(g1101, g1101)));
+  var norm01 = taylorInvSqrt4(vec4(dot(g0001, g0001), dot(g0101, g0101), dot(g1001, g1001), dot(g1101, g1101)));
   g0001 = g0001 * norm01.x;
   g0101 = g0101 * norm01.y;
   g1001 = g1001 * norm01.z;
   g1101 = g1101 * norm01.w;
 
-  let norm10 = taylorInvSqrt4(vec4(dot(g0010, g0010), dot(g0110, g0110), dot(g1010, g1010), dot(g1110, g1110)));
+  var norm10 = taylorInvSqrt4(vec4(dot(g0010, g0010), dot(g0110, g0110), dot(g1010, g1010), dot(g1110, g1110)));
   g0010 = g0010 * norm10.x;
   g0110 = g0110 * norm10.y;
   g1010 = g1010 * norm10.z;
   g1110 = g1110 * norm10.w;
 
-  let norm11 = taylorInvSqrt4(vec4(dot(g0011, g0011), dot(g0111, g0111), dot(g1011, g1011), dot(g1111, g1111)));
+  var norm11 = taylorInvSqrt4(vec4(dot(g0011, g0011), dot(g0111, g0111), dot(g1011, g1011), dot(g1111, g1111)));
   g0011 = g0011 * norm11.x;
   g0111 = g0111 * norm11.y;
   g1011 = g1011 * norm11.z;
