@@ -54,12 +54,13 @@ license:
 #ifndef FNC_PBR_LITTLE
 #define FNC_PBR_LITTLE
 
-float4 pbrLittle(float4 albedo, float3 position, float3 normal, float roughness, float metallic, float3 f0, float shadow ) {
-    #ifdef LIGHT_DIRECTION
+float4 pbrLittle(float4 albedo, float3 position, float3 normal, float roughness, float metallic, float3 f0, float shadow)
+{
+#ifdef LIGHT_DIRECTION
     float3 L = normalize(LIGHT_DIRECTION);
-    #else
+#else
     float3 L = normalize(LIGHT_POSITION - position);
-    #endif
+#endif
     float3 N = normalize(normal);
     float3 V = normalize(CAMERA_POSITION - position);
 
@@ -71,37 +72,43 @@ float4 pbrLittle(float4 albedo, float3 position, float3 normal, float roughness,
     float spec = specular(L, N, V, roughness) * shadow;
 
     albedo.rgb = albedo.rgb * diff;
-    #if defined(UNITY_COMPILER_HLSL)
+#if defined(UNITY_COMPILER_HLSL)
     albedo.rgb += ShadeSH9(half4(N,1));
     // #elif defined(SCENE_SH_ARRAY)
     // albedo.rgb = albedo.rgb + tonemapReinhard( sphericalHarmonics(N) ) * 0.25;
-    // #endif
+#endif
 
-    float NoV = dot(N, V); 
+    float NoV = dot(N, V);
 
     // SPECULAR
-    float3 specIntensity =  float3(1.0, 1.0, 1.0) *
-                            (0.04 * notMetal + 2.0 * metallic) * 
+    // This is a bit of a stylistic approach
+    float specIntensity = (0.04 * notMetal + 2.0 * metallic) *
                             saturate(-1.1 + NoV + metallic) * // Fresnel
                             (metallic + smoothness * 4.0); // make smaller highlights brighter
 
     float3 R = reflect(-V, N);
-    float3 ambientSpecular = tonemapReinhard( envMap(R, roughness, metallic) ) * specIntensity;
+    float3 ambientSpecular = tonemapReinhard(envMap(R, roughness, metallic)) * specIntensity;
     ambientSpecular += fresnelReflection(R, f0, NoV) * metallic;
 
-    albedo.rgb =    albedo.rgb * notMetal + ( ambientSpecular 
+    albedo.rgb = albedo.rgb * notMetal + (ambientSpecular
                     + LIGHT_COLOR * 2.0 * spec
                     ) * (notMetal * smoothness + albedo.rgb * metallic);
 
     return albedo;
 }
 
-float4 pbrLittle(float4 albedo, float3 position, float3 normal, float roughness, float metallic, float shadow) {
+float4 pbrLittle(float4 albedo, float3 position, float3 normal, float roughness, float metallic, float shadow)
+{
     return pbrLittle(albedo, position, normal, roughness, metallic, float3(0.04, 0.04, 0.04), shadow);
 }
 
-float4 pbrLittle(Material material) {
-    return pbrLittle(material.albedo, material.position, material.normal, material.roughness, material.metallic, material.f0, material.ambientOcclusion * material.shadow) + float4(material.emissive, 0.0);
+float4 pbrLittle(Material material)
+{
+    float s = 1.0;
+#if defined(LIGHT_SHADOWMAP) && defined(LIGHT_SHADOWMAP_SIZE) && defined(LIGHT_COORD)
+    s *= shadow(LIGHT_SHADOWMAP, vec2(LIGHT_SHADOWMAP_SIZE), (LIGHT_COORD).xy, (LIGHT_COORD).z);
+#endif
+    return pbrLittle(material.albedo, material.position, material.normal, material.roughness, material.metallic, material.f0, material.ambientOcclusion * s) + float4(material.emissive, 0.0);
 }
 
 #endif
