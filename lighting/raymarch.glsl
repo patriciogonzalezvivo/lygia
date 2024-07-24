@@ -40,7 +40,7 @@ license:
 #define ENG_RAYMARCHING
 vec4 raymarch(vec3 camera, vec3 ta, vec2 st) {
     mat3 ca = RAYMARCH_CAMERA_MATRIX_FNC(camera, ta);
-    float fov = 2.0/tan(RAYMARCH_CAMERA_FOV*PI/180.0/2.0);
+    float fov = 1.0/tan(RAYMARCH_CAMERA_FOV*PI/180.0/2.0);
 
 #if defined(RAYMARCH_MULTISAMPLE)
     vec4 color = vec4(0.0);

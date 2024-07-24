@@ -42,7 +42,7 @@ license:
 
 float4 raymarch(float3 camera, float3 ta, float2 st) {
     float3x3 ca = RAYMARCH_CAMERA_MATRIX_FNC(camera, ta);
-    float fov = 2.0/tan(RAYMARCH_CAMERA_FOV*PI/180.0/2.0);
+    float fov = 1.0/tan(RAYMARCH_CAMERA_FOV*PI/180.0/2.0);
     
 #if defined(RAYMARCH_MULTISAMPLE)
     float4 color = float4(0.0, 0.0, 0.0, 0.0);
