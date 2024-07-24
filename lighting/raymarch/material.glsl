@@ -78,8 +78,8 @@ vec3 raymarchDefaultMaterial(vec3 ray, vec3 position, vec3 normal, RAYMARCH_MAP_
     float dom = smoothstep( -0.1, 0.1, ref.y );
     float fre = pow( saturate(1.0+dot(normal,ray) ), 2.0 );
     
-    dif *= raymarchSoftShadow( position, lig, 0.02, 2.5 );
-    dom *= raymarchSoftShadow( position, ref, 0.02, 2.5 );
+    dif *= raymarchSoftShadow( position, lig );
+    dom *= raymarchSoftShadow( position, ref );
 
     vec3 light = vec3(0.0);
     light += 1.30 * dif * LIGHT_COLOR;
