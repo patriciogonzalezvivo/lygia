@@ -1,5 +1,3 @@
-#include "../../math/saturate.hlsl"
-
 /*
 contributors:  Inigo Quiles
 description: Default raymarching renderer
