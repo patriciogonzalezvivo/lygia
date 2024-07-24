@@ -24,10 +24,6 @@ license:
 #define SAMPLE_CUBE_FNC(CUBEMAP, NORM, LOD) CUBEMAP.SampleLevel(DEFAULT_SAMPLER_STATE, NORM, LOD)
 #endif
 
-#if defined(ENVMAP_MAX_MIP_LEVEL) && !defined(UNITY_COMPILER_HLSL)
-#define ENVMAP_MAX_MIP_LEVEL 3.0
-#endif
-
 #ifndef FNC_ENVMAP
 #define FNC_ENVMAP
 float3 envMap(float3 _normal, float _roughness, float _metallic) {
