@@ -9,7 +9,7 @@ license:
 
 #ifndef FNC_FLOWERSDF
 #define FNC_FLOWERSDF
-float flowerSDF(vec2 st, int N) {
+float flowerSDF(float2 st, int N) {
 #ifdef CENTER_2D
     st -= CENTER_2D;
 #else
