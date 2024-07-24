@@ -20,10 +20,14 @@ license:
 */
 
 #ifndef SAMPLE_CUBE_FNC
+#if __VERSION__ >= 300
+#define SAMPLE_CUBE_FNC(CUBEMAP, NORM, LOD) texture(CUBEMAP, NORM, LOD)
+#else
 #define SAMPLE_CUBE_FNC(CUBEMAP, NORM, LOD) textureCube(CUBEMAP, NORM, LOD)
 #endif
+#endif
 
-#ifndef ENVMAP_MAX_MIP_LEVEL
+#if __VERSION__ < 430
 #define ENVMAP_MAX_MIP_LEVEL 3.0
 #endif
 
@@ -39,6 +43,10 @@ vec3 envMap(const in vec3 _normal, const in float _roughness, const in float _me
     return sampleEquirect(SCENE_EQUIRECT, _normal, 1.0 + 26.0 * _roughness).rgb;
 
 // Cubemap sampling
+#elif defined(SCENE_CUBEMAP) && !defined(ENVMAP_MAX_MIP_LEVEL)
+    int levels = textureQueryLevels( SCENE_CUBEMAP );
+    return SAMPLE_CUBE_FNC( SCENE_CUBEMAP, _normal, levels * _roughness).rgb;
+
 #elif defined(SCENE_CUBEMAP)
     return SAMPLE_CUBE_FNC( SCENE_CUBEMAP, _normal, (ENVMAP_MAX_MIP_LEVEL * _roughness) ).rgb;
 
