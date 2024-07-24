@@ -1,3 +1,4 @@
+#include "../color/tonemap.hlsl"
 #include "material.hlsl"
 #include "fresnelReflection.hlsl"
 #include "light/point.hlsl"
