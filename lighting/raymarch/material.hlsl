@@ -75,8 +75,8 @@ float3 raymarchDefaultMaterial(float3 ray, float3 position, float3 normal, RAYMA
     float dom = smoothstep( -0.1, 0.1, ref.y );
     float fre = pow( saturate(1.0+dot(normal,ray) ), 2.0 );
     
-    dif *= raymarchSoftShadow( position, lig, 0.02, 2.5 );
-    dom *= raymarchSoftShadow( position, ref, 0.02, 2.5 );
+    dif *= raymarchSoftShadow( position, lig );
+    dom *= raymarchSoftShadow( position, ref );
 
     float3 light = float3(0.0, 0.0, 0.0);
     light += 1.30 * dif * LIGHT_COLOR;
