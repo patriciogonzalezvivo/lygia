@@ -28,11 +28,7 @@ license:
 #endif
 
 #ifndef RAYMARCH_CAMERA_FOV
-#define RAYMARCH_CAMERA_FOV 3.0
-#endif
-
-#ifndef RAYMARCH_CAMERA_SCALE
-#define RAYMARCH_CAMERA_SCALE 0.11
+#define RAYMARCH_CAMERA_FOV 60.0
 #endif
 
 #include "../math/const.glsl"
@@ -44,21 +40,22 @@ license:
 #define ENG_RAYMARCHING
 vec4 raymarch(vec3 camera, vec3 ta, vec2 st) {
     mat3 ca = RAYMARCH_CAMERA_MATRIX_FNC(camera, ta);
-    
+    float fov = 2.0/tan(RAYMARCH_CAMERA_FOV*PI/180.0/2.0);
+
 #if defined(RAYMARCH_MULTISAMPLE)
     vec4 color = vec4(0.0);
     vec2 pixel = 1.0/RESOLUTION;
     vec2 offset = rotate( vec2(0.5, 0.0), HALF_PI/4.);
 
     for (int i = 0; i < RAYMARCH_MULTISAMPLE; i++) {
-        vec3 rd = ca * normalize(vec3((st + offset * pixel)*2.0-1.0, RAYMARCH_CAMERA_FOV));
-        color += RAYMARCH_RENDER_FNC( camera * RAYMARCH_CAMERA_SCALE, rd);
+        vec3 rd = ca * normalize(vec3((st + offset * pixel)*2.0-1.0, fov));
+        color += RAYMARCH_RENDER_FNC( camera, rd);
         offset = rotate(offset, HALF_PI);
     }
     return color/float(RAYMARCH_MULTISAMPLE);
 #else
-    vec3 rd = ca * normalize(vec3(st*2.0-1.0, RAYMARCH_CAMERA_FOV));
-    return RAYMARCH_RENDER_FNC( camera * RAYMARCH_CAMERA_SCALE, rd);
+    vec3 rd = ca * normalize(vec3(st*2.0-1.0, fov));
+    return RAYMARCH_RENDER_FNC( camera, rd);
 #endif
 }
 
