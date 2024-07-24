@@ -40,6 +40,8 @@
 #include "common/specularAO.hlsl"
 #include "common/envBRDFApprox.hlsl"
 
+#include "raymarch/ao.hlsl"
+
 /*
 contributors: Patricio Gonzalez Vivo
 description: Simple PBR shading model
@@ -50,6 +52,7 @@ options:
     - LIGHT_POSITION: in glslViewer is u_light
     - LIGHT_COLOR in glslViewer is u_lightColor
     - CAMERA_POSITION: in glslViewer is u_camera
+    - RAYMARCH_AO: enabled raymarched ambient occlusion
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
@@ -71,16 +74,21 @@ float4 pbr(const Material _mat) {
 
     // Ambient Occlusion
     // ------------------------
-    float ssao = 1.0;
+    float ao = 1.0;
+    
+    #if defined(RAYMARCH_AO)
+    ao = raymarchAO(M.position, M.normal);
+    #endif
+
 // #if defined(FNC_SSAO) && defined(SCENE_DEPTH) && defined(RESOLUTION) && defined(CAMERA_NEAR_CLIP) && defined(CAMERA_FAR_CLIP)
 //     vec2 pixel = 1.0/RESOLUTION;
-//     ssao = ssao(SCENE_DEPTH, gl_FragCoord.xy*pixel, pixel, 1.);
+//     ao = ssao(SCENE_DEPTH, gl_FragCoord.xy*pixel, pixel, 1.);
 // #endif 
 
     // Global Ilumination ( Image Based Lighting )
     // ------------------------
     float3 E = envBRDFApprox(specularColor, M);
-    float diffuseAO = min(M.ambientOcclusion, ssao);
+    float diffuseAO = min(M.ambientOcclusion, ao);
     
     float3 Fr = float3(0.0, 0.0, 0.0);
     Fr = envMap(M) * E;
