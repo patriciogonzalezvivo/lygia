@@ -83,7 +83,7 @@ float4 raymarchVolume( in float3 ro, in float3 rd ) {
             #ifdef LIGHT_POSITION
             float Tl = 1.0;
             for (int j = 0; j < nbSampleLight; j++) {
-                float densityLight = raymarchMap( pos + sun_direction * float(j) * tstepl ).a;
+                float densityLight = RAYMARCH_MAP_FNC( pos + sun_direction * float(j) * tstepl ).a;
                 if (densityLight>0.)
                     Tl *= 1. - densityLight * absorption/fSamples;
                 if (Tl <= 0.01)
