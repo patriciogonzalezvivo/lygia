@@ -7,7 +7,7 @@ use: <float> castRay( in <float3> pos, in <float3> nor )
 */
 
 #ifndef RAYMARCH_SAMPLES
-#define RAYMARCH_SAMPLES 64
+#define RAYMARCH_SAMPLES 256
 #endif
 
 #ifndef RAYMARCH_MIN_DIST
