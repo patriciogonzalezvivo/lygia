@@ -16,8 +16,11 @@ license:
 
 #include "../specular.glsl"
 #include "../diffuse.glsl"
-#include "../raymarch/softShadow.glsl"
 #include "falloff.glsl"
+
+#ifdef RAYMARCH_SHADOWS
+#include "../raymarch/softShadow.glsl"
+#endif
 
 #ifndef STR_LIGHT_POINT
 #define STR_LIGHT_POINT

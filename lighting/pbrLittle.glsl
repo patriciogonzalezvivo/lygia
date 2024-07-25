@@ -110,7 +110,12 @@ vec4 pbrLittle(Material material) {
     #if defined(LIGHT_SHADOWMAP) && defined(LIGHT_SHADOWMAP_SIZE) && defined(LIGHT_COORD)
     s *= shadow(LIGHT_SHADOWMAP, vec2(LIGHT_SHADOWMAP_SIZE), (LIGHT_COORD).xy, (LIGHT_COORD).z);
     #endif
+
+    #if defined(SHADING_MODEL_IRIDESCENCE)
     return pbrLittle(material.albedo, material.position, material.normal, material.roughness, material.metallic, material.f0, material.ior, material.thickness, material.ambientOcclusion * s) + vec4(material.emissive, 0.0);
+    #else
+    return pbrLittle(material.albedo, material.position, material.normal, material.roughness, material.metallic, material.f0, material.ambientOcclusion * s) + vec4(material.emissive, 0.0);
+    #endif
 }
 
 #endif

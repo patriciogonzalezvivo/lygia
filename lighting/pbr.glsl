@@ -12,7 +12,9 @@
 #include "common/specularAO.glsl"
 #include "common/envBRDFApprox.glsl"
 
+#if defined(RAYMARCH_AO)
 #include "raymarch/ao.glsl"
+#endif
 
 /*
 contributors: Patricio Gonzalez Vivo
