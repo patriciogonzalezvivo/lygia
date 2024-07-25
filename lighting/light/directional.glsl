@@ -1,6 +1,9 @@
 #include "../specular.glsl"
 #include "../diffuse.glsl"
+
+#ifdef RAYMARCH_SHADOWS
 #include "../raymarch/softShadow.glsl"
+#endif
 
 /*
 contributors: Patricio Gonzalez Vivo

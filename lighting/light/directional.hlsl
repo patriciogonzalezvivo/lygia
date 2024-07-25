@@ -1,6 +1,9 @@
 #include "../specular.hlsl"
 #include "../diffuse.hlsl"
+
+#ifdef RAYMARCH_SHADOWS   
 #include "../raymarch/softShadow.hlsl"
+#endif
 
 /*
 contributors: Patricio Gonzalez Vivo

@@ -16,8 +16,10 @@ license:
 
 #include "../specular.hlsl"
 #include "../diffuse.hlsl"
-#include "../raymarch/softShadow.hlsl"
 #include "falloff.hlsl"
+#ifdef RAYMARCH_SHADOWS
+#include "../raymarch/softShadow.hlsl"
+#endif
 
 #ifndef STR_LIGHT_POINT
 #define STR_LIGHT_POINT
