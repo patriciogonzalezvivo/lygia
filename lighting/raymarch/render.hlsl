@@ -46,13 +46,7 @@ float4 raymarchDefaultRender( in float3 ray_origin, in float3 ray_direction ) {
     float3 pos = ray_origin + t * ray_direction;
     float3 nor = raymarchNormal( pos );
     col = raymarchMaterial(ray_direction, pos, nor, res.RAYMARCH_MAP_MATERIAL);
-    if (FOG_DENSITY > 0.0) {
-        #ifdef LIGHT_DIRECTION
-        col = raymarchFog(col, t, ray_direction, LIGHT_DIRECTION);
-        #else
-        col = raymarchFog(col, t);
-        #endif
-    }
+    col = raymarchFog(col, t, ray_origin, ray_direction);
     
     return float4( saturate(col), t );
 }
