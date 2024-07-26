@@ -11,10 +11,12 @@ float2 cart2polar(in float2 st) {
     return float2(atan2(st.y, st.x), length(st));
 }
 
+// https://mathworld.wolfram.com/SphericalCoordinates.html
 float3 cart2polar( in float3 st) {
-   float r = length(st);
-   float theta = atan2( length(st.xy), st.z);
-   float phi = atan2(st.y, st.x);
-   return float3(r, theta, phi);
+    float r = length(st);
+    float phi = acos(st.z/r);
+    float theta = atan2(st.y, st.x);
+    return float3(r, phi, theta);
 }
+
 #endif
