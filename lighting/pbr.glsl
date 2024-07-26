@@ -85,7 +85,7 @@ vec4 pbr(const in Material _mat) {
     #if defined(SCENE_SH_ARRAY)
     Fd  *= tonemap( sphericalHarmonics(M.normal) );
     #else
-    Fd *= envMap(M.normal, 0.8); // a roughness of 0.8 visually matches the factors returned by Unity's ShadeSH9
+    Fd *= envMap(M.normal, 1);
     #endif
     Fd  *= diffuseAO;
     Fd  *= (1.0 - E);
