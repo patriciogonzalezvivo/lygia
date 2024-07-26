@@ -57,7 +57,7 @@ vec3 raymarchHeightFog(in vec3 col, // color of pixel
 
 vec3 raymarchFog(in vec3 col, in float t, in vec3 ro, in vec3 rd)
 {
-    if (FOG_FALLOFF > 0.0) {
+    if (FOG_DENSITY > 0.0 && FOG_FALLOFF > 0.0) {
         return raymarchHeightFog(col, t, ro, rd);
     }
     else if (FOG_DENSITY > 0.0) {
