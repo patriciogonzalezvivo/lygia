@@ -22,9 +22,9 @@ license:
 
 #ifndef SAMPLE_CUBE_FNC
 #if __VERSION__ >= 300
-#define SAMPLE_CUBE_FNC(CUBEMAP, NORM, LOD) texture(CUBEMAP, NORM, LOD)
+#define SAMPLE_CUBE_FNC(CUBEMAP, NORM, LOD) textureLod(CUBEMAP, NORM, LOD)
 #else
-#define SAMPLE_CUBE_FNC(CUBEMAP, NORM, LOD) textureCube(CUBEMAP, NORM, LOD)
+#define SAMPLE_CUBE_FNC(CUBEMAP, NORM, LOD) textureCubeLod(CUBEMAP, NORM, LOD)
 #endif
 #endif
 
