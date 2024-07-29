@@ -2,7 +2,7 @@
 
 /*
 contributors:  Inigo Quiles
-description: Calculare Ambient Occlusion
+description: Calculate Ambient Occlusion. See calcAO in https://www.shadertoy.com/view/lsKcDD
 use: <float> raymarchAO( in <float3> pos, in <float3> nor ) 
 */
 
@@ -21,18 +21,18 @@ use: <float> raymarchAO( in <float3> pos, in <float3> nor )
 #ifndef FNC_RAYMARCHAO
 #define FNC_RAYMARCHAO
 
-float raymarchAO( in float3 pos, in float3 nor ) {
+float raymarchAO(in float3 pos, in float3 nor)
+{
     float occ = 0.0;
     float sca = 1.0;
-    for( int i = 0; i < RAYMARCH_SAMPLES_AO; i++ ) {
-        float hr = 0.01 + 0.12 * float(i) * 0.2;
-        float dd = RAYMARCH_MAP_FNC( hr * nor + pos ).RAYMARCH_MAP_DISTANCE;
-        occ += (hr-dd)*sca;
-        sca *= 0.9;
-        if( occ > 0.35 ) 
-            break;
+    for (int i = 0; i < RAYMARCH_SAMPLES_AO; i++)
+    {
+        float h = 0.001 + 0.15 * float(i) / 4.0;
+        float d = RAYMARCH_MAP_FNC(pos + h * nor).RAYMARCH_MAP_DISTANCE;
+        occ += (h - d) * sca;
+        sca *= 0.95;
     }
-    return saturate( 1.0 - 3.0 * occ ) * (0.5+0.5*nor.y);
+    return clamp(1.0 - 1.5 * occ, 0.0, 1.0);
 }
 
 #endif
