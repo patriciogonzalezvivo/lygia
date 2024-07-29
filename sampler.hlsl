@@ -20,7 +20,7 @@ license:
 
     // https://docs.unity3d.com/Manual/SL-SamplerStates.html
     #ifndef DEFAULT_SAMPLER_STATE
-    #define DEFAULT_SAMPLER_STATE defaultLinearClampSampler
+    #define DEFAULT_SAMPLER_STATE defaultTrilinearClampSampler
     SamplerState DEFAULT_SAMPLER_STATE
     {
         Filter = MIN_MAG_MIP_LINEAR;
