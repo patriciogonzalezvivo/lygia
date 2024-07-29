@@ -19,9 +19,19 @@ license:
 #else
 
     // https://docs.unity3d.com/Manual/SL-SamplerStates.html
-    #ifndef DEFAULT_SAMPLER_STATE
-    #define DEFAULT_SAMPLER_STATE defaultLinearClampSampler
-    SamplerState DEFAULT_SAMPLER_STATE
+    #ifndef SAMPLER_BILINEAR_CLAMP
+    #define SAMPLER_BILINEAR_CLAMP defaultLinearClampSampler
+    SamplerState SAMPLER_BILINEAR_CLAMP
+    {
+        Filter = MIN_MAG_MIP_LINEAR;
+        AddressU = Clamp;
+        AddressV = Clamp;
+    };
+    #endif
+
+    #ifndef SAMPLER_TRILINEAR_CLAMP
+    #define SAMPLER_TRILINEAR_CLAMP defaultTrilinearClampSampler
+    SamplerState SAMPLER_TRILINEAR_CLAMP
     {
         Filter = MIN_MAG_MIP_LINEAR;
         AddressU = Clamp;
@@ -30,7 +40,7 @@ license:
     #endif
 
     #ifndef SAMPLER_FNC
-    #define SAMPLER_FNC(TEX, UV) TEX.Sample(DEFAULT_SAMPLER_STATE, UV)
+    #define SAMPLER_FNC(TEX, UV) TEX.Sample(SAMPLER_BILINEAR_CLAMP, UV)
     #endif
 
     #ifndef SAMPLER_TYPE

@@ -13,7 +13,8 @@ description: |
 use: <float3> envMap(<float3> _normal, <float> _roughness [, <float> _metallic])
 options:
     - CUBEMAP: pointing to the cubemap texture
-    - ENVMAP_MAX_MIP_LEVEL: defualt 8
+    - ENVMAP_MAX_MIP_LEVEL
+    - ENVMAP_LOD_OFFSET
     - ENVMAP_FNC(NORMAL, ROUGHNESS, METALLIC)
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
@@ -21,7 +22,11 @@ license:
 */
 
 #ifndef SAMPLE_CUBE_FNC
-#define SAMPLE_CUBE_FNC(CUBEMAP, NORM, LOD) CUBEMAP.SampleLevel(DEFAULT_SAMPLER_STATE, NORM, LOD)
+#define SAMPLE_CUBE_FNC(CUBEMAP, NORM, LOD) CUBEMAP.SampleLevel(SAMPLER_TRILINEAR_CLAMP, NORM, LOD)
+#endif
+
+#ifndef ENVMAP_LOD_OFFSET
+#define ENVMAP_LOD_OFFSET 0
 #endif
 
 #ifndef FNC_ENVMAP
@@ -36,12 +41,12 @@ float3 envMap(float3 _normal, float _roughness, float _metallic) {
 #elif defined(SCENE_CUBEMAP) && !defined(ENVMAP_MAX_MIP_LEVEL)
     uint width, height, levels;
     SCENE_CUBEMAP.GetDimensions(0, width, height, levels);
-    float lod = levels * _roughness;
-    return SAMPLE_CUBE_FNC( SCENE_CUBEMAP, _normal, lod).rgb;
+    float lod = levels - ENVMAP_LOD_OFFSET;
+    return SAMPLE_CUBE_FNC( SCENE_CUBEMAP, _normal, lod * _roughness).rgb;
     
 #elif defined(SCENE_CUBEMAP)
-    float lod = ENVMAP_MAX_MIP_LEVEL * _roughness;
-    return SAMPLE_CUBE_FNC( SCENE_CUBEMAP, _normal, lod).rgb;
+    float lod = ENVMAP_MAX_MIP_LEVEL;
+    return SAMPLE_CUBE_FNC( SCENE_CUBEMAP, _normal, lod * _roughness).rgb;
 
 // Default
 #else
