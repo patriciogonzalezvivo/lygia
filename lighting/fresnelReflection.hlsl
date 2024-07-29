@@ -30,7 +30,7 @@ float3 fresnelReflection(const in float3 R, const in float3 f0, const in float N
 
     float3 reflectColor = float3(0.0, 0.0, 0.0);
 #if defined(FRESNEL_REFLECTION_FNC)
-    reflection = FRESNEL_REFLECTION_FNC(R);
+    reflectColor = FRESNEL_REFLECTION_FNC(R);
 #else
     reflectColor = envMap(R, 1.0, 0.001);
 #endif
@@ -42,7 +42,7 @@ float3 fresnelReflection(const in float3 R, const in float3 Fr)
 {
     float3 reflectColor = float3(0.0, 0.0, 0.0);
 #if defined(FRESNEL_REFLECTION_FNC)
-    reflection = FRESNEL_REFLECTION_FNC(R);
+    reflectColor = FRESNEL_REFLECTION_FNC(R);
 #else
     reflectColor = envMap(R, 1.0, 0.001);
 #endif
