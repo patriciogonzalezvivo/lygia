@@ -26,7 +26,7 @@ license:
 #endif
 
 #ifndef ENVMAP_LOD_OFFSET
-#define ENVMAP_LOD_OFFSET 3 // this is different from GLSL
+#define ENVMAP_LOD_OFFSET 0
 #endif
 
 #ifndef FNC_ENVMAP
