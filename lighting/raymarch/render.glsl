@@ -3,6 +3,7 @@
 #include "normal.glsl"
 #include "softShadow.glsl"
 #include "material.glsl"
+#include "fog.glsl"
 #include "../../math/saturate.glsl"
 
 /*
@@ -48,6 +49,7 @@ vec4 raymarchDefaultRender( in vec3 ray_origin, in vec3 ray_direction ) {
     vec3 pos = ray_origin + t * ray_direction;
     vec3 nor = raymarchNormal( pos );
     col = raymarchMaterial(ray_direction, pos, nor, res.RAYMARCH_MAP_MATERIAL);
+    col = raymarchFog(col, t, ray_origin, ray_direction);
 
     return vec4( saturate(col), t );
 }
