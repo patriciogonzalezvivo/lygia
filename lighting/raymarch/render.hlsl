@@ -3,6 +3,7 @@
 #include "normal.hlsl"
 #include "softShadow.hlsl"
 #include "material.hlsl"
+#include "fog.hlsl"
 
 /*
 contributors:  Inigo Quiles
@@ -45,7 +46,8 @@ float4 raymarchDefaultRender( in float3 ray_origin, in float3 ray_direction ) {
     float3 pos = ray_origin + t * ray_direction;
     float3 nor = raymarchNormal( pos );
     col = raymarchMaterial(ray_direction, pos, nor, res.RAYMARCH_MAP_MATERIAL);
-
+    col = raymarchFog(col, t, ray_origin, ray_direction);
+    
     return float4( saturate(col), t );
 }
 
