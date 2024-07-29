@@ -33,7 +33,7 @@ license:
 #endif
 
 #ifndef ENVMAP_LOD_OFFSET
-#define ENVMAP_LOD_OFFSET 0 // this is different from HLSL
+#define ENVMAP_LOD_OFFSET 0
 #endif
 
 #ifndef FNC_ENVMAP
