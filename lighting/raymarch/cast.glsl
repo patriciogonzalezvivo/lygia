@@ -7,11 +7,11 @@ use: <float> castRay( in <vec3> pos, in <vec3> nor )
 */
 
 #ifndef RAYMARCH_SAMPLES
-#define RAYMARCH_SAMPLES 64
+#define RAYMARCH_SAMPLES 256
 #endif
 
 #ifndef RAYMARCH_MIN_DIST
-#define RAYMARCH_MIN_DIST 1.0
+#define RAYMARCH_MIN_DIST 0.1
 #endif
 
 #ifndef RAYMARCH_MAX_DIST
