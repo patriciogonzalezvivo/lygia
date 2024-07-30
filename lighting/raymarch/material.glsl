@@ -56,11 +56,11 @@ license:
 #ifndef FNC_RAYMARCHMATERIAL
 #define FNC_RAYMARCHMATERIAL
 
-vec3 raymarchDefaultMaterial(vec3 ray, vec3 position, vec3 normal, RAYMARCH_MAP_MATERIAL_TYPE color) {
+vec4 raymarchDefaultMaterial(vec3 ray, vec3 position, vec3 normal, RAYMARCH_MAP_MATERIAL_TYPE color) {
     vec3  env = RAYMARCH_AMBIENT;
 
     if ( sum(color) <= 0.0 ) 
-        return RAYMARCH_BACKGROUND;
+        return vec4(RAYMARCH_BACKGROUND, 0.0);
 
     vec3 ref = reflect( ray, normal );
     float occ = raymarchAO( position, normal );
@@ -88,10 +88,10 @@ vec3 raymarchDefaultMaterial(vec3 ray, vec3 position, vec3 normal, RAYMARCH_MAP_
     light += 0.50 * bac * occ * 0.25;
     light += 0.25 * fre * occ;
 
-    return RAYMARCH_MAP_MATERIAL_FNC(color) * light;
+    return vec4(RAYMARCH_MAP_MATERIAL_FNC(color) * light, 1.0);
 }
 
-vec3 raymarchMaterial(vec3 ray, vec3 position, vec3 normal, vec3 albedo) {
+vec4 raymarchMaterial(vec3 ray, vec3 position, vec3 normal, vec3 albedo) {
     return RAYMARCH_MATERIAL_FNC(ray, position, normal, albedo);
 }
 
