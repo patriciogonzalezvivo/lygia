@@ -34,7 +34,7 @@ float4 raymarchDefaultRender(
     if (res.valid) {
         res.position = worldPos;
         res.normal = worldNormal;
-        res.V = rayDirection;
+        res.V = -rayDirection;
         color = RAYMARCH_MATERIAL_FNC(res);
     }
     color.rgb = raymarchFog(color.rgb, t, rayOrigin, rayDirection);
