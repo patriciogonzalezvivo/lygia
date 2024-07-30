@@ -19,6 +19,7 @@ use:
     - void materialNew(out <material> _mat)
     - <material> materialNew()
 options:
+    - SURFACE_POSITION
     - SCENE_BACK_SURFACE
     - SHADING_MODEL_CLEAR_COAT
     - MATERIAL_HAS_CLEAR_COAT_NORMAL
