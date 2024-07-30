@@ -10,7 +10,7 @@ options:
     - RAYMARCH_MULTISAMPLE: null
     - RAYMARCH_BACKGROUND: default vec3(0.0)
     - RAYMARCH_CAMERA_MATRIX_FNC(RO, TA): default raymarchCamera(RO, TA)
-    - RAYMARCH_RENDER_FNC(RO, RD): default raymarchDefaultRender(RO, RD)
+    - RAYMARCH_RENDER_FNC(RO, RD): default raymarchDefaultRender(RO, RD, TA)
     - RESOLUTION: nan
 examples:
     - /shaders/lighting_raymarching.frag
@@ -50,13 +50,13 @@ vec4 raymarch(vec3 camera, vec3 ta, vec2 st) {
 
     for (int i = 0; i < RAYMARCH_MULTISAMPLE; i++) {
         vec3 rd = ca * normalize(vec3((st + offset * pixel)*2.0-1.0, fov));
-        color += RAYMARCH_RENDER_FNC( camera, rd);
+        color += RAYMARCH_RENDER_FNC( camera, rd, ta );
         offset = rotate(offset, HALF_PI);
     }
     return color/float(RAYMARCH_MULTISAMPLE);
 #else
     vec3 rd = ca * normalize(vec3(st*2.0-1.0, fov));
-    return RAYMARCH_RENDER_FNC( camera, rd);
+    return RAYMARCH_RENDER_FNC( camera, rd, ta );
 #endif
 }
 

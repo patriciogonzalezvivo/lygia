@@ -10,7 +10,7 @@ options:
     - RAYMARCH_MULTISAMPLE: null
     - RAYMARCH_BACKGROUND: default float3(0.0)
     - RAYMARCH_CAMERA_MATRIX_FNC(RO, TA): default raymarchCamera(RO, TA)
-    - RAYMARCH_RENDER_FNC(RO, RD): default raymarchDefaultRender(RO, RD)
+    - RAYMARCH_RENDER_FNC(RO, RD): default raymarchDefaultRender(RO, RD, TA)
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
@@ -52,13 +52,13 @@ float4 raymarch(float3 camera, float3 ta, float2 st) {
 
     for (int i = 0; i < RAYMARCH_MULTISAMPLE; i++) {    
         float3 rd = mul(ca, normalize(float3( (st + offset * pixel)*2.0-1.0, fov)) );
-        color += RAYMARCH_RENDER_FNC( camera, rd);
+        color += RAYMARCH_RENDER_FNC( camera, rd, ta );
         offset = rotate(offset, HALF_PI);
     }
     return color/float(RAYMARCH_MULTISAMPLE);
 #else
     float3 rd = mul(ca, normalize(float3(st * 2.0 - 1.0, fov)));
-    return RAYMARCH_RENDER_FNC(camera, rd);
+    return RAYMARCH_RENDER_FNC(camera, rd, ta);
 #endif
 }
 

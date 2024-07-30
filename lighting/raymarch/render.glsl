@@ -40,7 +40,7 @@ examples:
 #ifndef FNC_RAYMARCHDEFAULT
 #define FNC_RAYMARCHDEFAULT
 
-vec4 raymarchDefaultRender( in vec3 ray_origin, in vec3 ray_direction ) { 
+vec4 raymarchDefaultRender( in vec3 ray_origin, in vec3 ray_direction, vec3 ta ) { 
     vec3 col = vec3(0.0);
     
     RAYMARCHCAST_TYPE res = raymarchCast(ray_origin, ray_direction);
@@ -51,7 +51,11 @@ vec4 raymarchDefaultRender( in vec3 ray_origin, in vec3 ray_direction ) {
     col = raymarchMaterial(ray_direction, pos, nor, res.RAYMARCH_MAP_MATERIAL);
     col = raymarchFog(col, t, ray_origin, ray_direction);
 
-    return vec4( saturate(col), t );
+    // https://www.shadertoy.com/view/4tByz3
+    vec3 cameraForward = normalize(ta - ray_origin);
+    float depth = t * dot(ray_direction, cameraForward);
+
+    return vec4( col, depth );
 }
 
 #endif
