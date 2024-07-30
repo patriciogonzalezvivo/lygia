@@ -34,10 +34,6 @@ license:
 #define RAYMARCH_AMBIENT float3(0.0, 0.0, 0.0)
 #endif
 
-#ifndef RAYMARCH_BACKGROUND
-#define RAYMARCH_BACKGROUND float3(0.0, 0.0, 0.0)
-#endif
-
 #ifndef RAYMARCH_MATERIAL_FNC
 #define RAYMARCH_MATERIAL_FNC raymarchDefaultMaterial
 #endif
@@ -45,33 +41,27 @@ license:
 #ifndef FNC_RAYMARCHMATERIAL
 #define FNC_RAYMARCHMATERIAL
 
-Material raymarchDefaultMaterial(float3 ray, float3 position, float3 normal, Material material) {
+float4 raymarchDefaultMaterial(Material m) {
     float3  env = RAYMARCH_AMBIENT;
 
-    if (!material.valid)
-    {
-        material.albedo = float4(RAYMARCH_BACKGROUND, 0.0);
-        return material;
-    }
-
-    float3 ref = reflect( ray, normal );
-    float occ = raymarchAO( position, normal );
+    float3 ref = reflect(m.V, m.normal);
+    float occ = raymarchAO(m.position, m.normal);
 
     #if defined(LIGHT_DIRECTION)
     float3  lig = normalize( LIGHT_DIRECTION );
     #else
-    float3  lig = normalize( LIGHT_POSITION - position);
+    float3 lig = normalize(LIGHT_POSITION - m.position);
     #endif
     
-    float3  hal = normalize( lig-ray );
-    float amb = saturate( 0.5+0.5*normal.y );
-    float dif = saturate( dot( normal, lig ) );
-    float bac = saturate( dot( normal, normalize(float3(-lig.x, 0.0,-lig.z))) ) * saturate( 1.0-position.y );
+    float3 hal = normalize(lig - m.V);
+    float amb = saturate(0.5 + 0.5 * m.normal.y);
+    float dif = saturate(dot(m.normal, lig));
+    float bac = saturate(dot(m.normal, normalize(float3(-lig.x, 0.0, -lig.z)))) * saturate(1.0 - m.position.y);
     float dom = smoothstep( -0.1, 0.1, ref.y );
-    float fre = pow( saturate(1.0+dot(normal,ray) ), 2.0 );
+    float fre = pow(saturate(1.0 + dot(m.normal, m.V)), 2.0);
     
-    dif *= raymarchSoftShadow( position, lig );
-    dom *= raymarchSoftShadow( position, ref );
+    dif *= raymarchSoftShadow(m.position, lig);
+    dom *= raymarchSoftShadow(m.position, ref);
 
     float3 light = float3(0.0, 0.0, 0.0);
     light += 1.30 * dif * LIGHT_COLOR;
@@ -80,9 +70,7 @@ Material raymarchDefaultMaterial(float3 ray, float3 position, float3 normal, Mat
     light += 0.50 * bac * occ * 0.25;
     light += 0.25 * fre * occ;
 
-    material.albedo.rgb *= light;
-    
-    return material;
+    return float4(m.albedo.rgb * light, m.albedo.a);
 }
 
 #endif
