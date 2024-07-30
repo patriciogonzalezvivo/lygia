@@ -51,7 +51,7 @@ float4 raymarch( float3 camera, float3 ta, float2 st,
 
 #if defined(RAYMARCH_MULTISAMPLE)
     float4 color = float4(0.0, 0.0, 0.0, 0.0);
-    eyeDepth = 0;
+    eyeDepth = 0.0;
     worldPos = float3(0.0,0.0, 0.0);
     worldNormal = float3(0.0, 0.0, 0.0);
     float2 pixel = 1.0/RESOLUTION;
@@ -59,7 +59,7 @@ float4 raymarch( float3 camera, float3 ta, float2 st,
 
     for (int i = 0; i < RAYMARCH_MULTISAMPLE; i++) {
         float3 rd = mul(ca, normalize(float3((st + offset * pixel)*2.0-1.0, fov)));
-        float sampleDepth = 0;
+        float sampleDepth = 0.0;
         float3 sampleWorldPos = float3(0.0, 0.0, 0.0);
         float3 sampleWorldNormal = float3(0.0, 0.0, 0.0);
         color += RAYMARCH_RENDER_FNC( camera, rd, cameraForward,

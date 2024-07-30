@@ -105,7 +105,7 @@ float4 pbr(const Material _mat) {
     //#elif defined(UNITY_COMPILER_HLSL)
     // Fd *= ShadeSH9(half4(M.normal,1));
     #else
-    Fd *= envMap(M.normal, 1);
+    Fd *= envMap(M.normal, 1.0);
     #endif
     Fd  *= diffuseAO;
     Fd  *= (1.0 - E);
