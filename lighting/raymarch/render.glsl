@@ -9,7 +9,8 @@
 /*
 contributors:  Inigo Quiles
 description: Default raymarching renderer
-use: <vec4> raymarchDefaultRender( in <vec3> ro, in <vec3> rd ) 
+use: <vec4> raymarchDefaultRender( in <vec3> rayOriging, in <vec3> rayDirection, in <vec3> cameraForward,
+    out <vec3> eyeDepth, out <vec3> worldPosition, out <vec3> worldNormal ) 
 options:
     - LIGHT_COLOR: vec3(0.5) or u_lightColor in GlslViewer
     - LIGHT_POSITION: vec3(0.0, 10.0, -50.0) or u_light in GlslViewer
@@ -40,22 +41,24 @@ examples:
 #ifndef FNC_RAYMARCHDEFAULT
 #define FNC_RAYMARCHDEFAULT
 
-vec4 raymarchDefaultRender( in vec3 ray_origin, in vec3 ray_direction, vec3 ta ) { 
-    vec3 col = vec3(0.0);
+vec4 raymarchDefaultRender(
+    in vec3 rayOrigin, in vec3 rayDirection, vec3 cameraForward,
+    out float eyeDepth, out vec3 worldPos, out vec3 worldNormal ) { 
+
+    vec4 color = vec4(0.0);
     
-    RAYMARCHCAST_TYPE res = raymarchCast(ray_origin, ray_direction);
+    RAYMARCHCAST_TYPE res = raymarchCast(rayOrigin, rayDirection);
     float t = res.RAYMARCH_MAP_DISTANCE;
 
-    vec3 pos = ray_origin + t * ray_direction;
-    vec3 nor = raymarchNormal( pos );
-    col = raymarchMaterial(ray_direction, pos, nor, res.RAYMARCH_MAP_MATERIAL);
-    col = raymarchFog(col, t, ray_origin, ray_direction);
+    worldPos = rayOrigin + t * rayDirection;
+    worldNormal = raymarchNormal( worldPos );
+    color = raymarchMaterial(rayDirection, worldPos, worldNormal, res.RAYMARCH_MAP_MATERIAL);
+    color.rgb = raymarchFog(color.rgb, t, rayOrigin, rayDirection);
 
-    // https://www.shadertoy.com/view/4tByz3
-    vec3 cameraForward = normalize(ta - ray_origin);
-    float depth = t * dot(ray_direction, cameraForward);
+    // Eye-space depth. See https://www.shadertoy.com/view/4tByz3
+    eyeDepth = t * dot(rayDirection, cameraForward);
 
-    return vec4( col, depth );
+    return color;
 }
 
 #endif
