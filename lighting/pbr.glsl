@@ -85,7 +85,7 @@ vec4 pbr(const in Material _mat) {
     #if defined(SCENE_SH_ARRAY)
     Fd  *= tonemap( sphericalHarmonics(M.normal) );
     #else
-    Fd *= envMap(M.normal, 1);
+    Fd *= envMap(M.normal, 1.0);
     #endif
     Fd  *= diffuseAO;
     Fd  *= (1.0 - E);

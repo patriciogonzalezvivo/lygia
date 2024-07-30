@@ -50,7 +50,7 @@ vec4 raymarch( vec3 camera, vec3 ta, vec2 st,
 
 #if defined(RAYMARCH_MULTISAMPLE)
     vec4 color = vec4(0.0);
-    eyeDepth = 0;
+    eyeDepth = 0.0;
     worldPos = vec3(0.0);
     worldNormal = vec3(0.0);
     vec2 pixel = 1.0/RESOLUTION;
@@ -58,7 +58,7 @@ vec4 raymarch( vec3 camera, vec3 ta, vec2 st,
 
     for (int i = 0; i < RAYMARCH_MULTISAMPLE; i++) {
         vec3 rd = ca * normalize(vec3((st + offset * pixel)*2.0-1.0, fov));
-        float sampleDepth = 0;
+        float sampleDepth = 0.0;
         vec3 sampleWorldPos = vec3(0.0);
         vec3 sampleWorldNormal = vec3(0.0);
         color += RAYMARCH_RENDER_FNC( camera, rd, cameraForward,
