@@ -8,7 +8,6 @@
 #include "shininess.glsl"
 
 #include "../material.glsl"
-// #include "../shadow.glsl"
 #include "../ior.glsl"
 #include "../../sampler.glsl"
 
@@ -43,6 +42,7 @@ void materialNew(out Material _mat) {
     // Surface data
     _mat.position           = (SURFACE_POSITION).xyz;
     _mat.normal             = materialNormal();
+    _mat.sdf                = 0.0;
 
     #if defined(SCENE_BACK_SURFACE) && defined(RESOLUTION)
         vec4 back_surface       = SAMPLER_FNC(SCENE_BACK_SURFACE, gl_FragCoord.xy / RESOLUTION);
@@ -63,21 +63,16 @@ void materialNew(out Material _mat) {
     _mat.ior                = vec3(IOR_GLASS_RGB);      // Index of Refraction
     _mat.f0                 = vec3(0.04, 0.04, 0.04);   // reflectance at 0 degree
 
-    // Shade
     _mat.ambientOcclusion   = materialOcclusion();
 
-    // _mat.shadow             = SHADOW_INIT;
-
-    // Clear Coat Model
-// #if defined(MATERIAL_HAS_CLEAR_COAT)
+#if defined (SHADING_MODEL_CLEAR_COAT)
     _mat.clearCoat          = 0.0;
     _mat.clearCoatRoughness = 0.01;
-#if defined(MATERIAL_HAS_CLEAR_COAT_NORMAL)
+    #if defined(MATERIAL_HAS_CLEAR_COAT_NORMAL)
     _mat.clearCoatNormal    = vec3(0.0, 0.0, 1.0);
+    #endif
 #endif
-// #endif
 
-    // SubSurface Model
 #if defined(SHADING_MODEL_IRIDESCENCE)
     _mat.thickness          = 300.0;
 #endif
@@ -111,16 +106,23 @@ void materialNew(out Material _mat) {
         // This is pretty much of a hack by overwriting the absorption to the thinkness
         _mat.subsurfaceThickness = max(Do - Di, 0.005) * 30.0;
     }
-
-
     #endif
 
 #endif
 
-    // Cloth Model
 #if defined(SHADING_MODEL_CLOTH)
     _mat.sheenColor         = sqrt(_mat.albedo.rgb);
 #endif
+
+#if defined(SHADING_MODEL_SPECULAR_GLOSSINESS)
+    vec3    specularColor;
+    float   glossiness;
+#endif
+
+    // Cache
+    vec3    V;
+    vec3    R;
+    float   NoV;
 }
 
 Material materialNew() {
