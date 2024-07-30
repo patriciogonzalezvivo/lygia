@@ -38,11 +38,11 @@ options:
 #ifndef FNC_RAYMARCHDEFAULT
 #define FNC_RAYMARCHDEFAULT
 
-float4 raymarchDefaultRender( in float3 ray_origin, in float3 ray_direction, in float3 ta ) { 
+float4 raymarchDefaultRender(
     in float3 rayOrigin, in float3 rayDirection, float3 cameraForward,
     out float eyeDepth, out float3 worldPos, out float3 worldNormal ) { 
 
-    vec4 color = vec4(0.0);
+    float4 color = float4(0.0, 0.0, 0.0, 0.0);
     
     RAYMARCHCAST_TYPE res = raymarchCast(rayOrigin, rayDirection);
     float t = res.RAYMARCH_MAP_DISTANCE;
