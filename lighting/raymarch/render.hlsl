@@ -37,7 +37,7 @@ options:
 #ifndef FNC_RAYMARCHDEFAULT
 #define FNC_RAYMARCHDEFAULT
 
-float4 raymarchDefaultRender( in float3 ray_origin, in float3 ray_direction ) { 
+float4 raymarchDefaultRender( in float3 ray_origin, in float3 ray_direction, in float3 ta ) { 
     float3 col = float3(0.0, 0.0, 0.0);
     
     RAYMARCHCAST_TYPE res = raymarchCast(ray_origin, ray_direction);
@@ -48,7 +48,11 @@ float4 raymarchDefaultRender( in float3 ray_origin, in float3 ray_direction ) {
     col = raymarchMaterial(ray_direction, pos, nor, res.RAYMARCH_MAP_MATERIAL);
     col = raymarchFog(col, t, ray_origin, ray_direction);
     
-    return float4( saturate(col), t );
+    // https://www.shadertoy.com/view/4tByz3
+    float3 cameraForward = normalize(ta - ray_origin);
+    float depth = t * dot(ray_direction, cameraForward);
+    
+    return float4(col, depth);
 }
 
 #endif
