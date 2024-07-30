@@ -1,3 +1,5 @@
+#include "../material.hlsl"
+
 /*
 contributors:  Inigo Quiles
 description: Map of SDF functions to be declare
@@ -5,11 +7,7 @@ use: <float4> raymarchMap( in <float3> pos )
 */
 
 #ifndef RAYMARCH_MAP_FNC
-#define RAYMARCH_MAP_FNC(POS) raymarchMap(POS)
-#endif
-
-#ifndef RAYMARCH_MAP_TYPE
-#define RAYMARCH_MAP_TYPE float4
+#define RAYMARCH_MAP_FNC raymarchMap
 #endif
 
 #ifndef RAYMARCH_MAP_DISTANCE
@@ -23,6 +21,6 @@ use: <float4> raymarchMap( in <float3> pos )
 #ifndef FNC_RAYMARCHMAP
 #define FNC_RAYMARCHMAP
 
-RAYMARCH_MAP_TYPE RAYMARCH_MAP_FNC( in float3 pos );
+Material RAYMARCH_MAP_FNC( in float3 pos );
 
 #endif

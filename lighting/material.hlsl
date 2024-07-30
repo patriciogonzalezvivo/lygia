@@ -36,6 +36,7 @@ struct Material
     float3 position; // world position of the surface
     float3 normal;   // world normal of the surface
     float  sdf;
+    bool   valid;
     
 #ifdef SCENE_BACK_SURFACE
     float3  normal_back;        // world normal of the back surface of the model

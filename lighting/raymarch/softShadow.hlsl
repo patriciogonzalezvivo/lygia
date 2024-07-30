@@ -27,14 +27,6 @@ options:
 #define RAYMARCH_SHADOW_SOLID_ANGLE 0.1
 #endif
 
-#ifndef RAYMARCH_MAP_FNC
-#define RAYMARCH_MAP_FNC(POS) raymarchMap(POS)
-#endif
-
-#ifndef RAYMARCH_MAP_DISTANCE
-#define RAYMARCH_MAP_DISTANCE a
-#endif
-
 #ifndef FNC_RAYMARCHSOFTSHADOW
 #define FNC_RAYMARCHSOFTSHADOW
 
@@ -43,7 +35,7 @@ float raymarchSoftShadow( float3 ro, float3 rd, in float mint, in float maxt, fl
     float t = mint;
     for (int i = 0; i < RAYMARCHSOFTSHADOW_ITERATIONS && t < maxt; i++)
     {
-        float h = RAYMARCH_MAP_FNC(ro + t * rd).RAYMARCH_MAP_DISTANCE;
+        float h = RAYMARCH_MAP_FNC(ro + t * rd).sdf;
         res = min(res, h / (w * t));
         t += clamp(h, 0.005, 0.50);
         if (res < -1.0 || t > maxt)
