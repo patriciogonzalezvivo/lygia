@@ -44,6 +44,7 @@ void materialNew(out Material _mat) {
     _mat.position           = (SURFACE_POSITION).xyz;
     _mat.normal             = materialNormal();
     _mat.sdf                = 0.0;
+    _mat.valid              = true;
     
     #if defined(SCENE_BACK_SURFACE) && defined(RESOLUTION)
         float4 back_surface       = SAMPLER_FNC(SCENE_BACK_SURFACE, gl_FragCoord.xy / RESOLUTION);
@@ -129,6 +130,13 @@ void materialNew(out Material _mat) {
 Material materialNew() {
     Material mat;
     materialNew(mat);
+    return mat;
+}
+
+Material materialNew(float3 albedo, float sdf) {
+    Material mat = materialNew();
+    mat.albedo.rgb = albedo;
+    mat.sdf = sdf;
     return mat;
 }
 
