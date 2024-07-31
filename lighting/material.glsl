@@ -35,6 +35,7 @@ struct Material {
     vec3    position;       // world position of the surface
     vec3    normal;         // world normal of the surface
     float   sdf;
+    bool    valid;
 
     #if defined(SCENE_BACK_SURFACE)
     vec3    normal_back;    // world normal of the back surface of the model

@@ -10,14 +10,6 @@ use: <float4> raymarchMap( in <float3> pos )
 #define RAYMARCH_MAP_FNC raymarchMap
 #endif
 
-#ifndef RAYMARCH_MAP_DISTANCE
-#define RAYMARCH_MAP_DISTANCE a
-#endif
-
-#ifndef RAYMARCH_MAP_MATERIAL
-#define RAYMARCH_MAP_MATERIAL rgb
-#endif
-
 #ifndef FNC_RAYMARCHMAP
 #define FNC_RAYMARCHMAP
 

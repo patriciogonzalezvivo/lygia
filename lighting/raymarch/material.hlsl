@@ -2,7 +2,6 @@
 #include "cast.hlsl"
 #include "ao.hlsl"
 #include "softShadow.hlsl"
-#include "../../math/sum.hlsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
@@ -48,7 +47,7 @@ float4 raymarchDefaultMaterial(Material m) {
     float occ = raymarchAO(m.position, m.normal);
 
     #if defined(LIGHT_DIRECTION)
-    float3  lig = normalize( LIGHT_DIRECTION );
+    float3 lig = normalize(LIGHT_DIRECTION);
     #else
     float3 lig = normalize(LIGHT_POSITION - m.position);
     #endif

@@ -6,14 +6,6 @@ description: Calculate normals http://iquilezles.org/www/articles/normalsSDF/nor
 use: <float> raymarchNormal( in <float3> pos ) 
 */
 
-#ifndef RAYMARCH_MAP_FNC
-#define RAYMARCH_MAP_FNC(POS) raymarchMap(POS)
-#endif
-
-#ifndef RAYMARCH_MAP_DISTANCE
-#define RAYMARCH_MAP_DISTANCE a
-#endif
-
 #ifndef FNC_RAYMARCHNORMAL
 #define FNC_RAYMARCHNORMAL
 
