@@ -1,9 +1,8 @@
-#include "../../math/saturate.glsl"
-
 /*
 contributors:  Inigo Quiles
 description: Default raymarching renderer
-use: <vec4> raymarchDefaultRender( in <vec3> rayOrigin, in <vec3> rd ) 
+use: <vec4> raymarchDefaultRender( in <float3> rayOriging, in <float3> rayDirection, in <float3> cameraForward,
+    out <float3> eyeDepth, out <float3> worldPosition, out <float3> worldNormal ) 
 options:
     - RAYMARCH_MATERIAL_FNC(RGB) vec3(RGB)
     - RAYMARCH_BACKGROUND vec3(0.0)
@@ -20,10 +19,6 @@ examples:
 #else
 #define LIGHT_COLOR vec3(0.5)
 #endif
-#endif
-
-#ifndef RAYMARCH_AMBIENT
-#define RAYMARCH_AMBIENT vec3(1.0)
 #endif
 
 #ifndef RAYMARCH_BACKGROUND
@@ -54,7 +49,7 @@ examples:
 #define FNC_RAYMARCHVOLUMERENDER
 
 vec4 raymarchVolume( in vec3 rayOrigin, in vec3 rayDirection, vec3 cameraForward,
-                    out float eyeDepth, out vec3 worldPos, out vec3 worldNormal) {
+                     out float eyeDepth, out vec3 worldPos, out vec3 worldNormal) {
 
     const float tmin        = RAYMARCH_MIN_DIST;
     const float tmax        = RAYMARCH_MAX_DIST;
@@ -104,7 +99,7 @@ vec4 raymarchVolume( in vec3 rayOrigin, in vec3 rayDirection, vec3 cameraForward
     worldNormal = raymarchNormal( worldPos );
     eyeDepth = t * dot(rayDirection, cameraForward);
 
-    return vec4(saturate(col), t);
+    return vec4(col, t);
 }
 
 #endif
