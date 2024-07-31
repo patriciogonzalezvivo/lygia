@@ -71,8 +71,7 @@ float4 pbr(const Material _mat) {
 
     // Cached
     Material M = _mat;
-    if (sum(M.V) == 0)
-    {
+    if (sum(M.V) == 0) {
         M.V = normalize(CAMERA_POSITION - M.position); // View
     }
     M.NoV = dot(M.normal, M.V); // Normal . View

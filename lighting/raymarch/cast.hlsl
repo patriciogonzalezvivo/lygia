@@ -39,8 +39,7 @@ Material raymarchCast( in float3 ro, in float3 rd ) {
     float t = tmin;
     Material m = materialNew();
     m.valid = false;
-    for (int i = 0; i < RAYMARCH_SAMPLES; i++)
-    {
+    for (int i = 0; i < RAYMARCH_SAMPLES; i++) {
         Material res = RAYMARCH_MAP_FNC(ro + rd * t);
         if (res.sdf < RAYMARCH_MIN_HIT_DIST || t > tmax) 
             break;

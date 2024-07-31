@@ -4,15 +4,9 @@ description: Raymarching template where it needs to define a vec4 raymarchMap( i
 use: <vec4> raymarch(<vec3> cameraPosition, <vec3> lookAt, <vec2> st,
     out <vec3> eyeDepth, out <vec3> worldPosition, out <vec3> worldNormal )
 options:
-    - LIGHT_POSITION: in glslViewer is u_light
-    - LIGHT_DIRECTION
-    - LIGHT_COLOR: in glslViewer is u_lightColor
-    - RAYMARCH_AMBIENT: defualt vec3(1.0)
-    - RAYMARCH_MULTISAMPLE: null
-    - RAYMARCH_BACKGROUND: default vec3(0.0)
     - RAYMARCH_CAMERA_MATRIX_FNC(RO, TA): default raymarchCamera(RO, TA)
     - RAYMARCH_RENDER_FNC(RO, RD): default raymarchDefaultRender(RO, RD, TA)
-    - RESOLUTION: nan
+    - RAYMARCH_CAMERA_FOV
 examples:
     - /shaders/lighting_raymarching.frag
 license:

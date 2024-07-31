@@ -3,7 +3,6 @@
 #include "ao.glsl"
 #include "softShadow.glsl"
 #include "../../math/saturate.glsl"
-#include "../../math/sum.glsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
@@ -30,27 +29,15 @@ license:
 #endif
 
 #ifndef LIGHT_COLOR
-#define LIGHT_COLOR vec3(0.5)
+#define LIGHT_COLOR vec3(1.0, 1.0, 1.0)
 #endif
 
 #ifndef RAYMARCH_AMBIENT
-#define RAYMARCH_AMBIENT vec3(1.0)
-#endif
-
-#ifndef RAYMARCH_BACKGROUND
-#define RAYMARCH_BACKGROUND vec3(0.0)
-#endif
-
-#ifndef RAYMARCH_MAP_MATERIAL_TYPE
-#define RAYMARCH_MAP_MATERIAL_TYPE vec3
-#endif
-
-#ifndef RAYMARCH_MAP_MATERIAL_FNC
-#define RAYMARCH_MAP_MATERIAL_FNC 
+#define RAYMARCH_AMBIENT vec3(0.0, 0.0, 0.0)
 #endif
 
 #ifndef RAYMARCH_MATERIAL_FNC
-#define RAYMARCH_MATERIAL_FNC(RAY, POSITION, NORMAL, ALBEDO) raymarchDefaultMaterial(RAY, POSITION, NORMAL, ALBEDO)
+#define RAYMARCH_MATERIAL_FNC raymarchDefaultMaterial
 #endif
 
 #ifndef FNC_RAYMARCHMATERIAL
@@ -59,79 +46,33 @@ license:
 vec4 raymarchDefaultMaterial(vec3 ray, vec3 position, vec3 normal, RAYMARCH_MAP_MATERIAL_TYPE color) {
     vec3  env = RAYMARCH_AMBIENT;
 
-    if ( sum(color) <= 0.0 ) 
-        return vec4(RAYMARCH_BACKGROUND, 0.0);
-
-    vec3 ref = reflect( ray, normal );
-    float occ = raymarchAO( position, normal );
+    vec3 ref = reflect(-m.V, m.normal);
+    float occ = raymarchAO(m.position, m.normal);
 
     #if defined(LIGHT_DIRECTION)
-    vec3  lig = normalize( LIGHT_DIRECTION );
+    vec3 lig = normalize( LIGHT_DIRECTION );
     #else
-    vec3  lig = normalize( LIGHT_POSITION - position);
+    vec3 lig = normalize(LIGHT_POSITION - m.position);
     #endif
     
-    vec3  hal = normalize( lig-ray );
-    float amb = saturate( 0.5+0.5*normal.y );
-    float dif = saturate( dot( normal, lig ) );
-    float bac = saturate( dot( normal, normalize(vec3(-lig.x, 0.0,-lig.z))) ) * saturate( 1.0-position.y );
+    vec3 hal = normalize(lig + m.V);
+    float amb = saturate(0.5 + 0.5 * m.normal.y);
+    float dif = saturate(dot(m.normal, lig));
+    float bac = saturate(dot(m.normal, normalize(vec3(-lig.x, 0.0, -lig.z)))) * saturate(1.0 - m.position.y);
     float dom = smoothstep( -0.1, 0.1, ref.y );
-    float fre = pow( saturate(1.0+dot(normal,ray) ), 2.0 );
+    float fre = pow(saturate(1.0 + dot(m.normal, -m.V)), 2.0);
     
-    dif *= raymarchSoftShadow( position, lig );
-    dom *= raymarchSoftShadow( position, ref );
+    dif *= raymarchSoftShadow(m.position, lig);
+    dom *= raymarchSoftShadow(m.position, ref);
 
-    vec3 light = vec3(0.0);
+    vec3 light = vec3(0.0, 0.0, 0.0);
     light += 1.30 * dif * LIGHT_COLOR;
     light += 0.40 * amb * occ * env;
     light += 0.50 * dom * occ * env;
     light += 0.50 * bac * occ * 0.25;
     light += 0.25 * fre * occ;
 
-    return vec4(RAYMARCH_MAP_MATERIAL_FNC(color) * light, 1.0);
+    return vec4(m.albedo.rgb * light, m.albedo.a);
 }
-
-vec4 raymarchMaterial(vec3 ray, vec3 position, vec3 normal, vec3 albedo) {
-    return RAYMARCH_MATERIAL_FNC(ray, position, normal, albedo);
-}
-
-#if defined(STR_MATERIAL)
-void raymarchMaterial( in vec3 ro, in vec3 rd, inout Material mat) { 
-    RAYMARCH_MAP_TYPE res = raymarchCast(ro, rd);
-
-    vec3 col = vec3(0.0);
-    vec3 m = res.rgb;
-    float t = res.a;
-
-    vec3 pos = ro + t * rd;
-    vec3 nor = raymarchNormal( pos );
-    float occ = raymarchAO( pos, nor );
-
-    mat.albedo = res;
-    mat.normal = nor;
-    mat.ambientOcclusion = occ;
-
-    #if defined(SHADING_SHADOWS)
-    vec3 ref = reflect( rd, nor );
-    vec3 lig = normalize( LIGHT_POSITION );
-
-    vec3  hal = normalize( lig-rd );
-    float amb = saturate( 0.5+0.5*nor.y);
-    float dif = saturate( dot( nor, lig ));
-    float bac = saturate( dot( nor, normalize(vec3(-lig.x,0.0,-lig.z))))*saturate( 1.0-pos.y);
-    float dom = smoothstep( -0.1, 0.1, ref.y );
-    float fre = pow( saturate(1.0+dot(nor,rd) ), 2.0 );
-
-    dif *= raymarchSoftShadow( pos, lig, 0.02, 2.5 );
-    dom *= raymarchSoftShadow( pos, ref, 0.02, 2.5 );
-
-    mat.shadows = 1.30 * dif;
-    mat.shadows += 0.40 * amb * occ;
-    mat.shadows += 0.50 * dom * occ;
-    mat.shadows += 0.50 * bac * occ;
-    mat.shadows += 0.25 * fre * occ * 0.25;
-    #endif
-}
-#endif
 
 #endif
