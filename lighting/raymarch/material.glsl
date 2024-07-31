@@ -42,7 +42,7 @@ license:
 #endif
 
 #ifndef RAYMARCH_MAP_MATERIAL_TYPE
-#define RAYMARCH_MAP_MATERIAL_TYPE vec3
+#define RAYMARCH_MAP_MATERIAL_TYPE vec4
 #endif
 
 #ifndef RAYMARCH_MAP_MATERIAL_FNC

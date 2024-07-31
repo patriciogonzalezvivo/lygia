@@ -3,7 +3,7 @@
 /*
 contributors:  Inigo Quiles
 description: Default raymarching renderer
-use: <vec4> raymarchDefaultRender( in <vec3> ro, in <vec3> rd ) 
+use: <vec4> raymarchDefaultRender( in <vec3> rayOrigin, in <vec3> rd ) 
 options:
     - RAYMARCH_MATERIAL_FNC(RGB) vec3(RGB)
     - RAYMARCH_BACKGROUND vec3(0.0)
@@ -53,7 +53,8 @@ examples:
 #ifndef FNC_RAYMARCHVOLUMERENDER
 #define FNC_RAYMARCHVOLUMERENDER
 
-vec4 raymarchVolume( in vec3 ro, in vec3 rd ) {
+vec4 raymarchVolume( in vec3 rayOrigin, in vec3 rayDirection, vec3 cameraForward,
+                    out float eyeDepth, out vec3 worldPos, out vec3 worldNormal) {
 
     const float tmin        = RAYMARCH_MIN_DIST;
     const float tmax        = RAYMARCH_MAX_DIST;
@@ -71,7 +72,7 @@ vec4 raymarchVolume( in vec3 ro, in vec3 rd ) {
     float T = 1.;
     float t = tmin;
     vec3 col = vec3(0.0);
-    vec3 pos = ro;
+    vec3 pos = rayOrigin;
     for(int i = 0; i < RAYMARCH_SAMPLES; i++) {
         vec4 res    = RAYMARCH_MAP_FNC(pos);
         float density = (0.1 - res.a);
@@ -96,8 +97,12 @@ vec4 raymarchVolume( in vec3 ro, in vec3 rd ) {
             col += LIGHT_COLOR * 80. * tmp * T * Tl;
             #endif
         }
-        pos += rd * tstep;
+        pos += rayDirection * tstep;
     }
+
+    worldPos = rayOrigin + t * rayDirection;
+    worldNormal = raymarchNormal( worldPos );
+    eyeDepth = t * dot(rayDirection, cameraForward);
 
     return vec4(saturate(col), t);
 }
