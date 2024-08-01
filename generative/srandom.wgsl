@@ -3,16 +3,12 @@
 /*
 contributors:
     - Patricio Gonzalez Vivo
-    - Stevan Dedovic
 description: Signed Random
 use: srandomX(<vec2|vec3> x)
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
-
-#ifndef FNC_SRANDOM
-#define FNC_SRANDOM
 
 fn srandom(x: f32) -> f32 {
   return -1. + 2. * fract(sin(x) * 43758.5453);
@@ -53,5 +49,3 @@ fn srandom_tile3(p: vec3f, tileLength: f32) -> vec3f {
     let tmp = mod3(p, vec3(tileLength));
     return srandom33(tmp);
 }
-
-#endif
