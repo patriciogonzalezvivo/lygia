@@ -30,7 +30,7 @@ license:
 #endif
 
 #ifndef RAYMARCH_AMBIENT
-#define RAYMARCH_AMBIENT float3(0.0, 0.0, 0.0)
+#define RAYMARCH_AMBIENT float3(1.0, 1.0, 1.0)
 #endif
 
 #ifndef RAYMARCH_MATERIAL_FNC
