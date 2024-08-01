@@ -2,7 +2,7 @@
 #include "ao.hlsl"
 #include "normal.hlsl"
 #include "softShadow.hlsl"
-#include "material.hlsl"
+#include "shading.hlsl"
 #include "fog.hlsl"
 
 /*
@@ -36,7 +36,7 @@ float4 raymarchDefaultRender(
         res.position = worldPos;
         res.normal = worldNormal;
         res.V = -rayDirection;
-        color = RAYMARCH_MATERIAL_FNC(res);
+        color = RAYMARCH_SHADING_FNC(res);
     }
     color.rgb = raymarchFog(color.rgb, t, rayOrigin, rayDirection);
 

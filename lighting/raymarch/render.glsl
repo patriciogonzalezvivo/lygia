@@ -2,7 +2,7 @@
 #include "ao.glsl"
 #include "normal.glsl"
 #include "softShadow.glsl"
-#include "material.glsl"
+#include "shading.glsl"
 #include "fog.glsl"
 
 /*
@@ -38,7 +38,7 @@ vec4 raymarchDefaultRender(
         res.position = worldPos;
         res.normal = worldNormal;
         res.V = -rayDirection;
-        color = RAYMARCH_MATERIAL_FNC(res);
+        color = RAYMARCH_SHADING_FNC(res);
     }
     color.rgb = raymarchFog(color.rgb, t, rayOrigin, rayDirection);
 
