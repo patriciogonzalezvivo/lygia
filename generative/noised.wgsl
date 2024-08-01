@@ -4,9 +4,9 @@
 contributors:
     - Inigo Quilez
 description: Returns 2D/3D value noise in the first channel and in the rest the derivatives. For more details read this nice article http://www.iquilezles.org/www/articles/gradientnoise/gradientnoise.htm
-use: noised(<vec2|vec3> space)
-options:
-    NOISED_QUINTIC_INTERPOLATION: Quintic interpolation on/off. Default is off.
+use:
+    - <vec3f> noised2(<vec2f>)
+    - <vec4f> noised3(<vec3f>)
 examples:
     - /shaders/generative_noised.frag
 */
