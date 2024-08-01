@@ -1,4 +1,4 @@
-#include "../material.hlsl"
+#include "../material.glsl"
 
 /*
 contributors:  Inigo Quiles
@@ -15,6 +15,6 @@ examples:
 #ifndef FNC_RAYMARCHMAP
 #define FNC_RAYMARCHMAP
 
-RAYMARCH_MAP_TYPE RAYMARCH_MAP_FNC( in vec3 pos );
+Material RAYMARCH_MAP_FNC( in vec3 pos );
 
 #endif
