@@ -4,7 +4,16 @@
 contributors:
     - Patricio Gonzalez Vivo
 description: Signed Random
-use: srandomX(<vec2|vec3> x)
+use:
+    - <f32> srandom(<f32>)
+    - <f32> srandom2(<vec2f>)
+    - <f32> srandom3(<vec3f>)
+    - <f32> srandom4(<vec4f>)
+    - <vec2> srandom22(<vec2f>)
+    - <vec3> srandom33(<vec3f>)
+    - <vec4> srandom44(<vec4f>)
+    - <vec3> srandom_tile22(<vec2f>, <f32>)
+    - <vec4> srandom_tile33(<vec3f>, <f32>)
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
@@ -40,12 +49,12 @@ fn srandom33(p: vec3f) -> vec3f {
     return -1. + 2. * fract(sin(tmp) * 43758.5453123);
 }
 
-fn srandom_tile2(p: vec2f, tileLength: f32) -> vec2f {
+fn srandom_tile22(p: vec2f, tileLength: f32) -> vec2f {
     let tmp = mod2(p, vec2(tileLength));
     return srandom22(tmp);
 }
 
-fn srandom_tile3(p: vec3f, tileLength: f32) -> vec3f {
+fn srandom_tile33(p: vec3f, tileLength: f32) -> vec3f {
     let tmp = mod3(p, vec3(tileLength));
     return srandom33(tmp);
 }
