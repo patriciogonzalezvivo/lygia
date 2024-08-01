@@ -140,4 +140,14 @@ Material materialNew(float3 albedo, float sdf) {
     return mat;
 }
 
+Material materialNew(float3 albedo, float metallic, float roughness, float sdf)
+{
+    Material mat = materialNew();
+    mat.albedo.rgb = albedo;
+    mat.metallic = metallic;
+    mat.roughness = roughness;
+    mat.sdf = sdf;
+    return mat;
+}
+
 #endif
