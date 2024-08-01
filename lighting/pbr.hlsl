@@ -27,7 +27,6 @@
 #define IBL_LUMINANCE   1.0
 #endif
 
-#include "../math/sum.hlsl"
 #include "../color/tonemap.hlsl"
 
 #include "material.hlsl"
@@ -71,7 +70,7 @@ float4 pbr(const Material _mat) {
 
     // Cached
     Material M = _mat;
-    if (sum(M.V) == 0) {
+    if (length(M.V) == 0) {
         M.V = normalize(CAMERA_POSITION - M.position); // View
     }
     M.NoV = dot(M.normal, M.V); // Normal . View
