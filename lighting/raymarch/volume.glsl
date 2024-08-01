@@ -7,7 +7,6 @@ description: Default raymarching renderer
 use: <vec4> raymarchVolume( in <float3> rayOriging, in <float3> rayDirection, in <float3> cameraForward,
     out <float3> eyeDepth, out <float3> worldPosition, out <float3> worldNormal ) 
 options:
-    - RAYMARCH_MATERIAL_FNC(RGB) vec3(RGB)
     - RAYMARCH_BACKGROUND vec3(0.0)
     - RAYMARCH_AMBIENT vec3(1.0)
     - LIGHT_COLOR     vec3(0.5)
