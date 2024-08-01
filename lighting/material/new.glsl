@@ -133,14 +133,14 @@ Material materialNew() {
     return mat;
 }
 
-Material materialNew(float3 albedo, float sdf) {
+Material materialNew(vec3 albedo, float sdf) {
     Material mat = materialNew();
     mat.albedo.rgb = albedo;
     mat.sdf = sdf;
     return mat;
 }
 
-Material materialNew(float3 albedo, float metallic, float roughness, float sdf) {
+Material materialNew(vec3 albedo, float metallic, float roughness, float sdf) {
     Material mat = materialNew();
     mat.albedo.rgb = albedo;
     mat.metallic = metallic;

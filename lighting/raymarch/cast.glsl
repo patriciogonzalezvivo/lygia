@@ -1,5 +1,5 @@
 #include "map.glsl"
-#include "../material/new.hlsl"
+#include "../material/new.glsl"
 
 /*
 contributors:  Inigo Quiles
@@ -26,7 +26,7 @@ use: <float> castRay( in <vec3> pos, in <vec3> nor )
 #ifndef FNC_RAYMARCHCAST
 #define FNC_RAYMARCHCAST
 
-RAYMARCH_MAP_TYPE raymarchCast( in vec3 ro, in vec3 rd ) {
+Material raymarchCast( in vec3 ro, in vec3 rd ) {
     float tmin = RAYMARCH_MIN_DIST;
     float tmax = RAYMARCH_MAX_DIST;
    

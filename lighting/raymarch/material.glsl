@@ -33,7 +33,7 @@ license:
 #endif
 
 #ifndef RAYMARCH_AMBIENT
-#define RAYMARCH_AMBIENT float3(1.0, 1.0, 1.0)
+#define RAYMARCH_AMBIENT vec3(1.0, 1.0, 1.0)
 #endif
 
 #ifndef RAYMARCH_MATERIAL_FNC
@@ -43,7 +43,7 @@ license:
 #ifndef FNC_RAYMARCHMATERIAL
 #define FNC_RAYMARCHMATERIAL
 
-vec4 raymarchDefaultMaterial(vec3 ray, vec3 position, vec3 normal, RAYMARCH_MAP_MATERIAL_TYPE color) {
+vec4 raymarchDefaultMaterial(Material m) {
     vec3  env = RAYMARCH_AMBIENT;
 
     vec3 ref = reflect(-m.V, m.normal);
