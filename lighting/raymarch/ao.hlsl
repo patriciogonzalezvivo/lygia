@@ -10,14 +10,6 @@ use: <float> raymarchAO( in <float3> pos, in <float3> nor )
 #define RAYMARCH_SAMPLES_AO 5
 #endif
 
-#ifndef RAYMARCH_MAP_FNC
-#define RAYMARCH_MAP_FNC(POS) raymarchMap(POS)
-#endif
-
-#ifndef RAYMARCH_MAP_DISTANCE
-#define RAYMARCH_MAP_DISTANCE a
-#endif
-
 #ifndef FNC_RAYMARCHAO
 #define FNC_RAYMARCHAO
 
@@ -25,10 +17,9 @@ float raymarchAO(in float3 pos, in float3 nor)
 {
     float occ = 0.0;
     float sca = 1.0;
-    for (int i = 0; i < RAYMARCH_SAMPLES_AO; i++)
-    {
+    for (int i = 0; i < RAYMARCH_SAMPLES_AO; i++) {
         float h = 0.001 + 0.15 * float(i) / 4.0;
-        float d = RAYMARCH_MAP_FNC(pos + h * nor).RAYMARCH_MAP_DISTANCE;
+        float d = RAYMARCH_MAP_FNC(pos + h * nor).sdf;
         occ += (h - d) * sca;
         sca *= 0.95;
     }

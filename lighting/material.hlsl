@@ -14,11 +14,10 @@
 contributors: Patricio Gonzalez Vivo
 description: Generic Material Structure
 options:
-    - SURFACE_POSITION
-    - SHADING_SHADOWS
-    - MATERIAL_HAS_CLEAR_COAT
-    - MATERIAL_CLEARCOAT_ROUGHNESS
+    - SCENE_BACK_SURFACE
+    - SHADING_MODEL_CLEAR_COAT
     - MATERIAL_HAS_CLEAR_COAT_NORMAL
+    - SHADING_MODEL_IRIDESCENCE
     - SHADING_MODEL_SUBSURFACE
     - SHADING_MODEL_CLOTH
     - SHADING_MODEL_SPECULAR_GLOSSINESS
@@ -29,30 +28,34 @@ license:
 
 #ifndef STR_MATERIAL
 #define STR_MATERIAL
-struct Material {
-    float4  albedo;
-    float3  emissive;
+struct Material
+{
+    float4 albedo;
+    float3 emissive;
 
-    float3  position;           // world position of the surface
-    float3  normal;             // world normal of the surface
-
-    #if defined(SCENE_BACK_SURFACE)
+    float3 position; // world position of the surface
+    float3 normal;   // world normal of the surface
+    float  sdf;
+    bool   valid;
+    
+#ifdef SCENE_BACK_SURFACE
     float3  normal_back;        // world normal of the back surface of the model
-    #endif
+#endif
     
-    float3  ior;                // Index of Refraction
-    float3  f0;                 // reflectance at 0 degree 
+    float3 ior; // Index of Refraction
+    float3 f0;  // reflectance at 0 degree 
     
-    float   roughness;
-    float   metallic;
-    float   ambientOcclusion;   // default 1.0
-    // float   shadow;             // default 1.0
+    float roughness;
+    float metallic;
+    float ambientOcclusion; // default 1.0
 
+#if defined(SHADING_MODEL_CLEAR_COAT)
     float   clearCoat;
     float   clearCoatRoughness;
-    #if defined(MATERIAL_HAS_CLEAR_COAT_NORMAL)
+    #if defined (MATERIAL_HAS_CLEAR_COAT_NORMAL)
     float3  clearCoatNormal;    // default float3(0.0, 0.0, 1.0)
     #endif
+#endif
 
 #if defined(SHADING_MODEL_IRIDESCENCE)
     float   thickness; // default to 300.0
