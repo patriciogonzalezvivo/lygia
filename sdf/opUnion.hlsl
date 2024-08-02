@@ -1,4 +1,4 @@
-#include "../lighting/material/new.hlsl"
+#include "../lighting/material.hlsl"
 
 /*
 contributors:  Inigo Quiles
