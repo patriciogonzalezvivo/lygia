@@ -48,7 +48,7 @@ struct Material {
     float   metallic;
     float   ambientOcclusion;   // default 1.0
 
-#if defined (SHADING_MODEL_CLEAR_COAT)
+#if defined(SHADING_MODEL_CLEAR_COAT)
     float   clearCoat;
     float   clearCoatRoughness;
     #if defined(MATERIAL_HAS_CLEAR_COAT_NORMAL)
