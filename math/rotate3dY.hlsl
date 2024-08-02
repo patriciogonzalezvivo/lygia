@@ -9,9 +9,11 @@ license:
 
 #ifndef FNC_ROTATE3DY
 #define FNC_ROTATE3DY
-float3x3 rotate3dY(const in float theta){
-    return float3x3(float3(cos(theta),0.,-sin(theta)),
+float3x3 rotate3dY(const in float r){
+    float c = cos(r);
+    float s = sin(r);
+    return float3x3(float3(c,0.,s),
                     float3(0.,1.,0.),
-                    float3(sin(theta),0.,cos(theta)));
+                    float3(-s,0.,c));
 }
 #endif
