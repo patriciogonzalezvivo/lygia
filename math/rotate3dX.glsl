@@ -10,8 +10,10 @@ license:
 #ifndef FNC_ROTATE3DX
 #define FNC_ROTATE3DX
 mat3 rotate3dX(const in float r){
+    float c = cos(r);
+    float s = sin(r);
     return mat3(vec3(1.0,0.0,0.0),
-                vec3(0.0,cos(r),-sin(r)),
-                vec3(0.0,sin(r),cos(r)));
+                vec3(0.0,c,s),
+                vec3(0.0,-s,c));
 }
 #endif
