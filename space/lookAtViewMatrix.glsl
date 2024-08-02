@@ -11,7 +11,7 @@ use: <mat4> lookAtViewMatrix(in <vec3> position, in <vec3> target, in <vec3> up)
 #define FNC_LOOKATVIEWMATRIX
 
 mat4 lookAtViewMatrix( in vec3 position, in vec3 target, in vec3 up ) {
-    mat4 m = mat4(lookAt(position, target, up));
+    mat3 m = lookAt(position, target, up);
     return translate(m, position);
 }
 
