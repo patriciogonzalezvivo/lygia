@@ -12,10 +12,6 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-#ifndef RAYMARCH_CAMERA_MATRIX_FNC
-#define RAYMARCH_CAMERA_MATRIX_FNC raymarchCamera
-#endif
-
 #ifndef RAYMARCH_RENDER_FNC
 #define RAYMARCH_RENDER_FNC raymarchDefaultRender
 #endif
@@ -30,34 +26,33 @@ license:
 
 #include "../math/const.hlsl"
 #include "../space/rotate.hlsl"
+#include "../space/lookAtViewMatrix.hlsl"
 #include "raymarch/render.hlsl"
-#include "raymarch/camera.hlsl"
 
 #ifndef ENG_RAYMARCH
 #define ENG_RAYMARCH
 
-float4 raymarch( float3 camera, float3 ta, float2 st,
-    out float eyeDepth, out float3 worldPos, out float3 worldNormal) {
-
-    float3x3 ca = RAYMARCH_CAMERA_MATRIX_FNC(camera, ta);
-    float fov = 1.0/tan(RAYMARCH_CAMERA_FOV*PI/180.0/2.0);
-    float3 cameraForward = normalize(ta - camera);
-    st.x = 1.0 - st.x;
+float4 raymarch(float4x4 viewMatrix, float2 st,
+    out float eyeDepth, out float3 worldPos, out float3 worldNormal)
+{
+    float fov = 1.0 / tan(RAYMARCH_CAMERA_FOV * DEG2RAD / 2.0);
+    float3 cameraPosition = float3(viewMatrix._m03, viewMatrix._m13, viewMatrix._m23);
+    float3 cameraForward = float3(viewMatrix._m02, viewMatrix._m12, viewMatrix._m22);
 
 #if defined(RAYMARCH_MULTISAMPLE)
     float4 color = float4(0.0, 0.0, 0.0, 0.0);
     eyeDepth = 0.0;
-    worldPos = float3(0.0,0.0, 0.0);
+    worldPos = float3(0.0, 0.0, 0.0);
     worldNormal = float3(0.0, 0.0, 0.0);
     float2 pixel = 1.0/RESOLUTION;
     float2 offset = rotate( float2(0.5, 0.0), HALF_PI/4.);
 
     for (int i = 0; i < RAYMARCH_MULTISAMPLE; i++) {
-        float3 rd = mul(ca, normalize(float3((st + offset * pixel)*2.0-1.0, fov)));
+        float3 rayDirection = mul(normalize(float3((st + offset * pixel)*2.0-1.0, fov)), (float3x3)viewMatrix);
         float sampleDepth = 0.0;
         float3 sampleWorldPos = float3(0.0, 0.0, 0.0);
         float3 sampleWorldNormal = float3(0.0, 0.0, 0.0);
-        color += RAYMARCH_RENDER_FNC( camera, rd, cameraForward,
+        color += RAYMARCH_RENDER_FNC( cameraPosition, rayDirection, cameraForward,
             sampleDepth, sampleWorldPos, sampleWorldNormal );
         eyeDepth += sampleDepth;
         worldPos += sampleWorldPos;
@@ -69,20 +64,18 @@ float4 raymarch( float3 camera, float3 ta, float2 st,
     worldNormal /= float(RAYMARCH_MULTISAMPLE);
     return color/float(RAYMARCH_MULTISAMPLE);
 #else
-    float3 rd = mul(ca, normalize(float3(st * 2.0 - 1.0, fov)));
-    return RAYMARCH_RENDER_FNC( camera, rd, cameraForward, eyeDepth, worldPos, worldNormal );
+    float3 rayDirection = mul(normalize(float3(st * 2.0 - 1.0, fov)), (float3x3) viewMatrix);
+    return RAYMARCH_RENDER_FNC(cameraPosition, rayDirection, cameraForward, eyeDepth, worldPos, worldNormal);
 #endif
 }
 
-float4 raymarch(float3 camera, float3 ta, float2 st) {
+float4 raymarch(float3 cameraPosition, float3 cameraLookAt, float2 st)
+{
     float depth = 0.0;
     float3 worldPos = float3(0.0, 0.0, 0.0);
     float3 worldNormal = float3(0.0, 0.0, 0.0);
-    return raymarch(camera, ta, st, depth, worldPos, worldNormal);
-}
-
-float4 raymarch(float3 camera, float2 st) {
-    return raymarch(camera, float3(0.0, 0.0, 0.0), st);
+    float4x4 viewMatrix = lookAtViewMatrix(cameraPosition, cameraLookAt);
+    return raymarch(viewMatrix, st, depth, worldPos, worldNormal);
 }
 
 #endif
