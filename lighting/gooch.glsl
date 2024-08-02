@@ -1,15 +1,12 @@
 #include "material/roughness.glsl"
 #include "material/normal.glsl"
 #include "material/albedo.glsl"
-
+#include "material.glsl"
 #include "light/new.glsl"
 
-#include "diffuse.glsl"
-#include "specular.glsl"
-
-#include "material.glsl"
-
-#include "../sample/shadowPCF.glsl"
+// #include "diffuse.glsl"
+// #include "specular.glsl"
+// #include "../sample/shadowPCF.glsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
@@ -33,7 +30,7 @@ license:
 #endif
 
 #ifndef CAMERA_POSITION
-#define CAMERA_POSITION vec3(0.0, 0.0, -10.0);
+#define CAMERA_POSITION vec3(0.0, 0.0, -10.0)
 #endif
 
 #ifndef LIGHT_POSITION
@@ -75,22 +72,35 @@ vec4 gooch(const in vec4 _albedo, const in vec3 _N, const in vec3 _L, const in v
     return gooch(_albedo, _N, _L, _V, _roughness, 1.0);
 }
 
-vec4 gooch(const in Material _M, const in LightDirectional _L) {
-    vec3 V = normalize(CAMERA_POSITION - _M.position);
-    return gooch(_M.albedo, _M.normal, _L.direction, V, _M.roughness, _L.intensity);
+vec4 gooch(in Material _M, vec3 _L) {
+    if (length(_M.V) == 0.0) {
+        _M.V = normalize(CAMERA_POSITION - _M.position);
+    }
+    return gooch(_M.albedo, _M.normal, _L, _M.V, _M.roughness, 1.0);
 }
 
-vec4 gooch(const in Material _M, const in LightPoint _L) {
-    vec3 V = normalize(CAMERA_POSITION - _M.position);
-    return gooch(_M.albedo, _M.normal, _L.position, V, _M.roughness, _L.intensity);
+vec4 gooch(in Material _M, const in LightDirectional _L) {
+    if (length(_M.V) == 0.0) {
+        _M.V = normalize(CAMERA_POSITION - _M.position);
+    }
+    return gooch(_M.albedo, _M.normal, _L.direction, _M.V, _M.roughness, _L.intensity);
 }
 
-vec4 gooch(const in Material _M) {
+
+vec4 gooch(in Material _M, const in LightPoint _L) {
+    if (length(_M.V) == 0.0) {
+        _M.V = normalize(CAMERA_POSITION - _M.position);
+    }
+    return gooch(_M.albedo, _M.normal, _L.position, _M.V, _M.roughness, _L.intensity);
+}
+
+vec4 gooch(in Material _M) {
     #if defined(LIGHT_DIRECTION)
-    LightDirectional L = LightDirectionalNew();
+    LightDirectional L;
     #elif defined(LIGHT_POSITION)
-    LightPoint L = LightPointNew();
+    LightPoint L;
     #endif
+    lightNew(L);
 
     return gooch(_M, L);
 }
