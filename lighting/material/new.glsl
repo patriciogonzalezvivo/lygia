@@ -117,14 +117,14 @@ void materialNew(out Material _mat) {
 #endif
 
 #if defined(SHADING_MODEL_SPECULAR_GLOSSINESS)
-    vec3    specularColor;
-    float   glossiness;
+    _mat.specularColor = vec3(0.04, 0.04, 0.04);
+    _mat.glossiness = 0.5;
 #endif
 
     // Cache
-    vec3    V;
-    vec3    R;
-    float   NoV;
+    _mat.V = vec3(0.0);
+    _mat.R = vec3(0.0);
+    _mat.NoV = 0.0;
 }
 
 Material materialNew() {
