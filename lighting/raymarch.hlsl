@@ -48,7 +48,7 @@ float4 raymarch(float4x4 viewMatrix, float2 st,
     float2 offset = rotate( float2(0.5, 0.0), HALF_PI/4.);
 
     for (int i = 0; i < RAYMARCH_MULTISAMPLE; i++) {
-        float3 rayDirection = mul(normalize(float3((st + offset * pixel)*2.0-1.0, fov)), (float3x3)viewMatrix);
+        float3 rayDirection = mul((float3x3)viewMatrix, normalize(float3((st + offset * pixel)*2.0-1.0, fov)));
         float sampleDepth = 0.0;
         float3 sampleWorldPos = float3(0.0, 0.0, 0.0);
         float3 sampleWorldNormal = float3(0.0, 0.0, 0.0);
@@ -64,7 +64,7 @@ float4 raymarch(float4x4 viewMatrix, float2 st,
     worldNormal /= float(RAYMARCH_MULTISAMPLE);
     return color/float(RAYMARCH_MULTISAMPLE);
 #else
-    float3 rayDirection = mul(normalize(float3(st * 2.0 - 1.0, fov)), (float3x3) viewMatrix);
+    float3 rayDirection = mul((float3x3) viewMatrix, normalize(float3(st * 2.0 - 1.0, fov)));
     return RAYMARCH_RENDER_FNC(cameraPosition, rayDirection, cameraForward, eyeDepth, worldPos, worldNormal);
 #endif
 }
