@@ -23,7 +23,11 @@ float3x3 lookAt(float3 forward, float3 up)
     float3 xaxis = normalize(cross(up, zaxis));
     float3 yaxis = normalize(cross(zaxis, xaxis));
 #endif
-    return float3x3(xaxis, yaxis, zaxis);
+    float3x3 m;
+    m._m00_m10_m20 = xaxis;
+    m._m01_m11_m21 = yaxis;
+    m._m02_m12_m22 = zaxis;
+    return m;
 }
 
 float3x3 lookAt(float3 eye, float3 target, float3 up)
