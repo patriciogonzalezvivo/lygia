@@ -4,14 +4,9 @@ description: Raymarching template where it needs to define a float4 raymarchMSap
 use: <float4> raymarch(<float3> cameraPosition, <float3> lookAt, <float2> st,
     out <float3> eyeDepth, out <float3> worldPosition, out <float3> worldNormal )
 options:
-    - LIGHT_POSITION: in glslViewer is u_light
-    - LIGHT_DIRECTION
-    - LIGHT_COLOR: in glslViewer is u_lightColor
-    - RAYMARCH_AMBIENT: defualt float3(1.0)
-    - RAYMARCH_MULTISAMPLE: null
-    - RAYMARCH_BACKGROUND: default float3(0.0)
     - RAYMARCH_CAMERA_MATRIX_FNC(RO, TA): default raymarchCamera(RO, TA)
     - RAYMARCH_RENDER_FNC(RO, RD): default raymarchDefaultRender(RO, RD, TA)
+    - RAYMARCH_CAMERA_FOV
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license

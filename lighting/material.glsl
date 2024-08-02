@@ -14,11 +14,10 @@
 contributors: Patricio Gonzalez Vivo
 description: Generic Material Structure
 options:
-    - SURFACE_POSITION
-    - SHADING_SHADOWS
-    - MATERIAL_HAS_CLEAR_COAT
-    - MATERIAL_CLEARCOAT_ROUGHNESS
+    - SCENE_BACK_SURFACE
+    - SHADING_MODEL_CLEAR_COAT
     - MATERIAL_HAS_CLEAR_COAT_NORMAL
+    - SHADING_MODEL_IRIDESCENCE
     - SHADING_MODEL_SUBSURFACE
     - SHADING_MODEL_CLOTH
     - SHADING_MODEL_SPECULAR_GLOSSINESS
@@ -35,6 +34,8 @@ struct Material {
 
     vec3    position;       // world position of the surface
     vec3    normal;         // world normal of the surface
+    float   sdf;
+    bool    valid;
 
     #if defined(SCENE_BACK_SURFACE)
     vec3    normal_back;    // world normal of the back surface of the model
@@ -46,15 +47,14 @@ struct Material {
     float   roughness;
     float   metallic;
     float   ambientOcclusion;   // default 1.0
-    // float   shadow;             // default 1.0
 
-// #if defined(MATERIAL_HAS_CLEAR_COAT)
+#if defined(SHADING_MODEL_CLEAR_COAT)
     float   clearCoat;
     float   clearCoatRoughness;
     #if defined(MATERIAL_HAS_CLEAR_COAT_NORMAL)
     vec3    clearCoatNormal;    // default vec3(0.0, 0.0, 1.0);
     #endif
-// #endif
+#endif
 
 #if defined(SHADING_MODEL_IRIDESCENCE)
     float   thickness; // default to 300.0

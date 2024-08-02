@@ -1,4 +1,5 @@
 #include "map.glsl"
+#include "../material/new.glsl"
 
 /*
 contributors:  Inigo Quiles
@@ -22,30 +23,10 @@ use: <float> castRay( in <vec3> pos, in <vec3> nor )
 #define RAYMARCH_MIN_HIT_DIST 0.00001 * t
 #endif
 
-#ifndef RAYMARCH_MAP_FNC
-#define RAYMARCH_MAP_FNC(POS) raymarchMap(POS)
-#endif
-
-#ifndef RAYMARCH_MAP_TYPE
-#define RAYMARCH_MAP_TYPE vec4
-#endif
-
-#ifndef RAYMARCH_MAP_DISTANCE
-#define RAYMARCH_MAP_DISTANCE a
-#endif
-
-#ifndef RAYMARCH_MAP_MATERIAL
-#define RAYMARCH_MAP_MATERIAL rgb
-#endif
-
-#ifndef RAYMARCH_MAP_MATERIAL_TYPE
-#define RAYMARCH_MAP_MATERIAL_TYPE vec3
-#endif
-
 #ifndef FNC_RAYMARCHCAST
 #define FNC_RAYMARCHCAST
 
-RAYMARCH_MAP_TYPE raymarchCast( in vec3 ro, in vec3 rd ) {
+Material raymarchCast( in vec3 ro, in vec3 rd ) {
     float tmin = RAYMARCH_MIN_DIST;
     float tmax = RAYMARCH_MAX_DIST;
    
@@ -56,21 +37,23 @@ RAYMARCH_MAP_TYPE raymarchCast( in vec3 ro, in vec3 rd ) {
 // #endif
     
     float t = tmin;
-    RAYMARCH_MAP_MATERIAL_TYPE m = RAYMARCH_MAP_MATERIAL_TYPE(-1.0);
-    for ( int i = 0; i < RAYMARCH_SAMPLES; i++ ) {
-        RAYMARCH_MAP_TYPE res = RAYMARCH_MAP_FNC( ro + rd * t );
-        if ( res.RAYMARCH_MAP_DISTANCE < RAYMARCH_MIN_HIT_DIST || t > tmax ) 
+    Material m = materialNew();
+    m.valid = false;
+    for (int i = 0; i < RAYMARCH_SAMPLES; i++) {
+        Material res = RAYMARCH_MAP_FNC(ro + rd * t);
+        if (res.sdf < RAYMARCH_MIN_HIT_DIST || t > tmax) 
             break;
-        t += res.RAYMARCH_MAP_DISTANCE;
-        m = res.RAYMARCH_MAP_MATERIAL;
+        m = res;
+        t += res.sdf;
     }
 
     #if defined(RAYMARCH_BACKGROUND) || defined(RAYMARCH_FLOOR)
-    if ( t > tmax ) 
-        m = RAYMARCH_MAP_MATERIAL_TYPE(-1.0);
+    if ( t > tmax )
+        m.valid = false;
     #endif
 
-    return RAYMARCH_MAP_TYPE( m, t );
+    m.sdf = t;
+    return m;
 }
 
 #endif

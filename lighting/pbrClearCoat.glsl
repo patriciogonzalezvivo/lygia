@@ -1,3 +1,7 @@
+#ifndef SHADING_MODEL_CLEAR_COAT
+#define SHADING_MODEL_CLEAR_COAT
+#endif
+
 #include "../math/saturate.glsl"
 #include "../color/tonemap.glsl"
 

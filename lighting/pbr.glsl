@@ -52,7 +52,9 @@ vec4 pbr(const in Material _mat) {
 
     // Cached
     Material M  = _mat;
-    M.V         = normalize(CAMERA_POSITION - M.position);  // View
+    if (length(M.V) == 0.0) {
+        M.V         = normalize(CAMERA_POSITION - M.position);  // View
+    }
     M.NoV       = dot(M.normal, M.V);                       // Normal . View
     M.R         = reflection(M.V, M.normal, M.roughness);   // Reflection
 
