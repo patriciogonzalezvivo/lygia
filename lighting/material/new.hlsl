@@ -43,8 +43,11 @@ void materialNew(out Material _mat) {
     // Surface data
     _mat.position           = (SURFACE_POSITION).xyz;
     _mat.normal             = materialNormal();
+
+#if defined(RENDER_RAYMARCHING)
     _mat.sdf                = 0.0;
     _mat.valid              = true;
+#endif
     
     #if defined(SCENE_BACK_SURFACE) && defined(RESOLUTION)
         float4 back_surface       = SAMPLER_FNC(SCENE_BACK_SURFACE, gl_FragCoord.xy / RESOLUTION);
