@@ -16,7 +16,7 @@ use: <mat4> lookAtViewMatrix(in <vec3> position, in <vec3> euler)
     mat3 rotX = rotate3dX(euler.x);
     mat3 rotY = rotate3dY(euler.y);
     mat3 idendity = mat3(1.0);
-    mat4 m = mat4(idendity * rotZ * rotX * rotY);
+    mat4 m = mat4(rotY * rotX * rotZ * idendity);
     m[0][3] = position.x;
     m[1][3] = position.y;
     m[2][3] = position.z;
