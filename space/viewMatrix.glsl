@@ -12,8 +12,8 @@ use: <mat4> lookAtViewMatrix(in <vec3> position, in <vec3> euler)
 #define FNC_VIEWMATRIX
 
  mat4 viewMatrix(vec3 position, vec3 euler) {
-    mat3 rotZ = rotate3dZ(-euler.z);
-    mat3 rotX = rotate3dX(-euler.x);
+    mat3 rotZ = rotate3dZ(euler.z);
+    mat3 rotX = rotate3dX(euler.x);
     mat3 rotY = rotate3dY(euler.y);
     mat3 idendity = mat3(1.0);
     mat4 m = mat4(idendity * rotZ * rotX * rotY);
