@@ -1,4 +1,4 @@
-#include "../math/const.glsl"
+#include "../math/const.hlsl"
 
 /*
 contributors: [Mario Carrillo, Daniel Ilett]
