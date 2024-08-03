@@ -1,6 +1,6 @@
-#include "space/srgb2rgb.glsl"
-#include "space/rgb2srgb.glsl"
-#include "space/xyz2srgb.glsl"
+#include "space/srgb2rgb.hlsl"
+#include "space/rgb2srgb.hlsl"
+#include "space/xyz2srgb.hlsl"
 
 /*
 contributors: Ronald van Wijnen (@OneDayOfCrypto)
