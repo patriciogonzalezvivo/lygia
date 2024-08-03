@@ -41,35 +41,36 @@ license:
 #define FNC_RAYMARCHDEFAULTSHADING
 
 float4 raymarchDefaultShading(Material m) {
-    float3  env = RAYMARCH_AMBIENT;
+    float3 worldNormal = m.normal;
+    float3 worldPosition = m.position;
+    #if defined(LIGHT_DIRECTION)
+    float3 light = normalize(LIGHT_DIRECTION);
+    #else
+    float3 light = normalize(LIGHT_POSITION - m.position);
+    #endif
 
     float3 ref = reflect(-m.V, m.normal);
     float occ = raymarchAO(m.position, m.normal);
-
-    #if defined(LIGHT_DIRECTION)
-    float3 lig = normalize(LIGHT_DIRECTION);
-    #else
-    float3 lig = normalize(LIGHT_POSITION - m.position);
-    #endif
     
-    float3 hal = normalize(lig + m.V);
+    float3 hal = normalize(light + m.V);
     float amb = saturate(0.5 + 0.5 * m.normal.y);
-    float dif = saturate(dot(m.normal, lig));
-    float bac = saturate(dot(m.normal, normalize(float3(-lig.x, 0.0, -lig.z)))) * saturate(1.0 - m.position.y);
+    float dif = saturate(dot(m.normal, light));
+    float bac = saturate(dot(m.normal, normalize(float3(-light.x, 0.0, -light.z)))) * saturate(1.0 - m.position.y);
     float dom = smoothstep( -0.1, 0.1, ref.y );
     float fre = pow(saturate(1.0 + dot(m.normal, -m.V)), 2.0);
     
-    dif *= raymarchSoftShadow(m.position, lig);
+    dif *= raymarchSoftShadow(m.position, light);
     dom *= raymarchSoftShadow(m.position, ref);
 
-    float3 light = float3(0.0, 0.0, 0.0);
-    light += 1.30 * dif * LIGHT_COLOR;
-    light += 0.40 * amb * occ * env;
-    light += 0.50 * dom * occ * env;
-    light += 0.50 * bac * occ * 0.25;
-    light += 0.25 * fre * occ;
+    float3 env = RAYMARCH_AMBIENT;
+    float3 shade = float3(0.0, 0.0, 0.0);
+    shade += 1.30 * dif * LIGHT_COLOR;
+    shade += 0.40 * amb * occ * env;
+    shade += 0.50 * dom * occ * env;
+    shade += 0.50 * bac * occ * 0.25;
+    shade += 0.25 * fre * occ;
 
-    return float4(m.albedo.rgb * light, m.albedo.a);
+    return float4(m.albedo.rgb * shade, m.albedo.a);
 }
 
 #endif
