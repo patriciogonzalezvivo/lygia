@@ -36,7 +36,7 @@ license:
 #endif 
 
 #ifndef YELLOW_OCHRE
-#define YELLOW_OCHRE vec3(0.706, 0.486, 0.188)
+#define YELLOW_OCHRE float3(0.706, 0.486, 0.188)
 #endif
 
 #ifndef CADMIUM_ORANGE

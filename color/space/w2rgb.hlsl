@@ -3,7 +3,7 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: Wavelength between 400~700 nm to RGB
-use: <vec3> w2rgb(<float> wavelength)
+use: <float3> w2rgb(<float> wavelength)
 options:
     W2RGB_FNC(X): spectral_zucconi, spectral_zucconi6, spectral_gems, spectral_geoffrey,
 license:
@@ -19,7 +19,7 @@ float3 w2rgb(const in float w) {
 #if defined( W2RGB_FNC )
     float x = saturate((w - 400.0) * 0.00333333333);
 	#if defined(W2RGB_ITERATIONS)
-    vec3 sum = vec3(0.0, 0.0, 0.0);
+    float3 sum = float3(0.0, 0.0, 0.0);
     for (float i = 0.; i < W2RGB_ITERATIONS ;i++) {
         sum +=  W2RGB_FNC(x * (1. - i * .003)) / W2RGB_ITERATIONS;
     }
