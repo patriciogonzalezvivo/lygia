@@ -11,7 +11,7 @@ license:
 
 #ifndef FNC_RAYSSDF
 #define FNC_RAYSSDF
-float raysSDF(in vec2 st, in int N) {
+float raysSDF(in float2 st, in int N) {
 #ifdef CENTER_2D
     st -= CENTER_2D;
 #else

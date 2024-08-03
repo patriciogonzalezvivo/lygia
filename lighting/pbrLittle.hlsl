@@ -103,7 +103,7 @@ float4 pbrLittle(float4 albedo, float3 position, float3 normal, float roughness,
 float4 pbrLittle(Material material) {
     float s = 1.0;
     #if defined(LIGHT_SHADOWMAP) && defined(LIGHT_SHADOWMAP_SIZE) && defined(LIGHT_COORD)
-    s *= shadow(LIGHT_SHADOWMAP, vec2(LIGHT_SHADOWMAP_SIZE), (LIGHT_COORD).xy, (LIGHT_COORD).z);
+    s *= shadow(LIGHT_SHADOWMAP, float2(LIGHT_SHADOWMAP_SIZE), (LIGHT_COORD).xy, (LIGHT_COORD).z);
     #endif
     return pbrLittle(material.albedo, material.position, material.normal, material.roughness, material.metallic, material.f0, material.ambientOcclusion * s) + float4(material.emissive, 0.0);
 }
