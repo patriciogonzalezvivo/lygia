@@ -7,10 +7,10 @@
 /*
 contributors:  Inigo Quiles
 description: Default raymarching renderer
-use: <vec4> raymarchDefaultRender( in <float3> rayOriging, in <float3> rayDirection, in <float3> cameraForward,
+use: <float4> raymarchDefaultRender( in <float3> rayOriging, in <float3> rayDirection, in <float3> cameraForward,
     out <float3> eyeDepth, out <float3> worldPosition, out <float3> worldNormal ) 
 options:
-    - RAYMARCH_BACKGROUND: vec3(0.0)
+    - RAYMARCH_BACKGROUND: float3(0.0)
 */
 
 #ifndef RAYMARCH_BACKGROUND

@@ -3,7 +3,7 @@
 /*
 contributors: Paniq
 description: based on the picture in http://home.hiroshima-u.ac.jp/kin/publications/TVC01/examples.pdf
-use: <vec3> iridescence(<float> angle, <float> thickness)
+use: <float3> iridescence(<float> angle, <float> thickness)
 examples:
     - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/color_iridescence_map.frag
 */
@@ -21,7 +21,7 @@ float3 iridescence(float cosA, float thickness) {
     float luma = 0.01070;
     // tint of the final color
     float3 tint = float3(0.7333, 0.89804, 0.94902);
-    // vec3 tint = vec3(0.49639,0.78252,0.88723);
+    // float3 tint = float3(0.49639,0.78252,0.88723);
     // interference rate at minimum angle
     float interf0 = 2.4;
     // phase shift rate at minimum angle
