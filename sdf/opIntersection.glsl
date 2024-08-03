@@ -1,4 +1,5 @@
 #include "../math/saturate.glsl"
+#include "../lighting/material.glsl"
 
 /*
 contributors:  Inigo Quiles
@@ -11,8 +12,7 @@ use: <float> opIntersection( in <float> d1, in <float> d2 [, <float> smooth_fact
 
 float opIntersection( float d1, float d2 ) { return max(d1,d2); }
 
-Material opIntersection(Material d1, Material d2)
-{
+Material opIntersection(Material d1, Material d2) {
     if (d1.sdf > d2.sdf){
         return d1;
     } else {
