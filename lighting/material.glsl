@@ -28,6 +28,7 @@ license:
 
 #if !defined(MATERIAL_OPT_IN)
 #define RENDER_RAYMARCHING
+#define SHADING_MODEL_CLEAR_COAT
 #endif
 
 #ifndef STR_MATERIAL
