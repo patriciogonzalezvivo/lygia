@@ -12,9 +12,9 @@
 #include "common/specularAO.glsl"
 #include "common/envBRDFApprox.glsl"
 
-#if defined(RAYMARCH_AO)
-#include "raymarch/ao.glsl"
-#endif
+// #if defined(RAYMARCH_AO)
+// #include "raymarch/ao.glsl"
+// #endif
 
 /*
 contributors: Patricio Gonzalez Vivo
@@ -62,7 +62,7 @@ vec4 pbr(const in Material _mat) {
     // ------------------------
     float ao = 1.0;
 
-    #if defined(RAYMARCH_AO)
+    #if defined(FNC_RAYMARCH_AO)
     ao = raymarchAO(M.position, M.normal);
     #endif
 

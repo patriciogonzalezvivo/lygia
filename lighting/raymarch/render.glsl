@@ -1,7 +1,6 @@
 #include "cast.glsl"
 #include "ao.glsl"
 #include "normal.glsl"
-#include "softShadow.glsl"
 #include "shading.glsl"
 #include "fog.glsl"
 
@@ -20,8 +19,8 @@ examples:
 #define RAYMARCH_BACKGROUND vec3(0.0, 0.0, 0.0)
 #endif
 
-#ifndef FNC_RAYMARCHDEFAULT
-#define FNC_RAYMARCHDEFAULT
+#ifndef FNC_RAYMARCH_DEFAULT
+#define FNC_RAYMARCH_DEFAULT
 
 vec4 raymarchDefaultRender(
     in vec3 rayOrigin, in vec3 rayDirection, vec3 cameraForward,
@@ -40,6 +39,7 @@ vec4 raymarchDefaultRender(
         res.V = -rayDirection;
         color = RAYMARCH_SHADING_FNC(res);
     }
+    
     color.rgb = raymarchFog(color.rgb, t, rayOrigin, rayDirection);
 
     // Eye-space depth. See https://www.shadertoy.com/view/4tByz3

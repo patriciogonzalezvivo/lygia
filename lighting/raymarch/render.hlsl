@@ -1,7 +1,6 @@
 #include "cast.hlsl"
 #include "ao.hlsl"
 #include "normal.hlsl"
-#include "softShadow.hlsl"
 #include "shading.hlsl"
 #include "fog.hlsl"
 
@@ -18,8 +17,8 @@ options:
 #define RAYMARCH_BACKGROUND float3(0.0, 0.0, 0.0)
 #endif
 
-#ifndef FNC_RAYMARCHDEFAULT
-#define FNC_RAYMARCHDEFAULT
+#ifndef FNC_RAYMARCH_DEFAULT
+#define FNC_RAYMARCH_DEFAULT
 
 float4 raymarchDefaultRender(
     in float3 rayOrigin, in float3 rayDirection, float3 cameraForward,

@@ -37,29 +37,32 @@ license:
 #define RAYMARCH_SHADING_FNC raymarchDefaultShading
 #endif
 
-#ifndef FNC_RAYMARCHDEFAULTSHADING
-#define FNC_RAYMARCHDEFAULTSHADING
+#ifndef FNC_RAYMARCH_DEFAULTSHADING
+#define FNC_RAYMARCH_DEFAULTSHADING
 
 float4 raymarchDefaultShading(Material m) {
+
+     // This are here to be access by RAYMARCH_AMBIENT 
     float3 worldNormal = m.normal;
     float3 worldPosition = m.position;
+    
     #if defined(LIGHT_DIRECTION)
-    float3 light = normalize(LIGHT_DIRECTION);
+    float3 lig = normalize(LIGHT_DIRECTION);
     #else
-    float3 light = normalize(LIGHT_POSITION - m.position);
+    float3 lig = normalize(LIGHT_POSITION - m.position);
     #endif
 
     float3 ref = reflect(-m.V, m.normal);
     float occ = raymarchAO(m.position, m.normal);
     
-    float3 hal = normalize(light + m.V);
+    float3 hal = normalize(lig + m.V);
     float amb = saturate(0.5 + 0.5 * m.normal.y);
-    float dif = saturate(dot(m.normal, light));
-    float bac = saturate(dot(m.normal, normalize(float3(-light.x, 0.0, -light.z)))) * saturate(1.0 - m.position.y);
+    float dif = saturate(dot(m.normal, lig));
+    float bac = saturate(dot(m.normal, normalize(float3(-lig.x, 0.0, -lig.z)))) * saturate(1.0 - m.position.y);
     float dom = smoothstep( -0.1, 0.1, ref.y );
     float fre = pow(saturate(1.0 + dot(m.normal, -m.V)), 2.0);
     
-    dif *= raymarchSoftShadow(m.position, light);
+    dif *= raymarchSoftShadow(m.position, lig);
     dom *= raymarchSoftShadow(m.position, ref);
 
     float3 env = RAYMARCH_AMBIENT;

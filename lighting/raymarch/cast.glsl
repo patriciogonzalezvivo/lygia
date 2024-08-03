@@ -23,19 +23,13 @@ use: <float> castRay( in <vec3> pos, in <vec3> nor )
 #define RAYMARCH_MIN_HIT_DIST 0.00001 * t
 #endif
 
-#ifndef FNC_RAYMARCHCAST
-#define FNC_RAYMARCHCAST
+#ifndef FNC_RAYMARCH_CAST
+#define FNC_RAYMARCH_CAST
 
 Material raymarchCast( in vec3 ro, in vec3 rd ) {
     float tmin = RAYMARCH_MIN_DIST;
     float tmax = RAYMARCH_MAX_DIST;
    
-// #if defined(RAYMARCH_FLOOR)
-//     float tp1 = (0.0-ro.y)/rd.y; if( tp1>0.0 ) tmax = min( tmax, tp1 );
-//     float tp2 = (1.6-ro.y)/rd.y; if( tp2>0.0 ) { if( ro.y>1.6 ) tmin = max( tmin, tp2 );
-//                                                  else           tmax = min( tmax, tp2 ); }
-// #endif
-    
     float t = tmin;
     Material m = materialNew();
     m.valid = false;

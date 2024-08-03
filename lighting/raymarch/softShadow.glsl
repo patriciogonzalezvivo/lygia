@@ -30,8 +30,8 @@ examples:
 #define RAYMARCH_SHADOW_SOLID_ANGLE 0.1
 #endif
 
-#ifndef FNC_RAYMARCHSOFTSHADOW
-#define FNC_RAYMARCHSOFTSHADOW
+#ifndef FNC_RAYMARCH_SOFTSHADOW
+#define FNC_RAYMARCH_SOFTSHADOW
 
 float raymarchSoftShadow(vec3 ro, vec3 rd, in float mint, in float maxt, float w) {
     float res = 1.0;

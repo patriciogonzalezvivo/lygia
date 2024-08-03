@@ -44,9 +44,6 @@ void lightNew(out LightPoint _L) {
     _L.position     = LIGHT_POSITION;
     #endif
     
-    _L.color        = LIGHT_COLOR;
-    _L.intensity    = LIGHT_INTENSITY;
-
     #ifdef LIGHT_COLOR
     _L.color        = LIGHT_COLOR;
     #else 

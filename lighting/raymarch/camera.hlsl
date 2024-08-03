@@ -4,8 +4,8 @@ description: Set a camera for raymarching
 use: <float3x3> raymarchCamera(in <float3> ro, [in <float3> ta [, in <float3> up] ])
 */
 
-#ifndef FNC_RAYMARCHCAMERA
-#define FNC_RAYMARCHCAMERA
+#ifndef FNC_RAYMARCH_CAMERA
+#define FNC_RAYMARCH_CAMERA
 
 float3x3 raymarchCamera( in float3 ro, in float3 ta, in float3 up ) {
     float3 cw = normalize(ta-ro);
