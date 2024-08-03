@@ -10,11 +10,10 @@ use: <float> raymarchAO( in <float3> pos, in <float3> nor )
 #define RAYMARCH_SAMPLES_AO 5
 #endif
 
-#ifndef FNC_RAYMARCHAO
-#define FNC_RAYMARCHAO
+#ifndef FNC_RAYMARCH_AO
+#define FNC_RAYMARCH_AO
 
-float raymarchAO(in float3 pos, in float3 nor)
-{
+float raymarchAO(in float3 pos, in float3 nor) {
     float occ = 0.0;
     float sca = 1.0;
     for (int i = 0; i < RAYMARCH_SAMPLES_AO; i++) {

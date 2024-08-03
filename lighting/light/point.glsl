@@ -18,10 +18,6 @@ license:
 #include "../diffuse.glsl"
 #include "falloff.glsl"
 
-#ifdef RAYMARCH_SHADOWS
-#include "../raymarch/softShadow.glsl"
-#endif
-
 #ifndef STR_LIGHT_POINT
 #define STR_LIGHT_POINT
 struct LightPoint {
@@ -43,7 +39,7 @@ void lightPoint(
     inout vec3 _diffuse, inout vec3 _specular) {
 
     float intensity = _Li;
-    #ifdef RAYMARCH_SHADOWS    
+    #ifdef FNC_RAYMARCH_SOFTSHADOW    
     intensity = raymarchSoftShadow(_P, _Ld);
     #endif
 

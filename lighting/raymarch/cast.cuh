@@ -22,8 +22,8 @@ use: <float> castRay( in <float3> pos, in <float3> nor )
 #define RAYMARCH_MAP_DISTANCE w
 #endif
 
-#ifndef FNC_RAYMARCHCAST
-#define FNC_RAYMARCHCAST
+#ifndef FNC_RAYMARCH_CAST
+#define FNC_RAYMARCH_CAST
 
 inline __host__ __device__ RAYMARCH_MAP_TYPE raymarchCast(const float3& ro, const float3& rd) {
     float tmin = 1.0;
