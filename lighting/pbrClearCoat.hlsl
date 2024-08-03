@@ -1,7 +1,3 @@
-#ifndef SHADING_MODEL_CLEAR_COAT
-#define SHADING_MODEL_CLEAR_COAT
-#endif
-
 #include "../color/tonemap.hlsl"
 #include "material.hlsl"
 #include "fresnelReflection.hlsl"
@@ -77,7 +73,9 @@ float4 pbrClearCoat(const Material _mat)
 
     // Cached
     Material M = _mat;
-    M.V = normalize(CAMERA_POSITION - M.position); // View
+    if (M.V.x == 0.0 && M.V.y == 0.0 && M.V.z == 0.0) {
+        M.V         = normalize(CAMERA_POSITION - M.position);  // View
+    }
     M.NoV = dot(M.normal, M.V); // Normal . View
     M.R = reflection(M.V, M.normal, M.roughness); // Reflection
 

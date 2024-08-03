@@ -36,6 +36,11 @@ license:
 #define SURFACE_POSITION float3(0.0, 0.0, 0.0)
 #endif
 
+#ifndef RAYMARCH_MAX_DIST
+#define RAYMARCH_MAX_DIST 20.0
+#endif
+
+
 #ifndef FNC_MATERIAL_NEW
 #define FNC_MATERIAL_NEW
 
@@ -45,7 +50,7 @@ void materialNew(out Material _mat) {
     _mat.normal             = materialNormal();
 
 #if defined(RENDER_RAYMARCHING)
-    _mat.sdf                = 0.0;
+    _mat.sdf                = RAYMARCH_MAX_DIST;
     _mat.valid              = true;
 #endif
     

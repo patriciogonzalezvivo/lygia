@@ -52,7 +52,7 @@ vec4 pbr(const in Material _mat) {
 
     // Cached
     Material M  = _mat;
-    if (M.V.x != 0.0 && M.V.y != 0.0 && M.V.z != 0.0) {
+    if (M.V.x == 0.0 && M.V.y == 0.0 && M.V.z == 0.0) {
         M.V         = normalize(CAMERA_POSITION - M.position);  // View
     }
     M.NoV       = dot(M.normal, M.V);                       // Normal . View

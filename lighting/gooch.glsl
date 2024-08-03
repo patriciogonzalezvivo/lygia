@@ -73,14 +73,14 @@ vec4 gooch(const in vec4 _albedo, const in vec3 _N, const in vec3 _L, const in v
 }
 
 vec4 gooch(in Material _M, vec3 _L) {
-    if (length(_M.V) == 0.0) {
+    if (_M.V.x == 0.0 && _M.V.y == 0.0 && _M.V.z == 0.0) {
         _M.V = normalize(CAMERA_POSITION - _M.position);
     }
     return gooch(_M.albedo, _M.normal, _L, _M.V, _M.roughness, 1.0);
 }
 
 vec4 gooch(in Material _M, const in LightDirectional _L) {
-    if (length(_M.V) == 0.0) {
+    if (_M.V.x == 0.0 && _M.V.y == 0.0 && _M.V.z == 0.0) {
         _M.V = normalize(CAMERA_POSITION - _M.position);
     }
     return gooch(_M.albedo, _M.normal, _L.direction, _M.V, _M.roughness, _L.intensity);
@@ -88,7 +88,7 @@ vec4 gooch(in Material _M, const in LightDirectional _L) {
 
 
 vec4 gooch(in Material _M, const in LightPoint _L) {
-    if (length(_M.V) == 0.0) {
+    if (_M.V.x == 0.0 && _M.V.y == 0.0 && _M.V.z == 0.0) {
         _M.V = normalize(CAMERA_POSITION - _M.position);
     }
     return gooch(_M.albedo, _M.normal, _L.position, _M.V, _M.roughness, _L.intensity);
