@@ -10,9 +10,9 @@ license:
 #endif
 
 #ifndef LYGIA_VERSION_MINOR
-#define LYGIA_VERSION_MINOR 2
+#define LYGIA_VERSION_MINOR 3
 #endif
 
 #ifndef LYGIA_VERSION_PATCH
-#define LYGIA_VERSION_PATCH 3
+#define LYGIA_VERSION_PATCH 0
 #endif

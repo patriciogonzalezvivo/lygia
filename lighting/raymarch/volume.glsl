@@ -81,13 +81,13 @@ vec4 raymarchVolume( in vec3 rayOrigin, in vec3 rayDirection, vec3 cameraForward
             #ifdef LIGHT_POSITION
             float Tl = 1.0;
             for (int j = 0; j < nbSampleLight; j++) {
-                float densityLight = RAYMARCH_MAP_FNC( pos + sun_direction * float(j) * tstepl ).a;
+                float densityLight = RAYMARCH_MAP_FNC( pos + sun_direction * float(j) * tstepl ).sdf;
                 if (densityLight>0.)
                     Tl *= 1. - densityLight * absorption/fSamples;
                 if (Tl <= 0.01)
                     break;
             }
-            col += LIGHT_COLOR * 80. * tmp * T * Tl;
+            col += vec4(LIGHT_COLOR * 80. * tmp * T * Tl, 1.0);
             #endif
         }
         pos += rayDirection * tstep;

@@ -36,6 +36,11 @@ license:
 #define SURFACE_POSITION float3(0.0, 0.0, 0.0)
 #endif
 
+#ifndef RAYMARCH_MAX_DIST
+#define RAYMARCH_MAX_DIST 20.0
+#endif
+
+
 #ifndef FNC_MATERIAL_NEW
 #define FNC_MATERIAL_NEW
 
@@ -43,8 +48,11 @@ void materialNew(out Material _mat) {
     // Surface data
     _mat.position           = (SURFACE_POSITION).xyz;
     _mat.normal             = materialNormal();
-    _mat.sdf                = 0.0;
+
+#if defined(RENDER_RAYMARCHING)
+    _mat.sdf                = RAYMARCH_MAX_DIST;
     _mat.valid              = true;
+#endif
     
     #if defined(SCENE_BACK_SURFACE) && defined(RESOLUTION)
         float4 back_surface       = SAMPLER_FNC(SCENE_BACK_SURFACE, gl_FragCoord.xy / RESOLUTION);

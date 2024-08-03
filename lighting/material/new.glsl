@@ -36,6 +36,10 @@ license:
 #define SURFACE_POSITION vec3(0.0, 0.0, 0.0)
 #endif
 
+#ifndef RAYMARCH_MAX_DIST
+#define RAYMARCH_MAX_DIST 20.0
+#endif
+
 #ifndef FNC_MATERIAL_NEW
 #define FNC_MATERIAL_NEW
 
@@ -43,8 +47,11 @@ void materialNew(out Material _mat) {
     // Surface data
     _mat.position           = (SURFACE_POSITION).xyz;
     _mat.normal             = materialNormal();
-    _mat.sdf                = 0.0;
+
+#if defined(RENDER_RAYMARCHING)
+    _mat.sdf                = RAYMARCH_MAX_DIST;
     _mat.valid              = true;
+#endif
 
     #if defined(SCENE_BACK_SURFACE) && defined(RESOLUTION)
         vec4 back_surface       = SAMPLER_FNC(SCENE_BACK_SURFACE, gl_FragCoord.xy / RESOLUTION);
@@ -117,14 +124,14 @@ void materialNew(out Material _mat) {
 #endif
 
 #if defined(SHADING_MODEL_SPECULAR_GLOSSINESS)
-    vec3    specularColor;
-    float   glossiness;
+    _mat.specularColor = vec3(0.04, 0.04, 0.04);
+    _mat.glossiness = 0.5;
 #endif
 
     // Cache
-    vec3    V;
-    vec3    R;
-    float   NoV;
+    _mat.V = vec3(0.0);
+    _mat.R = vec3(0.0);
+    _mat.NoV = 0.0;
 }
 
 Material materialNew() {

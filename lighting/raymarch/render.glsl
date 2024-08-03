@@ -17,7 +17,7 @@ examples:
 */
 
 #ifndef RAYMARCH_BACKGROUND
-#define RAYMARCH_BACKGROUND float3(0.0, 0.0, 0.0)
+#define RAYMARCH_BACKGROUND vec3(0.0, 0.0, 0.0)
 #endif
 
 #ifndef FNC_RAYMARCHDEFAULT
