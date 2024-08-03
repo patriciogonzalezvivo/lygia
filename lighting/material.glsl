@@ -26,6 +26,11 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
+#if !defined(MATERIAL_OPT_IN)
+#define RENDER_RAYMARCHING
+#define SHADING_MODEL_CLEAR_COAT
+#endif
+
 #ifndef STR_MATERIAL
 #define STR_MATERIAL
 struct Material {
@@ -34,8 +39,11 @@ struct Material {
 
     vec3    position;       // world position of the surface
     vec3    normal;         // world normal of the surface
+
+#if defined(RENDER_RAYMARCHING)
     float   sdf;
     bool    valid;
+#endif
 
     #if defined(SCENE_BACK_SURFACE)
     vec3    normal_back;    // world normal of the back surface of the model
@@ -48,7 +56,7 @@ struct Material {
     float   metallic;
     float   ambientOcclusion;   // default 1.0
 
-#if defined (SHADING_MODEL_CLEAR_COAT)
+#if defined(SHADING_MODEL_CLEAR_COAT)
     float   clearCoat;
     float   clearCoatRoughness;
     #if defined(MATERIAL_HAS_CLEAR_COAT_NORMAL)

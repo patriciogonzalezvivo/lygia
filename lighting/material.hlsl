@@ -26,6 +26,11 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
+#if !defined(MATERIAL_OPT_IN)
+#define RENDER_RAYMARCHING
+#define SHADING_MODEL_CLEAR_COAT
+#endif
+
 #ifndef STR_MATERIAL
 #define STR_MATERIAL
 struct Material
@@ -35,8 +40,11 @@ struct Material
 
     float3 position; // world position of the surface
     float3 normal;   // world normal of the surface
-    float  sdf;
-    bool   valid;
+
+#if defined(RENDER_RAYMARCHING)
+    float   sdf;
+    bool    valid;
+#endif
     
 #ifdef SCENE_BACK_SURFACE
     float3  normal_back;        // world normal of the back surface of the model
