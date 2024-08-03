@@ -4,7 +4,7 @@
 /*
 contributors:  Inigo Quiles
 description: Default raymarching renderer
-use: <vec4> raymarchVolume( in <float3> rayOriging, in <float3> rayDirection, in <float3> cameraForward,
+use: <float4> raymarchVolume( in <float3> rayOriging, in <float3> rayDirection, in <float3> cameraForward,
     out <float3> eyeDepth, out <float3> worldPosition, out <float3> worldNormal ) 
 options:
     - RAYMARCH_BACKGROUND float3(0.0)
