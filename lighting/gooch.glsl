@@ -90,7 +90,7 @@ vec4 gooch(in Material _M, const in LightPoint _L) {
     return gooch(_M.albedo, _M.normal, _L.position, _M.V, _M.roughness, _L.intensity);
 }
 
-vec4 gooch(in Material _M) {
+vec4 gooch(const in Material _M) {
     #if defined(LIGHT_DIRECTION)
     LightDirectional L;
     #elif defined(LIGHT_POSITION)
@@ -98,7 +98,20 @@ vec4 gooch(in Material _M) {
     #endif
     lightNew(L);
 
-    return gooch(_M, L);
+    float ao = 1.0;
+    #if defined(FNC_RAYMARCH_AO)
+    ao = raymarchAO(_M.position, _M.normal);
+    #endif
+
+    #if defined(FNC_RAYMARCH_SOFTSHADOW)
+    #if defined(LIGHT_DIRECTION)
+    L.intensity = raymarchSoftShadow(_M.position, L.direction);
+    #elif defined(LIGHT_POSITION)
+    L.intensity = raymarchSoftShadow(_M.position, L.position);
+    #endif
+    #endif 
+
+    return gooch(_M, L) * ao;
 }
 
 #endif

@@ -47,29 +47,29 @@ float sampleMarchingSquares_tile(in vec2 p, in vec2 cellUv, in vec2 a, in vec2 b
     else if (tile == 3)
         return step(0.5, cellUv.y);
     else if (tile == 4)
-        return 1.0 - step(0.35, (rotate2d(PI * 0.75) * cellUv).x);
+        return 1.0 - step(0.35, (rotate2d(PI * -0.75) * cellUv).x);
     else if (tile == 5)
-        return step(0.35, (rotate2d(PI * 0.75) * cellUv).x);
+        return step(0.35, (rotate2d(PI * -0.75) * cellUv).x);
     else if (tile == 6)
-        return 1.0 - step(1.05, (rotate2d(PI * 0.25) * cellUv).x);
+        return 1.0 - step(1.05, (rotate2d(PI * -0.25) * cellUv).x);
     else if (tile == 7)
-        return step(1.05, (rotate2d(PI * 0.25) * cellUv).x);
+        return step(1.05, (rotate2d(PI * -0.25) * cellUv).x);
     else if (tile == 8)
-        return step(0.35, (rotate2d(PI * 0.25) * cellUv).x);
-    else if (tile == 9)
-        return 1.0 - step(0.35, (rotate2d(PI * 0.25) * cellUv).x);
-    else if (tile == 10)
-        return 1.0 - step(0.35, (rotate2d(PI * -0.25) * cellUv).x);
-    else if (tile == 11) 
         return step(0.35, (rotate2d(PI * -0.25) * cellUv).x);
+    else if (tile == 9)
+        return 1.0 - step(0.35, (rotate2d(PI * -0.25) * cellUv).x);
+    else if (tile == 10)
+        return 1.0 - step(0.35, (rotate2d(PI * 0.25) * cellUv).x);
+    else if (tile == 11) 
+        return step(0.35, (rotate2d(PI * 0.25) * cellUv).x);
     else if (tile == 12) {
-        float shape12_0 = 1.0 - step(0.35, (rotate2d(PI * -0.25) * cellUv).x);
-        float shape12_1 = step(0.35, (rotate2d(PI * 0.75) * cellUv).x);
+        float shape12_0 = 1.0 - step(0.35, (rotate2d(PI * 0.25) * cellUv).x);
+        float shape12_1 = step(0.35, (rotate2d(PI * -0.75) * cellUv).x);
         return shape12_0 - shape12_1;
     }
     else if (tile == 13) {
-        float shape13_0 = step(0.35, (rotate2d(PI * 0.25) * cellUv).x);
-        float shape13_1 = step(1.05, (rotate2d(PI * 0.25) * cellUv).x);
+        float shape13_0 = step(0.35, (rotate2d(PI * -0.25) * cellUv).x);
+        float shape13_1 = step(1.05, (rotate2d(PI * -0.25) * cellUv).x);
         return shape13_0 - shape13_1;
     }
     else
