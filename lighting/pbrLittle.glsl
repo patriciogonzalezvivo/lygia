@@ -11,7 +11,6 @@
 #include "envMap.glsl"
 #include "diffuse.glsl"
 #include "specular.glsl"
-#include "reflection.glsl"
 
 #include "../math/saturate.glsl"
 
@@ -49,7 +48,7 @@ license:
 
 vec4 pbrLittle( vec4 _albedo, vec3 _position, vec3 _normal, float _roughness, float _metallic, vec3 _f0, // Material Basic
                 vec3 ior, float thickness,                                                               // Material Iridescence
-                float shadow  ) {                                                                        // Light       
+                float _shadow  ) {                                                                        // Light       
             
     #ifdef LIGHT_DIRECTION
     vec3 L = normalize(LIGHT_DIRECTION);
@@ -64,19 +63,19 @@ vec4 pbrLittle( vec4 _albedo, vec3 _position, vec3 _normal, float _roughness, fl
     float smoothness = 0.95 - saturate(_roughness);
 
     #if defined(LIGHT_SHADOWMAP) && defined(LIGHT_SHADOWMAP_SIZE) && defined(LIGHT_COORD)
-    shadow *= shadow(LIGHT_SHADOWMAP, vec2(LIGHT_SHADOWMAP_SIZE), (LIGHT_COORD).xy, (LIGHT_COORD).z);
+    _shadow *= shadow(LIGHT_SHADOWMAP, vec2(LIGHT_SHADOWMAP_SIZE), (LIGHT_COORD).xy, (LIGHT_COORD).z);
     #elif defined(FNC_RAYMARCH_SOFTSHADOW)
-    shadow *= raymarchSoftShadow(_position, L);
+    _shadow *= raymarchSoftShadow(_position, L);
     #endif
 
     // AO
     #if defined(FNC_RAYMARCH_AO)
-    shadow *= raymarchAO(_position, _normal);
+    _shadow *= raymarchAO(_position, _normal);
     #endif
 
     // DIFFUSE
-    float diff = diffuse(L, N, V, _roughness) * shadow;
-    float spec = specular(L, N, V, _roughness) * shadow;
+    float diff = diffuse(L, N, V, _roughness) * _shadow;
+    float spec = specular(L, N, V, _roughness) * _shadow;
 
     _albedo.rgb = _albedo.rgb * diff;
 // #ifdef SCENE_SH_ARRAY
