@@ -88,7 +88,7 @@ vec4 pbrLittle( vec4 _albedo, vec3 _position, vec3 _normal, float _roughness, fl
                             saturate(-1.1 + NoV + _metallic) * // Fresnel
                             (_metallic + smoothness * 4.0); // make smaller highlights brighter
 
-    vec3 R = reflect(V, N);
+    vec3 R = reflect(-V, N);
     vec3 ambientSpecular = tonemapReinhard( envMap(R, _roughness, _metallic) ) * specIntensity;
     ambientSpecular += fresnelReflection(R, _f0, NoV) * (1.0-_roughness);
 
@@ -116,12 +116,10 @@ vec4 pbrLittle(vec4 albedo, vec3 normal, float roughness, float metallic) {
 }
 
 vec4 pbrLittle(Material M) {
-    float s = M.ambientOcclusion;
-
     #if defined(SHADING_MODEL_IRIDESCENCE)
-    return pbrLittle(M.albedo, M.position, M.normal, M.roughness, M.metallic, M.f0, M.ior, M.thickness, s) + vec4(M.emissive, 0.0);
+    return pbrLittle(M.albedo, M.position, M.normal, M.roughness, M.metallic, M.f0, M.ior, M.thickness, M.ambientOcclusion) + vec4(M.emissive, 0.0);
     #else
-    return pbrLittle(M.albedo, M.position, M.normal, M.roughness, M.metallic, M.f0, s) + vec4(M.emissive, 0.0);
+    return pbrLittle(M.albedo, M.position, M.normal, M.roughness, M.metallic, M.f0, M.ambientOcclusion) + vec4(M.emissive, 0.0);
     #endif
 }
 
