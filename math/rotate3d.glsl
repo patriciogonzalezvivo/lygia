@@ -14,8 +14,9 @@ mat3 rotate3d(in vec3 a, const in float r) {
     float s = sin(r);
     float c = cos(r);
     float oc = 1.0 - c;
-    return mat3(oc * a.x * a.x + c,           oc * a.x * a.y - a.z * s,  oc * a.z * a.x + a.y * s,
-                oc * a.x * a.y + a.z * s,  oc * a.y * a.y + c,           oc * a.y * a.z - a.x * s,
-                oc * a.z * a.x - a.y * s,  oc * a.y * a.z + a.x * s,  oc * a.z * a.z + c );
+    vec3 col1 = vec3(oc * a.x * a.x + c, oc * a.x * a.y + a.z * s, oc * a.z * a.x - a.y * s);
+    vec3 col2 = vec3(oc * a.x * a.y - a.z * s, oc * a.y * a.y + c, oc * a.y * a.z + a.x * s);
+    vec3 col3 = vec3(oc * a.z * a.x + a.y * s, oc * a.y * a.z - a.x * s, oc * a.z * a.z + c);
+    return mat3(col1, col2, col3);
 }
 #endif
