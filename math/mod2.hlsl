@@ -5,7 +5,7 @@ contributors: Mercury
 description: |
     Two dimensional modulus, returns the remainder of a division of two vectors.
     Found at in Mercury's library https://mercury.sexy/hg_sdf/
-use: <vec2> mod2(<vec2> x, <vec2> size)
+use: <float2> mod2(<float2> x, <float2> size)
 */
 
 #ifndef FNC_MOD2
