@@ -25,10 +25,6 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-#ifndef SURFACE_POSITION
-#define SURFACE_POSITION v_position
-#endif
-
 #ifndef CAMERA_POSITION
 #define CAMERA_POSITION vec3(0.0, 0.0, -10.0)
 #endif
