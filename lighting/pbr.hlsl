@@ -81,7 +81,7 @@ float4 pbr(const Material _mat) {
     #endif
 
 // #if defined(FNC_SSAO) && defined(SCENE_DEPTH) && defined(RESOLUTION) && defined(CAMERA_NEAR_CLIP) && defined(CAMERA_FAR_CLIP)
-//     vec2 pixel = 1.0/RESOLUTION;
+//     float2 pixel = 1.0/RESOLUTION;
 //     ao = ssao(SCENE_DEPTH, gl_FragCoord.xy*pixel, pixel, 1.);
 // #endif 
 
