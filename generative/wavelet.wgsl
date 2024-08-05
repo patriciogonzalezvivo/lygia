@@ -1,5 +1,5 @@
-#include "random.glsl"
-#include "../math/rotate2d.glsl"
+#include "random.wgsl"
+#include "../math/rotate2d.wgsl"
 
 /*
 contributors: Martijn Steinrucken
@@ -13,40 +13,36 @@ license:
     - The MIT License Copyright 2020 Martijn Steinrucken
 */
 
-#ifndef FNC_WAVELET
-#define FNC_WAVELET
+const WAVELET_VORTICITY: f32 = 0.0;
 
-float wavelet(vec2 p, float phase, float k) {
-    float d = 0.0, s = 1.0, m=0.0, a = 0.0;
+fn wavelet(p: vec2f, phase: f32, scale: f32) -> f32 {
+    let d = 0.0, s = 1.0, m = 0.0, a = 0.0;
+    let tmp = p;
     for (float i = 0.0; i < 4.0; i++) {
-        vec2 q = p*s;
-        a = random(floor(q)) * 1e3;
-        #ifdef WAVELET_VORTICITY
-        a += phase * random(floor(q)) * WAVELET_VORTICITY;
-        #endif
+        let q = tmp*s;
+        a = random2(floor(q)) * 1e3;
+        a += phase * random2(floor(q)) * WAVELET_VORTICITY;
         q = (fract(q) - 0.5) * rotate2d(a);
         d += sin(q.x * 10.0 + phase) * smoothstep(.25, 0.0, dot(q,q)) / s;
-        p = p * mat2(0.54,-0.84, 0.84, 0.54) + i;
+        tmp = tmp * mat2x2(0.54,-0.84, 0.84, 0.54) + i;
         m += 1.0 / s;
-        s *= k; 
+        s *= scale; 
     }
     return d / m;
 }
 
-float wavelet(vec3 p, float k) {
-    return wavelet(p.xy, p.z, k);
+fn waveletScaled3(p: vec3f, scale: f32) -> f32 {
+    return wavelet(p.xy, p.z, scale);
 }
 
-float wavelet(vec3 p) {
-    return wavelet(p, 1.24);
+fn wavelet3(p: vec3f) -> f32 {
+    return wavelet(p.xy, p.z, 1.24);
 } 
 
-float wavelet(vec2 p, float phase) {
+fn waveletScaled2(p: vec2f, phase: f32) -> f32 {
     return wavelet(p, phase, 1.24);
 } 
 
-float wavelet(vec2 p) {
+fn wavelet2(p: vec2f) -> f32 {
     return wavelet(p, 0.0, 1.24);
 } 
-
-#endif
