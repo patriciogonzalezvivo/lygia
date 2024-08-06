@@ -16,10 +16,13 @@ license:
 const WAVELET_VORTICITY: f32 = 0.0;
 
 fn wavelet(p: vec2f, phase: f32, scale: f32) -> f32 {
-    let d = 0.0, s = 1.0, m = 0.0, a = 0.0;
-    let tmp = p;
-    for (float i = 0.0; i < 4.0; i++) {
-        let q = tmp*s;
+    var d = 0.0; 
+    var s = 1.0;
+    var m = 0.0;
+    var a = 0.0;
+    var tmp = p;
+    for (var i = 0.0; i < 4.0; i += 1.0) {
+        var q = tmp*s;
         a = random2(floor(q)) * 1e3;
         a += phase * random2(floor(q)) * WAVELET_VORTICITY;
         q = (fract(q) - 0.5) * rotate2d(a);
