@@ -28,6 +28,6 @@ fn distMinkowski2(a: vec2f, b: vec2f) -> f32 { return  pow(pow(abs(a.x - b.x), D
 fn distMinkowski3(a: vec3f, b: vec3f) -> f32 { return  pow(pow(abs(a.x - b.x), DIST_MINKOWSKI_P) + pow(abs(a.y - b.y), DIST_MINKOWSKI_P) + pow(abs(a.z - b.z), DIST_MINKOWSKI_P), 1.0 / DIST_MINKOWSKI_P); }
 fn distMinkowski4(a: vec4f, b: vec4f) -> f32 { return  pow(pow(abs(a.x - b.x), DIST_MINKOWSKI_P) + pow(abs(a.y - b.y), DIST_MINKOWSKI_P) + pow(abs(a.z - b.z), DIST_MINKOWSKI_P) + pow(abs(a.w - b.w), DIST_MINKOWSKI_P), 1.0 / DIST_MINKOWSKI_P); }
 
-fn dist2(a: vec2f, b: vec2f) -> f32 { return distEuclidean(a, b); }
-fn dist3(a: vec3f, b: vec3f) -> f32 { return distEuclidean(a, b); }
-fn dist4(a: vec4f, b: vec4f) -> f32 { return distEuclidean(a, b); }
+fn dist2(a: vec2f, b: vec2f) -> f32 { return distEuclidean2(a, b); }
+fn dist3(a: vec3f, b: vec3f) -> f32 { return distEuclidean3(a, b); }
+fn dist4(a: vec4f, b: vec4f) -> f32 { return distEuclidean4(a, b); }
