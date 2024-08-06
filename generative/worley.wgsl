@@ -22,15 +22,15 @@ fn worley22(p: vec2f) -> vec2f {
     let n = floor( p );
     let f = fract( p );
 
-    let distF1 = 1.0;
-    let distF2 = 1.0;
-    let off1 = vec2(0.0); 
-    let pos1 = vec2(0.0);
-    let off2 = vec2(0.0);
-    let pos2 = vec2(0.0);
-    for( int j= -1; j <= 1; j++ ) {
-        for( int i=-1; i <= 1; i++ ) {	
-            let  g = vec2(i,j);
+    var distF1 = 1.0;
+    var distF2 = 1.0;
+    var off1 = vec2(0.0); 
+    var pos1 = vec2(0.0);
+    var off2 = vec2(0.0);
+    var pos2 = vec2(0.0);
+    for(var j = -1; j <= 1; j++) {
+        for(var i = -1; i <= 1; i++) {	
+            let  g = vec2(f32(i), f32(j));
             let  o = random22( n + g ) * WORLEY_JITTER;
             let  p = g + o;
             let d = distEuclidean2(p, f);
@@ -53,22 +53,22 @@ fn worley22(p: vec2f) -> vec2f {
     return vec2(distF1, distF2);
 }
 
-fn worley2(p: vec2f) -> f32 { return 1.0-worley2(p).x; }
+fn worley2(p: vec2f) -> f32 { return 1.0-worley22(p).x; }
 
 fn worley32(p: vec3f) -> vec2f {
     let n = floor( p );
     let f = fract( p );
 
-    let distF1 = 1.0;
-    let distF2 = 1.0;
-    let off1 = vec3(0.0);
-    let pos1 = vec3(0.0);
-    let off2 = vec3(0.0);
-    let pos2 = vec3(0.0);
-    for( int k = -1; k <= 1; k++ ) {
-        for( int j= -1; j <= 1; j++ ) {
-            for( int i=-1; i <= 1; i++ ) {	
-                let  g = vec3(i,j,k);
+    var distF1 = 1.0;
+    var distF2 = 1.0;
+    var off1 = vec3(0.0);
+    var pos1 = vec3(0.0);
+    var off2 = vec3(0.0);
+    var pos2 = vec3(0.0);
+    for(var k = -1; k <= 1; k++) {
+        for(var j = -1; j <= 1; j++) {
+            for(var i=-1; i <= 1; i++) {	
+                let  g = vec3(f32(i), f32(j), f32(k));
                 let  o = random33( n + g ) * WORLEY_JITTER;
                 let  p = g + o;
                 let d = distEuclidean3(p, f);
@@ -92,4 +92,4 @@ fn worley32(p: vec3f) -> vec2f {
     return vec2(distF1, distF2);
 }
 
-fn worley3(p: vec3f) -> f32 { return 1.0-worley2(p).x; }
+fn worley3(p: vec3f) -> f32 { return 1.0-worley32(p).x; }
