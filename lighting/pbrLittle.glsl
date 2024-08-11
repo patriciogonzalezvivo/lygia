@@ -68,11 +68,6 @@ vec4 pbrLittle( vec4 _albedo, vec3 _position, vec3 _normal, float _roughness, fl
     _shadow *= raymarchSoftShadow(_position, L);
     #endif
 
-    // AO
-    #if defined(FNC_RAYMARCH_AO)
-    _shadow *= raymarchAO(_position, _normal);
-    #endif
-
     // DIFFUSE
     float diff = diffuse(L, N, V, _roughness) * _shadow;
     float spec = specular(L, N, V, _roughness) * _shadow;
