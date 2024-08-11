@@ -62,10 +62,6 @@ vec4 pbr(const in Material _mat) {
     // ------------------------
     float ao = 1.0;
 
-    #if defined(FNC_RAYMARCH_AO)
-    ao = raymarchAO(M.position, M.normal);
-    #endif
-
 // #if defined(FNC_SSAO) && defined(SCENE_DEPTH) && defined(RESOLUTION) && defined(CAMERA_NEAR_CLIP) && defined(CAMERA_FAR_CLIP)
 //     vec2 pixel = 1.0/RESOLUTION;
 //     ao = ssao(SCENE_DEPTH, gl_FragCoord.xy*pixel, pixel, 1.);

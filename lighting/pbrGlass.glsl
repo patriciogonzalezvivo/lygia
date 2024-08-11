@@ -81,7 +81,7 @@ vec4 pbrGlass(const Material _mat) {
 
     // Refraction
     color.rgb   += transparent(No, -M.V, Fr, eta, M.roughness);
-    color.rgb   += Gi * IBL_LUMINANCE;
+    color.rgb   += Gi * IBL_LUMINANCE * M.ambientOcclusion;
 
     // TODO: RaG
     //  - Add support for multiple lights

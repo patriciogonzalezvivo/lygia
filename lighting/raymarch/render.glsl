@@ -37,6 +37,31 @@ vec4 raymarchDefaultRender(
         res.position = worldPos;
         res.normal = worldNormal;
         res.V = -rayDirection;
+        res.ambientOcclusion = raymarchAO(res.position, res.normal);
+        color = RAYMARCH_SHADING_FNC(res);
+    }
+    
+    color.rgb = raymarchFog(color.rgb, t, rayOrigin, rayDirection);
+
+    // Eye-space depth. See https://www.shadertoy.com/view/4tByz3
+    eyeDepth = t * dot(rayDirection, cameraForward);
+
+    return color;
+}
+
+vec4 raymarchDefaultRender(
+    in vec3 rayOrigin, in vec3 rayDirection, vec3 cameraForward,
+    out Material res, out float eyeDepth) { 
+
+    res = raymarchCast(rayOrigin, rayDirection);
+    float t = res.sdf;
+
+    vec4 color = vec4(RAYMARCH_BACKGROUND, 0.0);
+    if (res.valid) {
+        res.position = rayOrigin + t * rayDirection;
+        res.normal = raymarchNormal( res.position );
+        res.ambientOcclusion = raymarchAO(res.position, res.normal);
+        res.V = -rayDirection;
         color = RAYMARCH_SHADING_FNC(res);
     }
     

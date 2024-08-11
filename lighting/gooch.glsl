@@ -98,11 +98,6 @@ vec4 gooch(const in Material _M) {
     #endif
     lightNew(L);
 
-    float ao = 1.0;
-    #if defined(FNC_RAYMARCH_AO)
-    ao = raymarchAO(_M.position, _M.normal);
-    #endif
-
     #if defined(FNC_RAYMARCH_SOFTSHADOW)
     #if defined(LIGHT_DIRECTION)
     L.intensity = raymarchSoftShadow(_M.position, L.direction);
@@ -111,7 +106,7 @@ vec4 gooch(const in Material _M) {
     #endif
     #endif 
 
-    return gooch(_M, L) * ao;
+    return gooch(_M, L) * _M.ambientOcclusion;
 }
 
 #endif
