@@ -167,7 +167,7 @@ void materialZero(out Material _mat) {
 
 #if defined(SHADING_MODEL_SUBSURFACE)
     _mat.subsurfaceColor    = vec3(0.0);
-    _mat.subsurfacePower    = 0;
+    _mat.subsurfacePower    = 0.0;
     _mat.subsurfaceThickness = 0.0;
 #endif
 
