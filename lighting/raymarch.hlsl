@@ -74,7 +74,7 @@ float4 raymarch(float3 cameraPosition, float3 cameraLookAt, float2 st)
     float depth = 0.0;
     float3 worldPos = float3(0.0, 0.0, 0.0);
     float3 worldNormal = float3(0.0, 0.0, 0.0);
-    float4x4 viewMatrix = lookAtViewMatrix(cameraPosition, cameraLookAt);
+    float4x4 viewMatrix = lookAtView(cameraPosition, cameraLookAt);
     return raymarch(viewMatrix, st, depth, worldPos, worldNormal);
 }
 

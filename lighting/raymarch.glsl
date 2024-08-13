@@ -199,7 +199,7 @@ vec4 raymarch(vec3 cameraPosition, vec3 cameraLookAt, vec2 st)
     float depth = 0.0;
     vec3 worldPos = vec3(0.0, 0.0, 0.0);
     vec3 worldNormal = vec3(0.0, 0.0, 0.0);
-    mat4 viewMatrix = lookAtViewMatrix(cameraPosition, cameraLookAt);
+    mat4 viewMatrix = lookAtView(cameraPosition, cameraLookAt);
     return raymarch(viewMatrix, st, depth, worldPos, worldNormal);
 }
 
