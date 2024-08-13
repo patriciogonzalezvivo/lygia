@@ -14,23 +14,18 @@ option:
 #ifndef FNC_AAFLOOR
 #define FNC_AAFLOOR
 
-#if defined(GL_OES_standard_derivatives)
-#extension GL_OES_standard_derivatives : enable
-#endif
-
 float aafloor(float x) {
-#if !defined(GL_ES) || __VERSION__ >= 300 || defined(GL_OES_standard_derivatives)
-    float afwidth = 2.0 * length(float2(dFdx(x), dFdy(x)));
-    float fx = fract(x);
-    float idx = 1. - afwidth;
-    return (fx < idx) ? x - fx : map(fx, idx, 1., x-fx, x);
-#elif defined(AA_EDGE)
+
+#if defined(AA_EDGE)
     float afwidth = AA_EDGE;
     float fx = fract(x);
     float idx = 1. - afwidth;
     return (fx < idx) ? x - fx : map(fx, idx, 1., x-fx, x);
 #else 
-    return floor(x);
+    float afwidth = 2.0 * length(float2(dfdx(x), dfdy(x)));
+    float fx = fract(x);
+    float idx = 1. - afwidth;
+    return (fx < idx) ? x - fx : map(fx, idx, 1., x-fx, x);
 #endif
 }
 
