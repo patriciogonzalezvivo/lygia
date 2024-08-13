@@ -1,10 +1,6 @@
 #include "../specular.hlsl"
 #include "../diffuse.hlsl"
 
-#ifdef RAYMARCH_SHADOWS   
-#include "../raymarch/softShadow.hlsl"
-#endif
-
 /*
 contributors: Patricio Gonzalez Vivo
 description: Calculate directional light
@@ -43,7 +39,7 @@ void lightDirectional(
     inout float3 _diffuse, inout float3 _specular) {
 
     float intensity = _Li;
-    #ifdef RAYMARCH_SHADOWS    
+    #ifdef FNC_RAYMARCH_SOFTSHADOW    
     intensity = raymarchSoftShadow(_P, _Ld);
     #endif    
 

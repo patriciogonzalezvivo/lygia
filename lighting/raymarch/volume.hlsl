@@ -40,8 +40,8 @@ options:
 #define RAYMARCH_MAP_FNC(POS) raymarchMap(POS)
 #endif
 
-#ifndef FNC_RAYMARCHVOLUMERENDER
-#define FNC_RAYMARCHVOLUMERENDER
+#ifndef FNC_RAYMARCH_VOLUMERENDER
+#define FNC_RAYMARCH_VOLUMERENDER
 
 float4 raymarchVolume(in float3 rayOrigin, in float3 rayDirection, float3 cameraForward,
                       out float eyeDepth, out float3 worldPos, out float3 worldNormal)

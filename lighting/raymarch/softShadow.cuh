@@ -18,8 +18,8 @@ use: <float> raymarchSoftshadow( in <float3> ro, in <float3> rd, in <float> tmin
 #define RAYMARCH_MAP_DISTANCE w
 #endif
 
-#ifndef FNC_RAYMARCHSOFTSHADOW
-#define FNC_RAYMARCHSOFTSHADOW
+#ifndef FNC_RAYMARCH_SOFTSHADOW
+#define FNC_RAYMARCH_SOFTSHADOW
 
 inline __host__ __device__ float raymarchSoftShadow(const float3& ro, const float3& rd, float tmin, float tmax, float k ) {
     float res = 1.0f;

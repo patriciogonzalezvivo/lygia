@@ -18,8 +18,8 @@ use: <float> raymarchAO( in <float3> pos, in <float3> nor )
 #define RAYMARCH_MAP_DISTANCE w
 #endif
 
-#ifndef FNC_RAYMARCHAO
-#define FNC_RAYMARCHAO
+#ifndef FNC_RAYMARCH_AO
+#define FNC_RAYMARCH_AO
 
 inline __host__ __device__ float raymarchAO(const float3& pos, const float3& nor ) {
     float occ = 0.0f;

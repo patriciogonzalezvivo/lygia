@@ -82,8 +82,8 @@ examples:
 #define RAYMARCH_GLASS_MAP_MATERIAL rgb
 #endif
 
-#ifndef FNC_RAYMARCHGLASS
-#define FNC_RAYMARCHGLASS
+#ifndef FNC_RAYMARCH_GLASS
+#define FNC_RAYMARCH_GLASS
 RAYMARCH_MAP_TYPE raymarchGlassMarching(in vec3 ro, in vec3 rd) {
     float tmin = RAYMARCH_GLASS_MIN_DIST;
     float tmax = RAYMARCH_GLASS_MAX_DIST;

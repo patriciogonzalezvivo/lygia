@@ -10,8 +10,8 @@ use: <float4> raymarchMap( in <float3> pos )
 #define RAYMARCH_MAP_FNC raymarchMap
 #endif
 
-#ifndef FNC_RAYMARCHMAP
-#define FNC_RAYMARCHMAP
+#ifndef FNC_RAYMARCH_MAP
+#define FNC_RAYMARCH_MAP
 
 Material RAYMARCH_MAP_FNC( in float3 pos );
 

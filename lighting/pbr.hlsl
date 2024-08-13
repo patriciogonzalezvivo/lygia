@@ -40,10 +40,6 @@
 #include "common/specularAO.hlsl"
 #include "common/envBRDFApprox.hlsl"
 
-#if defined(RAYMARCH_AO)
-#include "raymarch/ao.hlsl"
-#endif
-
 /*
 contributors: Patricio Gonzalez Vivo
 description: Simple PBR shading model
@@ -80,7 +76,7 @@ float4 pbr(const Material _mat) {
     // ------------------------
     float ao = 1.0;
     
-    #if defined(RAYMARCH_AO)
+    #if defined(FNC_RAYMARCH_AO)
     ao = raymarchAO(M.position, M.normal);
     #endif
 

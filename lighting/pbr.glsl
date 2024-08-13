@@ -12,9 +12,9 @@
 #include "common/specularAO.glsl"
 #include "common/envBRDFApprox.glsl"
 
-#if defined(RAYMARCH_AO)
-#include "raymarch/ao.glsl"
-#endif
+// #if defined(RAYMARCH_AO)
+// #include "raymarch/ao.glsl"
+// #endif
 
 /*
 contributors: Patricio Gonzalez Vivo
@@ -58,14 +58,8 @@ vec4 pbr(const in Material _mat) {
     M.NoV       = dot(M.normal, M.V);                       // Normal . View
     M.R         = reflection(M.V, M.normal, M.roughness);   // Reflection
 
-    // Ambient Occlusion
-    // ------------------------
-    float ao = 1.0;
-
-    #if defined(RAYMARCH_AO)
-    ao = raymarchAO(M.position, M.normal);
-    #endif
-
+    // TODO: 
+    //  - ScreenSpace Ambient Occlusion when M.ambientOcclusion is not defined
 // #if defined(FNC_SSAO) && defined(SCENE_DEPTH) && defined(RESOLUTION) && defined(CAMERA_NEAR_CLIP) && defined(CAMERA_FAR_CLIP)
 //     vec2 pixel = 1.0/RESOLUTION;
 //     ao = ssao(SCENE_DEPTH, gl_FragCoord.xy*pixel, pixel, 1.);
@@ -74,7 +68,7 @@ vec4 pbr(const in Material _mat) {
     // Global Ilumination ( Image Based Lighting )
     // ------------------------
     vec3 E = envBRDFApprox(specularColor, M);
-    float diffuseAO = min(M.ambientOcclusion, ao);
+    float diffuseAO = M.ambientOcclusion;
 
     vec3 Fr = vec3(0.0, 0.0, 0.0);
     Fr  = envMap(M) * E;
