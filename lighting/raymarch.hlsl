@@ -26,7 +26,7 @@ license:
 
 #include "../math/const.hlsl"
 #include "../space/rotate.hlsl"
-#include "../space/lookAtViewMatrix.hlsl"
+#include "../space/lookAtView.hlsl"
 #include "raymarch/render.hlsl"
 
 #ifndef ENG_RAYMARCH

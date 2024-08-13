@@ -1,7 +1,7 @@
 /*
 contributors:  Shadi El Hajj
 description: Create a view matrix from camera position and camera rotation (euler angles)
-use: <float4x4> lookAtViewMatrix(in <float3> position, in <float3> euler)
+use: <float4x4> eulerView(in <float3> position, in <float3> euler)
 */
 
 #include "../math/rotate3dX.hlsl"
@@ -9,10 +9,10 @@ use: <float4x4> lookAtViewMatrix(in <float3> position, in <float3> euler)
 #include "../math/rotate3dZ.hlsl"
 #include "translate.hlsl"
 
-#ifndef FNC_VIEWMATRIX
-#define FNC_VIEWMATRIX
+#ifndef FNC_EULERVIEW
+#define FNC_EULERVIEW
 
- float4x4 viewMatrix(float3 position, float3 euler) {
+ float4x4 eulerView(float3 position, float3 euler) {
     float3x3 rotZ = rotate3dZ(euler.z);
     float3x3 rotX = rotate3dX(euler.x);
     float3x3 rotY = rotate3dY(euler.y);
