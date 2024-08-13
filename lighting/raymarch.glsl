@@ -14,10 +14,6 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-#ifndef RAYMARCH_CAMERA_MATRIX_FNC
-#define RAYMARCH_CAMERA_MATRIX_FNC raymarchCamera
-#endif
-
 #ifndef RAYMARCH_RENDER_FNC
 #define RAYMARCH_RENDER_FNC raymarchDefaultRender
 #endif
@@ -28,8 +24,8 @@ license:
 
 #include "../math/const.glsl"
 #include "../space/rotate.glsl"
+#include "../space/lookAtViewMatrix.glsl"
 #include "raymarch/render.glsl"
-#include "raymarch/camera.glsl"
 
 #ifndef ENG_RAYMARCHING
 #define ENG_RAYMARCHING
@@ -38,13 +34,12 @@ license:
 const float RAYMARCH_MULTISAMPLE_FACTOR = 1.0/float(RAYMARCH_MULTISAMPLE);
 #endif
 
-vec4 raymarch( vec3 camera, vec3 ta, vec2 st,
+vec4 raymarch( mat4 viewMatrix, vec2 st,
     out float eyeDepth, out vec3 worldPos, out vec3 worldNormal) {
 
-    mat3 ca = RAYMARCH_CAMERA_MATRIX_FNC(camera, ta);
-    float fov = 1.0/tan(RAYMARCH_CAMERA_FOV*PI/180.0/2.0);
-    vec3 cameraForward = normalize(ta - camera);
-    st.x = 1.0 - st.x;
+    float fov = 1.0/tan(RAYMARCH_CAMERA_FOV*DEG2RAD/2.0);
+    vec3 camera = vec3(viewMatrix[0][3], viewMatrix[1][3], viewMatrix[2][3]);
+    vec3 cameraForward = vec3(viewMatrix[0][2], viewMatrix[1][2], viewMatrix[2][2]);
 
 #if defined(RAYMARCH_MULTISAMPLE)
     vec4 color = vec4(0.0);
@@ -55,7 +50,7 @@ vec4 raymarch( vec3 camera, vec3 ta, vec2 st,
     vec2 offset = rotate( vec2(0.5, 0.0), HALF_PI/4.);
 
     for (int i = 0; i < RAYMARCH_MULTISAMPLE; i++) {
-        vec3 rd = ca * normalize(vec3((st + offset * pixel)*2.0-1.0, fov));
+        vec3 rd = mat3(viewMatrix) * normalize(vec3((st + offset * pixel)*2.0-1.0, fov));
         float sampleDepth = 0.0;
         vec3 sampleWorldPos = vec3(0.0);
         vec3 sampleWorldNormal = vec3(0.0);
@@ -70,16 +65,15 @@ vec4 raymarch( vec3 camera, vec3 ta, vec2 st,
     worldNormal *= RAYMARCH_MULTISAMPLE_FACTOR;
     return color * RAYMARCH_MULTISAMPLE_FACTOR;
 #else
-    vec3 rd = ca * normalize(vec3(st*2.0-1.0, fov));
+    vec3 rd = mat3(viewMatrix) * normalize(vec3((st + offset * pixel)*2.0-1.0, fov));
     return RAYMARCH_RENDER_FNC( camera, rd, cameraForward, eyeDepth, worldPos, worldNormal );
 #endif
 }
 
-vec4 raymarch( vec3 camera, vec3 ta, vec2 st, out Material mat, out float eyeDepth) {
-    mat3 ca = RAYMARCH_CAMERA_MATRIX_FNC(camera, ta);
-    float fov = 1.0/tan(RAYMARCH_CAMERA_FOV*PI/180.0/2.0);
-    vec3 cameraForward = normalize(ta - camera);
-    st.x = 1.0 - st.x;
+vec4 raymarch( mat4 viewMatrix, vec2 st, out Material mat, out float eyeDepth) {
+    float fov = 1.0/tan(RAYMARCH_CAMERA_FOV*DEG2RAD/2.0);
+    vec3 camera = vec3(viewMatrix[0][3], viewMatrix[1][3], viewMatrix[2][3]);
+    vec3 cameraForward = vec3(viewMatrix[0][2], viewMatrix[1][2], viewMatrix[2][2]);
 
 #if defined(RAYMARCH_MULTISAMPLE)
     vec4 color = vec4(0.0);
@@ -94,7 +88,7 @@ vec4 raymarch( vec3 camera, vec3 ta, vec2 st, out Material mat, out float eyeDep
     vec2 offset = rotate( vec2(0.5, 0.0), HALF_PI/4.);
 
     for (int i = 0; i < RAYMARCH_MULTISAMPLE; i++) {
-        vec3 rd = ca * normalize(vec3((st + offset * pixel)*2.0-1.0, fov));
+        vec3 rd = mat3(viewMatrix) * normalize(vec3((st + offset * pixel)*2.0-1.0, fov));
         float sampleDepth = 0.0;
         vec3 sampleWorldPos = vec3(0.0);
         vec3 sampleWorldNormal = vec3(0.0);
@@ -193,20 +187,18 @@ vec4 raymarch( vec3 camera, vec3 ta, vec2 st, out Material mat, out float eyeDep
     
     return color * RAYMARCH_MULTISAMPLE_FACTOR;
 #else
-    vec3 rd = ca * normalize(vec3(st*2.0-1.0, fov));
+    vec3 rd = mat3(viewMatrix) * normalize(vec3((st + offset * pixel)*2.0-1.0, fov));
     return RAYMARCH_RENDER_FNC( camera, rd, cameraForward, mat, eyeDepth);
 #endif
 }
 
-vec4 raymarch(vec3 camera, vec3 ta, vec2 st) {
+vec4 raymarch(vec3 cameraPosition, vec3 cameraLookAt, vec2 st)
+{
     float depth = 0.0;
-    vec3 worldPos = vec3(0.0);
-    vec3 worldNormal = vec3(0.0);
-    return raymarch(camera, ta, st, depth, worldPos, worldNormal);
-}
-
-vec4 raymarch(vec3 camera, vec2 st) {
-    return raymarch(camera, vec3(0.0), st);
+    vec3 worldPos = vec3(0.0, 0.0, 0.0);
+    vec3 worldNormal = vec3(0.0, 0.0, 0.0);
+    mat4 viewMatrix = lookAtViewMatrix(cameraPosition, cameraLookAt);
+    return raymarch(viewMatrix, st, depth, worldPos, worldNormal);
 }
 
 #endif
