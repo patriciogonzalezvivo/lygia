@@ -1,0 +1,51 @@
+/*
+contributors: Inigo Quiles
+description: cubic polynomial https://iquilezles.org/articles/smoothsteps/
+use: <float|float2|float3|float4> cubic(<float|float2|float3|float4> value[, <float> in, <float> out]);
+examples:
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/math_functions.frag
+*/
+
+#ifndef FNC_CUBIC
+#define FNC_CUBIC 
+float cubic(const float v) { return v*v*(3.0-2.0*v); }
+float2  cubic(const float2 v)  { return v*v*(3.0-2.0*v); }
+float3  cubic(const float3 v)  { return v*v*(3.0-2.0*v); }
+float4  cubic(const float4 v)  { return v*v*(3.0-2.0*v); }
+
+float cubic(const float v, float slope0, float slope1) {
+    float a = slope0 + slope1 - 2.;
+    float b = -2. * slope0 - slope1 + 3.;
+    float c = slope0;
+    float v2 = v * v;
+    float v3 = v * v2;
+    return a * v3 + b * v2 + c * v;
+}
+
+float2 cubic(const float2 v, float slope0, float slope1) {
+    float a = slope0 + slope1 - 2.;
+    float b = -2. * slope0 - slope1 + 3.;
+    float c = slope0;
+    float2 v2 = v * v;
+    float2 v3 = v * v2;
+    return a * v3 + b * v2 + c * v;
+}
+
+float3 cubic(const float3 v, float slope0, float slope1) {
+    float a = slope0 + slope1 - 2.;
+    float b = -2. * slope0 - slope1 + 3.;
+    float c = slope0;
+    float3 v2 = v * v;
+    float3 v3 = v * v2;
+    return a * v3 + b * v2 + c * v;
+}
+
+float4 cubic(const float4 v, float slope0, float slope1) {
+    float a = slope0 + slope1 - 2.;
+    float b = -2. * slope0 - slope1 + 3.;
+    float c = slope0;
+    float4 v2 = v * v;
+    float4 v3 = v * v2;
+    return a * v3 + b * v2 + c * v;
+}
+#endif
