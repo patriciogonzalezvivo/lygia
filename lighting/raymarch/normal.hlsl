@@ -6,8 +6,8 @@ description: Calculate normals http://iquilezles.org/www/articles/normalsSDF/nor
 use: <float> raymarchNormal( in <float3> pos ) 
 */
 
-#ifndef FNC_RAYMARCHNORMAL
-#define FNC_RAYMARCHNORMAL
+#ifndef FNC_RAYMARCH_NORMAL
+#define FNC_RAYMARCH_NORMAL
 
 float3 raymarchNormal(float3 pos, float2 pixel) {
    float2 offset = float2(1.0, -1.0) * pixel;

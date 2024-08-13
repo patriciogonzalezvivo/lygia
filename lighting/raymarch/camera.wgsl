@@ -8,8 +8,8 @@ examples:
     - /shaders/lighting_raymarching.frag
 */
 
-#ifndef FNC_RAYMARCHCAMERA
-#define FNC_RAYMARCHCAMERA
+#ifndef FNC_RAYMARCH_CAMERA
+#define FNC_RAYMARCH_CAMERA
 
 mat3 raymarchCamera( in vec3 ro, in vec3 ta, in vec3 up ) {
     vec3 cw = normalize(ta-ro);

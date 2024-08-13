@@ -8,8 +8,8 @@ examples:
     - /shaders/lighting_raymarching.frag
 */
 
-#ifndef FNC_RAYMARCHNORMAL
-#define FNC_RAYMARCHNORMAL
+#ifndef FNC_RAYMARCH_NORMAL
+#define FNC_RAYMARCH_NORMAL
 
 vec3 raymarchNormal(vec3 pos, vec2 pixel) {
    vec2 offset = vec2(1.0, -1.0) * pixel;

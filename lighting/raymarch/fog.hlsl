@@ -25,8 +25,8 @@ options:
 #define FOG_COLOR_WARM float3(1.0, 0.9, 0.7)
 #endif
 
-//#ifndef FNC_RAYMARCHFOG
-//#define FNC_RAYMARCHFOG
+#ifndef FNC_RAYMARCH_FOG
+#define FNC_RAYMARCH_FOG
 
 float3 raymarchFog(in float3 col, // color of pixel
                    in float t)    // distance to point
@@ -72,4 +72,4 @@ float3 raymarchFog(in float3 col, in float t, in float3 ro, in float3 rd)
     }
 }
 
-//#endif
+#endif

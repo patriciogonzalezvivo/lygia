@@ -25,10 +25,6 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-#ifndef SURFACE_POSITION
-#define SURFACE_POSITION v_position
-#endif
-
 #ifndef CAMERA_POSITION
 #define CAMERA_POSITION vec3(0.0, 0.0, -10.0)
 #endif
@@ -94,7 +90,7 @@ vec4 gooch(in Material _M, const in LightPoint _L) {
     return gooch(_M.albedo, _M.normal, _L.position, _M.V, _M.roughness, _L.intensity);
 }
 
-vec4 gooch(in Material _M) {
+vec4 gooch(const in Material _M) {
     #if defined(LIGHT_DIRECTION)
     LightDirectional L;
     #elif defined(LIGHT_POSITION)
@@ -102,7 +98,15 @@ vec4 gooch(in Material _M) {
     #endif
     lightNew(L);
 
-    return gooch(_M, L);
+    #if defined(FNC_RAYMARCH_SOFTSHADOW)
+    #if defined(LIGHT_DIRECTION)
+    L.intensity = raymarchSoftShadow(_M.position, L.direction);
+    #elif defined(LIGHT_POSITION)
+    L.intensity = raymarchSoftShadow(_M.position, L.position);
+    #endif
+    #endif 
+
+    return gooch(_M, L) * _M.ambientOcclusion;
 }
 
 #endif

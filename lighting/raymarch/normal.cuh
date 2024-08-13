@@ -16,8 +16,8 @@ use: <float> raymarchNormal( in <float3> pos )
 #define RAYMARCH_MAP_DISTANCE w
 #endif
 
-#ifndef FNC_RAYMARCHNORMAL
-#define FNC_RAYMARCHNORMAL
+#ifndef FNC_RAYMARCH_NORMAL
+#define FNC_RAYMARCH_NORMAL
 
 inline __host__ __device__ float3 raymarchNormal(const float3& pos, float2 pixel) {
    float2 offset = make_float2(1.0f, -1.0f) * pixel;

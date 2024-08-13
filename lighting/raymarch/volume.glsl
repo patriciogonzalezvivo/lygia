@@ -43,8 +43,8 @@ examples:
 #define RAYMARCH_MAP_FNC(POS) raymarchMap(POS)
 #endif
 
-#ifndef FNC_RAYMARCHVOLUMERENDER
-#define FNC_RAYMARCHVOLUMERENDER
+#ifndef FNC_RAYMARCH_VOLUMERENDER
+#define FNC_RAYMARCH_VOLUMERENDER
 
 vec4 raymarchVolume( in vec3 rayOrigin, in vec3 rayDirection, vec3 cameraForward,
                      out float eyeDepth, out vec3 worldPos, out vec3 worldNormal) {
