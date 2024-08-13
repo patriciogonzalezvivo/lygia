@@ -1,0 +1,13 @@
+/*
+contributors: Patricio Gonzalez Vivo
+description: this file contains the definition of the floor function for float, float2, float33, and float4 types, to match HLSL's behavior.
+use: <float|float2|float3|float4> frac(<float|float2|float3|float4> X)
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
+
+#ifndef FNC_FRAC
+#define FNC_FRAC
+#define frac(X) fract(X)
+#endif

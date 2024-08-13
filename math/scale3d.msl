@@ -1,0 +1,30 @@
+/*
+contributors: Patricio Gonzalez Vivo
+description: returns a 3x3 scale matrix
+use:
+    - <matrix<float, 3, 3>> scale3d(<float|float3> radians)
+    - <matrix<float, 3, 3>> scale3d(<float> x, <float> y, <float> z)
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
+
+#ifndef FNC_SCALE3D
+matrix<float, 3, 3> scale3d(float s) {
+    return matrix<float, 3, 3>(s, 0.0, 0.0,
+                0.0, s, 0.0,
+                0.0, 0.0, s );
+}
+
+matrix<float, 3, 3> scale3d(float x, float y, float z) {
+    return matrix<float, 3, 3>(  x, 0.0, 0.0,
+                0.0,  y, 0.0,
+                0.0, 0.0,  z );
+}
+
+matrix<float, 3, 3> scale3d(float3 s) {
+    return matrix<float, 3, 3>(s.x, 0.0, 0.0,
+                0.0, s.y, 0.0,
+                0.0, 0.0, s.z );
+}
+#endif
