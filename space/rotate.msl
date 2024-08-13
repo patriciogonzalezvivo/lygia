@@ -1,0 +1,80 @@
+#include "../math/rotate2d.msl"
+#include "../math/rotate4d.msl"
+
+/*
+contributors: Patricio Gonzalez Vivo
+description: rotate a 2D space by a radian r
+use: rotate(<float3|float2> v, float r [, float2 c])
+options:
+    - CENTER_2D
+    - CENTER_3D
+    - CENTER_4D
+examples:
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/draw_shapes.frag
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
+
+#ifndef FNC_ROTATE
+#define FNC_ROTATE
+float2 rotate(float2 v, float r, float2 c) {
+    return rotate2d(r) * (v - c) + c;
+}
+
+float2 rotate(float2 v, float r) {
+    #ifdef CENTER_2D
+    return rotate(v, r, CENTER_2D);
+    #else
+    return rotate(v, r, float2(.5));
+    #endif
+}
+
+float2 rotate(float2 v, float2 x_axis) {
+    #ifdef CENTER_2D
+    v -= CENTER_2D;
+    #endif
+    float2 rta = float2( dot(v, float2(-x_axis.y, x_axis.x)), dot(v, x_axis) );
+    #ifdef CENTER_2D
+    rta += CENTER_2D;
+    #endif
+    return rta;
+}
+
+float3 rotate(float3 v, float r, float3 axis, float3 c) {
+    return (rotate4d(axis, r) * float4(v - c, 1.)).xyz + c;
+}
+
+float3 rotate(float3 v, float r, float3 axis) {
+    #ifdef CENTER_3D
+    return rotate(v, r, axis, CENTER_3D);
+    #else
+    return rotate(v, r, axis, float3(0.));
+    #endif
+}
+
+float4 rotate(float4 v, float r, float3 axis, float4 c) {
+    return rotate4d(axis, r) * (v - c) + c;
+}
+
+float4 rotate(float4 v, float r, float3 axis) {
+    #ifdef CENTER_4D
+    return rotate(v, r, axis, CENTER_4D);
+    #else
+    return rotate(v, r, axis, float4(0.));
+    #endif
+}
+
+#if defined(FNC_QUATMULT)
+float3 rotate(QUAT q, float3 v) {
+    QUAT q_c = QUAT(-q.x, -q.y, -q.z, q.w);
+    return quatMul(q, quatMul(float4(v, 0), q_c)).xyz;
+}
+
+float3 rotate(QUAT q, float3 v, float3 c) {
+    float3 dir = v - c;
+    return c + rotate(q, dir);
+}
+#endif
+
+#endif

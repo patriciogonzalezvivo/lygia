@@ -1,10 +1,10 @@
-#include "../sdf/lineSDF.glsl"
-#include "../math/saturate.glsl"
+#include "../sdf/lineSDF.msl"
+#include "../math/saturate.msl"
 
 /*
 contributors: ["Morgan McGuire", "Matthias Reitinger"]
 description: Draw arrows for vector fields from https://www.shadertoy.com/view/4s23DG
-use: <float> arrows(<vec2> position, <vec2> velocity [, <vec2> resolution] )
+use: <float> arrows(<float2> position, <float2> velocity [, <float2> resolution] )
 options:
     - ARROWS_LINE_STYLE
     - ARROWS_TILE_SIZE
@@ -39,14 +39,14 @@ license: MIT License (MIT) Copyright 2014, Morgan McGuire
 #define FNC_ARROWS
 
 // Computes the center pixel of the tile containing pixel pos
-vec2 arrowsTileCenterCoord(vec2 pos) {
+float2 arrowsTileCenterCoord(float2 pos) {
     return (floor(pos / ARROWS_TILE_SIZE) + 0.5) * ARROWS_TILE_SIZE;
 }
 
 // v = field sampled at tileCenterCoord(p), scaled by the length
-// desired in pixels for arrows
+// desired pixels for arrows
 // Returns 1.0 where there is an arrow pixel.
-float arrows(vec2 p, vec2 v, vec2 resolution) {
+float arrows(float2 p, float2 v, float2 resolution) {
     p *= resolution;
 
     // Make everything relative to the center, which may be fractional
@@ -57,7 +57,7 @@ float arrows(vec2 p, vec2 v, vec2 resolution) {
         
     if (mag_v > 0.0) {
         // Non-zero velocity case
-        vec2 dir_v = v / mag_v;
+        float2 dir_v = v / mag_v;
         
         // We can't draw arrows larger than the tile radius, so clamp magnitude.
         // Enforce a minimum length to help see direction
@@ -72,8 +72,8 @@ float arrows(vec2 p, vec2 v, vec2 resolution) {
             float shaft = lineSDF(p, v, -v);
 
             // Signed distance from head
-            float head = min(   lineSDF(p, v, 0.4*v + 0.2*vec2(-v.y, v.x)),
-                                lineSDF(p, v, 0.4*v + 0.2*vec2(v.y, -v.x)));
+            float head = min(   lineSDF(p, v, 0.4*v + 0.2*float2(-v.y, v.x)),
+                                lineSDF(p, v, 0.4*v + 0.2*float2(v.y, -v.x)));
 
             return step(min(shaft, head), 1.);
 
@@ -81,7 +81,7 @@ float arrows(vec2 p, vec2 v, vec2 resolution) {
             // Line arrow style
             return saturate(1.0 + 
                     max( ARROWS_SHAFT_THICKNESS / 4.0 - 
-                        max(abs(dot(p, vec2(dir_v.y, -dir_v.x))), // Width
+                        max(abs(dot(p, float2(dir_v.y, -dir_v.x))), // Width
                             abs(dot(p, dir_v)) - mag_v + ARROWS_HEAD_LENGTH / 2.0), // Length
 
                         // Arrow head
@@ -101,6 +101,6 @@ float arrows(vec2 p, vec2 v, vec2 resolution) {
     return 0.0;
 }
 
-float arrows(vec2 p, vec2 v) { return arrows(p, v, vec2(1.0)); }
+float arrows(float2 p, float2 v) { return arrows(p, v, float2(1.0)); }
 
 #endif

@@ -1,6 +1,5 @@
 #include "math/absi.msl"
 #include "math/adaptiveThreshold.msl"
-#include "math/atan2.msl"
 #include "math/bump.msl"
 #include "math/const.msl"
 #include "math/cubic.msl"
