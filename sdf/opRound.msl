@@ -1,0 +1,15 @@
+/*
+contributors:  Inigo Quiles
+description: round SDFs 
+use: <float> opRound( <float> d, <float> h ) 
+*/
+
+#ifndef FNC_OPROUND
+#define FNC_OPROUND
+
+float opRound( float d, float h ) {
+    return d - h;
+}
+
+#endif
+

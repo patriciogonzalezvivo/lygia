@@ -1,0 +1,11 @@
+#include "boxSDF.msl"
+
+/*
+description: generate the SDF of a cube
+use: <float> cubeSDF( <float3> pos, <float> size ) 
+*/
+
+#ifndef FNC_CUBESDF
+#define FNC_CUBESDF
+float cubeSDF(float3 p, float s)  { return boxSDF(p, float3(s)); }
+#endif
