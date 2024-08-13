@@ -23,24 +23,32 @@ examples:
 #endif
 #endif
 
+#ifndef LIGHT_INTENSITY
+#define LIGHT_INTENSITY 100.0
+#endif
+
 #ifndef RAYMARCH_BACKGROUND
 #define RAYMARCH_BACKGROUND vec3(0.0)
 #endif
 
 #ifndef RAYMARCH_SAMPLES
-#define RAYMARCH_SAMPLES 64
+#define RAYMARCH_SAMPLES 512
 #endif
 
 #ifndef RAYMARCH_MIN_DIST
-#define RAYMARCH_MIN_DIST 1.0
+#define RAYMARCH_MIN_DIST 0.1
 #endif
 
 #ifndef RAYMARCH_MAX_DIST
-#define RAYMARCH_MAX_DIST 10.0
+#define RAYMARCH_MAX_DIST 20.0
 #endif
 
 #ifndef RAYMARCH_MAP_FNC
-#define RAYMARCH_MAP_FNC(POS) raymarchMap(POS)
+#define RAYMARCH_MAP_FNC raymarchMap
+#endif
+
+#ifndef RAYMARCH_MEDIUM_DENSITY
+#define RAYMARCH_MEDIUM_DENSITY 100.0
 #endif
 
 #ifndef FNC_RAYMARCH_VOLUMERENDER
@@ -53,7 +61,7 @@ vec4 raymarchVolume( in vec3 rayOrigin, in vec3 rayDirection, vec3 cameraForward
     const float tmax        = RAYMARCH_MAX_DIST;
     const float fSamples    = float(RAYMARCH_SAMPLES);
     const float tstep       = tmax/fSamples;
-    const float absorption  = 100.;
+    const float mediumDensity = RAYMARCH_MEDIUM_DENSITY / fSamples;
 
     #ifdef LIGHT_POSITION
     const int   nbSampleLight   = 6;
@@ -62,32 +70,31 @@ vec4 raymarchVolume( in vec3 rayOrigin, in vec3 rayDirection, vec3 cameraForward
     vec3 sun_direction          = normalize( LIGHT_POSITION );
     #endif
 
-    float T = 1.;
+    float transmittance = 1.;
     float t = tmin;
-    vec4 col = vec4(0.0);
+    vec4 col = vec4(0.0, 0.0, 0.0, 0.0);
     vec3 pos = rayOrigin;
     for(int i = 0; i < RAYMARCH_SAMPLES; i++) {
-        Material res    = RAYMARCH_MAP_FNC(pos);
-        float density = (0.1 - res.sdf);
-        if (density > 0.0) {
-            float tmp = density / fSamples;
-            T *= 1.0 - tmp * absorption;
-            if( T <= 0.001)
-                break;
+        Material res = RAYMARCH_MAP_FNC(pos);
+        float dist = -res.sdf;
+        if (dist > 0.0) {
+            float density = saturate(dist * mediumDensity);
+            transmittance *= 1.0 - density;
 
-            col += res.albedo * fSamples * tmp * T;
-                
+            col += res.albedo * density * transmittance;
+
             //Light scattering
             #ifdef LIGHT_POSITION
-            float Tl = 1.0;
+            float transmittanceLight = 1.0;
             for (int j = 0; j < nbSampleLight; j++) {
-                float densityLight = RAYMARCH_MAP_FNC( pos + sun_direction * float(j) * tstepl ).sdf;
-                if (densityLight>0.)
-                    Tl *= 1. - densityLight * absorption/fSamples;
-                if (Tl <= 0.01)
-                    break;
+                Material resLight = RAYMARCH_MAP_FNC( pos + sun_direction * float(j) * tstepl );
+                float distLight = resLight.sdf;
+                if (distLight > 0.0) {
+                    float densityLight = saturate(distLight * mediumDensity);
+                    transmittanceLight *= 1.0 - densityLight;
+                }
             }
-            col += vec4(LIGHT_COLOR * 80. * tmp * T * Tl, 1.0);
+            col += vec4(LIGHT_COLOR, 1.0) * LIGHT_INTENSITY * dist / fSamples * transmittance * transmittanceLight;
             #endif
         }
         pos += rayDirection * tstep;
