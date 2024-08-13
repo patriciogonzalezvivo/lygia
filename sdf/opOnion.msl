@@ -1,0 +1,15 @@
+/*
+contributors:  Inigo Quiles
+description: onion operation of one SDFs 
+use: <float> opOnion( <float> d, <float> h )
+*/
+
+#ifndef FNC_OPONION
+#define FNC_OPONION
+
+float opOnion( float d, float h ) {
+    return abs(d)-h;
+}
+
+#endif
+

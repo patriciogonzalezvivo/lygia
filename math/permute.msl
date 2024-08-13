@@ -1,0 +1,19 @@
+#include "mod289.msl"
+
+/*
+contributors: [Stefan Gustavson, Ian McEwan]
+description: permute
+use: <float|float2|float3|float4> permute(<float|float2|float3|float4> x)
+examples:
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/math_functions.frag
+*/
+
+#ifndef FNC_PERMUTE
+#define FNC_PERMUTE
+
+float permute(const float v) { return mod289(((v * 34.0) + 1.0) * v); }
+float2 permute(const float2 v) { return mod289(((v * 34.0) + 1.0) * v); }
+float3 permute(const float3 v) { return mod289(((v * 34.0) + 1.0) * v); }
+float4 permute(const float4 v) { return mod289(((v * 34.0) + 1.0) * v); }
+
+#endif

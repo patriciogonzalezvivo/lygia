@@ -1,0 +1,30 @@
+/*
+contributors: Johan Ismael
+description: Similar to step but for an interval instead of a threshold. Returns 1 is x is between left and right, 0 otherwise
+use: <float> within(<float> _min, <float|float2|float3|float4> maxVal, <float|float2|float3|float4> x)
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
+
+#ifndef FNC_WITHIN
+#define FNC_WITHIN
+float within(float x, float _min, float _max) {
+    return step(_min, x) * (1. - step(_max, x));
+}
+
+float within(float2 x, float2 _min, float2 _max) {
+    float2 rta = step(_min, x) * (1. - step(_max, x));
+    return rta.x * rta.y;
+}
+
+float within(float3 x, float3 _min, float3 _max) {
+    float3 rta = step(_min, x) * (1. - step(_max, x));
+    return rta.x * rta.y * rta.z;
+}
+
+float within(float4 x, float4 _min, float4 _max) {
+    float4 rta = step(_min, x) * (1. - step(_max, x));
+    return rta.x * rta.y * rta.z * rta.w;
+}
+#endif

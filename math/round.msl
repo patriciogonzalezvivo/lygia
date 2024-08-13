@@ -1,0 +1,16 @@
+/*
+contributors: Patricio Gonzalez Vivo
+description: round a value to the nearest integer
+use: <float|float2|float3|float4> round(<float|float2|float3|float4> value)
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
+
+#ifndef FNC_ROUND
+#define FNC_ROUND
+float round(float x) { return sign(x)*floor(abs(x)+0.5); }
+float2 round(float2 x) { return sign(x)*floor(abs(x)+0.5); }
+float3 round(float3 x) { return sign(x)*floor(abs(x)+0.5); }
+float4 round(float4 x) { return sign(x)*floor(abs(x)+0.5); }
+#endif
