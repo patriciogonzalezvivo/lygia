@@ -53,6 +53,5 @@
 #include "math/taylorInvSqrt.msl"
 #include "math/toMat4.msl"
 #include "math/translate4d.msl"
-#include "math/transpose.msl"
 #include "math/unpack.msl"
 #include "math/within.msl"
