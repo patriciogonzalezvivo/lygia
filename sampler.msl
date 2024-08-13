@@ -5,8 +5,12 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
-#ifndef SAMPLER_FNC
+
+#ifndef SAMPLER
 #define SAMPLER sampler( min_filter::linear, mag_filter::linear )
+#endif
+
+#ifndef SAMPLER_FNC
 #define SAMPLER_FNC(TEX, UV) TEX.sample(SAMPLER, UV)
 #endif
 
