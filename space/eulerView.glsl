@@ -1,7 +1,7 @@
 /*
 contributors:  Shadi El Hajj
 description: Create a view matrix from camera position and camera rotation (euler angles)
-use: <mat4> lookAtViewMatrix(in <vec3> position, in <vec3> euler)
+use: <mat4> eulerView(in <vec3> position, in <vec3> euler)
 */
 
 #include "../math/rotate3dX.glsl"
@@ -9,10 +9,10 @@ use: <mat4> lookAtViewMatrix(in <vec3> position, in <vec3> euler)
 #include "../math/rotate3dZ.glsl"
 #include "translate.glsl"
 
-#ifndef FNC_VIEWMATRIX
-#define FNC_VIEWMATRIX
+#ifndef FNC_EULERVIEW
+#define FNC_EULERVIEW
 
- mat4 viewMatrix(vec3 position, vec3 euler) {
+ mat4 eulerView(vec3 position, vec3 euler) {
     mat3 rotZ = rotate3dZ(euler.z);
     mat3 rotX = rotate3dX(euler.x);
     mat3 rotY = rotate3dY(euler.y);

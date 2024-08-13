@@ -24,7 +24,7 @@ license:
 
 #include "../math/const.glsl"
 #include "../space/rotate.glsl"
-#include "../space/lookAtViewMatrix.glsl"
+#include "../space/lookAtView.glsl"
 #include "raymarch/render.glsl"
 
 #ifndef ENG_RAYMARCHING
@@ -70,7 +70,7 @@ vec4 raymarch( mat4 viewMatrix, vec2 st,
 #endif
 }
 
-vec4 raymarch( mat4 viewMatrix, vec2 st, out Material mat, out float eyeDepth) {
+/*vec4 raymarch( mat4 viewMatrix, vec2 st, out Material mat, out float eyeDepth) {
     float fov = 1.0/tan(RAYMARCH_CAMERA_FOV*DEG2RAD/2.0);
     vec3 camera = vec3(viewMatrix[0][3], viewMatrix[1][3], viewMatrix[2][3]);
     vec3 cameraForward = vec3(viewMatrix[0][2], viewMatrix[1][2], viewMatrix[2][2]);
@@ -92,7 +92,7 @@ vec4 raymarch( mat4 viewMatrix, vec2 st, out Material mat, out float eyeDepth) {
         float sampleDepth = 0.0;
         vec3 sampleWorldPos = vec3(0.0);
         vec3 sampleWorldNormal = vec3(0.0);
-        color += RAYMARCH_RENDER_FNC( camera, rd, cameraForward, mat, sampleDepth);
+        color += RAYMARCH_RENDER_FNC( camera, rd, cameraForward, mat, sampleDepth, sampleWorldPos, sampleWorldNormal);
         eyeDepth += sampleDepth;
         
         // Accumulate material properties
@@ -188,9 +188,11 @@ vec4 raymarch( mat4 viewMatrix, vec2 st, out Material mat, out float eyeDepth) {
     return color * RAYMARCH_MULTISAMPLE_FACTOR;
 #else
     vec3 rd = mat3(viewMatrix) * normalize(vec3((st + offset * pixel)*2.0-1.0, fov));
-    return RAYMARCH_RENDER_FNC( camera, rd, cameraForward, mat, eyeDepth);
+    vec3 sampleWorldPos = vec3(0.0);
+    vec3 sampleWorldNormal = vec3(0.0);
+    return RAYMARCH_RENDER_FNC( camera, rd, cameraForward, mat, eyeDepth, sampleWorldPos, sampleWorldNormal);
 #endif
-}
+}*/
 
 vec4 raymarch(vec3 cameraPosition, vec3 cameraLookAt, vec2 st)
 {
