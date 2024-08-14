@@ -7,7 +7,7 @@ license: MIT License (MIT) Copyright (c) 2015 Jamie Owen
 
 #ifndef FNC_BLENDADD
 #define FNC_BLENDADD
-float blendAdd(in float base, in float blend) { return min(base + blend, 1.); }
-float3  blendAdd(in float3 base, in float3 blend) { return min(base + blend, float3(1.)); }
-float3  blendAdd(in float3 base, in float3 blend, float opacity) { return (blendAdd(base, blend) * opacity + base * (1. - opacity)); }
+float blendAdd(float base, float blend) { return min(base + blend, 1.); }
+float3  blendAdd(float3 base, float3 blend) { return min(base + blend, float3(1.)); }
+float3  blendAdd(float3 base, float3 blend, float opacity) { return (blendAdd(base, blend) * opacity + base * (1. - opacity)); }
 #endif
