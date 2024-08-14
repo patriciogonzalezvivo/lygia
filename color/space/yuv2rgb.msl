@@ -10,13 +10,13 @@ license:
 #ifndef MAT_YUV2RGB
 #define MAT_YUV2RGB
 #ifdef YUV_SDTV
-const mat3 YUV2RGB = mat3(
+constant matrix<float, 3, 3> YUV2RGB = matrix<float, 3, 3>(
     1.0,       1.0,      1.0,
     0.0,      -0.39465,  2.03211,
     1.13983,  -0.58060,  0.0
 );
 #else
-const mat3 YUV2RGB = mat3(
+constant matrix<float, 3, 3> YUV2RGB = matrix<float, 3, 3>(
     1.0,       1.0,      1.0,
     0.0,      -0.21482,  2.12798,
     1.28033,  -0.38059,  0.0
@@ -26,6 +26,6 @@ const mat3 YUV2RGB = mat3(
 
 #ifndef FNC_YUV2RGB
 #define FNC_YUV2RGB
-float3 yuv2rgb(const float3 yuv) { return YUV2RGB * yuv; }
-float4 yuv2rgb(const float4 yuv) { return float4(yuv2rgb(yuv.rgb), yuv.a); }
+float3 yuv2rgb( float3 yuv) { return YUV2RGB * yuv; }
+float4 yuv2rgb( float4 yuv) { return float4(yuv2rgb(yuv.rgb), yuv.a); }
 #endif

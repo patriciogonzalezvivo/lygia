@@ -15,9 +15,9 @@ license:
 #define FNC_SRGB2RGB
 // 1.0 / 12.92 = 0.0773993808
 // 1.0 / (1.0 + 0.055) = 0.947867298578199
-float srgb2rgb(const float v) {   return (v < 0.04045) ? v * 0.0773993808 : pow((v + 0.055) * 0.947867298578199, 2.4); }
-float3 srgb2rgb(const float3 srgb) {  return float3(   srgb2rgb(srgb.r + SRGB_EPSILON),
+float srgb2rgb( float v) {   return (v < 0.04045) ? v * 0.0773993808 : pow((v + 0.055) * 0.947867298578199, 2.4); }
+float3 srgb2rgb( float3 srgb) {  return float3(   srgb2rgb(srgb.r + SRGB_EPSILON),
                                                     srgb2rgb(srgb.g + SRGB_EPSILON),
                                                     srgb2rgb(srgb.b + SRGB_EPSILON)); }
-float4 srgb2rgb(const float4 srgb) {  return float4(   srgb2rgb(srgb.rgb), srgb.a); }
+float4 srgb2rgb( float4 srgb) {  return float4(   srgb2rgb(srgb.rgb), srgb.a); }
 #endif

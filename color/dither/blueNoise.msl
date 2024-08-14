@@ -22,7 +22,8 @@ license:
 */
 
 #ifndef DITHER_BLUENOISE_COORD
-#define DITHER_BLUENOISE_COORD gl_FragCoord.xy
+#define DITHER_BLUENOISE_COORD [[position]].xy
+
 #endif
 
 #ifdef DITHER_TIME

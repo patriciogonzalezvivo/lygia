@@ -17,8 +17,8 @@ license:
 
 #ifndef FNC_RGB2HCY
 #define FNC_RGB2HCY
-float3 rgb2hcy(const float3 rgb) {
-    const float3 HCYwts = float3(0.299, 0.587, 0.114);
+float3 rgb2hcy( float3 rgb) {
+    constant float3 HCYwts = float3(0.299, 0.587, 0.114);
     // Corrected by David Schaeffer
     float3 HCV = rgb2hcv(rgb);
     float Y = dot(rgb, HCYwts);

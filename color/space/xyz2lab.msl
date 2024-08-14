@@ -9,7 +9,7 @@ license:
 
 #ifndef FNC_XYZ2LAB
 #define FNC_XYZ2LAB
-float3 xyz2lab(const float3 c) {
+float3 xyz2lab( float3 c) {
     float3 n = c / float3(95.047, 100.0, 108.883);
     float3 c0 = pow(n, float3(1.0 / 3.0));
     float3 c1 = (7.787 * n) + (16.0 / 116.0);
@@ -19,5 +19,5 @@ float3 xyz2lab(const float3 c) {
                 200.0 * (v.y - v.z));
 }
 
-float4 xyz2lab(const float4 c) { return float4(xyz2lab(c.xyz), c.w); }
+float4 xyz2lab( float4 c) { return float4(xyz2lab(c.xyz), c.w); }
 #endif

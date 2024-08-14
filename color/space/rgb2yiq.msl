@@ -9,7 +9,7 @@ license:
 
 #ifndef MAT_RGB2YIQ
 #define MAT_RGB2YIQ
-const mat3 RGB2YIQ = mat3(
+constant matrix<float, 3, 3> RGB2YIQ = matrix<float, 3, 3>(
     0.300,  0.5900,  0.1100, 
     0.599, -0.2773, -0.3217, 
     0.213, -0.5251,  0.3121);
@@ -17,6 +17,6 @@ const mat3 RGB2YIQ = mat3(
 
 #ifndef FNC_RGB2YIQ
 #define FNC_RGB2YIQ
-float3 rgb2yiq(const float3 rgb) { return RGB2YIQ * rgb; }
-float4 rgb2yiq(const float4 rgb) { return float4(rgb2yiq(rgb.rgb), rgb.a); }
+float3 rgb2yiq( float3 rgb) { return RGB2YIQ * rgb; }
+float4 rgb2yiq( float4 rgb) { return float4(rgb2yiq(rgb.rgb), rgb.a); }
 #endif

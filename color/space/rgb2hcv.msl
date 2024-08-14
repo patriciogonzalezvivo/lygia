@@ -13,7 +13,7 @@ license:
 
 #ifndef FNC_RGB2HCV
 #define FNC_RGB2HCV
-float3 rgb2hcv(const float3 rgb) {
+float3 rgb2hcv( float3 rgb) {
     float4 P = (rgb.g < rgb.b) ? float4(rgb.bg, -1.0, 2.0/3.0) : float4(rgb.gb, 0.0, -1.0/3.0);
     float4 Q = (rgb.r < P.x) ? float4(P.xyw, rgb.r) : float4(rgb.r, P.yzx);
     float C = Q.x - min(Q.w, Q.y);

@@ -34,7 +34,7 @@ description: Include all available color spaces conversions
 #include "space/rgb2srgb.msl"
 
 // Wavelength
-#include "space/w2rgb.msl"
+//#include "space/w2rgb.msl"
 
 // XYZ
 #include "space/rgb2xyz.msl"

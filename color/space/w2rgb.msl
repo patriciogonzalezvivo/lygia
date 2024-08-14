@@ -14,7 +14,7 @@ license:
 #ifndef FNC_W2RGB
 #define FNC_W2RGB
 
-float3 w2rgb(const float w) {
+float3 w2rgb( float w) {
 
 #if defined( W2RGB_FNC )
     float x = saturate((w - 400.0) * 0.00333333333);

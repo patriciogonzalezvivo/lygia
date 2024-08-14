@@ -13,7 +13,7 @@ license:
 
 #ifndef FNC_GAMMA2LINEAR
 #define FNC_GAMMA2LINEAR
-float gamma2linear(const float v) {
+float gamma2linear( float v) {
 #ifdef GAMMA
     return pow(v, GAMMA);
 #else
@@ -22,7 +22,7 @@ float gamma2linear(const float v) {
 #endif
 }
 
-float3 gamma2linear(const float3 v) {
+float3 gamma2linear( float3 v) {
 #ifdef GAMMA
     return pow(v, float3(GAMMA));
 #else
@@ -31,7 +31,7 @@ float3 gamma2linear(const float3 v) {
 #endif
 }
 
-float4 gamma2linear(const float4 v) {
+float4 gamma2linear( float4 v) {
     return float4(gamma2linear(v.rgb), v.a);
 }
 #endif

@@ -3,7 +3,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: 'Converts a XYZ color to sRGB. From http://www.brucelindbloom.com/index.html?Eqn_RGB_XYZ_Matrix.html'
+description: 'Converts a XYZ color to sRGB. From http://www.brucelindbloom.com/index.html?Eqn_RGB_XYZ_matrix<float, 3, 3>.html'
 use: xyz2srgb(<float3|float4> color)
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
@@ -12,6 +12,6 @@ license:
 
 #ifndef FNC_XYZ2SRGB
 #define FNC_XYZ2SRGB
-float3 xyz2srgb(const float3 xyz) { return rgb2srgb(xyz2rgb(xyz)); }
-float4 xyz2srgb(const float4 xyz) { return float4(xyz2srgb(xyz.rgb), xyz.a); }
+float3 xyz2srgb( float3 xyz) { return rgb2srgb(xyz2rgb(xyz)); }
+float4 xyz2srgb( float4 xyz) { return float4(xyz2srgb(xyz.rgb), xyz.a); }
 #endif

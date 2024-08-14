@@ -9,13 +9,13 @@ license:
 
 #ifndef MAT_YIQ2RGB
 #define MAT_YIQ2RGB
-const mat3 YIQ2RGB = mat3(  1.0,  0.9469,  0.6235, 
+constant matrix<float, 3, 3> YIQ2RGB = matrix<float, 3, 3>(  1.0,  0.9469,  0.6235, 
                             1.0, -0.2747, -0.6357, 
                             1.0, -1.1085,  1.7020 );
 #endif
 
 #ifndef FNC_YIQ2RGB
 #define FNC_YIQ2RGB
-float3 yiq2rgb(const float3 yiq) { return YIQ2RGB * yiq; }
-float4 yiq2rgb(const float4 yiq) { return float4(yiq2rgb(yiq.rgb), yiq.a); }
+float3 yiq2rgb( float3 yiq) { return YIQ2RGB * yiq; }
+float4 yiq2rgb( float4 yiq) { return float4(yiq2rgb(yiq.rgb), yiq.a); }
 #endif

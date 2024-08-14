@@ -15,7 +15,7 @@ license:
 */
 
 #ifndef DITHER_SHIFT_COORD
-#define DITHER_SHIFT_COORD gl_FragCoord.xy
+#define DITHER_SHIFT_COORD [[position]].xy
 #endif
 
 #ifdef DITHER_TIME
