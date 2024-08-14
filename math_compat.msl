@@ -1,8 +1,6 @@
-
-
 #ifndef METAL_COMPAT_FUNCS
+#define METAL_COMPAT_FUNCS
 
-#define METAL_COMPAT_FUNCS 1
 // Scalar version of the mod function
 inline float mod(float x, float y) {
     return x - y * floor(x / y);

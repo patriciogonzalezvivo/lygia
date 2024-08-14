@@ -7,15 +7,15 @@ license: MIT License (MIT) Copyright (c) 2015 Jamie Owen
 
 #ifndef FNC_BLENDSUBTRACT
 #define FNC_BLENDSUBTRACT
-float blendSubtract(in float base, in float blend) {
+float blendSubtract(float base, float blend) {
     return max(base + blend - 1., 0.);
 }
 
-float3 blendSubtract(in float3 base, in float3 blend) {
+float3 blendSubtract(float3 base, float3 blend) {
     return max(base + blend - float3(1.), float3(0.));
 }
 
-float3 blendSubtract(in float3 base, in float3 blend, in float opacity) {
+float3 blendSubtract(float3 base, float3 blend, float opacity) {
     return (blendSubtract(base, blend) * opacity + base * (1. - opacity));
 }
 #endif
