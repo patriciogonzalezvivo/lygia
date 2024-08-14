@@ -11,9 +11,14 @@ use: <vec4> raymarchDefaultRender( in <vec3> rayOriging, in <vec3> rayDirection,
     out <vec3> eyeDepth, out <vec3> worldPosition, out <vec3> worldNormal ) 
 options:
     - RAYMARCH_BACKGROUND: vec3(0.0)
+    - RAYMARCH_RETRIVE: default 0. 0: nothing, 1: material, 2: world position and normal
 examples:
     - /shaders/lighting_raymarching.frag
 */
+
+#ifndef RAYMARCH_RETRIVE 
+#define RAYMARCH_RETRIVE 0
+#endif
 
 #ifndef RAYMARCH_BACKGROUND
 #define RAYMARCH_BACKGROUND vec3(0.0, 0.0, 0.0)
@@ -22,11 +27,25 @@ examples:
 #ifndef FNC_RAYMARCH_DEFAULT
 #define FNC_RAYMARCH_DEFAULT
 
-vec4 raymarchDefaultRender(
-    in vec3 rayOrigin, in vec3 rayDirection, vec3 cameraForward,
-    out float eyeDepth, out vec3 worldPos, out vec3 worldNormal ) { 
+vec4 raymarchDefaultRender( in vec3 rayOrigin, in vec3 rayDirection, vec3 cameraForward
+                            ,out float eyeDepth
+#if RAYMARCH_RETRIVE == 1
+                            ,out Material res
+#elif RAYMARCH_RETRIVE == 2
+                            ,out vec3 worldPos, out vec3 worldNormal 
+#endif
+    ) { 
 
-    Material res = raymarchCast(rayOrigin, rayDirection);
+#if RAYMARCH_RETRIVE != 2
+    vec3 worldPos, worldNormal;
+#endif
+
+#if RAYMARCH_RETRIVE != 1
+    Material res;
+#endif
+
+
+    res = raymarchCast(rayOrigin, rayDirection);
     float t = res.sdf;
 
     worldPos = rayOrigin + t * rayDirection;
@@ -36,30 +55,6 @@ vec4 raymarchDefaultRender(
     if (res.valid) {
         res.position = worldPos;
         res.normal = worldNormal;
-        res.V = -rayDirection;
-        res.ambientOcclusion = raymarchAO(res.position, res.normal);
-        color = RAYMARCH_SHADING_FNC(res);
-    }
-    
-    color.rgb = raymarchFog(color.rgb, t, rayOrigin, rayDirection);
-
-    // Eye-space depth. See https://www.shadertoy.com/view/4tByz3
-    eyeDepth = t * dot(rayDirection, cameraForward);
-
-    return color;
-}
-
-vec4 raymarchDefaultRender(
-    in vec3 rayOrigin, in vec3 rayDirection, vec3 cameraForward,
-    out Material res, out float eyeDepth) { 
-
-    res = raymarchCast(rayOrigin, rayDirection);
-    float t = res.sdf;
-
-    vec4 color = vec4(RAYMARCH_BACKGROUND, 0.0);
-    if (res.valid) {
-        res.position = rayOrigin + t * rayDirection;
-        res.normal = raymarchNormal( res.position );
         res.ambientOcclusion = raymarchAO(res.position, res.normal);
         res.V = -rayDirection;
         color = RAYMARCH_SHADING_FNC(res);
