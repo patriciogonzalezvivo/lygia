@@ -82,8 +82,8 @@ examples:
 #define RAYMARCH_GLASS_MAP_MATERIAL rgb
 #endif
 
-#ifndef FNC_RAYMARCHGLASS
-#define FNC_RAYMARCHGLASS
+#ifndef FNC_RAYMARCH_GLASS
+#define FNC_RAYMARCH_GLASS
 RAYMARCH_MAP_TYPE raymarchGlassMarching(in vec3 ro, in vec3 rd) {
     float tmin = RAYMARCH_GLASS_MIN_DIST;
     float tmax = RAYMARCH_GLASS_MAX_DIST;
@@ -172,9 +172,9 @@ vec3 raymarchDefaultGlass(in vec3 ray, in vec3 pos, in float ior, in float rough
             
             if (enableReflection) {
                 float fresnelVal = pow(1.+dot(ray, nEnter), reflection);
-                return mix(res, color, saturate(fresnelVal));
+                return vec4(mix(res, color, saturate(fresnelVal)), 1.0);
             } else {
-                return res;
+                return vec4(res, 1.0);
             }
         } else {
             rdOut = refract(rdIn, nExit, ior);
@@ -190,18 +190,18 @@ vec3 raymarchDefaultGlass(in vec3 ray, in vec3 pos, in float ior, in float rough
 
             if (enableReflection) {
                 float fresnelVal = pow(1.+dot(ray, nEnter), reflection);
-                return mix(res, color, saturate(fresnelVal));
+                return vec4(mix(res, color, saturate(fresnelVal)), 1.0);
             } else {
-                return res;
+                return vec4(res, 1.0);
             }
         }
     } else {
-        return envMap(ray, 0.).rgb;
+        return vec4(envMap(ray, 0.).rgb, 1.0);
     }
 }
 #endif
 
-vec3 raymarchDefaultGlass(in vec3 ray, in vec3 pos, in float ior, in float roughness) {
+vec4 raymarchDefaultGlass(in vec3 ray, in vec3 pos, in float ior, in float roughness) {
     vec3 color = vec3(0.);
 
     RAYMARCH_MAP_TYPE marchOutside = raymarchGlassMarching(pos,ray); // Outside of the object
@@ -268,9 +268,9 @@ vec3 raymarchDefaultGlass(in vec3 ray, in vec3 pos, in float ior, in float rough
         
         #ifdef RAYMARCH_GLASS_ENABLE_REFLECTION
             float fresnelVal = pow(1.+dot(ray, nEnter), RAYMARCH_GLASS_REFLECTION_EFFECT);
-            return mix(res, color, saturate(fresnelVal));
+            return vec4(mix(res, color, saturate(fresnelVal)), 1.);
         #else
-            return res;
+            return vec4(res, 1.0);
         #endif
     #else
         rdOut = refract(rdIn, nExit, ior);
@@ -286,17 +286,17 @@ vec3 raymarchDefaultGlass(in vec3 ray, in vec3 pos, in float ior, in float rough
 
         #ifdef RAYMARCH_GLASS_ENABLE_REFLECTION
             float fresnelVal = pow(1.+dot(ray, nEnter), RAYMARCH_GLASS_REFLECTION_EFFECT);
-            return mix(res, color, saturate(fresnelVal));
+            return vec4(mix(res, color, saturate(fresnelVal)), 1.0);
         #else
-            return res;
+            return vec4(res, 1.0);
         #endif
     #endif
     } else {
-        return envMap(ray, 0.).rgb;
+        return vec4(envMap(ray, 0.).rgb, 1.0);
     }
 }
 
-vec3 raymarchGlass(in vec3 ray, in vec3 pos, in float ior, in float roughness) {
+vec4 raymarchGlass(in vec3 ray, in vec3 pos, in float ior, in float roughness) {
     return RAYMARCH_GLASS_FNC(ray, pos, ior, roughness);
 }
 #endif

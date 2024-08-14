@@ -1,0 +1,43 @@
+#include "../math/const.msl"
+#include "rotate.msl"
+#include "sqTile.msl"
+
+/*
+contributors: Patricio Gonzalez Vivo
+description: 'Rotate tiles (a squared grid pattern) by 45 degrees'
+use:
+    - <float4> windmillTile(<float4> tiles[, <float> fullturn = TAU])
+    - <float2> windmillTile(<float2> st [, <float|float2> scale])
+examples:
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/draw_tiles.frag
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
+
+#ifndef FNC_WINDMILLTILE
+#define FNC_WINDMILLTILE
+float4 windmillTile(float4 t, float turn) {
+    float a = ( abs(mod(t.z, 2.0)-
+                    mod(t.w, 2.0))+
+                mod(t.w, 2.0) * 2.0)*
+                0.25;
+    return float4(rotate(t.xy, a * turn), t.zw);
+}
+
+float4 windmillTile(float4 t) {
+    return windmillTile(t, TAU);
+}
+
+float4 windmillTile(float2 v) {
+    return windmillTile(sqTile(v));
+}
+
+float4 windmillTile(float2 v, float s) {
+    return windmillTile(v * s);
+}
+
+float4 windmillTile(float2 v, float2 s) {
+    return windmillTile(v * s);
+}
+#endif

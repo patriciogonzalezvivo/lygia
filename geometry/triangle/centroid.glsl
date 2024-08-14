@@ -1,4 +1,4 @@
-#include "triangle.hlsl"
+#include "triangle.glsl"
 
 /*
 contributors: Patricio Gonzalez Vivo

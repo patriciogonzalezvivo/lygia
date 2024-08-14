@@ -1,52 +1,67 @@
 #include "cast.hlsl"
 #include "ao.hlsl"
 #include "normal.hlsl"
-#include "softShadow.hlsl"
-#include "material.hlsl"
+#include "shading.hlsl"
+#include "fog.hlsl"
 
 /*
 contributors:  Inigo Quiles
 description: Default raymarching renderer
-use: <float4> raymarchDefaultRender( in <float3> ro, in <float3> rd ) 
+use: 
+    - <float4> raymarchDefaultRender( in <float3> rayOriging, in <float3> rayDirection, in <float3> cameraForward)
+    - <float4> raymarchDefaultRender( in <float3> rayOriging, in <float3> rayDirection, in <float3> cameraForward, out <float> eyeDepth )
+    - <float4> raymarchDefaultRender( in <float3> rayOriging, in <float3> rayDirection, in <float3> cameraForward, out <float> eyeDepth, out <Material> res )
+    - <float4> raymarchDefaultRender( in <float3> rayOriging, in <float3> rayDirection, in <float3> cameraForward, out <float3> eyeDepth, out <float3> worldPosition, out <float3> worldNormal ) 
 options:
-    - LIGHT_COLOR: float3(0.5) or u_lightColor in glslViewer
-    - LIGHT_POSITION: float3(0.0, 10.0, -50.0) or u_light in GlslViewer
-    - LIGHT_DIRECTION;
-    - RAYMARCH_BACKGROUND: float3(0.0)
-    - RAYMARCH_AMBIENT: float3(1.0)
-    - RAYMARCH_MATERIAL_FNC raymarchDefaultMaterial
+    - RAYMARCH_BACKGROUND: float3(0.0, 0.0, 0.0)
+    - RAYMARCH_RETURN:  0. nothing (default), 1. depth;  2. depth and material
 */
 
-#ifndef RAYMARCH_MAP_DISTANCE
-#define RAYMARCH_MAP_DISTANCE a
+#ifndef RAYMARCH_RETURN 
+#define RAYMARCH_RETURN 0
 #endif
 
-#ifndef RAYMARCH_MAP_MATERIAL
-#define RAYMARCH_MAP_MATERIAL rgb
+#ifndef RAYMARCH_BACKGROUND
+#define RAYMARCH_BACKGROUND float3(0.0, 0.0, 0.0)
 #endif
 
-#ifndef RAYMARCH_MAP_MATERIAL_TYPE
-#define RAYMARCH_MAP_MATERIAL_TYPE float3
+#ifndef FNC_RAYMARCH_DEFAULT
+#define FNC_RAYMARCH_DEFAULT
+
+float4 raymarchDefaultRender(in float3 rayOrigin, in float3 rayDirection, float3 cameraForward,
+#if RAYMARCH_RETURN != 0
+                            ,out float eyeDepth
+#endif
+#if RAYMARCH_RETURN == 2
+                            ,out Material res
+#endif
+    ) { 
+
+#if RAYMARCH_RETURN != 2
+    Material res;
 #endif
 
-#ifndef RAYMARCHCAST_TYPE
-#define RAYMARCHCAST_TYPE float4
-#endif
+    res = raymarchCast(rayOrigin, rayDirection);
+    float t = res.sdf;
+    float3 worldPos = rayOrigin + t * rayDirection;
+    float3 worldNormal = raymarchNormal( worldPos );
 
-#ifndef FNC_RAYMARCHDEFAULT
-#define FNC_RAYMARCHDEFAULT
+    float4 color = float4(RAYMARCH_BACKGROUND, 0.0);
+    if (res.valid) {
+        res.position = worldPos;
+        res.normal = worldNormal;
+        es.ambientOcclusion = raymarchAO(res.position, res.normal);
+        res.V = -rayDirection;
+        color = RAYMARCH_SHADING_FNC(res);
+    }
+    color.rgb = raymarchFog(color.rgb, t, rayOrigin, rayDirection);
 
-float4 raymarchDefaultRender( in float3 ray_origin, in float3 ray_direction ) { 
-    float3 col = float3(0.0, 0.0, 0.0);
-    
-    RAYMARCHCAST_TYPE res = raymarchCast(ray_origin, ray_direction);
-    float t = res.RAYMARCH_MAP_DISTANCE;
+    #if RAYMARCH_RETURN != 0
+    // Eye-space depth. See https://www.shadertoy.com/view/4tByz3
+    eyeDepth = t * dot(rayDirection, cameraForward);
+    #endif
 
-    float3 pos = ray_origin + t * ray_direction;
-    float3 nor = raymarchNormal( pos );
-    col = raymarchMaterial(ray_direction, pos, nor, res.RAYMARCH_MAP_MATERIAL);
-
-    return float4( saturate(col), t );
+    return color;
 }
 
 #endif

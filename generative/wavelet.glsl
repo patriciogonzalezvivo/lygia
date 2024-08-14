@@ -5,6 +5,8 @@
 contributors: Martijn Steinrucken
 description: Wavelet noise https://www.shadertoy.com/view/wsBfzK
 use: <vec2> worley(<vec2|vec3> pos)
+options:
+    - WAVELET_VORTICITY: amount of vorticity, i.e. spinning behaviour. With 0.0 (none) being the default, values may exceed 1.0.
 examples:
     - /shaders/generative_worley.frag
 license:

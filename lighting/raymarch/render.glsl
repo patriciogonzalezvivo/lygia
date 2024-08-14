@@ -1,55 +1,71 @@
 #include "cast.glsl"
 #include "ao.glsl"
 #include "normal.glsl"
-#include "softShadow.glsl"
-#include "material.glsl"
-#include "../../math/saturate.glsl"
+#include "shading.glsl"
+#include "fog.glsl"
 
 /*
 contributors:  Inigo Quiles
 description: Default raymarching renderer
-use: <vec4> raymarchDefaultRender( in <vec3> ro, in <vec3> rd ) 
+use:
+    - <vec4> raymarchDefaultRender( in <vec3> rayOriging, in <vec3> rayDirection, in <vec3> cameraForward)
+    - <vec4> raymarchDefaultRender( in <vec3> rayOriging, in <vec3> rayDirection, in <vec3> cameraForward, out <float> eyeDepth )
+    - <vec4> raymarchDefaultRender( in <vec3> rayOriging, in <vec3> rayDirection, in <vec3> cameraForward, out <float> eyeDepth, out <Material> res )
+    - <vec4> raymarchDefaultRender( in <vec3> rayOriging, in <vec3> rayDirection, in <vec3> cameraForward, out <vec3> eyeDepth, out <vec3> worldPosition, out <vec3> worldNormal ) 
 options:
-    - LIGHT_COLOR: vec3(0.5) or u_lightColor in GlslViewer
-    - LIGHT_POSITION: vec3(0.0, 10.0, -50.0) or u_light in GlslViewer
-    - LIGHT_DIRECTION;
     - RAYMARCH_BACKGROUND: vec3(0.0)
-    - RAYMARCH_AMBIENT: vec3(1.0)
-    - RAYMARCH_MATERIAL_FNC raymarchDefaultMaterial
+    - RAYMARCH_RETURN:  0. nothing (default), 1. depth;  2. depth and material
 examples:
     - /shaders/lighting_raymarching.frag
 */
 
-#ifndef RAYMARCH_MAP_DISTANCE
-#define RAYMARCH_MAP_DISTANCE a
+#ifndef RAYMARCH_RETURN 
+#define RAYMARCH_RETURN 0
 #endif
 
-#ifndef RAYMARCH_MAP_MATERIAL
-#define RAYMARCH_MAP_MATERIAL rgb
+#ifndef RAYMARCH_BACKGROUND
+#define RAYMARCH_BACKGROUND vec3(0.0, 0.0, 0.0)
 #endif
 
-#ifndef RAYMARCH_MAP_MATERIAL_TYPE
-#define RAYMARCH_MAP_MATERIAL_TYPE vec3
+#ifndef FNC_RAYMARCH_DEFAULT
+#define FNC_RAYMARCH_DEFAULT
+
+vec4 raymarchDefaultRender( in vec3 rayOrigin, in vec3 rayDirection, vec3 cameraForward
+#if RAYMARCH_RETURN >= 1
+                            ,out float eyeDepth
+#endif
+#if RAYMARCH_RETURN == 2
+                            ,out Material res
+#endif
+    ) { 
+
+#if RAYMARCH_RETURN != 2
+    Material res;
 #endif
 
-#ifndef RAYMARCHCAST_TYPE
-#define RAYMARCHCAST_TYPE vec4
-#endif
+    res = raymarchCast(rayOrigin, rayDirection);
+    float t = res.sdf;
+    vec3 worldPos = rayOrigin + t * rayDirection;
+    vec3 worldNormal = raymarchNormal( worldPos );
 
-#ifndef FNC_RAYMARCHDEFAULT
-#define FNC_RAYMARCHDEFAULT
-
-vec4 raymarchDefaultRender( in vec3 ray_origin, in vec3 ray_direction ) { 
-    vec3 col = vec3(0.0);
+    vec4 color = vec4(RAYMARCH_BACKGROUND, 0.0);
+    if (res.valid) {
+        res.position = worldPos;
+        res.normal = worldNormal;
+        res.ambientOcclusion = raymarchAO(res.position, res.normal);
+        res.V = -rayDirection;
+        color = RAYMARCH_SHADING_FNC(res);
+    }
     
-    RAYMARCHCAST_TYPE res = raymarchCast(ray_origin, ray_direction);
-    float t = res.RAYMARCH_MAP_DISTANCE;
+    color.rgb = raymarchFog(color.rgb, t, rayOrigin, rayDirection);
 
-    vec3 pos = ray_origin + t * ray_direction;
-    vec3 nor = raymarchNormal( pos );
-    col = raymarchMaterial(ray_direction, pos, nor, res.RAYMARCH_MAP_MATERIAL);
+    #if RAYMARCH_RETURN >= 1
+    eyeDepth = t;
+    // Eye-space depth. See https://www.shadertoy.com/view/4tByz3
+    // eyeDepth = t * dot(rayDirection, cameraForward);
+    #endif
 
-    return vec4( saturate(col), t );
+    return color;
 }
 
 #endif

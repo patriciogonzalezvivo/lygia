@@ -1,0 +1,17 @@
+/*
+contributors: Inigo Quiles
+description: quartic polynomial https://iquilezles.org/articles/smoothsteps/
+use: <float|float2|float3|float4> quartic(<float|float2|float3|float4> value);
+examples:
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/math_functions.frag
+*/
+
+#ifndef FNC_QUARTIC
+#define FNC_QUARTIC 
+
+float quartic(const float v) { return v*v*(2.0-v*v); }
+float2  quartic(const float2 v)  { return v*v*(2.0-v*v); }
+float3  quartic(const float3 v)  { return v*v*(2.0-v*v); }
+float4  quartic(const float4 v)  { return v*v*(2.0-v*v); }
+
+#endif

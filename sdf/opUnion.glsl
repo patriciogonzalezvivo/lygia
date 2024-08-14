@@ -1,4 +1,5 @@
 #include "../math/saturate.glsl"
+#include "../lighting/material.glsl"
 
 /*
 contributors:  Inigo Quiles
@@ -10,7 +11,14 @@ use: <float> opUnion( in <float|vec4> d1, in <float|vec4> d2 [, <float> smooth_f
 #define FNC_OPUNION
 
 float opUnion( float d1, float d2 ) { return min(d1, d2); }
-vec4  opUnion( vec4 d1, vec4 d2 ) { return (d1.a < d2.a) ? d1 : d2; }
+
+Material opUnion( Material d1, Material d2 ) {
+    if (d1.sdf < d2.sdf) {
+        return d1;
+    } else {
+        return d2;
+    }
+}
 
 // Soft union
 float opUnion( float d1, float d2, float k ) {

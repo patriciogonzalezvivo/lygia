@@ -1,3 +1,4 @@
+#include "../color/tonemap.hlsl"
 #include "material.hlsl"
 #include "fresnelReflection.hlsl"
 #include "light/point.hlsl"
@@ -72,7 +73,9 @@ float4 pbrClearCoat(const Material _mat)
 
     // Cached
     Material M = _mat;
-    M.V = normalize(CAMERA_POSITION - M.position); // View
+    if (M.V.x == 0.0 && M.V.y == 0.0 && M.V.z == 0.0) {
+        M.V         = normalize(CAMERA_POSITION - M.position);  // View
+    }
     M.NoV = dot(M.normal, M.V); // Normal . View
     M.R = reflection(M.V, M.normal, M.roughness); // Reflection
 
@@ -90,10 +93,15 @@ float4 pbrClearCoat(const Material _mat)
 
     // Ambient Occlusion
     // ------------------------
-    float ssao = 1.0;
+    float ao = 1.0;
+    
+    #if defined(FNC_RAYMARCH_AO)
+    ao = raymarchAO(M.position, M.normal);
+    #endif
+
 // #if defined(FNC_SSAO) && defined(SCENE_DEPTH) && defined(RESOLUTION) && defined(CAMERA_NEAR_CLIP) && defined(CAMERA_FAR_CLIP)
 //     float2 pixel = 1.0/RESOLUTION;
-//     ssao = ssao(SCENE_DEPTH, gl_FragCoord.xy*pixel, pixel, 1.);
+//     ao = ssao(SCENE_DEPTH, gl_FragCoord.xy*pixel, pixel, 1.);
 // #endif 
 
     // Global Ilumination ( mage Based Lighting )
@@ -105,7 +113,7 @@ float4 pbrClearCoat(const Material _mat)
     //                         saturate(-1.1 + NoV + M.metallic) *          // Fresnel
     //                         (M.metallic + (.95 - M.roughness) * 2.0); // make smaller highlights brighter
 
-    float diffAO = min(M.ambientOcclusion, ssao);
+    float diffAO = min(M.ambientOcclusion, ao);
     float specAO = specularAO(M, diffAO);
 
     float3 Fr = float3(0.0, 0.0, 0.0);
