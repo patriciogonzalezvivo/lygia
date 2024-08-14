@@ -1,0 +1,23 @@
+/*
+contributors: Johan Ismael
+description: Map a v between one range to another.
+use: <float|float2|float3|float4> map(<float|float2|float3|float4> v, <float|float2|float3|float4> inMin, <float|float2|float3|float4> inMax, <float|float2|float3|float4> outMin, <float|float2|float3|float4> outMax)
+examples:
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/math_functions.frag
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
+
+#ifndef FNC_MAP
+#define FNC_MAP
+float map(float v, float iMin, float iMax ) { return (v-iMin)/(iMax-iMin); }
+float2 map(float2 v, float2 iMin, float2 iMax ) { return (v-iMin)/(iMax-iMin); }
+float3 map(float3 v, float3 iMin, float3 iMax ) { return (v-iMin)/(iMax-iMin); }
+float4 map(float4 v, float4 iMin, float4 iMax ) { return (v-iMin)/(iMax-iMin); }
+
+float map(float v, float iMin, float iMax, float oMin, float oMax) { return oMin+ (oMax - oMin) * (v - iMin) / (iMax - iMin); }
+float2 map(float2 v, float2 iMin, float2 iMax, float2 oMin, float2 oMax) { return oMin+ (oMax - oMin) * (v - iMin) / (iMax - iMin); }
+float3 map(float3 v, float3 iMin, float3 iMax, float3 oMin, float3 oMax) { return oMin+ (oMax - oMin) * (v - iMin) / (iMax - iMin); }
+float4 map(float4 v, float4 iMin, float4 iMax, float4 oMin, float4 oMax) { return oMin+ (oMax - oMin) * (v - iMin) / (iMax - iMin); }
+#endif

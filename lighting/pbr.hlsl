@@ -50,6 +50,7 @@ options:
     - LIGHT_POSITION: in glslViewer is u_light
     - LIGHT_COLOR in glslViewer is u_lightColor
     - CAMERA_POSITION: in glslViewer is u_camera
+    - RAYMARCH_AO: enabled raymarched ambient occlusion
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
@@ -65,22 +66,29 @@ float4 pbr(const Material _mat) {
 
     // Cached
     Material M = _mat;
-    M.V = normalize(CAMERA_POSITION - M.position); // View
+    if (M.V.x == 0.0 && M.V.y == 0.0 && M.V.z == 0.0) {
+        M.V = normalize(CAMERA_POSITION - M.position); // View
+    }
     M.NoV = dot(M.normal, M.V); // Normal . View
     M.R = reflection(M.V, M.normal, M.roughness); // Reflection
 
     // Ambient Occlusion
     // ------------------------
-    float ssao = 1.0;
+    float ao = 1.0;
+    
+    #if defined(FNC_RAYMARCH_AO)
+    ao = raymarchAO(M.position, M.normal);
+    #endif
+
 // #if defined(FNC_SSAO) && defined(SCENE_DEPTH) && defined(RESOLUTION) && defined(CAMERA_NEAR_CLIP) && defined(CAMERA_FAR_CLIP)
-//     vec2 pixel = 1.0/RESOLUTION;
-//     ssao = ssao(SCENE_DEPTH, gl_FragCoord.xy*pixel, pixel, 1.);
+//     float2 pixel = 1.0/RESOLUTION;
+//     ao = ssao(SCENE_DEPTH, gl_FragCoord.xy*pixel, pixel, 1.);
 // #endif 
 
     // Global Ilumination ( Image Based Lighting )
     // ------------------------
     float3 E = envBRDFApprox(specularColor, M);
-    float diffuseAO = min(M.ambientOcclusion, ssao);
+    float diffuseAO = min(M.ambientOcclusion, ao);
     
     float3 Fr = float3(0.0, 0.0, 0.0);
     Fr = envMap(M) * E;
@@ -90,10 +98,12 @@ float4 pbr(const Material _mat) {
     Fr  *= specularAO(M, diffuseAO);
 
     float3 Fd = diffuseColor;
-    #if defined(UNITY_COMPILER_HLSL)
-    Fd *= ShadeSH9(half4(M.normal,1));
-    #elif defined(SCENE_SH_ARRAY)
+    #if defined(SCENE_SH_ARRAY)
     Fd  *= tonemap( sphericalHarmonics(M.normal) );
+    //#elif defined(UNITY_COMPILER_HLSL)
+    // Fd *= ShadeSH9(half4(M.normal,1));
+    #else
+    Fd *= envMap(M.normal, 1.0);
     #endif
     Fd  *= diffuseAO;
     Fd  *= (1.0 - E);

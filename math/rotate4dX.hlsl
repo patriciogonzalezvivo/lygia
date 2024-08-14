@@ -9,10 +9,12 @@ license:
 
 #ifndef FNC_ROTATE4DX
 #define FNC_ROTATE4DX
-float4x4 rotate4dX(const in float phi){
+float4x4 rotate4dX(const in float r){
+    float c = cos(r);
+    float s = sin(r);
     return float4x4(float4(1.,0.,0.,0),
-                    float4(0.,cos(phi),-sin(phi),0.),
-                    float4(0.,sin(phi),cos(phi),0.),
+                    float4(0.,c,-s,0.),
+                    float4(0.,s,c,0.),
                     float4(0.,0.,0.,1.));
 }
 #endif

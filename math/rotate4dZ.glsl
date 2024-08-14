@@ -10,8 +10,10 @@ license:
 #ifndef FNC_ROTATE4DZ
 #define FNC_ROTATE4DZ
 mat4 rotate4dZ(in float r){
-    return mat4(vec4(cos(r),-sin(r),0.,0),
-                vec4(sin(r),cos(r),0.,0.),
+    float c = cos(r);
+    float s = sin(r);
+    return mat4(vec4(cos(r),sin(r),0.,0),
+                vec4(-sin(r),cos(r),0.,0.),
                 vec4(0.,0.,1.,0.),
                 vec4(0.,0.,0.,1.));
 }

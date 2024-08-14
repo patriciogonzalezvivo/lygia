@@ -1,0 +1,37 @@
+#include "sqTile.msl"
+
+/*
+contributors: Patricio Gonzalez Vivo
+description: 'Brick a squared pattern'
+use:
+    - <float2> brickTile(<float2> st [, <float> scale])
+    - <float4> brickTile(<float4> tiles)
+examples:
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/draw_tiles.frag
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
+
+#ifndef FNC_BRICKTILE
+#define FNC_BRICKTILE
+float4 brickTile(float4 t) {
+    t.x += mod(t.w,2.)*.5;
+    t.z = floor(t.z+t.x);
+    t.x = fract(t.x);
+    return t;
+}
+
+float4 brickTile(float2 st) {
+    return brickTile(sqTile(st));
+}
+
+float4 brickTile(float2 st, float s) {
+    return brickTile(st * s);
+}
+
+float4 brickTile(float2 st, float2 s) {
+    return brickTile(st * s);
+}
+
+#endif

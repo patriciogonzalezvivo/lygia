@@ -11,6 +11,7 @@
 #include "sdf/superShapeSDF.hlsl"
 #include "sdf/triSDF.hlsl"
 #include "sdf/vesicaSDF.hlsl"
+#include "sdf/flowerSDF.hlsl"
 
 // 3D
 #include "sdf/boxFrameSDF.hlsl"
@@ -40,4 +41,5 @@
 #include "sdf/opRevolve.hlsl"
 #include "sdf/opRound.hlsl"
 #include "sdf/opSubtraction.hlsl"
+#include "sdf/opIntersection.hlsl"
 #include "sdf/opUnion.hlsl"

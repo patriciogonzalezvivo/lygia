@@ -1,4 +1,4 @@
-#include "rgb2hcv.glsl"
+#include "rgb2hcv.hlsl"
 
 /*
 contributors: Patricio Gonzalez Vivo

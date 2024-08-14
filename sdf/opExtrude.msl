@@ -1,0 +1,16 @@
+/*
+contributors:  Inigo Quiles
+description: extrude operation of a 2D SDFs into a 3D one
+use: <float> opExtrude( <float3> p, <float> sdf, <float> h )
+*/
+
+#ifndef FNC_OPEXTRUDE
+#define FNC_OPEXTRUDE
+
+float opExtrude( float3 p, float sdf, float h ) {
+    float2 w = float2( sdf, abs(p.z) - h );
+  	return min(max(w.x,w.y),0.0) + length(max(w,0.0));
+}
+
+#endif
+

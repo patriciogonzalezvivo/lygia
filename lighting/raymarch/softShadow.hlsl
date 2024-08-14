@@ -3,49 +3,49 @@
 /*
 contributors:  Inigo Quiles
 description: Calculate soft shadows http://iquilezles.org/www/articles/rmshadows/rmshadows.htm
-use: <float> raymarchSoftshadow( in <float3> ro, in <float3> rd, in <float> tmin, in <float> tmax) 
+use: <float> raymarchSoftshadow( in <float3> ro, in <float3> rd, in <float> tmin, in <float> tmax)
+options:
+    - RAYMARCHSOFTSHADOW_ITERATIONS: shadow quality
+    - RAYMARCH_SHADOW_MIN_DIST: minimum shadow distance
+    - RAYMARCH_SHADOW_MAX_DIST: maximum shadow distance
+    - RAYMARCH_SHADOW_SOLID_ANGLE: light size
 */
 
 #ifndef RAYMARCHSOFTSHADOW_ITERATIONS
-#define RAYMARCHSOFTSHADOW_ITERATIONS 16
+#define RAYMARCHSOFTSHADOW_ITERATIONS 64
 #endif
 
-#ifndef RAYMARCH_MAP_FNC
-#define RAYMARCH_MAP_FNC(POS) raymarchMap(POS)
+#ifndef RAYMARCH_SHADOW_MIN_DIST
+#define RAYMARCH_SHADOW_MIN_DIST 0.01
 #endif
 
-#ifndef RAYMARCH_MAP_DISTANCE
-#define RAYMARCH_MAP_DISTANCE a
+#ifndef RAYMARCH_SHADOW_MAX_DIST
+#define RAYMARCH_SHADOW_MAX_DIST 3.0
 #endif
 
-#ifndef FNC_RAYMARCHSOFTSHADOW
-#define FNC_RAYMARCHSOFTSHADOW
+#ifndef RAYMARCH_SHADOW_SOLID_ANGLE
+#define RAYMARCH_SHADOW_SOLID_ANGLE 0.1
+#endif
 
-float raymarchSoftShadow( float3 ro, float3 rd, in float tmin, in float tmax, float k ) {
+#ifndef FNC_RAYMARCH_SOFTSHADOW
+#define FNC_RAYMARCH_SOFTSHADOW
+
+float raymarchSoftShadow( float3 ro, float3 rd, in float mint, in float maxt, float w ) {
     float res = 1.0;
-    float t = tmin;
-    float ph = 1e20;
-    for (int i = 0; i < RAYMARCHSOFTSHADOW_ITERATIONS; i++) {
-        float h = RAYMARCH_MAP_FNC(ro + rd*t).RAYMARCH_MAP_DISTANCE;
-
-        if (t > tmax)
+    float t = mint;
+    for (int i = 0; i < RAYMARCHSOFTSHADOW_ITERATIONS && t < maxt; i++)
+    {
+        float h = RAYMARCH_MAP_FNC(ro + t * rd).sdf;
+        res = min(res, h / (w * t));
+        t += clamp(h, 0.005, 0.50);
+        if (res < -1.0 || t > maxt)
             break;
-
-        else if (h < 0.001) {
-            res = 0.0;
-            break;
-        }
-
-        float y = h*h/(2.0*ph);
-        float d = sqrt(h*h-y*y);
-        res = min( res, k*d/max(0.0,t-y) );
-        ph = h;
-        t += h;
     }
-    return res;
+    res = max(res, -1.0);
+    return 0.25 * (1.0 + res) * (1.0 + res) * (2.0 - res);
 }
 
-float raymarchSoftShadow( float3 ro, float3 rd, in float tmin, in float tmax) { return raymarchSoftShadow(ro, rd, tmin, tmax, 12.0); }
-float raymarchSoftShadow( float3 ro, float3 rd) { return raymarchSoftShadow(ro, rd, 0.05, 5.0); }
+float raymarchSoftShadow( float3 ro, float3 rd, in float tmin, in float tmax) { return raymarchSoftShadow(ro, rd, RAYMARCH_SHADOW_MIN_DIST, RAYMARCH_SHADOW_MAX_DIST, RAYMARCH_SHADOW_SOLID_ANGLE); }
+float raymarchSoftShadow( float3 ro, float3 rd) { return raymarchSoftShadow(ro, rd, RAYMARCH_SHADOW_MIN_DIST, RAYMARCH_SHADOW_MAX_DIST); }
 
 #endif

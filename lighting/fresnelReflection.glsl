@@ -1,6 +1,7 @@
 #include "fresnel.glsl"
 #include "envMap.glsl"
 #include "../math/const.glsl"
+#include "../lighting/ior.glsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
@@ -29,7 +30,7 @@ vec3 fresnelReflection(const in vec3 R, const in vec3 f0, const in float NoV) {
 
     vec3 reflectColor = vec3(0.0);
     #if defined(FRESNEL_REFLECTION_FNC)
-    reflection = FRESNEL_REFLECTION_FNC(R);
+    reflectColor = FRESNEL_REFLECTION_FNC(R);
     #else
     reflectColor = envMap(R, 1.0, 0.001);
     #endif
@@ -40,7 +41,7 @@ vec3 fresnelReflection(const in vec3 R, const in vec3 f0, const in float NoV) {
 vec3 fresnelReflection(const in vec3 R, const in vec3 Fr) {
     vec3 reflectColor = vec3(0.0);
     #if defined(FRESNEL_REFLECTION_FNC)
-    reflection = FRESNEL_REFLECTION_FNC(R);
+    reflectColor = FRESNEL_REFLECTION_FNC(R);
     #else
     reflectColor = envMap(R, 1.0, 0.001);
     #endif

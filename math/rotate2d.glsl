@@ -12,6 +12,6 @@ license:
 mat2 rotate2d(const in float r){
     float c = cos(r);
     float s = sin(r);
-    return mat2(c, -s, s, c);
+    return mat2(c, s, -s, c);
 }
 #endif

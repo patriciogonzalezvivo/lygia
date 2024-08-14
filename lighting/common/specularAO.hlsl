@@ -1,3 +1,6 @@
+// See section 4.10.2 in Sebastien Lagarde: Moving Frostbite to Physically Based Rendering 3.0
+// https://seblagarde.wordpress.com/wp-content/uploads/2015/07/course_notes_moving_frostbite_to_pbr_v32.pdf
+
 #if !defined(TARGET_MOBILE) && !defined(PLATFORM_RPI) && !defined(PLATFORM_WEBGL)
 #define IBL_SPECULAR_OCCLUSION
 #endif

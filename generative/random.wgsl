@@ -4,8 +4,9 @@ contributors:
     - David Hoskins
     - Inigo Quilez
 description: Pass a value and get some random normalize value between 0 and 1
+notes:
+    - While the GLSL and HLSL versions of this file support a RANDOM_HIGHER_RANGE option, the current implementation has this permanently enabled.
 options:
-    - RANDOM_HIGHER_RANGE: for working with a range over 0 and 1
     - RANDOM_SINLESS: Use sin-less random, which tolerates bigger values before producing pattern. From https://www.shadertoy.com/view/4djSRW
     - RANDOM_SCALE: by default this scale if for number with a big range. For producing good random between 0 and 1 use bigger range
 examples:

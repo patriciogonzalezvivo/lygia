@@ -1,0 +1,136 @@
+#include "../space/scale.msl"
+#include "../color/palette/macbeth.msl"
+#include "../color/palette/spyder.msl"
+#include "../sdf/crossSDF.msl"
+#include "rect.msl"
+#include "stroke.msl"
+
+/*
+contributors: Patricio Gonzalez Vivo
+description: Draw a color checker (Macbeth or Spyder)
+use:
+    - colorChecker(<float2> uv)
+    - colorCheckerMacbeth(<float2> uv)
+    - colorCheckerSpyder(<float2> uv)
+options:
+    - COLORCHECKER_FNC: function to use to draw the color checker
+examples:
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/draw_colorChecker.frag
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
+
+#ifndef COLORCHECKER_FNC
+#define COLORCHECKER_FNC(UV) colorCheckerMacbeth(UV)
+#endif
+
+#ifndef COLOR_CHECKER
+#define COLOR_CHECKER
+
+float4 colorCheckerTile(float2 uv) {
+    float2 st = scale(uv, float2(1.0,1.5)) * float2(6.0, 4.0);
+    return float4(fract(st), floor(st));
+}
+
+float4 colorCheckerMacbeth (float2 uv) {
+    float4 t = colorCheckerTile(float2(uv.x, 1.0-uv.y));
+    int index = 6 * int(t.w) + int(t.z);
+    float3 color = macbeth(index) * 
+                rect(t.xy, 0.8) +
+                fill(crossSDF(uv, 2.), .015) + 
+                saturate(
+                    stroke(rectSDF(uv, float2(1.015, 0.68)), 1., 0.01) -
+                    rect(uv, float2(.966, 1.)) - rect(uv, float2(1.1, .63))
+                );
+    float alpha = rect(uv, float2(1.03,0.69));
+    return float4(saturate(color) * alpha, alpha);
+}
+
+float4 colorCheckerMacbethXYZ(float2 uv) {
+    float4 t = colorCheckerTile(float2(uv.x, 1.0-uv.y));
+    int index = 6 * int(t.w) + int(t.z);
+    float3 xyz = macbethXYZ(index) * 
+                rect(t.xy, 0.8);
+    float alpha = rect(uv, float2(1.03,0.69));
+    return float4(xyz * alpha, alpha);
+}
+
+float4 colorCheckerMacbethLAB(float2 uv) {
+    float4 t = colorCheckerTile(float2(uv.x, 1.0-uv.y));
+    int index = 6 * int(t.w) + int(t.z);
+    float3 lab = macbethLAB(index) * 
+                rect(t.xy, 0.8);
+    float alpha = rect(uv, float2(1.03,0.69));
+    return float4(lab * alpha, alpha);
+}
+
+float4 colorCheckerMacbethLCH(float2 uv) {
+    float4 t = colorCheckerTile(float2(uv.x, 1.0-uv.y));
+    int index = 6 * int(t.w) + int(t.z);
+    float3 lch = macbethLCH(index) *
+                rect(t.xy, 0.8);
+    float alpha = rect(uv, float2(1.03,0.69));
+    return float4(lch * alpha, alpha);
+}
+
+float4 colorCheckerMacbethXYY(float2 uv) {
+    float4 t = colorCheckerTile(float2(uv.x, 1.0-uv.y));
+    int index = 6 * int(t.w) + int(t.z);
+    float3 xyY = macbethXYY(index) *
+        rect(t.xy, 0.8);
+    float alpha = saturate(rect(uv, float2(1.03,0.69)));
+    return float4(xyY, alpha);
+}
+
+float4 colorCheckerSpyderA(float2 uv) {
+    float4 t = colorCheckerTile(uv);
+
+    int index = 6 * int(t.w) + int(t.z);
+    float3 color = spyderA(index) * 
+                rect(t.xy, 0.8) +
+                fill(crossSDF(uv, 2.), .015) +
+                saturate(
+                    stroke(rectSDF(uv, float2(1.015, 0.68)), 1., 0.01) -
+                    rect(uv, float2(.966, 1.)) - rect(uv, float2(1.1, .63))
+                );
+    float alpha = rect(uv, float2(1.03,0.69));
+    return float4(saturate(color) * alpha, alpha);
+}
+
+float4 colorCheckerSpyderALAB(float2 uv) {
+    float4 t = colorCheckerTile(uv);
+    int index = 6 * int(t.w) + int(t.z);
+    float3 color = spyderALAB(index) * 
+                rect(t.xy, 0.8);
+    float alpha = rect(uv, float2(1.03,0.69));
+    return float4(color * alpha, alpha);
+}
+
+float4 colorCheckerSpyderB(float2 uv) {
+    float4 t = colorCheckerTile(float2(uv.x, 1.0-uv.y));
+    int index = 6 * int(t.w) + int(t.z);
+    float3 color = spyderB(index) *
+                rect(t.xy, 0.8) +
+                fill(crossSDF(uv, 2.), .015) +
+                saturate(
+                    stroke(rectSDF(uv, float2(1.015, 0.68)), 1., 0.01) -
+                    rect(uv, float2(.966, 1.)) - rect(uv, float2(1.1, .63))
+                );
+    float alpha = rect(uv, float2(1.03,0.69));
+    return float4(saturate(color) * alpha, alpha);
+}
+
+float4 colorCheckerSpyderBLAB(float2 uv) {
+    float4 t = colorCheckerTile(float2(uv.x, 1.0-uv.y));
+    int index = 6 * int(t.w) + int(t.z);
+    float3 color = spyderBLAB(index) * 
+                rect(t.xy, 0.8);
+    float alpha = rect(uv, float2(1.03,0.69));
+    return float4(color * alpha, alpha);
+}
+
+float4 colorCheckerSpyder(float2 uv) { return colorCheckerSpyderB(uv); }
+float4 colorChecker (float2 uv){ return COLORCHECKER_FNC(uv); }
+
+#endif

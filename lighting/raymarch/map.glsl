@@ -1,3 +1,5 @@
+#include "../material.glsl"
+
 /*
 contributors:  Inigo Quiles
 description: Map of SDF functions to be declare
@@ -7,24 +9,12 @@ examples:
 */
 
 #ifndef RAYMARCH_MAP_FNC
-#define RAYMARCH_MAP_FNC(POS) raymarchMap(POS)
+#define RAYMARCH_MAP_FNC raymarchMap
 #endif
 
-#ifndef RAYMARCH_MAP_TYPE
-#define RAYMARCH_MAP_TYPE vec4
-#endif
+#ifndef FNC_RAYMARCH_MAP
+#define FNC_RAYMARCH_MAP
 
-#ifndef RAYMARCH_MAP_DISTANCE
-#define RAYMARCH_MAP_DISTANCE a
-#endif
-
-#ifndef RAYMARCH_MAP_MATERIAL
-#define RAYMARCH_MAP_MATERIAL rgb
-#endif
-
-#ifndef FNC_RAYMARCHMAP
-#define FNC_RAYMARCHMAP
-
-RAYMARCH_MAP_TYPE RAYMARCH_MAP_FNC( in vec3 pos );
+Material RAYMARCH_MAP_FNC( in vec3 pos );
 
 #endif

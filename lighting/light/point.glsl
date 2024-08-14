@@ -16,7 +16,6 @@ license:
 
 #include "../specular.glsl"
 #include "../diffuse.glsl"
-#include "../shadow.glsl"
 #include "falloff.glsl"
 
 #ifndef STR_LIGHT_POINT
@@ -36,13 +35,18 @@ void lightPoint(
     const in vec3 _diffuseColor, const in vec3 _specularColor, 
     const in vec3 _V, 
     const in vec3 _Lp, const in vec3 _Ld, const in vec3 _Lc, const in float _Li, const in float _Ldist, const in float _Lof, 
-    const in vec3 _N, const in float _NoV, const in float _NoL, const in float _roughness, const in float _f0, 
+    const in vec3 _P, const in vec3 _N, const in float _NoV, const in float _NoL, const in float _roughness, const in float _f0,
     inout vec3 _diffuse, inout vec3 _specular) {
+
+    float intensity = _Li;
+    #ifdef FNC_RAYMARCH_SOFTSHADOW    
+    intensity = raymarchSoftShadow(_P, _Ld);
+    #endif
 
     float dif   = diffuse(_Ld, _N, _V, _NoV, _NoL, _roughness);// * INV_PI;
     float spec  = specular(_Ld, _N, _V, _NoV, _NoL, _roughness, _f0);
 
-    vec3 lightContribution = _Lc * _Li * _NoL;
+    vec3 lightContribution = _Lc * intensity * _NoL;
     if (_Lof > 0.0)
         lightContribution *= falloff(_Ldist, _Lof);
 
@@ -65,7 +69,7 @@ void lightPoint(
     lightPoint( _diffuseColor, _specularColor, 
                 _mat.V, 
                 _L.position, L, _L.color, _L.intensity, dist, _L.falloff, 
-                _mat.normal, _mat.NoV, NoL, _mat.roughness, f0, 
+                _mat.position, _mat.normal, _mat.NoV, NoL, _mat.roughness, f0,
                 _diffuse, _specular);
 
     // TODO:

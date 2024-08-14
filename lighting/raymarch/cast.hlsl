@@ -1,4 +1,5 @@
 #include "map.hlsl"
+#include "../material/new.hlsl"
 
 /*
 contributors:  Inigo Quiles
@@ -7,59 +8,46 @@ use: <float> castRay( in <float3> pos, in <float3> nor )
 */
 
 #ifndef RAYMARCH_SAMPLES
-#define RAYMARCH_SAMPLES 64
+#define RAYMARCH_SAMPLES 256
 #endif
 
-#ifndef RAYMARCH_MAP_FNC
-#define RAYMARCH_MAP_FNC(POS) raymarchMap(POS)
+#ifndef RAYMARCH_MIN_DIST
+#define RAYMARCH_MIN_DIST 0.1
 #endif
 
-#ifndef RAYMARCH_MAP_TYPE
-#define RAYMARCH_MAP_TYPE float4
+#ifndef RAYMARCH_MAX_DIST
+#define RAYMARCH_MAX_DIST 20.0
 #endif
 
-#ifndef RAYMARCH_MAP_DISTANCE
-#define RAYMARCH_MAP_DISTANCE a
+#ifndef RAYMARCH_MIN_HIT_DIST
+#define RAYMARCH_MIN_HIT_DIST 0.00001 * t
 #endif
 
-#ifndef RAYMARCH_MAP_MATERIAL
-#define RAYMARCH_MAP_MATERIAL rgb
-#endif
+#ifndef FNC_RAYMARCH_CAST
+#define FNC_RAYMARCH_CAST
 
-#ifndef RAYMARCH_MAP_MATERIAL_TYPE
-#define RAYMARCH_MAP_MATERIAL_TYPE float3
-#endif
-
-#ifndef FNC_RAYMARCHCAST
-#define FNC_RAYMARCHCAST
-
-RAYMARCH_MAP_TYPE raymarchCast( in float3 ro, in float3 rd ) {
-    float tmin = 1.0;
-    float tmax = 20.0;
+Material raymarchCast( in float3 ro, in float3 rd ) {
+    float tmin = RAYMARCH_MIN_DIST;
+    float tmax = RAYMARCH_MAX_DIST;
    
-// #if defined(RAYMARCH_FLOOR)
-//     float tp1 = (0.0-ro.y)/rd.y; if( tp1>0.0 ) tmax = min( tmax, tp1 );
-//     float tp2 = (1.6-ro.y)/rd.y; if( tp2>0.0 ) { if( ro.y>1.6 ) tmin = max( tmin, tp2 );
-//                                                  else           tmax = min( tmax, tp2 ); }
-// #endif
-    
     float t = tmin;
-    RAYMARCH_MAP_MATERIAL_TYPE m = float3( -1.0, -1.0, -1.0);
-    for ( int i = 0; i < RAYMARCH_SAMPLES; i++ ) {
-        float precis = 0.00001*t;
-        RAYMARCH_MAP_TYPE res = RAYMARCH_MAP_FNC( ro + rd * t );
-        if ( res.RAYMARCH_MAP_DISTANCE < precis || t > tmax ) 
+    Material m = materialNew();
+    m.valid = false;
+    for (int i = 0; i < RAYMARCH_SAMPLES; i++) {
+        Material res = RAYMARCH_MAP_FNC(ro + rd * t);
+        if (res.sdf < RAYMARCH_MIN_HIT_DIST || t > tmax) 
             break;
-        t += res.RAYMARCH_MAP_DISTANCE;
-        m = res.RAYMARCH_MAP_MATERIAL;
+        m = res;
+        t += res.sdf;
     }
 
     #if defined(RAYMARCH_BACKGROUND) || defined(RAYMARCH_FLOOR)
-    if ( t > tmax ) 
-        m = float3(-1.0, -1.0, -1.0);
+    if ( t > tmax )
+        m.valid = false;
     #endif
 
-    return RAYMARCH_MAP_TYPE( m, t );
+    m.sdf = t;
+    return m;
 }
 
 #endif

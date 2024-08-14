@@ -12,6 +12,10 @@
 #include "common/specularAO.glsl"
 #include "common/envBRDFApprox.glsl"
 
+// #if defined(RAYMARCH_AO)
+// #include "raymarch/ao.glsl"
+// #endif
+
 /*
 contributors: Patricio Gonzalez Vivo
 description: Simple PBR shading model
@@ -22,6 +26,7 @@ options:
     - LIGHT_POSITION: in GlslViewer is u_light
     - LIGHT_COLOR in GlslViewer is u_lightColor
     - CAMERA_POSITION: in GlslViewer is u_camera
+    - RAYMARCH_AO: enabled raymarched ambient occlusion
 examples:
     - /shaders/lighting_raymarching_pbr.frag
 license:
@@ -47,22 +52,23 @@ vec4 pbr(const in Material _mat) {
 
     // Cached
     Material M  = _mat;
-    M.V         = normalize(CAMERA_POSITION - M.position);  // View
+    if (M.V.x == 0.0 && M.V.y == 0.0 && M.V.z == 0.0) {
+        M.V         = normalize(CAMERA_POSITION - M.position);  // View
+    }
     M.NoV       = dot(M.normal, M.V);                       // Normal . View
     M.R         = reflection(M.V, M.normal, M.roughness);   // Reflection
 
-    // Ambient Occlusion
-    // ------------------------
-    float ssao = 1.0;
+    // TODO: 
+    //  - ScreenSpace Ambient Occlusion when M.ambientOcclusion is not defined
 // #if defined(FNC_SSAO) && defined(SCENE_DEPTH) && defined(RESOLUTION) && defined(CAMERA_NEAR_CLIP) && defined(CAMERA_FAR_CLIP)
 //     vec2 pixel = 1.0/RESOLUTION;
-//     ssao = ssao(SCENE_DEPTH, gl_FragCoord.xy*pixel, pixel, 1.);
+//     ao = ssao(SCENE_DEPTH, gl_FragCoord.xy*pixel, pixel, 1.);
 // #endif 
 
     // Global Ilumination ( Image Based Lighting )
     // ------------------------
     vec3 E = envBRDFApprox(specularColor, M);
-    float diffuseAO = min(M.ambientOcclusion, ssao);
+    float diffuseAO = M.ambientOcclusion;
 
     vec3 Fr = vec3(0.0, 0.0, 0.0);
     Fr  = envMap(M) * E;
@@ -74,6 +80,8 @@ vec4 pbr(const in Material _mat) {
     vec3 Fd = diffuseColor;
     #if defined(SCENE_SH_ARRAY)
     Fd  *= tonemap( sphericalHarmonics(M.normal) );
+    #else
+    Fd *= envMap(M.normal, 1.0);
     #endif
     Fd  *= diffuseAO;
     Fd  *= (1.0 - E);

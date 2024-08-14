@@ -1,0 +1,63 @@
+/*
+contributors: Patricio Gonzalez Vivo
+description: scale a 2D space variable
+use: scale(<float2> st, <float2|float> scale_factor [, <float2> center])
+options:
+    - CENTER_2D
+    - CENTER_3D
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
+
+#ifndef FNC_SCALE
+#define FNC_SCALE
+float2 scale(float st, float s, float2 center) { return (st - center) * s + center; }
+float2 scale(float st, float s) {
+#ifdef CENTER_2D
+    return scale(st,  s, CENTER_2D);
+#else
+    return scale(st,  s, float2(0.5));
+#endif
+}
+
+float2 scale(float2 st, float2 s, float2 center) { return (st - center) * s + center; }
+float2 scale(float2 st, float s, float2 center) { return scale(st, float2(s), center); }
+float2 scale(float2 st, float2 s) {
+#ifdef CENTER_2D
+    return (st - CENTER_2D) * s + CENTER_2D;
+#else
+    return (st - 0.5) * s + 0.5;
+#endif
+}
+
+float2 scale(float2 st, float s) {
+#ifdef CENTER_2D
+    return (st - CENTER_2D) * s + CENTER_2D;
+#else
+    return (st - 0.5) * s + 0.5;
+#endif
+}
+
+float3 scale(float3 st, float3 s, float3 center) { return (st - center) * s + center; }
+float3 scale(float3 st, float s, float3 center) { return (st - center) * s + center; }
+float3 scale(float3 st, float3 s) {
+#ifdef CENTER_3D
+    return (st - CENTER_3D) * s + CENTER_3D;
+#else
+    return (st - 0.5) * s + 0.5;
+#endif
+}
+
+float3 scale(float3 st, float s) {
+#ifdef CENTER_3D
+    return (st - CENTER_3D) * s + CENTER_3D;
+#else
+    return (st - 0.5) * s + 0.5;
+#endif
+}
+
+// For tiles
+float4 scale(float4 st, float s) { return float4(scale(st.xy, s), st.zw); }
+float4 scale(float4 st, float2 s) { return float4(scale(st.xy, s), st.zw); }
+#endif

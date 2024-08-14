@@ -49,7 +49,9 @@ vec4 pbrGlass(const Material _mat) {
     
     // Cached
     Material M  = _mat;
-    M.V         = normalize(CAMERA_POSITION - M.position);  // View
+    if (M.V.x == 0.0 && M.V.y == 0.0 && M.V.z == 0.0) {
+        M.V         = normalize(CAMERA_POSITION - M.position);  // View
+    }
     M.R         = reflection(M.V, M.normal, M.roughness);   // Reflection
 #if defined(SCENE_BACK_SURFACE)
     vec3 No     = normalize(M.normal - M.normal_back); // Normal out is the difference between the front and back normals
@@ -84,7 +86,7 @@ vec4 pbrGlass(const Material _mat) {
 
     // Refraction
     color.rgb   += transparent(No, -M.V, Fr, eta, M.roughness);
-    color.rgb   += Gi * IBL_LUMINANCE;
+    color.rgb   += Gi * IBL_LUMINANCE * M.ambientOcclusion;
 
     // TODO: RaG
     //  - Add support for multiple lights
