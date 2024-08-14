@@ -1,25 +1,7 @@
 #ifndef METAL_COMPAT_FUNCS
 #define METAL_COMPAT_FUNCS
 
-// Scalar version of the mod function
-inline float mod(float x, float y) {
-    return x - y * floor(x / y);
-}
 
-// Vector version of the mod function for float2
-inline float2 mod(float2 x, float2 y) {
-    return x - y * floor(x / y);
-}
-
-// Vector version of the mod function for float3
-inline float3 mod(float3 x, float3 y) {
-    return x - y * floor(x / y);
-}
-
-// Vector version of the mod function for float4
-inline float4 mod(float4 x, float4 y) {
-    return x - y * floor(x / y);
-}
 
 inline bool2 lessThan(float2 x, float2 y) {
     return x < y;
@@ -94,5 +76,35 @@ inline bool4 notEqual(float4 x, float4 y) {
     return x != y;
 }
 
+// Scalar mod function (float)
+inline float mod(float x, float y) {
+    return fmod(x, y);
+}
+
+// Vector mod functions (float2, float3, float4)
+inline float2 mod(float2 x, float2 y) {
+    return fmod(x, y);
+}
+
+inline float3 mod(float3 x, float3 y) {
+    return fmod(x, y);
+}
+
+inline float4 mod(float4 x, float4 y) {
+    return fmod(x, y);
+}
+
+// Scalar mod function with scalar divisor (float2, float3, float4)
+inline float2 mod(float2 x, float y) {
+    return fmod(x, float2(y));
+}
+
+inline float3 mod(float3 x, float y) {
+    return fmod(x, float3(y));
+}
+
+inline float4 mod(float4 x, float y) {
+    return fmod(x, float4(y));
+}
 
 #endif
