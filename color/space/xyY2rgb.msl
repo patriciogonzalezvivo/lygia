@@ -12,6 +12,6 @@ license:
 
 #ifndef FNC_XYY2RGB
 #define FNC_XYY2RGB
-float3 xyY2rgb(const float3 xyY) { return xyz2rgb(xyY2xyz(xyY));}
-float4 xyY2rgb(const float4 xyY) { return float4(xyz2rgb(xyY2xyz(xyY.xyz)), xyY.w);}
+float3 xyY2rgb( float3 xyY) { return xyz2rgb(xyY2xyz(xyY));}
+float4 xyY2rgb( float4 xyY) { return float4(xyz2rgb(xyY2xyz(xyY.xyz)), xyY.w);}
 #endif

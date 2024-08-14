@@ -18,7 +18,7 @@ license:
 
 #ifndef FNC_LAB2XYZ
 #define FNC_LAB2XYZ
-float3 lab2xyz(const float3 c) {
+float3 lab2xyz( float3 c) {
     float fy = ( c.x + 16.0 ) / 116.0;
     float fx = c.y / 500.0 + fy;
     float fz = fy - c.z / 200.0;

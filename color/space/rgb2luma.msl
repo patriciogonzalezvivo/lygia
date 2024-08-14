@@ -9,6 +9,6 @@ license:
 
 #ifndef FNC_RGB2LUMA
 #define FNC_RGB2LUMA
-float rgb2luma(const float3 rgb) { return dot(rgb, float3(0.2126, 0.7152, 0.0722)); }
-float rgb2luma(const float4 rgb) { return rgb2luma(rgb.rgb); }
+float rgb2luma( float3 rgb) { return dot(rgb, float3(0.2126, 0.7152, 0.0722)); }
+float rgb2luma( float4 rgb) { return rgb2luma(rgb.rgb); }
 #endif

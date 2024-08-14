@@ -11,6 +11,6 @@ license:
 
 #ifndef FNC_RGB2HEAT
 #define FNC_RGB2HEAT
-float rgb2heat(const float3 c) { return 1.025 - rgb2hue(c) * 1.538461538; }
-float rgb2heat(const float4 c) { return rgb2heat(c.rgb); }
+float rgb2heat( float3 c) { return 1.025 - rgb2hue(c) * 1.538461538; }
+float rgb2heat( float4 c) { return rgb2heat(c.rgb); }
 #endif

@@ -12,6 +12,6 @@ license:
 
 #ifndef FNC_SRGB2OKLAB
 #define FNC_SRGB2OKLAB
-float3 srgb2oklab(const float3 srgb) { return rgb2oklab( srgb2rgb(srgb) ); }
-float4 srgb2oklab(const float4 srgb) { return float4(srgb2oklab(srgb.rgb), srgb.a); }
+float3 srgb2oklab( float3 srgb) { return rgb2oklab( srgb2rgb(srgb) ); }
+float4 srgb2oklab( float4 srgb) { return float4(srgb2oklab(srgb.rgb), srgb.a); }
 #endif

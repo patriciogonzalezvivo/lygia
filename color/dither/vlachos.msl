@@ -23,7 +23,7 @@ license:
 #endif
 
 #ifndef DITHER_VLACHOS_COORD
-#define DITHER_VLACHOS_COORD gl_FragCoord.xy
+#define DITHER_VLACHOS_COORD [[position]].xy
 #endif
 
 #ifdef DITHER_TIME

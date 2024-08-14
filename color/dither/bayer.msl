@@ -17,7 +17,7 @@ license:
 */
 
 #ifndef DITHER_BAKER_COORD
-#define DITHER_BAKER_COORD gl_FragCoord.xy
+#define DITHER_BAKER_COORD [[position]].xy
 #endif
 
 #ifndef DITHER_BAYER_PRECISION

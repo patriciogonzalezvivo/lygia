@@ -10,13 +10,13 @@ license:
 #ifndef MAT_RGB2PBPR
 #define MAT_RGB2PBPR
 #ifdef YPBPR_SDTV
-const mat3 RGB2PBPR = mat3( 
+constant matrix<float, 3, 3> RGB2PBPR = matrix<float, 3, 3>( 
     0.299, -0.169,  0.5,
     0.587, -0.331, -0.419,
     0.114,  0.5,   -0.081
 );
 #else
-const mat3 RGB2PBPR = mat3( 
+constant matrix<float, 3, 3> RGB2PBPR = matrix<float, 3, 3>( 
     0.2126, -0.1145721060573399,   0.5,
     0.7152, -0.3854278939426601,  -0.4541529083058166,
     0.0722,  0.5,                 -0.0458470916941834
@@ -26,6 +26,6 @@ const mat3 RGB2PBPR = mat3(
 
 #ifndef FNC_RGB2YPBPR
 #define FNC_RGB2YPBPR
-float3 rgb2YPbPr(const float3 rgb) { return RGB2PBPR * rgb; }
-float4 rgb2YPbPr(const float4 rgb) { return float4(rgb2YPbPr(rgb.rgb),rgb.a); }
+float3 rgb2YPbPr( float3 rgb) { return RGB2PBPR * rgb; }
+float4 rgb2YPbPr( float4 rgb) { return float4(rgb2YPbPr(rgb.rgb),rgb.a); }
 #endif
