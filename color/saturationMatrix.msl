@@ -1,0 +1,23 @@
+/*
+contributors: Patricio Gonzalez Vivo
+description: Generate a matrix to change a the saturation of any color
+use: saturationMatrix(<float> amount)
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
+
+#ifndef FNC_SATURATIONMATRIX
+#define FNC_SATURATIONMATRIX
+mat4 saturationMatrix(float a) {
+    float3 lum = float3(.3086, .6094, .0820 );
+    float iA= 1. - a;
+    float3 r = float3(lum.x * iA) + float3(a, .0, .0);
+    float3 g = float3(lum.y * iA) + float3( .0, a, .0);
+    float3 b = float3(lum.z * iA) + float3( .0, .0, a);
+    return mat4(r,.0,
+                g,.0,
+                b,.0,
+                .0, .0, .0, 1.);
+}
+#endif

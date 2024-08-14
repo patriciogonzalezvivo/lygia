@@ -1,0 +1,13 @@
+#include "../math/const.msl"
+
+/*
+contributors: Inigo Quiles
+description:  Procedural generation of color palette algorithm explained here http://www.iquilezles.org/www/articles/palettes/palettes.htm)
+use: palette(<float> t, <float3|float4> a, <float3|float4> b, <float3|float4> c, <float3|float4> d)
+*/
+
+#ifndef FNC_PALETTE
+#define FNC_PALETTE
+float3 palette (float t, float3 a, float3 b, float3 c, float3 d) { return a + b * cos(TAU * ( c * t + d )); }
+float4 palette (float t, float4 a, float4 b, float4 c, float4 d) { return a + b * cos(TAU * ( c * t + d )); }
+#endif
