@@ -28,22 +28,22 @@ examples:
 #define FNC_RAYMARCH_DEFAULT
 
 vec4 raymarchDefaultRender( in vec3 rayOrigin, in vec3 rayDirection, vec3 cameraForward
+#if RAYMARCH_RETRIVE != 0
                             ,out float eyeDepth
-#if RAYMARCH_RETRIVE == 1
+#endif
+#if RAYMARCH_RETRIVE == 2
                             ,out Material res
-#elif RAYMARCH_RETRIVE == 2
+#elif RAYMARCH_RETRIVE == 3
                             ,out vec3 worldPos, out vec3 worldNormal 
 #endif
     ) { 
 
 #if RAYMARCH_RETRIVE != 2
-    vec3 worldPos, worldNormal;
-#endif
-
-#if RAYMARCH_RETRIVE != 1
     Material res;
 #endif
-
+#if RAYMARCH_RETRIVE != 3
+    vec3 worldPos, worldNormal;
+#endif
 
     res = raymarchCast(rayOrigin, rayDirection);
     float t = res.sdf;
@@ -62,8 +62,10 @@ vec4 raymarchDefaultRender( in vec3 rayOrigin, in vec3 rayDirection, vec3 camera
     
     color.rgb = raymarchFog(color.rgb, t, rayOrigin, rayDirection);
 
+    #if RAYMARCH_RETRIVE != 0
     // Eye-space depth. See https://www.shadertoy.com/view/4tByz3
     eyeDepth = t * dot(rayDirection, cameraForward);
+    #endif
 
     return color;
 }
