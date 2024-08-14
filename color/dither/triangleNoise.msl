@@ -14,7 +14,7 @@ license:
 */
 
 #ifndef DITHER_TRIANGLENOISE_COORD
-#define DITHER_TRIANGLENOISE_COORD [[position]].xy
+#define DITHER_TRIANGLENOISE_COORD gl_FragCoord.xy
 #endif
 
 #ifdef DITHER_TIME

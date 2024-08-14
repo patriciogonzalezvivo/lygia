@@ -2,7 +2,6 @@
 #define METAL_COMPAT_FUNCS
 
 
-
 inline bool2 lessThan(float2 x, float2 y) {
     return x < y;
 }

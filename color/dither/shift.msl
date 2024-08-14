@@ -14,9 +14,6 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-#ifndef DITHER_SHIFT_COORD
-#define DITHER_SHIFT_COORD [[position]].xy
-#endif
 
 #ifdef DITHER_TIME
 #define DITHER_SHIFT_TIME DITHER_TIME
@@ -90,13 +87,5 @@ float3 ditherShift(const float3 color, const float2 st, const int pres) {
 float ditherShift(const float value, const float2 xy) {  return ditherShift(value, xy, DITHER_SHIFT_PRECISION); }
 float3 ditherShift(const float3 color, const float2 xy) {  return ditherShift(color, xy, DITHER_SHIFT_PRECISION); }
 float4 ditherShift(const float4 color, const float2 xy) {  return float4(ditherShift(color.rgb, xy, DITHER_SHIFT_PRECISION), color.a); }
-
-float ditherShift(const float val, int pres) { return ditherShift(float3(val),DITHER_SHIFT_COORD, pres).r; }
-float3 ditherShift(const float3 color, int pres) { return ditherShift(color, DITHER_SHIFT_COORD, pres); }
-float4 ditherShift(const float4 color, int pres) { return float4(ditherShift(color.rgb, DITHER_SHIFT_COORD, pres), color.a); }
-
-float ditherShift(const float val) { return ditherShift(float3(val), DITHER_SHIFT_COORD, DITHER_SHIFT_PRECISION).r; }
-float3 ditherShift(const float3 color) { return ditherShift(color, DITHER_SHIFT_COORD, DITHER_SHIFT_PRECISION); }
-float4 ditherShift(const float4 color) { return float4(ditherShift(color.rgb), color.a); }
 
 #endif
