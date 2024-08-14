@@ -1,0 +1,43 @@
+/*
+contributors: Patricio Gonzalez Vivo
+description: Set of dither methods
+use: <float4|float3|float> dither(<float4|float3|float> value[, <float> time])
+options:
+    - DITHER_FNC
+    - RESOLUTION: view port resolution
+    - BLUENOISE_TEXTURE_RESOLUTION
+    - BLUENOISE_TEXTURE
+    - DITHER_TIME: followed with an elipsed secods uniform
+    - DITHER_CHROMATIC
+    - DITHER_PRECISION
+    - SAMPLER_FNC
+examples:
+    - /shaders/color_dither.frag
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
+
+#include "dither/interleavedGradientNoise.msl"
+#include "dither/vlachos.msl"
+#include "dither/triangleNoise.msl"
+#include "dither/blueNoise.msl"
+#include "dither/shift.msl"
+#include "dither/bayer.msl"
+
+#ifndef DITHER_FNC
+#ifdef TARGET_MOBILE
+#define DITHER_FNC ditherInterleavedGradientNoise
+#else
+#define DITHER_FNC ditherVlachos
+#endif
+#endif
+
+#ifndef FNC_DITHER
+#define FNC_DITHER
+
+float dither(float v) { return DITHER_FNC(v); }
+float3 dither(float3 v) { return DITHER_FNC(v); }
+float4 dither(float4 v) { return DITHER_FNC(v); }
+
+#endif
