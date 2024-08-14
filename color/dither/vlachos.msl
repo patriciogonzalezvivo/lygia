@@ -22,9 +22,6 @@ license:
 #endif
 #endif
 
-#ifndef DITHER_VLACHOS_COORD
-#define DITHER_VLACHOS_COORD [[position]].xy
-#endif
 
 #ifdef DITHER_TIME
 #define DITHER_VLACHOS_TIME DITHER_TIME
@@ -72,9 +69,5 @@ float3 ditherVlachos(const float3 color, const float2 xy) {
 }
 
 float4 ditherVlachos(float4 color, float2 st) { return float4(ditherVlachos(color.rgb, st), color.a);}
-
-float ditherVlachos(float val) { return ditherVlachos(val, DITHER_VLACHOS_COORD);}
-float3 ditherVlachos(float3 color) { return ditherVlachos(color, DITHER_VLACHOS_COORD);}
-float4 ditherVlachos(float4 color) { return float4(ditherVlachos(color.rgb), color.a);}
 
 #endif

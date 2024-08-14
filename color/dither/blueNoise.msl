@@ -21,11 +21,6 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-#ifndef DITHER_BLUENOISE_COORD
-#define DITHER_BLUENOISE_COORD [[position]].xy
-
-#endif
-
 #ifdef DITHER_TIME
 #define DITHER_BLUENOISE_TIME DITHER_TIME
 #endif
@@ -94,10 +89,6 @@ float ditherBlueNoise(SAMPLER_TYPE tex, const float b, float2 st) { return dithe
 float3 ditherBlueNoise(SAMPLER_TYPE tex, const float3 rgb, float2 st) { return ditherBlueNoise(tex, rgb, st, DITHER_BLUENOISE_PRECISION);}
 float4 ditherBlueNoise(SAMPLER_TYPE tex, const float4 rgba, float2 st) { return float4(ditherBlueNoise(tex, rgba.rgb, st), rgba.a); }
 
-float ditherBlueNoise(const float val) { return ditherBlueNoise(BLUENOISE_TEXTURE, val, DITHER_BLUENOISE_COORD); }
-float3 ditherBlueNoise(const float3 color) { return ditherBlueNoise(BLUENOISE_TEXTURE, color, DITHER_BLUENOISE_COORD); }
-float4 ditherBlueNoise(const float4 color) { return ditherBlueNoise(BLUENOISE_TEXTURE, color, DITHER_BLUENOISE_COORD); }
-
 #else 
 
 float ditherBlueNoise(float2 p) {
@@ -135,9 +126,6 @@ float ditherBlueNoise(const float val, const float2 xy) { return ditherBlueNoise
 float3 ditherBlueNoise(const float3 color, const float2 xy) { return ditherBlueNoise(color, xy, DITHER_BLUENOISE_PRECISION); }  
 float4 ditherBlueNoise(const float4 color, const float2 xy) {  return float4(ditherBlueNoise(color.rgb, xy, DITHER_BLUENOISE_PRECISION), color.a); }
 
-float ditherBlueNoise(float val) { return ditherBlueNoise(val, DITHER_BLUENOISE_COORD, DITHER_BLUENOISE_PRECISION); }
-float3 ditherBlueNoise(float3 color) { return ditherBlueNoise(color, DITHER_BLUENOISE_COORD, DITHER_BLUENOISE_PRECISION); }
-float4 ditherBlueNoise(float4 color) { return ditherBlueNoise(color, DITHER_BLUENOISE_COORD, DITHER_BLUENOISE_PRECISION); }
 #endif
 
 #endif
