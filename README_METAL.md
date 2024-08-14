@@ -46,7 +46,7 @@ Metal support is currently highly experimental and very work in progress.
 - Texture precision and filtering.
     - Added `SAMPLER_TYPE` which specifies the texture precisions. Defaults to `texture2d<float>`
     - This means your texture definition must match the default `float` precision, or you will need to override `SAMPLER_TYPE`
-    - Added `SAMPLER` which specifies the Metal sampler object. Defaults to `sampler( min_filter::linear, mag_filter::linear )
+    - Added `SAMPLER` which specifies the Metal sampler object. Defaults to `sampler( min_filter::linear, mag_filter::linear )`
     
 ## Things not yet done
 
