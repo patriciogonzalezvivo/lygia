@@ -1,7 +1,7 @@
 #include "normal.glsl"
 #include "cast.glsl"
 #include "ao.glsl"
-#include "softShadow.glsl"
+// #include "softShadow.glsl"
 #include "../../math/saturate.glsl"
 
 /*
@@ -65,8 +65,8 @@ vec4 raymarchDefaultShading(Material m) {
     float dom = smoothstep( -0.1, 0.1, ref.y );
     float fre = pow(saturate(1.0 + dot(m.normal, -m.V)), 2.0);
     
-    dif *= raymarchSoftShadow(m.position, lig);
-    dom *= raymarchSoftShadow(m.position, ref);
+    // dif *= raymarchSoftShadow(m.position, lig);
+    // dom *= raymarchSoftShadow(m.position, ref);
 
     vec3 env = RAYMARCH_AMBIENT;
     vec3 shade = vec3(0.0, 0.0, 0.0);
