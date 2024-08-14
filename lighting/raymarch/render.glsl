@@ -58,7 +58,7 @@ vec4 raymarchDefaultRender( in vec3 rayOrigin, in vec3 rayDirection, vec3 camera
     if (res.valid) {
         res.position = worldPos;
         res.normal = worldNormal;
-        res.ambientOcclusion = raymarchAO(res.position, res.normal);
+        // res.ambientOcclusion = raymarchAO(res.position, res.normal);
         res.V = -rayDirection;
         color = RAYMARCH_SHADING_FNC(res);
     }
