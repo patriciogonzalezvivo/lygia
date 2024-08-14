@@ -1,0 +1,100 @@
+
+
+#ifndef METAL_COMPAT_FUNCS
+
+#define METAL_COMPAT_FUNCS 1
+// Scalar version of the mod function
+inline float mod(float x, float y) {
+    return x - y * floor(x / y);
+}
+
+// Vector version of the mod function for float2
+inline float2 mod(float2 x, float2 y) {
+    return x - y * floor(x / y);
+}
+
+// Vector version of the mod function for float3
+inline float3 mod(float3 x, float3 y) {
+    return x - y * floor(x / y);
+}
+
+// Vector version of the mod function for float4
+inline float4 mod(float4 x, float4 y) {
+    return x - y * floor(x / y);
+}
+
+inline bool2 lessThan(float2 x, float2 y) {
+    return x < y;
+}
+
+inline bool3 lessThan(float3 x, float3 y) {
+    return x < y;
+}
+
+inline bool4 lessThan(float4 x, float4 y) {
+    return x < y;
+}
+
+inline bool2 lessThanEqual(float2 x, float2 y) {
+    return x <= y;
+}
+
+inline bool3 lessThanEqual(float3 x, float3 y) {
+    return x <= y;
+}
+
+inline bool4 lessThanEqual(float4 x, float4 y) {
+    return x <= y;
+}
+
+
+inline bool2 greaterThan(float2 x, float2 y) {
+    return x > y;
+}
+
+inline bool3 greaterThan(float3 x, float3 y) {
+    return x > y;
+}
+
+inline bool4 greaterThan(float4 x, float4 y) {
+    return x > y;
+}
+
+inline bool2 greaterThanEqual(float2 x, float2 y) {
+    return x >= y;
+}
+
+inline bool3 greaterThanEqual(float3 x, float3 y) {
+    return x >= y;
+}
+
+inline bool4 greaterThanEqual(float4 x, float4 y) {
+    return x >= y;
+}
+
+inline bool2 equal(float2 x, float2 y) {
+    return x == y;
+}
+
+inline bool3 equal(float3 x, float3 y) {
+    return x == y;
+}
+
+inline bool4 equal(float4 x, float4 y) {
+    return x == y;
+}
+
+inline bool2 notEqual(float2 x, float2 y) {
+    return x != y;
+}
+
+inline bool3 notEqual(float3 x, float3 y) {
+    return x != y;
+}
+
+inline bool4 notEqual(float4 x, float4 y) {
+    return x != y;
+}
+
+
+#endif
