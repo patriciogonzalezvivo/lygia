@@ -8,9 +8,7 @@ Metal support is currently highly experimental and very work in progress.
 - [x] Blend
 - [ ] Color 
   - [x] Blend
-  - [ ] Dither
-    - [x] Bayer
-    - [ ] 
+  - [x] Dither (not fully vetted / just spot checked)
   - [ ] Palette 
   - [x] Levels
   - [x] Space
