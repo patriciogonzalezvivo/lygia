@@ -134,58 +134,6 @@ void materialNew(out Material _mat) {
     _mat.NoV = 0.0;
 }
 
-void materialZero(out Material _mat) {
-    _mat.albedo = vec4(0.0);
-    _mat.emissive = vec3(0.0);
-    _mat.position = vec3(0.0);
-    _mat.normal = vec3(0.0);
-#if defined(RENDER_RAYMARCHING)
-    _mat.sdf = 0.0;
-    _mat.valid = true;
-#endif
-
-#if defined(SCENE_BACK_SURFACE)
-    _mat.normal_back = vec3(0.0);
-#endif
-    _mat.ior = vec3(0.0);
-    _mat.f0 = vec3(0.0);
-    _mat.roughness = 0.0;
-    _mat.metallic = 0.0;
-    _mat.ambientOcclusion = 0.0;
-
-#if defined (SHADING_MODEL_CLEAR_COAT)
-    _mat.clearCoat = 0.0;
-    _mat.clearCoatRoughness = 0.0;
-    #if defined(MATERIAL_HAS_CLEAR_COAT_NORMAL)
-    _mat.clearCoatNormal = vec3(0.0);
-    #endif
-#endif
-
-#if defined(SHADING_MODEL_IRIDESCENCE)
-    _mat.thickness          = 0.0;
-#endif
-
-#if defined(SHADING_MODEL_SUBSURFACE)
-    _mat.subsurfaceColor    = vec3(0.0);
-    _mat.subsurfacePower    = 0.0;
-    _mat.subsurfaceThickness = 0.0;
-#endif
-
-#if defined(SHADING_MODEL_CLOTH)
-    _mat.sheenColor         = vec3(0.0);
-#endif
-
-#if defined(SHADING_MODEL_SPECULAR_GLOSSINESS)
-    _mat.specularColor = vec3(0.0, 0.0, 0.0);
-    _mat.glossiness = 0.0;
-#endif
-
-    // Cache
-    _mat.V = vec3(0.0);
-    _mat.R = vec3(0.0);
-    _mat.NoV = 0.0;
-}
-
 Material materialNew() {
     Material mat;
     materialNew(mat);
