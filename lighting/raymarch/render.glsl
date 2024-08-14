@@ -14,7 +14,7 @@ use:
     - <vec4> raymarchDefaultRender( in <vec3> rayOriging, in <vec3> rayDirection, in <vec3> cameraForward, out <vec3> eyeDepth, out <vec3> worldPosition, out <vec3> worldNormal ) 
 options:
     - RAYMARCH_BACKGROUND: vec3(0.0)
-    - RAYMARCH_RETURN:  0. nothing (default), 1. depth;  2. depth and material; 3. depth: world position and normal
+    - RAYMARCH_RETURN:  0. nothing (default), 1. depth;  2. depth and material
 examples:
     - /shaders/lighting_raymarching.frag
 */
@@ -31,28 +31,22 @@ examples:
 #define FNC_RAYMARCH_DEFAULT
 
 vec4 raymarchDefaultRender( in vec3 rayOrigin, in vec3 rayDirection, vec3 cameraForward
-#if RAYMARCH_RETURN != 0
+#if RAYMARCH_RETURN >= 1
                             ,out float eyeDepth
 #endif
 #if RAYMARCH_RETURN == 2
                             ,out Material res
-#elif RAYMARCH_RETURN == 3
-                            ,out vec3 worldPos, out vec3 worldNormal 
 #endif
     ) { 
 
 #if RAYMARCH_RETURN != 2
     Material res;
 #endif
-#if RAYMARCH_RETURN != 3
-    vec3 worldPos, worldNormal;
-#endif
 
     res = raymarchCast(rayOrigin, rayDirection);
     float t = res.sdf;
-
-    worldPos = rayOrigin + t * rayDirection;
-    worldNormal = raymarchNormal( worldPos );
+    vec3 worldPos = rayOrigin + t * rayDirection;
+    vec3 worldNormal = raymarchNormal( worldPos );
 
     vec4 color = vec4(RAYMARCH_BACKGROUND, 0.0);
     if (res.valid) {
@@ -65,8 +59,10 @@ vec4 raymarchDefaultRender( in vec3 rayOrigin, in vec3 rayDirection, vec3 camera
     
     color.rgb = raymarchFog(color.rgb, t, rayOrigin, rayDirection);
 
-    #if RAYMARCH_RETURN != 0
+    #if RAYMARCH_RETURN >= 1
     eyeDepth = t;
+    // Eye-space depth. See https://www.shadertoy.com/view/4tByz3
+    // eyeDepth = t * dot(rayDirection, cameraForward);
     #endif
 
     return color;

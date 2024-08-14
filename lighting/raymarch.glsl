@@ -21,7 +21,7 @@ options:
     - RAYMARCH_RENDER_FNC(RO, RD): default raymarchDefaultRender(RO, RD, TA)
     - RAYMARCH_CAMERA_FOV: Filed of view express in degrees. Default 60.0 degrees
     - RAYMARCH_MULTISAMPLE: default 1. If it is greater than 1 it will render multisample
-    - RAYMARCH_RETURN:  0. nothing (default), 1. depth;  2. depth and material; 3. depth: world position and normal
+    - RAYMARCH_RETURN:  0. nothing (default), 1. depth;  2. depth and material
 examples:
     - /shaders/lighting_raymarching.frag
 license:
@@ -45,13 +45,11 @@ const float RAYMARCH_MULTISAMPLE_FACTOR = 1.0/float(RAYMARCH_MULTISAMPLE);
 #endif
 
 vec4 raymarch(  mat4 viewMatrix, vec2 st
-#if RAYMARCH_RETURN != 0
+#if RAYMARCH_RETURN >= 1
                 ,out float eyeDepth
 #endif
 #if RAYMARCH_RETURN == 2
                 ,out Material mat
-#elif RAYMARCH_RETURN == 3
-                ,out vec3 worldPos, out vec3 worldNormal
 #endif
     ) {
                     
@@ -62,16 +60,13 @@ vec4 raymarch(  mat4 viewMatrix, vec2 st
 
 #if defined(RAYMARCH_MULTISAMPLE)
     vec4 color = vec4(0.0);
-    #if RAYMARCH_RETURN != 0
+
+    #if RAYMARCH_RETURN >= 1
     eyeDepth = 0.0;
     #endif
-
     #if RAYMARCH_RETURN == 2
     Material tmp;
     materialZero(tmp);
-    #elif RAYMARCH_RETURN == 3
-    worldPos = vec3(0.0);
-    worldNormal = vec3(0.0);
     #endif
 
     vec2 pixel = 1.0/RESOLUTION;
@@ -80,7 +75,7 @@ vec4 raymarch(  mat4 viewMatrix, vec2 st
     for (int i = 0; i < RAYMARCH_MULTISAMPLE; i++) {
         vec3 rayDirection = viewMatrix3 * normalize(vec3((st + offset * pixel)*2.0-1.0, fov));
 
-        #if RAYMARCH_RETURN != 0
+        #if RAYMARCH_RETURN >= 1
         float sampleDepth = 0.0;
         #endif
 
@@ -92,14 +87,9 @@ vec4 raymarch(  mat4 viewMatrix, vec2 st
         
         #elif RAYMARCH_RETURN == 2
             color += RAYMARCH_RENDER_FNC(camera, rayDirection, cameraForward, sampleDepth, mat);
-
-        #elif RAYMARCH_RETURN == 3
-            vec3 sampleWorldPos = vec3(0.0);
-            vec3 sampleWorldNormal = vec3(0.0);
-            color += RAYMARCH_RENDER_FNC(camera, rayDirection, cameraForward, sampleDepth, sampleWorldPos, sampleWorldNormal);
         #endif
 
-        #if RAYMARCH_RETURN != 0
+        #if RAYMARCH_RETURN >= 1
             eyeDepth += sampleDepth;
         #endif
         
@@ -151,16 +141,12 @@ vec4 raymarch(  mat4 viewMatrix, vec2 st
             // tmp.V += mat.V;
             // tmp.R += mat.R;
             // tmp.NoV += mat.NoV;
-        
-        #elif RAYMARCH_RETURN == 3
-            worldPos += sampleWorldPos;
-            worldNormal += sampleWorldNormal;
         #endif
 
         offset = rotate(offset, HALF_PI);
     }
 
-    #if RAYMARCH_RETURN != 0
+    #if RAYMARCH_RETURN >= 1
         eyeDepth *= RAYMARCH_MULTISAMPLE_FACTOR;
     #endif
 
@@ -205,11 +191,6 @@ vec4 raymarch(  mat4 viewMatrix, vec2 st
         // mat.V = tmp.V * RAYMARCH_MULTISAMPLE_FACTOR;
         // mat.R = tmp.R * RAYMARCH_MULTISAMPLE_FACTOR;
         // mat.NoV = tmp.NoV * RAYMARCH_MULTISAMPLE_FACTOR;
-    #elif RAYMARCH_RETURN == 3
-    
-        // Average world position and normal
-        worldPos *= RAYMARCH_MULTISAMPLE_FACTOR;
-        worldNormal *= RAYMARCH_MULTISAMPLE_FACTOR;
     #endif
     
     return color * RAYMARCH_MULTISAMPLE_FACTOR;
@@ -219,38 +200,32 @@ vec4 raymarch(  mat4 viewMatrix, vec2 st
     vec3 rayDirection = viewMatrix3 * normalize(vec3(st*2.0-1.0, fov));
 
     return RAYMARCH_RENDER_FNC( camera, rayDirection, cameraForward
-    #if RAYMARCH_RETURN != 0
+    #if RAYMARCH_RETURN >= 1
                                 ,eyeDepth
     #endif
     #if RAYMARCH_RETURN == 2
                                 ,mat
-    #elif RAYMARCH_RETURN == 3
-                                ,worldPos, worldNormal
     #endif
                                 );
 #endif
 }
 
 vec4 raymarch(  vec3 cameraPosition, vec3 cameraLookAt, vec2 st 
-#if RAYMARCH_RETURN != 0
+#if RAYMARCH_RETURN >= 1
                 ,out float depth
 #endif
 #if RAYMARCH_RETURN == 2
                 ,out Material mat
-#elif RAYMARCH_RETURN == 3
-                ,out vec3 worldPos, out vec3 worldNormal
 #endif
     ) {
     mat4 viewMatrix = lookAtView(cameraPosition, cameraLookAt);
 
     return raymarch(viewMatrix, st
-    #if RAYMARCH_RETURN != 0
+    #if RAYMARCH_RETURN >= 1
                     ,depth
     #endif
     #if RAYMARCH_RETURN == 2
                     ,mat
-    #elif RAYMARCH_RETURN == 3
-                    ,worldPos, worldNormal
     #endif
     );
 }
