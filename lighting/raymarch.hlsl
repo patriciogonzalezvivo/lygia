@@ -42,10 +42,10 @@ license:
 #define ENG_RAYMARCH
 
 #if defined(RAYMARCH_MULTISAMPLE)
-const float RAYMARCH_MULTISAMPLE_FACTOR = 1.0/float(RAYMARCH_MULTISAMPLE);
+static const float RAYMARCH_MULTISAMPLE_FACTOR = 1.0/float(RAYMARCH_MULTISAMPLE);
 #endif
 
-float4 raymarch(float4x4 viewMatrix, float2 st,
+float4 raymarch(float4x4 viewMatrix, float2 st
 #if RAYMARCH_RETURN >= 1
                 ,out float eyeDepth
 #endif
@@ -55,7 +55,7 @@ float4 raymarch(float4x4 viewMatrix, float2 st,
     ) {
 
     float fov = 1.0 / tan(RAYMARCH_CAMERA_FOV * DEG2RAD * 0.5);
-    float3 cameraPosition = float3(viewMatrix._m03, viewMatrix._m13, viewMatrix._m23);
+    float3 camera = float3(viewMatrix._m03, viewMatrix._m13, viewMatrix._m23);
     float3 cameraForward = float3(viewMatrix._m02, viewMatrix._m12, viewMatrix._m22);
 
 #if defined(RAYMARCH_MULTISAMPLE)
@@ -218,7 +218,7 @@ float4 raymarch(float3 cameraPosition, float3 cameraLookAt, float2 st
     ){
     float4x4 viewMatrix = lookAtView(cameraPosition, cameraLookAt);
 
-    return raymarch(viewMatrix, st, 
+    return raymarch(viewMatrix, st
     #if RAYMARCH_RETURN >= 1
                     ,depth
     #endif
