@@ -28,12 +28,8 @@ examples:
 #define LIGHT_INTENSITY 1.0
 #endif
 
-#ifndef RAYMARCH_BACKGROUND
-#define RAYMARCH_BACKGROUND vec3(0.0)
-#endif
-
 #ifndef RAYMARCH_SAMPLES
-#define RAYMARCH_SAMPLES 512
+#define RAYMARCH_SAMPLES 256
 #endif
 
 #ifndef RAYMARCH_SAMPLES
