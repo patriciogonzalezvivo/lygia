@@ -1,0 +1,26 @@
+/*
+contributors: Patricio Gonzalez Vivo
+description: Fill a stroke a SDF. From PixelSpiritDeck https://github.com/patriciogonzalezvivo/PixelSpiritDeck
+use: stroke(<float> sdf, <float> size, <float> width [, <float> edge])
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
+
+#ifndef FNC_STROKE
+#define FNC_STROKE
+
+#include "../math/aastep.msl"
+#include "../math/saturate.msl"
+
+float stroke(float x, float size, float w) {
+    float d = aastep(size, x + w * 0.5) - aastep(size, x - w * 0.5);
+    return saturate(d);
+}
+
+float stroke(float x, float size, float w, float edge) {
+    float d = smoothstep(size - edge, size + edge, x + w * 0.5) - smoothstep(size - edge, size + edge, x - w * 0.5);
+    return saturate(d);
+}
+
+#endif

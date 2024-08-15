@@ -1,0 +1,15 @@
+/*
+contributors: [Stefan Gustavson, Ian McEwan]
+description: modulus of 289
+use: <float|float2|float3|float4> mod289(<float|float2|float3|float4> x)
+*/
+
+#ifndef FNC_MOD289
+#define FNC_MOD289
+
+float mod289(const float x) { return x - floor(x * (1. / 289.)) * 289.; }
+float2 mod289(const float2 x) { return x - floor(x * (1. / 289.)) * 289.; }
+float3 mod289(const float3 x) { return x - floor(x * (1. / 289.)) * 289.; }
+float4 mod289(const float4 x) { return x - floor(x * (1. / 289.)) * 289.; }
+
+#endif

@@ -1,0 +1,27 @@
+/*
+contributors:  Inigo Quiles
+description: repeat operation for 2D/3D SDFs 
+use: <float4> opElongate( <float3> p, <float3> h )
+*/
+
+#ifndef FNC_OPREPEAT
+#define FNC_OPREPEAT
+
+float2 opRepeat( float2 p, float s ) {
+    return mod(p+s*0.5,s)-s*0.5;
+}
+
+float3 opRepeat( float3 p, float3 c ) {
+    return mod(p+0.5*c,c)-0.5*c;
+}
+
+float2 opRepeat( float2 p, float2 lima, float2 limb, float s ) {
+    return p-s*clamp(floor(p/s),lima,limb);
+}
+
+float3 opRepeat( float3 p, float3 lima, float3 limb, float s ) {
+    return p-s*clamp(floor(p/s),lima,limb);
+}
+
+#endif
+

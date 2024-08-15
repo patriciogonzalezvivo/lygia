@@ -1,0 +1,16 @@
+/*
+contributors: Patricio Gonzalez Vivo
+description: returns a 2x2 scale matrix
+use:
+    - <matrix<float, 2, 2>> scale2d(<float|float2> radians)
+    - <matrix<float, 2, 2>> scale2d(<float> x, <float> y)
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
+
+#ifndef FNC_SCALE2D
+matrix<float, 2, 2> scale2d(float s) { return matrix<float, 2, 2>(s, 0.0, 0.0, s); }
+matrix<float, 2, 2> scale2d(float2 s) { return matrix<float, 2, 2>(s.x, 0.0, 0.0, s.y); }
+matrix<float, 2, 2> scale2d(float x, float y) { return matrix<float, 2, 2>(x, 0.0, 0.0,  y); }
+#endif
