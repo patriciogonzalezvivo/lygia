@@ -28,7 +28,7 @@ options:
 #ifndef FNC_RAYMARCH_DEFAULT
 #define FNC_RAYMARCH_DEFAULT
 
-float4 raymarchDefaultRender(in float3 rayOrigin, in float3 rayDirection, float3 cameraForward,
+float4 raymarchDefaultRender(in float3 rayOrigin, in float3 rayDirection, float3 cameraForward
 #if RAYMARCH_RETURN != 0
                             ,out float eyeDepth
 #endif
@@ -50,7 +50,7 @@ float4 raymarchDefaultRender(in float3 rayOrigin, in float3 rayDirection, float3
     if (res.valid) {
         res.position = worldPos;
         res.normal = worldNormal;
-        es.ambientOcclusion = raymarchAO(res.position, res.normal);
+        res.ambientOcclusion = raymarchAO(res.position, res.normal);
         res.V = -rayDirection;
         color = RAYMARCH_SHADING_FNC(res);
     }
