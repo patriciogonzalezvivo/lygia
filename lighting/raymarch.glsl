@@ -80,13 +80,13 @@ vec4 raymarch(  mat4 viewMatrix, vec2 st
         #endif
 
         #if RAYMARCH_RETURN == 0
-            color += RAYMARCH_RENDER_FNC(camera, rayDirection, cameraForward);
+            color += RAYMARCH_RENDER_FNC(camera, rayDirection, st, cameraForward);
 
         #elif RAYMARCH_RETURN == 1
-            color += RAYMARCH_RENDER_FNC(camera, rayDirection, cameraForward, sampleDepth);
+            color += RAYMARCH_RENDER_FNC(camera, rayDirection, cameraForward, st, sampleDepth);
         
         #elif RAYMARCH_RETURN == 2
-            color += RAYMARCH_RENDER_FNC(camera, rayDirection, cameraForward, sampleDepth, mat);
+            color += RAYMARCH_RENDER_FNC(camera, rayDirection, cameraForward, st, sampleDepth, mat);
         #endif
 
         #if RAYMARCH_RETURN >= 1
@@ -199,7 +199,7 @@ vec4 raymarch(  mat4 viewMatrix, vec2 st
     // Single sample
     vec3 rayDirection = viewMatrix3 * normalize(vec3(st*2.0-1.0, fov));
 
-    return RAYMARCH_RENDER_FNC( camera, rayDirection, cameraForward
+    return RAYMARCH_RENDER_FNC( camera, rayDirection, cameraForward, st
     #if RAYMARCH_RETURN >= 1
                                 ,eyeDepth
     #endif

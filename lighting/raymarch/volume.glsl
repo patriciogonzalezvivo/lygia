@@ -1,4 +1,5 @@
 #include "map.glsl"
+#include "../../generative/random.glsl"
 #include "../../math/const.glsl"
 
 /*
@@ -58,7 +59,7 @@ examples:
 #ifndef FNC_RAYMARCH_VOLUMERENDER
 #define FNC_RAYMARCH_VOLUMERENDER
 
-vec4 raymarchVolume( in vec3 rayOrigin, in vec3 rayDirection, vec3 cameraForward, out float eyeDepth) {
+vec4 raymarchVolume( in vec3 rayOrigin, in vec3 rayDirection, vec3 cameraForward, vec2 st, out float eyeDepth) {
 
     const float tmin          = RAYMARCH_MIN_DIST;
     const float tmax          = RAYMARCH_MAX_DIST;
@@ -108,7 +109,9 @@ vec4 raymarchVolume( in vec3 rayOrigin, in vec3 rayDirection, vec3 cameraForward
 
             transmittance *= sampleTransmittance;
         }
-        position += rayDirection * tstep;
+
+        float offset = random(st)*0.001;
+        position += rayDirection * (tstep + offset);
     }
 
     eyeDepth = t * dot(rayDirection, cameraForward);
