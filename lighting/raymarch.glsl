@@ -54,8 +54,8 @@ vec4 raymarch(  mat4 viewMatrix, vec2 st
     ) {
                     
     float fov = 1.0 / tan(RAYMARCH_CAMERA_FOV * DEG2RAD * 0.5);
-    vec3 camera = vec3(viewMatrix[0][3], viewMatrix[1][3], viewMatrix[2][3]);
-    vec3 cameraForward = vec3(viewMatrix[0][2], viewMatrix[1][2], viewMatrix[2][2]);
+    vec3 camera = viewMatrix[3].xyz;
+    vec3 cameraForward = viewMatrix[2].xyz;
     mat3 viewMatrix3 = toMat3(viewMatrix);
 
 #if defined(RAYMARCH_MULTISAMPLE)
