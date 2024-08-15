@@ -14,7 +14,7 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: |
-    Material Constructor. Designed to integrate with GlslViewer's defines https://github.com/patriciogonzalezvivo/glslViewer/wiki/GlslViewer-DEFINES#material-defines
+    Material Constructor.
 use:
     - void materialNew(out <material> _mat)
     - <material> materialNew()

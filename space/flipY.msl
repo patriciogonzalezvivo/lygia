@@ -1,0 +1,15 @@
+/*
+contributors: Patricio Gonzalez Vivo
+description: Flip Y axis
+use: <float2|float3|float4> flipY(<float2|float3|float4> st)
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
+
+#ifndef FNC_FLIPY
+#define FNC_FLIPY
+float2 flipY(float2 v) { return float2(v.x, 1. - v.y); }
+float3 flipY(float3 v) { return float3(v.x, 1. - v.y, v.z); }
+float4 flipY(float4 v) { return float4(v.x, 1. - v.y, v.z, v.w); }
+#endif

@@ -5,7 +5,9 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
-
+#ifndef EIGHTH_PI
+#define EIGHTH_PI 0.39269908169
+#endif
 #ifndef QTR_PI
 #define QTR_PI 0.78539816339
 #endif
@@ -17,12 +19,6 @@ license:
 #endif
 #ifndef TWO_PI
 #define TWO_PI 6.2831853071795864769252867665590
-#endif
-#ifndef DEG2RAD
-#define DEG2RAD (TWO_PI / 360.0)
-#endif
-#ifndef RAD2DEG
-#define RAD2DEG (360.0 / TWO_PI)
 #endif
 #ifndef TAU
 #define TAU 6.2831853071795864769252867665590
@@ -50,4 +46,10 @@ license:
 #endif
 #ifndef GOLDEN_ANGLE // (3.-sqrt(5.0))*PI radians
 #define GOLDEN_ANGLE 2.39996323
+#endif
+#ifndef DEG2RAD
+#define DEG2RAD (PI / 180.0)
+#endif
+#ifndef RAD2DEG
+#define RAD2DEG (180.0 / PI)
 #endif

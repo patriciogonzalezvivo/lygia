@@ -1,0 +1,17 @@
+/*
+contributors: Patricio Gonzalez Vivo
+description: returns a 3x3 rotation matrix
+use: <matrix<float, 3, 3>> rotate3dZ(<float> radians)
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
+
+#ifndef FNC_ROTATE3DZ
+#define FNC_ROTATE3DZ
+matrix<float, 3, 3> rotate3dZ(const float r){
+    return matrix<float, 3, 3>(float3(cos(r),-sin(r),0.),
+                float3(sin(r),cos(r),0.),
+                float3(0.,0.,1.));
+}
+#endif

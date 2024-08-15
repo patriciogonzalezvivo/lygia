@@ -1,0 +1,22 @@
+#include "../math/saturate.msl"
+
+/*
+contributors: Inigo Quiles
+description: Segment SDF
+use: lineSDF(<float2> st, <float2> A, <float2> B)
+*/
+
+#ifndef FNC_LINESDF
+#define FNC_LINESDF
+float lineSDF( float2 st, float2 a, float2 b ) {
+    float2 b_to_a = b - a;
+    float2 to_a = st - a;
+    float h = saturate(dot(to_a, b_to_a)/dot(b_to_a, b_to_a));
+    return length(to_a - h * b_to_a );
+}
+
+float lineSDF(float3 p, float3 a, float3 b) {
+    //https://mathworld.wolfram.com/Point-LineDistance3-Dimensional.html
+    return length(cross(p - a, p - b))/length(b - a);
+}
+#endif

@@ -1,0 +1,39 @@
+#include "../math/rotate4dX.msl"
+
+/*
+contributors: Patricio Gonzalez Vivo
+description: rotate a 2D space by a radian angle
+use: rotateX(<float3|float4> v, float radian [, float3 center])
+options:
+    - CENTER_3D
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
+
+#ifndef FNC_ROTATEX
+#define FNC_ROTATEX
+float4 rotateX(float4 v, float r, float4 c) {
+    return rotate4dX(r) * (v - c) + c;
+}
+
+float4 rotateX(float4 v, float r) {
+    #ifdef CENTER_4D
+    return rotate4dX(r) * (v - CENTER_4D) + CENTER_4D;
+    #else
+    return rotate4dX(r) * v;
+    #endif
+}
+
+float3 rotateX(float3 v, float r, float3 c) {
+    return (rotate4dX(r) * float4(v - c, 1.0)).xyz + c;
+}
+
+float3 rotateX(float3 v, float r) {
+    #ifdef CENTER_3D
+    return (rotate4dX(r) * float4(v - CENTER_3D, 1.0)).xyz + CENTER_3D;
+    #else
+    return (rotate4dX(r) * float4(v, 1.0)).xyz;
+    #endif
+}
+#endif
