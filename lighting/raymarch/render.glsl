@@ -60,9 +60,8 @@ vec4 raymarchDefaultRender( in vec3 rayOrigin, in vec3 rayDirection, vec3 camera
     color.rgb = raymarchFog(color.rgb, t, rayOrigin, rayDirection);
 
     #if RAYMARCH_RETURN >= 1
-    eyeDepth = t;
     // Eye-space depth. See https://www.shadertoy.com/view/4tByz3
-    // eyeDepth = t * dot(rayDirection, cameraForward);
+    eyeDepth = t * dot(rayDirection, cameraForward);
     #endif
 
     return color;
