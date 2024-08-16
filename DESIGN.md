@@ -37,7 +37,7 @@
 
 ```
 
-* **Prevent name collisions** prevention by using the following pattern where `FNC_` is followed with the function name:
+* **Prevent name collisions** by using the following pattern where `FNC_` is followed with the function name:
 
 ```glsl
 
