@@ -1,3 +1,4 @@
+#include "math_compat.msl"
 #include "math/absi.msl"
 #include "math/adaptiveThreshold.msl"
 #include "math/bump.msl"

@@ -2,7 +2,7 @@
 #include "../space/hsv2rgb.msl"
 
 /*
-contributors: Romain Dura
+contributors: RomaDura
 description: Saturation Blend mode creates the result color by combining the hue and luminance of the base color with the saturation of the blend color.
 use: blendSaturation(<float|float3> base, <float|float3> blend [, <float> opacity])
 license: MIT License (MIT) Copyright (c) 2015 Jamie Owen
@@ -16,7 +16,7 @@ float3 blendSaturation(float3 base, float3 blend) {
   return hsv2rgb(
       float3(baseHSL.x, blendHSL.y, baseHSL.z));
 }
-float3  blendSaturation(in float3 base, in float3 blend, float opacity) { 
+float3  blendSaturation(float3 base, float3 blend, float opacity) { 
     return (blendSaturation(base, blend) * opacity + base * (1. - opacity)); 
 }
 #endif

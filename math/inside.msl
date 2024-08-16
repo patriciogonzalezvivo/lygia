@@ -12,7 +12,7 @@ license:
 #ifndef FNC_INSIDE
 #define FNC_INSIDE
 bool inside(float _x, float _min, float _max) {
-    return !(_x < _m|| _x > _max);
+    return !(_x < _min|| _x > _max);
 }
 
 bool inside(float2 _v, float2 _min, float2 _max) {
