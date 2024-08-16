@@ -108,7 +108,7 @@ If you are concerned about the size of the library you may be also interested on
     python prune.py --all --keep glsl
 ```
 
-Alternativelly if your are working on a `npm` project there is a [npm bundle](https://www.npmjs.com/package/lygia) you could use.
+Alternatively, if your are working on a `npm` project, there is a [npm bundle](https://www.npmjs.com/package/lygia) you could use.
 
 If you are working on web project you may want to resolve the dependencies using a bundler like [vite glsl plugin (local bundle)](https://github.com/UstymUkhman/vite-plugin-glsl), [esbuild glsl plugin (local bundle)](https://github.com/ricardomatias/esbuild-plugin-glsl-include) or [webpack glsl plugin (local bundle)](https://github.com/grieve/webpack-glsl-loader).
 
