@@ -148,7 +148,7 @@ To then resolve the dependencies by passing a `string` or `strings[]` to `resolv
     shdr = createShader(vertSource, fragSource);
 ```
 
-This this function can also resolve dependencies to previous versions of LYGIA by using this pattern `lygia/vX.X/...` or `lygia/vX.X.X/...` on you dependency paths. For example:
+This function can also resolve dependencies to previous versions of LYGIA by using this pattern `lygia/vX.X/...` or `lygia/vX.X.X/...` on you dependency paths. For example:
 
 ```glsl
 #include "lygia/v1.0/math/decimation.glsl"
