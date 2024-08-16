@@ -1,0 +1,73 @@
+#include "../../math/decimate.msl"
+
+/*
+contributors: Patricio Gonzalez Vivo
+description: 'Vlachos 2016, "Advanced VR Rendering" http://alex.vlachos.com/graphics/Alex_Vlachos_Advanced_VR_Rendering_GDC2015.pdf'
+use: <float4|float3|float> ditherVlachos(<float4|float3|float> value, <float> time)
+options:
+    - DITHER_VLACHOS_TIME
+    - DITHER_VLACHOS_CHROMATIC
+examples:
+    - /shaders/color_dither.frag
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
+
+#ifndef HIGHP
+#if defined(TARGET_MOBILE) && defined(GL_ES)
+#define HIGHP highp
+#else
+#define HIGHP
+#endif
+#endif
+
+
+#ifdef DITHER_TIME
+#define DITHER_VLACHOS_TIME DITHER_TIME
+#endif
+
+#ifndef DITHER_VLACHOS_PRECISION
+#ifdef DITHER_PRECISION
+#define DITHER_VLACHOS_PRECISION DITHER_PRECISION
+#else
+#define DITHER_VLACHOS_PRECISION 256
+#endif
+#endif
+
+#ifndef FNC_DITHER_VLACHOS
+#define FNC_DITHER_VLACHOS
+
+float ditherVlachos(float b, float2 st) {
+    #ifdef DITHER_VLACHOS_TIME
+    st += 1337.0*fract(DITHER_VLACHOS_TIME);
+    #endif
+    HIGHP float noise = dot(float2(171.0, 231.0), st);
+    noise = fract(noise / 71.0);
+    noise = (noise * 2.0) - 1.0;
+    return b + (noise / 255.0);
+}
+
+float3 ditherVlachos(float2 st) {
+    #ifdef DITHER_VLACHOS_TIME
+    st += 1337.0*fract(DITHER_VLACHOS_TIME);
+    #endif
+    HIGHP float3 noise = float3(dot(float2(171.0, 231.0), st));
+    noise = fract(noise / float3(103.0, 71.0, 97.0));
+    return noise;
+}
+
+float3 ditherVlachos(const float3 color, const float2 st, const int pres) {
+    // return color + ditherVlachos(st) / 255.0;
+
+    float d = float(pres);
+    float3 ditherPattern = ditherVlachos(st);
+    return decimate(color + ditherPattern / d, d);
+}
+float3 ditherVlachos(const float3 color, const float2 xy) {
+    return ditherVlachos(color, xy, DITHER_VLACHOS_PRECISION);
+}
+
+float4 ditherVlachos(float4 color, float2 st) { return float4(ditherVlachos(color.rgb, st), color.a);}
+
+#endif

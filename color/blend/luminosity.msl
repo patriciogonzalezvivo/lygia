@@ -2,7 +2,7 @@
 #include "../space/hsv2rgb.msl"
 
 /*
-contributors: Romain Dura
+contributors: RomaDura
 description: Luminosity Blend mode creates the result color by combining the hue and luminance of the base color with the saturation of the blend color.
 use: blendLuminosity(<float|float3> base, <float|float3> blend [, <float> opacity])
 license: MIT License (MIT) Copyright (c) 2015 Jamie Owen
@@ -16,7 +16,7 @@ float3 blendLuminosity(float3 base, float3 blend) {
   return hsv2rgb(
       float3(baseHSL.x, baseHSL.y, blendHSL.z));
 }
-float3  blendLuminosity(in float3 base, in float3 blend, float opacity) { 
+float3  blendLuminosity(float3 base, float3 blend, float opacity) { 
     return (blendLuminosity(base, blend) * opacity + base * (1. - opacity)); 
 }
 #endif

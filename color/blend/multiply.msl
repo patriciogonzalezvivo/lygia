@@ -7,15 +7,15 @@ license: MIT License (MIT) Copyright (c) 2015 Jamie Owen
 
 #ifndef FNC_BLENDMULTIPLY
 #define FNC_BLENDMULTIPLY
-float blendMultiply(in float base, in float blend) {
+float blendMultiply(float base, float blend) {
     return base * blend;
 }
 
-float3 blendMultiply(in float3 base, in float3 blend) {
+float3 blendMultiply(float3 base, float3 blend) {
     return base * blend;
 }
 
-float3 blendMultiply(in float3 base, in float3 blend, float opacity) {
+float3 blendMultiply(float3 base, float3 blend, float opacity) {
     return (blendMultiply(base, blend) * opacity + base * (1. - opacity));
 }
 #endif

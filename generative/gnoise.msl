@@ -1,0 +1,73 @@
+#include "random.msl"
+#include "srandom.msl"
+#include "../math/cubic.msl"
+#include "../math/quintic.msl"
+
+/*
+contributors: Patricio Gonzalez Vivo
+description: Gradient Noise
+use: gnoise(<float> x)
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
+
+#ifndef FNC_GNOISE
+#define FNC_GNOISE
+
+float gnoise(float x) {
+    float i = floor(x);  // integer
+    float f = fract(x);  // fraction
+    return mix(random(i), random(i + 1.0), smoothstep(0.,1.,f)); 
+}
+
+float gnoise(float2 st) {
+    float2 i = floor(st);
+    float2 f = fract(st);
+    float a = random(i);
+    float b = random(i + float2(1.0, 0.0));
+    float c = random(i + float2(0.0, 1.0));
+    float d = random(i + float2(1.0, 1.0));
+    float2 u = cubic(f);
+    return mix( a, b, u.x) +
+                (c - a)* u.y * (1.0 - u.x) +
+                (d - b) * u.x * u.y;
+}
+
+float gnoise(float3 p) {
+    float3 i = floor(p);
+    float3 f = fract(p);
+    float3 u = quintic(f);
+    return -1.0 + 2.0 * mix( mix( mix( random(i + float3(0.0,0.0,0.0)), 
+                                        random(i + float3(1.0,0.0,0.0)), u.x),
+                                mix( random(i + float3(0.0,1.0,0.0)), 
+                                        random(i + float3(1.0,1.0,0.0)), u.x), u.y),
+                            mix( mix( random(i + float3(0.0,0.0,1.0)), 
+                                        random(i + float3(1.0,0.0,1.0)), u.x),
+                                mix( random(i + float3(0.0,1.0,1.0)), 
+                                        random(i + float3(1.0,1.0,1.0)), u.x), u.y), u.z );
+}
+
+float gnoise(float3 p, float tileLength) {
+    float3 i = floor(p);
+    float3 f = fract(p);
+            
+    float3 u = quintic(f);
+        
+    return mix( mix( mix( dot( srandom3(i + float3(0.0,0.0,0.0), tileLength), f - float3(0.0,0.0,0.0)), 
+                            dot( srandom3(i + float3(1.0,0.0,0.0), tileLength), f - float3(1.0,0.0,0.0)), u.x),
+                    mix( dot( srandom3(i + float3(0.0,1.0,0.0), tileLength), f - float3(0.0,1.0,0.0)), 
+                            dot( srandom3(i + float3(1.0,1.0,0.0), tileLength), f - float3(1.0,1.0,0.0)), u.x), u.y),
+                mix( mix( dot( srandom3(i + float3(0.0,0.0,1.0), tileLength), f - float3(0.0,0.0,1.0)), 
+                            dot( srandom3(i + float3(1.0,0.0,1.0), tileLength), f - float3(1.0,0.0,1.0)), u.x),
+                    mix( dot( srandom3(i + float3(0.0,1.0,1.0), tileLength), f - float3(0.0,1.0,1.0)), 
+                            dot( srandom3(i + float3(1.0,1.0,1.0), tileLength), f - float3(1.0,1.0,1.0)), u.x), u.y), u.z );
+}
+
+float3 gnoise3(float3 x) {
+    return float3(gnoise(x+float3(123.456, 0.567, 0.37)),
+                gnoise(x+float3(0.11, 47.43, 19.17)),
+                gnoise(x) );
+}
+
+#endif

@@ -1,0 +1,70 @@
+#include "../../math/decimate.msl"
+
+/*
+contributors: Patricio Gonzalez Vivo
+description: 'Jimenez 2014, "Next Generation Post-Processing Call of Duty" http://advances.realtimerendering.com/s2014/index.html'
+use: <float4|float3|float> interleavedGradientNoise(<float4|float3|float> value, <float> time)
+options:
+    - DITHER_INTERLEAVEDGRADIENTNOISE_TIME
+    - DITHER_INTERLEAVEDGRADIENTNOISE_CHROMATIC
+examples:
+    - /shaders/color_dither.frag
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
+
+
+#ifdef DITHER_TIME
+#define DITHER_INTERLEAVEDGRADIENTNOISE_TIME DITHER_TIME
+#endif
+
+#ifndef DITHER_INTERLEAVEDGRADIENTNOISE_PRECISION
+#ifdef DITHER_PRECISION
+#define DITHER_INTERLEAVEDGRADIENTNOISE_PRECISION DITHER_PRECISION
+#else
+#define DITHER_INTERLEAVEDGRADIENTNOISE_PRECISION 255
+#endif
+#endif
+
+#ifndef FNC_DITHER_INTERLEAVEDGRADIENTNOISE
+#define FNC_DITHER_INTERLEAVEDGRADIENTNOISE
+
+float ditherInterleavedGradientNoise(float2 st) {
+    #ifdef DITHER_INTERLEAVEDGRADIENTNOISE_TIME
+    st += 1337.0*fract(DITHER_INTERLEAVEDGRADIENTNOISE_TIME);
+    #endif
+    st = floor(st);
+    return fract(52.982919 * fract(dot(float2(0.06711, 0.00584), st))) * 2.0 - 1.0;
+}
+
+float ditherInterleavedGradientNoise(const float value, const float2 st, const int pres) {
+    float ditherPattern = ditherInterleavedGradientNoise(st);
+    return value + ditherPattern / 255.0;
+}
+
+float3 ditherInterleavedGradientNoise(const float3 color, const float2 st, const int pres) {
+    #ifdef DITHER_INTERLEAVEDGRADIENTNOISE_CHROMATIC 
+    float3 ditherPattern = float3(
+            ditherInterleavedGradientNoise(st),
+            ditherInterleavedGradientNoise(st + 0.1337),
+            ditherInterleavedGradientNoise(st + 0.3141));
+    #else
+    float3 ditherPattern = float3(ditherInterleavedGradientNoise(st));
+    #endif
+    
+    // return color + ditherPattern / 255.0;
+
+    float d = float(pres);
+    float h = 0.5 / d;
+    // float3 decimated = decimate(color, d);
+    // float3 diff = (color - decimated) * d;
+    // ditherPattern = step(ditherPattern, diff);
+    return decimate(color - h + ditherPattern / d, d);
+}
+
+//float ditherInterleavedGradientNoise(const float b, const float2 st) { return b + triangleNoise(st) / float(DITHER_INTERLEAVEDGRADIENTNOISE_PRECISION); }
+float3 ditherInterleavedGradientNoise(const float3 color, const float2 xy) {  return ditherInterleavedGradientNoise(color, xy, DITHER_INTERLEAVEDGRADIENTNOISE_PRECISION); }
+float4 ditherInterleavedGradientNoise(const float4 color, const float2 xy) {  return float4(ditherInterleavedGradientNoise(color.rgb, xy, DITHER_INTERLEAVEDGRADIENTNOISE_PRECISION), color.a); }
+
+#endif
