@@ -1,6 +1,6 @@
 # Contributing to LYIGA
 
-LYGIA is a project that aims to provide a unified API for writing shaders in different shading languages, with carefully tailored code optimize for each language. It is a community-driven project and we welcome contributions from everyone.
+LYGIA is a project that aims to provide a unified API for writing shaders in different shading languages, with carefully tailored code, optimized for each language. It is a community-driven project and we welcome contributions from everyone.
 
 At the moment we are figuring the best way to organize the project and the best practices to follow. If you have any suggestions, please open an issue.
 
