@@ -101,7 +101,7 @@
 
 ### WGSL Specifics
 
-WGSL as a language have some fundamental differences from GLSL, HLSL and METAL. Here are some guidelines to help with the transition:
+WGSL as a language has some fundamental differences from GLSL, HLSL and METAL. Here are some guidelines to help with the transition:
 
 * **WGSL Function Renaming**. WGSL [does not support function overloading](https://github.com/gpuweb/gpuweb/issues/876) and as such function names must be unique and should reflect the size of parameter, return types. See documented examples below.
 
