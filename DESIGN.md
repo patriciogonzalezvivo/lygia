@@ -73,7 +73,7 @@
 
 ```
 
-* **Arguments order**. optional elements are at the end. When possible sort them according their memory footprint (except textures that remain at the top). Ex.: `SAMPLER_TYPE, mat4, mat3, mat2, vec4, vec3, vec2, float, ivec4, ivec3, ivec2, int, bool`
+* **Argument order**. Optional elements are at the end. When possible sort them according their memory footprint (except textures that remain at the top). Ex.: `SAMPLER_TYPE, mat4, mat3, mat2, vec4, vec3, vec2, float, ivec4, ivec3, ivec2, int, bool`
 
 ```glsl
 
