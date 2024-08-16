@@ -84,7 +84,7 @@ If you are working on a project and want to use LYGIA, you have two options: clo
 
 ### LYGIA Locally
 
-If want to working **locally** you must ensure that your environment can resolve `#include` dependencies. You can find some examples in [here specially for GLSL](README_GLSL.md). Then you just need to clone LYGIA into your project relative to the shader you are loading:
+If you want to work **locally**, you must ensure that your environment can resolve `#include` dependencies. You can find some examples in [here specially for GLSL](README_GLSL.md). Then you just need to clone LYGIA into your project relative to the shader you are loading:
 
 ```bash
     git clone https://github.com/patriciogonzalezvivo/lygia.git
