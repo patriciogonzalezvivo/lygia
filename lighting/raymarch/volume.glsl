@@ -28,28 +28,24 @@ examples:
 #define LIGHT_INTENSITY 1.0
 #endif
 
-#ifndef RAYMARCH_SAMPLES
-#define RAYMARCH_SAMPLES 256
+#ifndef RAYMARCH_VOLUME_SAMPLES
+#define RAYMARCH_VOLUME_SAMPLES 256
 #endif
 
-#ifndef RAYMARCH_SAMPLES
-#define RAYMARCH_SAMPLES_LIGHT 8
+#ifndef RAYMARCH_VOLUME_SAMPLES_LIGHT
+#define RAYMARCH_VOLUME_SAMPLES_LIGHT 8
 #endif
 
-#ifndef RAYMARCH_MIN_DIST
-#define RAYMARCH_MIN_DIST 0.1
+#ifndef RAYMARCH_VOLUME_MAP_FNC
+#define RAYMARCH_VOLUME_MAP_FNC raymarchVolumeMap
 #endif
 
-#ifndef RAYMARCH_MAX_DIST
-#define RAYMARCH_MAX_DIST 10.0
+#ifndef RAYMARCH_VOLUME_DENSITY
+#define RAYMARCH_VOLUME_DENSITY 1.0
 #endif
 
-#ifndef RAYMARCH_MAP_FNC
-#define RAYMARCH_MAP_FNC raymarchMap
-#endif
-
-#ifndef RAYMARCH_MEDIUM_DENSITY
-#define RAYMARCH_MEDIUM_DENSITY 1.0
+#ifndef RAYMARCH_VOLUME_DITHER
+#define RAYMARCH_VOLUME_DITHER 0.1
 #endif
 
 #ifndef FNC_RAYMARCH_VOLUMERENDER
@@ -59,8 +55,8 @@ vec4 raymarchVolume( in vec3 rayOrigin, in vec3 rayDirection, vec3 cameraForward
 
     const float tmin          = RAYMARCH_MIN_DIST;
     const float tmax          = RAYMARCH_MAX_DIST;
-    const float tstep         = tmax/float(RAYMARCH_SAMPLES);
-    const float tstepLight    = tmax/float(RAYMARCH_SAMPLES_LIGHT);
+    const float tstep         = tmax/float(RAYMARCH_VOLUME_SAMPLES);
+    const float tstepLight    = tmax/float(RAYMARCH_VOLUME_SAMPLES_LIGHT);
 
     #if defined(LIGHT_DIRECTION)
     vec3 lightDirection       = LIGHT_DIRECTION;
@@ -75,19 +71,19 @@ vec4 raymarchVolume( in vec3 rayOrigin, in vec3 rayDirection, vec3 cameraForward
     vec4 color = vec4(0.0, 0.0, 0.0, 0.0);
     vec3 position = rayOrigin;
     
-    for(int i = 0; i < RAYMARCH_SAMPLES; i++) {
+    for(int i = 0; i < RAYMARCH_VOLUME_SAMPLES; i++) {
         Material res = RAYMARCH_MAP_FNC(position);
         float extinction = -res.sdf;
-        float density = RAYMARCH_MEDIUM_DENSITY*tstep;
+        float density = RAYMARCH_VOLUME_DENSITY*tstep;
         if (extinction > 0.0) {
             float sampleTransmittance = exp(-extinction*density);
 
             float transmittanceLight = 1.0;
             #if defined(LIGHT_DIRECTION) || defined(LIGHT_POSITION)
-            for (int j = 0; j < RAYMARCH_SAMPLES_LIGHT; j++) {
+            for (int j = 0; j < RAYMARCH_VOLUME_SAMPLES_LIGHT; j++) {
                 Material resLight = RAYMARCH_MAP_FNC(position + lightDirection * float(j) * tstepLight);
                 float extinctionLight = -resLight.sdf;
-                float densityLight = RAYMARCH_MEDIUM_DENSITY*tstepLight;
+                float densityLight = RAYMARCH_VOLUME_DENSITY*tstepLight;
                 if (extinctionLight > 0.0) {
                     transmittanceLight *= exp(-extinctionLight*densityLight);
                 }
@@ -106,7 +102,7 @@ vec4 raymarchVolume( in vec3 rayOrigin, in vec3 rayDirection, vec3 cameraForward
             transmittance *= sampleTransmittance;
         }
 
-        float offset = random(st)*0.001;
+        float offset = random(st)*(tstep*RAYMARCH_VOLUME_DITHER);
         position += rayDirection * (tstep + offset);
     }
 
