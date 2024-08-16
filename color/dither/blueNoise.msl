@@ -1,0 +1,131 @@
+#include "../../sampler.msl"
+#include "../../math/decimate.msl"
+#include "../../math/saturate.msl"
+
+/*
+contributors: Patricio Gonzalez Vivo
+description: blue noise dithering
+use:
+    - <float4|float3|float> ditherBlueNoise(<float4|float3|float> value, <float2> st, <float> time)
+    - <float4|float3|float> ditherBlueNoise(<float4|float3|float> value, <float> time)
+options:
+    - SAMPLER_FNC
+    - BLUENOISE_TEXTURE
+    - BLUENOISE_TEXTURE_RESOLUTION
+    - DITHER_BLUENOISE_CHROMATIC
+    - DITHER_BLUENOISE_TIME
+examples:
+    - /shaders/color_dither.frag
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
+
+#ifdef DITHER_TIME
+#define DITHER_BLUENOISE_TIME DITHER_TIME
+#endif
+
+#ifdef DITHER_CHROMATIC
+#define DITHER_BLUENOISE_CHROMATIC
+#endif
+
+#ifndef DITHER_BLUENOISE_PRECISION
+#ifdef DITHER_PRECISION
+#define DITHER_BLUENOISE_PRECISION DITHER_PRECISION
+#else
+#define DITHER_BLUENOISE_PRECISION 256
+#endif
+#endif
+
+#ifndef BLUENOISE_TEXTURE_RESOLUTION
+#define BLUENOISE_TEXTURE_RESOLUTION float2(1024.0)
+#endif
+
+#ifndef DITHER_BLUENOISE
+#define DITHER_BLUENOISE
+
+#ifdef BLUENOISE_TEXTURE
+
+float remap_pdf_tri_unity(float v) {
+    v = v*2.0-1.0;
+    return 0.5 + 0.5 * sign(v) * (1.0 - sqrt(1.0 - abs(v)));
+}
+
+const float2 blueNoiseTexturePixel = 1.0/BLUENOISE_TEXTURE_RESOLUTION;
+
+float ditherBlueNoise(SAMPLER_TYPE tex, const float value, float2 st, int pres) {
+    float d = float(pres);
+    #ifdef DITHER_BLUENOISE_TIME 
+    st += 1337.0*fract(DITHER_BLUENOISE_TIME);
+    #endif
+    float bn = SAMPLER_FNC(tex, st * blueNoiseTexturePixel).r;
+    float bn_tri = remap_pdf_tri_unity(bn);
+    return value + (bn_tri*2.0-0.5)/d;
+}
+
+float3 ditherBlueNoise(SAMPLER_TYPE tex, float3 color, float2 st, int pres) {
+    float d = float(pres);
+
+    #ifdef DITHER_BLUENOISE_TIME
+    st += 1337.0*fract(DITHER_BLUENOISE_TIME * 0.1);
+    #endif
+        
+    #ifdef DITHER_BLUENOISE_CHROMATIC
+    float3 bn = SAMPLER_FNC(tex, st * blueNoiseTexturePixel).color;
+    float3 bn_tri = float3( remap_noise_tri_erp(bn.x), 
+                        remap_noise_tri_erp(bn.y), 
+                        remap_noise_tri_erp(bn.z) );
+    color += (bn_tri*2.0-1.5)/d;
+    #else
+    float bn = SAMPLER_FNC(tex, st * blueNoiseTexturePixel).r;
+    float bn_tri = remap_pdf_tri_unity(bn);
+    color += (bn_tri*2.0-1.5)/d;
+    #endif
+
+    return color;
+}
+
+float ditherBlueNoise(SAMPLER_TYPE tex, const float b, float2 st) { return ditherBlueNoise(tex, b, st, DITHER_BLUENOISE_PRECISION); }
+float3 ditherBlueNoise(SAMPLER_TYPE tex, const float3 rgb, float2 st) { return ditherBlueNoise(tex, rgb, st, DITHER_BLUENOISE_PRECISION);}
+float4 ditherBlueNoise(SAMPLER_TYPE tex, const float4 rgba, float2 st) { return float4(ditherBlueNoise(tex, rgba.rgb, st), rgba.a); }
+
+#else 
+
+float ditherBlueNoise(float2 p) {
+    const float SEED1 = 1.705;
+    const float size = 5.5;
+    p = floor(p);
+    float2 p1 = p;
+    #ifdef DITHER_BLUENOISE_TIME
+    p += 1337.0*fract(DITHER_BLUENOISE_TIME * 0.1);
+    #else
+    p += 10.0;
+    #endif
+    p = floor(p/size)*size;
+    p = fract(p * 0.1) + 1.0 + p * float2(0.0002, 0.0003);
+    float a = fract(1.0 / (0.000001 * p.x * p.y + 0.00001));
+    a = fract(1.0 / (0.000001234 * a + 0.00001));
+    float b = fract(1.0 / (0.000002 * (p.x * p.y + p.x) + 0.00001));
+    b = fract(1.0 / (0.0000235*b + 0.00001));
+    float2 r = float2(a, b) - 0.5;
+    p1 += r * 8.12235325;
+    return fract(p1.x * SEED1 + p1.y/(SEED1+0.15555));
+}
+
+float3 ditherBlueNoise(const float3 color, const float2 xy, const int pres) {
+    float d = float(pres);
+    float3 decimated = decimate(color, d);
+    float3 diff = (color - decimated) * d;
+    return saturate(decimate(color + step(float3(ditherBlueNoise(xy)), diff) / d, d));
+}
+
+float ditherBlueNoise(const float val, const float2 xy, const int pres) { return ditherBlueNoise(float3(val), xy, pres).r; }
+float4 ditherBlueNoise(const float4 color, const float2 xy, const int pres) { return float4(ditherBlueNoise(color.rgb, xy, pres), color.a); }
+
+float ditherBlueNoise(const float val, const float2 xy) { return ditherBlueNoise(float3(val), xy, DITHER_BLUENOISE_PRECISION).r; }
+float3 ditherBlueNoise(const float3 color, const float2 xy) { return ditherBlueNoise(color, xy, DITHER_BLUENOISE_PRECISION); }  
+float4 ditherBlueNoise(const float4 color, const float2 xy) {  return float4(ditherBlueNoise(color.rgb, xy, DITHER_BLUENOISE_PRECISION), color.a); }
+
+#endif
+
+#endif

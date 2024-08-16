@@ -9,17 +9,17 @@ license: MIT License (MIT) Copyright (c) 2015 Jamie Owen
 
 #ifndef FNC_BLENDHARDMIX
 #define FNC_BLENDHARDMIX
-float blendHardMix(in float base, in float blend) {
+float blendHardMix(float base, float blend) {
     return (blendVividLight(base, blend) < .5)? 0.: 1.;
 }
 
-float3 blendHardMix(in float3 base, in float3 blend) {
+float3 blendHardMix(float3 base, float3 blend) {
     return float3(blendHardMix(base.r, blend.r),
                 blendHardMix(base.g, blend.g),
                 blendHardMix(base.b, blend.b));
 }
 
-float3 blendHardMix(in float3 base, in float3 blend, in float opacity) {
+float3 blendHardMix(float3 base, float3 blend, float opacity) {
     return (blendHardMix(base, blend) * opacity + base * (1. - opacity));
 }
 #endif

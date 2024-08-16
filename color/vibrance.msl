@@ -1,0 +1,25 @@
+/*
+contributors: Christian Cann Schuldt Jensen ~ CeeJay.dk
+description: |
+    Vibrance is a smart-tool which cleverly increases the intensity of the more muted colors and leaves the already well-saturated colors alone. Prevents sktones from becoming overly saturated and unnatural. 
+    vibrance from https://github.com/CeeJayDK/SweetFX/blob/master/Shaders/Vibrance.fx 
+use: <float3|float4> vibrance(<float3|float4> color, <float> v) 
+license: MIT License (MIT) Copyright (c) 2014 CeeJayDK
+*/
+
+#include "../math/mmax.msl"
+#include "../math/mmin.msl"
+#include "luma.msl"
+
+#ifndef FNC_VIBRANCE
+#define FNC_VIBRANCE
+float3 vibrance(float3 v, float vi) {
+    float max_v = mmax(v);
+    float min_v = mmin(v);
+    float sat = max_v - min_v;
+    float lum = luma(v);
+    return mix(float3(lum), v, 1.0 + (vi * 1.0 - (sign(vi) * sat)));
+}
+
+float4 vibrance(float4 v, float vi) { return float4( vibrance(v.rgb, vi), v.a); }
+#endif

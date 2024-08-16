@@ -1,0 +1,36 @@
+
+#include "space/ryb2rgb.msl"
+#include "space/rgb2ryb.msl"
+#include "../math/sum.msl"
+
+/*
+contributors: Patricio Gonzalez Vivo
+description: Mix colors RYB space.
+use: 
+    - <float3|float4> mixRYB(<float3|float4> colA, <float3|float4> colB, <float> p)
+    - <float4> mixRYB(<float4> colA, <float4> colB, <float4> colC)
+    - <float3> mixRYB(<float3> colA, <float3> colB, <float3> colC, <float3> p)
+    - <float4> mixRYB(<float4> colA, <float4> colB, <float4> colC, <float4> colD)
+    - <float3> mixRYB(<float3> colA, <float3> colB, <float3> colC, <float3> colD, <float4> p) 
+options:
+    - RYB_FAST: Use a faster approximation of the RYB space
+examples:
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/color_mix_ryb.frag
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
+
+#ifndef FNC_MIXRYB
+#define FNC_MIXRYB
+
+float3 mixRYB(float3 A, float3 B, float p) { return ryb2rgb(mix(rgb2ryb(A),rgb2ryb(B), p)); }
+float4 mixRYB(float4 A, float4 B, float p) { return ryb2rgb(mix(rgb2ryb(A),rgb2ryb(B), p)); }
+
+float4 mixRYB(float4 A, float4 B, float4 C) { return float4(ryb2rgb(rgb2ryb(A.rgb) * A.a + rgb2ryb(B.rgb) * B.a + rgb2ryb(C.rgb) * C.a), sum(float3(A.a, B.a, C.a))); }
+float3 mixRYB(float3 A, float3 B, float3 C, float3 p) { return ryb2rgb(rgb2ryb(A) * p.x + rgb2ryb(B) * p.y + rgb2ryb(C) * p.z ); }
+
+float4 mixRYB(float4 A, float4 B, float4 C, float4 D) { return float4(ryb2rgb(rgb2ryb(A.rgb) * A.a + rgb2ryb(B.rgb) * B.a + rgb2ryb(C.rgb) * C.a + rgb2ryb(D.rgb) * D.a), sum(float4(A.a, B.a, C.a, D.a))); }
+float3 mixRYB(float3 A, float3 B, float3 C, float3 D, float4 p) { return ryb2rgb(rgb2ryb(A) * p.x + rgb2ryb(B) * p.y + rgb2ryb(C) * p.z + rgb2ryb(D) * p.w); }
+
+#endif

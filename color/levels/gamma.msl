@@ -1,0 +1,19 @@
+
+/*
+contributors: Johan Ismael
+description: |
+    Color gamma correction similar to Levels adjusment Photoshop
+    Adapted from RomaDura (http://mouaif.wordpress.com/?p=94)
+use: levelsGamma(<float3|float4> color, <float|float3> gamma)
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
+
+#ifndef FNC_GAMMA
+#define FNC_GAMMA
+float3 levelsGamma(float3 v, float3 g) { return pow(v, 1.0 / g); }
+float3 levelsGamma(float3 v, float g) { return levelsGamma(v, float3(g)); }
+float4 levelsGamma(float4 v, float3 g) { return float4(levelsGamma(v.rgb, g), v.a); }
+float4 levelsGamma(float4 v, float g) { return float4(levelsGamma(v.rgb, g), v.a); }
+#endif

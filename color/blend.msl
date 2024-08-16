@@ -1,4 +1,5 @@
 #include "blend/add.msl"
+#include "blend/subtract.msl"
 #include "blend/average.msl"
 #include "blend/colorDodge.msl"
 #include "blend/difference.msl"
@@ -21,4 +22,3 @@
 #include "blend/overlay.msl"
 #include "blend/pinLight.msl"
 #include "blend/screen.msl"
-#include "blend/subtract.msl"

@@ -7,7 +7,7 @@ license: MIT License (MIT) Copyright (c) 2015 Jamie Owen
 
 #ifndef FNC_BLENDAVERAGE
 #define FNC_BLENDAVERAGE
-float blendAverage(in float base, in float blend) { return (base + blend) * .5; }
-float3  blendAverage(in float3 base, in float3 blend) { return (base + blend) * .5; }
-float3  blendAverage(in float3 base, in float3 blend, float opacity) { return (blendAverage(base, blend) * opacity + base * (1. - opacity)); }
+float blendAverage(float base, float blend) { return (base + blend) * .5; }
+float3  blendAverage(float3 base, float3 blend) { return (base + blend) * .5; }
+float3  blendAverage(float3 base, float3 blend, float opacity) { return (blendAverage(base, blend) * opacity + base * (1. - opacity)); }
 #endif

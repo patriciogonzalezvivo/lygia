@@ -1,0 +1,33 @@
+#include "levels/inputRange.msl"
+#include "levels/outputRange.msl"
+#include "levels/gamma.msl"
+
+/*
+contributors: Johan Ismael
+description: |
+    Combines inputRange, outputRange and gamma functions into one
+    Adapted from RomaDura (http://mouaif.wordpress.com/?p=94)
+use: levels(<float3|float4> color, <float|float3> minInput, <float|float3> gamma, <float|float3 maxInput, <float|float3 minOutput, <float|float3 maxOutput)
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
+
+#ifndef FNC_LEVELS
+#define FNC_LEVELS
+float3 levels(float3 v, float3 iMin, float3 g, float3 iMax, float3 oMin, float3 oMax) {
+    return levelsOutputRange( levelsGamma( levelsInputRange(v, iMin, iMax), g), oMin, oMax);
+}
+
+float3 levels(float3 v, float iMin, float g, float iMax, float oMin, float oMax) {
+    return levels(v, float3(iMin), float3(g), float3(iMax), float3(oMin), float3(oMax));
+}
+
+float4 levels(float4 v, float3 iMin, float3 g, float3 iMax, float3 oMin, float3 oMax) {
+    return float4(levels(v.rgb, iMin, g, iMax, oMin, oMax), v.a);
+}
+
+float4 levels(float4 v, float iMin, float g, float iMax, float oMin, float oMax) {
+    return float4(levels(v.rgb, iMin, g, iMax, oMin, oMax), v.a);
+}
+#endif

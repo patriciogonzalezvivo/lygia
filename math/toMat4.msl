@@ -7,9 +7,9 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-#ifndef FNC_TOmatrix<float, 4, 4>
-#define FNC_TOmatrix<float, 4, 4>
-matrix<float, 4, 4> tomatrix<float, 4, 4>(matrix<float, 3, 3> m) {
+#ifndef FNC_TOMAT4
+#define FNC_TOMAT4
+matrix<float, 4, 4> tomat4(matrix<float, 3, 3> m) {
     return matrix<float, 4, 4>(float4(m[0], 0.0), 
                 float4(m[1], 0.0), 
                 float4(m[2], 0.0), 
