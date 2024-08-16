@@ -48,7 +48,7 @@ examples:
 #ifndef FNC_RAYMARCH_VOLUMERENDER
 #define FNC_RAYMARCH_VOLUMERENDER
 
-vec4 raymarchVolume( in vec3 rayOrigin, in vec3 rayDirection, vec3 cameraForward, vec2 st, out float eyeDepth) {
+vec4 raymarchVolume( in vec3 rayOrigin, in vec3 rayDirection, vec2 st, float minDist) {
 
     const float tmin          = RAYMARCH_MIN_DIST;
     const float tmax          = RAYMARCH_MAX_DIST;
@@ -69,10 +69,11 @@ vec4 raymarchVolume( in vec3 rayOrigin, in vec3 rayDirection, vec3 cameraForward
     vec3 position = rayOrigin;
     
     for(int i = 0; i < RAYMARCH_VOLUME_SAMPLES; i++) {
+        vec3 position = rayOrigin + rayDirection * t;
         VolumeMaterial res = RAYMARCH_VOLUME_MAP_FNC(position);
         float extinction = -res.sdf;
         float density = res.density*tstep;
-        if (extinction > 0.0) {
+        if (t < minDist && extinction > 0.0) {
             float sampleTransmittance = exp(-extinction*density);
 
             float transmittanceLight = 1.0;
@@ -100,10 +101,8 @@ vec4 raymarchVolume( in vec3 rayOrigin, in vec3 rayDirection, vec3 cameraForward
         }
 
         float offset = random(st)*(tstep*RAYMARCH_VOLUME_DITHER);
-        position += rayDirection * (tstep + offset);
+        t += tstep + offset;
     }
-
-    eyeDepth = t * dot(rayDirection, cameraForward);
 
     return vec4(color, 1.0);
 }

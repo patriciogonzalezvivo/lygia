@@ -3,6 +3,7 @@
 #include "../space/rotate.glsl"
 #include "../space/lookAtView.glsl"
 #include "raymarch/render.glsl"
+#include "raymarch/volume.glsl"
 #include "material/zero.glsl"
 
 /*
@@ -31,6 +32,10 @@ license:
 
 #ifndef RAYMARCH_RENDER_FNC
 #define RAYMARCH_RENDER_FNC raymarchDefaultRender
+#endif
+
+#ifndef RAYMARCH_VOLUME_RENDER_FNC
+#define RAYMARCH_VOLUME_RENDER_FNC raymarchVolume
 #endif
 
 #ifndef RAYMARCH_CAMERA_FOV
@@ -75,18 +80,16 @@ vec4 raymarch(  mat4 viewMatrix, vec2 st
     for (int i = 0; i < RAYMARCH_MULTISAMPLE; i++) {
         vec3 rayDirection = viewMatrix3 * normalize(vec3((st + offset * pixel)*2.0-1.0, fov));
 
-        #if RAYMARCH_RETURN >= 1
         float sampleDepth = 0.0;
+        float dist = 0.0;
+
+        #if RAYMARCH_RETURN != 2
+            Material mat;        
         #endif
 
-        #if RAYMARCH_RETURN == 0
-            color += RAYMARCH_RENDER_FNC(camera, rayDirection, cameraForward);
-
-        #elif RAYMARCH_RETURN == 1
-            color += RAYMARCH_RENDER_FNC(camera, rayDirection, cameraForward, sampleDepth);
-        
-        #elif RAYMARCH_RETURN == 2
-            color += RAYMARCH_RENDER_FNC(camera, rayDirection, cameraForward, sampleDepth, mat);
+        color += RAYMARCH_RENDER_FNC(camera, rayDirection, cameraForward, dist, sampleDepth, mat);
+        #ifdef RAYMARCH_VOLUME
+        color += RAYMARCH_VOLUME_RENDER_FNC(camera, rayDirection, st, dist);
         #endif
 
         #if RAYMARCH_RETURN >= 1
@@ -198,15 +201,20 @@ vec4 raymarch(  mat4 viewMatrix, vec2 st
 
     // Single sample
     vec3 rayDirection = viewMatrix3 * normalize(vec3(st*2.0-1.0, fov));
+    float dist = 0.0;
+    #if RAYMARCH_RETURN == 0
+        float eyeDepth = 0.0;
+    #endif
+    #if RAYMARCH_RETURN != 2
+        Material mat;        
+    #endif
 
-    return RAYMARCH_RENDER_FNC( camera, rayDirection, cameraForward
-    #if RAYMARCH_RETURN >= 1
-                                ,eyeDepth
+    vec4 color = RAYMARCH_RENDER_FNC( camera, rayDirection, cameraForward, dist, eyeDepth, mat);
+    #ifdef RAYMARCH_VOLUME
+    color += RAYMARCH_VOLUME_RENDER_FNC(camera, rayDirection, st, dist);
     #endif
-    #if RAYMARCH_RETURN == 2
-                                ,mat
-    #endif
-                                );
+
+    return color;
 #endif
 }
 
