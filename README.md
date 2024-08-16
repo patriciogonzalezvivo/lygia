@@ -102,7 +102,7 @@ Alternatively you may clone LYGIA without the git history and reduce the project
     npx degit https://github.com/patriciogonzalezvivo/lygia.git lygia
 ```
 
-If you are concern about the size of the library you may be also interested on pruning the library to only the language you are using. You can do that by using the `prune.py` script. For example:
+If you are concerned about the size of the library you may be also interested on pruning the library to only the language you are using. You can do that by using the `prune.py` script. For example:
 
 ```bash
     python prune.py --all --keep glsl
