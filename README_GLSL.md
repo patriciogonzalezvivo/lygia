@@ -1,4 +1,4 @@
-LYGIA relies on `#include "path/to/file.glsl"` which is defined by Khronos GLSL standard but it's up to the project developer to implemented. Good news is that is not that hard, it just requires a typical C-like MACRO pre-compiler, which is easy to implement with just basic string operations to resolve dependencies.
+LYGIA relies on `#include "path/to/file.glsl"` which is defined by Khronos GLSL standard but it's up to the project developer to implement. Good news is that it's not that hard, it just requires a typical C-like MACRO pre-compiler, which is easy to implement with just basic string operations to resolve dependencies.
 
 Here you can find some examples on different languages:
 
