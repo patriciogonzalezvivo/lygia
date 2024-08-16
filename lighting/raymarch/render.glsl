@@ -30,7 +30,7 @@ examples:
 #ifndef FNC_RAYMARCH_DEFAULT
 #define FNC_RAYMARCH_DEFAULT
 
-vec4 raymarchDefaultRender( in vec3 rayOrigin, in vec3 rayDirection, vec3 cameraForward, vec2 set
+vec4 raymarchDefaultRender( in vec3 rayOrigin, in vec3 rayDirection, vec3 cameraForward
 #if RAYMARCH_RETURN >= 1
                             ,out float eyeDepth
 #endif
