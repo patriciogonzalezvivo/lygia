@@ -1,0 +1,17 @@
+#include "rgb2xyz.msl"
+#include "xyz2lab.msl"
+
+/*
+contributors: Patricio Gonzalez Vivo
+description: Converts a RGB color to Lab color space.
+use: <float3|float4> rgb2lab(<float3|float4> color)
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
+
+#ifndef FNC_RGB2LAB
+#define FNC_RGB2LAB
+float3 rgb2lab( float3 c) { return xyz2lab( rgb2xyz( c ) ); }
+float4 rgb2lab( float4 rgb) { return float4(rgb2lab(rgb.rgb),rgb.a); }
+#endif

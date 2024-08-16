@@ -1,0 +1,14 @@
+#include "space/rgb2luma.msl"
+
+/*
+contributors: Hugh Kennedy (https://github.com/hughsk)
+description: Get the luminosity of a color. From https://github.com/hughsk/glsl-luma/blob/master/index.msl
+use: luma(<float3|float4> color)
+*/
+
+#ifndef FNC_LUMA
+#define FNC_LUMA
+float luma(float v) { return v; }
+float luma(float3 v) { return rgb2luma(v); }
+float luma(float4 v) { return rgb2luma(v.rgb); }
+#endif

@@ -7,7 +7,7 @@ license: MIT License (MIT) Copyright (c) 2015 Jamie Owen
 
 #ifndef FNC_BLENDDIFFERENCE
 #define FNC_BLENDDIFFERENCE
-float blendDifference(in float base, in float blend) { return abs(base-blend); }
-float3  blendDifference(in float3 base, in float3 blend) { return abs(base-blend); }
-float3  blendDifference(in float3 base, in float3 blend, in float opacity) { return (blendDifference(base, blend) * opacity + base * (1. - opacity)); }
+float blendDifference(float base, float blend) { return abs(base-blend); }
+float3  blendDifference(float3 base, float3 blend) { return abs(base-blend); }
+float3  blendDifference(float3 base, float3 blend, float opacity) { return (blendDifference(base, blend) * opacity + base * (1. - opacity)); }
 #endif

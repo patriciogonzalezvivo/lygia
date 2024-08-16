@@ -2,7 +2,7 @@
 #include "../space/hsv2rgb.msl"
 
 /*
-contributors: Romain Dura
+contributors: RomaDura
 description: Color Blend mode creates the result color by combining the luminance of the base color with the hue and saturation of the blend color.
 use: blendColor(<float|float3> base, <float|float3> blend [, <float> opacity])
 license: MIT License (MIT) Copyright (c) 2015 Jamie Owen
@@ -17,7 +17,7 @@ float3 blendColor(float3 base, float3 blend) {
       float3(blendHSL.x, blendHSL.y, baseHSL.z));
 }
 
-float3  blendColor(in float3 base, in float3 blend, float opacity) { 
+float3  blendColor(float3 base, float3 blend, float opacity) { 
     return (blendColor(base, blend) * opacity + base * (1. - opacity)); 
 }
 #endif

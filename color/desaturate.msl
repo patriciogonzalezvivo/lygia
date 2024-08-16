@@ -1,0 +1,19 @@
+/*
+contributors: Patricio Gonzalez Vivo
+description: Change saturation of a color
+use: desaturate(<float|float3|float4> color, float amount)
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
+
+#ifndef FNC_DESATURATE
+#define FNC_DESATURATE
+float3 desaturate(float3 v, float a ) {
+    return mix(v, float3(dot(float3(.3, .59, .11), v)), a);
+}
+
+float4 desaturate(float4 v, float a ) {
+    return float4(desaturate(v.rgb, a), v.a);
+}
+#endif

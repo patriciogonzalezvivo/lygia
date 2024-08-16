@@ -2,7 +2,7 @@
 #include "../space/hsv2rgb.msl"
 
 /*
-contributors: Romain Dura
+contributors: RomaDura
 description: Hue Blend mode creates the result color by combining the luminance and saturation of the base color with the hue of the blend color.
 use: blendHue(<float|float3> base, <float|float3> blend [, <float> opacity])
 license: MIT License (MIT) Copyright (c) 2015 Jamie Owen
@@ -16,7 +16,7 @@ float3 blendHue(float3 base, float3 blend) {
   return hsv2rgb(
       float3(blendHSL.x, baseHSL.y, baseHSL.z));
 }
-float3  blendHue(in float3 base, in float3 blend, float opacity) { 
+float3  blendHue(float3 base, float3 blend, float opacity) { 
     return (blendHue(base, blend) * opacity + base * (1. - opacity)); 
 }
 #endif

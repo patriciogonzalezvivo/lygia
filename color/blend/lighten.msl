@@ -7,17 +7,17 @@ license: MIT License (MIT) Copyright (c) 2015 Jamie Owen
 
 #ifndef FNC_BLENDLIGHTEN
 #define FNC_BLENDLIGHTEN
-float blendLighten(in float base, in float blend) {
+float blendLighten(float base, float blend) {
     return max(blend, base);
 }
 
-float3 blendLighten(in float3 base, in float3 blend) {
+float3 blendLighten(float3 base, float3 blend) {
     return float3(blendLighten(base.r, blend.r),
                 blendLighten(base.g, blend.g),
                 blendLighten(base.b, blend.b));
 }
 
-float3 blendLighten(in float3 base, in float3 blend, in float opacity) {
+float3 blendLighten(float3 base, float3 blend, float opacity) {
     return (blendLighten(base, blend) * opacity + base * (1. - opacity));
 }
 #endif

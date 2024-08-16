@@ -1,0 +1,57 @@
+/*
+description: Include all available color spaces conversions
+*/
+
+// CMYK
+#include "space/cmyk2rgb.msl"
+#include "space/rgb2cmyk.msl"
+
+// Gamma
+#include "space/gamma2linear.msl"
+#include "space/linear2gamma.msl"
+
+// HSV
+#include "space/hsv2rgb.msl"
+#include "space/rgb2hsv.msl"
+
+// Kelvin
+#include "space/k2rgb.msl"
+
+// LAB
+#include "space/rgb2lab.msl"
+#include "space/lab2rgb.msl"
+
+// LMS
+#include "space/rgb2lms.msl"
+#include "space/lms2rgb.msl"
+
+// OkLab
+#include "space/oklab2rgb.msl"
+#include "space/rgb2oklab.msl"
+
+// sRGB
+#include "space/srgb2rgb.msl"
+#include "space/rgb2srgb.msl"
+
+// Wavelength
+//#include "space/w2rgb.msl"
+
+// XYZ
+#include "space/rgb2xyz.msl"
+#include "space/xyz2rgb.msl"
+
+// YCbCr
+#include "space/YCbCr2rgb.msl"
+#include "space/rgb2YCbCr.msl"
+
+// YIQ
+#include "space/yiq2rgb.msl"
+#include "space/rgb2yiq.msl"
+
+// YPbPr
+#include "space/YPbPr2rgb.msl"
+#include "space/rgb2YPbPr.msl"
+
+// YUV
+#include "space/yuv2rgb.msl"
+#include "space/rgb2yuv.msl"
