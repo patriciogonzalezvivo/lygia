@@ -1,4 +1,4 @@
-# Metal Support in Lygia
+# METAL version
 
 Metal support is currently highly experimental and very work in progress.
 
