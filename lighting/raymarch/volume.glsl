@@ -1,6 +1,7 @@
 #include "map.glsl"
 #include "../../generative/random.glsl"
 #include "../../math/const.glsl"
+#include "../material/volumeNew.glsl"
 
 /*
 contributors:  Shadi El Hajj
@@ -40,10 +41,6 @@ examples:
 #define RAYMARCH_VOLUME_MAP_FNC raymarchVolumeMap
 #endif
 
-#ifndef RAYMARCH_VOLUME_DENSITY
-#define RAYMARCH_VOLUME_DENSITY 1.0
-#endif
-
 #ifndef RAYMARCH_VOLUME_DITHER
 #define RAYMARCH_VOLUME_DITHER 0.1
 #endif
@@ -68,36 +65,36 @@ vec4 raymarchVolume( in vec3 rayOrigin, in vec3 rayDirection, vec3 cameraForward
 
     float transmittance = 1.0;
     float t = tmin;
-    vec4 color = vec4(0.0, 0.0, 0.0, 0.0);
+    vec3 color = vec3(0.0, 0.0, 0.0);
     vec3 position = rayOrigin;
     
     for(int i = 0; i < RAYMARCH_VOLUME_SAMPLES; i++) {
-        Material res = RAYMARCH_MAP_FNC(position);
+        VolumeMaterial res = RAYMARCH_VOLUME_MAP_FNC(position);
         float extinction = -res.sdf;
-        float density = RAYMARCH_VOLUME_DENSITY*tstep;
+        float density = res.density*tstep;
         if (extinction > 0.0) {
             float sampleTransmittance = exp(-extinction*density);
 
             float transmittanceLight = 1.0;
             #if defined(LIGHT_DIRECTION) || defined(LIGHT_POSITION)
             for (int j = 0; j < RAYMARCH_VOLUME_SAMPLES_LIGHT; j++) {
-                Material resLight = RAYMARCH_MAP_FNC(position + lightDirection * float(j) * tstepLight);
+                VolumeMaterial resLight = RAYMARCH_VOLUME_MAP_FNC(position + lightDirection * float(j) * tstepLight);
                 float extinctionLight = -resLight.sdf;
-                float densityLight = RAYMARCH_VOLUME_DENSITY*tstepLight;
+                float densityLight = res.density*tstepLight;
                 if (extinctionLight > 0.0) {
                     transmittanceLight *= exp(-extinctionLight*densityLight);
                 }
             }
             #endif
 
-            vec4 luminance = vec4(LIGHT_COLOR, 1.0) * LIGHT_INTENSITY * transmittanceLight;
+            vec3 luminance = LIGHT_COLOR * LIGHT_INTENSITY * transmittanceLight;
 
             // usual scaterring integration
-            //color += res.albedo * luminance * density * transmittance; 
+            //color += res.color * luminance * density * transmittance; 
             
             // energy-conserving scattering integration
-            vec4 integScatt = (luminance - luminance * sampleTransmittance) / max(extinction, EPSILON);       
-            color += res.albedo * transmittance * integScatt;
+            vec3 integScatt = (luminance - luminance * sampleTransmittance) / max(extinction, EPSILON);       
+            color += res.color * transmittance * integScatt;
 
             transmittance *= sampleTransmittance;
         }
@@ -108,7 +105,7 @@ vec4 raymarchVolume( in vec3 rayOrigin, in vec3 rayDirection, vec3 cameraForward
 
     eyeDepth = t * dot(rayDirection, cameraForward);
 
-    return color;
+    return vec4(color, 1.0);
 }
 
 #endif
