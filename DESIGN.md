@@ -10,7 +10,7 @@
 
 ```
 
-* **Multi-language**. Right now most of is GLSL (`*.glsl`) and HLSL (`*.hlsl`), but we are slowly extending to WGSL (`*.wgsl`), CUDA (`*.cuh`) and Metal (`*.msl`).
+* **Multi-language**. Right now, most of the code is GLSL (`*.glsl`) and HLSL (`*.hlsl`), but we are slowly extending to WGSL (`*.wgsl`), CUDA (`*.cuh`) and Metal (`*.msl`).
 
 ```
     math/mirror.glsl

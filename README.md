@@ -102,7 +102,7 @@ Alternatively you may clone LYGIA without the git history and reduce the project
     npx degit https://github.com/patriciogonzalezvivo/lygia.git lygia
 ```
 
-If you are concerned about the size of the library you may be also interested on pruning the library to only the language you are using. You can do that by using the `prune.py` script. For example:
+If you are concerned about the size of the library you might also be interested on pruning the library to only the language you are using. You can do that by using the `prune.py` script. For example:
 
 ```bash
     python prune.py --all --keep glsl
@@ -174,7 +174,7 @@ The functions are divided into different categories:
 * [`morphological/`](https://lygia.xyz/morphological): morphological filters: dilation, erosion, alpha and poisson fill.
 
 
-### How is [design](https://github.com/patriciogonzalezvivo/lygia/blob/main/DESIGN.md)?
+### How is it [designed](https://github.com/patriciogonzalezvivo/lygia/blob/main/DESIGN.md)?
 
 LYGIA is designed to be very granular (each file holds one function), multilanguage (each language have it's onw file extension) and flexible. Flexible how?
 There are some functions whose behavior can be changed using the `#defines` keyword before including it. For example, [gaussian blurs](filter/gaussianBlur.glsl) are usually are done in two passes. By default, these are performed on their 1D version, but if you are interested in using a 2D kernel, all in the same pass, you will need to add the `GAUSSIANBLUR_2D` keyword this way:
@@ -211,11 +211,11 @@ Learn more about [LYGIAS design principles in the DESIGN.md file](https://github
 LYGIA has a long way to go and welcomes all kinds of contributions. You can help by:
 
 * **Bug fixing**
-* **Translation**, keeping parity between languages (GLSL, HLSL, MSL, WGSL, TSL, CUDA, OSL, etc) is a big part of the challenge. Not all language are the same and we want to make sure make sure each function is optimize and carefully crafted for each enviroment. This means the more eyes looking at this the better. Please make sure to read and understand the [Design Principles](DESIGN.md) before starting.
+* **Translation**, keeping parity between languages (GLSL, HLSL, MSL, WGSL, TSL, CUDA, OSL, etc) is a big part of the challenge. Not all language are the same and we want to make sure make sure each function is optimized and carefully crafted for each enviroment. This means, the more eyes looking at this, the better. Please make sure to read and understand the [Design Principles](DESIGN.md) before starting.
 * **New functions or improving the current implementations**. Please take a look to the [Contributing Guidelines](CONTRIBUTING.md) before starting.
-* **Documentation**, each function have a header with some information describing the function. Make sure to fill this information when adding a new function.
-* Adding new **examples** and integrations for new environments like: [GoDot](https://godotengine.org/), [ISF](https://isf.video/), [MaxMSP](https://cycling74.com/products/max), etc.
-* **Financial** [sponsorships](https://github.com/sponsors/patriciogonzalezvivo), right now the money that flows in is invested on the server and infraestructure. Long term plan will be to be hable to pay lead contributors and mantainers.
+* **Documentation**. Each function has a header with some information describing the function. Make sure to fill this information when adding a new function.
+* Adding new **examples** and integrations for new environments like: [Godot](https://godotengine.org/), [ISF](https://isf.video/), [MaxMSP](https://cycling74.com/products/max), etc.
+* **Financial** [sponsorships](https://github.com/sponsors/patriciogonzalezvivo). Right now, the money that flows in is invested on the server and infraestructure. Long term plan will be to be able to pay lead contributors and mantainers.
 
 Collaborators and sponsors are automatically added to the [commercial license](https://lygia.xyz/license). Making a PR or subscribing to the github sponsors program is the shortest path to get access to the commercial license. It's all automated, not red taping. LYGIA belongs to those that takes care of it.
 
