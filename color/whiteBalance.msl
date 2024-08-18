@@ -60,13 +60,13 @@ float3 whiteBalance(float3 rgb, float temp, float tint) {
     float3 balance = w/float3(L, M, S);
 
     // TODO: use our own rgb to lms to rgb
-    const mat3 lin2lms_mat = mat3(
+    const matrix<float, 3, 3> lin2lms_mat = matrix<float, 3, 3>(
         3.90405e-1, 5.49941e-1, 8.92632e-3,
         7.08416e-2, 9.63172e-1, 1.35775e-3,
         2.31082e-2, 1.28021e-1, 9.36245e-1
     );
 
-    const mat3 lms2lin_mat = mat3(
+    const matrix<float, 3, 3> lms2lin_mat = matrix<float, 3, 3>(
         2.85847e+0, -1.62879e+0, -2.48910e-2,
         -2.10182e-1,  1.15820e+0,  3.24281e-4,
         -4.18120e-2, -1.18169e-1,  1.06867e+0
