@@ -1,4 +1,5 @@
 #include "map.glsl"
+#include "../common/attenuation.glsl"
 #include "../common/beerLambert.glsl"
 #include "../../generative/random.glsl"
 #include "../../math/const.glsl"
@@ -71,18 +72,20 @@ vec4 raymarchVolume( in vec3 rayOrigin, in vec3 rayDirection, vec2 st, float min
         if (t < minDist && extinction > 0.0) {
             float sampleTransmittance = beerLambert(density, extinction);
 
-            float transmittanceLight = 1.0;
             #if defined(LIGHT_DIRECTION) || defined(LIGHT_POSITION)
-            for (int j = 0; j < RAYMARCH_VOLUME_SAMPLES_LIGHT; j++) {
-                
-                #if defined(LIGHT_POSITION) // point light
-                float tstepLight = distance(LIGHT_POSITION, position)/float(RAYMARCH_VOLUME_SAMPLES_LIGHT);
-                vec3 rayDirectionLight = normalize(LIGHT_POSITION - position);
-                #else // directional light
-                float tstepLight = tmax/float(RAYMARCH_VOLUME_SAMPLES_LIGHT);
-                vec3 rayDirectionLight = -LIGHT_DIRECTION;
-                #endif
-                
+            #if defined(LIGHT_DIRECTION) // directional light
+            float tstepLight = tmax/float(RAYMARCH_VOLUME_SAMPLES_LIGHT);
+            vec3 rayDirectionLight = -LIGHT_DIRECTION;
+            const float attenuationLight = 1.0;
+            #else // point light
+            float distToLight = distance(LIGHT_POSITION, position);
+            float tstepLight = distToLight/float(RAYMARCH_VOLUME_SAMPLES_LIGHT);
+            vec3 rayDirectionLight = normalize(LIGHT_POSITION - position);
+            float attenuationLight = attenuation(distToLight);
+            #endif
+
+            float transmittanceLight = 1.0;
+            for (int j = 0; j < RAYMARCH_VOLUME_SAMPLES_LIGHT; j++) {                
                 vec3 positionLight = position + rayDirectionLight * j * tstepLight;
                 VolumeMaterial resLight = RAYMARCH_VOLUME_MAP_FNC(positionLight);
                 float extinctionLight = -resLight.sdf;
@@ -91,9 +94,10 @@ vec4 raymarchVolume( in vec3 rayOrigin, in vec3 rayDirection, vec2 st, float min
                     transmittanceLight *= beerLambert(densityLight, extinctionLight);
                 }
             }
+            vec3 luminance = LIGHT_COLOR * LIGHT_INTENSITY * attenuationLight * transmittanceLight;
+            #else // no lighting
+            vec3 luminance = 1.0;
             #endif
-
-            vec3 luminance = LIGHT_COLOR * LIGHT_INTENSITY * transmittanceLight;
 
             // usual scaterring integration
             //color += res.color * luminance * density * transmittance; 
