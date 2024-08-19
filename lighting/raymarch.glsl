@@ -70,8 +70,8 @@ vec4 raymarch(  mat4 viewMatrix, vec2 st
     eyeDepth = 0.0;
     #endif
     #if RAYMARCH_RETURN == 2
-    Material tmp;
-    materialZero(tmp);
+    Material matAcc;
+    materialZero(matAcc);
     #endif
 
     vec2 pixel = 1.0/RESOLUTION;
@@ -98,52 +98,52 @@ vec4 raymarch(  mat4 viewMatrix, vec2 st
         
         #if RAYMARCH_RETURN == 2
             // Accumulate material properties
-            tmp.albedo += mat.albedo;
-            tmp.emissive += mat.emissive;
-            tmp.position += mat.position;
-            tmp.normal += mat.normal;
+            matAcc.albedo += mat.albedo;
+            matAcc.emissive += mat.emissive;
+            matAcc.position += mat.position;
+            matAcc.normal += mat.normal;
 
             #if defined(SCENE_BACK_SURFACE)
-            tmp.normal_back += mat.normal_back;
+            matAcc.normal_back += mat.normal_back;
             #endif
 
-            tmp.ior += mat.ior;
-            tmp.f0 += mat.f0;
-            tmp.roughness += mat.roughness;
-            tmp.metallic += mat.metallic;
-            tmp.ambientOcclusion += mat.ambientOcclusion;
+            matAcc.ior += mat.ior;
+            matAcc.f0 += mat.f0;
+            matAcc.roughness += mat.roughness;
+            matAcc.metallic += mat.metallic;
+            matAcc.ambientOcclusion += mat.ambientOcclusion;
 
             #if defined(SHADING_MODEL_CLEAR_COAT)
-            tmp.clearCoat += mat.clearCoat;
-            tmp.clearCoatRoughness += mat.clearCoatRoughness;
+            matAcc.clearCoat += mat.clearCoat;
+            matAcc.clearCoatRoughness += mat.clearCoatRoughness;
             #if defined(MATERIAL_HAS_CLEAR_COAT_NORMAL)
-            tmp.clearCoatNormal += mat.clearCoatNormal;
+            matAcc.clearCoatNormal += mat.clearCoatNormal;
             #endif
             #endif
 
             #if defined(SHADING_MODEL_IRIDESCENCE)
-            tmp.thickness  += mat.thickness;
+            matAcc.thickness  += mat.thickness;
             #endif
 
             #if defined(SHADING_MODEL_SUBSURFACE)
-            tmp.subsurfaceColor += mat.subsurfaceColor;
-            tmp.subsurfacePower += mat.subsurfacePower;
-            tmp.subsurfaceThickness += mat.subsurfaceThickness;
+            matAcc.subsurfaceColor += mat.subsurfaceColor;
+            matAcc.subsurfacePower += mat.subsurfacePower;
+            matAcc.subsurfaceThickness += mat.subsurfaceThickness;
             #endif
 
             #if defined(SHADING_MODEL_CLOTH)
-            tmp.sheenColor += mat.sheenColor;
+            matAcc.sheenColor += mat.sheenColor;
             #endif
 
             #if defined(SHADING_MODEL_SPECULAR_GLOSSINESS)
-            tmp.specularColor += mat.specularColor;
-            tmp.glossiness += mat.glossiness;
+            matAcc.specularColor += mat.specularColor;
+            matAcc.glossiness += mat.glossiness;
             #endif
 
             // I don't thing nobody needs this
-            // tmp.V += mat.V;
-            // tmp.R += mat.R;
-            // tmp.NoV += mat.NoV;
+            // matAcc.V += mat.V;
+            // matAcc.R += mat.R;
+            // matAcc.NoV += mat.NoV;
         #endif
 
         offset = rotate(offset, HALF_PI);
@@ -156,44 +156,44 @@ vec4 raymarch(  mat4 viewMatrix, vec2 st
     #if RAYMARCH_RETURN == 2
 
         // Average material
-        mat.albedo = tmp.albedo * RAYMARCH_MULTISAMPLE_FACTOR;
-        mat.emissive = tmp.emissive * RAYMARCH_MULTISAMPLE_FACTOR;
-        mat.position = tmp.position * RAYMARCH_MULTISAMPLE_FACTOR;
-        mat.normal = tmp.normal * RAYMARCH_MULTISAMPLE_FACTOR;
+        mat.albedo = matAcc.albedo * RAYMARCH_MULTISAMPLE_FACTOR;
+        mat.emissive = matAcc.emissive * RAYMARCH_MULTISAMPLE_FACTOR;
+        mat.position = matAcc.position * RAYMARCH_MULTISAMPLE_FACTOR;
+        mat.normal = matAcc.normal * RAYMARCH_MULTISAMPLE_FACTOR;
         #if defined(SCENE_BACK_SURFACE)
-        mat.normal_back = tmp.normal_back * RAYMARCH_MULTISAMPLE_FACTOR;
+        mat.normal_back = matAcc.normal_back * RAYMARCH_MULTISAMPLE_FACTOR;
         #endif
-        mat.ior = tmp.ior * RAYMARCH_MULTISAMPLE_FACTOR;
-        mat.f0 = tmp.f0 * RAYMARCH_MULTISAMPLE_FACTOR;
-        mat.roughness = tmp.roughness * RAYMARCH_MULTISAMPLE_FACTOR;
-        mat.metallic = tmp.metallic * RAYMARCH_MULTISAMPLE_FACTOR;
-        mat.ambientOcclusion = tmp.ambientOcclusion * RAYMARCH_MULTISAMPLE_FACTOR;
+        mat.ior = matAcc.ior * RAYMARCH_MULTISAMPLE_FACTOR;
+        mat.f0 = matAcc.f0 * RAYMARCH_MULTISAMPLE_FACTOR;
+        mat.roughness = matAcc.roughness * RAYMARCH_MULTISAMPLE_FACTOR;
+        mat.metallic = matAcc.metallic * RAYMARCH_MULTISAMPLE_FACTOR;
+        mat.ambientOcclusion = matAcc.ambientOcclusion * RAYMARCH_MULTISAMPLE_FACTOR;
         #if defined(SHADING_MODEL_CLEAR_COAT)
-        mat.clearCoat = tmp.clearCoat * RAYMARCH_MULTISAMPLE_FACTOR;
-        mat.clearCoatRoughness = tmp.clearCoatRoughness * RAYMARCH_MULTISAMPLE_FACTOR;
+        mat.clearCoat = matAcc.clearCoat * RAYMARCH_MULTISAMPLE_FACTOR;
+        mat.clearCoatRoughness = matAcc.clearCoatRoughness * RAYMARCH_MULTISAMPLE_FACTOR;
         #if defined(MATERIAL_HAS_CLEAR_COAT_NORMAL)
-        mat.clearCoatNormal = tmp.clearCoatNormal * RAYMARCH_MULTISAMPLE_FACTOR;
+        mat.clearCoatNormal = matAcc.clearCoatNormal * RAYMARCH_MULTISAMPLE_FACTOR;
         #endif
         #endif
         #if defined(SHADING_MODEL_IRIDESCENCE)
-        mat.thickness = tmp.thickness * RAYMARCH_MULTISAMPLE_FACTOR;
+        mat.thickness = matAcc.thickness * RAYMARCH_MULTISAMPLE_FACTOR;
         #endif
         #if defined(SHADING_MODEL_SUBSURFACE)
-        mat.subsurfaceColor = tmp.subsurfaceColor * RAYMARCH_MULTISAMPLE_FACTOR;
-        mat.subsurfacePower = tmp.subsurfacePower * RAYMARCH_MULTISAMPLE_FACTOR;
-        mat.subsurfaceThickness = tmp.subsurfaceThickness * RAYMARCH_MULTISAMPLE_FACTOR;
+        mat.subsurfaceColor = matAcc.subsurfaceColor * RAYMARCH_MULTISAMPLE_FACTOR;
+        mat.subsurfacePower = matAcc.subsurfacePower * RAYMARCH_MULTISAMPLE_FACTOR;
+        mat.subsurfaceThickness = matAcc.subsurfaceThickness * RAYMARCH_MULTISAMPLE_FACTOR;
         #endif
         #if defined(SHADING_MODEL_CLOTH)
-        mat.sheenColor = tmp.sheenColor * RAYMARCH_MULTISAMPLE_FACTOR;
+        mat.sheenColor = matAcc.sheenColor * RAYMARCH_MULTISAMPLE_FACTOR;
         #endif
         #if defined(SHADING_MODEL_SPECULAR_GLOSSINESS)
-        mat.specularColor = tmp.specularColor * RAYMARCH_MULTISAMPLE_FACTOR;
-        mat.glossiness = tmp.glossiness * RAYMARCH_MULTISAMPLE_FACTOR;
+        mat.specularColor = matAcc.specularColor * RAYMARCH_MULTISAMPLE_FACTOR;
+        mat.glossiness = matAcc.glossiness * RAYMARCH_MULTISAMPLE_FACTOR;
         #endif
         // I don't thing nobody needs this
-        // mat.V = tmp.V * RAYMARCH_MULTISAMPLE_FACTOR;
-        // mat.R = tmp.R * RAYMARCH_MULTISAMPLE_FACTOR;
-        // mat.NoV = tmp.NoV * RAYMARCH_MULTISAMPLE_FACTOR;
+        // mat.V = matAcc.V * RAYMARCH_MULTISAMPLE_FACTOR;
+        // mat.R = matAcc.R * RAYMARCH_MULTISAMPLE_FACTOR;
+        // mat.NoV = matAcc.NoV * RAYMARCH_MULTISAMPLE_FACTOR;
     #endif
     
     return color * RAYMARCH_MULTISAMPLE_FACTOR;
