@@ -76,7 +76,7 @@ float4 raymarchVolume(in float3 rayOrigin, in float3 rayDirection, float2 st, fl
         float density = res.density * tstep;
         if (t < minDist && extinction > 0.0)
         {
-            float sampleTransmittance = exp(-extinction * density);
+            float sampleTransmittance = beerLambert(density, extinction);
 
             float transmittanceLight = 1.0;
 #if defined(LIGHT_DIRECTION)
@@ -85,7 +85,7 @@ float4 raymarchVolume(in float3 rayOrigin, in float3 rayDirection, float2 st, fl
                 float extinctionLight = -resLight.sdf;
                 float densityLight = res.density*tstepLight;
                 if (extinctionLight > 0.0) {
-                    transmittanceLight *= exp(-extinctionLight*densityLight);
+                    transmittanceLight *= beerLambert(densityLight, extinctionLight);
                 }
             }
 #endif

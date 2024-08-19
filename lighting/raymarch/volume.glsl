@@ -1,4 +1,5 @@
 #include "map.glsl"
+#include "../common/beerLambert.glsl"
 #include "../../generative/random.glsl"
 #include "../../math/const.glsl"
 #include "../material/volumeNew.glsl"
@@ -77,7 +78,7 @@ vec4 raymarchVolume( in vec3 rayOrigin, in vec3 rayDirection, vec2 st, float min
         float extinction = -res.sdf;
         float density = res.density*tstep;
         if (t < minDist && extinction > 0.0) {
-            float sampleTransmittance = exp(-extinction*density);
+            float sampleTransmittance = beerLambert(density, extinction);
 
             float transmittanceLight = 1.0;
             #if defined(LIGHT_DIRECTION) || defined(LIGHT_POSITION)
@@ -86,7 +87,7 @@ vec4 raymarchVolume( in vec3 rayOrigin, in vec3 rayDirection, vec2 st, float min
                 float extinctionLight = -resLight.sdf;
                 float densityLight = res.density*tstepLight;
                 if (extinctionLight > 0.0) {
-                    transmittanceLight *= exp(-extinctionLight*densityLight);
+                    transmittanceLight *= beerLambert(densityLight, extinctionLight);
                 }
             }
             #endif
