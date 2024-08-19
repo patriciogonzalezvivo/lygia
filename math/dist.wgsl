@@ -5,6 +5,7 @@ notes:
     - While the GLSL and HLSL versions of this file support defining the default distance function (DIST_FNC), WGSL does not have a standard way to do this. As such, the current implementation uses distEuclidean.
 options:
     - DIST_MINKOWSKI_P: the power of the Minkowski distance function (1.0 Manhattan, 2.0 Euclidean, Infinity Chebychev)
+license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 */
 
 const DIST_MINKOWSKI_P: f32 = 2.0; // 1: Manhattan, 2: Euclidean, Infinity: Chebychev
