@@ -1,101 +1,111 @@
 #include "map.hlsl"
-#include "normal.hlsl"
+#include "../../generative/random.hlsl"
+#include "../../math/const.hlsl"
+#include "../material/volumeNew.hlsl"
 
 /*
-contributors:  Inigo Quiles
-description: Default raymarching renderer
-use: <float4> raymarchVolume( in <float3> rayOriging, in <float3> rayDirection, in <float3> cameraForward,
-    out <float3> eyeDepth, out <float3> worldPosition, out <float3> worldNormal ) 
+contributors:  Shadi El Hajj
+description: Default raymarching renderer. Based on Sébastien Hillaire's paper "Physically Based Sky, Atmosphere & Cloud Rendering in Frostbite"
+use: <float4> raymarchVolume( in <float3> rayOrigin, in <float3> rayDirection, in <float3> cameraForward, <float2> st, float minDist ) 
 options:
-    - RAYMARCH_BACKGROUND float3(0.0)
-    - LIGHT_COLOR     float3(0.5)
-    - LIGHT_POSITION  float3(0.0, 10.0, -50.0)
+    - RAYMARCH_VOLUME_SAMPLES       256
+    - RAYMARCH_VOLUME_SAMPLES_LIGHT 8
+    - RAYMARCH_VOLUME_MAP_FNC       raymarchVolumeMap
+    - RAYMARCH_VOLUME_DITHER        0.1
+    - LIGHT_COLOR                   float3(0.5)
+    - LIGHT_INTENSITY               1.0
+    - LIGHT_POSITION                float3(0.0, 10.0, -50.0)
+examples:
+    - /shaders/lighting_raymarching_volume.frag
 */
 
 #ifndef LIGHT_COLOR
 #if defined(GLSLVIEWER)
 #define LIGHT_COLOR u_lightColor
 #else
-#define LIGHT_COLOR float3(0.5, 0.5, 0.5)
+#define LIGHT_COLOR float3(0.5)
 #endif
 #endif
 
-#ifndef RAYMARCH_BACKGROUND
-#define RAYMARCH_BACKGROUND float3(0.0, 0.0, 0.0)
+#ifndef LIGHT_INTENSITY
+#define LIGHT_INTENSITY 1.0
 #endif
 
-#ifndef RAYMARCH_SAMPLES
-#define RAYMARCH_SAMPLES 64
+#ifndef RAYMARCH_VOLUME_SAMPLES
+#define RAYMARCH_VOLUME_SAMPLES 256
 #endif
 
-#ifndef RAYMARCH_MIN_DIST
-#define RAYMARCH_MIN_DIST 1.0
+#ifndef RAYMARCH_VOLUME_SAMPLES_LIGHT
+#define RAYMARCH_VOLUME_SAMPLES_LIGHT 8
 #endif
 
-#ifndef RAYMARCH_MAX_DIST
-#define RAYMARCH_MAX_DIST 10.0
+#ifndef RAYMARCH_VOLUME_MAP_FNC
+#define RAYMARCH_VOLUME_MAP_FNC raymarchVolumeMap
 #endif
 
-#ifndef RAYMARCH_MAP_FNC
-#define RAYMARCH_MAP_FNC(POS) raymarchMap(POS)
+#ifndef RAYMARCH_VOLUME_DITHER
+#define RAYMARCH_VOLUME_DITHER 0.1
 #endif
 
 #ifndef FNC_RAYMARCH_VOLUMERENDER
 #define FNC_RAYMARCH_VOLUMERENDER
 
-float4 raymarchVolume(in float3 rayOrigin, in float3 rayDirection, float3 cameraForward,
-                      out float eyeDepth, out float3 worldPos, out float3 worldNormal)
+float4 raymarchVolume(in float3 rayOrigin, in float3 rayDirection, float2 st, float minDist)
 {
 
-    const float tmin        = RAYMARCH_MIN_DIST;
-    const float tmax        = RAYMARCH_MAX_DIST;
-    const float fSamples    = float(RAYMARCH_SAMPLES);
-    const float tstep       = tmax/fSamples;
-    const float absorption  = 100.;
+    const float tmin = RAYMARCH_MIN_DIST;
+    const float tmax = RAYMARCH_MAX_DIST;
+    const float tstep = tmax / float(RAYMARCH_VOLUME_SAMPLES);
+    const float tstepLight = tmax / float(RAYMARCH_VOLUME_SAMPLES_LIGHT);
 
-    #ifdef LIGHT_POSITION
-    const int   nbSampleLight   = 6;
-    const float fSampleLight    = float(nbSampleLight);
-    const float tstepl          = tmax/fSampleLight;
-    float3 sun_direction          = normalize( LIGHT_POSITION );
-    #endif
+#if defined(LIGHT_DIRECTION)
+    float3 lightDirection       = LIGHT_DIRECTION;
+#endif
 
-    float T = 1.;
+    float transmittance = 1.0;
     float t = tmin;
-    float4 col = float4(0.0, 0.0, 0.0, 0.0);
-    float3 pos = rayOrigin;
-    for(int i = 0; i < RAYMARCH_SAMPLES; i++) {
-        Material res    = RAYMARCH_MAP_FNC(pos);
-        float density = (0.1 - res.sdf);
-        if (density > 0.0) {
-            float tmp = density / fSamples;
-            T *= 1.0 - tmp * absorption;
-            if( T <= 0.001)
-                break;
+    float3 color = float3(0.0, 0.0, 0.0);
+    float3 position = rayOrigin;
+    
+    for (int i = 0; i < RAYMARCH_VOLUME_SAMPLES; i++)
+    {
+        float3 position = rayOrigin + rayDirection * t;
+        VolumeMaterial res = RAYMARCH_VOLUME_MAP_FNC(position);
+        float extinction = -res.sdf;
+        float density = res.density * tstep;
+        if (t < minDist && extinction > 0.0)
+        {
+            float sampleTransmittance = exp(-extinction * density);
 
-            col += res.albedo * fSamples * tmp * T;
-                
-            //Light scattering
-            #ifdef LIGHT_POSITION
-            float Tl = 1.0;
-            for (int j = 0; j < nbSampleLight; j++) {
-                float densityLight = RAYMARCH_MAP_FNC( pos + sun_direction * float(j) * tstepl ).sdf;
-                if (densityLight>0.)
-                    Tl *= 1. - densityLight * absorption/fSamples;
-                if (Tl <= 0.01)
-                    break;
+            float transmittanceLight = 1.0;
+#if defined(LIGHT_DIRECTION)
+            for (int j = 0; j < RAYMARCH_VOLUME_SAMPLES_LIGHT; j++) {
+                VolumeMaterial resLight = RAYMARCH_VOLUME_MAP_FNC(position + lightDirection * float(j) * tstepLight);
+                float extinctionLight = -resLight.sdf;
+                float densityLight = res.density*tstepLight;
+                if (extinctionLight > 0.0) {
+                    transmittanceLight *= exp(-extinctionLight*densityLight);
+                }
             }
-            col += float4(LIGHT_COLOR * 80. * tmp * T * Tl, 1.0);
-            #endif
+#endif
+
+            float3 luminance = LIGHT_COLOR * LIGHT_INTENSITY * transmittanceLight;
+
+            // usual scaterring integration
+            //color += res.color * luminance * density * transmittance; 
+            
+            // energy-conserving scattering integration
+            float3 integScatt = (luminance - luminance * sampleTransmittance) / max(extinction, EPSILON);
+            color += res.color * transmittance * integScatt;
+
+            transmittance *= sampleTransmittance;
         }
-        pos += rayDirection * tstep;
+
+        float offset = random(st) * (tstep * RAYMARCH_VOLUME_DITHER);
+        t += tstep + offset;
     }
 
-    worldPos = rayOrigin + t * rayDirection;
-    worldNormal = raymarchNormal( worldPos );
-    eyeDepth = t * dot(rayDirection, cameraForward);
-
-    return col;
+    return float4(color, 1.0);
 }
 
 #endif
