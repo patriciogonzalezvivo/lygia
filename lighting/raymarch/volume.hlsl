@@ -5,7 +5,7 @@
 
 /*
 contributors:  Shadi El Hajj
-description: Default raymarching renderer. Based on Sébastien Hillaire's paper "Physically Based Sky, Atmosphere & Cloud Rendering in Frostbite"
+description: Default raymarching renderer. Based on Sï¿½bastien Hillaire's paper "Physically Based Sky, Atmosphere & Cloud Rendering in Frostbite"
 use: <float4> raymarchVolume( in <float3> rayOrigin, in <float3> rayDirection, in <float3> cameraForward, <float2> st, float minDist ) 
 options:
     - RAYMARCH_VOLUME_SAMPLES       256
@@ -17,6 +17,7 @@ options:
     - LIGHT_POSITION                float3(0.0, 10.0, -50.0)
 examples:
     - /shaders/lighting_raymarching_volume.frag
+license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 */
 
 #ifndef LIGHT_COLOR

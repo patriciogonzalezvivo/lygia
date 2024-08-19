@@ -7,6 +7,7 @@ description: |
 use:
     - void volumeMaterialNew(out <volumeMaterial> _mat)
     - <volumeMaterial> volumeMaterialNew()
+license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 */
 
 #ifndef FNC_VOLUME_MATERIAL_NEW
