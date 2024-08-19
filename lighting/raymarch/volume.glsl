@@ -14,9 +14,10 @@ options:
     - RAYMARCH_VOLUME_SAMPLES_LIGHT 8
     - RAYMARCH_VOLUME_MAP_FNC       raymarchVolumeMap
     - RAYMARCH_VOLUME_DITHER        0.1
-    - LIGHT_COLOR                   vec3(0.5)
+    - LIGHT_COLOR                   vec3(0.5, 0.5, 0.5)
     - LIGHT_INTENSITY               1.0
-    - LIGHT_POSITION                vec3(0.0, 10.0, -50.0)
+    - LIGHT_POSITION
+    - LIGHT_DIRECTION
 examples:
     - /shaders/lighting_raymarching_volume.frag
 license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
@@ -99,7 +100,7 @@ vec4 raymarchVolume( in vec3 rayOrigin, in vec3 rayDirection, vec2 st, float min
             vec3 luminance = 1.0;
             #endif
 
-            // usual scaterring integration
+            // usual scattering integration
             //color += res.color * luminance * density * transmittance; 
             
             // energy-conserving scattering integration
@@ -113,7 +114,7 @@ vec4 raymarchVolume( in vec3 rayOrigin, in vec3 rayDirection, vec2 st, float min
         t += tstep + offset;
     }
 
-    return vec4(color, 1.0);
+    return vec4(color, 0.0);
 }
 
 #endif

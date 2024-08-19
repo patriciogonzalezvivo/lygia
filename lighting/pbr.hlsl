@@ -1,32 +1,3 @@
-#ifndef CAMERA_POSITION
-#if defined(UNITY_COMPILER_HLSL)
-#define CAMERA_POSITION _WorldSpaceCameraPos
-#else
-#define CAMERA_POSITION float3(0.0, 0.0, -10.0)
-#endif
-#endif
-
-#ifndef LIGHT_DIRECTION
-#if defined(UNITY_COMPILER_HLSL)
-#define LIGHT_DIRECTION _WorldSpaceLightPos0.xyz
-#else
-#define LIGHT_DIRECTION float3(0.0, 10.0, -50.0)
-#endif
-#endif
-
-#ifndef LIGHT_COLOR
-#if defined(UNITY_COMPILER_HLSL)
-#include <UnityLightingCommon.cginc>
-#define LIGHT_COLOR     _LightColor0.rgb
-#else
-#define LIGHT_COLOR     float3(0.5, 0.5, 0.5)
-#endif
-#endif
-
-#ifndef IBL_LUMINANCE
-#define IBL_LUMINANCE   1.0
-#endif
-
 #include "../color/tonemap.hlsl"
 
 #include "material.hlsl"
@@ -55,6 +26,18 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
+
+#ifndef CAMERA_POSITION
+#if defined(UNITY_COMPILER_HLSL)
+#define CAMERA_POSITION _WorldSpaceCameraPos
+#else
+#define CAMERA_POSITION float3(0.0, 0.0, -10.0)
+#endif
+#endif
+
+#ifndef IBL_LUMINANCE
+#define IBL_LUMINANCE   1.0
+#endif
 
 #ifndef FNC_PBR
 #define FNC_PBR
