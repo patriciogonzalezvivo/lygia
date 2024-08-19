@@ -1,4 +1,5 @@
 #include "map.hlsl"
+#include "../common/beerLambert.hlsl"
 #include "../../generative/random.hlsl"
 #include "../../math/const.hlsl"
 #include "../material/volumeNew.hlsl"
