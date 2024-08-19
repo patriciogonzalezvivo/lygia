@@ -94,9 +94,7 @@ float4 raymarchVolume(in float3 rayOrigin, in float3 rayDirection, float2 st, fl
                 VolumeMaterial resLight = RAYMARCH_VOLUME_MAP_FNC(positionLight);
                 float extinctionLight = -resLight.sdf;
                 float densityLight = resLight.density*tstepLight;
-                if (extinctionLight > 0.0) {
-                    transmittanceLight *= beerLambert(densityLight, extinctionLight);
-                }
+                transmittanceLight *= beerLambert(densityLight, extinctionLight);
             }
             float3 luminance = LIGHT_COLOR * LIGHT_INTENSITY * attenuationLight * transmittanceLight;
             #else // no lighting
