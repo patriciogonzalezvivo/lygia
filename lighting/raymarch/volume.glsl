@@ -76,7 +76,7 @@ vec4 raymarchVolume( in vec3 rayOrigin, in vec3 rayDirection, vec2 st, float min
             #if defined(LIGHT_DIRECTION) || defined(LIGHT_POSITION)
             #if defined(LIGHT_DIRECTION) // directional light
             float tstepLight = tmax/float(RAYMARCH_VOLUME_SAMPLES_LIGHT);
-            vec3 rayDirectionLight = -LIGHT_DIRECTION;
+            vec3 rayDirectionLight = LIGHT_DIRECTION;
             const float attenuationLight = 1.0;
             #else // point light
             float distToLight = distance(LIGHT_POSITION, position);
@@ -90,7 +90,7 @@ vec4 raymarchVolume( in vec3 rayOrigin, in vec3 rayDirection, vec2 st, float min
                 vec3 positionLight = position + rayDirectionLight * j * tstepLight;
                 VolumeMaterial resLight = RAYMARCH_VOLUME_MAP_FNC(positionLight);
                 float extinctionLight = -resLight.sdf;
-                float densityLight = res.density*tstepLight;
+                float densityLight = resLight.density*tstepLight;
                 if (extinctionLight > 0.0) {
                     transmittanceLight *= beerLambert(densityLight, extinctionLight);
                 }
