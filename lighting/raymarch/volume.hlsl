@@ -80,16 +80,17 @@ float4 raymarchVolume(in float3 rayOrigin, in float3 rayDirection, float2 st, fl
             float sampleTransmittance = beerLambert(density, extinction);
 
             float transmittanceLight = 1.0;
-#if defined(LIGHT_DIRECTION)
+            #if defined(LIGHT_DIRECTION)
             for (int j = 0; j < RAYMARCH_VOLUME_SAMPLES_LIGHT; j++) {
-                VolumeMaterial resLight = RAYMARCH_VOLUME_MAP_FNC(position + lightDirection * float(j) * tstepLight);
+                float3 positionLight = position - lightDirection * float(j) * tstepLight;
+                VolumeMaterial resLight = RAYMARCH_VOLUME_MAP_FNC(positionLight);
                 float extinctionLight = -resLight.sdf;
                 float densityLight = res.density*tstepLight;
                 if (extinctionLight > 0.0) {
                     transmittanceLight *= beerLambert(densityLight, extinctionLight);
                 }
             }
-#endif
+            #endif
 
             float3 luminance = LIGHT_COLOR * LIGHT_INTENSITY * transmittanceLight;
 

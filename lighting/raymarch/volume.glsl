@@ -63,10 +63,6 @@ vec4 raymarchVolume( in vec3 rayOrigin, in vec3 rayDirection, vec2 st, float min
     vec3 lightDirection       = LIGHT_DIRECTION;
     #endif
 
-    #if defined(LIGHT_POSITION)
-    vec3 lightDirection       = normalize( LIGHT_POSITION );
-    #endif
-
     float transmittance = 1.0;
     float t = tmin;
     vec3 color = vec3(0.0, 0.0, 0.0);
@@ -81,9 +77,10 @@ vec4 raymarchVolume( in vec3 rayOrigin, in vec3 rayDirection, vec2 st, float min
             float sampleTransmittance = beerLambert(density, extinction);
 
             float transmittanceLight = 1.0;
-            #if defined(LIGHT_DIRECTION) || defined(LIGHT_POSITION)
+            #if defined(LIGHT_DIRECTION)
             for (int j = 0; j < RAYMARCH_VOLUME_SAMPLES_LIGHT; j++) {
-                VolumeMaterial resLight = RAYMARCH_VOLUME_MAP_FNC(position + lightDirection * float(j) * tstepLight);
+                vec3 positionLight = position - lightDirection * float(j) * tstepLight;
+                VolumeMaterial resLight = RAYMARCH_VOLUME_MAP_FNC(positionLight);
                 float extinctionLight = -resLight.sdf;
                 float densityLight = res.density*tstepLight;
                 if (extinctionLight > 0.0) {
