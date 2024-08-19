@@ -102,11 +102,11 @@ float4 raymarchVolume(in float3 rayOrigin, in float3 rayDirection, float2 st, fl
             #endif
 
             // usual scattering integration
-            //color += res.color * luminance * density * transmittance; 
+            //color += res.albedo * luminance * density * transmittance; 
             
             // energy-conserving scattering integration
             float3 integScatt = (luminance - luminance * sampleTransmittance) / max(extinction, EPSILON);
-            color += res.color * transmittance * integScatt;
+            color += res.albedo * transmittance * integScatt;
 
             transmittance *= sampleTransmittance;
         }
