@@ -14,7 +14,7 @@ license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 #define FNC_VOLUME_MATERIAL_NEW
 
 void volumeMaterialNew(out VolumeMaterial _mat) {
-    _mat.color   = float3(1.0, 1.0, 1.0);
+    _mat.albedo   = float3(1.0, 1.0, 1.0);
     _mat.density = 1.0;
     _mat.sdf     = RAYMARCH_MAX_DIST;
 
@@ -26,16 +26,16 @@ VolumeMaterial volumeMaterialNew() {
     return mat;
 }
 
-VolumeMaterial volumeMaterialNew(float3 color, float sdf) {
+VolumeMaterial volumeMaterialNew(float3 albedo, float sdf) {
     VolumeMaterial mat = volumeMaterialNew();
-    mat.color.rgb = color;
+    mat.albedo.rgb = albedo;
     mat.sdf = sdf;
     return mat;
 }
 
-VolumeMaterial volumeMaterialNew(float3 color, float density, float sdf) {
+VolumeMaterial volumeMaterialNew(float3 albedo, float density, float sdf) {
     VolumeMaterial mat = volumeMaterialNew();
-    mat.color.rgb = color;
+    mat.albedo.rgb = albedo;
     mat.density = density;
     mat.sdf = sdf;
     return mat;

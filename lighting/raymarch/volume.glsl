@@ -99,11 +99,11 @@ vec4 raymarchVolume( in vec3 rayOrigin, in vec3 rayDirection, vec2 st, float min
             #endif
 
             // usual scattering integration
-            //color += res.color * luminance * density * transmittance; 
+            //color += res.albedo * luminance * density * transmittance; 
             
             // energy-conserving scattering integration
             vec3 integScatt = (luminance - luminance * sampleTransmittance) / max(extinction, EPSILON);       
-            color += res.color * transmittance * integScatt;
+            color += res.albedo * transmittance * integScatt;
 
             transmittance *= sampleTransmittance;
         }

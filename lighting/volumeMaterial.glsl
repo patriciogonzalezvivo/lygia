@@ -8,7 +8,7 @@ license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 #define STR_VOLUME_MATERIAL
 
 struct VolumeMaterial {
-    vec3    color;
+    vec3    albedo;
     float   density;
     float   sdf;
 };
