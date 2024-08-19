@@ -6,15 +6,18 @@
 /*
 contributors:  Shadi El Hajj
 description: Default raymarching renderer. Based on Sébastien Hillaire's paper "Physically Based Sky, Atmosphere & Cloud Rendering in Frostbite"
-use: <vec4> raymarchVolume( in <float3> rayOrigin, in <float3> rayDirection, in <float3> cameraForward,
-    out <float3> eyeDepth ) 
+use: <vec4> raymarchVolume( in <vec3> rayOrigin, in <vec3> rayDirection, in <vec3> cameraForward, <vec2> st, float minDist ) 
 options:
-    - RAYMARCH_MEDIUM_DENSITY 1.0
-    - LIGHT_COLOR     vec3(0.5)
-    - LIGHT_INTENSITY 1.0
-    - LIGHT_POSITION  vec3(0.0, 10.0, -50.0)
+    - RAYMARCH_VOLUME_SAMPLES       256
+    - RAYMARCH_VOLUME_SAMPLES_LIGHT 8
+    - RAYMARCH_VOLUME_MAP_FNC       raymarchVolumeMap
+    - RAYMARCH_VOLUME_DITHER        0.1
+    - LIGHT_COLOR                   vec3(0.5)
+    - LIGHT_INTENSITY               1.0
+    - LIGHT_POSITION                vec3(0.0, 10.0, -50.0)
 examples:
     - /shaders/lighting_raymarching_volume.frag
+license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 */
 
 #ifndef LIGHT_COLOR
