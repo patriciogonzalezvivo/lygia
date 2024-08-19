@@ -25,7 +25,7 @@ license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 #if defined(GLSLVIEWER)
 #define LIGHT_COLOR u_lightColor
 #else
-#define LIGHT_COLOR vec3(0.5)
+#define LIGHT_COLOR vec3(0.5, 0.5, 0.5)
 #endif
 #endif
 
@@ -56,12 +56,6 @@ vec4 raymarchVolume( in vec3 rayOrigin, in vec3 rayDirection, vec2 st, float min
 
     const float tmin          = RAYMARCH_MIN_DIST;
     const float tmax          = RAYMARCH_MAX_DIST;
-    const float tstep         = tmax/float(RAYMARCH_VOLUME_SAMPLES);
-    const float tstepLight    = tmax/float(RAYMARCH_VOLUME_SAMPLES_LIGHT);
-
-    #if defined(LIGHT_DIRECTION)
-    vec3 lightDirection       = LIGHT_DIRECTION;
-    #endif
 
     float transmittance = 1.0;
     float t = tmin;
@@ -72,14 +66,24 @@ vec4 raymarchVolume( in vec3 rayOrigin, in vec3 rayDirection, vec2 st, float min
         vec3 position = rayOrigin + rayDirection * t;
         VolumeMaterial res = RAYMARCH_VOLUME_MAP_FNC(position);
         float extinction = -res.sdf;
+        float tstep = tmax/float(RAYMARCH_VOLUME_SAMPLES);
         float density = res.density*tstep;
         if (t < minDist && extinction > 0.0) {
             float sampleTransmittance = beerLambert(density, extinction);
 
             float transmittanceLight = 1.0;
-            #if defined(LIGHT_DIRECTION)
+            #if defined(LIGHT_DIRECTION) || defined(LIGHT_POSITION)
             for (int j = 0; j < RAYMARCH_VOLUME_SAMPLES_LIGHT; j++) {
-                vec3 positionLight = position - lightDirection * float(j) * tstepLight;
+                
+                #if defined(LIGHT_POSITION) // point light
+                float tstepLight = distance(LIGHT_POSITION, position)/float(RAYMARCH_VOLUME_SAMPLES_LIGHT);
+                vec3 rayDirectionLight = normalize(LIGHT_POSITION - position);
+                #else // directional light
+                float tstepLight = tmax/float(RAYMARCH_VOLUME_SAMPLES_LIGHT);
+                vec3 rayDirectionLight = -LIGHT_DIRECTION;
+                #endif
+                
+                vec3 positionLight = position + rayDirectionLight * j * tstepLight;
                 VolumeMaterial resLight = RAYMARCH_VOLUME_MAP_FNC(positionLight);
                 float extinctionLight = -resLight.sdf;
                 float densityLight = res.density*tstepLight;
