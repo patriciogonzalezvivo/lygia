@@ -36,11 +36,11 @@ license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 #endif
 
 #ifndef RAYMARCH_VOLUME_SAMPLES
-#define RAYMARCH_VOLUME_SAMPLES 256
+#define RAYMARCH_VOLUME_SAMPLES 64
 #endif
 
 #ifndef RAYMARCH_VOLUME_SAMPLES_LIGHT
-#define RAYMARCH_VOLUME_SAMPLES_LIGHT 8
+#define RAYMARCH_VOLUME_SAMPLES_LIGHT 32
 #endif
 
 #ifndef RAYMARCH_VOLUME_MAP_FNC
@@ -56,13 +56,23 @@ license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 
 float3 shadowTransmittance(float3 position, float3 rayDirectionL, float stepSizeL) {
     float3 transmittanceL = float3(1.0, 1.0, 1.0);
-    
+    float tL = 0.0;
+
     for (int j = 0; j < RAYMARCH_VOLUME_SAMPLES_LIGHT; j++) {                
-        float3 positionL = position + rayDirectionL * j * stepSizeL;
+        float3 positionL = position + rayDirectionL * tL;
+        #if defined(RAYMARCH_VOLUME_OPAQUE_SHADOWING)
+            Material mat = RAYMARCH_MAP_FNC(positionL);
+            if (mat.sdf <= 0.0) {
+                return float3(0.0, 0.0, 0.0);
+            }
+        #endif
         VolumeMaterial resL = RAYMARCH_VOLUME_MAP_FNC(positionL);
         float densityL = -resL.sdf;
         float3 extinctionL = resL.absorption + resL.scattering;
         transmittanceL *= exp(-densityL * extinctionL * stepSizeL);
+
+        float offset = random(position)*(stepSizeL*RAYMARCH_VOLUME_DITHER);
+        tL += stepSizeL + offset;
     }
 
     return transmittanceL;
@@ -74,7 +84,6 @@ float3 raymarchVolume( in float3 rayOrigin, in float3 rayDirection, float2 st, f
     float stepSize = RAYMARCH_MAX_DIST/float(RAYMARCH_VOLUME_SAMPLES);
 
     float t = RAYMARCH_MIN_DIST;
-    float3 position = rayOrigin;
 
     for(int i = 0; i < RAYMARCH_VOLUME_SAMPLES; i++) {        
         float3 position = rayOrigin + rayDirection * t;
