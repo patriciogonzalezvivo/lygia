@@ -1,6 +1,5 @@
 #include "map.glsl"
 #include "../common/attenuation.glsl"
-#include "../common/beerLambert.glsl"
 #include "../../generative/random.glsl"
 #include "../../math/const.glsl"
 #include "../material/volumeNew.glsl"
@@ -14,6 +13,7 @@ options:
     - RAYMARCH_VOLUME_SAMPLES_LIGHT 8
     - RAYMARCH_VOLUME_MAP_FNC       raymarchVolumeMap
     - RAYMARCH_VOLUME_DITHER        0.1
+    - RAYMARCH_ENERGY_CONSERVING
     - LIGHT_COLOR                   vec3(0.5, 0.5, 0.5)
     - LIGHT_INTENSITY               1.0
     - LIGHT_POSITION
@@ -54,65 +54,74 @@ license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 #ifndef FNC_RAYMARCH_VOLUMERENDER
 #define FNC_RAYMARCH_VOLUMERENDER
 
-vec3 shadowTransmittance(vec3 position) {
-    #if defined(LIGHT_DIRECTION) || defined(LIGHT_POSITION)
-    #if defined(LIGHT_DIRECTION) // directional light
-    float tstepLight = RAYMARCH_MAX_DIST/float(RAYMARCH_VOLUME_SAMPLES_LIGHT);
-    vec3 rayDirectionLight = LIGHT_DIRECTION;
-    const float attenuationLight = 1.0;
-    #else // point light
-    float distToLight = distance(LIGHT_POSITION, position);
-    float tstepLight = distToLight/float(RAYMARCH_VOLUME_SAMPLES_LIGHT);
-    vec3 rayDirectionLight = normalize(LIGHT_POSITION - position);
-    float attenuationLight = attenuation(distToLight);
-    #endif
-
-    float transmittanceLight = 1.0;
+vec3 shadowTransmittance(vec3 position, vec3 rayDirectionL, float stepSizeL) {
+    vec3 transmittanceL = vec3(1.0, 1.0, 1.0);
+    
     for (int j = 0; j < RAYMARCH_VOLUME_SAMPLES_LIGHT; j++) {                
-        vec3 positionLight = position + rayDirectionLight * j * tstepLight;
-        VolumeMaterial resLight = RAYMARCH_VOLUME_MAP_FNC(positionLight);
-        float extinctionLight = -resLight.sdf;
-        float densityLight = resLight.density*tstepLight;
-        transmittanceLight *= beerLambert(densityLight, extinctionLight);
+        vec3 positionL = position + rayDirectionL * j * stepSizeL;
+        VolumeMaterial resL = RAYMARCH_VOLUME_MAP_FNC(positionL);
+        float densityL = -resL.sdf;
+        vec3 extinctionL = resL.absorption + resL.scattering;
+        transmittanceL *= exp(-densityL * extinctionL * stepSizeL);
     }
 
-    return LIGHT_COLOR * LIGHT_INTENSITY * attenuationLight * transmittanceLight;
+    return transmittanceL;
 }
 
-vec4 raymarchVolume( in vec3 rayOrigin, in vec3 rayDirection, vec2 st, float minDist) {
-    float transmittance = 1.0;
+vec3 raymarchVolume( in vec3 rayOrigin, in vec3 rayDirection, vec2 st, float minDist, vec3 background) {
+    vec3 scatteredLuminance = vec3(0.0, 0.0, 0.0);
+    vec3 transmittance = vec3(1.0, 1.0, 1.0);
+    float stepSize = RAYMARCH_MAX_DIST/float(RAYMARCH_VOLUME_SAMPLES);
+
     float t = RAYMARCH_MIN_DIST;
-    vec3 color = vec3(0.0, 0.0, 0.0);
     vec3 position = rayOrigin;
-    
-    for(int i = 0; i < RAYMARCH_VOLUME_SAMPLES; i++) {
+
+    for(int i = 0; i < RAYMARCH_VOLUME_SAMPLES; i++) {        
         vec3 position = rayOrigin + rayDirection * t;
         VolumeMaterial res = RAYMARCH_VOLUME_MAP_FNC(position);
-        float extinction = -res.sdf;
-        float tstep = RAYMARCH_MAX_DIST/float(RAYMARCH_VOLUME_SAMPLES);
-        float density = res.density*tstep;
-        if (t < minDist && extinction > 0.0) {
-            float sampleTransmittance = beerLambert(density, extinction);
-            vec3 luminance = shadowTransmittance(position);
+        float density = -res.sdf;
+        vec3 extinction = res.absorption + res.scattering;
+
+        if (t < minDist && density > 0.0) {
+
+            #if defined(LIGHT_DIRECTION) || defined(LIGHT_POSITION)
+                #if defined(LIGHT_DIRECTION) // directional light
+                    float stepSizeL = RAYMARCH_MAX_DIST/float(RAYMARCH_VOLUME_SAMPLES_LIGHT);
+                    vec3 rayDirectionL = LIGHT_DIRECTION;
+                    const float attenuationL = 1.0;
+                #else // point light
+                    float distL = distance(LIGHT_POSITION, position);
+                    float stepSizeL = distL/float(RAYMARCH_VOLUME_SAMPLES_LIGHT);
+                    vec3 rayDirectionL = normalize(LIGHT_POSITION - position);
+                    float attenuationL = attenuation(distL);
+                #endif
+                vec3 shadow = shadowTransmittance(position, rayDirectionL, stepSizeL);
+                vec3 L = LIGHT_COLOR * LIGHT_INTENSITY;
             #else // no lighting
-            vec3 luminance = 1.0;
+                const float attenuationL = 1.0;
+                const vec3 shadow = 1.0;
+                const vec3 L = vec3(1.0, 1.0, 1.0);
             #endif
 
-            // usual scattering integration
-            color += res.albedo * luminance * density * transmittance; 
-            
-            // energy-conserving scattering integration
-            //vec3 integScatt = (luminance - luminance * sampleTransmittance) / max(extinction, EPSILON);       
-            //color += res.albedo * transmittance * integScatt;
-
-            transmittance *= sampleTransmittance;
+            #if defined RAYMARCH_ENERGY_CONSERVING
+                // energy-conserving scattering integration
+                vec3 S = L * attenuationL * shadow * density * res.scattering;
+                vec3 sampleExtinction = max(vec3(EPSILON, EPSILON, EPSILON), density * extinction);
+                vec3 Sint = (S - S * exp(-sampleExtinction * stepSize)) / sampleExtinction;
+                scatteredLuminance += transmittance * Sint;
+                transmittance *= exp(-sampleExtinction * stepSize);
+            #else
+                // usual scattering integration. Not energy-conserving.
+                scatteredLuminance += attenuationL * shadow * transmittance * density * res.scattering * stepSize * L;
+                transmittance *= exp(-density * extinction * stepSize);
+            #endif
         }
 
-        float offset = random(st)*(tstep*RAYMARCH_VOLUME_DITHER);
-        t += tstep + offset;
+        float offset = random(st)*(stepSize*RAYMARCH_VOLUME_DITHER);
+        t += stepSize + offset;
     }
 
-    return vec4(color, 0.0);
+    return background * transmittance + scatteredLuminance;
 }
 
 #endif

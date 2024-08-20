@@ -8,8 +8,8 @@ license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 #define STR_VOLUME_MATERIAL
 
 struct VolumeMaterial {
-    float3  albedo;
-    float   density;
+    float3  absorption;
+    float3  scattering;
     float   sdf;
 };
 
