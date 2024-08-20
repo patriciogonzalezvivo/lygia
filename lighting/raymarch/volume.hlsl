@@ -60,7 +60,7 @@ float3 shadowTransmittance(float3 position, float3 rayDirectionL, float stepSize
 
     for (int j = 0; j < RAYMARCH_VOLUME_SAMPLES_LIGHT; j++) {                
         float3 positionL = position + rayDirectionL * tL;
-        #if defined(RAYMARCH_VOLUME_OPAQUE_SHADOWING)
+        #if defined(RAYMARCH_VOLUMETRIC_SHADOWS)
             Material mat = RAYMARCH_MAP_FNC(positionL);
             if (mat.sdf <= 0.0) {
                 return float3(0.0, 0.0, 0.0);
