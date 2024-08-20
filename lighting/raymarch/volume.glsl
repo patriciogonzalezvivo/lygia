@@ -54,13 +54,34 @@ license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 #ifndef FNC_RAYMARCH_VOLUMERENDER
 #define FNC_RAYMARCH_VOLUMERENDER
 
+vec3 shadowTransmittance(vec3 position) {
+    #if defined(LIGHT_DIRECTION) || defined(LIGHT_POSITION)
+    #if defined(LIGHT_DIRECTION) // directional light
+    float tstepLight = RAYMARCH_MAX_DIST/float(RAYMARCH_VOLUME_SAMPLES_LIGHT);
+    vec3 rayDirectionLight = LIGHT_DIRECTION;
+    const float attenuationLight = 1.0;
+    #else // point light
+    float distToLight = distance(LIGHT_POSITION, position);
+    float tstepLight = distToLight/float(RAYMARCH_VOLUME_SAMPLES_LIGHT);
+    vec3 rayDirectionLight = normalize(LIGHT_POSITION - position);
+    float attenuationLight = attenuation(distToLight);
+    #endif
+
+    float transmittanceLight = 1.0;
+    for (int j = 0; j < RAYMARCH_VOLUME_SAMPLES_LIGHT; j++) {                
+        vec3 positionLight = position + rayDirectionLight * j * tstepLight;
+        VolumeMaterial resLight = RAYMARCH_VOLUME_MAP_FNC(positionLight);
+        float extinctionLight = -resLight.sdf;
+        float densityLight = resLight.density*tstepLight;
+        transmittanceLight *= beerLambert(densityLight, extinctionLight);
+    }
+
+    return LIGHT_COLOR * LIGHT_INTENSITY * attenuationLight * transmittanceLight;
+}
+
 vec4 raymarchVolume( in vec3 rayOrigin, in vec3 rayDirection, vec2 st, float minDist) {
-
-    const float tmin          = RAYMARCH_MIN_DIST;
-    const float tmax          = RAYMARCH_MAX_DIST;
-
     float transmittance = 1.0;
-    float t = tmin;
+    float t = RAYMARCH_MIN_DIST;
     vec3 color = vec3(0.0, 0.0, 0.0);
     vec3 position = rayOrigin;
     
@@ -68,42 +89,21 @@ vec4 raymarchVolume( in vec3 rayOrigin, in vec3 rayDirection, vec2 st, float min
         vec3 position = rayOrigin + rayDirection * t;
         VolumeMaterial res = RAYMARCH_VOLUME_MAP_FNC(position);
         float extinction = -res.sdf;
-        float tstep = tmax/float(RAYMARCH_VOLUME_SAMPLES);
+        float tstep = RAYMARCH_MAX_DIST/float(RAYMARCH_VOLUME_SAMPLES);
         float density = res.density*tstep;
         if (t < minDist && extinction > 0.0) {
             float sampleTransmittance = beerLambert(density, extinction);
-
-            #if defined(LIGHT_DIRECTION) || defined(LIGHT_POSITION)
-            #if defined(LIGHT_DIRECTION) // directional light
-            float tstepLight = tmax/float(RAYMARCH_VOLUME_SAMPLES_LIGHT);
-            vec3 rayDirectionLight = LIGHT_DIRECTION;
-            const float attenuationLight = 1.0;
-            #else // point light
-            float distToLight = distance(LIGHT_POSITION, position);
-            float tstepLight = distToLight/float(RAYMARCH_VOLUME_SAMPLES_LIGHT);
-            vec3 rayDirectionLight = normalize(LIGHT_POSITION - position);
-            float attenuationLight = attenuation(distToLight);
-            #endif
-
-            float transmittanceLight = 1.0;
-            for (int j = 0; j < RAYMARCH_VOLUME_SAMPLES_LIGHT; j++) {                
-                vec3 positionLight = position + rayDirectionLight * j * tstepLight;
-                VolumeMaterial resLight = RAYMARCH_VOLUME_MAP_FNC(positionLight);
-                float extinctionLight = -resLight.sdf;
-                float densityLight = resLight.density*tstepLight;
-                transmittanceLight *= beerLambert(densityLight, extinctionLight);
-            }
-            vec3 luminance = LIGHT_COLOR * LIGHT_INTENSITY * attenuationLight * transmittanceLight;
+            vec3 luminance = shadowTransmittance(position);
             #else // no lighting
             vec3 luminance = 1.0;
             #endif
 
             // usual scattering integration
-            //color += res.albedo * luminance * density * transmittance; 
+            color += res.albedo * luminance * density * transmittance; 
             
             // energy-conserving scattering integration
-            vec3 integScatt = (luminance - luminance * sampleTransmittance) / max(extinction, EPSILON);       
-            color += res.albedo * transmittance * integScatt;
+            //vec3 integScatt = (luminance - luminance * sampleTransmittance) / max(extinction, EPSILON);       
+            //color += res.albedo * transmittance * integScatt;
 
             transmittance *= sampleTransmittance;
         }
