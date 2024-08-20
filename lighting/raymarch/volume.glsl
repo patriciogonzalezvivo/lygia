@@ -2,7 +2,7 @@
 #include "../common/attenuation.glsl"
 #include "../../generative/random.glsl"
 #include "../../math/const.glsl"
-#include "../volume/new.glsl"
+#include "../medium/new.glsl"
 
 /*
 contributors:  Shadi El Hajj
@@ -66,7 +66,7 @@ vec3 shadowTransmittance(vec3 position, vec3 rayDirectionL, float stepSizeL) {
                 return vec3(0.0, 0.0, 0.0);
             }
         #endif
-        Volume resL = RAYMARCH_VOLUME_MAP_FNC(positionL);
+        Medium resL = RAYMARCH_VOLUME_MAP_FNC(positionL);
         float densityL = -resL.sdf;
         vec3 extinctionL = resL.absorption + resL.scattering;
         transmittanceL *= exp(-densityL * extinctionL * stepSizeL);
@@ -87,7 +87,7 @@ vec3 raymarchVolume( in vec3 rayOrigin, in vec3 rayDirection, vec2 st, float min
 
     for(int i = 0; i < RAYMARCH_VOLUME_SAMPLES; i++) {        
         vec3 position = rayOrigin + rayDirection * t;
-        Volume res = RAYMARCH_VOLUME_MAP_FNC(position);
+        Medium res = RAYMARCH_VOLUME_MAP_FNC(position);
         float density = -res.sdf;
         vec3 extinction = res.absorption + res.scattering;
 

@@ -1,5 +1,5 @@
 #include "../material.hlsl"
-#include "../volume.hlsl"
+#include "../medium.hlsl"
 
 /*
 contributors:  Inigo Quiles
@@ -19,6 +19,6 @@ use: <float4> raymarchMap( in <float3> pos )
 #define FNC_RAYMARCH_MAP
 
 Material RAYMARCH_MAP_FNC( in float3 pos );
-Volume RAYMARCH_VOLUME_MAP_FNC(in float3 pos);
+Medium RAYMARCH_VOLUME_MAP_FNC(in float3 pos);
 
 #endif

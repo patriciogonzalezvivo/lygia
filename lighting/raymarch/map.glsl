@@ -1,5 +1,5 @@
 #include "../material.glsl"
-#include "../volume.glsl"
+#include "../medium.glsl"
 
 /*
 contributors:  Inigo Quiles
@@ -21,6 +21,6 @@ examples:
 #define FNC_RAYMARCH_MAP
 
 Material RAYMARCH_MAP_FNC( in vec3 pos );
-Volume RAYMARCH_VOLUME_MAP_FNC( in vec3 pos );
+Medium RAYMARCH_VOLUME_MAP_FNC( in vec3 pos );
 
 #endif

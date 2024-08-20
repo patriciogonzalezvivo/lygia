@@ -1,13 +1,13 @@
 /*
 contributors: Shadi El Hajj
-description: Volume Structure
+description: Medium Structure
 license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 */
 
-#ifndef STR_VOLUME
-#define STR_VOLUME
+#ifndef STR_MEDIUM
+#define STR_MEDIUM
 
-struct Volume {
+struct Medium {
     float3  scattering;
     float3  absorption;
     float   sdf;
