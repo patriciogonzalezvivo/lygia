@@ -8,8 +8,8 @@ license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 #define STR_VOLUME_MATERIAL
 
 struct VolumeMaterial {
-    vec3    absorption;
     vec3    scattering;
+    vec3    absorption;
     float   sdf;
 };
 
