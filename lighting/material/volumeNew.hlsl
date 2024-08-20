@@ -14,8 +14,8 @@ license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 #define FNC_VOLUME_MATERIAL_NEW
 
 void volumeMaterialNew(out VolumeMaterial _mat) {
-    _mat.absorption = float3(1.0, 1.0, 1.0);
     _mat.scattering = float3(1.0, 1.0, 1.0);
+    _mat.absorption = float3(1.0, 1.0, 1.0);
     _mat.sdf        = RAYMARCH_MAX_DIST;
 
 }
@@ -26,12 +26,16 @@ VolumeMaterial volumeMaterialNew() {
     return mat;
 }
 
-VolumeMaterial volumeMaterialNew(float3 absorption, float3 scattering, float sdf) {
+VolumeMaterial volumeMaterialNew(float3 scattering, float3 absorption, float sdf) {
     VolumeMaterial mat = volumeMaterialNew();
-    mat.absorption = absorption;
     mat.scattering = scattering;
+    mat.absorption = absorption;
     mat.sdf = sdf;
     return mat;
+}
+
+VolumeMaterial volumeMaterialNew(float3 scattering, float sdf) {
+    return volumeMaterialNew(scattering, float3(0.0, 0.0, 0.0), sdf);
 }
 
 #endif
