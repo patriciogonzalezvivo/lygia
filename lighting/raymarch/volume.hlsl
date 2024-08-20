@@ -7,11 +7,12 @@
 /*
 contributors:  Shadi El Hajj
 description: Default raymarching renderer. Based on Sébastien Hillaire's paper "Physically Based Sky, Atmosphere & Cloud Rendering in Frostbite"
-use: <float4> raymarchVolume( in <float3> rayOrigin, in <float3> rayDirection, in <float3> cameraForward, <float2> st, float minDist ) 
+use: <float4> raymarchVolume(<float3> rayOrigin, <float3> rayDirection, <float2> st, <float> minDist, <float3> background) 
 options:
-    - RAYMARCH_VOLUME_SAMPLES       256
-    - RAYMARCH_VOLUME_SAMPLES_LIGHT 8
+    - RAYMARCH_VOLUME_SAMPLES       64
+    - RAYMARCH_VOLUME_SAMPLES_LIGHT 32
     - RAYMARCH_VOLUME_MAP_FNC       raymarchVolumeMap
+    - RAYMARCH_VOLUMETRIC_SHADOWS
     - RAYMARCH_VOLUME_DITHER        0.1
     - RAYMARCH_ENERGY_CONSERVING
     - LIGHT_COLOR                   float3(0.5, 0.5, 0.5)
@@ -78,7 +79,7 @@ float3 shadowTransmittance(float3 position, float3 rayDirectionL, float stepSize
     return transmittanceL;
 }
 
-float3 raymarchVolume( in float3 rayOrigin, in float3 rayDirection, float2 st, float minDist, float3 background) {
+float3 raymarchVolume(in float3 rayOrigin, in float3 rayDirection, float2 st, float minDist, float3 background) {
     float3 scatteredLuminance = float3(0.0, 0.0, 0.0);
     float3 transmittance = float3(1.0, 1.0, 1.0);
     float stepSize = RAYMARCH_MAX_DIST/float(RAYMARCH_VOLUME_SAMPLES);
