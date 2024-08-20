@@ -36,11 +36,11 @@ license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 #endif
 
 #ifndef RAYMARCH_VOLUME_SAMPLES
-#define RAYMARCH_VOLUME_SAMPLES 256
+#define RAYMARCH_VOLUME_SAMPLES 64
 #endif
 
 #ifndef RAYMARCH_VOLUME_SAMPLES_LIGHT
-#define RAYMARCH_VOLUME_SAMPLES_LIGHT 8
+#define RAYMARCH_VOLUME_SAMPLES_LIGHT 32
 #endif
 
 #ifndef RAYMARCH_VOLUME_MAP_FNC
@@ -56,13 +56,23 @@ license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 
 vec3 shadowTransmittance(vec3 position, vec3 rayDirectionL, float stepSizeL) {
     vec3 transmittanceL = vec3(1.0, 1.0, 1.0);
-    
+    float tL = 0.0;
+
     for (int j = 0; j < RAYMARCH_VOLUME_SAMPLES_LIGHT; j++) {                
-        vec3 positionL = position + rayDirectionL * j * stepSizeL;
+        vec3 positionL = position + rayDirectionL * tL;
+        #if defined(RAYMARCH_VOLUME_OPAQUE_SHADOWING)
+            Material mat = RAYMARCH_MAP_FNC(positionL);
+            if (mat.sdf <= 0.0) {
+                return vec3(0.0, 0.0, 0.0);
+            }
+        #endif
         VolumeMaterial resL = RAYMARCH_VOLUME_MAP_FNC(positionL);
         float densityL = -resL.sdf;
         vec3 extinctionL = resL.absorption + resL.scattering;
         transmittanceL *= exp(-densityL * extinctionL * stepSizeL);
+
+        float offset = random(position)*(stepSizeL*RAYMARCH_VOLUME_DITHER);
+        tL += stepSizeL + offset;
     }
 
     return transmittanceL;
@@ -74,7 +84,6 @@ vec3 raymarchVolume( in vec3 rayOrigin, in vec3 rayDirection, vec2 st, float min
     float stepSize = RAYMARCH_MAX_DIST/float(RAYMARCH_VOLUME_SAMPLES);
 
     float t = RAYMARCH_MIN_DIST;
-    vec3 position = rayOrigin;
 
     for(int i = 0; i < RAYMARCH_VOLUME_SAMPLES; i++) {        
         vec3 position = rayOrigin + rayDirection * t;
@@ -87,7 +96,7 @@ vec3 raymarchVolume( in vec3 rayOrigin, in vec3 rayDirection, vec2 st, float min
             #if defined(LIGHT_DIRECTION) || defined(LIGHT_POSITION)
                 #if defined(LIGHT_DIRECTION) // directional light
                     float stepSizeL = RAYMARCH_MAX_DIST/float(RAYMARCH_VOLUME_SAMPLES_LIGHT);
-                    vec3 rayDirectionL = LIGHT_DIRECTION;
+                    vec3 rayDirectionL = normalize(LIGHT_DIRECTION);
                     const float attenuationL = 1.0;
                 #else // point light
                     float distL = distance(LIGHT_POSITION, position);
