@@ -2,7 +2,7 @@
 #include "../common/attenuation.hlsl"
 #include "../../generative/random.hlsl"
 #include "../../math/const.hlsl"
-#include "../volume/new.hlsl"
+#include "../medium/new.hlsl"
 
 /*
 contributors:  Shadi El Hajj
@@ -66,7 +66,7 @@ float3 shadowTransmittance(float3 position, float3 rayDirectionL, float stepSize
                 return float3(0.0, 0.0, 0.0);
             }
         #endif
-        Volume resL = RAYMARCH_VOLUME_MAP_FNC(positionL);
+        Medium resL = RAYMARCH_VOLUME_MAP_FNC(positionL);
         float densityL = -resL.sdf;
         float3 extinctionL = resL.absorption + resL.scattering;
         transmittanceL *= exp(-densityL * extinctionL * stepSizeL);
@@ -87,7 +87,7 @@ float3 raymarchVolume( in float3 rayOrigin, in float3 rayDirection, float2 st, f
 
     for(int i = 0; i < RAYMARCH_VOLUME_SAMPLES; i++) {        
         float3 position = rayOrigin + rayDirection * t;
-        Volume res = RAYMARCH_VOLUME_MAP_FNC(position);
+        Medium res = RAYMARCH_VOLUME_MAP_FNC(position);
         float density = -res.sdf;
         float3 extinction = res.absorption + res.scattering;
 
