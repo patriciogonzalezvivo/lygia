@@ -1,13 +1,13 @@
 /*
 contributors: Shadi El Hajj
-description: Volume Material Structure
+description: Volume Structure
 license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 */
 
-#ifndef STR_VOLUME_MATERIAL
-#define STR_VOLUME_MATERIAL
+#ifndef STR_VOLUME
+#define STR_VOLUME
 
-struct VolumeMaterial {
+struct Volume {
     vec3    scattering;
     vec3    absorption;
     float   sdf;
