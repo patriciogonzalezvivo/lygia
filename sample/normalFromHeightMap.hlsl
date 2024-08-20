@@ -7,6 +7,7 @@ description: Given a height map texture, calculate normal at point (s, t)
 use: normalFromHeightMap(<SAMPLER_TYPE> heightMap, <float2> st, <float> strength, <float> offset)
 options:
     - SAMPLE_CHANNEL: texture channel to sample from. Defaults to 0 (red)
+license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 */
 
 #ifndef SAMPLE_CHANNEL

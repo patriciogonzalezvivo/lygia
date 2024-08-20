@@ -3,6 +3,7 @@ contributors: Shadi El Hajj
 description: A simple low-pass filter which attenuates high-frequencies.
 use: nyquist(<float> value, <float> fwidth)
 use: nyquist(<float> value, <float> width, <float> strength)
+license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 */
 
 #ifndef FNC_NYQUIST
