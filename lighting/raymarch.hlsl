@@ -19,7 +19,7 @@ options:
     - RAYMARCH_RENDER_FNC: default raymarchDefaultRender
     - RAYMARCH_CAMERA_FOV: Filed of view express in degrees. Default 60.0 degrees
     - RAYMARCH_MULTISAMPLE: default 1. If it is greater than 1 it will render multisample
-    - RAYMARCH_RETURN:  0. nothing (default), 1. depth;  2. depth and material
+    - RAYMARCH_AOV: return AOVs in a Material structure
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
@@ -48,29 +48,16 @@ license:
 static const float RAYMARCH_MULTISAMPLE_FACTOR = 1.0/float(RAYMARCH_MULTISAMPLE);
 #endif
 
-float4 raymarch(float4x4 viewMatrix, float2 st
-#if RAYMARCH_RETURN >= 1
-                ,out float eyeDepth
-#endif
-#if RAYMARCH_RETURN == 2
-                ,out Material mat
-#endif
-    ) {
+float4 raymarch(float4x4 viewMatrix, float2 st, out float eyeDepth, out Material mat) {
 
     float fov = 1.0 / tan(RAYMARCH_CAMERA_FOV * DEG2RAD * 0.5);
     float3 camera = float3(viewMatrix._m03, viewMatrix._m13, viewMatrix._m23);
     float3 cameraForward = float3(viewMatrix._m02, viewMatrix._m12, viewMatrix._m22);
 
 #if defined(RAYMARCH_MULTISAMPLE)
-    float4 color = float4(0.0, 0.0, 0.0, 0.0);
 
-    #if RAYMARCH_RETURN >= 1
+    float4 color = float4(0.0, 0.0, 0.0, 0.0);
     eyeDepth = 0.0;
-    #endif
-    #if RAYMARCH_RETURN == 2
-    Material matAcc;
-    materialZero(matAcc);
-    #endif
 
     float2 pixel = 1.0/RESOLUTION;
     float2 offset = rotate( float2(0.5, 0.0), EIGHTH_PI);
@@ -81,10 +68,6 @@ float4 raymarch(float4x4 viewMatrix, float2 st
         float sampleDepth = 0.0;
         float dist = 0.0;
 
-        #if RAYMARCH_RETURN != 2
-            Material mat;        
-        #endif
-
         float4 opaque = RAYMARCH_RENDER_FNC(camera, rayDirection, cameraForward, dist, sampleDepth, mat);
         #ifdef RAYMARCH_VOLUME
         color += float4(RAYMARCH_VOLUME_RENDER_FNC(camera, rayDirection, st, dist, opaque.rgb), opaque.a);
@@ -92,11 +75,9 @@ float4 raymarch(float4x4 viewMatrix, float2 st
         color += opaque;
         #endif
 
-        #if RAYMARCH_RETURN >= 1
-            eyeDepth += sampleDepth;
-        #endif
+        eyeDepth += sampleDepth;
 
-        #if RAYMARCH_RETURN == 2
+        #if RAYMARCH_AOV
             // Accumulate material properties
             add(matAcc, mat, matAcc);
         #endif
@@ -104,55 +85,57 @@ float4 raymarch(float4x4 viewMatrix, float2 st
         offset = rotate(offset, HALF_PI);
     }
 
-    #if RAYMARCH_RETURN >= 1
-        eyeDepth *= RAYMARCH_MULTISAMPLE_FACTOR;
-    #endif
+    eyeDepth *= RAYMARCH_MULTISAMPLE_FACTOR;
 
-    #if RAYMARCH_RETURN == 2
+    #if RAYMARCH_AOV
         // Average material
         multiply(mat, RAYMARCH_MULTISAMPLE_FACTOR, mat);
     #endif
     
     return color * RAYMARCH_MULTISAMPLE_FACTOR;
-#else
-    
-    // Single sample
+
+#else // Single sample
+
     float3 rayDirection = mul((float3x3)viewMatrix, normalize(float3(st * 2.0 - 1.0, fov)));
     float dist = 0.0;
-    #if RAYMARCH_RETURN == 0
-        float eyeDepth = 0.0;
-    #endif
-    #if RAYMARCH_RETURN != 2
-        Material mat;
-    #endif
+    float eyeDepth = 0.0;
 
-    float4 color = RAYMARCH_RENDER_FNC(camera, rayDirection, cameraForward, dist, eyeDepth, mat);
+    float4 opaque = RAYMARCH_RENDER_FNC(camera, rayDirection, cameraForward, dist, eyeDepth, mat);
     #ifdef RAYMARCH_VOLUME
-        color.rgb = RAYMARCH_VOLUME_RENDER_FNC(camera, rayDirection, st, dist, color.rgb);
+        color = float4(RAYMARCH_VOLUME_RENDER_FNC(camera, rayDirection, st, dist, opaque.rgb), opaque.a);
+    #else
+        color = opaque;
     #endif
 
     return color;
+
 #endif
 }
 
-float4 raymarch(float3 cameraPosition, float3 cameraLookAt, float2 st
-#if RAYMARCH_RETURN >= 1
-                ,out float depth
-#endif
-#if RAYMARCH_RETURN == 2
-                ,out Material mat
-#endif
-    ){
-    float4x4 viewMatrix = lookAtView(cameraPosition, cameraLookAt);
+float4 raymarch(float4x4 viewMatrix, float2 st, out float eyeDepth) {
+    Material mat;
+    materialZero(mat);
+    return raymarch(viewMatrix, st, eyeDepth, mat);
+}
 
-    return raymarch(viewMatrix, st
-    #if RAYMARCH_RETURN >= 1
-                    ,depth
-    #endif
-    #if RAYMARCH_RETURN == 2
-                    ,mat
-    #endif
-    );
+float4 raymarch(float4x4 viewMatrix, float2 st) {
+    float eyeDepth = 0.0;
+    return raymarch(viewMatrix, st, eyeDepth);
+}
+
+float4 raymarch(float3 cameraPosition, float3 cameraLookAt, float2 st, out float eyeDepth, out Material mat) {
+    float4x4 viewMatrix = lookAtView(cameraPosition, cameraLookAt);
+    return raymarch(viewMatrix, st, eyeDepth, mat);
+}
+
+float4 raymarch(float3 cameraPosition, float3 cameraLookAt, float2 st, out float eyeDepth) {
+    float4x4 viewMatrix = lookAtView(cameraPosition, cameraLookAt);
+    return raymarch(viewMatrix, st, eyeDepth);
+}
+
+float4 raymarch(float3 cameraPosition, float3 cameraLookAt, float2 st) {
+    float4x4 viewMatrix = lookAtView(cameraPosition, cameraLookAt);
+    return raymarch(viewMatrix, st);
 }
 
 #endif
