@@ -87,9 +87,11 @@ vec4 raymarch(  mat4 viewMatrix, vec2 st
             Material mat;        
         #endif
 
-        color += RAYMARCH_RENDER_FNC(camera, rayDirection, cameraForward, dist, sampleDepth, mat);
+        vec4 opaque = RAYMARCH_RENDER_FNC(camera, rayDirection, cameraForward, dist, sampleDepth, mat);
         #ifdef RAYMARCH_VOLUME
-        color += RAYMARCH_VOLUME_RENDER_FNC(camera, rayDirection, st, dist);
+        color += vec4(RAYMARCH_VOLUME_RENDER_FNC(camera, rayDirection, st, dist, opaque.rgb), opaque.a);
+        #else
+        color += opaque;
         #endif
 
         #if RAYMARCH_RETURN >= 1
@@ -211,7 +213,7 @@ vec4 raymarch(  mat4 viewMatrix, vec2 st
 
     vec4 color = RAYMARCH_RENDER_FNC( camera, rayDirection, cameraForward, dist, eyeDepth, mat);
     #ifdef RAYMARCH_VOLUME
-    color += RAYMARCH_VOLUME_RENDER_FNC(camera, rayDirection, st, dist);
+    color.rgb = RAYMARCH_VOLUME_RENDER_FNC(camera, rayDirection, st, dist, color.rgb);
     #endif
 
     return color;
