@@ -4,6 +4,7 @@
 contributors: Shadi El Hajj
 description: An anti-aliased triangle wave function.
 use: <float> mirror(<float> x)
+license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 */
 
 #ifndef FNC_AAMIRROR
