@@ -84,7 +84,7 @@ If you are working on a project and want to use LYGIA, you have two options: clo
 
 ### LYGIA Locally
 
-If you want to work **locally**, you must ensure that your environment can resolve `#include` dependencies. You can find some examples in [here specially for GLSL](README_GLSL.md). Then you just need to clone LYGIA into your project relative to the shader you are loading:
+If you want to work **locally**, you must ensure that your environment can resolve `#include` dependencies. You can find some examples in [here specially for GLSL](https://github.com/patriciogonzalezvivo/lygia/blob/main/README_GLSL.md). Then you just need to clone LYGIA into your project relative to the shader you are loading:
 
 ```bash
     git clone https://github.com/patriciogonzalezvivo/lygia.git
@@ -211,8 +211,8 @@ Learn more about [LYGIAS design principles in the DESIGN.md file](https://github
 LYGIA has a long way to go and welcomes all kinds of contributions. You can help by:
 
 * **Bug fixing**
-* **Translation**, keeping parity between languages (GLSL, HLSL, MSL, WGSL, TSL, CUDA, OSL, etc) is a big part of the challenge. Not all language are the same and we want to make sure make sure each function is optimized and carefully crafted for each enviroment. This means, the more eyes looking at this, the better. Please make sure to read and understand the [Design Principles](DESIGN.md) before starting.
-* **New functions or improving the current implementations**. Please take a look to the [Contributing Guidelines](CONTRIBUTING.md) before starting.
+* **Translation**, keeping parity between languages (GLSL, HLSL, MSL, WGSL, TSL, CUDA, OSL, etc) is a big part of the challenge. Not all language are the same and we want to make sure make sure each function is optimized and carefully crafted for each enviroment. This means, the more eyes looking at this, the better. Please make sure to read and understand the [Design Principles](https://github.com/patriciogonzalezvivo/lygia/blob/main/DESIGN.md) before starting.
+* **New functions or improving the current implementations**. Please take a look to the [Contributing Guidelines](https://github.com/patriciogonzalezvivo/lygia/blob/main/CONTRIBUTING.md) before starting.
 * **Documentation**. Each function has a header with some information describing the function. Make sure to fill this information when adding a new function.
 * Adding new **examples** and integrations for new environments like: [Godot](https://godotengine.org/), [ISF](https://isf.video/), [MaxMSP](https://cycling74.com/products/max), etc.
 * **Financial** [sponsorships](https://github.com/sponsors/patriciogonzalezvivo). Right now, the money that flows in is invested on the server and infraestructure. Long term plan will be to be able to pay lead contributors and mantainers.
