@@ -74,12 +74,6 @@ float4 pbr(const Material _mat) {
 
     // Ambient Occlusion
     // ------------------------
-    float ao = 1.0;
-    
-    #if defined(FNC_RAYMARCH_AO)
-    ao = raymarchAO(M.position, M.normal);
-    #endif
-
 // #if defined(FNC_SSAO) && defined(SCENE_DEPTH) && defined(RESOLUTION) && defined(CAMERA_NEAR_CLIP) && defined(CAMERA_FAR_CLIP)
 //     float2 pixel = 1.0/RESOLUTION;
 //     ao = ssao(SCENE_DEPTH, gl_FragCoord.xy*pixel, pixel, 1.);
@@ -88,7 +82,7 @@ float4 pbr(const Material _mat) {
     // Global Ilumination ( Image Based Lighting )
     // ------------------------
     float3 E = envBRDFApprox(specularColor, M);
-    float diffuseAO = min(M.ambientOcclusion, ao);
+    float diffuseAO = M.ambientOcclusion;
     
     float3 Fr = float3(0.0, 0.0, 0.0);
     Fr = envMap(M) * E;
@@ -141,7 +135,6 @@ float4 pbr(const Material _mat) {
     // Specular
     color.rgb += Fr * IBL_LUMINANCE;
     color.rgb += lightSpecular;
-    color.rgb *= M.ambientOcclusion;
     color.rgb += M.emissive;
     color.a = M.albedo.a;
 
