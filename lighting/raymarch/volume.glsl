@@ -1,5 +1,5 @@
 #include "map.glsl"
-#include "../common/attenuation.glsl"
+#include "../light/attenuation.glsl"
 #include "../../generative/random.glsl"
 #include "../../math/const.glsl"
 #include "../medium/new.glsl"

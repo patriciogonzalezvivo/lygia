@@ -1,5 +1,5 @@
 #include "map.hlsl"
-#include "../common/attenuation.hlsl"
+#include "../light/attenuation.hlsl"
 #include "../../generative/random.hlsl"
 #include "../../math/const.hlsl"
 #include "../medium/new.hlsl"
