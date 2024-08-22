@@ -97,13 +97,12 @@ vec4 raymarch(mat4 viewMatrix, vec2 st, out float eyeDepth, out Material mat) {
 
     vec3 rayDirection = viewMatrix3 * normalize(vec3(st*2.0-1.0, fov));
     float dist = 0.0;
-    float eyeDepth = 0.0;
 
     vec4 opaque = RAYMARCH_RENDER_FNC( camera, rayDirection, cameraForward, dist, eyeDepth, mat);
     #ifdef RAYMARCH_VOLUME
-        color = vec4(RAYMARCH_VOLUME_RENDER_FNC(camera, rayDirection, st, dist, opaque.rgb), opaque.a);
+        vec4 color = vec4(RAYMARCH_VOLUME_RENDER_FNC(camera, rayDirection, st, dist, opaque.rgb), opaque.a);
     #else
-        color = opaque;
+        vec4 color = opaque;
     #endif
 
     return color;
