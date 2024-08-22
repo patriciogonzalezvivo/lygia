@@ -1,4 +1,4 @@
-#include "../lighting/raymarch/camera.glsl"
+#include "../space/lookAt.glsl"
 #include "../sampler.glsl"
 
 /*
@@ -73,7 +73,7 @@ vec3 displace(SAMPLER_TYPE tex, vec3 ro, vec3 rd) {
 }
 
 vec3 displace(SAMPLER_TYPE tex, vec3 ro, vec2 uv) {
-    vec3 rd = raymarchCamera(ro) * normalize(vec3(uv - 0.5, 1.0));
+    vec3 rd = lookAt(-ro) * normalize(vec3(uv - 0.5, 1.0));
     return displace(tex, ro, rd);
 }
 #endif
