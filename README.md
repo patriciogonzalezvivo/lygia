@@ -84,7 +84,7 @@ If you are working on a project and want to use LYGIA, you have two options: clo
 
 ### LYGIA Locally
 
-If you are working **locally** in an environment that can resolve `#include` dependencies, just clone LYGIA into your project relative to the shader you are loading:
+If you want to work **locally**, you must ensure that your environment can resolve `#include` dependencies. You can find some examples in [here specially for GLSL](README_GLSL.md). Then you just need to clone LYGIA into your project relative to the shader you are loading:
 
 ```bash
     git clone https://github.com/patriciogonzalezvivo/lygia.git
@@ -96,13 +96,19 @@ or as a submodule:
     git submodule add https://github.com/patriciogonzalezvivo/lygia.git
 ```
 
-or you may clone LYGIA without the git history and reduce the project size (9MB+) with the following command:
+Alternatively you may clone LYGIA without the git history and reduce the project size (9MB+) with the following command:
 
 ```bash
     npx degit https://github.com/patriciogonzalezvivo/lygia.git lygia
 ```
 
-There is also a [npm bundle](https://www.npmjs.com/package/lygia) you could use.
+If you are concerned about the size of the library you might also be interested on pruning the library to only the language you are using. You can do that by using the `prune.py` script. For example:
+
+```bash
+    python prune.py --all --keep glsl
+```
+
+Alternatively, if your are working on a `npm` project, there is a [npm bundle](https://www.npmjs.com/package/lygia) you could use.
 
 If you are working on web project you may want to resolve the dependencies using a bundler like [vite glsl plugin (local bundle)](https://github.com/UstymUkhman/vite-plugin-glsl), [esbuild glsl plugin (local bundle)](https://github.com/ricardomatias/esbuild-plugin-glsl-include) or [webpack glsl plugin (local bundle)](https://github.com/grieve/webpack-glsl-loader).
 
@@ -142,13 +148,12 @@ To then resolve the dependencies by passing a `string` or `strings[]` to `resolv
     shdr = createShader(vertSource, fragSource);
 ```
 
-This this function can also resolve dependencies to previous versions of LYGIA by using this pattern `lygia/vX.X.X/...` on you dependency paths. For example:
+This function can also resolve dependencies to previous versions of LYGIA by using this pattern `lygia/vX.X/...` or `lygia/vX.X.X/...` on you dependency paths. For example:
 
 ```glsl
-#include "lygia/v1.0.0/math/decimation.glsl"
-#include "lygia/v1.1.0/math/decimation.glsl"
+#include "lygia/v1.0/math/decimation.glsl"
+#include "lygia/v1.2.1/math/decimation.glsl"
 ```
-
 
 ### How is LYGIA organized?
 
@@ -169,8 +174,9 @@ The functions are divided into different categories:
 * [`morphological/`](https://lygia.xyz/morphological): morphological filters: dilation, erosion, alpha and poisson fill.
 
 
-### Flexible how?
+### How is it [designed](https://github.com/patriciogonzalezvivo/lygia/blob/main/DESIGN.md)?
 
+LYGIA is designed to be very granular (each file holds one function), multilanguage (each language have it's onw file extension) and flexible. Flexible how?
 There are some functions whose behavior can be changed using the `#defines` keyword before including it. For example, [gaussian blurs](filter/gaussianBlur.glsl) are usually are done in two passes. By default, these are performed on their 1D version, but if you are interested in using a 2D kernel, all in the same pass, you will need to add the `GAUSSIANBLUR_2D` keyword this way:
 
 ```glsl
@@ -188,19 +194,30 @@ There are some functions whose behavior can be changed using the `#defines` keyw
 
 ```
 
-Learn more about LYGIAS design principles [here](https://github.com/patriciogonzalezvivo/lygia/blob/main/DESIGN.md).
+In the same way you can change the sampling function that the gaussian uses. Ex:
 
+```glsl
+// from
+#define GAUSSIANBLUR_SAMPLER_FNC(TEX, UV) texture2D(TEX, UV)
+// to 
+#include "lygia/sample/clamp2edges.glsl"
+#define GAUSSIANBLUR_SAMPLER_FNC(TEX, UV) sampleClamp2edge(TEX, UV)
+```
+
+Learn more about [LYGIAS design principles in the DESIGN.md file](https://github.com/patriciogonzalezvivo/lygia/blob/main/DESIGN.md).
 
 ## Contributions
 
-LYGIA has a long way to go. Your support will be appreciated and rewarded! All contributors are automatically added to the [commercial license](https://lygia.xyz/license). This support can take multiple forms:
+LYGIA has a long way to go and welcomes all kinds of contributions. You can help by:
 
-* fixing bugs!
-* expanding the cross-compatibility between languages GLSL/HLSL/MSL/WGSL/CUDA
-* contributing new functions
-* adding new examples and integrations for new environments like: [GoDot](https://godotengine.org/), [ISF](https://isf.video/), [MaxMSP](https://cycling74.com/products/max), etc.
-* through [sponsorships](https://github.com/sponsors/patriciogonzalezvivo)
+* **Bug fixing**
+* **Translation**, keeping parity between languages (GLSL, HLSL, MSL, WGSL, TSL, CUDA, OSL, etc) is a big part of the challenge. Not all language are the same and we want to make sure make sure each function is optimized and carefully crafted for each enviroment. This means, the more eyes looking at this, the better. Please make sure to read and understand the [Design Principles](DESIGN.md) before starting.
+* **New functions or improving the current implementations**. Please take a look to the [Contributing Guidelines](CONTRIBUTING.md) before starting.
+* **Documentation**. Each function has a header with some information describing the function. Make sure to fill this information when adding a new function.
+* Adding new **examples** and integrations for new environments like: [Godot](https://godotengine.org/), [ISF](https://isf.video/), [MaxMSP](https://cycling74.com/products/max), etc.
+* **Financial** [sponsorships](https://github.com/sponsors/patriciogonzalezvivo). Right now, the money that flows in is invested on the server and infraestructure. Long term plan will be to be able to pay lead contributors and mantainers.
 
+Collaborators and sponsors are automatically added to the [commercial license](https://lygia.xyz/license). Making a PR or subscribing to the github sponsors program is the shortest path to get access to the commercial license. It's all automated, not red taping. LYGIA belongs to those that takes care of it.
 
 ## License 
 
