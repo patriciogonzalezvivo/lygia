@@ -4,6 +4,7 @@ description: Commonly used distance functions.
 options:
 - DIST_FNC: change the distance function, currently implemented are distEuclidean, distManhattan, distChebychev and distMinkowski
 - DIST_MINKOWSKI_P: the power of the Minkowski distance function (1.0 Manhattan, 2.0 Euclidean, Infinity Chebychev)
+license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 */
 
 #ifndef DIST_FNC

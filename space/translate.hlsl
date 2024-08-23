@@ -2,6 +2,7 @@
 contributors:  Shadi El Hajj
 description: Add a translation component to a transform matrix
 use: <float4x4> translate(in <float3x3> matrix, in <float3> tranaslation)
+license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 */
 
 #ifndef FNC_TRANSLATE
