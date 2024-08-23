@@ -78,8 +78,8 @@ vec4 raymarch(mat4 viewMatrix, vec2 st, out float eyeDepth, out Material mat) {
 
         eyeDepth += sampleDepth;
         
-        #if RAYMARCH_AOV
-            add(matAcc, mat, matAcc);
+        #if defined(RAYMARCH_AOV)
+        add(matAcc, mat, matAcc);
         #endif
 
         offset = rotate(offset, HALF_PI);
@@ -87,7 +87,7 @@ vec4 raymarch(mat4 viewMatrix, vec2 st, out float eyeDepth, out Material mat) {
 
     eyeDepth *= RAYMARCH_MULTISAMPLE_FACTOR;
 
-    #if RAYMARCH_AOV  
+    #if defined(RAYMARCH_AOV)  
         multiply(mat, RAYMARCH_MULTISAMPLE_FACTOR, mat);
     #endif
     

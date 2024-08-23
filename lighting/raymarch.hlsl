@@ -77,7 +77,7 @@ float4 raymarch(float4x4 viewMatrix, float2 st, out float eyeDepth, out Material
 
         eyeDepth += sampleDepth;
 
-        #if RAYMARCH_AOV
+        #if defined(RAYMARCH_AOV)
             // Accumulate material properties
             add(matAcc, mat, matAcc);
         #endif
@@ -87,7 +87,7 @@ float4 raymarch(float4x4 viewMatrix, float2 st, out float eyeDepth, out Material
 
     eyeDepth *= RAYMARCH_MULTISAMPLE_FACTOR;
 
-    #if RAYMARCH_AOV
+    #if defined(RAYMARCH_AOV)
         // Average material
         multiply(mat, RAYMARCH_MULTISAMPLE_FACTOR, mat);
     #endif
