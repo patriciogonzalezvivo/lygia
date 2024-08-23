@@ -55,7 +55,7 @@ license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 #if !defined(FNC_RAYMARCH_VOLUME) && defined(RAYMARCH_VOLUME)
 #define FNC_RAYMARCH_VOLUME
 
-vec3 shadowTransmittance(vec3 position, vec3 rayDirectionL, float stepSizeL) {
+vec3 raymarchVolumeShadowTransmittance(vec3 position, vec3 rayDirectionL, float stepSizeL) {
     vec3 transmittanceL = vec3(1.0, 1.0, 1.0);
     float tL = 0.0;
 
@@ -105,7 +105,7 @@ vec3 raymarchVolume(vec3 rayOrigin, vec3 rayDirection, vec2 st, float minDist, v
                     vec3 rayDirectionL = normalize(LIGHT_POSITION - position);
                     float attenuationL = attenuation(distL);
                 #endif
-                vec3 shadow = shadowTransmittance(position, rayDirectionL, stepSizeL);
+                vec3 shadow = raymarchVolumeShadowTransmittance(position, rayDirectionL, stepSizeL);
                 vec3 L = LIGHT_COLOR * LIGHT_INTENSITY;
             #else // no lighting
                 const float attenuationL = 1.0;
