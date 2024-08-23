@@ -34,8 +34,9 @@ examples:
 float raymarchAO(in float3 pos, in float3 nor) {
     float occ = 0.0;
     float sca = 1.0;
+    const float samplesFactor = 1.0 / float(RAYMARCH_AO_SAMPLES-1);
     for (int i = 0; i < RAYMARCH_AO_SAMPLES; i++) {
-        float h = RAYMARCH_AO_MIN_DIST + RAYMARCH_AO_MAX_DIST * float(i) / (RAYMARCH_AO_SAMPLES-1);
+        float h = RAYMARCH_AO_MIN_DIST + RAYMARCH_AO_MAX_DIST * float(i) * samplesFactor;
         float d = RAYMARCH_MAP_FNC(pos + h * nor).sdf;
         occ += (h - d) * sca;
         sca *= RAYMARCH_AO_FALLOFF;
