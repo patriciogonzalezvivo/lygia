@@ -2,6 +2,7 @@
 contributors:  Shadi El Hajj
 description: Create a look-at view matrix
 use: <mat4> lookAtView(in <vec3> position, in <vec3> target, in <vec3> up)
+license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 */
 
 #include "lookAt.glsl"
