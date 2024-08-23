@@ -36,13 +36,9 @@ examples:
 float raymarchSoftShadow(vec3 ro, vec3 rd, in float mint, in float maxt, float w) {
     float res = 1.0;
     float t = mint;
-    #if defined(PLATFORM_WEBGL)
     for (int i = 0; i < RAYMARCHSOFTSHADOW_ITERATIONS; i++) {
         if (t >= maxt)
             break;
-    #else
-    for (int i = 0; i < RAYMARCHSOFTSHADOW_ITERATIONS && t < maxt; i++) {
-    #endif
         float h = RAYMARCH_MAP_FNC(ro + t * rd).sdf;
         res = min(res, h / (w * t));
 
