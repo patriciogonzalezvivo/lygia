@@ -28,18 +28,8 @@ options:
 #ifndef FNC_RAYMARCH_DEFAULT
 #define FNC_RAYMARCH_DEFAULT
 
-float4 raymarchDefaultRender(in float3 rayOrigin, in float3 rayDirection, float3 cameraForward
-#if RAYMARCH_RETURN != 0
-                            ,out float eyeDepth
-#endif
-#if RAYMARCH_RETURN == 2
-                            ,out Material res
-#endif
-    ) { 
-
-#if RAYMARCH_RETURN != 2
-    Material res;
-#endif
+float4 raymarchDefaultRender(in float3 rayOrigin, in float3 rayDirection, float3 cameraForward,
+                             out float dist, out float eyeDepth, out Material res) { 
 
     res = raymarchCast(rayOrigin, rayDirection);
     float t = res.sdf;
@@ -53,10 +43,14 @@ float4 raymarchDefaultRender(in float3 rayOrigin, in float3 rayDirection, float3
         res.ambientOcclusion = raymarchAO(res.position, res.normal);
         res.V = -rayDirection;
         color = RAYMARCH_SHADING_FNC(res);
+        dist = t;
+    }
+    else {
+        dist = RAYMARCH_MAX_DIST;
     }
     color.rgb = raymarchFog(color.rgb, t, rayOrigin, rayDirection);
 
-    #if RAYMARCH_RETURN != 0
+    #if RAYMARCH_RETURN >= 1
     // Eye-space depth. See https://www.shadertoy.com/view/4tByz3
     eyeDepth = t * dot(rayDirection, cameraForward);
     #endif
