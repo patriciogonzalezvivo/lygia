@@ -3,12 +3,14 @@
 /*
 contributors:  Inigo Quiles
 description: Calculate soft shadows http://iquilezles.org/www/articles/rmshadows/rmshadows.htm
-use: <float> raymarchSoftshadow( in <float3> ro, in <float3> rd, in <float> tmin, in <float> tmax)
+use: <float> raymarchSoftshadow( in <float3> ro, in <float3> rd ) 
 options:
     - RAYMARCHSOFTSHADOW_ITERATIONS: shadow quality
     - RAYMARCH_SHADOW_MIN_DIST: minimum shadow distance
     - RAYMARCH_SHADOW_MAX_DIST: maximum shadow distance
     - RAYMARCH_SHADOW_SOLID_ANGLE: light size
+examples:
+    - /shaders/lighting_raymarching.frag
 */
 
 #ifndef RAYMARCHSOFTSHADOW_ITERATIONS
@@ -16,11 +18,11 @@ options:
 #endif
 
 #ifndef RAYMARCH_SHADOW_MIN_DIST
-#define RAYMARCH_SHADOW_MIN_DIST 0.01
+#define RAYMARCH_SHADOW_MIN_DIST 0.005
 #endif
 
 #ifndef RAYMARCH_SHADOW_MAX_DIST
-#define RAYMARCH_SHADOW_MAX_DIST 3.0
+#define RAYMARCH_SHADOW_MAX_DIST RAYMARCH_MAX_DIST
 #endif
 
 #ifndef RAYMARCH_SHADOW_SOLID_ANGLE
@@ -30,7 +32,11 @@ options:
 #ifndef FNC_RAYMARCH_SOFTSHADOW
 #define FNC_RAYMARCH_SOFTSHADOW
 
-float raymarchSoftShadow( float3 ro, float3 rd, in float mint, in float maxt, float w ) {
+float raymarchSoftShadow(float3 ro, float3 rd) {
+    const float mint = RAYMARCH_SHADOW_MIN_DIST;
+    const float maxt = RAYMARCH_SHADOW_MAX_DIST;
+    const float w = RAYMARCH_SHADOW_SOLID_ANGLE;
+
     float res = 1.0;
     float t = mint;
     for (int i = 0; i < RAYMARCHSOFTSHADOW_ITERATIONS; i++) {
@@ -38,15 +44,13 @@ float raymarchSoftShadow( float3 ro, float3 rd, in float mint, in float maxt, fl
             break;
         float h = RAYMARCH_MAP_FNC(ro + t * rd).sdf;
         res = min(res, h / (w * t));
-        t += clamp(h, 0.005, 0.50);
+
+        t += clamp(h, RAYMARCH_SHADOW_MIN_DIST, RAYMARCH_SHADOW_MAX_DIST);
         if (res < -1.0 || t > maxt)
             break;
     }
     res = max(res, -1.0);
     return 0.25 * (1.0 + res) * (1.0 + res) * (2.0 - res);
 }
-
-float raymarchSoftShadow( float3 ro, float3 rd, in float tmin, in float tmax) { return raymarchSoftShadow(ro, rd, RAYMARCH_SHADOW_MIN_DIST, RAYMARCH_SHADOW_MAX_DIST, RAYMARCH_SHADOW_SOLID_ANGLE); }
-float raymarchSoftShadow( float3 ro, float3 rd) { return raymarchSoftShadow(ro, rd, RAYMARCH_SHADOW_MIN_DIST, RAYMARCH_SHADOW_MAX_DIST); }
 
 #endif
