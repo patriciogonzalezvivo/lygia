@@ -120,7 +120,6 @@ vec4 pbr(const in Material _mat) {
     // Specular
     color.rgb  += Fr * IBL_LUMINANCE;
     color.rgb  += lightSpecular;    
-    color.rgb  *= M.ambientOcclusion;
     color.rgb  += M.emissive;
     color.a     = M.albedo.a;
 

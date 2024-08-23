@@ -93,12 +93,6 @@ float4 pbrClearCoat(const Material _mat)
 
     // Ambient Occlusion
     // ------------------------
-    float ao = 1.0;
-    
-    #if defined(FNC_RAYMARCH_AO)
-    ao = raymarchAO(M.position, M.normal);
-    #endif
-
 // #if defined(FNC_SSAO) && defined(SCENE_DEPTH) && defined(RESOLUTION) && defined(CAMERA_NEAR_CLIP) && defined(CAMERA_FAR_CLIP)
 //     float2 pixel = 1.0/RESOLUTION;
 //     ao = ssao(SCENE_DEPTH, gl_FragCoord.xy*pixel, pixel, 1.);
@@ -113,7 +107,7 @@ float4 pbrClearCoat(const Material _mat)
     //                         saturate(-1.1 + NoV + M.metallic) *          // Fresnel
     //                         (M.metallic + (.95 - M.roughness) * 2.0); // make smaller highlights brighter
 
-    float diffAO = min(M.ambientOcclusion, ao);
+    float diffAO = M.ambientOcclusion;
     float specAO = specularAO(M, diffAO);
 
     float3 Fr = float3(0.0, 0.0, 0.0);
