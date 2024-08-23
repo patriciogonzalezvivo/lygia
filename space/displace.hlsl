@@ -1,4 +1,4 @@
-#include "../lighting/raymarch/camera.hlsl"
+#include "../space/lookAt.hlsl"
 #include "../sampler.hlsl"
 
 /*
@@ -68,7 +68,7 @@ float3 displace(SAMPLER_TYPE tex, float3 ro, float3 rd) {
 }
 
 float3 displace(SAMPLER_TYPE tex, float3 ro, float2 uv) {
-    float3 rd = raymarchCamera(ro) * normalize(float3(uv - 0.5, 1.0));
+    float3 rd = lookAt(-ro) * normalize(float3(uv - 0.5, 1.0));
     return displace(u_tex0Depth, ro, rd);
 }
 #endif
