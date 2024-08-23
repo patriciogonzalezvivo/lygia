@@ -33,8 +33,9 @@ options:
 float raymarchSoftShadow( float3 ro, float3 rd, in float mint, in float maxt, float w ) {
     float res = 1.0;
     float t = mint;
-    for (int i = 0; i < RAYMARCHSOFTSHADOW_ITERATIONS && t < maxt; i++)
-    {
+    for (int i = 0; i < RAYMARCHSOFTSHADOW_ITERATIONS; i++) {
+        if (t >= maxt)
+            break;
         float h = RAYMARCH_MAP_FNC(ro + t * rd).sdf;
         res = min(res, h / (w * t));
         t += clamp(h, 0.005, 0.50);
