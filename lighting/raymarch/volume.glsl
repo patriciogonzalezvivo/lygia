@@ -52,8 +52,8 @@ license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 #define RAYMARCH_VOLUME_DITHER 0.1
 #endif
 
-#ifndef FNC_RAYMARCH_VOLUMERENDER
-#define FNC_RAYMARCH_VOLUMERENDER
+#if !defined(FNC_RAYMARCH_VOLUME) && defined(RAYMARCH_VOLUME)
+#define FNC_RAYMARCH_VOLUME
 
 vec3 shadowTransmittance(vec3 position, vec3 rayDirectionL, float stepSizeL) {
     vec3 transmittanceL = vec3(1.0, 1.0, 1.0);
@@ -113,7 +113,7 @@ vec3 raymarchVolume(vec3 rayOrigin, vec3 rayDirection, vec2 st, float minDist, v
                 const vec3 L = vec3(1.0, 1.0, 1.0);
             #endif
 
-            #if defined RAYMARCH_ENERGY_CONSERVING
+            #if defined(RAYMARCH_ENERGY_CONSERVING)
                 // energy-conserving scattering integration
                 vec3 S = L * attenuationL * shadow * density * res.scattering;
                 vec3 sampleExtinction = max(vec3(EPSILON, EPSILON, EPSILON), density * extinction);
