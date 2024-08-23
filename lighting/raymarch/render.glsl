@@ -30,18 +30,8 @@ examples:
 #ifndef FNC_RAYMARCH_DEFAULT
 #define FNC_RAYMARCH_DEFAULT
 
-vec4 raymarchDefaultRender( in vec3 rayOrigin, in vec3 rayDirection, vec3 cameraForward
-#if RAYMARCH_RETURN >= 1
-                            ,out float eyeDepth
-#endif
-#if RAYMARCH_RETURN == 2
-                            ,out Material res
-#endif
-    ) { 
-
-#if RAYMARCH_RETURN != 2
-    Material res;
-#endif
+vec4 raymarchDefaultRender( in vec3 rayOrigin, in vec3 rayDirection, vec3 cameraForward,
+                            out float dist ,out float eyeDepth, out Material res) { 
 
     res = raymarchCast(rayOrigin, rayDirection);
     float t = res.sdf;
@@ -55,6 +45,9 @@ vec4 raymarchDefaultRender( in vec3 rayOrigin, in vec3 rayDirection, vec3 camera
         res.ambientOcclusion = raymarchAO(res.position, res.normal);
         res.V = -rayDirection;
         color = RAYMARCH_SHADING_FNC(res);
+        dist = t;
+    } else {
+        dist = RAYMARCH_MAX_DIST;
     }
     
     color.rgb = raymarchFog(color.rgb, t, rayOrigin, rayDirection);

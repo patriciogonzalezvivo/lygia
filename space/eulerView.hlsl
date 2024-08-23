@@ -2,6 +2,7 @@
 contributors:  Shadi El Hajj
 description: Create a view matrix from camera position and camera rotation (euler angles)
 use: <float4x4> eulerView(in <float3> position, in <float3> euler)
+license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 */
 
 #include "../math/rotate3dX.hlsl"
