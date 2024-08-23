@@ -1,13 +1,31 @@
-#include "map.hlsl"
+#include "map.glsl"
 
 /*
 contributors:  Inigo Quiles
 description: Calculate Ambient Occlusion. See calcAO in https://www.shadertoy.com/view/lsKcDD
 use: <float> raymarchAO( in <float3> pos, in <float3> nor ) 
+examples:
+    - /shaders/lighting_raymarching.frag
 */
 
-#ifndef RAYMARCH_SAMPLES_AO
-#define RAYMARCH_SAMPLES_AO 5
+#ifndef RAYMARCH_AO_SAMPLES
+#define RAYMARCH_AO_SAMPLES 5
+#endif
+
+#ifndef RAYMARCH_AO_INTENSITY
+#define RAYMARCH_AO_INTENSITY 1.0
+#endif
+
+#ifndef RAYMARCH_AO_MIN_DIST
+#define RAYMARCH_AO_MIN_DIST 0.001
+#endif
+
+#ifndef RAYMARCH_AO_MAX_DIST
+#define RAYMARCH_AO_MAX_DIST 0.2
+#endif
+
+#ifndef RAYMARCH_AO_FALLOFF
+#define RAYMARCH_AO_FALLOFF 0.95
 #endif
 
 #ifndef FNC_RAYMARCH_AO
@@ -16,13 +34,13 @@ use: <float> raymarchAO( in <float3> pos, in <float3> nor )
 float raymarchAO(in float3 pos, in float3 nor) {
     float occ = 0.0;
     float sca = 1.0;
-    for (int i = 0; i < RAYMARCH_SAMPLES_AO; i++) {
-        float h = 0.001 + 0.15 * float(i) / 4.0;
+    for (int i = 0; i < RAYMARCH_AO_SAMPLES; i++) {
+        float h = RAYMARCH_AO_MIN_DIST + RAYMARCH_AO_MAX_DIST * float(i) / (RAYMARCH_AO_SAMPLES-1);
         float d = RAYMARCH_MAP_FNC(pos + h * nor).sdf;
         occ += (h - d) * sca;
-        sca *= 0.95;
+        sca *= RAYMARCH_AO_FALLOFF;
     }
-    return clamp(1.0 - 1.5 * occ, 0.0, 1.0);
+    return saturate(1.0 - RAYMARCH_AO_INTENSITY * occ);
 }
 
 #endif
