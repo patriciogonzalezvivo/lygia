@@ -7,8 +7,8 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-#ifndef FNC_TOMAT4
-#define FNC_TOMAT4
+#ifndef FNC_TOMAT3
+#define FNC_TOMAT3
 mat3 toMat3(mat4 m) {
     #if __VERSION__ >= 300
     return mat3(m);
