@@ -56,41 +56,22 @@ vec4 gooch(const in vec4 _albedo, const in vec3 _N, const in vec3 _L, const in v
     vec3 v = normalize(_V);
 
     // Lambert Diffuse
-    float diff = diffuse(l, n, v, _roughness) * _Li;
+    float diff = diffuseLambert(l, n) * _Li;
     // Phong Specular
-    float spec = specular(l, n, v, _roughness) * _Li;
+    float spec = specularPhong(l, n, v, 1.0-_roughness) * _Li;
 
     return vec4(mix(mix(cold, warm, diff), GOOCH_SPECULAR, spec), _albedo.a);
 }
 
-
-vec4 gooch(const in vec4 _albedo, const in vec3 _N, const in vec3 _L, const in vec3 _V, const in float _roughness) {
-    return gooch(_albedo, _N, _L, _V, _roughness, 1.0);
+vec4 gooch(const in LightPoint _L, in Material _M, ShadingData shadingData) {
+    return gooch(_M.albedo, _M.normal, _L.direction, shadingData.V, _M.roughness, _L.intensity);
 }
 
-vec4 gooch(in Material _M, vec3 _L) {
-    if (_M.V.x == 0.0 && _M.V.y == 0.0 && _M.V.z == 0.0) {
-        _M.V = normalize(CAMERA_POSITION - _M.position);
-    }
-    return gooch(_M.albedo, _M.normal, _L, _M.V, _M.roughness, 1.0);
+vec4 gooch(const in LightPoint _L, in Material _M, ShadingData shadingData) {
+    return gooch(_M.albedo, _M.normal, _L.position, shadingData.V, _M.roughness, _L.intensity);
 }
 
-vec4 gooch(in Material _M, const in LightDirectional _L) {
-    if (_M.V.x == 0.0 && _M.V.y == 0.0 && _M.V.z == 0.0) {
-        _M.V = normalize(CAMERA_POSITION - _M.position);
-    }
-    return gooch(_M.albedo, _M.normal, _L.direction, _M.V, _M.roughness, _L.intensity);
-}
-
-
-vec4 gooch(in Material _M, const in LightPoint _L) {
-    if (_M.V.x == 0.0 && _M.V.y == 0.0 && _M.V.z == 0.0) {
-        _M.V = normalize(CAMERA_POSITION - _M.position);
-    }
-    return gooch(_M.albedo, _M.normal, _L.position, _M.V, _M.roughness, _L.intensity);
-}
-
-vec4 gooch(const in Material _M) {
+vec4 gooch(const in Material _M, ShadingData shadingData) {
     #if defined(LIGHT_DIRECTION)
     LightDirectional L;
     #elif defined(LIGHT_POSITION)
@@ -100,13 +81,19 @@ vec4 gooch(const in Material _M) {
 
     #if defined(FNC_RAYMARCH_SOFTSHADOW)
     #if defined(LIGHT_DIRECTION)
-    L.intensity = raymarchSoftShadow(_M.position, L.direction);
+    L.intensity *= raymarchSoftShadow(_M.position, L.direction);
     #elif defined(LIGHT_POSITION)
-    L.intensity = raymarchSoftShadow(_M.position, L.position);
+    L.intensity *= raymarchSoftShadow(_M.position, L.position);
     #endif
     #endif 
 
     return gooch(_M, L) * _M.ambientOcclusion;
+}
+
+vec4 gooch(const in Material _M) {
+    ShadingData shadingData = shadingDataNew();
+    shadingData.V = normalize(CAMERA_POSITION - _M.position);
+    return gooch(_M, shadingData);
 }
 
 #endif
