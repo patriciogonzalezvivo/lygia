@@ -48,7 +48,7 @@ license:
 
 vec4 pbrLittle(Material mat, ShadingData shadingData) {
     shadingData.N = mat.normal;
-    shadingData.R = reflection(shadingData.V,  shadingData.N, mat.roughness);
+    shadingData.R = reflect(-shadingData.V,  shadingData.N);
     shadingData.fresnel = max(mat.f0.r, max(mat.f0.g, mat.f0.b));
     shadingData.roughness = mat.roughness;
     shadingData.linearRoughness = mat.roughness;
