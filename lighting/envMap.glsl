@@ -1,4 +1,6 @@
 #include "../sample/equirect.glsl"
+#include "material/new.glsl"
+#include "shadingData/new.glsl"
 
 #include "fakeCube.glsl"
 #include "toShininess.glsl"
