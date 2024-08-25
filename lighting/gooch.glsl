@@ -54,8 +54,12 @@ vec4 gooch(const in vec4 _albedo, const in vec3 _N, const in vec3 _L, const in v
     shadingData.L = normalize(_L);
     shadingData.N = normalize(_N);
     shadingData.V = normalize(_V);
+    shadingData.R = reflection(shadingData.V,  shadingData.N, _roughness);
     shadingData.NoV = dot(shadingData.N, shadingData.V);
     shadingData.NoL = dot(shadingData.N, shadingData.L);
+    shadingData.fresnel = 0.04;
+    shadingData.roughness = _roughness;
+    shadingData.linearRoughness = _roughness;
 
     // Lambert Diffuse
     float diff = diffuse(shadingData) * _Li;
