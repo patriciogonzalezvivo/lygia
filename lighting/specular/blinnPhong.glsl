@@ -13,12 +13,12 @@
 #define FNC_SPECULAR_BLINNPHONG
 
 // https://github.com/glslify/glsl-specular-blinn-phong
-float specularBlinnPhong(const in vec3 NoH, float shininess) {
+float specularBlinnPhong(const in float NoH, float shininess) {
     return SPECULAR_POW(max(0.0, NoH), shininess);
 }
 
-float specularBlinnPhong(ShadingData, shadingData) {
-    return specularBlinnPhong(shadingData.L, shadingData.NoH, 1.0-shadingData.roughness);
+float specularBlinnPhong(ShadingData shadingData) {
+    return specularBlinnPhong(shadingData.NoH, 1.0-shadingData.roughness);
 }
 
 #endif

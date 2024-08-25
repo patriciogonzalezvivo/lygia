@@ -18,7 +18,7 @@ float specularPhong(const in vec3 L, const in vec3 N, const in vec3 V, const in 
     return SPECULAR_POW(max(0.0, dot(R, -V)), shininess);
 }
 
-float specularPhong(ShadingData, shadingData) {
+float specularPhong(ShadingData shadingData) {
     return specularPhong(shadingData.L, shadingData.N, shadingData.V, 1.0-shadingData.roughness);
 }
 

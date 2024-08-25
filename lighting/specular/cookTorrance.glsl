@@ -49,7 +49,7 @@ float specularCookTorrance(const in vec3 _L, const in vec3 _N, const in vec3 _V,
 }
 
 float specularCookTorrance(ShadingData shadingData){
-    return specularCookTorrance(shadingData.L, shadingData.N, shadingData.V, shading.NoV, shadingData.NoL, shadingData.linearRoughness, shadingData.fresnel); 
+    return specularCookTorrance(shadingData.L, shadingData.N, shadingData.V, shadingData.NoV, shadingData.NoL, shadingData.linearRoughness, shadingData.fresnel); 
 }
 
 
