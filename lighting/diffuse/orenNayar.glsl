@@ -12,17 +12,21 @@ license:
 #ifndef FNC_DIFFUSE_ORENNAYAR
 #define FNC_DIFFUSE_ORENNAYAR
 
-float diffuseOrenNayar(ShadingData shadingData) {
-    float LoV = dot(shadingData.L, shadingData.V);
+float diffuseOrenNayar(const in vec3 L, const in vec3 N, const in vec3 V, const in float NoV, const in float NoL, const in float roughness) {
+    float LoV = dot(L, V);
     
-    float s = LoV - shadingData.NoL * shadingData.NoV;
-    float t = mix(1.0, max(shadingData.NoL, shadingData.NoV), step(0.0, s));
+    float s = LoV - NoL * NoV;
+    float t = mix(1.0, max(NoL, NoV), step(0.0, s));
 
-    float sigma2 = shadingData.linearRoughness * shadingData.linearRoughness;
+    float sigma2 = roughness * roughness;
     float A = 1.0 + sigma2 * (1.0 / (sigma2 + 0.13) + 0.5 / (sigma2 + 0.33));
     float B = 0.45 * sigma2 / (sigma2 + 0.09);
 
-    return max(0.0, shadingData.NoL) * (A + B * s / t);
+    return max(0.0, NoL) * (A + B * s / t);
+}
+
+float diffuseOrenNayar(ShadingData shadingData) {
+    return diffuseOrenNayar(shadingData.L, shadingData.N, shadingData.V, shadingData.NoV, shadingData.NoL, shadingData.linearRoughness);
 }
 
 #endif

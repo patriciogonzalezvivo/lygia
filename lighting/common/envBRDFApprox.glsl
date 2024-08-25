@@ -11,9 +11,13 @@ vec2 envBRDFApprox(const in float _NoV, in float _roughness ) {
 }
 
 //https://www.unrealengine.com/en-US/blog/physically-based-shading-on-mobile
+vec3 envBRDFApprox(const in vec3 _specularColor, const in float _NoV, const in float _roughness) {
+    vec2 AB = envBRDFApprox(_NoV, _roughness);
+    return _specularColor * AB.x + AB.y;
+}
+
 vec3 envBRDFApprox(ShadingData shadingData) {
-    vec2 AB = envBRDFApprox(shadingData.NoV, shadingData.linearRoughness);
-    return shadingData.specularColor * AB.x + AB.y;
+    return envBRDFApprox(shadingData.specularColor, shadingData.NoV, shadingData.roughness);
 }
 
 #endif

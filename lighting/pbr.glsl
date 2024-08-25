@@ -45,7 +45,7 @@ license:
 #ifndef FNC_PBR
 #define FNC_PBR
 
-vec4 pbr(const in Material mat, ShadingData shadingData) {
+vec4 pbr(const Material mat, ShadingData shadingData) {
     // Shading Data
     // ------------
     shadingData.N = mat.normal;
@@ -56,8 +56,8 @@ vec4 pbr(const in Material mat, ShadingData shadingData) {
     shadingData.specularColor = mix(mat.f0, mat.albedo.rgb, mat.metallic);
     shadingData.NoV = dot(shadingData.N, shadingData.V);
 
-    // Global Ilumination ( Image Based Lighting )
-    // ------------------------
+    // Indirect Lights ( Image Based Lighting )
+    // ----------------------------------------
     vec3 E = envBRDFApprox(shadingData);
     float diffuseAO = mat.ambientOcclusion;
 
@@ -77,22 +77,21 @@ vec4 pbr(const in Material mat, ShadingData shadingData) {
     Fd  *= diffuseAO;
     Fd  *= (1.0 - E);
 
-    // Local Ilumination
-    // ------------------------    
+    // Direct Lights
+    // -------------
 
     {
         #if defined(LIGHT_DIRECTION)
         LightDirectional L = LightDirectionalNew();
-        lightDirectional(L, mat, shadingData);
         #elif defined(LIGHT_POSITION)
         LightPoint L = LightPointNew();
-        lightPoint(L, mat, shadingData);
         #endif
+        lightResolve(L, mat, shadingData);
 
         #if defined(LIGHT_POINTS) && defined(LIGHT_POINTS_TOTAL)
         for (int i = 0; i < LIGHT_POINTS_TOTAL; i++) {
             LightPoint L = LIGHT_POINTS[i];
-            lightPoint(L, mat, shadingData);
+            lightResolve(L, mat, shadingData);
         }
         #endif
     }

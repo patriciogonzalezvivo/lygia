@@ -14,13 +14,17 @@ license:
 #ifndef FNC_DIFFUSE_BURLEY
 #define FNC_DIFFUSE_BURLEY
 
-float diffuseBurley(ShadingData shadingData) {
+float diffuseBurley(const in float NoV, const in float NoL, const in float LoH, const in float linearRoughness) {
     // Burley 2012, "Physically-Based Shading at Disney"
-    float LoH = dot(shadingData.L, shadingData.H);
-    float f90 = 0.5 + 2.0 * shadingData.linearRoughness * LoH * LoH;
-    float lightScatter = schlick(1.0, f90, shadingData.NoL);
-    float viewScatter  = schlick(1.0, f90, shadingData.NoV);
+    float f90 = 0.5 + 2.0 * linearRoughness * LoH * LoH;
+    float lightScatter = schlick(1.0, f90, NoL);
+    float viewScatter  = schlick(1.0, f90, NoV);
     return lightScatter * viewScatter;
+}
+
+float diffuseBurley(ShadingData shadingData) {
+    float LoH = dot(shadingData.L, shadingData.H);
+    return diffuseBurley(shadingData.NoV, shadingData.NoL, LoH, shadingData.linearRoughness);
 }
 
 #endif
