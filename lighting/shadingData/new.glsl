@@ -5,6 +5,9 @@ contributors:  Shadi El Hajj
 description: ShadingData constructor
 */
 
+#ifndef FNC_SHADING_DATA_NEW
+#define FNC_SHADING_DATA_NEW 
+
 ShadingData shadingDataNew() {
    ShadingData shadingData;
 
@@ -19,6 +22,7 @@ ShadingData shadingDataNew() {
    shadingData.NoH = 0.0;
 
    shadingData.fresnel = 0.0;
+   shadingData.roughness = 0.0;
    shadingData.linearRoughness = 0.0;
    shadingData.diffuseColor = vec3(0.0, 0.0, 0.0);
    shadingData.specularColor = vec3(0.0, 0.0, 0.0);
@@ -28,3 +32,5 @@ ShadingData shadingDataNew() {
 
    return shadingData;
 };
+
+#endif

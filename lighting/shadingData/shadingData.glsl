@@ -3,6 +3,9 @@ contributors:  Shadi El Hajj
 description: Structure to hold shading variables
 */
 
+#ifndef STR_SHADING_DATA
+#define STR_SHADING_DATA
+
 struct ShadingData {
    vec3 V;
    vec3 N;
@@ -15,6 +18,7 @@ struct ShadingData {
    float NoH;
 
    float fresnel;
+   float roughness;
    float linearRoughness;
    vec3 diffuseColor;
    vec3 specularColor;
@@ -22,3 +26,5 @@ struct ShadingData {
    vec3 diffuse;
    vec3 specular;
 };
+
+#endif
