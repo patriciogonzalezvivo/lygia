@@ -54,11 +54,13 @@ vec4 pbrGlass(const Material mat, ShadingData shadingData) {
     vec3 No     = mat.normal;                            // Normal out
 #endif
     vec3 eta    = ior2eta(mat.ior);
-    shadingData.specularColor = mat.albedo.rgb;
-    shadingData.NoV = dot(No, shadingData.V);
+    shadingData.N = mat.normal;
     shadingData.R = reflection(shadingData.V,  shadingData.N, mat.roughness);
+    shadingData.fresnel = max(mat.f0.r, max(mat.f0.g, mat.f0.b));
     shadingData.roughness = mat.roughness; 
     shadingData.linearRoughness = mat.roughness;
+    shadingData.specularColor = mat.albedo.rgb;
+    shadingData.NoV = dot(No, shadingData.V);
 
     // Indirect Lights ( Image Based Lighting )
     // ----------------------------------------
@@ -97,6 +99,11 @@ vec4 pbrGlass(const Material mat, ShadingData shadingData) {
         #endif
 
         #if defined(LIGHT_DIRECTION) || defined(LIGHT_POSITION)
+
+        shadingData.L = L.direction;
+        shadingData.H = normalize(L.direction + shadingData.V);
+        shadingData.NoL = dot(shadingData.N, L.direction);
+        shadingData.NoH = dot(shadingData.N, shadingData.H);
         vec3 spec = vec3( specular(shadingData) );
 
         color.rgb += L.color * spec;
