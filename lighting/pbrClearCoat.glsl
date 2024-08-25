@@ -1,20 +1,22 @@
 #include "../math/saturate.glsl"
 #include "../color/tonemap.glsl"
 
-#include "material.glsl"
-#include "fresnelReflection.glsl"
-#include "envMap.glsl"
-#include "light/new.glsl"
-#include "light/resolve.glsl"
-#include "sphericalHarmonics.glsl"
-
-#include "ior/2f0.glsl"
-
-#include "reflection.glsl"
 #include "common/ggx.glsl"
 #include "common/kelemen.glsl"
+
+#include "shadingData/new.glsl"
+#include "material.glsl"
+#include "envMap.glsl"
+#include "fresnelReflection.glsl"
+#include "sphericalHarmonics.glsl"
+#include "light/new.glsl"
+#include "light/resolve.glsl"
+
+#include "reflection.glsl"
 #include "common/specularAO.glsl"
 #include "common/envBRDFApprox.glsl"
+
+#include "ior/2f0.glsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
