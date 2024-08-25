@@ -4,6 +4,8 @@
 #include "material/albedo.glsl"
 #include "material.glsl"
 #include "light/new.glsl"
+#include "diffuse/lambert.glsl"
+#include "specular/phong.glsl"
 
 // #include "diffuse.glsl"
 // #include "specular.glsl"
