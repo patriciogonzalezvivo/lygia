@@ -4,7 +4,7 @@
 #define FNC_SPECULAR_BECKMANN
 
 float specularBeckmann(ShadingData shadingData) {
-    return beckmann(shadingData.NoH, shadingData.linearRoughness);
+    return beckmann(shadingData.NoH, shadingData.roughness);
 }
 
 #endif
