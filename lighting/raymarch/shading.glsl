@@ -2,6 +2,7 @@
 #include "cast.glsl"
 #include "ao.glsl"
 #include "softShadow.glsl"
+#include "../shadingData/new.glsl"
 #include "../../math/saturate.glsl"
 
 /*
