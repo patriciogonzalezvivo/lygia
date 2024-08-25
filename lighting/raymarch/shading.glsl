@@ -43,7 +43,7 @@ license:
 #ifndef FNC_RAYMARCH_DEFAULTSHADING
 #define FNC_RAYMARCH_DEFAULTSHADING
 
-vec4 raymarchDefaultShading(Material m, vec3 viewDirection) {
+vec4 raymarchDefaultShading(Material m, ShadingData shadingData) {
     
     // This are here to be access by RAYMARCH_AMBIENT 
     vec3 worldNormal = m.normal;
@@ -55,15 +55,15 @@ vec4 raymarchDefaultShading(Material m, vec3 viewDirection) {
     vec3 lig = normalize(LIGHT_POSITION - m.position);
     #endif
     
-    vec3 ref = reflect(-viewDirection, m.normal);
+    vec3 ref = reflect(-shadingData.V, m.normal);
     float occ = raymarchAO(m.position, m.normal);
 
-    vec3 hal = normalize(lig + viewDirection);
+    vec3 hal = normalize(lig + shadingData.V);
     float amb = saturate(0.5 + 0.5 * m.normal.y);
     float dif = saturate(dot(m.normal, lig));
     float bac = saturate(dot(m.normal, normalize(vec3(-lig.x, 0.0, -lig.z)))) * saturate(1.0 - m.position.y);
     float dom = smoothstep( -0.1, 0.1, ref.y );
-    float fre = pow(saturate(1.0 + dot(m.normal, -viewDirection)), 2.0);
+    float fre = pow(saturate(1.0 + dot(m.normal, -shadingData.V)), 2.0);
     
     dif *= raymarchSoftShadow(m.position, lig);
     dom *= raymarchSoftShadow(m.position, ref);
