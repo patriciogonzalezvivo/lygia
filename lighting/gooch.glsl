@@ -1,3 +1,4 @@
+#include "shadingData/new.glsl"
 #include "material/roughness.glsl"
 #include "material/normal.glsl"
 #include "material/albedo.glsl"
