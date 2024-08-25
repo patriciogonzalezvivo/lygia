@@ -88,7 +88,7 @@ vec4 gooch(const in Material _M, ShadingData shadingData) {
     #endif
     #endif 
 
-    return gooch(_M, L) * _M.ambientOcclusion;
+    return gooch(L, _M, shadingData) * _M.ambientOcclusion;
 }
 
 vec4 gooch(const in Material _M) {
