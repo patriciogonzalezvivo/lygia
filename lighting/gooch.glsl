@@ -64,7 +64,7 @@ vec4 gooch(const in vec4 _albedo, const in vec3 _N, const in vec3 _L, const in v
     return vec4(mix(mix(cold, warm, diff), GOOCH_SPECULAR, spec), _albedo.a);
 }
 
-vec4 gooch(const in LightPoint _L, in Material _M, ShadingData shadingData) {
+vec4 gooch(const in LightDirectional _L, in Material _M, ShadingData shadingData) {
     return gooch(_M.albedo, _M.normal, _L.direction, shadingData.V, _M.roughness, _L.intensity);
 }
 
