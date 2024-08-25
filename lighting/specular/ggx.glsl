@@ -7,37 +7,21 @@
 #ifndef FNC_SPECULAR_GGX
 #define FNC_SPECULAR_GGX
 
-float specularGGX(const in vec3 _L, const in vec3 _N, const in vec3 _V, float _NoV, float _NoL, float _roughness, float _fresnel) {
-    float NoV = max(_NoV, 0.0);
-    float NoL = max(_NoL, 0.0);
-
-    vec3 H = normalize(_L + _V);
-    float LoH = saturate(dot(_L, H));
-    float NoH = saturate(dot(_N, H));
+float specularGGX(ShadingData shadingData) {
+    float LoH = saturate(dot(shadingData.L, shadingData.H));
 
     // float NoV, float NoL, float roughness
-    float linearRoughness =  _roughness * _roughness;
-    float D = GGX(NoH, linearRoughness);
+    float D = GGX(shadingData.NoH, shadingData.linearRoughness);
 
 #if defined(PLATFORM_RPI)
-    float V = smithGGXCorrelated_Fast(_NoV, NoL,linearRoughness);
+    float V = smithGGXCorrelated_Fast(shadingData.NoV, shadingData.NoL, shadingData.linearRoughness);
 #else
-    float V = smithGGXCorrelated(_NoV, NoL,linearRoughness);
+    float V = smithGGXCorrelated(shadingData.NoV, shadingData.NoL, shadingData.linearRoughness);
 #endif
     
-    float F = fresnel(vec3(_fresnel), LoH).r;
+    float F = fresnel(vec3(shadingData.fresnel), LoH).r;
 
     return (D * V) * F;
-}
-
-float specularGGX(vec3 L, vec3 N, vec3 V, float roughness, float fresnel) {
-    float NoV = max(dot(N, V), 0.0);
-    float NoL = max(dot(N, L), 0.0);
-    return specularGGX(L, N, V, NoV, NoL, roughness, fresnel);
-}
-
-float specularGGX(vec3 L, vec3 N, vec3 V, float roughness) {
-    return specularGGX(L, N, V, roughness, 0.04);
 }
 
 #endif

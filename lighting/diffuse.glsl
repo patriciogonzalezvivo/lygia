@@ -1,3 +1,4 @@
+#include "shadingData/new.glsl"
 #include "diffuse/lambert.glsl"
 #include "diffuse/orenNayar.glsl"
 #include "diffuse/burley.glsl"
@@ -23,6 +24,5 @@ license:
 
 #ifndef FNC_DIFFUSE
 #define FNC_DIFFUSE
-float diffuse(const in vec3 _L, const in vec3 _N, const in vec3 _V, const in float _roughness) { return DIFFUSE_FNC(_L, _N, _V, _roughness); }
-float diffuse(const in vec3 _L, const in vec3 _N, const in vec3 _V, const in float _NoV, const in float _NoL, const in float _roughness) { return DIFFUSE_FNC(_L, _N, _V, _NoV, _NoL, _roughness); }
+float diffuse(ShadingData shadingData) { return DIFFUSE_FNC(shadingData); }
 #endif

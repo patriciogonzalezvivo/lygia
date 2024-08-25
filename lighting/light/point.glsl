@@ -1,5 +1,5 @@
 /*
-contributors: Patricio Gonzalez Vivo
+contributors: [Patricio Gonzalez Vivo, Shadi El Hajj]
 description: Calculate point light
 use: lightPoint(<vec3> _diffuseColor, <vec3> _specularColor, <vec3> _N, <vec3> _V, <float> _NoV, <float> _f0, out <vec3> _diffuse, out <vec3> _specular)
 options:
@@ -31,61 +31,40 @@ struct LightPoint {
 #ifndef FNC_LIGHT_POINT
 #define FNC_LIGHT_POINT
 
-void lightPoint(
-    const in vec3 _diffuseColor, const in vec3 _specularColor, 
-    const in vec3 _V, 
-    const in vec3 _Lp, const in vec3 _Ld, const in vec3 _Lc, const in float _Li, const in float _Ldist, const in float _Lof, 
-    const in vec3 _P, const in vec3 _N, const in float _NoV, const in float _NoL, const in float _roughness, const in float _f0,
-    inout vec3 _diffuse, inout vec3 _specular) {
+void lightPoint(LightPoint L, Material mat, ShadingData shadingData) {
 
-    float intensity = _Li;
+    float Ldist  = length(L.position);
+    vec3 Ldirection = L.position/Ldist;
+    shadingData.L = Ldirection;
+    shadingData.H = normalize(Ldirection + shadingData.V);
+    shadingData.NoL = dot(shadingData.N, Ldirection);
+    shadingData.NoH = dot(shadingData.N, shadingData.H);
+
     #ifdef FNC_RAYMARCH_SOFTSHADOW    
-    intensity = raymarchSoftShadow(_P, _Ld);
+    float shadow = raymarchSoftShadow(mat.position, Ldirection);
+    #else
+    float shadow = 1.0;
     #endif
 
-    float dif   = diffuse(_Ld, _N, _V, _NoV, _NoL, _roughness);// * INV_PI;
-    float spec  = specular(_Ld, _N, _V, _NoV, _NoL, _roughness, _f0);
+    float dif  = diffuse(shadingData);
+    float spec = specular(shadingData);
 
-    vec3 lightContribution = _Lc * intensity * _NoL;
-    if (_Lof > 0.0)
-        lightContribution *= falloff(_Ldist, _Lof);
+    vec3 lightContribution = L.color * L.intensity * shadow * shadingData.NoL;
+    if (L.falloff > 0.0)
+        lightContribution *= falloff(Ldist, L.falloff);
 
-    _diffuse    += max(vec3(0.0), _diffuseColor * lightContribution * dif);
-    _specular   += max(vec3(0.0), _specularColor * lightContribution * spec);
-}
-
-#ifdef STR_MATERIAL
-void lightPoint(
-    const in vec3 _diffuseColor, const in vec3 _specularColor,
-    LightPoint _L, const in Material _mat, 
-    inout vec3 _diffuse, inout vec3 _specular) 
-    {
-    float dist  = length(_L.position);
-    vec3 L      = _L.position/dist;
-
-    float f0    = max(_mat.f0.r, max(_mat.f0.g, _mat.f0.b));
-    float NoL   = dot(_mat.normal, L);
-
-    lightPoint( _diffuseColor, _specularColor, 
-                _mat.V, 
-                _L.position, L, _L.color, _L.intensity, dist, _L.falloff, 
-                _mat.position, _mat.normal, _mat.NoV, NoL, _mat.roughness, f0,
-                _diffuse, _specular);
+    shadingData.diffuse  += max(vec3(0.0), shadingData.diffuseColor * lightContribution * dif);
+    shadingData.specular += max(vec3(0.0), shadingData.specularColor * lightContribution * spec);
 
     // TODO:
     // - make sure that the shadow use a perspective projection
     #ifdef SHADING_MODEL_SUBSURFACE
-    vec3  h     = normalize(_mat.V + L);
-    float NoH   = saturate(dot(_mat.normal, h));
-    float LoH   = saturate(dot(L, h));
-
-    float scatterVoH = saturate(dot(_mat.V, -L));
-    float forwardScatter = exp2(scatterVoH * _mat.subsurfacePower - _mat.subsurfacePower);
-    float backScatter = saturate(NoL * _mat.subsurfaceThickness + (1.0 - _mat.subsurfaceThickness)) * 0.5;
-    float subsurface = mix(backScatter, 1.0, forwardScatter) * (1.0 - _mat.subsurfaceThickness);
-    _diffuse += _mat.subsurfaceColor * (subsurface * diffuseLambert());
+    float scatterVoH = saturate(dot(shadingData.V, -Ldirection));
+    float forwardScatter = exp2(scatterVoH * mat.subsurfacePower - mat.subsurfacePower);
+    float backScatter = saturateshadingData.(NoL * mat.subsurfaceThickness + (1.0 - mat.subsurfaceThickness)) * 0.5;
+    float subsurface = mix(backScatter, 1.0, forwardScatter) * (1.0 - mat.subsurfaceThickness);
+    shadingData.diffuse += mat.subsurfaceColor * (subsurface * diffuseLambert());
     #endif
 }
-#endif
 
 #endif

@@ -9,18 +9,12 @@
 
 #ifndef FNC_SPECULARAO
 #define FNC_SPECULARAO
-float specularAO(const in float _NoV, const in float _roughness, const in float _ao) {
+float specularAO(Material mat, ShadingData shadingData, const in float ao) {
 #if !defined(TARGET_MOBILE) && !defined(PLATFORM_RPI) && !defined(PLATFORM_WEBGL)
-    return saturate(pow(_NoV + _ao, exp2(-16.0 * _roughness - 1.0)) - 1.0 + _ao);
+    return saturate(pow(shadingData.NoV + ao, exp2(-16.0 * mat.roughness - 1.0)) - 1.0 + ao);
 #else
     return 1.0;
 #endif
 }
-
-#ifdef STR_MATERIAL
-float specularAO(const in Material _M, const in float _ao) {
-    return specularAO(_M.NoV, _M.roughness, _ao);
-}
-#endif
 
 #endif

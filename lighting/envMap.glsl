@@ -68,8 +68,8 @@ vec3 envMap(const in vec3 _normal, const in float _roughness) {
 }
 
 #ifdef STR_MATERIAL
-vec3 envMap(const in Material _M) {
-    return envMap(_M.R, _M.roughness, _M.metallic);
+vec3 envMap(const in Material _M, ShadingData shadingData) {
+    return envMap(shadingData.R, _M.roughness, _M.metallic);
 }
 #endif
 #endif
