@@ -58,7 +58,7 @@ vec4 pbrLittle(Material mat, ShadingData shadingData) {
     #ifdef LIGHT_DIRECTION
     shadingData.L = normalize(LIGHT_DIRECTION);
     #else
-    shadingData.L = normalize(LIGHT_POSITION - _position);
+    shadingData.L = normalize(LIGHT_POSITION - mat.position);
     #endif
     shadingData.NoL = dot(shadingData.N, shadingData.L);
 
