@@ -74,19 +74,5 @@ struct Material {
     float   subsurfaceThickness;// default to 1.0
 #endif
 
-#if defined(SHADING_MODEL_CLOTH)
-    vec3    sheenColor;
-#endif
-
-#if defined(SHADING_MODEL_SPECULAR_GLOSSINESS)
-    vec3    specularColor;
-    float   glossiness;
-#endif
-
-// Cache
-    vec3    V;
-    vec3    R;
-    float   NoV;
-
 };
 #endif

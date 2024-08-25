@@ -1,3 +1,4 @@
+#include "shadingData/new.glsl"
 #include "specular/phong.glsl"
 #include "specular/blinnPhong.glsl"
 #include "specular/cookTorrance.glsl"
@@ -20,7 +21,7 @@ license:
 
 #ifndef SPECULAR_FNC
 #if defined(TARGET_MOBILE) || defined(PLATFORM_RPI) || defined(PLATFORM_WEBGL)
-#define SPECULAR_FNC specularBlinnPhongRoughnes
+#define SPECULAR_FNC specularBlinnPhong
 #else
 #define SPECULAR_FNC specularCookTorrance
 #endif  
@@ -28,7 +29,5 @@ license:
 
 #ifndef FNC_SPECULAR
 #define FNC_SPECULAR
-float specular(const in vec3 L, const in vec3 N, const in vec3 V, const in float roughness) { return SPECULAR_FNC(L, N, V, roughness); }
-float specular(const in vec3 L, const in vec3 N, const in vec3 V, const in float roughness, const in float fresnel) { return SPECULAR_FNC(L, N, V, roughness, fresnel); }
-float specular(const in vec3 L, const in vec3 N, const in vec3 V, const in float NoV, const in float NoL, const in float roughness, const in float fresnel) { return SPECULAR_FNC(L, N, V, NoV, NoL, roughness, fresnel); }
+float specular(ShadingData shadingData) { return SPECULAR_FNC(shadingData); }
 #endif

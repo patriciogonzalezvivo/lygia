@@ -23,36 +23,23 @@
 #ifndef FNC_SPECULAR_COOKTORRANCE
 #define FNC_SPECULAR_COOKTORRANCE
 // https://github.com/glslify/glsl-specular-cook-torrance
-float specularCookTorrance(const in vec3 _L, const in vec3 _N, const in vec3 _V, const in float _NoV, const in float _NoL, const in float _roughness, const in float _fresnel) {
-    float NoV = max(_NoV, 0.0);
-    float NoL = max(_NoL, 0.0);
+float specularCookTorrance(ShadingData shadingData) {
 
-    // Half angle vector
-    vec3 H = normalize(_L + _V);
+    float VoH = dot(shadingData.V, shadingData.H);
 
     // Geometric term
-    float NoH = max(dot(_N, H), 0.0);
-    float VoH = max(dot(_V, H), 0.000001);
 
-    float x = 2.0 * NoH / VoH;
-    float G = min(1.0, min(x * NoV, x * NoL));
+    float x = 2.0 * shadingData.NoH / VoH;
+    float G = min(1.0, min(x * shadingData.NoV, x * shadingData.NoL));
     
     // Distribution term
-    float D = SPECULAR_COOKTORRANCE_DIFFUSE_FNC(_N, H, NoH, _roughness);
+    float D = SPECULAR_COOKTORRANCE_DIFFUSE_FNC(shadingData.N, shadingData.H, shadingData.NoH, shadingData.linearRoughness);
 
     // Fresnel term
-    float F = SPECULAR_POW(1.0 - NoV, _fresnel);
+    float F = SPECULAR_POW(1.0 - shadingData.NoV, shadingData.fresnel);
 
     // Multiply terms and done
-    return max(G * F * D / max(PI * NoV * NoL, 0.00001), 0.0);
-}
-
-float specularCookTorrance(vec3 L, vec3 N, vec3 V, float roughness, float fresnel) {
-    return specularCookTorrance(L, N, V, dot(N, V), dot(N, L), roughness, fresnel);
-}
-
-float specularCookTorrance(vec3 L, vec3 N, vec3 V, float roughness) {
-    return specularCookTorrance(L, N, V, roughness, 0.04);
+    return max(G * F * D / max(PI * shadingData.NoV * shadingData.NoL, 0.00001), 0.0);
 }
 
 #endif
