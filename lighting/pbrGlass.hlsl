@@ -20,7 +20,7 @@ description: Simple glass shading model
 use:
     - <float4> glass(<Material> material)
 options:
-    - SPECULAR_FNC: specularGaussian, specularBeckmann, specularCookTorrance (default), specularPhongRoughness, specularBlinnPhongRoughnes (default on mobile)
+    - SPECULAR_FNC: specularGaussian, specularBeckmann, specularCookTorrance (default), specularPhongRoughness, specularBlinnPhongRoughness (default on mobile)
     - SCENE_BACK_SURFACE: null
     - LIGHT_POSITION: in GlslViewer is u_light
     - LIGHT_DIRECTION: null
