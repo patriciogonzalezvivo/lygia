@@ -15,5 +15,5 @@ license:
 #define FNC_DIFFUSE_LAMBERT
 float diffuseLambert() { return INV_PI; }
 float diffuseLambert(const in vec3 L, const in vec3 N) { return max(0.0, dot(N, L)); }
-float diffuseLambert(ShadingData shadingData) { return diffuseLambert(); }
+float diffuseLambert(ShadingData shadingData) { return max(0.0, shadingData.NoL); }
 #endif
