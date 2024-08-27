@@ -120,9 +120,6 @@ vec4 pbrClearCoat(const Material mat, ShadingData shadingData) {
 
     // Direct Lights
     // -------------
-    vec3 lightDiffuse = vec3(0.0, 0.0, 0.0);
-    vec3 lightSpecular = vec3(0.0, 0.0, 0.0);
-    
     // TODO: 
     //  - Add support for multiple lights
     // 
@@ -136,8 +133,8 @@ vec4 pbrClearCoat(const Material mat, ShadingData shadingData) {
         #if defined(LIGHT_DIRECTION) || defined(LIGHT_POSITION)
         lightResolve(L, mat, shadingData);
 
-        color.rgb  += lightDiffuse;     // Diffuse
-        color.rgb  += lightSpecular;    // Specular
+        color.rgb  += shadingData.diffuse;     // Diffuse
+        color.rgb  += shadingData.specular;    // Specular
 
         vec3  h     = normalize(shadingData.V + L.direction);
         float NoH   = saturate(dot(mat.normal, h));
