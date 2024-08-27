@@ -69,6 +69,8 @@ vec4 pbrLittle(Material mat, ShadingData shadingData) {
     float shadow = shadow(LIGHT_SHADOWMAP, vec2(LIGHT_SHADOWMAP_SIZE), (LIGHT_COORD).xy, (LIGHT_COORD).z);
     #elif defined(FNC_RAYMARCH_SOFTSHADOW)
     float shadow = raymarchSoftShadow(mat.position, shadingData.L);
+    #else
+    float shadow = 1.0;
     #endif
 
     // DIFFUSE

@@ -6,6 +6,7 @@
 #include "light/new.glsl"
 #include "specular.glsl"
 #include "diffuse.glsl"
+#include "reflection.glsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
