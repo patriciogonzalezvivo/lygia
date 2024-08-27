@@ -12,8 +12,6 @@
 #include "diffuse.glsl"
 #include "specular.glsl"
 
-#include "../math/saturate.glsl"
-
 /*
 contributors: Patricio Gonzalez Vivo
 description: Simple PBR shading model

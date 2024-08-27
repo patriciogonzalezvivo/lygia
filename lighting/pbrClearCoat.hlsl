@@ -1,4 +1,3 @@
-#include "../math/saturate.hlsl"
 #include "../color/tonemap.hlsl"
 
 #include "common/ggx.hlsl"
