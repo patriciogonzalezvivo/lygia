@@ -155,7 +155,7 @@ vec4 pbrClearCoat(const Material mat, ShadingData shadingData) {
         vec3  F         =   fresnel(f0, LoH) * mat.clearCoat;
 
         vec3  Fcc       =   F;
-        vec3  clearCoat =   vec3(D) * kelemen(LoH);// * F;
+        vec3  clearCoat =   vec3(D, D, D) * kelemen(LoH);// * F;
         vec3  atten     =   (1.0 - Fcc);
 
         #if defined(MATERIAL_HAS_CLEAR_COAT_NORMAL)
