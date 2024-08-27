@@ -102,14 +102,12 @@ float3 fresnelIridescentReflection(float3 normal, float3 view, float3 ior1, floa
     return fresnelIridescentReflection(normal, view, F0 * F0, ior1, ior2, thickness, roughness);
 }
 
-#ifdef STR_MATERIAL
-float3 fresnelReflection(const in Material _M) {
-#if defined(SHADING_MODEL_IRIDESCENCE)
-    return fresnelIridescentReflection(_M.normal, -_M.V, _M.f0, float3(IOR_AIR, IOR_AIR, IOR_AIR), _M.ior, _M.thickness, _M.roughness);
-#else
-    return fresnelReflection(_M.R, _M.f0, _M.NoV) * (1.0-_M.roughness);
-#endif
+vec3 fresnelReflection(const in Material _M, ShadingData shadingData) {
+    #if defined(SHADING_MODEL_IRIDESCENCE)
+    return fresnelIridescentReflection(_M.normal, -shadingData.V, _M.f0, float3(IOR_AIR, IOR_AIR, IOR_AIR), _M.ior, _M.thickness, _M.roughness);
+    #else
+    return fresnelReflection(shadingData.R, _M.f0, shadingData.NoV) * (1.0-_M.roughness);
+    #endif
 }
-#endif
 
 #endif
