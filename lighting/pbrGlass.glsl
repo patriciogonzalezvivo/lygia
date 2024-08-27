@@ -69,8 +69,6 @@ vec4 pbrGlass(const Material _mat) {
 
     vec3 Gi = vec3(0.0, 0.0, 0.0);
     Gi  += envMap(M) * E;
-    #if !defined(PLATFORM_RPI)
-    // Gi  += fresnelReflection(M);
 
     #if defined(SHADING_MODEL_IRIDESCENCE)
     vec3 Fr = vec3(0.0);
@@ -78,8 +76,6 @@ vec4 pbrGlass(const Material _mat) {
     #else
     vec3 Fr = fresnel(M.f0, M.NoV);
     Gi  += fresnelReflection(M.R, Fr) * (1.0-M.roughness);
-    #endif
-
     #endif
 
     vec4 color  = vec4(0.0, 0.0, 0.0, 1.0);
