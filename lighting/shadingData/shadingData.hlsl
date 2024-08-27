@@ -8,11 +8,11 @@ license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 #define STR_SHADING_DATA
 
 struct ShadingData {
-   vec3 V;
-   vec3 N;
-   vec3 H;
-   vec3 L;
-   vec3 R;
+   float3 V;
+   float3 N;
+   float3 H;
+   float3 L;
+   float3 R;
 
    float NoV;
    float NoL;
@@ -21,11 +21,11 @@ struct ShadingData {
    float fresnel;
    float roughness;
    float linearRoughness;
-   vec3 diffuseColor;
-   vec3 specularColor;
+   float3 diffuseColor;
+   float3 specularColor;
 
-   vec3 diffuse;
-   vec3 specular;
+   float3 diffuse;
+   float3 specular;
 };
 
 #endif

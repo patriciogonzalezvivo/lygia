@@ -44,15 +44,8 @@ float specularCookTorrance(float3 _L, float3 _N, float3 _V, float _NoV, float _N
     return  max(G * F * D / max(PI * NoV * NoL, 0.000001), 0.0);
 }
 
-// https://github.com/glslify/glsl-specular-cook-torrance
-float specularCookTorrance(float3 L, float3 N, float3 V, float roughness, float fresnel) {
-    float NoV = max(dot(N, V), 0.0);
-    float NoL = max(dot(N, L), 0.0);
-    return specularCookTorrance(L, N, V, NoV, NoL, roughness, fresnel);
-}
-
-float specularCookTorrance(float3 L, float3 N, float3 V, float roughness) {
-    return specularCookTorrance(L, N, V, roughness, 0.04);
+float specularCookTorrance(ShadingData shadingData){
+    return specularCookTorrance(shadingData.L, shadingData.N, shadingData.V, shadingData.NoV, shadingData.NoL, shadingData.linearRoughness, shadingData.fresnel); 
 }
 
 #endif

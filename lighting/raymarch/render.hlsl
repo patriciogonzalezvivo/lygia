@@ -41,7 +41,8 @@ float4 raymarchDefaultRender(in float3 rayOrigin, in float3 rayDirection, float3
         res.position = worldPos;
         res.normal = worldNormal;
         res.ambientOcclusion = raymarchAO(res.position, res.normal);
-        res.V = -rayDirection;
+        ShadingData shadingData = shadingDataNew();
+        shadingData.V = -rayDirection;
         color = RAYMARCH_SHADING_FNC(res);
         dist = t;
     }
@@ -50,7 +51,7 @@ float4 raymarchDefaultRender(in float3 rayOrigin, in float3 rayDirection, float3
     }
     color.rgb = raymarchFog(color.rgb, t, rayOrigin, rayDirection);
 
-    #if RAYMARCH_RETURN >= 1
+    #if defined(RAYMARCH_AOV)
     // Eye-space depth. See https://www.shadertoy.com/view/4tByz3
     eyeDepth = t * dot(rayDirection, cameraForward);
     #endif

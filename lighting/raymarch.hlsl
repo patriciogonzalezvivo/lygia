@@ -56,6 +56,11 @@ float4 raymarch(float4x4 viewMatrix, float2 st, out float eyeDepth, out Material
 
 #if defined(RAYMARCH_MULTISAMPLE)
 
+    #if defined(RAYMARCH_AOV)
+    Material matAcc;
+    materialZero(matAcc);
+    #endif
+
     float4 color = float4(0.0, 0.0, 0.0, 0.0);
     eyeDepth = 0.0;
 
@@ -89,7 +94,7 @@ float4 raymarch(float4x4 viewMatrix, float2 st, out float eyeDepth, out Material
 
     #if defined(RAYMARCH_AOV)
         // Average material
-        multiply(mat, RAYMARCH_MULTISAMPLE_FACTOR, mat);
+        multiply(matAcc, RAYMARCH_MULTISAMPLE_FACTOR, mat);
     #endif
     
     return color * RAYMARCH_MULTISAMPLE_FACTOR;

@@ -1,7 +1,7 @@
 /*
 contributors: [Patricio Gonzalez Vivo, Shadi El Hajj]
 description: Calculate point light
-use: lightPointEvaluate(<vec3> _diffuseColor, <vec3> _specularColor, <vec3> _N, <vec3> _V, <float> _NoV, <float> _f0, out <vec3> _diffuse, out <vec3> _specular)
+use: lightPointEvaluate(<float3> _diffuseColor, <float3> _specularColor, <float3> _N, <float3> _V, <float> _NoV, <float> _f0, out <float3> _diffuse, out <float3> _specular)
 options:
     - DIFFUSE_FNC: diffuseOrenNayar, diffuseBurley, diffuseLambert (default)
     - SURFACE_POSITION: in glslViewer is v_position
@@ -14,9 +14,9 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-#include "../specular.glsl"
-#include "../diffuse.glsl"
-#include "falloff.glsl"
+#include "../specular.hlsl"
+#include "../diffuse.hlsl"
+#include "falloff.hlsl"
 
 #ifndef FNC_LIGHT_POINT
 #define FNC_LIGHT_POINT
@@ -24,7 +24,7 @@ license:
 void lightPointEvaluate(LightPoint L, Material mat, inout ShadingData shadingData) {
 
     float Ldist  = length(L.position);
-    vec3 Ldirection = L.position/Ldist;
+    float3 Ldirection = L.position/Ldist;
     shadingData.L = Ldirection;
     shadingData.H = normalize(Ldirection + shadingData.V);
     shadingData.NoL = dot(shadingData.N, Ldirection);
@@ -39,12 +39,12 @@ void lightPointEvaluate(LightPoint L, Material mat, inout ShadingData shadingDat
     float dif  = diffuse(shadingData);
     float spec = specular(shadingData);
 
-    vec3 lightContribution = L.color * L.intensity * shadow * shadingData.NoL;
+    float3 lightContribution = L.color * L.intensity * shadow * shadingData.NoL;
     if (L.falloff > 0.0)
         lightContribution *= falloff(Ldist, L.falloff);
 
-    shadingData.diffuse  += max(vec3(0.0, 0.0, 0.0), shadingData.diffuseColor * lightContribution * dif);
-    shadingData.specular += max(vec3(0.0, 0.0, 0.0), shadingData.specularColor * lightContribution * spec);
+    shadingData.diffuse  += max(float3(0.0, 0.0, 0.0), shadingData.diffuseColor * lightContribution * dif);
+    shadingData.specular += max(float3(0.0, 0.0, 0.0), shadingData.specularColor * lightContribution * spec);
 
     // TODO:
     // - make sure that the shadow use a perspective projection
