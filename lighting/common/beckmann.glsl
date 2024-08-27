@@ -12,8 +12,4 @@ float beckmann(const in float _NoH, const in float roughness) {
     float denom = PI * roughness2 * cos2Alpha * cos2Alpha;
     return exp(tan2Alpha / roughness2) / denom;
 }
-
-float beckmann(const vec3 _N, const vec3 _H, const in float _NoH, const in float roughness) {
-    return beckmann(_NoH, roughness);
-}
 #endif

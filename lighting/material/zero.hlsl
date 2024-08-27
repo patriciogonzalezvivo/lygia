@@ -58,20 +58,6 @@ void materialZero(out Material _mat) {
     _mat.subsurfacePower    = 0.0;
     _mat.subsurfaceThickness = 0.0;
 #endif
-
-#if defined(SHADING_MODEL_CLOTH)
-    _mat.sheenColor         = float3(0.0, 0.0, 0.0);
-#endif
-
-#if defined(SHADING_MODEL_SPECULAR_GLOSSINESS)
-    _mat.specularColor = vec3(0.0, 0.0, 0.0);
-    _mat.glossiness = 0.0;
-#endif
-
-    // Cache
-    _mat.V = float3(0.0, 0.0, 0.0);
-    _mat.R = float3(0.0, 0.0, 0.0);
-    _mat.NoV = 0.0;
 }
 
 Material materialZero() {

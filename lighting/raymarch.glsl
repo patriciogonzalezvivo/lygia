@@ -6,6 +6,7 @@
 #include "raymarch/volume.glsl"
 #include "material/zero.glsl"
 #include "material/add.glsl"
+#include "material/multiply.glsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
@@ -57,6 +58,11 @@ vec4 raymarch(mat4 viewMatrix, vec2 st, out float eyeDepth, out Material mat) {
 
 #if defined(RAYMARCH_MULTISAMPLE)
 
+    #if defined(RAYMARCH_AOV)
+    Material matAcc;
+    materialZero(matAcc);
+    #endif
+
     vec4 color = vec4(0.0, 0.0, 0.0, 0.0);
     eyeDepth = 0.0;
 
@@ -88,7 +94,7 @@ vec4 raymarch(mat4 viewMatrix, vec2 st, out float eyeDepth, out Material mat) {
     eyeDepth *= RAYMARCH_MULTISAMPLE_FACTOR;
 
     #if defined(RAYMARCH_AOV)  
-        multiply(mat, RAYMARCH_MULTISAMPLE_FACTOR, mat);
+        multiply(matAcc, RAYMARCH_MULTISAMPLE_FACTOR, mat);
     #endif
     
     return color * RAYMARCH_MULTISAMPLE_FACTOR;

@@ -22,6 +22,7 @@
 
 #ifndef FNC_SPECULAR_COOKTORRANCE
 #define FNC_SPECULAR_COOKTORRANCE
+
 // https://github.com/glslify/glsl-specular-cook-torrance
 float specularCookTorrance(const in vec3 _L, const in vec3 _N, const in vec3 _V, const in float _NoV, const in float _NoL, const in float _roughness, const in float _fresnel) {
     float NoV = max(_NoV, 0.0);
@@ -47,12 +48,9 @@ float specularCookTorrance(const in vec3 _L, const in vec3 _N, const in vec3 _V,
     return max(G * F * D / max(PI * NoV * NoL, 0.00001), 0.0);
 }
 
-float specularCookTorrance(vec3 L, vec3 N, vec3 V, float roughness, float fresnel) {
-    return specularCookTorrance(L, N, V, dot(N, V), dot(N, L), roughness, fresnel);
+float specularCookTorrance(ShadingData shadingData){
+    return specularCookTorrance(shadingData.L, shadingData.N, shadingData.V, shadingData.NoV, shadingData.NoL, shadingData.linearRoughness, shadingData.fresnel); 
 }
 
-float specularCookTorrance(vec3 L, vec3 N, vec3 V, float roughness) {
-    return specularCookTorrance(L, N, V, roughness, 0.04);
-}
 
 #endif

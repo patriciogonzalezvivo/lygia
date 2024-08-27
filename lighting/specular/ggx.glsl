@@ -30,14 +30,8 @@ float specularGGX(const in vec3 _L, const in vec3 _N, const in vec3 _V, float _N
     return (D * V) * F;
 }
 
-float specularGGX(vec3 L, vec3 N, vec3 V, float roughness, float fresnel) {
-    float NoV = max(dot(N, V), 0.0);
-    float NoL = max(dot(N, L), 0.0);
-    return specularGGX(L, N, V, NoV, NoL, roughness, fresnel);
-}
-
-float specularGGX(vec3 L, vec3 N, vec3 V, float roughness) {
-    return specularGGX(L, N, V, roughness, 0.04);
+float specularGGX(ShadingData shadingData) {
+    return specularGGX(shadingData.L, shadingData.N, shadingData.V, shadingData.NoV, shadingData.NoL, shadingData.linearRoughness, shadingData.fresnel);
 }
 
 #endif

@@ -22,18 +22,9 @@ float diffuseBurley(const in float NoV, const in float NoL, const in float LoH, 
     return lightScatter * viewScatter;
 }
 
-float diffuseBurley(const in vec3 L, const in vec3 N, const in vec3 V, const in float NoV, const in float NoL, const in float roughness) {
-    float LoH = max(dot(L, normalize(L + V)), 0.001);
-    return diffuseBurley(NoV, NoL, LoH, roughness * roughness);
-}
-
-float diffuseBurley(const in vec3 L, const in vec3 N, const in vec3 V, const in float roughness) {
-    vec3 H = normalize(V + L);
-    float NoV = clamp(dot(N, V), 0.001, 1.0);
-    float NoL = clamp(dot(N, L), 0.001, 1.0);
-    float LoH = clamp(dot(L, H), 0.001, 1.0);
-
-    return diffuseBurley(NoV, NoL, LoH, roughness * roughness);
+float diffuseBurley(ShadingData shadingData) {
+    float LoH = dot(shadingData.L, shadingData.H);
+    return diffuseBurley(shadingData.NoV, shadingData.NoL, LoH, shadingData.linearRoughness);
 }
 
 #endif
