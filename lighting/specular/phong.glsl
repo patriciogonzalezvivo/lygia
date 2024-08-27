@@ -19,7 +19,11 @@ float specularPhong(const in vec3 L, const in vec3 N, const in vec3 V, const in 
 }
 
 float specularPhong(ShadingData shadingData) {
-    return specularPhong(shadingData.L, shadingData.N, shadingData.V, 1.0-shadingData.roughness);
+    return specularPhong(shadingData.L, shadingData.N, shadingData.V, shadingData.roughness);
+}
+
+float specularPhongRoughness(ShadingData shadingData) {
+    return specularPhong(shadingData.L, shadingData.N, shadingData.V, toShininess(shadingData.roughness, 0.0));
 }
 
 #endif

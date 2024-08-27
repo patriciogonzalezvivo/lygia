@@ -18,7 +18,11 @@ float specularBlinnPhong(const in float NoH, float shininess) {
 }
 
 float specularBlinnPhong(ShadingData shadingData) {
-    return specularBlinnPhong(shadingData.NoH, 1.0-shadingData.roughness);
+    return specularBlinnPhong(shadingData.NoH, shadingData.roughness);
+}
+
+float specularBlinnPhongRoughness(ShadingData shadingData) {
+    return specularBlinnPhong(shadingData.NoH, toShininess(shadingData.roughness, 0.0));
 }
 
 #endif
