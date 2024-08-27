@@ -21,7 +21,7 @@ license:
 #ifndef FNC_LIGHT_POINT
 #define FNC_LIGHT_POINT
 
-void lightPointEvaluate(LightPoint L, Material mat, ShadingData shadingData) {
+void lightPointEvaluate(LightPoint L, Material mat, inout ShadingData shadingData) {
 
     float Ldist  = length(L.position);
     vec3 Ldirection = L.position/Ldist;

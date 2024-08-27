@@ -85,10 +85,11 @@ vec4 pbr(const Material mat, ShadingData shadingData) {
     {
         #if defined(LIGHT_DIRECTION)
         LightDirectional L = LightDirectionalNew();
+        lightResolve(L, mat, shadingData);
         #elif defined(LIGHT_POSITION)
         LightPoint L = LightPointNew();
-        #endif
         lightResolve(L, mat, shadingData);
+        #endif
 
         #if defined(LIGHT_POINTS) && defined(LIGHT_POINTS_TOTAL)
         for (int i = 0; i < LIGHT_POINTS_TOTAL; i++) {
