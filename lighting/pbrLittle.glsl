@@ -40,7 +40,7 @@ license:
 #endif
 
 #ifndef LIGHT_COLOR
-#define LIGHT_COLOR     vec3(0.5)
+#define LIGHT_COLOR     vec3(0.5, 0.5, 0.5)
 #endif
 
 #ifndef FNC_PBR_LITTLE
