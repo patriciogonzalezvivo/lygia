@@ -53,7 +53,7 @@ void lightPointEvaluate(LightPoint L, Material mat, inout ShadingData shadingDat
     float forwardScatter = exp2(scatterVoH * mat.subsurfacePower - mat.subsurfacePower);
     float backScatter = saturate(shadingData.NoL * mat.subsurfaceThickness + (1.0 - mat.subsurfaceThickness)) * 0.5;
     float subsurface = mix(backScatter, 1.0, forwardScatter) * (1.0 - mat.subsurfaceThickness);
-    shadingData.diffuse += mat.subsurfaceColor * (subsurface * diffuseLambert());
+    shadingData.diffuse += mat.subsurfaceColor * (subsurface * diffuseLambertConstant());
     #endif
 }
 

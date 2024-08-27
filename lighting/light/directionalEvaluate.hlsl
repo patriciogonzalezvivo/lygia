@@ -45,7 +45,7 @@ void lightDirectionalEvaluate(LightDirectional L, Material mat, inout ShadingDat
     float forwardScatter = exp2(scatterVoH * mat.subsurfacePower - mat.subsurfacePower);
     float backScatter = saturate(shadingData.NoL * mat.subsurfaceThickness + (1.0 - mat.subsurfaceThickness)) * 0.5;
     float subsurface = lerp(backScatter, 1.0, forwardScatter) * (1.0 - mat.subsurfaceThickness);
-    shadingData.diffuse += mat.subsurfaceColor * (subsurface * diffuseLambert());
+    shadingData.diffuse += mat.subsurfaceColor * (subsurface * diffuseLambertConstant());
     #endif
 }
 
