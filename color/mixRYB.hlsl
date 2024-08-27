@@ -24,8 +24,8 @@ license:
 #ifndef FNC_MIXRYB
 #define FNC_MIXRYB
 
-float3 mixRYB(float3 A, float3 B, float p) { return ryb2rgb(mix(rgb2ryb(A),rgb2ryb(B), p)); }
-float4 mixRYB(float4 A, float4 B, float p) { return ryb2rgb(mix(rgb2ryb(A),rgb2ryb(B), p)); }
+float3 mixRYB(float3 A, float3 B, float p) { return ryb2rgb(lerp(rgb2ryb(A),rgb2ryb(B), p)); }
+float4 mixRYB(float4 A, float4 B, float p) { return ryb2rgb(lerp(rgb2ryb(A),rgb2ryb(B), p)); }
 
 float4 mixRYB(float4 A, float4 B, float4 C) { return float4(ryb2rgb(rgb2ryb(A.rgb) * A.a + rgb2ryb(B.rgb) * B.a + rgb2ryb(C.rgb) * C.a), sum(float3(A.a, B.a, C.a))); }
 float3 mixRYB(float3 A, float3 B, float3 C, float3 p) { return ryb2rgb(rgb2ryb(A) * p.x + rgb2ryb(B) * p.y + rgb2ryb(C) * p.z ); }

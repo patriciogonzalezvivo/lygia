@@ -50,7 +50,7 @@ vec4 pbrLittle(Material mat, ShadingData shadingData) {
     shadingData.fresnel = max(mat.f0.r, max(mat.f0.g, mat.f0.b));
     shadingData.roughness = mat.roughness;
     shadingData.linearRoughness = mat.roughness;
-    shadingData.diffuseColor = mat.albedo.rgb * (vec3(1.0) - mat.f0) * (1.0 - mat.metallic);
+    shadingData.diffuseColor = mat.albedo.rgb * (vec3(1.0, 1.0, 1.0) - mat.f0) * (1.0 - mat.metallic);
     shadingData.specularColor = mix(mat.f0, mat.albedo.rgb, mat.metallic);
     shadingData.NoV = dot(shadingData.N, shadingData.V);
     #ifdef LIGHT_DIRECTION
