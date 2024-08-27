@@ -51,6 +51,8 @@ vec4 raymarchDefaultRender( in vec3 rayOrigin, in vec3 rayDirection, vec3 camera
     #if defined(RAYMARCH_AOV)
     // Eye-space depth. See https://www.shadertoy.com/view/4tByz3
     eyeDepth = t * dot(rayDirection, cameraForward);
+    #else
+    eyeDepth = 0.0;
     #endif
 
     return color;

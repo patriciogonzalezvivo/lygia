@@ -15,7 +15,7 @@ float specularGGX(float3 _L, float3 _N, float3 _V, float _NoV, float _NoL, float
 
     // float NoV, float NoL, float roughness
     float linearRoughness =  _roughness * _roughness;
-    float D = commonGGX(NoH, linearRoughness);
+    float D = GGX(NoH, linearRoughness);
     float V = smithGGXCorrelated(_NoV, NoL,linearRoughness);
     float F = fresnel(float3(_fresnel, _fresnel, _fresnel), LoH).r;
 
