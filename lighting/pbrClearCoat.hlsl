@@ -154,7 +154,7 @@ float4 pbrClearCoat(const Material mat, ShadingData shadingData) {
         float3  F         =   fresnel(f0, LoH) * mat.clearCoat;
 
         float3  Fcc       =   F;
-        float3  clearCoat =   float3(D) * kelemen(LoH);// * F;
+        float3  clearCoat =   float3(D, D, D) * kelemen(LoH);// * F;
         float3  atten     =   (1.0 - Fcc);
 
         #if defined(MATERIAL_HAS_CLEAR_COAT_NORMAL)
