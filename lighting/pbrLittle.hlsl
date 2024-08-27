@@ -1,5 +1,4 @@
 #include "../math/powFast.hlsl"
-#include "../math/saturate.hlsl"
 #include "../color/tonemap/reinhard.hlsl"
 
 #include "shadow.hlsl"
@@ -11,8 +10,6 @@
 #include "envMap.hlsl"
 #include "diffuse.hlsl"
 #include "specular.hlsl"
-
-#include "../math/saturate.hlsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
