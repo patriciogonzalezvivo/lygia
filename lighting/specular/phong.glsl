@@ -18,16 +18,12 @@ float specularPhong(const in vec3 L, const in vec3 N, const in vec3 V, const in 
     return SPECULAR_POW(max(0.0, dot(R, -V)), shininess);
 }
 
-float specularPhongRoughness(const in vec3 L, const in vec3 N, const in vec3 V, const in float roughness) {
-    return specularPhong(L, N, V, toShininess(roughness, 0.0) );
+float specularPhong(ShadingData shadingData) {
+    return specularPhong(shadingData.L, shadingData.N, shadingData.V, shadingData.roughness);
 }
 
-float specularPhongRoughness(const in vec3 L, const in vec3 N, const in vec3 V, const in float roughness, const in float fresnel) {
-    return specularPhongRoughness(L, N, V, roughness );
-}
-
-float specularPhongRoughness(const in vec3 L, const in vec3 N, const in vec3 V, const in float NoV, const in float NoL, const in float roughness, const in float fresnel) {
-    return specularPhongRoughness(L, N, V, roughness);
+float specularPhongRoughness(ShadingData shadingData) {
+    return specularPhong(shadingData.L, shadingData.N, shadingData.V, toShininess(shadingData.roughness, 0.0));
 }
 
 #endif
