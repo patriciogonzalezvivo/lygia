@@ -13,8 +13,12 @@ examples:
     - /shaders/lighting_raymarching.frag
 */
 
-#ifndef RAYMARCHSOFTSHADOW_ITERATIONS
-#define RAYMARCHSOFTSHADOW_ITERATIONS 64
+#ifndef RAYMARCH_MAX_DIST
+#define RAYMARCH_MAX_DIST 20.0
+#endif
+
+#ifndef RAYMARCH_SOFTSHADOW_ITERATIONS
+#define RAYMARCH_SOFTSHADOW_ITERATIONS 64
 #endif
 
 #ifndef RAYMARCH_SHADOW_MIN_DIST
@@ -39,7 +43,7 @@ float raymarchSoftShadow(vec3 ro, vec3 rd) {
 
     float res = 1.0;
     float t = mint;
-    for (int i = 0; i < RAYMARCHSOFTSHADOW_ITERATIONS; i++) {
+    for (int i = 0; i < RAYMARCH_SOFTSHADOW_ITERATIONS; i++) {
         if (t >= maxt)
             break;
         float h = RAYMARCH_MAP_FNC(ro + t * rd).sdf;
