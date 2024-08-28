@@ -9,7 +9,7 @@
 #include "material/multiply.glsl"
 
 /*
-contributors: Patricio Gonzalez Vivo
+contributors:  [Inigo Quiles, Shadi El Hajj, Patricio Gonzalez Vivo]
 description: Raymarching template where it needs to define a vec4 raymarchMap( in vec3 pos )
 use: 
     - <vec4> raymarch(<mat4> viewMatrix, <vec2> st)
@@ -42,8 +42,8 @@ license:
 #define RAYMARCH_CAMERA_FOV 60.0
 #endif
 
-#ifndef ENG_RAYMARCH
-#define ENG_RAYMARCH
+#ifndef FNC_RAYMARCH
+#define FNC_RAYMARCH
 
 #if defined(RAYMARCH_MULTISAMPLE)
 const float RAYMARCH_MULTISAMPLE_FACTOR = 1.0/float(RAYMARCH_MULTISAMPLE);
@@ -85,7 +85,7 @@ vec4 raymarch(mat4 viewMatrix, vec2 st, out float eyeDepth, out Material mat) {
         eyeDepth += sampleDepth;
         
         #if defined(RAYMARCH_AOV)
-        add(matAcc, mat, matAcc);
+        materialAdd(matAcc, mat, matAcc);
         #endif
 
         offset = rotate(offset, HALF_PI);
@@ -94,7 +94,7 @@ vec4 raymarch(mat4 viewMatrix, vec2 st, out float eyeDepth, out Material mat) {
     eyeDepth *= RAYMARCH_MULTISAMPLE_FACTOR;
 
     #if defined(RAYMARCH_AOV)  
-        multiply(matAcc, RAYMARCH_MULTISAMPLE_FACTOR, mat);
+        materialMultiply(matAcc, RAYMARCH_MULTISAMPLE_FACTOR, mat);
     #endif
     
     return color * RAYMARCH_MULTISAMPLE_FACTOR;

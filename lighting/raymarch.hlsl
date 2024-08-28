@@ -6,7 +6,7 @@
 #include "material/zero.hlsl"
 
 /*
-contributors: Patricio Gonzalez Vivo
+contributors:  [Inigo Quiles, Shadi El Hajj, Patricio Gonzalez Vivo]
 description: Raymarching template where it needs to define a float4 raymarchMSap( in float3 pos )
 use: 
     - <float4> raymarch(<float4x4> viewMatrix, <float2> st)
@@ -41,8 +41,8 @@ license:
 #define RAYMARCH_CAMERA_FOV 60.0
 #endif
 
-#ifndef ENG_RAYMARCH
-#define ENG_RAYMARCH
+#ifndef FNC_RAYMARCH
+#define FNC_RAYMARCH
 
 #if defined(RAYMARCH_MULTISAMPLE)
 static const float RAYMARCH_MULTISAMPLE_FACTOR = 1.0/float(RAYMARCH_MULTISAMPLE);
@@ -84,7 +84,7 @@ float4 raymarch(float4x4 viewMatrix, float2 st, out float eyeDepth, out Material
 
         #if defined(RAYMARCH_AOV)
             // Accumulate material properties
-            add(matAcc, mat, matAcc);
+            materialAdd(matAcc, mat, matAcc);
         #endif
 
         offset = rotate(offset, HALF_PI);
@@ -94,7 +94,7 @@ float4 raymarch(float4x4 viewMatrix, float2 st, out float eyeDepth, out Material
 
     #if defined(RAYMARCH_AOV)
         // Average material
-        multiply(matAcc, RAYMARCH_MULTISAMPLE_FACTOR, mat);
+        materialMultiply(matAcc, RAYMARCH_MULTISAMPLE_FACTOR, mat);
     #endif
     
     return color * RAYMARCH_MULTISAMPLE_FACTOR;

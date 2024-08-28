@@ -9,7 +9,7 @@ license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 #ifndef MATERIAL_MULTIPLY
 #define MATERIAL_MULTIPLY
 
-void multiply(Material mat, float f, Material r) {
+void materialMultiply(Material mat, float f, Material r) {
     r.albedo = mat.albedo * f;
     r.emissive = mat.emissive * f;
     r.position = mat.position * f;

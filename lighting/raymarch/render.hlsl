@@ -14,12 +14,9 @@ use:
     - <float4> raymarchDefaultRender( in <float3> rayOriging, in <float3> rayDirection, in <float3> cameraForward, out <float3> eyeDepth, out <float3> worldPosition, out <float3> worldNormal ) 
 options:
     - RAYMARCH_BACKGROUND: float3(0.0, 0.0, 0.0)
-    - RAYMARCH_RETURN:  0. nothing (default), 1. depth;  2. depth and material
+    - RAYMARCH_AOV: return AOVs in a Material structure
 */
 
-#ifndef RAYMARCH_RETURN 
-#define RAYMARCH_RETURN 0
-#endif
 
 #ifndef RAYMARCH_BACKGROUND
 #define RAYMARCH_BACKGROUND float3(0.0, 0.0, 0.0)

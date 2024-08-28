@@ -14,6 +14,7 @@ use:
     - <vec4> raymarchDefaultRender( in <vec3> rayOriging, in <vec3> rayDirection, in <vec3> cameraForward, out <vec3> eyeDepth, out <vec3> worldPosition, out <vec3> worldNormal ) 
 options:
     - RAYMARCH_BACKGROUND: vec3(0.0)
+    - RAYMARCH_AOV: return AOVs in a Material structure
 examples:
     - /shaders/lighting_raymarching.frag
 */
