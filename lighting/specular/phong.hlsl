@@ -13,21 +13,17 @@
 #define FNC_SPECULAR_PHONG 
 
 // https://github.com/glslify/glsl-specular-phong
-float specularPhong(float3 L, float3 N, float3 V, float shininess) {
+float specularPhong(const in float3 L, const in float3 N, const in float3 V, const in float shininess) {
     float3 R = reflect(L, N); // 2.0 * dot(N, L) * N - L;
     return SPECULAR_POW(max(0.0, dot(R, -V)), shininess);
 }
 
-float specularPhongRoughness(float3 L, float3 N, float3 V, float roughness) {
-    return specularPhong(L, N, V, toShininess(roughness, 0.0) );
+float specularPhong(ShadingData shadingData) {
+    return specularPhong(shadingData.L, shadingData.N, shadingData.V, shadingData.roughness);
 }
 
-float specularPhongRoughness(float3 L, float3 N, float3 V, float roughness, float fresnel) {
-    return specularPhongRoughness(L, N, V, roughness );
-}
-
-float specularPhongRoughness(float3 L, float3 N, float3 V, float NoV, float NoL, float roughness, float fresnel) {
-    return specularPhongRoughness(L, N, V, roughness);
+float specularPhongRoughness(ShadingData shadingData) {
+    return specularPhong(shadingData.L, shadingData.N, shadingData.V, toShininess(shadingData.roughness, 0.0));
 }
 
 #endif

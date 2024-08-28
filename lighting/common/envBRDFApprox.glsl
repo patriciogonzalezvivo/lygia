@@ -16,16 +16,8 @@ vec3 envBRDFApprox(const in vec3 _specularColor, const in float _NoV, const in f
     return _specularColor * AB.x + AB.y;
 }
 
-
-#ifdef STR_MATERIAL
-vec2 envBRDFApprox(const in Material _M) {
-    return envBRDFApprox(_M.NoV, _M.roughness );
+vec3 envBRDFApprox(ShadingData shadingData) {
+    return envBRDFApprox(shadingData.specularColor, shadingData.NoV, shadingData.roughness);
 }
-
-vec3 envBRDFApprox(const in vec3 _specularColor, const in Material _M) {
-    return envBRDFApprox(_specularColor, _M.NoV, _M.roughness);
-}
-
-#endif
 
 #endif

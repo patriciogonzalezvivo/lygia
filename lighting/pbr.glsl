@@ -1,6 +1,7 @@
 #include "../math/saturate.glsl"
 #include "../color/tonemap.glsl"
 
+#include "shadingData/new.glsl"
 #include "material.glsl"
 #include "envMap.glsl"
 #include "fresnelReflection.glsl"
@@ -12,17 +13,13 @@
 #include "common/specularAO.glsl"
 #include "common/envBRDFApprox.glsl"
 
-// #if defined(RAYMARCH_AO)
-// #include "raymarch/ao.glsl"
-// #endif
-
 /*
-contributors: Patricio Gonzalez Vivo
+contributors: [Patricio Gonzalez Vivo, Shadi El Hajj]
 description: Simple PBR shading model
-use: <vec4> pbr( <Material> _material )
+use: <vec4> pbr( <Material> material )
 options:
     - DIFFUSE_FNC: diffuseOrenNayar, diffuseBurley, diffuseLambert (default)
-    - SPECULAR_FNC: specularGaussian, specularBeckmann, specularCookTorrance (default), specularPhongRoughness, specularBlinnPhongRoughnes (default on mobile)
+    - SPECULAR_FNC: specularGaussian, specularBeckmann, specularCookTorrance (default), specularPhongRoughness, specularBlinnPhongRoughness (default on mobile)
     - LIGHT_POSITION: in GlslViewer is u_light
     - LIGHT_COLOR in GlslViewer is u_lightColor
     - CAMERA_POSITION: in GlslViewer is u_camera
@@ -45,65 +42,55 @@ license:
 #ifndef FNC_PBR
 #define FNC_PBR
 
-vec4 pbr(const in Material _mat) {
-    // Calculate Color
-    vec3    diffuseColor = _mat.albedo.rgb * (vec3(1.0) - _mat.f0) * (1.0 - _mat.metallic);
-    vec3    specularColor = mix(_mat.f0, _mat.albedo.rgb, _mat.metallic);
+vec4 pbr(const Material mat, ShadingData shadingData) {
+    // Shading Data
+    // ------------
+    shadingData.N = mat.normal;
+    shadingData.R = reflection(shadingData.V,  shadingData.N, mat.roughness);
+    shadingData.fresnel = max(mat.f0.r, max(mat.f0.g, mat.f0.b));
+    shadingData.roughness = mat.roughness;
+    shadingData.linearRoughness = mat.roughness;
+    shadingData.diffuseColor = mat.albedo.rgb * (vec3(1.0, 1.0, 1.0) - mat.f0) * (1.0 - mat.metallic);
+    shadingData.specularColor = mix(mat.f0, mat.albedo.rgb, mat.metallic);
+    shadingData.NoV = dot(shadingData.N, shadingData.V);
 
-    // Cached
-    Material M  = _mat;
-    if (M.V.x == 0.0 && M.V.y == 0.0 && M.V.z == 0.0) {
-        M.V         = normalize(CAMERA_POSITION - M.position);  // View
-    }
-    M.NoV       = dot(M.normal, M.V);                       // Normal . View
-    M.R         = reflection(M.V, M.normal, M.roughness);   // Reflection
-
-    // TODO: 
-    //  - ScreenSpace Ambient Occlusion when M.ambientOcclusion is not defined
-// #if defined(FNC_SSAO) && defined(SCENE_DEPTH) && defined(RESOLUTION) && defined(CAMERA_NEAR_CLIP) && defined(CAMERA_FAR_CLIP)
-//     vec2 pixel = 1.0/RESOLUTION;
-//     ao = ssao(SCENE_DEPTH, gl_FragCoord.xy*pixel, pixel, 1.);
-// #endif 
-
-    // Global Ilumination ( Image Based Lighting )
-    // ------------------------
-    vec3 E = envBRDFApprox(specularColor, M);
-    float diffuseAO = M.ambientOcclusion;
+    // Indirect Lights ( Image Based Lighting )
+    // ----------------------------------------
+    vec3 E = envBRDFApprox(shadingData);
+    float diffuseAO = mat.ambientOcclusion;
 
     vec3 Fr = vec3(0.0, 0.0, 0.0);
-    Fr  = envMap(M) * E;
+    Fr  = envMap(mat, shadingData) * E;
     #if !defined(PLATFORM_RPI)
-    Fr  += fresnelReflection(M);
+    Fr  += fresnelReflection(mat, shadingData);
     #endif
-    Fr  *= specularAO(M, diffuseAO);
+    Fr  *= specularAO(mat, shadingData, diffuseAO);
 
-    vec3 Fd = diffuseColor;
+    vec3 Fd = shadingData.diffuseColor;
     #if defined(SCENE_SH_ARRAY)
-    Fd  *= tonemap( sphericalHarmonics(M.normal) );
+    Fd  *= tonemap( sphericalHarmonics(shadingData.N) );
     #else
-    Fd *= envMap(M.normal, 1.0);
+    Fd *= envMap(shadingData.N, 1.0);
     #endif
     Fd  *= diffuseAO;
     Fd  *= (1.0 - E);
 
-    // Local Ilumination
-    // ------------------------
-    vec3 lightDiffuse = vec3(0.0, 0.0, 0.0);
-    vec3 lightSpecular = vec3(0.0, 0.0, 0.0);
-    
+    // Direct Lights
+    // -------------
+
     {
         #if defined(LIGHT_DIRECTION)
         LightDirectional L = LightDirectionalNew();
-        lightResolve(diffuseColor, specularColor, M, L, lightDiffuse, lightSpecular);
+        lightResolve(L, mat, shadingData);
         #elif defined(LIGHT_POSITION)
         LightPoint L = LightPointNew();
-        lightResolve(diffuseColor, specularColor, M, L, lightDiffuse, lightSpecular);
+        lightResolve(L, mat, shadingData);
         #endif
 
         #if defined(LIGHT_POINTS) && defined(LIGHT_POINTS_TOTAL)
         for (int i = 0; i < LIGHT_POINTS_TOTAL; i++) {
             LightPoint L = LIGHT_POINTS[i];
-            lightResolve(diffuseColor, specularColor, M, L, lightDiffuse, lightSpecular);
+            lightResolve(L, mat, shadingData);
         }
         #endif
     }
@@ -115,14 +102,21 @@ vec4 pbr(const in Material _mat) {
 
     // Diffuse
     color.rgb  += Fd * IBL_LUMINANCE;
-    color.rgb  += lightDiffuse;
+    color.rgb  += shadingData.diffuse;
 
     // Specular
     color.rgb  += Fr * IBL_LUMINANCE;
-    color.rgb  += lightSpecular;    
-    color.rgb  += M.emissive;
-    color.a     = M.albedo.a;
+    color.rgb  += shadingData.specular;    
+    color.rgb  += mat.emissive;
+    color.a     = mat.albedo.a;
 
     return color;
 }
+
+vec4 pbr(const in Material mat) {
+    ShadingData shadingData = shadingDataNew();
+    shadingData.V = normalize(CAMERA_POSITION - mat.position);
+    return pbr(mat, shadingData);
+}
+
 #endif

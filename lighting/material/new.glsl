@@ -118,20 +118,6 @@ void materialNew(out Material _mat) {
     #endif
 
 #endif
-
-#if defined(SHADING_MODEL_CLOTH)
-    _mat.sheenColor         = sqrt(_mat.albedo.rgb);
-#endif
-
-#if defined(SHADING_MODEL_SPECULAR_GLOSSINESS)
-    _mat.specularColor = vec3(0.04, 0.04, 0.04);
-    _mat.glossiness = 0.5;
-#endif
-
-    // Cache
-    _mat.V = vec3(0.0);
-    _mat.R = vec3(0.0);
-    _mat.NoV = 0.0;
 }
 
 Material materialNew() {

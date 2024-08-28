@@ -56,13 +56,12 @@ float3 envMap(float3 _normal, float _roughness, float _metallic) {
 
 }
 
-float3 envMap(float3 _normal, float _roughness) {
+float3 envMap(const in float3 _normal, const in float _roughness) {
     return envMap(_normal, _roughness, 1.0);
 }
 
-#ifdef STR_MATERIAL
-float3 envMap(const in Material _M) {
-    return envMap(_M.R, _M.roughness, _M.metallic);
+float3 envMap(const in Material _M, ShadingData shadingData) {
+    return envMap(shadingData.R, _M.roughness, _M.metallic);
 }
-#endif
+
 #endif

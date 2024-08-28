@@ -20,7 +20,7 @@ description: Simple glass shading model
 use:
     - <vec4> glass(<Material> material)
 options:
-    - SPECULAR_FNC: specularGaussian, specularBeckmann, specularCookTorrance (default), specularPhongRoughness, specularBlinnPhongRoughnes (default on mobile)
+    - SPECULAR_FNC: specularGaussian, specularBeckmann, specularCookTorrance (default), specularPhongRoughness, specularBlinnPhongRoughness (default on mobile)
     - SCENE_BACK_SURFACE: null
     - LIGHT_POSITION: in GlslViewer is u_light
     - LIGHT_DIRECTION: null
@@ -45,44 +45,42 @@ license:
 #ifndef FNC_PBRGLASS
 #define FNC_PBRGLASS
 
-vec4 pbrGlass(const Material _mat) {
-    
-    // Cached
-    Material M  = _mat;
-    if (M.V.x == 0.0 && M.V.y == 0.0 && M.V.z == 0.0) {
-        M.V         = normalize(CAMERA_POSITION - M.position);  // View
-    }
-    M.R         = reflection(M.V, M.normal, M.roughness);   // Reflection
+vec4 pbrGlass(const Material mat, ShadingData shadingData) {
+    // Shading Data
+    // ------------
 #if defined(SCENE_BACK_SURFACE)
-    vec3 No     = normalize(M.normal - M.normal_back); // Normal out is the difference between the front and back normals
+    vec3 No     = normalize(mat.normal - mat.normal_back); // Normal out is the difference between the front and back normals
 #else
-    vec3 No     = M.normal;                            // Normal out
+    vec3 No     = mat.normal;                            // Normal out
 #endif
-    M.NoV       = dot(No, M.V);                        // Normal . View
+    vec3 eta    = ior2eta(mat.ior);
+    shadingData.N = mat.normal;
+    shadingData.R = reflection(shadingData.V,  shadingData.N, mat.roughness);
+    shadingData.fresnel = max(mat.f0.r, max(mat.f0.g, mat.f0.b));
+    shadingData.roughness = mat.roughness; 
+    shadingData.linearRoughness = mat.roughness;
+    shadingData.specularColor = mat.albedo.rgb;
+    shadingData.NoV = dot(No, shadingData.V);
 
-    vec3 eta    = ior2eta(M.ior);
-    
-
-    // Global Ilumination ( Image Based Lighting )
-    // ------------------------
-    vec3 E = envBRDFApprox(M.albedo.rgb, M);
-
-    vec3 Gi = vec3(0.0, 0.0, 0.0);
-    Gi  += envMap(M) * E;
+    // Indirect Lights ( Image Based Lighting )
+    // ----------------------------------------
+    vec3 E = envBRDFApprox(shadingData);
+    vec3 Gi = envMap(mat, shadingData) * E;
 
     #if defined(SHADING_MODEL_IRIDESCENCE)
-    vec3 Fr = vec3(0.0);
-    Gi  += fresnelIridescentReflection(M.normal, -M.V, M.f0, vec3(IOR_AIR), M.ior, M.thickness, M.roughness, Fr);
+    vec3 Fr = vec3(0.0, 0.0, 0.0);
+    Gi  += fresnelIridescentReflection(mat.normal, -shadingData.V, mat.f0, vec3(IOR_AIR),
+        mat.ior, mat.thickness, mat.roughness, Fr);
     #else
-    vec3 Fr = fresnel(M.f0, M.NoV);
-    Gi  += fresnelReflection(M.R, Fr) * (1.0-M.roughness);
+    vec3 Fr = fresnel(mat.f0, shadingData.NoV);
+    Gi  += fresnelReflection(shadingData.R, Fr) * (1.0-mat.roughness);
     #endif
 
     vec4 color  = vec4(0.0, 0.0, 0.0, 1.0);
 
     // Refraction
-    color.rgb   += transparent(No, -M.V, Fr, eta, M.roughness);
-    color.rgb   += Gi * IBL_LUMINANCE * M.ambientOcclusion;
+    color.rgb   += transparent(No, -shadingData.V, Fr, eta, mat.roughness);
+    color.rgb   += Gi * IBL_LUMINANCE * mat.ambientOcclusion;
 
     // TODO: RaG
     //  - Add support for multiple lights
@@ -95,17 +93,24 @@ vec4 pbrGlass(const Material _mat) {
         #endif
 
         #if defined(LIGHT_DIRECTION) || defined(LIGHT_POSITION)
-        // lightResolve(diffuseColor, specularColor, M, L, lightDiffuse, lightSpecular);
-        vec3 spec = vec3( specular(L.direction, M.normal, M.V, M.roughness) );
+
+        shadingData.L = L.direction;
+        shadingData.H = normalize(L.direction + shadingData.V);
+        shadingData.NoL = dot(shadingData.N, L.direction);
+        shadingData.NoH = dot(shadingData.N, shadingData.H);
+        vec3 spec = vec3( specular(shadingData) );
 
         color.rgb += L.color * spec;
-
         #endif
     }
 
     return color;
 }
 
-
+vec4 pbrGlass(const in Material mat) {
+    ShadingData shadingData = shadingDataNew();
+    shadingData.V = normalize(CAMERA_POSITION - mat.position);
+    return pbrGlass(mat, shadingData);
+}
 
 #endif
