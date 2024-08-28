@@ -32,6 +32,6 @@ ShadingData shadingDataNew() {
    shadingData.specular = vec3(0.0, 0.0, 0.0);
 
    return shadingData;
-};
+}
 
 #endif
