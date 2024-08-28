@@ -1,24 +1,25 @@
+#include "shadingData/new.hlsl"
 #include "material/roughness.hlsl"
 #include "material/normal.hlsl"
 #include "material/albedo.hlsl"
-
-#include "diffuse.hlsl"
-#include "specular.hlsl"
-
 #include "material.hlsl"
+#include "light/new.hlsl"
+#include "specular.hlsl"
+#include "diffuse.hlsl"
+#include "reflection.hlsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
 description: Render with a gooch stylistic shading model
 use: <float4> gooch(<float4> albedo, <float3> normal, <float3> light, <float3> view, <float> roughness)
 options:
-    - GOOCH_WARM: defualt float3(0.25, 0.15, 0.0)
-    - GOOCH_COLD: defualt float3(0.0, 0.0, 0.2)
-    - GOOCH_SPECULAR: defualt float3(1.0, 1.0, 1.0)
+    - GOOCH_WARM: default float3(0.25, 0.15, 0.0)
+    - GOOCH_COLD: default float3(0.0, 0.0, 0.2)
+    - GOOCH_SPECULAR: default float3(1.0, 1.0, 1.0)
     - DIFFUSE_FNC: diffuseOrenNayar, diffuseBurley, diffuseLambert (default)
-    - LIGHT_COORD: in GlslViewer is  v_lightCoord
-    - LIGHT_SHADOWMAP: in GlslViewer is u_lightShadowMap
-    - LIGHT_SHADOWMAP_SIZE: in GlslViewer is 1024.0
+    - LIGHT_COORD: in glslViewer is  v_lightCoord
+    - LIGHT_SHADOWMAP: in glslViewer is u_lightShadowMap
+    - LIGHT_SHADOWMAP_SIZE: in glslViewer is 1024.0
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
@@ -61,32 +62,60 @@ license:
 
 #ifndef FNC_GOOCH
 #define FNC_GOOCH
-float4 gooch(float4 albedo, float3 normal, float3 light, float3 view, float roughness, float shadow) {
-    float3 warm = GOOCH_WARM + albedo.rgb * 0.6;
-    float3 cold = GOOCH_COLD + albedo.rgb * 0.1;
+float4 gooch(const in float4 _albedo, const in float3 _N, const in float3 _L, const in float3 _V, const in float _roughness, const in float _Li) {
+    float3 warm = GOOCH_WARM + _albedo.rgb * 0.6;
+    float3 cold = GOOCH_COLD + _albedo.rgb * 0.1;
 
-    float3 l = normalize(light);
-    float3 n = normalize(normal);
-    float3 v = normalize(view);
+    ShadingData shadingData = shadingDataNew();
+    shadingData.L = normalize(_L);
+    shadingData.N = normalize(_N);
+    shadingData.V = normalize(_V);
+    shadingData.R = reflection(shadingData.V, shadingData.N, _roughness);
+    shadingData.NoV = dot(shadingData.N, shadingData.V);
+    shadingData.NoL = dot(shadingData.N, shadingData.L);
+    shadingData.fresnel = 0.04;
+    shadingData.roughness = _roughness;
+    shadingData.linearRoughness = _roughness;
 
     // Lambert Diffuse
-    float diff = diffuse(l, n, v, roughness) * shadow;
+    float diff = diffuse(shadingData) * _Li;
     // Phong Specular
-    float spec = specular(l, n, v, roughness) * shadow;
+    float spec = specular(shadingData) * _Li;
 
-    return float4(lerp(lerp(cold, warm, diff), GOOCH_SPECULAR, spec), albedo.a);
+    return float4(lerp(lerp(cold, warm, diff), GOOCH_SPECULAR, spec), _albedo.a);
 }
 
-float4 gooch(float4 albedo, float3 normal, float3 light, float3 view, float roughness) {
-    return gooch(albedo, normal, light, view, roughness, 1.0);
+float4 gooch(const in LightDirectional _L, in Material _M, ShadingData shadingData) {
+    return gooch(_M.albedo, _M.normal, _L.direction, shadingData.V, _M.roughness, _L.intensity);
 }
 
-float4 gooch(Material material) {
-    #ifdef LIGHT_DIRECTION
-    return gooch(material.albedo, material.normal, LIGHT_DIRECTION, (CAMERA_POSITION - material.position), material.roughness, material.shadow);
-    #else
-    return gooch(material.albedo, material.normal, (LIGHT_POSITION - material.position), (CAMERA_POSITION - material.position), material.roughness, material.shadow);
+float4 gooch(const in LightPoint _L, in Material _M, ShadingData shadingData) {
+    return gooch(_M.albedo, _M.normal, _L.position, shadingData.V, _M.roughness, _L.intensity);
+}
+
+float4 gooch(const in Material _M, ShadingData shadingData) {
+    #if defined(LIGHT_DIRECTION)
+    LightDirectional L;
+    #elif defined(LIGHT_POSITION)
+    LightPoint L;
     #endif
+    lightNew(L);
+
+    #if defined(FNC_RAYMARCH_SOFTSHADOW)
+    #if defined(LIGHT_DIRECTION)
+    L.intensity *= raymarchSoftShadow(_M.position, L.direction);
+    #elif defined(LIGHT_POSITION)
+    L.intensity *= raymarchSoftShadow(_M.position, L.position);
+    #endif
+    #endif 
+
+    return gooch(L, _M, shadingData) * _M.ambientOcclusion;
+}
+
+float4 gooch(const in Material _M) {
+    ShadingData shadingData = shadingDataNew();
+    shadingData.V = normalize(CAMERA_POSITION - _M.position);
+    return gooch(_M, shadingData);
 }
 
 #endif
