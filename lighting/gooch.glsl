@@ -64,7 +64,7 @@ vec4 gooch(const in vec4 _albedo, const in vec3 _N, const in vec3 _L, const in v
     // Lambert Diffuse
     float diff = diffuse(shadingData) * _Li;
     // Phong Specular
-    float spec = specular(shadingData) * _Li;
+    vec3 spec = specular(shadingData) * _Li;
 
     return vec4(mix(mix(cold, warm, diff), GOOCH_SPECULAR, spec), _albedo.a);
 }
