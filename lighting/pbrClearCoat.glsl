@@ -61,7 +61,6 @@ vec4 pbrClearCoat(const Material mat, ShadingData shadingData) {
     // ------------
     shadingData.N = mat.normal;
     shadingData.R = reflection(shadingData.V,  shadingData.N, mat.roughness);
-    shadingData.fresnel = max(mat.f0.r, max(mat.f0.g, mat.f0.b));
     shadingData.roughness = mat.roughness;
     shadingData.linearRoughness = mat.roughness;
     shadingData.diffuseColor = mat.albedo.rgb * (vec3((1.0, 1.0, 1.0)) - mat.f0) * (1.0 - mat.metallic);
