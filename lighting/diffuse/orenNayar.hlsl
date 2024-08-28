@@ -25,10 +25,8 @@ float diffuseOrenNayar(float3 L, float3 N, float3 V, float NoV, float NoL, float
     return max(0.0, NoL) * (A + B * s / t);
 }
 
-float diffuseOrenNayar(float3 L, float3 N, float3 V, float roughness) {
-    float NoV = max(dot(N, V), 0.001);
-    float NoL = max(dot(N, L), 0.001);
-    return diffuseOrenNayar(L, N, V, NoV, NoL, roughness);
+float diffuseOrenNayar(ShadingData shadingData) {
+    return diffuseOrenNayar(shadingData.L, shadingData.N, shadingData.V, shadingData.NoV, shadingData.NoL, shadingData.linearRoughness);
 }
 
 #endif

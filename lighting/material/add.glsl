@@ -42,20 +42,6 @@ void add(Material a, Material b, Material r) {
     r.subsurfacePower = a.subsurfacePower + b.subsurfacePower;
     r.subsurfaceThickness = a.subsurfaceThickness + b.subsurfaceThickness;
     #endif
-
-    #if defined(SHADING_MODEL_CLOTH)
-    r.sheenColor = a.sheenColor + b.sheenColor;
-    #endif
-
-    #if defined(SHADING_MODEL_SPECULAR_GLOSSINESS)
-    r.specularColor = a.specularColor + b.specularColor;
-    r.glossiness = a.glossiness + b.glossiness;
-    #endif
-
-    // I don't think anybody needs this
-    // r.V = a.V + b.V;
-    // r.R = a.R + b.R;
-    // r.NoV = a.NoV + b.NoV;
 }
 
 #endif

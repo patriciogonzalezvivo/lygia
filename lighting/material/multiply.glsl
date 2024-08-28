@@ -37,17 +37,6 @@ void multiply(Material mat, float f, Material r) {
     r.subsurfacePower = mat.subsurfacePower * f;
     r.subsurfaceThickness = mat.subsurfaceThickness * f;
     #endif
-    #if defined(SHADING_MODEL_CLOTH)
-    r.sheenColor = mat.sheenColor * f;
-    #endif
-    #if defined(SHADING_MODEL_SPECULAR_GLOSSINESS)
-    r.specularColor = mat.specularColor * f;
-    r.glossiness = mat.glossiness * f;
-    #endif
-    // I don't think anybody needs this
-    // r.V = mat.V * f;
-    // r.R = mat.R * f;
-    // r.NoV = mat.NoV * f;
 }
 
 #endif

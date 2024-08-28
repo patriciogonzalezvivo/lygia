@@ -1,17 +1,19 @@
 #include "point.glsl"
+#include "pointEvaluate.glsl"
 #include "directional.glsl"
+#include "directionalEvaluate.glsl"
 #include "../material.glsl"
 
 #ifndef FNC_LIGHT_RESOLVE
 #define FNC_LIGHT_RESOLVE
 
-void lightResolve(vec3 _diffuseColor, vec3 _specularColor, Material _M, LightPoint _L, inout vec3 _lightDiffuse, inout vec3 _lightSpecular) {
-    lightPoint(_diffuseColor, _specularColor, _L, _M, _lightDiffuse, _lightSpecular);
+void lightResolve(LightPoint L, Material mat, inout ShadingData shadingData) {
+    lightPointEvaluate(L, mat, shadingData);
 }
 
 
-void lightResolve(vec3 _diffuseColor, vec3 _specularColor, Material _M, LightDirectional _L, inout vec3 _lightDiffuse, inout vec3 _lightSpecular) {
-    lightDirectional(_diffuseColor, _specularColor, _L, _M, _lightDiffuse, _lightSpecular);
+void lightResolve(LightDirectional L, Material mat, inout ShadingData shadingData) {
+    lightDirectionalEvaluate(L, mat, shadingData);
 }
 
 #endif
