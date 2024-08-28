@@ -6,6 +6,10 @@ description: Calculate normals http://iquilezles.org/www/articles/normalsSDF/nor
 use: <float> raymarchNormal( in <float3> pos ) 
 */
 
+#ifndef RAYMARCH_NORMAL_OFFSET
+#define RAYMARCH_NORMAL_OFFSET 0.0001
+#endif
+
 #ifndef FNC_RAYMARCH_NORMAL
 #define FNC_RAYMARCH_NORMAL
 
@@ -26,7 +30,7 @@ float3 raymarchNormal(float3 pos, float e) {
 }
 
 float3 raymarchNormal( in float3 pos ) {
-   return raymarchNormal(pos, 0.5773 * 0.0005);
+   return raymarchNormal(pos, RAYMARCH_NORMAL_OFFSET);
 }
 
 #endif

@@ -8,6 +8,10 @@ examples:
     - /shaders/lighting_raymarching.frag
 */
 
+#ifndef RAYMARCH_NORMAL_OFFSET
+#define RAYMARCH_NORMAL_OFFSET 0.0001
+#endif
+
 #ifndef FNC_RAYMARCH_NORMAL
 #define FNC_RAYMARCH_NORMAL
 
@@ -28,7 +32,7 @@ vec3 raymarchNormal(vec3 pos, float e) {
 }
 
 vec3 raymarchNormal( in vec3 pos ) {
-   return raymarchNormal(pos, 0.5773 * 0.0005);
+   return raymarchNormal(pos, RAYMARCH_NORMAL_OFFSET);
 }
 
 #endif
