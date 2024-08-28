@@ -66,10 +66,7 @@ float4 pbrGlass(const Material mat, ShadingData shadingData) {
     // ----------------------------------------
     float3 E = envBRDFApprox(shadingData);
 
-    float3 Gi = float3(0.0, 0.0, 0.0);
-    Gi  += envMap(mat, shadingData) * E;
-    #if !defined(PLATFORM_RPI)
-    // Gi  += fresnelReflection(M);
+    float3 Gi = envMap(mat, shadingData) * E;
 
     #if defined(SHADING_MODEL_IRIDESCENCE)
     float3 Fr = float3(0.0, 0.0, 0.0);
@@ -78,8 +75,6 @@ float4 pbrGlass(const Material mat, ShadingData shadingData) {
     #else
     float3 Fr = fresnel(mat.f0, shadingData.NoV);
     Gi  += fresnelReflection(shadingData.R, Fr) * (1.0-mat.roughness);
-    #endif
-
     #endif
 
     float4 color  = float4(0.0, 0.0, 0.0, 1.0);
