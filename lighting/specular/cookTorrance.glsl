@@ -21,7 +21,7 @@ float specularCookTorrance(const in vec3 _L, const in vec3 _N, const in vec3 _V,
     float V = smithGGXCorrelated(_NoV, NoL,linearRoughness);
 #endif
     
-    float F = schlick(_specularColor, float3(1.0, 1.0, 1.0), LoH).r;
+    float F = schlick(_specularColor, vec3(1.0, 1.0, 1.0), LoH).r;
 
     return (D * V) * F;
 }
