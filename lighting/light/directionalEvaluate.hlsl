@@ -24,8 +24,8 @@ void lightDirectionalEvaluate(LightDirectional L, Material mat, inout ShadingDat
 
     shadingData.L = L.direction;
     shadingData.H = normalize(L.direction + shadingData.V);
-    shadingData.NoL = dot(shadingData.N, L.direction);
-    shadingData.NoH = dot(shadingData.N, shadingData.H);
+    shadingData.NoL = saturate(dot(shadingData.N, L.direction));
+    shadingData.NoH = saturate(dot(shadingData.N, shadingData.H));
 
     #ifdef FNC_RAYMARCH_SOFTSHADOW    
     float shadow = raymarchSoftShadow(mat.position, L.direction);
@@ -34,7 +34,7 @@ void lightDirectionalEvaluate(LightDirectional L, Material mat, inout ShadingDat
     #endif
 
     float dif  = diffuse(shadingData);
-    float spec = specular(shadingData);
+    float3 spec = specular(shadingData);
 
     float3 lightContribution = L.color * L.intensity * shadow * shadingData.NoL;
     shadingData.diffuse  += max(float3(0.0, 0.0, 0.0), shadingData.diffuseColor * lightContribution * dif);

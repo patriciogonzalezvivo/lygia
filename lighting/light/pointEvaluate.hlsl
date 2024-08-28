@@ -27,8 +27,8 @@ void lightPointEvaluate(LightPoint L, Material mat, inout ShadingData shadingDat
     float3 Ldirection = L.position/Ldist;
     shadingData.L = Ldirection;
     shadingData.H = normalize(Ldirection + shadingData.V);
-    shadingData.NoL = dot(shadingData.N, Ldirection);
-    shadingData.NoH = dot(shadingData.N, shadingData.H);
+    shadingData.NoL = saturate(dot(shadingData.N, Ldirection));
+    shadingData.NoH = saturate(dot(shadingData.N, shadingData.H));
 
     #ifdef FNC_RAYMARCH_SOFTSHADOW    
     float shadow = raymarchSoftShadow(mat.position, Ldirection);
@@ -37,7 +37,7 @@ void lightPointEvaluate(LightPoint L, Material mat, inout ShadingData shadingDat
     #endif
 
     float dif  = diffuse(shadingData);
-    float spec = specular(shadingData);
+    float3 spec = specular(shadingData);
 
     float3 lightContribution = L.color * L.intensity * shadow * shadingData.NoL;
     if (L.falloff > 0.0)
