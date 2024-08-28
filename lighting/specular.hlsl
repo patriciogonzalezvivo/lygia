@@ -3,7 +3,6 @@
 #include "specular/cookTorrance.hlsl"
 #include "specular/gaussian.hlsl"
 #include "specular/beckmann.hlsl"
-#include "specular/ggx.hlsl"
 
 /*
 contributors: Patricio Gonzalez Vivo

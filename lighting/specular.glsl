@@ -4,7 +4,6 @@
 #include "specular/cookTorrance.glsl"
 #include "specular/gaussian.glsl"
 #include "specular/beckmann.glsl"
-#include "specular/ggx.glsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
