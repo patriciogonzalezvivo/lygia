@@ -12,10 +12,6 @@
 #endif
 #endif
 
-#ifndef SPECULAR_COOKTORRANCE_DIFFUSE_FNC
-#define SPECULAR_COOKTORRANCE_DIFFUSE_FNC GGX
-#endif 
-
 #ifndef FNC_SPECULAR_COOKTORRANCE
 #define FNC_SPECULAR_COOKTORRANCE
 
@@ -35,7 +31,7 @@ float specularCookTorrance(float3 _L, float3 _N, float3 _V, float _NoV, float _N
     float G = min(1.0, min(x * NoV, x * NoL));
     
     //Distribution term
-    float D = SPECULAR_COOKTORRANCE_DIFFUSE_FNC(_N, H, NoH, _roughness);
+    float D = GGX(_N, H, NoH, _roughness);
 
     //Fresnel term
     float F = SPECULAR_POW(1.0 - NoV, _fresnel);
