@@ -1,47 +1,34 @@
-#include "../common/beckmann.glsl"
 #include "../common/ggx.glsl"
-#include "../../math/powFast.glsl"
+#include "../common/smithGGXCorrelated.glsl"
 #include "../../math/saturate.glsl"
-#include "../../math/const.glsl"
-
-#ifndef SPECULAR_POW
-#if defined(TARGET_MOBILE) || defined(PLATFORM_RPI) || defined(PLATFORM_WEBGL)
-#define SPECULAR_POW(A,B) powFast(A,B)
-#else
-#define SPECULAR_POW(A,B) pow(A,B)
-#endif
-#endif
+#include "../../math/saturateMediump.glsl"
+#include "../fresnel.glsl"
 
 #ifndef FNC_SPECULAR_COOKTORRANCE
 #define FNC_SPECULAR_COOKTORRANCE
 
-// https://github.com/glslify/glsl-specular-cook-torrance
-float specularCookTorrance(const in vec3 _L, const in vec3 _N, const in vec3 _V, const in float _NoV, const in float _NoL, const in float _roughness, const in float _fresnel) {
+float specularCookTorrance(const in vec3 _L, const in vec3 _N, const in vec3 _V, const in vec3 H, const in float _NoV, const in float _NoL, const in float _NoH, const in float _roughness, const in float _fresnel) {
     float NoV = max(_NoV, 0.0);
     float NoL = max(_NoL, 0.0);
+    float NoH = max(_NoH, 0.0);
+    float LoH = saturate(dot(_L, H));
 
-    // Half angle vector
-    vec3 H = normalize(_L + _V);
+    float linearRoughness =  _roughness * _roughness;
+    float D = GGX(NoH, linearRoughness);
 
-    // Geometric term
-    float NoH = max(dot(_N, H), 0.0);
-    float VoH = max(dot(_V, H), 0.000001);
-
-    float x = 2.0 * NoH / VoH;
-    float G = min(1.0, min(x * NoV, x * NoL));
+#if defined(PLATFORM_RPI)
+    float V = smithGGXCorrelated_Fast(_NoV, NoL,linearRoughness);
+#else
+    float V = smithGGXCorrelated(_NoV, NoL,linearRoughness);
+#endif
     
-    // Distribution term
-    float D = GGX(_N, H, NoH, _roughness);
+    float F = fresnel(vec3(_fresnel, _fresnel, _fresnel), LoH).r;
 
-    // Fresnel term
-    float F = SPECULAR_POW(1.0 - NoV, _fresnel);
-
-    // Multiply terms and done
-    return max(G * F * D / max(PI * NoV * NoL, 0.00001), 0.0);
+    return (D * V) * F;
 }
 
 float specularCookTorrance(ShadingData shadingData){
-    return specularCookTorrance(shadingData.L, shadingData.N, shadingData.V, shadingData.NoV, shadingData.NoL, shadingData.linearRoughness, shadingData.fresnel); 
+    return specularCookTorrance(shadingData.L, shadingData.N, shadingData.V, shadingData.H, shadingData.NoV, shadingData.NoL, shadingData.NoH, shadingData.roughness, shadingData.fresnel); 
 }
 
 
