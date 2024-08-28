@@ -1,6 +1,5 @@
 #include "../common/ggx.hlsl"
 #include "../common/smithGGXCorrelated.hlsl"
-#include "../common/schlick.hlsl"
 #include "../../math/saturateMediump.hlsl"
 #include "../fresnel.hlsl"
 
@@ -21,7 +20,7 @@ float specularCookTorrance(float3 _L, float3 _N, float3 _V, const in float3 _H, 
     float V = smithGGXCorrelated(_NoV, NoL,linearRoughness);
 #endif
     
-    float F = schlick(_specularColor, float3(1.0, 1.0, 1.0), LoH).r;
+    float F = fresnel(_specularColor, LoH).r;
 
     return (D * V) * F;
 }
