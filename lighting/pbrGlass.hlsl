@@ -56,7 +56,6 @@ float4 pbrGlass(const Material mat, ShadingData shadingData) {
     float3 eta    = ior2eta(mat.ior);
     shadingData.N = mat.normal;
     shadingData.R = reflection(shadingData.V,  shadingData.N, mat.roughness);
-    shadingData.fresnel = max(mat.f0.r, max(mat.f0.g, mat.f0.b));
     shadingData.roughness = mat.roughness; 
     shadingData.linearRoughness = mat.roughness;
     shadingData.specularColor = mat.albedo.rgb;

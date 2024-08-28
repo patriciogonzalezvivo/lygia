@@ -46,7 +46,6 @@ license:
 float4 pbrLittle(Material mat, ShadingData shadingData) {
     shadingData.N = normalize(mat.normal);
     shadingData.R = reflect(-shadingData.V,  shadingData.N);
-    shadingData.fresnel = max(mat.f0.r, max(mat.f0.g, mat.f0.b));
     shadingData.roughness = mat.roughness;
     shadingData.linearRoughness = mat.roughness;
     shadingData.diffuseColor = mat.albedo.rgb * (float3(1.0, 1.0, 1.0) - mat.f0) * (1.0 - mat.metallic);

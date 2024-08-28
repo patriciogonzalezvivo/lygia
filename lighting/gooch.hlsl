@@ -73,7 +73,6 @@ float4 gooch(const in float4 _albedo, const in float3 _N, const in float3 _L, co
     shadingData.R = reflection(shadingData.V, shadingData.N, _roughness);
     shadingData.NoV = dot(shadingData.N, shadingData.V);
     shadingData.NoL = dot(shadingData.N, shadingData.L);
-    shadingData.fresnel = 0.04;
     shadingData.roughness = _roughness;
     shadingData.linearRoughness = _roughness;
 

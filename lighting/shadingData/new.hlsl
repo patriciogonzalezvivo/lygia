@@ -22,7 +22,6 @@ ShadingData shadingDataNew() {
    shadingData.NoL = 0.0;
    shadingData.NoH = 0.0;
 
-   shadingData.fresnel = 0.0;
    shadingData.roughness = 0.0;
    shadingData.linearRoughness = 0.0;
    shadingData.diffuseColor = float3(0.0, 0.0, 0.0);
