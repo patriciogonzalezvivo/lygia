@@ -99,7 +99,7 @@ vec4 pbrGlass(const Material mat, ShadingData shadingData) {
         shadingData.H = normalize(L.direction + shadingData.V);
         shadingData.NoL = dot(shadingData.N, L.direction);
         shadingData.NoH = dot(shadingData.N, shadingData.H);
-        vec3 spec = vec3( specular(shadingData) );
+        vec3 spec = specular(shadingData);
 
         color.rgb += L.color * spec;
 

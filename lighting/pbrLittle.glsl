@@ -66,7 +66,7 @@ vec4 pbrLittle(Material mat, ShadingData shadingData) {
 
     // DIFFUSE
     float diff = diffuse(shadingData) * shadow;
-    float spec = specular(shadingData) * shadow;
+    vec3 spec = specular(shadingData) * shadow;
 
     vec3 albedo = mat.albedo.rgb * diff;
 // #ifdef SCENE_SH_ARRAY
