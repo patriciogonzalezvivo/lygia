@@ -9,7 +9,7 @@ license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 #ifndef MATERIAL_ADD
 #define MATERIAL_ADD
 
-void add(Material a, Material b, Material r) {
+void materialAdd(Material a, Material b, Material r) {
     r.albedo = a.albedo + b.albedo;
     r.emissive = a.emissive + b.emissive;
     r.position = a.position + b.position;
