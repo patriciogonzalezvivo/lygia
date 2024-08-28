@@ -56,7 +56,7 @@ license:
 #define FNC_PBRCLEARCOAT
 
 float4 pbrClearCoat(const Material mat, ShadingData shadingData) {
-    shadingData(mat, shadingData);
+    shadingDataNew(mat, shadingData);
 
     float3    f0      = ior2f0(mat.ior);
     float3    R       = reflection(shadingData.V, mat.normal, mat.roughness);

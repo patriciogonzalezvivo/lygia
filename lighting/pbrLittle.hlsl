@@ -44,7 +44,7 @@ license:
 #define FNC_PBR_LITTLE
 
 float4 pbrLittle(Material mat, ShadingData shadingData) {
-    shadingData(mat, shadingData);
+    shadingDataNew(mat, shadingData);
     #ifdef LIGHT_DIRECTION
     shadingData.L = normalize(LIGHT_DIRECTION);
     #else
