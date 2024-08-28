@@ -1,4 +1,5 @@
 #include "shadingData.hlsl"
+#include "../material.hlsl"
 #include "../reflection.hlsl"
 #include "../ior/reflectance2f0.hlsl"
 #include "../common/perceptual2LinearRoughness.hlsl"

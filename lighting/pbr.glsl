@@ -43,7 +43,7 @@ license:
 #define FNC_PBR
 
 vec4 pbr(const Material mat, ShadingData shadingData) {
-    shadingData(mat, shadingData);
+    shadingDataNew(mat, shadingData);
 
     // Indirect Lights ( Image Based Lighting )
     // ----------------------------------------
