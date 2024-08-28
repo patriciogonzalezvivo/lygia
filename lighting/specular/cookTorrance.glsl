@@ -8,7 +8,6 @@
 #define FNC_SPECULAR_COOKTORRANCE
 
 float specularCookTorrance(const in vec3 _L, const in vec3 _N, const in vec3 _V, const in vec3 H, const in float _NoV, const in float _NoL, const in float _NoH, const in float _roughness, const in float _fresnel) {
-    float NoV = max(_NoV, 0.0);
     float NoL = max(_NoL, 0.0);
     float NoH = max(_NoH, 0.0);
     float LoH = saturate(dot(_L, H));

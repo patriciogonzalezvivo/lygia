@@ -1,6 +1,5 @@
 #include "../common/ggx.hlsl"
 #include "../common/smithGGXCorrelated.hlsl"
-#include "../../math/saturate.hlsl"
 #include "../../math/saturateMediump.hlsl"
 #include "../fresnel.hlsl"
 
@@ -8,9 +7,7 @@
 #define FNC_SPECULAR_COOKTORRANCE
 
 float specularCookTorrance(float3 _L, float3 _N, float3 _V, const in float3 H, float _NoV, float _NoL, const in float _NoH, float _roughness, float _fresnel) {
-    float NoV = max(_NoV, 0.0);
     float NoL = max(_NoL, 0.0);
-
     float LoH = saturate(dot(_L, H));
     float NoH = saturate(dot(_N, H));
 
