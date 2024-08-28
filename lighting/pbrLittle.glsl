@@ -45,13 +45,7 @@ license:
 #define FNC_PBR_LITTLE
 
 vec4 pbrLittle(Material mat, ShadingData shadingData) {
-    shadingData.N = normalize(mat.normal);
-    shadingData.R = reflect(-shadingData.V,  shadingData.N);
-    shadingData.roughness = mat.roughness;
-    shadingData.linearRoughness = mat.roughness;
-    shadingData.diffuseColor = mat.albedo.rgb * (vec3(1.0, 1.0, 1.0) - mat.f0) * (1.0 - mat.metallic);
-    shadingData.specularColor = mix(mat.f0, mat.albedo.rgb, mat.metallic);
-    shadingData.NoV = dot(shadingData.N, shadingData.V);
+    shadingData(mat, shadingData);
     #ifdef LIGHT_DIRECTION
     shadingData.L = normalize(LIGHT_DIRECTION);
     #else

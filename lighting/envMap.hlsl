@@ -41,7 +41,7 @@ float3 envMap(float3 _normal, float _roughness, float _metallic) {
 #elif defined(SCENE_CUBEMAP) && !defined(ENVMAP_MAX_MIP_LEVEL)
     uint width, height, levels;
     SCENE_CUBEMAP.GetDimensions(0, width, height, levels);
-    float lod = levels - ENVMAP_LOD_OFFSET;
+    float lod = levels - ENVMAP_LOD_OFFSET - 1;
     return SAMPLE_CUBE_FNC( SCENE_CUBEMAP, _normal, lod * _roughness).rgb;
     
 #elif defined(SCENE_CUBEMAP)
