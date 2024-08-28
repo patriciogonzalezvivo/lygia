@@ -57,15 +57,7 @@ license:
 #define FNC_PBRCLEARCOAT
 
 vec4 pbrClearCoat(const Material mat, ShadingData shadingData) {
-    // Shading Data
-    // ------------
-    shadingData.N = mat.normal;
-    shadingData.R = reflection(shadingData.V,  shadingData.N, mat.roughness);
-    shadingData.roughness = mat.roughness;
-    shadingData.linearRoughness = mat.roughness;
-    shadingData.diffuseColor = mat.albedo.rgb * (vec3((1.0, 1.0, 1.0)) - mat.f0) * (1.0 - mat.metallic);
-    shadingData.specularColor = mix(mat.f0, mat.albedo.rgb, mat.metallic);
-    shadingData.NoV = dot(shadingData.N, shadingData.V);
+    shadingData(mat, shadingData);
 
     vec3    f0      = ior2f0(mat.ior);
     vec3    R       = reflection(shadingData.V, mat.normal, mat.roughness);

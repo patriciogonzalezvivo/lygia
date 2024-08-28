@@ -1,4 +1,7 @@
 #include "shadingData.hlsl"
+#include "../reflection.hlsl"
+#include "../ior/reflectance2f0.hlsl"
+#include "../common/perceptual2LinearRoughness.hlsl"
 
 /*
 contributors:  Shadi El Hajj
@@ -31,6 +34,17 @@ ShadingData shadingDataNew() {
    shadingData.specular = float3(0.0, 0.0, 0.0);
 
    return shadingData;
+}
+
+void shadingDataNew(Material mat, inout ShadingData shadingData) {
+   float dielectricF0 = reflectance2f0(mat.reflectance);
+   shadingData.N = mat.normal;
+   shadingData.R = reflection(shadingData.V, shadingData.N, mat.roughness);
+   shadingData.NoV = dot(shadingData.N, shadingData.V);
+   shadingData.roughness = mat.roughness;
+   shadingData.linearRoughness = perceptual2LinearRoughness(shadingData.roughness);
+   shadingData.diffuseColor = mat.albedo.rgb * (1.0 - mat.metallic);
+   shadingData.specularColor = lerp(float3(dielectricF0, dielectricF0, dielectricF0), mat.albedo.rgb, mat.metallic);
 }
 
 #endif

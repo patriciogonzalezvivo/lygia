@@ -7,10 +7,9 @@
 #ifndef FNCSPECULARCOOKTORRANCE
 #define FNCSPECULARCOOKTORRANCE
 
-float3 specularCookTorrance(float3 L, float3 N, float3 V, const in float3 H, float NoV, float NoL, const in float NoH, float roughness, float3 specularColor) {
+float3 specularCookTorrance(float3 L, float3 N, float3 V, const in float3 H, float NoV, float NoL, const in float NoH, float linearRoughness, float3 specularColor) {
     float LoH = saturate(dot(L, H));
 
-    float linearRoughness =  roughness * roughness;
     float D = GGX(N, H, NoH, linearRoughness);
 
 #if defined(PLATFORMRPI)
@@ -25,7 +24,7 @@ float3 specularCookTorrance(float3 L, float3 N, float3 V, const in float3 H, flo
 }
 
 float3 specularCookTorrance(ShadingData shadingData){
-    return specularCookTorrance(shadingData.L, shadingData.N, shadingData.V, shadingData.H, shadingData.NoV, shadingData.NoL, shadingData.NoH, shadingData.roughness, shadingData.specularColor);
+    return specularCookTorrance(shadingData.L, shadingData.N, shadingData.V, shadingData.H, shadingData.NoV, shadingData.NoL, shadingData.NoH, shadingData.linearRoughness, shadingData.specularColor);
 }
 
 #endif

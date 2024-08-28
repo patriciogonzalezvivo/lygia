@@ -20,9 +20,9 @@ void materialAdd(Material a, Material b, Material r) {
     #endif
 
     r.ior = a.ior + b.ior;
-    r.f0 = a.f0 + b.f0;
     r.roughness = a.roughness + b.roughness;
     r.metallic = a.metallic + b.metallic;
+    r.reflectance = a.reflectance + b.reflectance;
     r.ambientOcclusion = a.ambientOcclusion + b.ambientOcclusion;
 
     #if defined(SHADING_MODEL_CLEAR_COAT)

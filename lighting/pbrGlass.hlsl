@@ -54,6 +54,7 @@ float4 pbrGlass(const Material mat, ShadingData shadingData) {
     float3 No     = mat.normal;                            // Normal out
 #endif
     float3 eta    = ior2eta(mat.ior);
+    float3 f0     = float3(0.04, 0.04, 0.04);
     shadingData.N = mat.normal;
     shadingData.R = reflection(shadingData.V,  shadingData.N, mat.roughness);
     shadingData.roughness = mat.roughness; 
@@ -69,10 +70,10 @@ float4 pbrGlass(const Material mat, ShadingData shadingData) {
 
     #if defined(SHADING_MODEL_IRIDESCENCE)
     float3 Fr = float3(0.0, 0.0, 0.0);
-    Gi  += fresnelIridescentReflection(mat.normal, -shadingData.V, mat.f0, float3(IOR_AIR),
+    Gi  += fresnelIridescentReflection(mat.normal, -shadingData.V, f0, float3(IOR_AIR),
         mat.ior, mat.thickness, mat.roughness, Fr);
     #else
-    float3 Fr = fresnel(mat.f0, shadingData.NoV);
+    float3 Fr = fresnel(f0, shadingData.NoV);
     Gi  += fresnelReflection(shadingData.R, Fr) * (1.0-mat.roughness);
     #endif
 

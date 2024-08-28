@@ -51,7 +51,7 @@ vec3 envMap(const in vec3 _normal, const in float _roughness, const in float _me
 
 // Cubemap sampling
 #elif defined(SCENE_CUBEMAP) && !defined(ENVMAP_MAX_MIP_LEVEL)
-    int lod = textureQueryLevels( SCENE_CUBEMAP ) - ENVMAP_LOD_OFFSET;
+    int lod = textureQueryLevels( SCENE_CUBEMAP ) ENVMAP_LOD_OFFSET - 1;
     return SAMPLE_CUBE_FNC( SCENE_CUBEMAP, _normal, lod * _roughness).rgb;
 
 #elif defined(SCENE_CUBEMAP)
