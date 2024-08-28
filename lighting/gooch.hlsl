@@ -79,7 +79,7 @@ float4 gooch(const in float4 _albedo, const in float3 _N, const in float3 _L, co
     // Lambert Diffuse
     float diff = diffuse(shadingData) * _Li;
     // Phong Specular
-    float spec = specular(shadingData) * _Li;
+    float3 spec = specular(shadingData) * _Li;
 
     return float4(lerp(lerp(cold, warm, diff), GOOCH_SPECULAR, spec), _albedo.a);
 }
