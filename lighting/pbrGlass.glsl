@@ -65,7 +65,6 @@ vec4 pbrGlass(const Material mat, ShadingData shadingData) {
     // Indirect Lights ( Image Based Lighting )
     // ----------------------------------------
     vec3 E = envBRDFApprox(shadingData);
-
     vec3 Gi = envMap(mat, shadingData) * E;
 
     #if defined(SHADING_MODEL_IRIDESCENCE)
@@ -102,7 +101,6 @@ vec4 pbrGlass(const Material mat, ShadingData shadingData) {
         vec3 spec = vec3( specular(shadingData) );
 
         color.rgb += L.color * spec;
-
         #endif
     }
 
