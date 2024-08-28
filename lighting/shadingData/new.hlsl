@@ -32,6 +32,6 @@ ShadingData shadingDataNew() {
    shadingData.specular = float3(0.0, 0.0, 0.0);
 
    return shadingData;
-};
+}
 
 #endif
