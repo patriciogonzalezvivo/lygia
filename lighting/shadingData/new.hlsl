@@ -42,7 +42,7 @@ void shadingDataNew(Material mat, inout ShadingData shadingData) {
    shadingData.N = mat.normal;
    shadingData.R = reflection(shadingData.V, shadingData.N, mat.roughness);
    shadingData.NoV = dot(shadingData.N, shadingData.V);
-   shadingData.roughness = mat.roughness;
+   shadingData.roughness = max(mat.roughness, MIN_PERCEPTUAL_ROUGHNESS);
    shadingData.linearRoughness = perceptual2LinearRoughness(shadingData.roughness);
    shadingData.diffuseColor = mat.albedo.rgb * (1.0 - mat.metallic);
    shadingData.specularColor = lerp(float3(dielectricF0, dielectricF0, dielectricF0), mat.albedo.rgb, mat.metallic);
