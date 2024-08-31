@@ -40,6 +40,12 @@ license:
 
 #ifndef FNC_ENVMAP
 #define FNC_ENVMAP
+
+float envMapRoughnessToLod(float roughness, float roughnessOneLevel) {
+    // quadratic fit for log2(roughness)+roughnessOneLevel
+    return roughnessOneLevel * roughness * (2.0 - roughness);
+}
+
 vec3 envMap(const in vec3 _normal, const in float _roughness, const in float _metallic) {
 
 // ENVMAP overwrites cube sampling  
@@ -51,12 +57,11 @@ vec3 envMap(const in vec3 _normal, const in float _roughness, const in float _me
 
 // Cubemap sampling
 #elif defined(SCENE_CUBEMAP) && !defined(ENVMAP_MAX_MIP_LEVEL)
-    int lod = textureQueryLevels( SCENE_CUBEMAP ) ENVMAP_LOD_OFFSET - 1;
-    return SAMPLE_CUBE_FNC( SCENE_CUBEMAP, _normal, lod * _roughness).rgb;
+    int roughnessOneLevel = textureQueryLevels(SCENE_CUBEMAP) - ENVMAP_LOD_OFFSET - 1;
+    return SAMPLE_CUBE_FNC( SCENE_CUBEMAP, _normal, envMapRoughnessToLod(_roughness, float(roughnessOneLevel)) ).rgb;
 
 #elif defined(SCENE_CUBEMAP)
-    float lod = ENVMAP_MAX_MIP_LEVEL;
-    return SAMPLE_CUBE_FNC( SCENE_CUBEMAP, _normal, lod * _roughness ).rgb;
+    return SAMPLE_CUBE_FNC( SCENE_CUBEMAP, _normal, envMapRoughnessToLod(_roughness, ENVMAP_MAX_MIP_LEVEL) ).rgb;
 
 // Default
 #else
