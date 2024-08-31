@@ -1,7 +1,7 @@
 /*
 contributors:  Shadi El Hajj
 description: Calculate camera exposure
-use: float exposure(float aperture, float shutterSpeed, float sensitivity) {
+use: float exposure(float aperture, float shutterSpeed, float sensitivity)
 license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 */
 
