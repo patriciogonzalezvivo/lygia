@@ -1,5 +1,10 @@
+#ifndef DIFFUSE_FNC
 #define DIFFUSE_FNC diffuseLambertConstant
+#endif
+
+#ifndef SPECULAR_FNC
 #define SPECULAR_FNC specularCookTorrance
+#endif
 
 #include "../math/saturate.glsl"
 
