@@ -1,5 +1,10 @@
+#ifndef DIFFUSE_FNC
 #define DIFFUSE_FNC diffuseLambertConstant
+#endif
+
+#ifndef SPECULAR_FNC
 #define SPECULAR_FNC specularCookTorrance
+#endif
 
 #include "shadingData/new.hlsl"
 #include "material.hlsl"
@@ -10,6 +15,8 @@
 #include "light/resolve.hlsl"
 
 #include "reflection.hlsl"
+#include "diffuse/importanceSampling.hlsl"
+#include "specular/importanceSampling.hlsl"
 #include "common/specularAO.hlsl"
 #include "common/envBRDFApprox.hlsl"
 
@@ -52,23 +59,30 @@ float4 pbr(const Material mat, ShadingData shadingData) {
     float3 specularDFG = lerp(E.xxx, E.yyy, shadingData.specularColor); 
     float energyCompensation = 1.0 + shadingData.specularColor * (1.0 / specularDFG.y - 1.0);
 
-    float diffuseAO = mat.ambientOcclusion;
-
+#if defined(IBL_IMPORTANCE_SAMPLING)
+    float3 Fr = specularImportanceSampling(shadingData.linearRoughness, shadingData.specularColor, shadingData.N, shadingData.V, shadingData.R, shadingData.NoV);
+#else
     float3 Fr = envMap(mat, shadingData) * specularColorE;
+    Fr  *= energyCompensation;
+#endif
+
     #if !defined(PLATFORM_RPI) && defined(SHADING_MODEL_IRIDESCENCE)
     Fr  += fresnelReflection(mat, shadingData);
     #endif
-    Fr  *= energyCompensation;
-    Fr  *= specularAO(mat, shadingData, diffuseAO);
 
     float3 Fd = shadingData.diffuseColor;
-    #if defined(SCENE_SH_ARRAY)
+#if defined(SCENE_SH_ARRAY)
     Fd  *= sphericalHarmonics(shadingData.N);
-    #else
+#elif defined(IBL_IMPORTANCE_SAMPLING)
+    Fd *= diffuseImportanceSampling(shadingData.linearRoughness, shadingData.N, shadingData.V, shadingData.R);
+#else
     Fd *= envMap(shadingData.N, 1.0);
-    #endif
+#endif
+
+    // AO
+    float diffuseAO = mat.ambientOcclusion;
     Fd  *= diffuseAO;
-    //Fd  *= (1.0 - specularColorE);
+    Fr  *= specularAO(mat, shadingData, diffuseAO);
 
     // Direct Lights
     // -------------
