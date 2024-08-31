@@ -52,7 +52,7 @@ float3 specularImportanceSampling(float roughness, float3 f0, const float3 n, co
             float LoH = saturate(dot(l, h));
 
             float D = GGX(n, h, NoH, roughness);
-            float V = smithGGXCorrelated_Fast(NoV, NoL, roughness);
+            float V = smithGGXCorrelated_Fast(roughness, NoV, NoL);
             float3 F = fresnel(f0, LoH);
 
             float ipdf = (4.0 * LoH) / (D * NoH);
