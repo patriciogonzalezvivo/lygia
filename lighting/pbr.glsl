@@ -17,6 +17,8 @@
 #include "light/resolve.glsl"
 
 #include "reflection.glsl"
+#include "diffuse/importanceSampling.glsl"
+#include "specular/importanceSampling.glsl"
 #include "common/specularAO.glsl"
 #include "common/envBRDFApprox.glsl"
 
@@ -54,28 +56,35 @@ vec4 pbr(const Material mat, ShadingData shadingData) {
 
     // Indirect Lights ( Image Based Lighting )
     // ----------------------------------------
-    float2 E = envBRDFApprox(shadingData.NoV, shadingData.roughness);    
-    float3 specularColorE = shadingData.specularColor * E.x + E.y;
-    float3 specularDFG = lerp(E.xxx, E.yyy, shadingData.specularColor); 
+    vec2 E = envBRDFApprox(shadingData.NoV, shadingData.roughness);    
+    vec3 specularColorE = shadingData.specularColor * E.x + E.y;
+    vec3 specularDFG = mix(E.xxx, E.yyy, shadingData.specularColor); 
     float energyCompensation = 1.0 + shadingData.specularColor * (1.0 / specularDFG.y - 1.0);
 
-    float diffuseAO = mat.ambientOcclusion;
-
+#if defined(IBL_IMPORTANCE_SAMPLING)
+    vec3 Fr = specularImportanceSampling(shadingData.linearRoughness, shadingData.specularColor, shadingData.N, shadingData.V, shadingData.R, shadingData.NoV);
+#else
     vec3 Fr = envMap(mat, shadingData) * specularColorE;
+    Fr  *= energyCompensation;
+#endif
+
     #if !defined(PLATFORM_RPI) && defined(SHADING_MODEL_IRIDESCENCE)
     Fr  += fresnelReflection(mat, shadingData);
     #endif
-    Fr  *= energyCompensation;
-    Fr  *= specularAO(mat, shadingData, diffuseAO);
 
     vec3 Fd = shadingData.diffuseColor;
-    #if defined(SCENE_SH_ARRAY)
+#if defined(SCENE_SH_ARRAY)
     Fd  *= sphericalHarmonics(shadingData.N);
-    #else
+#elif defined(IBL_IMPORTANCE_SAMPLING)
+    Fd *= diffuseImportanceSampling(shadingData.linearRoughness, shadingData.N, shadingData.V, shadingData.R);
+#else
     Fd *= envMap(shadingData.N, 1.0);
-    #endif
+#endif
+
+    // AO
+    float diffuseAO = mat.ambientOcclusion;
     Fd  *= diffuseAO;
-    // Fd  *= (1.0 - specularColorE);
+    Fr  *= specularAO(mat, shadingData, diffuseAO);
 
     // Direct Lights
     // -------------
@@ -108,7 +117,7 @@ vec4 pbr(const Material mat, ShadingData shadingData) {
 
     // Specular
     color.rgb  += Fr * IBL_LUMINANCE;
-    color.rgb  += shadingData.specular * energyCompensation;
+    color.rgb  += shadingData.specular * energyCompensation; 
     color.rgb  += mat.emissive;
     color.a     = mat.albedo.a;
 
