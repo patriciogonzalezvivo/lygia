@@ -6,27 +6,24 @@
 #ifndef FNC_SPECULAR_COOKTORRANCE
 #define FNC_SPECULAR_COOKTORRANCE
 
-float specularCookTorrance(float3 _L, float3 _N, float3 _V, const in float3 _H, float _NoV, float _NoL, const in float _NoH, float _roughness, float3 _specularColor) {
-    float NoL = max(_NoL, 0.0);
-    float NoH = max(_NoH, 0.0);
-    float LoH = saturate(dot(_L, _H));
+float3 specularCookTorrance(float3 L, float3 N, float3 V, const in float3 H, float NoV, float NoL, const in float NoH, float linearRoughness, float3 specularColor) {
+    float LoH = saturate(dot(L, H));
 
-    float linearRoughness =  _roughness * _roughness;
-    float D = GGX(_N, _H, NoH, linearRoughness);
+    float D = GGX(N, H, NoH, linearRoughness);
 
-#if defined(PLATFORM_RPI)
-    float V = smithGGXCorrelated_Fast(_NoV, NoL, linearRoughness);
+#if defined(PLATFORMRPI)
+    float G = smithGGXCorrelated_Fast(NoV, NoL, linearRoughness);
 #else
-    float V = smithGGXCorrelated(_NoV, NoL,linearRoughness);
+    float G = smithGGXCorrelated(NoV, NoL, linearRoughness);
 #endif
     
-    float F = fresnel(_specularColor, LoH).r;
+    float3 F = fresnel(specularColor, LoH);
 
-    return (D * V) * F;
+    return (D * G) * F;
 }
 
-float specularCookTorrance(ShadingData shadingData){
-    return specularCookTorrance(shadingData.L, shadingData.N, shadingData.V, shadingData.H, shadingData.NoV, shadingData.NoL, shadingData.NoH, shadingData.roughness, shadingData.specularColor);
+float3 specularCookTorrance(ShadingData shadingData){
+    return specularCookTorrance(shadingData.L, shadingData.N, shadingData.V, shadingData.H, shadingData.NoV, shadingData.NoL, shadingData.NoH, shadingData.linearRoughness, shadingData.specularColor);
 }
 
 #endif
