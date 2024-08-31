@@ -38,7 +38,7 @@ void lightDirectionalEvaluate(LightDirectional L, Material mat, inout ShadingDat
 
     vec3 lightContribution = L.color * L.intensity * shadow * shadingData.NoL;
     shadingData.diffuse  += max(vec3(0.0, 0.0, 0.0), shadingData.diffuseColor * lightContribution * dif);
-    shadingData.specular += max(vec3(0.0, 0.0, 0.0), shadingData.specularColor * lightContribution * spec);
+    shadingData.specular += max(vec3(0.0, 0.0, 0.0), lightContribution * spec);
 
     #ifdef SHADING_MODEL_SUBSURFACE
     float scatterVoH = saturate(dot(shadingData.V, -L.direction));
