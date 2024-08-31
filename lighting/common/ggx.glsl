@@ -40,4 +40,13 @@ float GGX(const in vec3 N, const in vec3 H, const in float NoH, float roughness)
     return saturateMediump(d);
 }
 
+vec3 importanceSamplingGGX(vec2 u, float roughness) {
+    float a2 = roughness * roughness;
+    float phi = 2.0 * PI * u.x;
+    float cosTheta2 = (1.0 - u.y) / (1.0 + (a2 - 1.0) * u.y);
+    float cosTheta = sqrt(cosTheta2);
+    float sinTheta = sqrt(1.0 - cosTheta2);
+    return vec3(cos(phi) * sinTheta, sin(phi) * sinTheta, cosTheta);
+}
+
 #endif
