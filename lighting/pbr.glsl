@@ -59,7 +59,7 @@ vec4 pbr(const Material mat, ShadingData shadingData) {
     vec2 E = envBRDFApprox(shadingData.NoV, shadingData.roughness);    
     vec3 specularColorE = shadingData.specularColor * E.x + E.y;
     vec3 specularDFG = mix(E.xxx, E.yyy, shadingData.specularColor); 
-    float energyCompensation = 1.0 + shadingData.specularColor * (1.0 / specularDFG.y - 1.0);
+    vec3 energyCompensation = 1.0 + shadingData.specularColor * (1.0 / specularDFG.y - 1.0);
 
 #if defined(IBL_IMPORTANCE_SAMPLING)
     vec3 Fr = specularImportanceSampling(shadingData.linearRoughness, shadingData.specularColor, shadingData.N, shadingData.V, shadingData.R, shadingData.NoV);
