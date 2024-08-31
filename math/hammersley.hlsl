@@ -1,3 +1,5 @@
+# include "const.hlsl"
+
 /*
 contributors: Holger Dammertz
 description: Return a Hammersley point
@@ -8,7 +10,7 @@ license: CC BY 3.0 Copyright (c) 2012 Holger Dammertz
 #ifndef FNC_HAMMERSLEY
 #define FNC_HAMMERSLEY
 
-float2 hammersley(uint indexm numSamples) {
+float2 hammersley(uint index, int numSamples) {
     const float tof = 0.5 / float(0x80000000U);
     uint bits = index;
     bits = (bits << 16u) | (bits >> 16u);
