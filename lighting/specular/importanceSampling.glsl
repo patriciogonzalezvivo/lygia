@@ -8,7 +8,7 @@
 /*
 contributors:  Shadi El Hajj
 description: Sample the environment map using importance sampling
-use: vec3 specularImportanceSampling(float roughness, vec3 f0, const vec3 n, const vec3 v, const vec3 r, const float NoV, const float2 st)
+use: vec3 specularImportanceSampling(float roughness, vec3 f0, const vec3 n, const vec3 v, const vec3 r, const float NoV, const vec2 st)
 license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 */
 
@@ -24,16 +24,16 @@ vec3 specularImportanceSampling(float roughness, vec3 f0, const vec3 n, const ve
     const int numSamples = IBL_IMPORTANCE_SAMPLING_SAMPLES;
     const float invNumSamples = 1.0 / float(IBL_IMPORTANCE_SAMPLING_SAMPLES);
     const vec3 up = vec3(0.0, 0.0, 1.0);
-    vec3x3 T = tbn(n, up);
+    mat3 T = tbn(n, up);
 
-    uint width = textureSize(SCENE_CUBEMAP, 0);
+    int width = textureSize(SCENE_CUBEMAP, 0).x;
     float omegaP = (4.0 * PI) / (6.0 * width * width);
 
     vec3 indirectSpecular = vec3(0.0, 0.0, 0.0);
     for (int i = 0; i < numSamples; i++) {
-        float2 u = hammersley(i, numSamples);
-        vec3 h = mul(T, importanceSamplingGGX(u, roughness));
-        vec3 l = lerp(r, n, roughness * roughness);
+        vec2 u = hammersley(i, numSamples);
+        vec3 h = T * importanceSamplingGGX(u, roughness);
+        vec3 l = mix(r, n, roughness * roughness);
 
         float NoL = saturate(dot(n, l));
         if (NoL > 0.0) {
@@ -46,7 +46,7 @@ vec3 specularImportanceSampling(float roughness, vec3 f0, const vec3 n, const ve
 
             float ipdf = (4.0 * LoH) / (D * NoH);
             float mipLevel = prefilteredImportanceSampling(ipdf, omegaP, numSamples);
-            vec3 L = SCENE_CUBEMAP.SampleLevel(SAMPLER_TRILINEAR_CLAMP, l, mipLevel).rgb;
+            vec3 L = textureLod(SCENE_CUBEMAP, l, mipLevel).rgb;
 
             vec3 Fr = F * (D * V * NoL * ipdf * invNumSamples);
 
