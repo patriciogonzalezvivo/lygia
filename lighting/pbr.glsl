@@ -1,5 +1,7 @@
+#define DIFFUSE_FNC diffuseLambertConstant
+#define SPECULAR_FNC specularCookTorrance
+
 #include "../math/saturate.glsl"
-#include "../color/tonemap.glsl"
 
 #include "shadingData/new.glsl"
 #include "material.glsl"
@@ -47,24 +49,28 @@ vec4 pbr(const Material mat, ShadingData shadingData) {
 
     // Indirect Lights ( Image Based Lighting )
     // ----------------------------------------
-    vec3 E = envBRDFApprox(shadingData);
+    float2 E = envBRDFApprox(shadingData.NoV, shadingData.roughness);    
+    float3 specularColorE = shadingData.specularColor * E.x + E.y;
+    float3 specularDFG = lerp(E.xxx, E.yyy, shadingData.specularColor); 
+    float energyCompensation = 1.0 + shadingData.specularColor * (1.0 / specularDFG.y - 1.0);
+
     float diffuseAO = mat.ambientOcclusion;
 
-    vec3 Fr = vec3(0.0, 0.0, 0.0);
-    Fr  = envMap(mat, shadingData) * E;
-    #if !defined(PLATFORM_RPI)
+    vec3 Fr = envMap(mat, shadingData) * specularColorE;
+    #if !defined(PLATFORM_RPI) && defined(SHADING_MODEL_IRIDESCENCE)
     Fr  += fresnelReflection(mat, shadingData);
     #endif
+    Fr  *= energyCompensation;
     Fr  *= specularAO(mat, shadingData, diffuseAO);
 
     vec3 Fd = shadingData.diffuseColor;
     #if defined(SCENE_SH_ARRAY)
-    Fd  *= tonemap( sphericalHarmonics(shadingData.N) );
+    Fd  *= sphericalHarmonics(shadingData.N);
     #else
     Fd *= envMap(shadingData.N, 1.0);
     #endif
     Fd  *= diffuseAO;
-    Fd  *= (1.0 - E);
+    // Fd  *= (1.0 - specularColorE);
 
     // Direct Lights
     // -------------
@@ -93,11 +99,11 @@ vec4 pbr(const Material mat, ShadingData shadingData) {
 
     // Diffuse
     color.rgb  += Fd * IBL_LUMINANCE;
-    color.rgb  += shadingData.diffuse;
+    color.rgb  += shadingData.diffuse * energyCompensation;
 
     // Specular
     color.rgb  += Fr * IBL_LUMINANCE;
-    color.rgb  += shadingData.specular;    
+    color.rgb  += shadingData.specular * energyCompensation;
     color.rgb  += mat.emissive;
     color.a     = mat.albedo.a;
 
