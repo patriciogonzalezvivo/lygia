@@ -62,14 +62,15 @@ vec4 pbr(const Material mat, ShadingData shadingData) {
 #if defined(IBL_IMPORTANCE_SAMPLING)
     vec3 Fr = specularImportanceSampling(shadingData.linearRoughness, shadingData.specularColor, shadingData.N, shadingData.V, shadingData.R, shadingData.NoV);
 #else
-    vec3 Fr = envMap(mat, shadingData) * specularColorE;
+    vec3 Fr = envMap(mat, shadingData);
 #endif
+    Fr *= specularColorE;
 
     #if !defined(PLATFORM_RPI) && defined(SHADING_MODEL_IRIDESCENCE)
     Fr  += fresnelReflection(mat, shadingData);
     #endif
 
-    vec3 Fd = shadingData.diffuseColor;
+    vec3 Fd = shadingData.diffuseColor * (1.0-specularColorE);
 #if defined(SCENE_SH_ARRAY)
     Fd  *= sphericalHarmonics(shadingData.N);
 #elif defined(IBL_IMPORTANCE_SAMPLING)
