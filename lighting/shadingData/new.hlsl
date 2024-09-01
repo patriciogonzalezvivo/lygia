@@ -2,7 +2,7 @@
 #include "../material.hlsl"
 #include "../reflection.hlsl"
 #include "../ior/reflectance2f0.hlsl"
-#include "../common/perceptual2LinearRoughness.hlsl"
+#include "../common/perceptual2linearRoughness.hlsl"
 
 /*
 contributors:  Shadi El Hajj
@@ -43,7 +43,7 @@ void shadingDataNew(Material mat, inout ShadingData shadingData) {
    shadingData.R = reflection(shadingData.V, shadingData.N, mat.roughness);
    shadingData.NoV = dot(shadingData.N, shadingData.V);
    shadingData.roughness = max(mat.roughness, MIN_PERCEPTUAL_ROUGHNESS);
-   shadingData.linearRoughness = perceptual2LinearRoughness(shadingData.roughness);
+   shadingData.linearRoughness = perceptual2linearRoughness(shadingData.roughness);
    shadingData.diffuseColor = mat.albedo.rgb * (1.0 - mat.metallic);
    shadingData.specularColor = lerp(float3(dielectricF0, dielectricF0, dielectricF0), mat.albedo.rgb, mat.metallic);
 }
