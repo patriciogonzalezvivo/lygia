@@ -7,7 +7,7 @@ use: hammersley(uint index)
 license: CC BY 3.0 Copyright (c) 2012 Holger Dammertz
 */
 
-#ifndef FNC_HAMMERSLEY
+#if !defined(FNC_HAMMERSLEY) &&  __VERSION__ >= 130
 #define FNC_HAMMERSLEY
 
 vec2 hammersley(uint index, int numSamples) {
