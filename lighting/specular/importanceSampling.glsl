@@ -30,29 +30,34 @@ vec3 specularImportanceSampling(float roughness, vec3 f0, const vec3 n, const ve
     float omegaP = (4.0 * PI) / (6.0 * width * width);
 
     vec3 indirectSpecular = vec3(0.0, 0.0, 0.0);
+    float Ey = 0.0;
     for (int i = 0; i < numSamples; i++) {
         vec2 u = hammersley(i, numSamples);
         vec3 h = T * importanceSamplingGGX(u, roughness);
         vec3 l = r;
 
-        float NoL = saturate(dot(n, l));
-        if (NoL > 0.0) {
-            float NoH = dot(n, h);
-            float LoH = saturate(dot(l, h));
+        float NoL = dot(n, l);
+        float NoH = dot(n, h);
+        float LoH = max(dot(l, h), EPSILON);
 
-            float D = GGX(n, h, NoH, roughness);
-            float V = smithGGXCorrelated_Fast(roughness, NoV, NoL);
-            vec3 F = fresnel(f0, LoH);
+        float D = GGX(n, h, NoH, roughness);
+        float V = smithGGXCorrelated_Fast(roughness, NoV, NoL);
+        vec3 F = fresnel(f0, LoH);
 
-            float ipdf = (4.0 * LoH) / (D * NoH);
-            float mipLevel = prefilteredImportanceSampling(ipdf, omegaP, numSamples);
-            vec3 L = textureLod(SCENE_CUBEMAP, l, mipLevel).rgb;
+        float ipdf = (4.0 * LoH) / (D * NoH);
+        float mipLevel = prefilteredImportanceSampling(ipdf, omegaP, numSamples);
+        vec3 L = textureLod(SCENE_CUBEMAP, l, mipLevel).rgb;
 
-            vec3 Fr = F * (D * V * NoL * ipdf * invNumSamples);
+        vec3 Fr = F * (D * V * NoL * ipdf * invNumSamples);
 
-            indirectSpecular += (Fr * L);
-        }
+        indirectSpecular += (Fr * L);
+
+        Ey += 4*V*LoH*NoL/NoH;
     }
+
+    Ey /= numSamples;
+    float3 energyCompensation = 1.0 + f0 * (1.0 / Ey - 1.0);
+    indirectSpecular *= energyCompensation;
 
     return indirectSpecular;
 }
