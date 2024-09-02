@@ -13,7 +13,7 @@ license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 */
 
 #ifndef IBL_IMPORTANCE_SAMPLING_SAMPLES
-#define IBL_IMPORTANCE_SAMPLING_SAMPLES  64
+#define IBL_IMPORTANCE_SAMPLING_SAMPLES  16
 #endif
 
 #if !defined(FNC_SPECULAR_IMPORTANCE_SAMPLING) &&  __VERSION__ >= 130
@@ -33,7 +33,7 @@ vec3 specularImportanceSampling(float roughness, vec3 f0, const vec3 n, const ve
     for (int i = 0; i < numSamples; i++) {
         vec2 u = hammersley(i, numSamples);
         vec3 h = T * importanceSamplingGGX(u, roughness);
-        vec3 l = mix(r, n, roughness * roughness);
+        vec3 l = r;
 
         float NoL = saturate(dot(n, l));
         if (NoL > 0.0) {
