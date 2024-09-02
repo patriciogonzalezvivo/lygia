@@ -65,8 +65,8 @@ vec4 pbr(const Material mat, ShadingData shadingData) {
     vec3 Fr = specularImportanceSampling(shadingData.linearRoughness, shadingData.specularColor, shadingData.N, shadingData.V, shadingData.R, shadingData.NoV);
 #else
     vec3 Fr = envMap(mat, shadingData);
-#endif
     Fr *= specularColorE;
+#endif
 
 #if !defined(PLATFORM_RPI) && defined(SHADING_MODEL_IRIDESCENCE)
     Fr  += fresnelReflection(mat, shadingData);
