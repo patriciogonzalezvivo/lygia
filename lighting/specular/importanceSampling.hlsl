@@ -31,29 +31,34 @@ float3 specularImportanceSampling(float roughness, float3 f0, const float3 n, co
     float omegaP = (4.0 * PI) / (6.0 * width * width);
 
     float3 indirectSpecular = float3(0.0, 0.0, 0.0);
+    float Ey = 0.0;
     for (int i = 0; i < numSamples; i++) {
         float2 u = hammersley(i, numSamples);
         float3 h = mul(T, importanceSamplingGGX(u, roughness));
         float3 l = r;
 
-        float NoL = saturate(dot(n, l));
-        if (NoL > 0.0) {
-            float NoH = dot(n, h);
-            float LoH = saturate(dot(l, h));
+        float NoL = dot(n, l);
+        float NoH = dot(n, h);
+        float LoH = max(dot(l, h), EPSILON);
 
-            float D = GGX(n, h, NoH, roughness);
-            float V = smithGGXCorrelated_Fast(roughness, NoV, NoL);
-            float3 F = fresnel(f0, LoH);
+        float D = GGX(n, h, NoH, roughness);
+        float V = smithGGXCorrelated_Fast(roughness, NoV, NoL);
+        float3 F = fresnel(f0, LoH);
 
-            float ipdf = (4.0 * LoH) / (D * NoH);
-            float mipLevel = prefilteredImportanceSampling(ipdf, omegaP, numSamples);
-            float3 L = SCENE_CUBEMAP.SampleLevel(SAMPLER_TRILINEAR_CLAMP, l, mipLevel).rgb;
+        float ipdf = (4.0 * LoH) / (D * NoH);
+        float mipLevel = prefilteredImportanceSampling(ipdf, omegaP, numSamples);
+        float3 L = SCENE_CUBEMAP.SampleLevel(SAMPLER_TRILINEAR_CLAMP, l, mipLevel).rgb;
 
-            float3 Fr = F * (D * V * NoL * ipdf * invNumSamples);
+        float3 Fr = F * (D * V * NoL * ipdf * invNumSamples);
 
-            indirectSpecular += (Fr * L);
-        }
+        indirectSpecular += (Fr * L);
+
+        Ey += 4*V*LoH*NoL/NoH;
     }
+
+    Ey /= numSamples;
+    float3 energyCompensation = 1.0 + f0 * (1.0 / Ey - 1.0);
+    indirectSpecular *= energyCompensation;
 
     return indirectSpecular;
 }
