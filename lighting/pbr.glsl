@@ -56,7 +56,11 @@ vec4 pbr(const Material mat, ShadingData shadingData) {
 
     // Indirect Lights ( Image Based Lighting )
     // ----------------------------------------
+#if !defined(IBL_IMPORTANCE_SAMPLING)
     vec2 E = envBRDFApprox(shadingData.NoV, shadingData.roughness);    
+#else
+    vec2 E = vec2(1.0, 0.0);
+#endif
     vec3 specularColorE = shadingData.specularColor * E.x + E.y;
 
 #if defined(IBL_IMPORTANCE_SAMPLING) &&  __VERSION__ >= 130
@@ -66,9 +70,9 @@ vec4 pbr(const Material mat, ShadingData shadingData) {
 #endif
     Fr *= specularColorE;
 
-    #if !defined(PLATFORM_RPI) && defined(SHADING_MODEL_IRIDESCENCE)
+#if !defined(PLATFORM_RPI) && defined(SHADING_MODEL_IRIDESCENCE)
     Fr  += fresnelReflection(mat, shadingData);
-    #endif
+#endif
 
     vec3 Fd = shadingData.diffuseColor * (1.0-specularColorE);
 #if defined(SCENE_SH_ARRAY)

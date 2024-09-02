@@ -10,7 +10,7 @@ license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 */
 
 #ifndef IBL_IMPORTANCE_SAMPLING_SAMPLES
-#define IBL_IMPORTANCE_SAMPLING_SAMPLES  64
+#define IBL_IMPORTANCE_SAMPLING_SAMPLES  16
 #endif
 
 #ifndef FNC_DIFFUSE_IMPORTANCE_SAMPLING
@@ -31,8 +31,8 @@ float3 diffuseImportanceSampling(float roughness, const float3 n, const float3 v
     for (int i = 0; i < numSamples; i++) {
         float2 u = hammersley(i, numSamples);
         float3 h = mul(T, hemisphereCosSample(u));
-
         float3 l = n;
+
         float NoL = saturate(dot(n, l));
         if (NoL > 0.0) {
             float ipdf = PI / NoL;
