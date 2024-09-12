@@ -63,6 +63,7 @@ vec4 pbr(const Material mat, ShadingData shadingData) {
 
 #if defined(IBL_IMPORTANCE_SAMPLING) &&  __VERSION__ >= 130
     vec3 Fr = specularImportanceSampling(shadingData.linearRoughness, shadingData.specularColor, shadingData.N, shadingData.V, shadingData.R, shadingData.NoV);
+    Fr *= shadingData.specularColor;
 #else
     vec3 Fr = envMap(mat, shadingData);
     Fr *= specularColorE;
