@@ -30,11 +30,11 @@ vec3 specularImportanceSampling(float roughness, vec3 f0, const vec3 n, const ve
     float omegaP = (4.0 * PI) / (6.0 * width * width);
 
     vec3 indirectSpecular = vec3(0.0, 0.0, 0.0);
-    float Ey = 0.0;
+    float dfg2 = 0.0;
     for (int i = 0; i < numSamples; i++) {
         vec2 u = hammersley(i, numSamples);
         vec3 h = T * importanceSamplingGGX(u, roughness);
-        vec3 l = r;
+        vec3 l = mix(reflect(-v, h), h, roughness);
 
         float NoL = dot(n, l);
         float NoH = dot(n, h);
@@ -52,11 +52,11 @@ vec3 specularImportanceSampling(float roughness, vec3 f0, const vec3 n, const ve
 
         indirectSpecular += (Fr * L);
 
-        Ey += 4*V*LoH*NoL/NoH;
+        dfg2 += F*V*LoH*NoL/NoH;
     }
 
-    Ey /= numSamples;
-    float3 energyCompensation = 1.0 + f0 * (1.0 / Ey - 1.0);
+    dfg2 = 4*dfg2*invNumSamples;
+    float3 energyCompensation = 1.0 + f0 * (1.0 / dfg2 - 1.0);
     indirectSpecular *= energyCompensation;
 
     return indirectSpecular;

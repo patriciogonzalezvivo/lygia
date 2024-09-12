@@ -30,7 +30,7 @@ vec3 diffuseImportanceSampling(float roughness, const vec3 n, const vec3 v, cons
     for (int i = 0; i < numSamples; i++) {
         vec2 u = hammersley(i, numSamples);
         vec3 h = T * hemisphereCosSample(u);
-        vec3 l = n;
+        vec3 l = mix(reflect(-v, h), h, roughness);
 
         float NoL = saturate(dot(n, l));
         if (NoL > 0.0) {
