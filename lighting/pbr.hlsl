@@ -63,7 +63,8 @@ float4 pbr(const Material mat, ShadingData shadingData) {
     float3 Fr = specularImportanceSampling(shadingData.linearRoughness, shadingData.specularColor, shadingData.N, shadingData.V, shadingData.R, shadingData.NoV);
     Fr *= shadingData.specularColor;
 #else
-    float3 Fr = envMap(mat, shadingData);
+    float3 R = lerp(shadingData.R, shadingData.N, shadingData.roughness);
+    float3 Fr = envMap(R, shadingData.roughness, mat.metallic);
     Fr *= specularColorE;
 #endif
 
