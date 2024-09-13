@@ -7,20 +7,11 @@
 #endif
 
 #include "../math/saturate.glsl"
-
 #include "shadingData/new.glsl"
 #include "material.glsl"
-#include "envMap.glsl"
-#include "fresnelReflection.glsl"
-#include "sphericalHarmonics.glsl"
 #include "light/new.glsl"
 #include "light/resolve.glsl"
-
-#include "reflection.glsl"
-#include "diffuse/importanceSampling.glsl"
-#include "specular/importanceSampling.glsl"
-#include "common/specularAO.glsl"
-#include "common/envBRDFApprox.glsl"
+#include "light/indirectEvaluate.glsl"
 
 /*
 contributors: [Patricio Gonzalez Vivo, Shadi El Hajj]
@@ -56,43 +47,11 @@ vec4 pbr(const Material mat, ShadingData shadingData) {
 
     // Indirect Lights ( Image Based Lighting )
     // ----------------------------------------
-#if !defined(IBL_IMPORTANCE_SAMPLING)
-    vec2 E = envBRDFApprox(shadingData.NoV, shadingData.roughness);    
-    vec3 specularColorE = shadingData.specularColor * E.x + E.y;
-#endif
-
-vec3 energyCompensation = vec3(1.0, 1.0, 1.0);
-
-#if defined(IBL_IMPORTANCE_SAMPLING) &&  __VERSION__ >= 130
-    vec3 Fr = specularImportanceSampling(shadingData.linearRoughness, shadingData.specularColor,
-        mat.position, shadingData.N, shadingData.V, shadingData.R, shadingData.NoV, energyCompensation);
-#else
-    vec3 R = mix(shadingData.R, shadingData.N, shadingData.roughness*shadingData.roughness);
-    vec3 Fr = envMap(R, shadingData.roughness, mat.metallic);
-    Fr *= specularColorE;
-#endif
-    Fr *= energyCompensation;
-
-#if !defined(PLATFORM_RPI) && defined(SHADING_MODEL_IRIDESCENCE)
-    Fr  += fresnelReflection(mat, shadingData);
-#endif
-
-#if defined(SCENE_SH_ARRAY)
-    vec3 Fd = shadingData.diffuseColor * (1.0-specularColorE);
-    Fd  *= sphericalHarmonics(shadingData.N);
-#elif defined(IBL_IMPORTANCE_SAMPLING)
-    vec3 Fd = shadingData.diffuseColor;
-    // Fd *= diffuseImportanceSampling(shadingData.linearRoughness, mat.position, shadingData.N, shadingData.V, shadingData.R);
-    Fd *= envMap(shadingData.N, 1.0);
-#else
-    vec3 Fd = shadingData.diffuseColor * (1.0-specularColorE);
-    Fd *= envMap(shadingData.N, 1.0);
-#endif
-
-    // AO
-    float diffuseAO = mat.ambientOcclusion;
-    Fd  *= diffuseAO;
-    Fr  *= specularAO(mat, shadingData, diffuseAO);
+    
+    vec3 Fd;
+    vec3 Fr;
+    vec3 energyCompensation;
+    lightIndirectEvaluate(mat, shadingData, Fd, Fr, energyCompensation);
 
     // Direct Lights
     // -------------
