@@ -34,7 +34,7 @@ float3 diffuseImportanceSampling(float roughness, float3 p, float3 n, float3 v, 
     for (int i = 0; i < numSamples; i++) {
         float2 u = hammersley(i, numSamples);
         float3 h = mul(T, hemisphereCosSample(u));
-        float3 l = lerp(reflect(-v, h), h, roughness);
+        float3 l = reflect(-v, h);
 
         float NoL = saturate(dot(n, l));
         if (NoL > 0.0) {

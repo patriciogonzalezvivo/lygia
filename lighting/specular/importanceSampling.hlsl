@@ -38,7 +38,7 @@ float3 specularImportanceSampling(float roughness, float3 f0, float3 p, float3 n
     for (int i = 0; i < numSamples; i++) {
         float2 u = hammersley(i, numSamples);
         float3 h = mul(T, importanceSamplingGGX(u, roughness));
-        float3 l = lerp(reflect(-v, h), h, roughness);
+        float3 l = reflect(-v, h);
 
         float NoL = saturate(dot(n, l));
         if (NoL > 0.0) {
@@ -46,7 +46,7 @@ float3 specularImportanceSampling(float roughness, float3 f0, float3 p, float3 n
             float LoH = max(dot(l, h), EPSILON);
 
             float D = GGX(n, h, NoH, roughness);
-            float V = smithGGXCorrelated_Fast(roughness, NoV, NoL);
+            float V = smithGGXCorrelated(roughness, NoV, NoL);
             float3 F = fresnel(f0, LoH);
 
             float ipdf = (4.0 * LoH) / (D * NoH);
