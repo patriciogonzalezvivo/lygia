@@ -61,14 +61,17 @@ vec4 pbr(const Material mat, ShadingData shadingData) {
     vec3 specularColorE = shadingData.specularColor * E.x + E.y;
 #endif
 
+vec3 energyCompensation = vec3(1.0, 1.0, 1.0);
+
 #if defined(IBL_IMPORTANCE_SAMPLING) &&  __VERSION__ >= 130
     vec3 Fr = specularImportanceSampling(shadingData.linearRoughness, shadingData.specularColor,
-        mat.position, shadingData.N, shadingData.V, shadingData.R, shadingData.NoV);
+        mat.position, shadingData.N, shadingData.V, shadingData.R, shadingData.NoV, energyCompensation);
 #else
     vec3 R = mix(shadingData.R, shadingData.N, shadingData.roughness*shadingData.roughness);
     vec3 Fr = envMap(R, shadingData.roughness, mat.metallic);
     Fr *= specularColorE;
 #endif
+    Fr *= energyCompensation;
 
 #if !defined(PLATFORM_RPI) && defined(SHADING_MODEL_IRIDESCENCE)
     Fr  += fresnelReflection(mat, shadingData);
@@ -122,7 +125,7 @@ vec4 pbr(const Material mat, ShadingData shadingData) {
 
     // Specular
     color.rgb  += Fr * IBL_LUMINANCE;
-    color.rgb  += shadingData.specular; 
+    color.rgb  += shadingData.specular * energyCompensation; 
     color.rgb  += mat.emissive;
     color.a     = mat.albedo.a;
 
