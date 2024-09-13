@@ -41,7 +41,7 @@ float3 specularImportanceSampling(float roughness, float3 f0, float3 p, float3 n
         float3 l = reflect(-v, h);
 
         float NoL = saturate(dot(n, l));
-        if (NoL > 0.0) {
+        //if (NoL > 0.0) { // dfg2 cannot be 0
             float NoH = dot(n, h);
             float LoH = max(dot(l, h), EPSILON);
 
@@ -58,10 +58,10 @@ float3 specularImportanceSampling(float roughness, float3 f0, float3 p, float3 n
             indirectSpecular += (Fr * L);
 
             dfg2 += V*LoH*NoL/NoH;
-        }
+        //}
     }
 
-    dfg2 = 4*dfg2*invNumSamples + EPSILON;
+    dfg2 = 4*dfg2*invNumSamples;
     energyCompensation = 1.0 + f0 * (1.0 / dfg2 - 1.0);
 
     return indirectSpecular;
