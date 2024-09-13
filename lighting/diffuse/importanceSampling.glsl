@@ -1,5 +1,7 @@
 #include "../../math/hammersley.glsl"
+#include "../../math/rotate3dZ.hlsl"
 #include "../../space/tbn.glsl"
+#include "../../generative/random.hlsl"
 #include "../common/preFilteredImportanceSampling.glsl"
 
 /*
@@ -17,11 +19,12 @@ license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 #define FNC_DIFFUSE_IMPORTANCE_SAMPLING
 
 
-vec3 diffuseImportanceSampling(float roughness, const vec3 n, const vec3 v, const vec3 r) {
+vec3 diffuseImportanceSampling(float roughness, vec3 p, vec3 n, vec3 v, vec3 r) {
     const int numSamples = IBL_IMPORTANCE_SAMPLING_SAMPLES;
     const float invNumSamples = 1.0 / float(IBL_IMPORTANCE_SAMPLING_SAMPLES);
     const vec3 up = vec3(0.0, 0.0, 1.0);
     mat3 T = tbn(n, up);
+    T *= rotate3dZ(TWO_PI * random(p));
 
     int width = textureSize(SCENE_CUBEMAP, 0).x;
     float omegaP = (4.0 * PI) / (6.0 * width * width);

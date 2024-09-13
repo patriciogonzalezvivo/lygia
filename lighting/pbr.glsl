@@ -62,7 +62,8 @@ vec4 pbr(const Material mat, ShadingData shadingData) {
 #endif
 
 #if defined(IBL_IMPORTANCE_SAMPLING) &&  __VERSION__ >= 130
-    vec3 Fr = specularImportanceSampling(shadingData.linearRoughness, shadingData.specularColor, shadingData.N, shadingData.V, shadingData.R, shadingData.NoV);
+    vec3 Fr = specularImportanceSampling(shadingData.linearRoughness, shadingData.specularColor,
+        mat.position, shadingData.N, shadingData.V, shadingData.R, shadingData.NoV);
     Fr *= shadingData.specularColor;
 #else
     vec3 R = mix(shadingData.R, shadingData.N, shadingData.roughness);
@@ -79,7 +80,7 @@ vec4 pbr(const Material mat, ShadingData shadingData) {
     Fd  *= sphericalHarmonics(shadingData.N);
 #elif defined(IBL_IMPORTANCE_SAMPLING)
     vec3 Fd = shadingData.diffuseColor;
-    Fd *= diffuseImportanceSampling(shadingData.linearRoughness, shadingData.N, shadingData.V, shadingData.R);
+    Fd *= diffuseImportanceSampling(shadingData.linearRoughness, mat.position, shadingData.N, shadingData.V, shadingData.R);
 #else
     vec3 Fd = shadingData.diffuseColor * (1.0-specularColorE);
     Fd *= envMap(shadingData.N, 1.0);
