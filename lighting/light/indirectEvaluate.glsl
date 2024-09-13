@@ -13,15 +13,15 @@ license: MIT License (MIT) Copyright (c) 2024 Shadi El Hajj
 #include "../common/specularAO.glsl"
 #include "../common/envBRDFApprox.glsl"
 
-#ifndef FNC_LIGHT_INDIRECT_EVALUATE
-#define FNC_LIGHT_INDIRECT_EVALUATE
-
 #ifndef IBL_LUMINANCE
 #define IBL_LUMINANCE   1.0
 #endif
 
+#ifndef FNC_LIGHT_INDIRECT_EVALUATE
+#define FNC_LIGHT_INDIRECT_EVALUATE
+
 void lightIndirectEvaluate(Material mat, inout ShadingData shadingData,
-    out float3 Fd, out float3 Fr, out float3 energyCompensation) {
+    out vec3 Fd, out vec3 Fr, out vec3 energyCompensation) {
 
 #if !defined(IBL_IMPORTANCE_SAMPLING)
     vec2 E = envBRDFApprox(shadingData.NoV, shadingData.roughness);    
