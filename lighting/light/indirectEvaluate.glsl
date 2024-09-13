@@ -49,7 +49,6 @@ energyCompensation = vec3(1.0, 1.0, 1.0);
     Fd  *= sphericalHarmonics(shadingData.N);
 #elif defined(IBL_IMPORTANCE_SAMPLING)
     Fd = shadingData.diffuseColor;
-    // Fd *= diffuseImportanceSampling(shadingData.linearRoughness, mat.position, shadingData.N, shadingData.V, shadingData.R);
     Fd *= envMap(shadingData.N, 1.0);
 #else
     Fd = shadingData.diffuseColor * (1.0-specularColorE);
