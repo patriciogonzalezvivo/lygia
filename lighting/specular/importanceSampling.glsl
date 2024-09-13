@@ -61,7 +61,7 @@ vec3 specularImportanceSampling(float roughness, vec3 f0, vec3 p, vec3 n, vec3 v
     }
 
     dfg2 = 4*dfg2*invNumSamples;
-    energyCompensation = 1.0 + f0 * (1.0 / dfg2 - 1.0);
+    energyCompensation = max(1.0 + f0 * (1.0 / dfg2 - 1.0), 1.0);
 
     return indirectSpecular;
 }
