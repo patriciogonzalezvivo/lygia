@@ -22,7 +22,7 @@ license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 #define FNC_SPECULAR_IMPORTANCE_SAMPLING
 
 
-float3 specularImportanceSampling(float roughness, float3 f0, float3 p, float3 n, float3 v, float3 r, float NoV) {
+float3 specularImportanceSampling(float roughness, float3 f0, float3 p, float3 n, float3 v, float3 r, float NoV, out float3 energyCompensation) {
     const int numSamples = IBL_IMPORTANCE_SAMPLING_SAMPLES;
     const float invNumSamples = 1.0 / float(IBL_IMPORTANCE_SAMPLING_SAMPLES);
     const float3 up = float3(0.0, 0.0, 1.0);
@@ -62,8 +62,7 @@ float3 specularImportanceSampling(float roughness, float3 f0, float3 p, float3 n
     }
 
     dfg2 = 4*dfg2*invNumSamples + EPSILON;
-    float3 energyCompensation = 1.0 + f0 * (1.0 / dfg2 - 1.0);
-    indirectSpecular *= energyCompensation;
+    energyCompensation = 1.0 + f0 * (1.0 / dfg2 - 1.0);
 
     return indirectSpecular;
 }
