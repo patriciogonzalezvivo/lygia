@@ -27,7 +27,7 @@ float3 specularImportanceSampling(float roughness, float3 f0, float3 p, float3 n
     const float invNumSamples = 1.0 / float(IBL_IMPORTANCE_SAMPLING_SAMPLES);
     const float3 up = float3(0.0, 0.0, 1.0);
     float3x3 T = tbn(n, up);
-    T = mul(T, rotate3dZ(TWO_PI * random(p)));
+    // T = mul(T, rotate3dZ(TWO_PI * random(p)));
 
     uint width, height, levels;
     SCENE_CUBEMAP.GetDimensions(0, width, height, levels);
@@ -57,7 +57,7 @@ float3 specularImportanceSampling(float roughness, float3 f0, float3 p, float3 n
 
             indirectSpecular += (Fr * L);
 
-            dfg2 += F*V*LoH*NoL/NoH;
+            dfg2 += V*LoH*NoL/NoH;
         }
     }
 
