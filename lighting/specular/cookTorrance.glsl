@@ -12,7 +12,7 @@ vec3 specularCookTorrance(const in vec3 L, const in vec3 N, const in vec3 H, con
 
     float D = GGX(N, H, NoH, linearRoughness);
 
-#if defined(PLATFORMRPI)
+#if defined(PLATFORM_RPI)
     float V = smithGGXCorrelated_Fast(NoV, NoL, linearRoughness);
 #else
     float V = smithGGXCorrelated(NoV, NoL,linearRoughness);
