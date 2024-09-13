@@ -75,7 +75,7 @@ vec4 pbr(const Material mat, ShadingData shadingData) {
 
     
     // Final Sum
-    // ------------------------
+    // ---------
     vec4 color  = vec4(0.0, 0.0, 0.0, 1.0);
 
     // Diffuse

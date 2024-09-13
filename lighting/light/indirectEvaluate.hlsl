@@ -13,12 +13,12 @@ license: MIT License (MIT) Copyright (c) 2024 Shadi El Hajj
 #include "../common/specularAO.hlsl"
 #include "../common/envBRDFApprox.hlsl"
 
-#ifndef FNC_LIGHT_INDIRECT_EVALUATE
-#define FNC_LIGHT_INDIRECT_EVALUATE
-
 #ifndef IBL_LUMINANCE
 #define IBL_LUMINANCE   1.0
 #endif
+
+#ifndef FNC_LIGHT_INDIRECT_EVALUATE
+#define FNC_LIGHT_INDIRECT_EVALUATE
 
 void lightIndirectEvaluate(Material mat, inout ShadingData shadingData,
     out float3 Fd, out float3 Fr, out float3 energyCompensation) {
