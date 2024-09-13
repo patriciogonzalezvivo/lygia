@@ -45,7 +45,7 @@ vec3 specularImportanceSampling(float roughness, vec3 f0, vec3 p, vec3 n, vec3 v
             float LoH = max(dot(l, h), EPSILON);
 
             float D = GGX(n, h, NoH, roughness);
-            float V = smithGGXCorrelated(roughness, NoV, NoL);
+            float V = smithGGXCorrelated(NoV, NoL, roughness);
             vec3 F = fresnel(f0, LoH);
 
             float ipdf = (4.0 * LoH) / (D * NoH);
