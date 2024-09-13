@@ -1,7 +1,7 @@
 /*
 contributors: [Patricio Gonzalez Vivo, Shadi El Hajj]
 description: Calculate point light
-use: lightPointEvaluate(<float3> _diffuseColor, <float3> _specularColor, <float3> _N, <float3> _V, <float> _NoV, <float> _f0, out <float3> _diffuse, out <float3> _specular)
+use: <void> lightPointEvaluate(<LightPoint> L, <Material> mat, inout <ShadingData> shadingData)
 options:
     - DIFFUSE_FNC: diffuseOrenNayar, diffuseBurley, diffuseLambert (default)
     - SURFACE_POSITION: in glslViewer is v_position
