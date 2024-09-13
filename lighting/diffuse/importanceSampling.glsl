@@ -1,7 +1,7 @@
 #include "../../math/hammersley.glsl"
-#include "../../math/rotate3dZ.hlsl"
+#include "../../math/rotate3dZ.glsl"
 #include "../../space/tbn.glsl"
-#include "../../generative/random.hlsl"
+#include "../../generative/random.glsl"
 #include "../common/preFilteredImportanceSampling.glsl"
 
 /*
