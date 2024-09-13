@@ -1,5 +1,7 @@
 #include "../../math/hammersley.hlsl"
+#include "../../math/rotate3dZ.hlsl"
 #include "../../space/tbn.hlsl"
+#include "../../generative/random.hlsl"
 #include "../common/ggx.hlsl"
 #include "../common/smithGGXCorrelated.hlsl"
 #include "../fresnel.hlsl"
@@ -20,11 +22,12 @@ license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 #define FNC_SPECULAR_IMPORTANCE_SAMPLING
 
 
-float3 specularImportanceSampling(float roughness, float3 f0, const float3 n, const float3 v, const float3 r, const float NoV) {
+float3 specularImportanceSampling(float roughness, float3 f0, float3 p, float3 n, float3 v, float3 r, float NoV) {
     const int numSamples = IBL_IMPORTANCE_SAMPLING_SAMPLES;
     const float invNumSamples = 1.0 / float(IBL_IMPORTANCE_SAMPLING_SAMPLES);
     const float3 up = float3(0.0, 0.0, 1.0);
     float3x3 T = tbn(n, up);
+    T = mul(T, rotate3dZ(TWO_PI * random(p)));
 
     uint width, height, levels;
     SCENE_CUBEMAP.GetDimensions(0, width, height, levels);

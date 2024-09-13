@@ -60,7 +60,8 @@ float4 pbr(const Material mat, ShadingData shadingData) {
 #endif
 
 #if defined(IBL_IMPORTANCE_SAMPLING)
-    float3 Fr = specularImportanceSampling(shadingData.linearRoughness, shadingData.specularColor, shadingData.N, shadingData.V, shadingData.R, shadingData.NoV);
+    float3 Fr = specularImportanceSampling(shadingData.linearRoughness, shadingData.specularColor,
+        mat.position, shadingData.N, shadingData.V, shadingData.R, shadingData.NoV);
     Fr *= shadingData.specularColor;
 #else
     float3 R = lerp(shadingData.R, shadingData.N, shadingData.roughness);
@@ -77,7 +78,7 @@ float4 pbr(const Material mat, ShadingData shadingData) {
     Fd  *= sphericalHarmonics(shadingData.N);
 #elif defined(IBL_IMPORTANCE_SAMPLING)
     float3 Fd = shadingData.diffuseColor;
-    Fd *= diffuseImportanceSampling(shadingData.linearRoughness, shadingData.N, shadingData.V, shadingData.R);
+    Fd *= diffuseImportanceSampling(shadingData.linearRoughness, mat.position, shadingData.N, shadingData.V, shadingData.R);
 #else
     float3 Fd = shadingData.diffuseColor * (1.0-specularColorE);
     Fd *= envMap(shadingData.N, 1.0);
