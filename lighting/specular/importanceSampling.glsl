@@ -27,7 +27,7 @@ vec3 specularImportanceSampling(float roughness, vec3 f0, vec3 p, vec3 n, vec3 v
     const float invNumSamples = 1.0 / float(IBL_IMPORTANCE_SAMPLING_SAMPLES);
     const vec3 up = vec3(0.0, 0.0, 1.0);
     mat3 T = tbn(n, up);
-    T *= rotate3dZ(TWO_PI * random(p));
+    //T *= rotate3dZ(TWO_PI * random(p));
 
     int width = textureSize(SCENE_CUBEMAP, 0).x;
     float omegaP = (4.0 * PI) / (6.0 * width * width);
@@ -56,7 +56,7 @@ vec3 specularImportanceSampling(float roughness, vec3 f0, vec3 p, vec3 n, vec3 v
 
             indirectSpecular += (Fr * L);
 
-            dfg2 += F*V*LoH*NoL/NoH;
+            dfg2 += V*LoH*NoL/NoH;
         }
     }
 
