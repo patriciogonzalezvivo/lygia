@@ -97,8 +97,8 @@ float4 pbrGlass(const Material mat, ShadingData shadingData) {
 
         shadingData.L = L.direction;
         shadingData.H = normalize(L.direction + shadingData.V);
-        shadingData.NoL = dot(shadingData.N, L.direction);
-        shadingData.NoH = dot(shadingData.N, shadingData.H);
+        shadingData.NoL = saturate(dot(shadingData.N, L.direction));
+        shadingData.NoH = saturate(dot(shadingData.N, shadingData.H));
         float3 spec = specular(shadingData);
 
         color.rgb += L.color * spec;
