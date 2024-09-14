@@ -43,9 +43,9 @@ float4 pbr(const Material mat, ShadingData shadingData) {
     // Indirect Lights ( Image Based Lighting )
     // ----------------------------------------
 
-    float3 Fd;
-    float3 Fr;
-    float3 energyCompensation;
+    float3 Fd = float3(0.0, 0.0, 0.0);
+    float3 Fr = float3(0.0, 0.0, 0.0);
+    float3 energyCompensation = float3(1.0, 1.0, 1.0);
     lightIndirectEvaluate(mat, shadingData, Fd, Fr, energyCompensation);
 
     // Direct Lights
