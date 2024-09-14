@@ -36,9 +36,9 @@ void materialZero(out Material _mat) {
     _mat.normal_back = vec3(0.0);
 #endif
     _mat.ior = vec3(0.0);
-    _mat.f0 = vec3(0.0);
     _mat.roughness = 0.0;
     _mat.metallic = 0.0;
+    _mat.reflectance = 0.0;
     _mat.ambientOcclusion = 0.0;
 
 #if defined (SHADING_MODEL_CLEAR_COAT)

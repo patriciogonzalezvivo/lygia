@@ -4,7 +4,7 @@
 /*
 contributors: [Patricio Gonzalez Vivo, Shadi El Hajj]
 description: Calculate directional light
-use: lightDirectionalEvaluate(<vec3> _diffuseColor, <vec3> _specularColor, <vec3> _N, <vec3> _V, <float> _NoV, <float> _f0, out <vec3> _diffuse, out <vec3> _specular)
+use: <void> lightDirectionalEvaluate(<LightDirectional> L, <Material> mat, inout <ShadingData> shadingData)
 options:
     - DIFFUSE_FNC: diffuseOrenNayar, diffuseBurley, diffuseLambert (default)
     - LIGHT_POSITION: in GlslViewer is u_light
@@ -24,8 +24,8 @@ void lightDirectionalEvaluate(LightDirectional L, Material mat, inout ShadingDat
 
     shadingData.L = L.direction;
     shadingData.H = normalize(L.direction + shadingData.V);
-    shadingData.NoL = dot(shadingData.N, L.direction);
-    shadingData.NoH = dot(shadingData.N, shadingData.H);
+    shadingData.NoL = saturate(dot(shadingData.N, L.direction));
+    shadingData.NoH = saturate(dot(shadingData.N, shadingData.H));
 
     #ifdef FNC_RAYMARCH_SOFTSHADOW    
     float shadow = raymarchSoftShadow(mat.position, L.direction);
@@ -34,11 +34,11 @@ void lightDirectionalEvaluate(LightDirectional L, Material mat, inout ShadingDat
     #endif
 
     float dif  = diffuse(shadingData);
-    float spec = specular(shadingData);
+    vec3 spec = specular(shadingData);
 
     vec3 lightContribution = L.color * L.intensity * shadow * shadingData.NoL;
     shadingData.diffuse  += max(vec3(0.0, 0.0, 0.0), shadingData.diffuseColor * lightContribution * dif);
-    shadingData.specular += max(vec3(0.0, 0.0, 0.0), shadingData.specularColor * lightContribution * spec);
+    shadingData.specular += max(vec3(0.0, 0.0, 0.0), lightContribution * spec);
 
     #ifdef SHADING_MODEL_SUBSURFACE
     float scatterVoH = saturate(dot(shadingData.V, -L.direction));

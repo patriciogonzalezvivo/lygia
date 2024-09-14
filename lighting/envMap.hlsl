@@ -31,6 +31,12 @@ license:
 
 #ifndef FNC_ENVMAP
 #define FNC_ENVMAP
+
+float envMapRoughnessToLod(float roughness, float roughnessOneLevel) {
+    // quadratic fit for log2(roughness)+roughnessOneLevel
+    return roughnessOneLevel * roughness * (2.0 - roughness);
+}
+
 float3 envMap(float3 _normal, float _roughness, float _metallic) {
 
 // ENVMAP overwrites cube sampling  
@@ -41,12 +47,11 @@ float3 envMap(float3 _normal, float _roughness, float _metallic) {
 #elif defined(SCENE_CUBEMAP) && !defined(ENVMAP_MAX_MIP_LEVEL)
     uint width, height, levels;
     SCENE_CUBEMAP.GetDimensions(0, width, height, levels);
-    float lod = levels - ENVMAP_LOD_OFFSET;
-    return SAMPLE_CUBE_FNC( SCENE_CUBEMAP, _normal, lod * _roughness).rgb;
+    float roughnessOneLevel = levels - ENVMAP_LOD_OFFSET - 1;
+    return SAMPLE_CUBE_FNC( SCENE_CUBEMAP, _normal, envMapRoughnessToLod(_roughness, roughnessOneLevel)).rgb;
     
 #elif defined(SCENE_CUBEMAP)
-    float lod = ENVMAP_MAX_MIP_LEVEL;
-    return SAMPLE_CUBE_FNC( SCENE_CUBEMAP, _normal, lod * _roughness).rgb;
+    return SAMPLE_CUBE_FNC( SCENE_CUBEMAP, _normal, envMapRoughnessToLod(_roughness, ENVMAP_MAX_MIP_LEVEL)).rgb;
 
 // Default
 #else

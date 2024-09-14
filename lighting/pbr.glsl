@@ -1,17 +1,17 @@
-#include "../math/saturate.glsl"
-#include "../color/tonemap.glsl"
+#ifndef DIFFUSE_FNC
+#define DIFFUSE_FNC diffuseLambertConstant
+#endif
 
+#ifndef SPECULAR_FNC
+#define SPECULAR_FNC specularCookTorrance
+#endif
+
+#include "../math/saturate.glsl"
 #include "shadingData/new.glsl"
 #include "material.glsl"
-#include "envMap.glsl"
-#include "fresnelReflection.glsl"
-#include "sphericalHarmonics.glsl"
 #include "light/new.glsl"
 #include "light/resolve.glsl"
-
-#include "reflection.glsl"
-#include "common/specularAO.glsl"
-#include "common/envBRDFApprox.glsl"
+#include "light/indirectEvaluate.glsl"
 
 /*
 contributors: [Patricio Gonzalez Vivo, Shadi El Hajj]
@@ -43,37 +43,15 @@ license:
 #define FNC_PBR
 
 vec4 pbr(const Material mat, ShadingData shadingData) {
-    // Shading Data
-    // ------------
-    shadingData.N = mat.normal;
-    shadingData.R = reflection(shadingData.V,  shadingData.N, mat.roughness);
-    shadingData.fresnel = max(mat.f0.r, max(mat.f0.g, mat.f0.b));
-    shadingData.roughness = mat.roughness;
-    shadingData.linearRoughness = mat.roughness;
-    shadingData.diffuseColor = mat.albedo.rgb * (vec3(1.0, 1.0, 1.0) - mat.f0) * (1.0 - mat.metallic);
-    shadingData.specularColor = mix(mat.f0, mat.albedo.rgb, mat.metallic);
-    shadingData.NoV = dot(shadingData.N, shadingData.V);
+    shadingDataNew(mat, shadingData);
 
     // Indirect Lights ( Image Based Lighting )
     // ----------------------------------------
-    vec3 E = envBRDFApprox(shadingData);
-    float diffuseAO = mat.ambientOcclusion;
-
-    vec3 Fr = vec3(0.0, 0.0, 0.0);
-    Fr  = envMap(mat, shadingData) * E;
-    #if !defined(PLATFORM_RPI)
-    Fr  += fresnelReflection(mat, shadingData);
-    #endif
-    Fr  *= specularAO(mat, shadingData, diffuseAO);
-
-    vec3 Fd = shadingData.diffuseColor;
-    #if defined(SCENE_SH_ARRAY)
-    Fd  *= tonemap( sphericalHarmonics(shadingData.N) );
-    #else
-    Fd *= envMap(shadingData.N, 1.0);
-    #endif
-    Fd  *= diffuseAO;
-    Fd  *= (1.0 - E);
+    
+    vec3 Fd;
+    vec3 Fr;
+    vec3 energyCompensation;
+    lightIndirectEvaluate(mat, shadingData, Fd, Fr, energyCompensation);
 
     // Direct Lights
     // -------------
@@ -97,7 +75,7 @@ vec4 pbr(const Material mat, ShadingData shadingData) {
 
     
     // Final Sum
-    // ------------------------
+    // ---------
     vec4 color  = vec4(0.0, 0.0, 0.0, 1.0);
 
     // Diffuse
@@ -106,7 +84,7 @@ vec4 pbr(const Material mat, ShadingData shadingData) {
 
     // Specular
     color.rgb  += Fr * IBL_LUMINANCE;
-    color.rgb  += shadingData.specular;    
+    color.rgb  += shadingData.specular * energyCompensation; 
     color.rgb  += mat.emissive;
     color.a     = mat.albedo.a;
 

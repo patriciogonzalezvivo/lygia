@@ -1,7 +1,7 @@
 /*
 contributors: [Patricio Gonzalez Vivo, Shadi El Hajj]
 description: Calculate point light
-use: lightPointEvaluate(<vec3> _diffuseColor, <vec3> _specularColor, <vec3> _N, <vec3> _V, <float> _NoV, <float> _f0, out <vec3> _diffuse, out <vec3> _specular)
+use: <void> lightPointEvaluate(<LightPoint> L, <Material> mat, inout <ShadingData> shadingData)
 options:
     - DIFFUSE_FNC: diffuseOrenNayar, diffuseBurley, diffuseLambert (default)
     - SURFACE_POSITION: in glslViewer is v_position
@@ -27,8 +27,8 @@ void lightPointEvaluate(LightPoint L, Material mat, inout ShadingData shadingDat
     vec3 Ldirection = L.position/Ldist;
     shadingData.L = Ldirection;
     shadingData.H = normalize(Ldirection + shadingData.V);
-    shadingData.NoL = dot(shadingData.N, Ldirection);
-    shadingData.NoH = dot(shadingData.N, shadingData.H);
+    shadingData.NoL = saturate(dot(shadingData.N, Ldirection));
+    shadingData.NoH = saturate(dot(shadingData.N, shadingData.H));
 
     #ifdef FNC_RAYMARCH_SOFTSHADOW    
     float shadow = raymarchSoftShadow(mat.position, Ldirection);
@@ -37,14 +37,14 @@ void lightPointEvaluate(LightPoint L, Material mat, inout ShadingData shadingDat
     #endif
 
     float dif  = diffuse(shadingData);
-    float spec = specular(shadingData);
+    vec3 spec = specular(shadingData);
 
     vec3 lightContribution = L.color * L.intensity * shadow * shadingData.NoL;
     if (L.falloff > 0.0)
         lightContribution *= falloff(Ldist, L.falloff);
 
     shadingData.diffuse  += max(vec3(0.0, 0.0, 0.0), shadingData.diffuseColor * lightContribution * dif);
-    shadingData.specular += max(vec3(0.0, 0.0, 0.0), shadingData.specularColor * lightContribution * spec);
+    shadingData.specular += max(vec3(0.0, 0.0, 0.0), lightContribution * spec);
 
     // TODO:
     // - make sure that the shadow use a perspective projection

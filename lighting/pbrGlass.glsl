@@ -54,9 +54,9 @@ vec4 pbrGlass(const Material mat, ShadingData shadingData) {
     vec3 No     = mat.normal;                            // Normal out
 #endif
     vec3 eta    = ior2eta(mat.ior);
+    vec3 f0     = vec3(0.04, 0.04, 0.04);
     shadingData.N = mat.normal;
     shadingData.R = reflection(shadingData.V,  shadingData.N, mat.roughness);
-    shadingData.fresnel = max(mat.f0.r, max(mat.f0.g, mat.f0.b));
     shadingData.roughness = mat.roughness; 
     shadingData.linearRoughness = mat.roughness;
     shadingData.specularColor = mat.albedo.rgb;
@@ -69,10 +69,10 @@ vec4 pbrGlass(const Material mat, ShadingData shadingData) {
 
     #if defined(SHADING_MODEL_IRIDESCENCE)
     vec3 Fr = vec3(0.0, 0.0, 0.0);
-    Gi  += fresnelIridescentReflection(mat.normal, -shadingData.V, mat.f0, vec3(IOR_AIR),
+    Gi  += fresnelIridescentReflection(mat.normal, -shadingData.V, f0, vec3(IOR_AIR),
         mat.ior, mat.thickness, mat.roughness, Fr);
     #else
-    vec3 Fr = fresnel(mat.f0, shadingData.NoV);
+    vec3 Fr = fresnel(f0, shadingData.NoV);
     Gi  += fresnelReflection(shadingData.R, Fr) * (1.0-mat.roughness);
     #endif
 
@@ -98,7 +98,7 @@ vec4 pbrGlass(const Material mat, ShadingData shadingData) {
         shadingData.H = normalize(L.direction + shadingData.V);
         shadingData.NoL = dot(shadingData.N, L.direction);
         shadingData.NoH = dot(shadingData.N, shadingData.H);
-        vec3 spec = vec3( specular(shadingData) );
+        vec3 spec = specular(shadingData);
 
         color.rgb += L.color * spec;
         #endif

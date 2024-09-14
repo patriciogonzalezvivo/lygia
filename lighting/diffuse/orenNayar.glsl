@@ -26,7 +26,7 @@ float diffuseOrenNayar(const in vec3 L, const in vec3 N, const in vec3 V, const 
 }
 
 float diffuseOrenNayar(ShadingData shadingData) {
-    return diffuseOrenNayar(shadingData.L, shadingData.N, shadingData.V, shadingData.NoV, shadingData.NoL, shadingData.linearRoughness);
+    return diffuseOrenNayar(shadingData.L, shadingData.N, shadingData.V, shadingData.NoV, shadingData.NoL, shadingData.roughness);
 }
 
 #endif
