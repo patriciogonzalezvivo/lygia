@@ -2,7 +2,7 @@
 #include "cast.hlsl"
 #include "ao.hlsl"
 #include "softShadow.hlsl"
-#include "../shadingData/new.glsl"
+#include "../shadingData/new.hlsl"
 
 /*
 contributors: Patricio Gonzalez Vivo

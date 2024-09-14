@@ -36,4 +36,13 @@ float GGX(float3 N, float3 H, float NoH, float linearRoughness) {
     return saturateMediump(d);
 }
 
+float3 importanceSamplingGGX(float2 u, float roughness) {
+    float a2 = roughness * roughness;
+    float phi = 2.0 * PI * u.x;
+    float cosTheta2 = (1.0 - u.y) / (1.0 + (a2 - 1.0) * u.y);
+    float cosTheta = sqrt(cosTheta2);
+    float sinTheta = sqrt(1.0 - cosTheta2);
+    return float3(cos(phi) * sinTheta, sin(phi) * sinTheta, cosTheta);
+}
+
 #endif

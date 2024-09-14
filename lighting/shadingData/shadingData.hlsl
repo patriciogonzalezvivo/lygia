@@ -18,7 +18,6 @@ struct ShadingData {
    float NoL;
    float NoH;
 
-   float fresnel;
    float roughness;
    float linearRoughness;
    float3 diffuseColor;

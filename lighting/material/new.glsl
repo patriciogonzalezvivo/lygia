@@ -68,9 +68,9 @@ void materialNew(out Material _mat) {
     _mat.emissive           = materialEmissive();
     _mat.roughness          = materialRoughness();
     _mat.metallic           = materialMetallic();
+    _mat.reflectance        = 0.5;
 
     _mat.ior                = vec3(IOR_GLASS_RGB);      // Index of Refraction
-    _mat.f0                 = vec3(0.04, 0.04, 0.04);   // reflectance at 0 degree
 
     _mat.ambientOcclusion   = materialOcclusion();
 

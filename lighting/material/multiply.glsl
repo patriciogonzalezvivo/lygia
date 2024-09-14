@@ -18,9 +18,9 @@ void materialMultiply(Material mat, float f, Material r) {
     r.normal_back = mat.normal_back * f;
     #endif
     r.ior = mat.ior * f;
-    r.f0 = mat.f0 * f;
     r.roughness = mat.roughness * f;
     r.metallic = mat.metallic * f;
+    r.reflectance = mat.reflectance * f;
     r.ambientOcclusion = mat.ambientOcclusion * f;
     #if defined(SHADING_MODEL_CLEAR_COAT)
     r.clearCoat = mat.clearCoat * f;
