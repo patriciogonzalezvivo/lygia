@@ -48,9 +48,9 @@ vec4 pbr(const Material mat, ShadingData shadingData) {
     // Indirect Lights ( Image Based Lighting )
     // ----------------------------------------
     
-    vec3 Fd;
-    vec3 Fr;
-    vec3 energyCompensation;
+    vec3 Fd = vec3(0.0, 0.0, 0.0);
+    vec3 Fr = vec3(0.0, 0.0, 0.0);
+    vec3 energyCompensation = vec3(1.0, 1.0, 1.0);
     lightIndirectEvaluate(mat, shadingData, Fd, Fr, energyCompensation);
 
     // Direct Lights

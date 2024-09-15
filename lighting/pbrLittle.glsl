@@ -51,7 +51,9 @@ vec4 pbrLittle(Material mat, ShadingData shadingData) {
     #else
     shadingData.L = normalize(LIGHT_POSITION - mat.position);
     #endif
-    shadingData.NoL = dot(shadingData.N, shadingData.L);
+    shadingData.H = normalize(shadingData.L + shadingData.V);
+    shadingData.NoL = saturate(dot(shadingData.N, shadingData.L));
+    shadingData.NoH = saturate(dot(shadingData.N, shadingData.H));
 
     float notMetal = 1.0 - mat.metallic;
     float smoothness = 0.95 - saturate(mat.roughness);

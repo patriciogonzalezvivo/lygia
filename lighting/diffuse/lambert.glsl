@@ -1,5 +1,5 @@
 #include "../../math/const.glsl"
-#include "../shadingData/new.glsl"
+#include "../shadingData/shadingData.glsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
