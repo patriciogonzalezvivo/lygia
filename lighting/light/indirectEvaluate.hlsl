@@ -23,7 +23,7 @@ license: MIT License (MIT) Copyright (c) 2024 Shadi El Hajj
 void lightIndirectEvaluate(Material mat, inout ShadingData shadingData,
     out float3 Fd, out float3 Fr, out float3 energyCompensation) {
 
-#if !defined(IBL_IMPORTANCE_SAMPLING)
+#if !defined(IBL_IMPORTANCE_SAMPLING) || defined(SCENE_SH_ARRAY)
     float2 E = envBRDFApprox(shadingData.NoV, shadingData.roughness);    
     float3 specularColorE = shadingData.specularColor * E.x + E.y;
 #endif
