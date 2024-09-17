@@ -44,7 +44,7 @@ void lightPointEvaluate(LightPoint L, Material mat, inout ShadingData shadingDat
         lightContribution *= falloff(Ldist, L.falloff);
 
     shadingData.directDiffuse  += max(vec3(0.0, 0.0, 0.0), shadingData.diffuseColor * lightContribution * dif);
-    shadingData.directSpecular += max(vec3(0.0, 0.0, 0.0), lightContribution * spec);
+    shadingData.directSpecular += max(vec3(0.0, 0.0, 0.0), lightContribution * spec) * shadingData.energyCompensation;
 
     // TODO:
     // - make sure that the shadow use a perspective projection
