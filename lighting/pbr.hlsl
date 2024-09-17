@@ -10,7 +10,7 @@
 #include "material.hlsl"
 #include "light/new.hlsl"
 #include "light/resolve.hlsl"
-#include "light/indirectEvaluate.hlsl"
+#include "light/iblEvaluate.hlsl"
 
 /*
 contributors: [Patricio Gonzalez Vivo, Shadi El Hajj]
@@ -43,7 +43,7 @@ float4 pbr(const Material mat, ShadingData shadingData) {
     // Indirect Lights ( Image Based Lighting )
     // ----------------------------------------
 
-    lightIndirectEvaluate(mat, shadingData);
+    lightIBLEvaluate(mat, shadingData);
 
     // Direct Lights
     // -------------
