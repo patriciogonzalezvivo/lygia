@@ -35,10 +35,6 @@ license:
 #define CAMERA_POSITION vec3(0.0, 0.0, -10.0)
 #endif
 
-#ifndef IBL_LUMINANCE
-#define IBL_LUMINANCE   1.0
-#endif
-
 #ifndef FNC_PBR
 #define FNC_PBR
 
