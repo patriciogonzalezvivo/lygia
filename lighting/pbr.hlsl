@@ -43,8 +43,7 @@ float4 pbr(const Material mat, ShadingData shadingData) {
     // Indirect Lights ( Image Based Lighting )
     // ----------------------------------------
 
-    float3 energyCompensation = float3(1.0, 1.0, 1.0);
-    lightIndirectEvaluate(mat, shadingData, energyCompensation);
+    lightIndirectEvaluate(mat, shadingData);
 
     // Direct Lights
     // -------------
@@ -77,7 +76,7 @@ float4 pbr(const Material mat, ShadingData shadingData) {
 
     // Specular
     color.rgb  += shadingData.indirectSpecular;
-    color.rgb  += shadingData.directSpecular * energyCompensation; 
+    color.rgb  += shadingData.directSpecular; 
     color.rgb  += mat.emissive;
     color.a     = mat.albedo.a;
 

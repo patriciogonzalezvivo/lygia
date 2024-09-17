@@ -20,14 +20,14 @@ license: MIT License (MIT) Copyright (c) 2024 Shadi El Hajj
 #ifndef FNC_LIGHT_INDIRECT_EVALUATE
 #define FNC_LIGHT_INDIRECT_EVALUATE
 
-void lightIndirectEvaluate(Material mat, inout ShadingData shadingData, out vec3 energyCompensation) {
+void lightIndirectEvaluate(Material mat, inout ShadingData shadingData) {
 
 #if !defined(IBL_IMPORTANCE_SAMPLING) ||  __VERSION__ < 130 || defined(SCENE_SH_ARRAY)
     vec2 E = envBRDFApprox(shadingData.NoV, shadingData.roughness);    
     vec3 specularColorE = shadingData.specularColor * E.x + E.y;
 #endif
 
-energyCompensation = vec3(1.0, 1.0, 1.0);
+vec3 energyCompensation = vec3(1.0, 1.0, 1.0);
 
 #if defined(IBL_IMPORTANCE_SAMPLING) &&  __VERSION__ >= 130
     vec3 Fr = specularImportanceSampling(shadingData.linearRoughness, shadingData.specularColor,
@@ -58,6 +58,8 @@ energyCompensation = vec3(1.0, 1.0, 1.0);
     float diffuseAO = mat.ambientOcclusion;
     Fd  *= diffuseAO;
     Fr  *= specularAO(mat, shadingData, diffuseAO);
+
+    shadingData.energyCompensation = energyCompensation;
 
     shadingData.indirectDiffuse = Fd * IBL_LUMINANCE;
     shadingData.indirectSpecular = Fr * IBL_LUMINANCE;

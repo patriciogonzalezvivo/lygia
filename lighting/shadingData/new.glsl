@@ -31,6 +31,8 @@ ShadingData shadingDataNew() {
    shadingData.diffuseColor = vec3(0.0, 0.0, 0.0);
    shadingData.specularColor = vec3(0.0, 0.0, 0.0);
 
+   shadingData.energyCompensation = vec3(1.0, 1.0, 1.0);
+
    shadingData.directDiffuse = vec3(0.0, 0.0, 0.0);
    shadingData.directSpecular = vec3(0.0, 0.0, 0.0);
    shadingData.indirectDiffuse = vec3(0.0, 0.0, 0.0);
