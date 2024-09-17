@@ -20,8 +20,7 @@ license: MIT License (MIT) Copyright (c) 2024 Shadi El Hajj
 #ifndef FNC_LIGHT_INDIRECT_EVALUATE
 #define FNC_LIGHT_INDIRECT_EVALUATE
 
-void lightIndirectEvaluate(Material mat, inout ShadingData shadingData,
-    out float3 Fd, out float3 Fr, out float3 energyCompensation) {
+void lightIndirectEvaluate(Material mat, inout ShadingData shadingData, out float3 energyCompensation) {
 
 #if !defined(IBL_IMPORTANCE_SAMPLING) || defined(SCENE_SH_ARRAY)
     float2 E = envBRDFApprox(shadingData.NoV, shadingData.roughness);    
@@ -31,11 +30,11 @@ void lightIndirectEvaluate(Material mat, inout ShadingData shadingData,
 energyCompensation = float3(1.0, 1.0, 1.0);
 
 #if defined(IBL_IMPORTANCE_SAMPLING)
-    Fr = specularImportanceSampling(shadingData.linearRoughness, shadingData.specularColor,
+    float3 Fr = specularImportanceSampling(shadingData.linearRoughness, shadingData.specularColor,
         mat.position, shadingData.N, shadingData.V, shadingData.R, shadingData.NoV, energyCompensation);
 #else
     float3 R = lerp(shadingData.R, shadingData.N, shadingData.roughness*shadingData.roughness);
-    Fr = envMap(R, shadingData.roughness, mat.metallic);
+    float3 Fr = envMap(R, shadingData.roughness, mat.metallic);
     Fr *= specularColorE;
 #endif
     Fr *= energyCompensation;
@@ -45,20 +44,25 @@ energyCompensation = float3(1.0, 1.0, 1.0);
 #endif
 
 #if defined(SCENE_SH_ARRAY)
-    Fd = shadingData.diffuseColor * (1.0-specularColorE);
+    float3 Fd = shadingData.diffuseColor * (1.0-specularColorE);
     Fd  *= sphericalHarmonics(shadingData.N);
 #elif defined(IBL_IMPORTANCE_SAMPLING)
-    Fd = shadingData.diffuseColor;
-    Fd *= envMap(shadingData.N, 1.0);
+    float3 Fd = shadingData.diffuseColor;
+    //Fd *= envMap(shadingData.N, 1.0);
+    Fd *= diffuseIrradiance(shadingData.N);
 #else
-    Fd = shadingData.diffuseColor * (1.0-specularColorE);
-    Fd *= envMap(shadingData.N, 1.0);
+    float3 Fd = shadingData.diffuseColor * (1.0-specularColorE);
+    //Fd *= envMap(shadingData.N, 1.0);
+    Fd *= diffuseIrradiance(shadingData.N);
 #endif
 
     // AO
     float diffuseAO = mat.ambientOcclusion;
     Fd  *= diffuseAO;
     Fr  *= specularAO(mat, shadingData, diffuseAO);
+
+    shadingData.indirectDiffuse = Fd * IBL_LUMINANCE;
+    shadingData.indirectSpecular = Fr * IBL_LUMINANCE;
 }
 
 #endif

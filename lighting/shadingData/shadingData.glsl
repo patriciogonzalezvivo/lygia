@@ -23,8 +23,10 @@ struct ShadingData {
    vec3 diffuseColor;
    vec3 specularColor;
 
-   vec3 diffuse;
-   vec3 specular;
+   vec3 directDiffuse;
+   vec3 directSpecular;
+   vec3 indirectDiffuse;
+   vec3 indirectSpecular;
 };
 
 #endif
