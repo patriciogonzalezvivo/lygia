@@ -23,8 +23,10 @@ struct ShadingData {
    float3 diffuseColor;
    float3 specularColor;
 
-   float3 diffuse;
-   float3 specular;
+   float3 directDiffuse;
+   float3 directSpecular;
+   float3 indirectDiffuse;
+   float3 indirectSpecular;
 };
 
 #endif
