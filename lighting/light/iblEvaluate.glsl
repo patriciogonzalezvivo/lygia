@@ -1,7 +1,7 @@
 /*
 contributors: Shadi El Hajj
 description: Calculate indirect light
-use: void lightIndirectEvaluate(<Material> mat, inout <ShadingData> shadingData)
+use: void lightIBLEvaluate(<Material> mat, inout <ShadingData> shadingData)
 license: MIT License (MIT) Copyright (c) 2024 Shadi El Hajj
 */
 
@@ -17,10 +17,10 @@ license: MIT License (MIT) Copyright (c) 2024 Shadi El Hajj
 #define IBL_LUMINANCE   1.0
 #endif
 
-#ifndef FNC_LIGHT_INDIRECT_EVALUATE
-#define FNC_LIGHT_INDIRECT_EVALUATE
+#ifndef FNC_LIGHT_IBL_EVALUATE
+#define FNC_LIGHT_IBL_EVALUATE
 
-void lightIndirectEvaluate(Material mat, inout ShadingData shadingData) {
+void lightIBLEvaluate(Material mat, inout ShadingData shadingData) {
 
 #if !defined(IBL_IMPORTANCE_SAMPLING) ||  __VERSION__ < 130 || defined(SCENE_SH_ARRAY)
     vec2 E = envBRDFApprox(shadingData.NoV, shadingData.roughness);    

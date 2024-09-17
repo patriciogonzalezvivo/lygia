@@ -11,7 +11,7 @@
 #include "material.glsl"
 #include "light/new.glsl"
 #include "light/resolve.glsl"
-#include "light/indirectEvaluate.glsl"
+#include "light/iblEvaluate.glsl"
 
 /*
 contributors: [Patricio Gonzalez Vivo, Shadi El Hajj]
@@ -48,7 +48,7 @@ vec4 pbr(const Material mat, ShadingData shadingData) {
     // Indirect Lights ( Image Based Lighting )
     // ----------------------------------------
     
-    lightIndirectEvaluate(mat, shadingData);
+    lightIBLEvaluate(mat, shadingData);
 
     // Direct Lights
     // -------------
