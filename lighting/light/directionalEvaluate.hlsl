@@ -37,15 +37,15 @@ void lightDirectionalEvaluate(LightDirectional L, Material mat, inout ShadingDat
     float3 spec = specular(shadingData);
 
     float3 lightContribution = L.color * L.intensity * shadow * shadingData.NoL;
-    shadingData.diffuse  += max(float3(0.0, 0.0, 0.0), shadingData.diffuseColor * lightContribution * dif);
-    shadingData.specular += max(float3(0.0, 0.0, 0.0), lightContribution * spec);
+    shadingData.directDiffuse  += max(float3(0.0, 0.0, 0.0), shadingData.diffuseColor * lightContribution * dif);
+    shadingData.directSpecular += max(float3(0.0, 0.0, 0.0), lightContribution * spec) * shadingData.energyCompensation;
 
     #ifdef SHADING_MODEL_SUBSURFACE
     float scatterVoH = saturate(dot(shadingData.V, -L.direction));
     float forwardScatter = exp2(scatterVoH * mat.subsurfacePower - mat.subsurfacePower);
     float backScatter = saturate(shadingData.NoL * mat.subsurfaceThickness + (1.0 - mat.subsurfaceThickness)) * 0.5;
     float subsurface = lerp(backScatter, 1.0, forwardScatter) * (1.0 - mat.subsurfaceThickness);
-    shadingData.diffuse += mat.subsurfaceColor * (subsurface * diffuseLambertConstant());
+    shadingData.directDiffuse += mat.subsurfaceColor * (subsurface * diffuseLambertConstant());
     #endif
 }
 

@@ -43,8 +43,8 @@ void lightPointEvaluate(LightPoint L, Material mat, inout ShadingData shadingDat
     if (L.falloff > 0.0)
         lightContribution *= falloff(Ldist, L.falloff);
 
-    shadingData.diffuse  += max(vec3(0.0, 0.0, 0.0), shadingData.diffuseColor * lightContribution * dif);
-    shadingData.specular += max(vec3(0.0, 0.0, 0.0), lightContribution * spec);
+    shadingData.directDiffuse  += max(vec3(0.0, 0.0, 0.0), shadingData.diffuseColor * lightContribution * dif);
+    shadingData.directSpecular += max(vec3(0.0, 0.0, 0.0), lightContribution * spec) * shadingData.energyCompensation;
 
     // TODO:
     // - make sure that the shadow use a perspective projection
@@ -53,7 +53,7 @@ void lightPointEvaluate(LightPoint L, Material mat, inout ShadingData shadingDat
     float forwardScatter = exp2(scatterVoH * mat.subsurfacePower - mat.subsurfacePower);
     float backScatter = saturate(shadingData.NoL * mat.subsurfaceThickness + (1.0 - mat.subsurfaceThickness)) * 0.5;
     float subsurface = mix(backScatter, 1.0, forwardScatter) * (1.0 - mat.subsurfaceThickness);
-    shadingData.diffuse += mat.subsurfaceColor * (subsurface * diffuseLambertConstant());
+    shadingData.directDiffuse += mat.subsurfaceColor * (subsurface * diffuseLambertConstant());
     #endif
 }
 

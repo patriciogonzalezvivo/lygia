@@ -10,7 +10,7 @@
 #include "material.hlsl"
 #include "light/new.hlsl"
 #include "light/resolve.hlsl"
-#include "light/indirectEvaluate.hlsl"
+#include "light/iblEvaluate.hlsl"
 
 /*
 contributors: [Patricio Gonzalez Vivo, Shadi El Hajj]
@@ -43,10 +43,7 @@ float4 pbr(const Material mat, ShadingData shadingData) {
     // Indirect Lights ( Image Based Lighting )
     // ----------------------------------------
 
-    float3 Fd = float3(0.0, 0.0, 0.0);
-    float3 Fr = float3(0.0, 0.0, 0.0);
-    float3 energyCompensation = float3(1.0, 1.0, 1.0);
-    lightIndirectEvaluate(mat, shadingData, Fd, Fr, energyCompensation);
+    lightIBLEvaluate(mat, shadingData);
 
     // Direct Lights
     // -------------
@@ -74,12 +71,12 @@ float4 pbr(const Material mat, ShadingData shadingData) {
     float4 color  = float4(0.0, 0.0, 0.0, 1.0);
 
     // Diffuse
-    color.rgb  += Fd * IBL_LUMINANCE;
-    color.rgb  += shadingData.diffuse;
+    color.rgb  += shadingData.indirectDiffuse;
+    color.rgb  += shadingData.directDiffuse;
 
     // Specular
-    color.rgb  += Fr * IBL_LUMINANCE;
-    color.rgb  += shadingData.specular * energyCompensation; 
+    color.rgb  += shadingData.indirectSpecular;
+    color.rgb  += shadingData.directSpecular; 
     color.rgb  += mat.emissive;
     color.a     = mat.albedo.a;
 
