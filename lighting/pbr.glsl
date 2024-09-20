@@ -11,7 +11,7 @@
 #include "material.glsl"
 #include "light/new.glsl"
 #include "light/resolve.glsl"
-#include "light/indirectEvaluate.glsl"
+#include "light/iblEvaluate.glsl"
 
 /*
 contributors: [Patricio Gonzalez Vivo, Shadi El Hajj]
@@ -35,10 +35,6 @@ license:
 #define CAMERA_POSITION vec3(0.0, 0.0, -10.0)
 #endif
 
-#ifndef IBL_LUMINANCE
-#define IBL_LUMINANCE   1.0
-#endif
-
 #ifndef FNC_PBR
 #define FNC_PBR
 
@@ -48,10 +44,7 @@ vec4 pbr(const Material mat, ShadingData shadingData) {
     // Indirect Lights ( Image Based Lighting )
     // ----------------------------------------
     
-    vec3 Fd = vec3(0.0, 0.0, 0.0);
-    vec3 Fr = vec3(0.0, 0.0, 0.0);
-    vec3 energyCompensation = vec3(1.0, 1.0, 1.0);
-    lightIndirectEvaluate(mat, shadingData, Fd, Fr, energyCompensation);
+    lightIBLEvaluate(mat, shadingData);
 
     // Direct Lights
     // -------------
@@ -79,12 +72,12 @@ vec4 pbr(const Material mat, ShadingData shadingData) {
     vec4 color  = vec4(0.0, 0.0, 0.0, 1.0);
 
     // Diffuse
-    color.rgb  += Fd * IBL_LUMINANCE;
-    color.rgb  += shadingData.diffuse;
+    color.rgb  += shadingData.indirectDiffuse;
+    color.rgb  += shadingData.directDiffuse;
 
     // Specular
-    color.rgb  += Fr * IBL_LUMINANCE;
-    color.rgb  += shadingData.specular * energyCompensation; 
+    color.rgb  += shadingData.indirectSpecular;
+    color.rgb  += shadingData.directSpecular; 
     color.rgb  += mat.emissive;
     color.a     = mat.albedo.a;
 

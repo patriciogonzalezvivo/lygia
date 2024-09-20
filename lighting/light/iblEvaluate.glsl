@@ -1,7 +1,7 @@
 /*
 contributors: Shadi El Hajj
 description: Calculate indirect light
-use: void lightIndirectEvaluate(<Material> mat, inout <ShadingData> shadingData)
+use: void lightIBLEvaluate(<Material> mat, inout <ShadingData> shadingData)
 license: MIT License (MIT) Copyright (c) 2024 Shadi El Hajj
 */
 
@@ -17,25 +17,24 @@ license: MIT License (MIT) Copyright (c) 2024 Shadi El Hajj
 #define IBL_LUMINANCE   1.0
 #endif
 
-#ifndef FNC_LIGHT_INDIRECT_EVALUATE
-#define FNC_LIGHT_INDIRECT_EVALUATE
+#ifndef FNC_LIGHT_IBL_EVALUATE
+#define FNC_LIGHT_IBL_EVALUATE
 
-void lightIndirectEvaluate(Material mat, inout ShadingData shadingData,
-    out vec3 Fd, out vec3 Fr, out vec3 energyCompensation) {
+void lightIBLEvaluate(Material mat, inout ShadingData shadingData) {
 
 #if !defined(IBL_IMPORTANCE_SAMPLING) ||  __VERSION__ < 130 || defined(SCENE_SH_ARRAY)
     vec2 E = envBRDFApprox(shadingData.NoV, shadingData.roughness);    
     vec3 specularColorE = shadingData.specularColor * E.x + E.y;
 #endif
 
-energyCompensation = vec3(1.0, 1.0, 1.0);
+vec3 energyCompensation = vec3(1.0, 1.0, 1.0);
 
 #if defined(IBL_IMPORTANCE_SAMPLING) &&  __VERSION__ >= 130
-    Fr = specularImportanceSampling(shadingData.linearRoughness, shadingData.specularColor,
+    vec3 Fr = specularImportanceSampling(shadingData.linearRoughness, shadingData.specularColor,
         mat.position, shadingData.N, shadingData.V, shadingData.R, shadingData.NoV, energyCompensation);
 #else
     vec3 R = mix(shadingData.R, shadingData.N, shadingData.roughness*shadingData.roughness);
-    Fr = envMap(R, shadingData.roughness, mat.metallic);
+    vec3 Fr = envMap(R, shadingData.roughness, mat.metallic);
     Fr *= specularColorE;
 #endif
     Fr *= energyCompensation;
@@ -45,13 +44,13 @@ energyCompensation = vec3(1.0, 1.0, 1.0);
 #endif
 
 #if defined(SCENE_SH_ARRAY)
-    Fd = shadingData.diffuseColor * (1.0-specularColorE);
+    vec3 Fd = shadingData.diffuseColor * (1.0-specularColorE);
     Fd  *= sphericalHarmonics(shadingData.N);
 #elif defined(IBL_IMPORTANCE_SAMPLING)
-    Fd = shadingData.diffuseColor;
+    vec3 Fd = shadingData.diffuseColor;
     Fd *= envMap(shadingData.N, 1.0);
 #else
-    Fd = shadingData.diffuseColor * (1.0-specularColorE);
+    vec3 Fd = shadingData.diffuseColor * (1.0-specularColorE);
     Fd *= envMap(shadingData.N, 1.0);
 #endif
 
@@ -59,6 +58,11 @@ energyCompensation = vec3(1.0, 1.0, 1.0);
     float diffuseAO = mat.ambientOcclusion;
     Fd  *= diffuseAO;
     Fr  *= specularAO(mat, shadingData, diffuseAO);
+
+    shadingData.energyCompensation = energyCompensation;
+
+    shadingData.indirectDiffuse = Fd * IBL_LUMINANCE;
+    shadingData.indirectSpecular = Fr * IBL_LUMINANCE;
 }
 
 #endif

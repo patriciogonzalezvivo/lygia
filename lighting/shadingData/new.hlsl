@@ -31,8 +31,12 @@ ShadingData shadingDataNew() {
    shadingData.diffuseColor = float3(0.0, 0.0, 0.0);
    shadingData.specularColor = float3(0.0, 0.0, 0.0);
 
-   shadingData.diffuse = float3(0.0, 0.0, 0.0);
-   shadingData.specular = float3(0.0, 0.0, 0.0);
+   shadingData.energyCompensation = float3(1.0, 1.0, 1.0);
+
+   shadingData.directDiffuse = float3(0.0, 0.0, 0.0);
+   shadingData.directSpecular = float3(0.0, 0.0, 0.0);
+   shadingData.indirectDiffuse = float3(0.0, 0.0, 0.0);
+   shadingData.indirectSpecular = float3(0.0, 0.0, 0.0);
 
    return shadingData;
 }

@@ -123,8 +123,8 @@ float4 pbrClearCoat(const Material mat, ShadingData shadingData) {
         #if defined(LIGHT_DIRECTION) || defined(LIGHT_POSITION)
         lightResolve(L, mat, shadingData);
 
-        color.rgb  += shadingData.diffuse;     // Diffuse
-        color.rgb  += shadingData.specular;    // Specular
+        color.rgb  += shadingData.directDiffuse;     // Diffuse
+        color.rgb  += shadingData.directSpecular;    // Specular
 
         float3  h     = normalize(shadingData.V + L.direction);
         float NoH   = saturate(dot(mat.normal, h));
