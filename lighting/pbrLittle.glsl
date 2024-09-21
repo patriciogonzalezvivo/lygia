@@ -71,9 +71,9 @@ vec4 pbrLittle(Material mat, ShadingData shadingData) {
     vec3 spec = specular(shadingData) * shadow;
 
     vec3 albedo = mat.albedo.rgb * diff;
-#ifdef SCENE_SH_ARRAY
-    albedo.rgb += tonemap( sphericalHarmonics(shadingData.N) ) * 0.25;
-#endif
+// #ifdef SCENE_SH_ARRAY
+//     albedo.rgb += tonemap( sphericalHarmonics(shadingData.N) ) * 0.25;
+// #endif
 
     // SPECULAR
     // This is a bit of a stylistic approach
