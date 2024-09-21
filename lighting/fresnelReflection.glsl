@@ -95,10 +95,11 @@ vec3 fresnelIridescentReflection(vec3 normal, vec3 view, vec3 ior1, vec3 ior2, f
 }
 
 vec3 fresnelReflection(Material _M, ShadingData shadingData) {
+    vec3 f0 = vec3(0.04, 0.04, 0.04);
     #if defined(SHADING_MODEL_IRIDESCENCE)
-    return fresnelIridescentReflection(_M.normal, -shadingData.V, _M.f0, vec3(IOR_AIR, IOR_AIR, IOR_AIR), _M.ior, _M.thickness, _M.roughness);
+    return fresnelIridescentReflection(_M.normal, -shadingData.V, f0, vec3(IOR_AIR, IOR_AIR, IOR_AIR), _M.ior, _M.thickness, _M.roughness);
     #else
-    return fresnelReflection(shadingData.R, _M.f0, shadingData.NoV) * (1.0-_M.roughness);
+    return fresnelReflection(shadingData.R, f0, shadingData.NoV) * (1.0-_M.roughness);
     #endif
 }
 

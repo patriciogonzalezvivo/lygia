@@ -45,20 +45,15 @@ license:
 #define FNC_PBR_LITTLE
 
 vec4 pbrLittle(Material mat, ShadingData shadingData) {
-    shadingData.N = normalize(mat.normal);
-    shadingData.R = reflect(-shadingData.V,  shadingData.N);
-    shadingData.fresnel = max(mat.f0.r, max(mat.f0.g, mat.f0.b));
-    shadingData.roughness = mat.roughness;
-    shadingData.linearRoughness = mat.roughness;
-    shadingData.diffuseColor = mat.albedo.rgb * (vec3(1.0, 1.0, 1.0) - mat.f0) * (1.0 - mat.metallic);
-    shadingData.specularColor = mix(mat.f0, mat.albedo.rgb, mat.metallic);
-    shadingData.NoV = dot(shadingData.N, shadingData.V);
+    shadingDataNew(mat, shadingData);
     #ifdef LIGHT_DIRECTION
     shadingData.L = normalize(LIGHT_DIRECTION);
     #else
     shadingData.L = normalize(LIGHT_POSITION - mat.position);
     #endif
-    shadingData.NoL = dot(shadingData.N, shadingData.L);
+    shadingData.H = normalize(shadingData.L + shadingData.V);
+    shadingData.NoL = saturate(dot(shadingData.N, shadingData.L));
+    shadingData.NoH = saturate(dot(shadingData.N, shadingData.H));
 
     float notMetal = 1.0 - mat.metallic;
     float smoothness = 0.95 - saturate(mat.roughness);
@@ -73,7 +68,7 @@ vec4 pbrLittle(Material mat, ShadingData shadingData) {
 
     // DIFFUSE
     float diff = diffuse(shadingData) * shadow;
-    float spec = specular(shadingData) * shadow;
+    vec3 spec = specular(shadingData) * shadow;
 
     vec3 albedo = mat.albedo.rgb * diff;
 // #ifdef SCENE_SH_ARRAY

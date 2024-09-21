@@ -55,17 +55,16 @@ vec4 gooch(const in vec4 _albedo, const in vec3 _N, const in vec3 _L, const in v
     shadingData.L = normalize(_L);
     shadingData.N = normalize(_N);
     shadingData.V = normalize(_V);
-    shadingData.R = reflection(shadingData.V,  shadingData.N, _roughness);
+    shadingData.H = normalize(shadingData.L + shadingData.V);
     shadingData.NoV = dot(shadingData.N, shadingData.V);
     shadingData.NoL = dot(shadingData.N, shadingData.L);
-    shadingData.fresnel = 0.04;
+    shadingData.NoH = saturate(dot(shadingData.N, shadingData.H));
     shadingData.roughness = _roughness;
-    shadingData.linearRoughness = _roughness;
 
     // Lambert Diffuse
     float diff = diffuse(shadingData) * _Li;
     // Phong Specular
-    float spec = specular(shadingData) * _Li;
+    vec3 spec = vec3(1.0, 1.0, 1.0) * specularBlinnPhongRoughness(shadingData) * _Li;
 
     return vec4(mix(mix(cold, warm, diff), GOOCH_SPECULAR, spec), _albedo.a);
 }
