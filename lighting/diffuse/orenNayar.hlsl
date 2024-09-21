@@ -26,7 +26,7 @@ float diffuseOrenNayar(float3 L, float3 N, float3 V, float NoV, float NoL, float
 }
 
 float diffuseOrenNayar(ShadingData shadingData) {
-    return diffuseOrenNayar(shadingData.L, shadingData.N, shadingData.V, shadingData.NoV, shadingData.NoL, shadingData.linearRoughness);
+    return diffuseOrenNayar(shadingData.L, shadingData.N, shadingData.V, shadingData.NoV, shadingData.NoL, shadingData.roughness);
 }
 
 #endif

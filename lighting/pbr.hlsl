@@ -1,16 +1,16 @@
-#include "../color/tonemap.hlsl"
+#ifndef DIFFUSE_FNC
+#define DIFFUSE_FNC diffuseLambertConstant
+#endif
+
+#ifndef SPECULAR_FNC
+#define SPECULAR_FNC specularCookTorrance
+#endif
 
 #include "shadingData/new.hlsl"
 #include "material.hlsl"
-#include "envMap.hlsl"
-#include "fresnelReflection.hlsl"
-#include "sphericalHarmonics.hlsl"
 #include "light/new.hlsl"
 #include "light/resolve.hlsl"
-
-#include "reflection.hlsl"
-#include "common/specularAO.hlsl"
-#include "common/envBRDFApprox.hlsl"
+#include "light/iblEvaluate.hlsl"
 
 /*
 contributors: [Patricio Gonzalez Vivo, Shadi El Hajj]
@@ -34,45 +34,16 @@ license:
 #define CAMERA_POSITION float3(0.0, 0.0, -10.0)
 #endif
 
-#ifndef IBL_LUMINANCE
-#define IBL_LUMINANCE   1.0
-#endif
-
 #ifndef FNC_PBR
 #define FNC_PBR
 
 float4 pbr(const Material mat, ShadingData shadingData) {
-    // Shading Data
-    // ------------
-    shadingData.N = mat.normal;
-    shadingData.R = reflection(shadingData.V,  shadingData.N, mat.roughness);
-    shadingData.fresnel = max(mat.f0.r, max(mat.f0.g, mat.f0.b));
-    shadingData.roughness = mat.roughness;
-    shadingData.linearRoughness = mat.roughness;
-    shadingData.diffuseColor = mat.albedo.rgb * (float3(1.0, 1.0, 1.0) - mat.f0) * (1.0 - mat.metallic);
-    shadingData.specularColor = lerp(mat.f0, mat.albedo.rgb, mat.metallic);
-    shadingData.NoV = dot(shadingData.N, shadingData.V);
+    shadingDataNew(mat, shadingData);
 
     // Indirect Lights ( Image Based Lighting )
     // ----------------------------------------
-    float3 E = envBRDFApprox(shadingData);
-    float diffuseAO = mat.ambientOcclusion;
 
-    float3 Fr = float3(0.0, 0.0, 0.0);
-    Fr  = envMap(mat, shadingData) * E;
-    #if !defined(PLATFORM_RPI)
-    Fr  += fresnelReflection(mat, shadingData);
-    #endif
-    Fr  *= specularAO(mat, shadingData, diffuseAO);
-
-    float3 Fd = shadingData.diffuseColor;
-    #if defined(SCENE_SH_ARRAY)
-    Fd  *= tonemap( sphericalHarmonics(shadingData.N) );
-    #else
-    Fd *= envMap(shadingData.N, 1.0);
-    #endif
-    Fd  *= diffuseAO;
-    Fd  *= (1.0 - E);
+    lightIBLEvaluate(mat, shadingData);
 
     // Direct Lights
     // -------------
@@ -96,16 +67,16 @@ float4 pbr(const Material mat, ShadingData shadingData) {
 
     
     // Final Sum
-    // ------------------------
+    // ---------
     float4 color  = float4(0.0, 0.0, 0.0, 1.0);
 
     // Diffuse
-    color.rgb  += Fd * IBL_LUMINANCE;
-    color.rgb  += shadingData.diffuse;
+    color.rgb  += shadingData.indirectDiffuse;
+    color.rgb  += shadingData.directDiffuse;
 
     // Specular
-    color.rgb  += Fr * IBL_LUMINANCE;
-    color.rgb  += shadingData.specular;    
+    color.rgb  += shadingData.indirectSpecular;
+    color.rgb  += shadingData.directSpecular; 
     color.rgb  += mat.emissive;
     color.a     = mat.albedo.a;
 

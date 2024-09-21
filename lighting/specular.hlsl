@@ -3,7 +3,6 @@
 #include "specular/cookTorrance.hlsl"
 #include "specular/gaussian.hlsl"
 #include "specular/beckmann.hlsl"
-#include "specular/ggx.hlsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
@@ -28,5 +27,5 @@ license:
 
 #ifndef FNC_SPECULAR
 #define FNC_SPECULAR
-float specular(ShadingData shadingData) { return SPECULAR_FNC(shadingData); }
+float3 specular(ShadingData shadingData) { return float3(1.0, 1.0, 1.0) * SPECULAR_FNC(shadingData); }
 #endif
