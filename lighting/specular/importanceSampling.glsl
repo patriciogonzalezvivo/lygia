@@ -27,7 +27,7 @@ vec3 specularImportanceSampling(float roughness, vec3 f0, vec3 p, vec3 n, vec3 v
     const float invNumSamples = 1.0 / float(IBL_IMPORTANCE_SAMPLING_SAMPLES);
     const vec3 up = vec3(0.0, 0.0, 1.0);
     mat3 T = tbn(n, up);
-    //T *= rotate3dZ(TWO_PI * random(p));
+    // T *= rotate3dZ(TWO_PI * random(p));
 
     int width = textureSize(SCENE_CUBEMAP, 0).x;
     float omegaP = (4.0 * PI) / (6.0 * width * width);
@@ -35,7 +35,7 @@ vec3 specularImportanceSampling(float roughness, vec3 f0, vec3 p, vec3 n, vec3 v
     vec3 indirectSpecular = vec3(0.0, 0.0, 0.0);
     float dfg2 = 0.0;
     for (int i = 0; i < numSamples; i++) {
-        vec2 u = hammersley(i, numSamples);
+        vec2 u = hammersley(uint(i), numSamples);
         vec3 h = T * importanceSamplingGGX(u, roughness);
         vec3 l = reflect(-v, h);
 
@@ -60,13 +60,9 @@ vec3 specularImportanceSampling(float roughness, vec3 f0, vec3 p, vec3 n, vec3 v
         }
     }
 
-    dfg2 = 4*dfg2*invNumSamples;
-    if (dfg2 > 0.0) {
-        energyCompensation = 1.0 + f0 * (1.0 / dfg2 - 1.0);
-    } else {
-        energyCompensation = vec3(1.0, 1.0, 1.0);
-    }
+    dfg2 = 4.0 * dfg2 * invNumSamples;
 
+    energyCompensation = (dfg2 > 0.0) ? (1.0 + f0 * (1.0 / dfg2 - 1.0)) : vec3(1.0, 1.0, 1.0);
 
     return indirectSpecular;
 }
