@@ -1,6 +1,6 @@
 #include "../math/powFast.glsl"
 #include "../math/saturate.glsl"
-#include "../color/tonemap/reinhard.glsl"
+#include "../color/tonemap.glsl"
 
 #include "shadow.glsl"
 #include "material.glsl"
@@ -71,9 +71,9 @@ vec4 pbrLittle(Material mat, ShadingData shadingData) {
     vec3 spec = specular(shadingData) * shadow;
 
     vec3 albedo = mat.albedo.rgb * diff;
-// #ifdef SCENE_SH_ARRAY
-    // _albedo.rgb = _albedo.rgb + tonemapReinhard( sphericalHarmonics(N) ) * 0.25;
-// #endif
+#ifdef SCENE_SH_ARRAY
+    albedo.rgb += tonemap( sphericalHarmonics(shadingData.N) ) * 0.25;
+#endif
 
     // SPECULAR
     // This is a bit of a stylistic approach
@@ -81,7 +81,7 @@ vec4 pbrLittle(Material mat, ShadingData shadingData) {
                             saturate(-1.1 + shadingData.NoV + mat.metallic) * // Fresnel
                             (mat.metallic + smoothness * 4.0); // make smaller highlights brighter
 
-    vec3 ambientSpecular = tonemapReinhard( envMap(mat, shadingData) ) * specIntensity;
+    vec3 ambientSpecular = tonemap( envMap(mat, shadingData) ) * specIntensity;
     ambientSpecular += fresnelReflection(mat, shadingData) * (1.0-mat.roughness);
 
     albedo = albedo.rgb * notMetal + ( ambientSpecular 
