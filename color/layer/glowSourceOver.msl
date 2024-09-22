@@ -1,5 +1,5 @@
 #include "../blend.msl"
-#include "../compositing/sourceOver.msl"
+#include "../composite/sourceOver.msl"
 
 /*
 contributors: Patricio Gonzalez Vivo, Anton Marini
@@ -10,8 +10,8 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-#ifndef FNC_LAYERS_GLOW_SRC_OVER
-#define FNC_LAYERS_GLOW_SRC_OVER
+#ifndef FNC_LAYER_GLOW_SRC_OVER
+#define FNC_LAYER_GLOW_SRC_OVER
 
 float4 layerGlowSourceOver(float4 src, float4 dest)
 {    
