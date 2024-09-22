@@ -9,7 +9,24 @@ license:
 
 #ifndef FNC_COMPOSITE_XOR
 #define FNC_COMPOSITE_XOR
-float4 compositeXor(float4 srcColor, float4 dstColor) {
-    return srcColor * (1.0 - dstColor.a) + dstColor * (1.0 - srcColor.a);
+
+float compositeXor(float src, float dst)
+{
+    return src * (1.0 - dst) + dst * (1.0 - src);
+}
+
+float3 compositeXor(float3 srcColor, float3 dstColor, float srcAlpha, float dstAlpha)
+{
+    return srcColor * (1.0 - dstAlpha) + dstColor * (1.0 - srcAlpha);
+}
+
+float4 compositeXor(float4 srcColor, float4 dstColor) 
+{
+    float4 result;
+   
+    result.rgb = compositeXor(srcColor.rgb, dstColor.rgb, srcColor.a, dstColor.a);
+    result.a = compositeXor(srcColor.a, dstColor.a);
+
+    return result;
 }
 #endif
