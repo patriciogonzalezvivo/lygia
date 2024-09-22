@@ -17,7 +17,7 @@ float4 layerColorDodgeSourceOver(float4 src, float4 dest)
 {    
     float4 result;
 
-    // Compute overlay for RGB channels
+    // Compute color dodge for RGB channels
     float3 blendedColor = blendColorDodge(src.rgb, dest.rgb);
 
     // Compute source-over for RGB channels

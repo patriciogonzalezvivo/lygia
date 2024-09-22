@@ -17,7 +17,7 @@ float4 layerDifferenceSourceOver(float4 src, float4 dest)
 {    
     float4 result;
 
-    // Compute overlay for RGB channels
+    // Compute difference for RGB channels
     float3 blendedColor = blendDifference(src.rgb, dest.rgb);
 
     // Compute source-over for RGB channels
