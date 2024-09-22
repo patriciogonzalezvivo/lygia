@@ -12,6 +12,7 @@ license: MIT License (MIT) Copyright (c) 2024 Shadi El Hajj
 #include "../reflection.glsl"
 #include "../common/specularAO.glsl"
 #include "../common/envBRDFApprox.glsl"
+#include "../../color/tonemap.glsl"
 
 #ifndef IBL_LUMINANCE
 #define IBL_LUMINANCE   1.0
@@ -45,7 +46,7 @@ vec3 energyCompensation = vec3(1.0, 1.0, 1.0);
 
 #if defined(SCENE_SH_ARRAY)
     vec3 Fd = shadingData.diffuseColor * (1.0-specularColorE);
-    Fd  *= sphericalHarmonics(shadingData.N);
+    Fd  *= tonemap( sphericalHarmonics(shadingData.N) );
 #elif defined(IBL_IMPORTANCE_SAMPLING)
     vec3 Fd = shadingData.diffuseColor;
     Fd *= envMap(shadingData.N, 1.0);
