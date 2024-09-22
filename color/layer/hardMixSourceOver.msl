@@ -17,7 +17,7 @@ float4 layerHardMixSourceOver(float4 src, float4 dest)
 {    
     float4 result;
 
-    // Compute overlay for RGB channels
+    // Compute hard mix for RGB channels
     float3 blendedColor = blendHardMix(src.rgb, dest.rgb);
 
     // Compute source-over for RGB channels

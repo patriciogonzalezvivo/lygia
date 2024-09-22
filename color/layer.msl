@@ -9,7 +9,7 @@
 #include "layer/glowSourceOver.msl"
 #include "layer/hardLightSourceOver.msl"
 #include "layer/hardMixSourceOver.msl"
-#include "layer/hueMixSourceOver.msl"
+#include "layer/hueSourceOver.msl"
 #include "layer/lightenSourceOver.msl"
 #include "layer/linearBurnSourceOver.msl"
 #include "layer/linearDodgeSourceOver.msl"

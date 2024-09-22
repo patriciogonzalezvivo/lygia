@@ -17,7 +17,7 @@ float4 layerPinLightSourceOver(float4 src, float4 dest)
 {    
     float4 result;
 
-    // Compute overlay for RGB channels
+    // Compute pin light for RGB channels
     float3 blendedColor = blendPinLight(src.rgb, dest.rgb);
 
     // Compute source-over for RGB channels

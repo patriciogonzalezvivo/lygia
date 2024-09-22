@@ -17,7 +17,7 @@ float4 layerLinearDodgeSourceOver(float4 src, float4 dest)
 {    
     float4 result;
 
-    // Compute overlay for RGB channels
+    // Compute linear dodge for RGB channels
     float3 blendedColor = blendLinearDodge(src.rgb, dest.rgb);
 
     // Compute source-over for RGB channels
