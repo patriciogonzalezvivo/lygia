@@ -1,6 +1,10 @@
 #ifndef METAL_COMPAT_FUNCS
 #define METAL_COMPAT_FUNCS
 
+inline float radians(float angle)
+{
+    return angle * M_PI_F / 180.0;
+}
 
 inline bool2 lessThan(float2 x, float2 y) {
     return x < y;
