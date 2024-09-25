@@ -1,5 +1,5 @@
-#include "../blend.msl"
-#include "../composite/sourceOver.msl"
+#include "../blend.hlsl"
+#include "../composite/sourceOver.hlsl"
 
 /*
 contributors: Patricio Gonzalez Vivo, Anton Marini
@@ -13,9 +13,8 @@ license:
 #ifndef FNC_LAYER_LUMINOSITY_SRC_OVER
 #define FNC_LAYER_LUMINOSITY_SRC_OVER
 
-float4 layerLuminositySourceOver(float4 src, float4 dest) 
-{
-    float4 result;
+float4 layerLuminositySourceOver(float4 src, float4 dest) {
+    float4 result = float4(0.0, 0.0, 0.0, 0.0);
 
     // Compute luminosity for RGB channels
     float3 blendedColor = blendLuminosity(src.rgb, dest.rgb);
