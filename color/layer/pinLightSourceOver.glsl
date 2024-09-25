@@ -1,24 +1,23 @@
-#include "../blend.msl"
-#include "../composite/sourceOver.msl"
+#include "../blend.glsl"
+#include "../composite/sourceOver.glsl"
 
 /*
 contributors: Patricio Gonzalez Vivo, Anton Marini
-description: Luminosity Blending with Porter Duff Source Over Compositing
-use: <float4> layerLuminositySourceOver(<float4> src, <float4> dst)
+description: Pin Light Blending with Porter Duff Source Over Compositing
+use: <vec4> layerPinLightSourceOver(<vec4> src, <vec4> dst)
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-#ifndef FNC_LAYER_LUMINOSITY_SRC_OVER
-#define FNC_LAYER_LUMINOSITY_SRC_OVER
+#ifndef FNC_LAYER_PIN_LIGHT_SRC_OVER
+#define FNC_LAYER_PIN_LIGHT_SRC_OVER
 
-float4 layerLuminositySourceOver(float4 src, float4 dest) 
-{
-    float4 result;
+vec4 layerPinLightSourceOver(vec4 src, vec4 dest) {
+    vec4 result = vec4(0.0, 0.0, 0.0, 0.0);
 
-    // Compute luminosity for RGB channels
-    float3 blendedColor = blendLuminosity(src.rgb, dest.rgb);
+    // Compute pin light for RGB channels
+    vec3 blendedColor = blendPinLight(src.rgb, dest.rgb);
 
     // Compute source-over for RGB channels
     result.rgb = compositeSourceOver(blendedColor, dest.rgb, src.a, dest.a);
