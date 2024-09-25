@@ -1,4 +1,3 @@
-#include "../math_compat.msl"
 #include "snoise.msl"
 
 /*
