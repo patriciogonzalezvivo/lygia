@@ -1,0 +1,17 @@
+/*
+contributors: Patricio Gonzalez Vivo, Anton Marini
+description: greaterThanEqual polyfill
+use: <bool2|bool3|bool4> greaterThanEqual(<float2|float3|float4>, <float2|float3|float4>) 
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
+
+#ifndef FNC_GREATERTHANEQUAL
+#define FNC_GREATERTHANEQUAL
+
+inline bool2 greaterThanEqual(float2 x, float2 y) { return x >= y; }
+inline bool3 greaterThanEqual(float3 x, float3 y) { return x >= y; }
+inline bool4 greaterThanEqual(float4 x, float4 y) { return x >= y; }
+
+#endif

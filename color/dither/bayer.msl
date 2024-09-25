@@ -1,4 +1,4 @@
-#include "../../math_compat.msl"
+#include "../../math/mod.msl"
 #include "../../math/decimate.msl"
 
 /*

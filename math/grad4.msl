@@ -1,3 +1,5 @@
+#include "lessThan.msl"
+
 /*
 contributors: [Stefan Gustavson, Ian McEwan]
 description: grad4, used for snoise(float4 v)
