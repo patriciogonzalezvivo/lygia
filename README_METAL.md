@@ -42,7 +42,7 @@ Metal support is currently highly experimental and very work in progress.
 
 ## Things to look out for
 
-- Metal does not have the same basic math functions signatures as GLSL. We have a `math_compat.msl` import you can use which has defines that should help.
+- Metal does not have the same basic math functions signatures as GLSL. We are adding all the polyfill functions in the  `math/` folder.
 - Texture precision and filtering.
     - Added `SAMPLER_TYPE` which specifies the texture precisions. Defaults to `texture2d<float>`
     - This means your texture definition must match the default `float` precision, or you will need to override `SAMPLER_TYPE`

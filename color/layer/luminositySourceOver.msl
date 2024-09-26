@@ -13,15 +13,15 @@ license:
 #ifndef FNC_LAYER_LUMINOSITY_SRC_OVER
 #define FNC_LAYER_LUMINOSITY_SRC_OVER
 
-float4 layerLuminositySourceOver(float4 src, float4 dest)
-{    
+float4 layerLuminositySourceOver(float4 src, float4 dest) 
+{
     float4 result;
 
     // Compute luminosity for RGB channels
     float3 blendedColor = blendLuminosity(src.rgb, dest.rgb);
 
     // Compute source-over for RGB channels
-    result.rgb =  compositeSourceOver(blendedColor, dest.rgb, src.a, dest.a);
+    result.rgb = compositeSourceOver(blendedColor, dest.rgb, src.a, dest.a);
 
     // Compute source-over for the alpha channel
     result.a = compositeSourceOver(src.a, dest.a);

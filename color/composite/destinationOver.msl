@@ -10,7 +10,7 @@ license:
 #ifndef FNC_COMPOSITE_DST_OVER
 #define FNC_COMPOSITE_DST_OVER
 
-loat compositeDestinationOver(float src, float dst)
+float compositeDestinationOver(float src, float dst)
 {
     return dst + src * (1.0 - dst);
 }

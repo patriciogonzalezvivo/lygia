@@ -1,3 +1,5 @@
+#include "../math/greaterThan.msl"
+#include "../math/mod.msl"
 #include "../math/mod289.msl"
 #include "../math/permute.msl"
 #include "../math/taylorInvSqrt.msl"
