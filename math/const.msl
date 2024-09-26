@@ -47,9 +47,9 @@ license:
 #ifndef GOLDEN_ANGLE // (3.-sqrt(5.0))*PI radians
 #define GOLDEN_ANGLE 2.39996323
 #endif
-//#ifndef DEG2RAD
-//#define DEG2RAD (PI / 180.0)
-//#endif
-//#ifndef RAD2DEG
-//#define RAD2DEG (180.0 / PI)
-//#endif
+#ifndef DEG2RAD
+#define DEG2RAD 0.017453293
+#endif
+#ifndef RAD2DEG
+#define RAD2DEG 57.295779513
+#endif

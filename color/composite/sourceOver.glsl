@@ -19,7 +19,7 @@ vec3 compositeSourceOver(vec3 srcColor, vec3 dstColor, float srcAlpha, float dst
 }
 
 vec4 compositeSourceOver(vec4 srcColor, vec4 dstColor) {
-    vec4 result;
+    vec4 result = vec4(0.0);
    
     result.rgb = compositeSourceOver(srcColor.rgb, dstColor.rgb, srcColor.a, dstColor.a);
     result.a = compositeSourceOver(srcColor.a, dstColor.a);

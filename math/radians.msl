@@ -11,5 +11,5 @@ license:
 
 #ifndef FNC_RADIANS
 #define FNC_RADIANS
-inline float radians(float angle) { return angle * PI / 180.0; }
+inline float radians(float angle) { return angle * DEG2RAD; }
 #endif
