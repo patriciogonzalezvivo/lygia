@@ -14,7 +14,7 @@ license:
 #define FNC_LAYER_GLOW_SRC_OVER
 
 vec4 layerGlowSourceOver(vec4 src, vec4 dest) {
-    vec4 result;
+    vec4 result = vec4(0.0);
 
     // Compute glow for RGB channels
     vec3 blendedColor = blendGlow(src.rgb, dest.rgb);
