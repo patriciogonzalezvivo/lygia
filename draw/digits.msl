@@ -156,7 +156,7 @@ float digits(in float2 st, in float3 v) {
     return rta;
 }
 
-float digits(in float2 st, in vec4 v) {
+float digits(in float2 st, in float4 v) {
     float rta = 0.0;
     for (int i = 0; i < 4; i++) {
         float2 pos = st + float2(float(i), 0.0) * DIGITS_SIZE * DEBUG_VALUE_OFFSET;
