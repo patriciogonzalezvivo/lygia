@@ -15,7 +15,7 @@ license:
 */
 
 #ifndef DIGITS_SIZE
-#define DIGITS_SIZE vec2(.025)
+#define DIGITS_SIZE vec2(.02)
 #endif
 
 #ifndef DIGITS_DECIMALS
@@ -23,7 +23,7 @@ license:
 #endif
 
 #ifndef DIGITS_VALUE_OFFSET
-#define DIGITS_VALUE_OFFSET vec2(-8.0, 3.0) 
+#define DIGITS_VALUE_OFFSET vec2(-6.0, 3.0) 
 #endif
 
 #ifndef FNC_DIGITS
