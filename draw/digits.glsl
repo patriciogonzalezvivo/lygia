@@ -22,8 +22,8 @@ license:
 #define DIGITS_DECIMALS 2.0
 #endif
 
-#ifndef DEBUG_VALUE_OFFSET
-#define DEBUG_VALUE_OFFSET vec2(-8.0, 3.0) 
+#ifndef DIGITS_VALUE_OFFSET
+#define DIGITS_VALUE_OFFSET vec2(-8.0, 3.0) 
 #endif
 
 #ifndef FNC_DIGITS
@@ -139,7 +139,7 @@ float digits(in vec2 st, in float value) {
 float digits(in vec2 st, in vec2 v) {
     float rta = 0.0;
     for (int i = 0; i < 2; i++) {
-        vec2 pos = st + vec2(float(i), 0.0) * DIGITS_SIZE * DEBUG_VALUE_OFFSET;
+        vec2 pos = st + vec2(float(i), 0.0) * DIGITS_SIZE * DIGITS_VALUE_OFFSET;
         float value = i == 0 ? v.x : v.y;
         rta += digits( pos, value );
     }
@@ -149,7 +149,7 @@ float digits(in vec2 st, in vec2 v) {
 float digits(in vec2 st, in vec3 v) {
     float rta = 0.0;
     for (int i = 0; i < 3; i++) {
-        vec2 pos = st + vec2(float(i), 0.0) * DIGITS_SIZE * DEBUG_VALUE_OFFSET;
+        vec2 pos = st + vec2(float(i), 0.0) * DIGITS_SIZE * DIGITS_VALUE_OFFSET;
         float value = i == 0 ? v.x : i == 1 ? v.y : v.z;
         rta += digits( pos, value );
     }
@@ -159,7 +159,7 @@ float digits(in vec2 st, in vec3 v) {
 float digits(in vec2 st, in vec4 v) {
     float rta = 0.0;
     for (int i = 0; i < 4; i++) {
-        vec2 pos = st + vec2(float(i), 0.0) * DIGITS_SIZE * DEBUG_VALUE_OFFSET;
+        vec2 pos = st + vec2(float(i), 0.0) * DIGITS_SIZE * DIGITS_VALUE_OFFSET;
         float value = i == 0 ? v.x : i == 1 ? v.y : i == 2 ? v.z : v.w;
         rta += digits( pos, value );
     }
@@ -170,7 +170,7 @@ float digits(in vec2 st, in mat2 _matrix) {
     float rta = 0.0;
     for (int i = 0; i < 2; i++) {
         for (int j = 0; j < 2; j++) {
-            vec2 pos = st + vec2(float(i), float(j)) * DIGITS_SIZE * DEBUG_VALUE_OFFSET - DIGITS_SIZE * vec2(0.0, 3.0);
+            vec2 pos = st + vec2(float(i), float(j)) * DIGITS_SIZE * DIGITS_VALUE_OFFSET - DIGITS_SIZE * vec2(0.0, 3.0);
             float value = _matrix[j][i];
             rta += digits( pos, value );
         }
@@ -182,7 +182,7 @@ float digits(in vec2 st, in mat3 _matrix) {
     float rta = 0.0;
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
-            vec2 pos = st + vec2(float(i), float(j)) * DIGITS_SIZE * DEBUG_VALUE_OFFSET - DIGITS_SIZE * vec2(0.0, 6.0);
+            vec2 pos = st + vec2(float(i), float(j)) * DIGITS_SIZE * DIGITS_VALUE_OFFSET - DIGITS_SIZE * vec2(0.0, 6.0);
             float value = _matrix[j][i];
             rta += digits( pos, value );
         }
@@ -194,7 +194,7 @@ float digits(in vec2 st, in mat4 _matrix) {
     float rta = 0.0;
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
-            vec2 pos = st + vec2(float(i), float(j)) * DIGITS_SIZE * DEBUG_VALUE_OFFSET - DIGITS_SIZE * vec2(0.0, 9.0);
+            vec2 pos = st + vec2(float(i), float(j)) * DIGITS_SIZE * DIGITS_VALUE_OFFSET - DIGITS_SIZE * vec2(0.0, 9.0);
             float value = _matrix[j][i];
             rta += digits( pos, value );
         }

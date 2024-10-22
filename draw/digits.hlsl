@@ -17,8 +17,8 @@ license:
 #define DIGITS_SIZE float2(.025, .025)
 #endif
 
-#ifndef DEBUG_VALUE_OFFSET
-#define DEBUG_VALUE_OFFSET float2(-8.0, 3.0) 
+#ifndef DIGITS_VALUE_OFFSET
+#define DIGITS_VALUE_OFFSET float2(-8.0, 3.0) 
 #endif
 
 #ifndef DIGITS_DECIMALS
@@ -134,7 +134,7 @@ float digits(in float2 st, in float value) {
 float digits(in float2 st, in float2 v) {
     float rta = 0.0;
     for (int i = 0; i < 2; i++) {
-        float2 pos = st + float2(float(i), 0.0) * DIGITS_SIZE * DEBUG_VALUE_OFFSET;
+        float2 pos = st + float2(float(i), 0.0) * DIGITS_SIZE * DIGITS_VALUE_OFFSET;
         float value = i == 0 ? v.x : v.y;
         rta += digits( pos, value );
     }
@@ -144,7 +144,7 @@ float digits(in float2 st, in float2 v) {
 float digits(in float2 st, in float3 v) {
     float rta = 0.0;
     for (int i = 0; i < 3; i++) {
-        float2 pos = st + float2(float(i), 0.0) * DIGITS_SIZE * DEBUG_VALUE_OFFSET;
+        float2 pos = st + float2(float(i), 0.0) * DIGITS_SIZE * DIGITS_VALUE_OFFSET;
         float value = i == 0 ? v.x : i == 1 ? v.y : v.z;
         rta += digits( pos, value );
     }
@@ -154,7 +154,7 @@ float digits(in float2 st, in float3 v) {
 float digits(in float2 st, in float4 v) {
     float rta = 0.0;
     for (int i = 0; i < 4; i++) {
-        float2 pos = st + float2(float(i), 0.0) * DIGITS_SIZE * DEBUG_VALUE_OFFSET;
+        float2 pos = st + float2(float(i), 0.0) * DIGITS_SIZE * DIGITS_VALUE_OFFSET;
         float value = i == 0 ? v.x : i == 1 ? v.y : i == 2 ? v.z : v.w;
         rta += digits( pos, value );
     }
@@ -165,7 +165,7 @@ float digits(in float2 st, in float2x2 _matrix) {
     float rta = 0.0;
     for (int i = 0; i < 2; i++) {
         for (int j = 0; j < 2; j++) {
-            float2 pos = st + float2(float(i), float(j)) * DIGITS_SIZE * DEBUG_VALUE_OFFSET - DIGITS_SIZE * float2(0.0, 3.0);
+            float2 pos = st + float2(float(i), float(j)) * DIGITS_SIZE * DIGITS_VALUE_OFFSET - DIGITS_SIZE * float2(0.0, 3.0);
             float value = _matrix[j][i];
             rta += digits( pos, value );
         }
@@ -177,7 +177,7 @@ float digits(in float2 st, in float3x3 _matrix) {
     float rta = 0.0;
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
-            float2 pos = st + float2(float(i), float(j)) * DIGITS_SIZE * DEBUG_VALUE_OFFSET - DIGITS_SIZE * float2(0.0, 6.0);
+            float2 pos = st + float2(float(i), float(j)) * DIGITS_SIZE * DIGITS_VALUE_OFFSET - DIGITS_SIZE * float2(0.0, 6.0);
             float value = _matrix[j][i];
             rta += digits( pos, value );
         }
@@ -189,7 +189,7 @@ float digits(in float2 st, in float4x4 _matrix) {
     float rta = 0.0;
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
-            float2 pos = st + float2(float(i), float(j)) * DIGITS_SIZE * DEBUG_VALUE_OFFSET - DIGITS_SIZE * float2(0.0, 9.0);
+            float2 pos = st + float2(float(i), float(j)) * DIGITS_SIZE * DIGITS_VALUE_OFFSET - DIGITS_SIZE * float2(0.0, 9.0);
             float value = _matrix[j][i];
             rta += digits( pos, value );
         }
