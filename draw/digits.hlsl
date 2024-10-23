@@ -7,18 +7,18 @@ description: |
 use: digits(<float2> st, <float> value [, <float> nDecDigit])
 options:
     DIGITS_DECIMALS: number of decimals after the point, defaults to 2
-    DIGITS_SIZE: size of the font, defaults to float2(.025)
+    DIGITS_SIZE: size of the font, defaults to float2(.02, 0.02)
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
 #ifndef DIGITS_SIZE
-#define DIGITS_SIZE float2(.025, .025)
+#define DIGITS_SIZE float2(.02, .02)
 #endif
 
 #ifndef DIGITS_VALUE_OFFSET
-#define DIGITS_VALUE_OFFSET float2(-8.0, 3.0) 
+#define DIGITS_VALUE_OFFSET float2(-6.0, 3.0)
 #endif
 
 #ifndef DIGITS_DECIMALS

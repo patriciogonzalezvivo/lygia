@@ -15,11 +15,11 @@ license:
 */
 
 #ifndef DIGITS_SIZE
-#define DIGITS_SIZE float2(.025)
+#define DIGITS_SIZE float2(.02, .02)
 #endif
 
 #ifndef DIGITS_VALUE_OFFSET
-#define DIGITS_VALUE_OFFSET float2(-8.0, 3.0) 
+#define DIGITS_VALUE_OFFSET float2(-6.0, 3.0) 
 #endif
 
 #ifndef DIGITS_DECIMALS
