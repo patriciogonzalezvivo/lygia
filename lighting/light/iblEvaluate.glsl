@@ -28,7 +28,7 @@ void lightIBLEvaluate(Material mat, inout ShadingData shadingData) {
     vec3 specularColorE = shadingData.specularColor * E.x + E.y;
 #endif
 
-vec3 energyCompensation = vec3(1.0, 1.0, 1.0);
+    vec3 energyCompensation = vec3(1.0, 1.0, 1.0);
 
 #if defined(IBL_IMPORTANCE_SAMPLING) &&  __VERSION__ >= 130
     vec3 Fr = specularImportanceSampling(shadingData.linearRoughness, shadingData.specularColor,
@@ -44,15 +44,13 @@ vec3 energyCompensation = vec3(1.0, 1.0, 1.0);
     Fr  += fresnelReflection(mat, shadingData);
 #endif
 
+vec3 Fd = shadingData.diffuseColor;
 #if defined(SCENE_SH_ARRAY)
-    vec3 Fd = shadingData.diffuseColor * (1.0-specularColorE);
-    Fd  *= tonemap( sphericalHarmonics(shadingData.N) );
-#elif defined(IBL_IMPORTANCE_SAMPLING)
-    vec3 Fd = shadingData.diffuseColor;
-    Fd *= envMap(shadingData.N, 1.0);
-#else
-    vec3 Fd = shadingData.diffuseColor * (1.0-specularColorE);
-    Fd *= envMap(shadingData.N, 1.0);
+    Fd *= sphericalHarmonics(shadingData.N) * (1.0-specularColorE);
+// #elif defined(IBL_IMPORTANCE_SAMPLING)
+//     Fd *= envMap(shadingData.N, 1.0);
+// #else
+//     Fd *= envMap(shadingData.N, 1.0) * (1.0-specularColorE);
 #endif
 
     // AO

@@ -30,7 +30,7 @@ license:
 #endif
 #endif
 
-#if __VERSION__ < 430
+#if !defined(ENVMAP_MAX_MIP_LEVEL) && __VERSION__ < 430
 #define ENVMAP_MAX_MIP_LEVEL 3.0
 #endif
 
