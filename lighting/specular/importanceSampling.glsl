@@ -18,9 +18,8 @@ license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 #define IBL_IMPORTANCE_SAMPLING_SAMPLES  16
 #endif
 
-#if !defined(FNC_SPECULAR_IMPORTANCE_SAMPLING) &&  __VERSION__ >= 130
+#if !defined(FNC_SPECULAR_IMPORTANCE_SAMPLING) && defined(SCENE_CUBEMAP) &&  __VERSION__ >= 130 
 #define FNC_SPECULAR_IMPORTANCE_SAMPLING
-
 
 vec3 specularImportanceSampling(float roughness, vec3 f0, vec3 p, vec3 n, vec3 v, vec3 r, float NoV, out vec3 energyCompensation) {
     const int numSamples = IBL_IMPORTANCE_SAMPLING_SAMPLES;
@@ -29,7 +28,7 @@ vec3 specularImportanceSampling(float roughness, vec3 f0, vec3 p, vec3 n, vec3 v
     mat3 T = tbn(n, up);
     // T *= rotate3dZ(TWO_PI * random(p));
 
-    int width = textureSize(SCENE_CUBEMAP, 0).x;
+    float width = float(textureSize(SCENE_CUBEMAP, 0).x);
     float omegaP = (4.0 * PI) / (6.0 * width * width);
 
     vec3 indirectSpecular = vec3(0.0, 0.0, 0.0);

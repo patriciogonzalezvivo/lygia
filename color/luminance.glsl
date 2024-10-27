@@ -7,8 +7,8 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-#ifndef FNC_LUMINANCE
+#ifndef FNC_LUMINANCE 
 #define FNC_LUMINANCE
-float luminance(in vec3 linear) { return dot(linear, vec3(0.21250175, 0.71537574, 0.07212251)); }
-float luminance(in vec4 linear) { return luminance( linear.rgb ); }
+float luminance(vec3 v) { return dot(v, vec3(0.21250175, 0.71537574, 0.07212251)); }
+float luminance(vec4 v) { return luminance( v.rgb ); }
 #endif

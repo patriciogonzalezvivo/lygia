@@ -1,5 +1,3 @@
-#include "../luminance.glsl"
-
 /*
 contributors: nan
 description: |
@@ -58,7 +56,8 @@ vec3 tonemapDebug(const vec3 x) {
 
     // The 5th color in the array (cyan) represents middle gray (18%)
     // Every stop above or below middle gray causes a color shift
-    float v = log2(luminance(x) / 0.18);
+    float l = dot(x, vec3(0.21250175, 0.71537574, 0.07212251));
+    float v = log2(l / 0.18);
     v = clamp(v + 5.0, 0.0, 15.0);
     int index = int(v);
     return mix(debugColors[index], debugColors[index + 1], v - float(index));
