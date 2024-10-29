@@ -46,11 +46,17 @@ void lightIBLEvaluate(Material mat, inout ShadingData shadingData) {
 
 vec3 Fd = shadingData.diffuseColor;
 #if defined(SCENE_SH_ARRAY)
-    Fd *= sphericalHarmonics(shadingData.N) * (1.0-specularColorE);
-// #elif defined(IBL_IMPORTANCE_SAMPLING)
-//     Fd *= envMap(shadingData.N, 1.0);
-// #else
-//     Fd *= envMap(shadingData.N, 1.0) * (1.0-specularColorE);
+    #ifdef GLSLVIEWER
+    Fd *= tonemap(sphericalHarmonics(shadingData.N));
+    #else
+    Fd *= (sphericalHarmonics(shadingData.N));
+    #endif
+#else
+    Fd *= envMap(shadingData.N, 1.0);
+#endif
+
+#if !defined(IBL_IMPORTANCE_SAMPLING)
+    Fd *= (1.0-specularColorE);
 #endif
 
     // AO
