@@ -1,4 +1,4 @@
-#include "space/rgb2luma.glsl"
+#include "space/rgb2luma.wgsl"
 
 /*
 contributors: Hugh Kennedy (https://github.com/hughsk)

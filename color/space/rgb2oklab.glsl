@@ -3,7 +3,7 @@ contributors: Bjorn Ottosson (@bjornornorn)
 description: |
     Linear rgb to OKLab https://bottosson.github.io/posts/oklab/
 use: <vec3\vec4> rgb2oklab(<vec3|vec4> rgb)
-license: 
+license:
     - MIT License (MIT) Copyright (c) 2020 Björn Ottosson
 */
 
