@@ -27,7 +27,11 @@ vec4 axis(in vec2 st, mat4 M, vec3 pos, float thickness) {
     axis[2] = vec4(0.0, 0.0, 1.0, 1.0);
 
     for (int i = 0; i < 3; i++) {
+        #ifdef DEBUG_FLIPPED_SPACE
+        vec4 a = M * (vec4(pos - axis[i].xyz, 1.0));
+        #else
         vec4 a = M * (vec4(pos + axis[i].xyz, 1.0));
+        #endif
         a.xy /= a.w;
         a.xy = (a.xy * 0.5 + 0.5);
         rta += axis[i] * line(st, center.xy, a.xy, thickness);
