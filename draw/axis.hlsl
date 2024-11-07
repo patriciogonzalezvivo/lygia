@@ -27,7 +27,11 @@ float4 axis(in float2 st, float4x4 M, float3 pos, float thickness) {
     axis[2] = float4(0.0, 0.0, 1.0, 1.0);
 
     for (int i = 0; i < 3; i++) {
+        #ifdef DEBUG_FLIPPED_SPACE
+        float4 a = M * (float4(pos - axis[i].xyz, 1.0));
+        #else
         float4 a = M * (float4(pos + axis[i].xyz, 1.0));
+        #endif
         a.xy /= a.w;
         a.xy = (a.xy * 0.5 + 0.5);
         rta += axis[i] * line(st, center.xy, a.xy, thickness);
