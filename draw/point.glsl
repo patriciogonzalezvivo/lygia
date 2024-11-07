@@ -37,7 +37,12 @@ vec4 point(in vec2 st, mat4 M, vec3 pos, vec3 color, float radius) {
     vec4 rta = vec4(0.0);
     vec4 pos4 = M * vec4(pos, 1.0);
     vec2 p = pos4.xy / pos4.w;
+
+    #ifdef FLIPED
+    vec2 st_p = st - (p.xy * 0.5 + 0.5);
+    #else
     vec2 st_p = st + (p.xy * 0.5 - 0.5);
+    #endif
 
     rta += vec4(color, 1.0) * circle(st_p + 0.5, radius);
     st_p -= DIGITS_SIZE * vec2(0.0, 0.5);
