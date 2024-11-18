@@ -84,9 +84,9 @@ vec4 pbrLittle(Material mat, ShadingData shadingData) {
     vec3 ambientSpecular = tonemap( envMap(mat, shadingData) ) * specIntensity;
     ambientSpecular += fresnelReflection(mat, shadingData) * (1.0-mat.roughness);
 
-    albedo = albedo.rgb * notMetal + ( ambientSpecular 
-                    + LIGHT_COLOR * 2.0 * spec
-                    ) * (notMetal * smoothness + albedo * mat.metallic);
+    albedo =    albedo.rgb * notMetal + ( ambientSpecular 
+                + LIGHT_COLOR * 2.0 * spec
+                ) * (notMetal * smoothness + albedo * mat.metallic);
 
     return vec4(albedo, mat.albedo.a);
 }

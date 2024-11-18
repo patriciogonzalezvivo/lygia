@@ -1,6 +1,8 @@
 /*
 contributor: nan
-description: Computes the luminance of the specified linear RGB color using the luminance coefficients from Rec. 709.
+description: |
+    Computes the luminance of the specified linear RGB color using the luminance coefficients from Rec. 709.
+    Note, ThreeJS seems to inject this in all their shaders. Which could lead to issues
 use: luminance(<vec3|vec4> color)
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
