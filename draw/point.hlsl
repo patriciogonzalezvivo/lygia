@@ -37,7 +37,12 @@ float4 point(in float2 st, float4x4 P, float4x4 V, float3 pos, float3 color, flo
     float4 rta = float4(0.0, 0.0, 0.0, 0.0);
     float4 pos4 = mult(P, mult(V * float4(pos, 1.0)));
     float2 p = pos4.xy / pos4.w;
+
+    #ifdef DEBUG_FLIPPED_SPACE
     float2 st_p = st + (p.xy * 0.5 - 0.5);
+    #else
+    float2 st_p = st - (p.xy * 0.5 + 0.5);
+    #endif
 
     rta += float4(color, 1.0) * circle(st_p + 0.5, radius);
     st_p -= DIGITS_SIZE * float2(0.0, 0.5);
