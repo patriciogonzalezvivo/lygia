@@ -33,7 +33,8 @@ options:
 KUWAHARA_TYPE kuwahara(in SAMPLER_TYPE tex, in float2 st, in float2 pixel, in int radius) {
 
     float n = float((KUWAHARA_RADIUS + 1) * (KUWAHARA_RADIUS + 1));
-    int i; int j;
+    int i = 0; 
+    int j = 0;
     KUWAHARA_TYPE m0 = float4(0.0, 0.0, 0.0, 0.0); KUWAHARA_TYPE m1 = float4(0.0, 0.0, 0.0, 0.0); KUWAHARA_TYPE m2 = float4(0.0, 0.0, 0.0, 0.0); KUWAHARA_TYPE m3 = float4(0.0, 0.0, 0.0, 0.0);
     KUWAHARA_TYPE s0 = float4(0.0, 0.0, 0.0, 0.0); KUWAHARA_TYPE s1 = float4(0.0, 0.0, 0.0, 0.0); KUWAHARA_TYPE s2 = float4(0.0, 0.0, 0.0, 0.0); KUWAHARA_TYPE s3 = float4(0.0, 0.0, 0.0, 0.0);
     KUWAHARA_TYPE rta = float4(0.0, 0.0, 0.0, 0.0);
