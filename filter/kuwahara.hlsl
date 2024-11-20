@@ -30,26 +30,26 @@ options:
 #ifndef FNC_KUWAHARA
 #define FNC_KUWAHARA
 
-KUWAHARA_TYPE kuwahara(in SAMPLER_TYPE tex, in float2 st, in float2 pixel, in int radius) {
+KUWAHARA_TYPE kuwahara(in SAMPLER_TYPE tex, in float2 st, in float2 pixel, in float radius) {
 
-    float n = float((KUWAHARA_RADIUS + 1) * (KUWAHARA_RADIUS + 1));
-    int i = 0; 
-    int j = 0;
+    float n = ((KUWAHARA_RADIUS + 1.0) * (KUWAHARA_RADIUS + 1.0));
+    float i = 0.0; 
+    float j = 0.0;
     KUWAHARA_TYPE m0 = float4(0.0, 0.0, 0.0, 0.0); KUWAHARA_TYPE m1 = float4(0.0, 0.0, 0.0, 0.0); KUWAHARA_TYPE m2 = float4(0.0, 0.0, 0.0, 0.0); KUWAHARA_TYPE m3 = float4(0.0, 0.0, 0.0, 0.0);
     KUWAHARA_TYPE s0 = float4(0.0, 0.0, 0.0, 0.0); KUWAHARA_TYPE s1 = float4(0.0, 0.0, 0.0, 0.0); KUWAHARA_TYPE s2 = float4(0.0, 0.0, 0.0, 0.0); KUWAHARA_TYPE s3 = float4(0.0, 0.0, 0.0, 0.0);
     KUWAHARA_TYPE rta = float4(0.0, 0.0, 0.0, 0.0);
     KUWAHARA_TYPE c = float4(0.0, 0.0, 0.0, 0.0);
     
-    for (j = -KUWAHARA_RADIUS; j <= 0; ++j)  {
-        for (i = -KUWAHARA_RADIUS; i <= 0; ++i)  {
+    for (j = -KUWAHARA_RADIUS; j <= 0.0; ++j)  {
+        for (i = -KUWAHARA_RADIUS; i <= 0.0; ++i)  {
             c = KUWAHARA_SAMPLER_FNC(tex, st + float2(i,j) * pixel);
             m0 += c;
             s0 += c * c;
         }
     }
     
-    for (j = -KUWAHARA_RADIUS; j <= 0; ++j)  {
-        for (i = 0; i <= KUWAHARA_RADIUS_MAX; ++i)  {
+    for (j = -KUWAHARA_RADIUS; j <= 0.0; ++j)  {
+        for (i = 0.0; i <= KUWAHARA_RADIUS_MAX; ++i)  {
             if (i > KUWAHARA_RADIUS)
                 break;
             c = KUWAHARA_SAMPLER_FNC(tex, st + float2(i,j) * pixel);
@@ -58,10 +58,10 @@ KUWAHARA_TYPE kuwahara(in SAMPLER_TYPE tex, in float2 st, in float2 pixel, in in
         }
     }
     
-    for (j = 0; j <= KUWAHARA_RADIUS_MAX; ++j)  {
+    for (j = 0.0; j <= KUWAHARA_RADIUS_MAX; ++j)  {
         if (j > KUWAHARA_RADIUS)
             break;
-        for (i = 0; i <= KUWAHARA_RADIUS_MAX; ++i)  {
+        for (i = 0.0; i <= KUWAHARA_RADIUS_MAX; ++i)  {
             if (i > KUWAHARA_RADIUS)
                 break;
             c = KUWAHARA_SAMPLER_FNC(tex, st + float2(i,j) * pixel);
@@ -70,10 +70,10 @@ KUWAHARA_TYPE kuwahara(in SAMPLER_TYPE tex, in float2 st, in float2 pixel, in in
         }
     }
     
-    for (j = 0; j <= KUWAHARA_RADIUS; ++j)  {
+    for (j = 0.0; j <= KUWAHARA_RADIUS; ++j)  {
         if (j > KUWAHARA_RADIUS)
             break;
-        for (i = -KUWAHARA_RADIUS; i <= 0; ++i)  {
+        for (i = -KUWAHARA_RADIUS; i <= 0.0; ++i)  {
             c = KUWAHARA_SAMPLER_FNC(tex, st + float2(i,j) * pixel);
             m3 += c;
             s3 += c * c;
