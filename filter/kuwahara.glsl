@@ -3,7 +3,7 @@
 /*
 contributors: [Brad Larson, Ben Cochran, Hugues Lismonde, Keitaroh Kobayashi, Alaric Cole, Matthew Clark, Jacob Gundersen, Chris Williams.]
 description: Kuwahara image abstraction, drawn from the work of Kyprianidis, et. al. in their publication "Anisotropic Kuwahara Filtering on the GPU" within the GPU Pro collection. This produces an oil-painting-like image, but it is extremely computationally expensive, so it can take seconds to render a frame on an iPad 2. This might be best used for still images.
-use: kuwahara(<SAMPLER_TYPE> texture, <vec2> st, <vec2> pixel)
+use: kuwahara(<SAMPLER_TYPE> texture, <vec2> st, <vec2> pixel, <float> radius)
 options:
     - KUWAHARA_TYPE: defaults to vec3
     - KUWAHARA_SAMPLER_FNC(TEX, UV): defaults to texture2D(tex, TEX, UV).rgb
@@ -29,7 +29,7 @@ KUWAHARA_TYPE kuwahara(in SAMPLER_TYPE tex, in vec2 st, in vec2 pixel, in float 
     #define KUWAHARA_RADIUS radius
     #endif
 
-    float n = ((KUWAHARA_RADIUS + 1.0) * (KUWAHARA_RADIUS + 1.0));
+    float n = (KUWAHARA_RADIUS + 1.0) * (KUWAHARA_RADIUS + 1.0);
     float i = 0.0; 
     float j = 0.0;
     KUWAHARA_TYPE m0 = KUWAHARA_TYPE(0.0); KUWAHARA_TYPE m1 = KUWAHARA_TYPE(0.0); KUWAHARA_TYPE m2 = KUWAHARA_TYPE(0.0); KUWAHARA_TYPE m3 = KUWAHARA_TYPE(0.0);
@@ -116,15 +116,15 @@ KUWAHARA_TYPE kuwahara(in SAMPLER_TYPE tex, in vec2 st, in vec2 pixel, in float 
     #ifndef KUWAHARA_RADIUS
 
     #if defined(PLATFORM_WEBGL)
-    #define KUWAHARA_RADIUS 20
-    float n = ((radius + 1.0) * (radius + 1.0));
+    #define KUWAHARA_RADIUS 20.0
+    float n = (radius + 1.0) * (radius + 1.0);
     #else
     #define KUWAHARA_RADIUS radius
-    float n = ((KUWAHARA_RADIUS + 1.0) * (KUWAHARA_RADIUS + 1.0));
+    float n = (KUWAHARA_RADIUS + 1.0) * (KUWAHARA_RADIUS + 1.0);
     #endif
 
     #else
-    float n = ((KUWAHARA_RADIUS + 1.0) * (KUWAHARA_RADIUS + 1.0));
+    float n = (KUWAHARA_RADIUS + 1.0) * (KUWAHARA_RADIUS + 1.0);
     #endif
 
     float i = 0.0; float j = 0.0;
