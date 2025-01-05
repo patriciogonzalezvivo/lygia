@@ -30,4 +30,24 @@ float4 compositeSourceIn(float4 srcColor, float4 dstColor)
     return result;
 }
 
+half compositeSourceIn(half src, half dst)
+{
+    return src * dst;
+}
+
+half3 compositeSourceIn(half3 srcColor, half3 dstColor, half srcAlpha, half dstAlpha)
+{
+    return srcColor * dstAlpha;
+}
+
+half4 compositeSourceIn(half4 srcColor, half4 dstColor) 
+{
+    half4 result;
+
+    result.rgb = compositeSourceIn(srcColor.rgb, dstColor.rgb, srcColor.a, dstColor.a);
+    result.a = compositeSourceIn(srcColor.a, dstColor.a);
+
+    return result;
+}
+
 #endif

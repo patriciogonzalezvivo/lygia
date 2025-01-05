@@ -20,4 +20,18 @@ float3 blendReflect(float3 base, float3 blend) {
 float3 blendReflect(float3 base, float3 blend, float opacity) {
     return (blendReflect(base, blend) * opacity + base * (1. - opacity));
 }
+
+half blendReflect(half base, half blend) {
+    return (blend == 1.)? blend : min(base * base / (1. - blend), 1.);
+}
+
+half3 blendReflect(half3 base, half3 blend) {
+    return half3(blendReflect(base.r, blend.r),
+                blendReflect(base.g, blend.g),
+                blendReflect(base.b, blend.b));
+}
+
+half3 blendReflect(half3 base, half3 blend, half opacity) {
+    return (blendReflect(base, blend) * opacity + base * (1. - opacity));
+}
 #endif

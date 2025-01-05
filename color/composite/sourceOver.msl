@@ -30,6 +30,24 @@ float4 compositeSourceOver(float4 srcColor, float4 dstColor)
     return result;
 }
 
+half compositeSourceOver(half src, half dst)
+{
+    return src + dst * (1.0 - src);
+}
 
+half3 compositeSourceOver(half3 srcColor, half3 dstColor, half srcAlpha, half dstAlpha)
+{
+    return srcColor * srcAlpha + dstColor * dstAlpha * (1.0 - srcAlpha);
+}
+
+half4 compositeSourceOver(half4 srcColor, half4 dstColor)
+{
+    half4 result;
+   
+    result.rgb = compositeSourceOver(srcColor.rgb, dstColor.rgb, srcColor.a, dstColor.a);
+    result.a = compositeSourceOver(srcColor.a, dstColor.a);
+
+    return result;
+}
 
 #endif

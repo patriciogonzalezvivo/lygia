@@ -19,4 +19,14 @@ float3 blendLuminosity(float3 base, float3 blend) {
 float3  blendLuminosity(float3 base, float3 blend, float opacity) { 
     return (blendLuminosity(base, blend) * opacity + base * (1. - opacity)); 
 }
+
+half3 blendLuminosity(half3 base, half3 blend) {
+  half3 baseHSL = rgb2hsv(base);
+  half3 blendHSL = rgb2hsv(blend);
+  return hsv2rgb(
+      half3(baseHSL.x, baseHSL.y, blendHSL.z));
+}
+half3  blendLuminosity(half3 base, half3 blend, half opacity) { 
+    return (blendLuminosity(base, blend) * opacity + base * (1. - opacity)); 
+}
 #endif

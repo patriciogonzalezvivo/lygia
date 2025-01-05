@@ -20,4 +20,18 @@ float3 blendLighten(float3 base, float3 blend) {
 float3 blendLighten(float3 base, float3 blend, float opacity) {
     return (blendLighten(base, blend) * opacity + base * (1. - opacity));
 }
+
+half blendLighten(half base, half blend) {
+    return max(blend, base);
+}
+
+half3 blendLighten(half3 base, half3 blend) {
+    return half3(blendLighten(base.r, blend.r),
+                blendLighten(base.g, blend.g),
+                blendLighten(base.b, blend.b));
+}
+
+half3 blendLighten(half3 base, half3 blend, half opacity) {
+    return (blendLighten(base, blend) * opacity + base * (1. - opacity));
+}
 #endif

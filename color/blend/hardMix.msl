@@ -22,4 +22,18 @@ float3 blendHardMix(float3 base, float3 blend) {
 float3 blendHardMix(float3 base, float3 blend, float opacity) {
     return (blendHardMix(base, blend) * opacity + base * (1. - opacity));
 }
+
+half blendHardMix(half base, half blend) {
+    return (blendVividLight(base, blend) < .5)? 0.: 1.;
+}
+
+half3 blendHardMix(half3 base, half3 blend) {
+    return half3(blendHardMix(base.r, blend.r),
+                blendHardMix(base.g, blend.g),
+                blendHardMix(base.b, blend.b));
+}
+
+half3 blendHardMix(half3 base, half3 blend, half opacity) {
+    return (blendHardMix(base, blend) * opacity + base * (1. - opacity));
+}
 #endif

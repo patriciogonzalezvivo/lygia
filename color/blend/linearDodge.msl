@@ -9,7 +9,7 @@ license: MIT License (MIT) Copyright (c) 2015 Jamie Owen
 #define FNC_BLENDLINEARDODGE
 float blendLinearDodge(float base, float blend) {
   // Note : Same implementation as BlendAddf
-    return min(base + blend, 1.);
+    return min(base + blend, float(1.0));
 }
 
 float3 blendLinearDodge(float3 base, float3 blend) {
@@ -18,6 +18,20 @@ float3 blendLinearDodge(float3 base, float3 blend) {
 }
 
 float3 blendLinearDodge(float3 base, float3 blend, float opacity) {
+    return (blendLinearDodge(base, blend) * opacity + base * (1. - opacity));
+}
+
+half blendLinearDodge(half base, half blend) {
+  // Note : Same implementation as BlendAddf
+    return min(base + blend, half(1.0));
+}
+
+half3 blendLinearDodge(half3 base, half3 blend) {
+  // Note : Same implementation as BlendAdd
+    return min(base + blend, half3(1.0));
+}
+
+half3 blendLinearDodge(half3 base, half3 blend, half opacity) {
     return (blendLinearDodge(base, blend) * opacity + base * (1. - opacity));
 }
 #endif

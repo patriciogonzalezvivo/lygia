@@ -20,4 +20,16 @@ float3 blendHardLight(float3 base, float3 blend) {
 float3 blendHardLight(float3 base, float3 blend, float opacity) {
     return (blendHardLight(base, blend) * opacity + base * (1. - opacity));
 }
+
+half blendHardLight(half base, half blend) {
+    return blendOverlay(blend, base);
+}
+
+half3 blendHardLight(half3 base, half3 blend) {
+    return blendOverlay(blend, base);
+}
+
+half3 blendHardLight(half3 base, half3 blend, half opacity) {
+    return (blendHardLight(base, blend) * opacity + base * (1. - opacity));
+}
 #endif

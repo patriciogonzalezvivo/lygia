@@ -10,4 +10,8 @@ license: MIT License (MIT) Copyright (c) 2015 Jamie Owen
 float blendAverage(float base, float blend) { return (base + blend) * .5; }
 float3  blendAverage(float3 base, float3 blend) { return (base + blend) * .5; }
 float3  blendAverage(float3 base, float3 blend, float opacity) { return (blendAverage(base, blend) * opacity + base * (1. - opacity)); }
+
+half3  blendAverage(half3 base, half3 blend) { return (base + blend) * .5; }
+half3  blendAverage(half3 base, half3 blend, half opacity) { return (blendAverage(base, blend) * opacity + base * (1. - opacity)); }
+
 #endif

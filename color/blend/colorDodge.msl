@@ -7,11 +7,19 @@ license: MIT License (MIT) Copyright (c) 2015 Jamie Owen
 
 #ifndef FNC_BLENDCOLORDODGE
 #define FNC_BLENDCOLORDODGE
-float blendColorDodge(float base, float blend) { return (blend == 1.)? blend: min( base / (1. - blend), 1.); }
+float blendColorDodge(float base, float blend) { return (blend == 1.)? blend: min( float(base / (1. - blend)), float(1.0) ); }
 float3  blendColorDodge(float3 base, float3 blend) {
     return float3(blendColorDodge(base.r, blend.r),
                 blendColorDodge(base.g, blend.g),
                 blendColorDodge(base.b, blend.b));
 }
 float3  blendColorDodge(float3 base, float3 blend, float opacity) { return (blendColorDodge(base, blend) * opacity + base * (1. - opacity)); }
+
+half blendColorDodge(half base, half blend) { return (blend == 1.)? blend: min( half(base / (1. - blend)), half(1.0)); }
+half3  blendColorDodge(half3 base, half3 blend) {
+    return half3(blendColorDodge(base.r, blend.r),
+                blendColorDodge(base.g, blend.g),
+                blendColorDodge(base.b, blend.b));
+}
+half3  blendColorDodge(half3 base, half3 blend, half opacity) { return (blendColorDodge(base, blend) * opacity + base * (1. - opacity)); }
 #endif

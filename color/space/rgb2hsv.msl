@@ -20,4 +20,15 @@ float3 rgb2hsv( float3 c) {
                 q.x);
 }
 float4 rgb2hsv( float4 c) { return float4(rgb2hsv(c.rgb), c.a); }
+
+half3 rgb2hsv( half3 c) {
+    half4 K = half4(0., -0.33333333333333333333, 0.6666666666666666666, -1.0);
+    half4 p = c.g < c.b ? half4(c.bg, K.wz) : half4(c.gb, K.xy);
+    half4 q = c.r < p.x ? half4(p.xyw, c.r) : half4(c.r, p.yzx);
+    half d = q.x - min(q.w, q.y);
+    return half3(abs(q.z + (q.w - q.y) / (6. * d + HCV_EPSILON)), 
+                d / (q.x + HCV_EPSILON), 
+                q.x);
+}
+half4 rgb2hsv( half4 c) { return half4(rgb2hsv(c.rgb), c.a); }
 #endif

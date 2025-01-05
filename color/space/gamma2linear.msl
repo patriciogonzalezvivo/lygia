@@ -34,4 +34,17 @@ float3 gamma2linear( float3 v) {
 float4 gamma2linear( float4 v) {
     return float4(gamma2linear(v.rgb), v.a);
 }
+
+half3 gamma2linear( half3 v) {
+#ifdef GAMMA
+    return pow(v, half3(GAMMA));
+#else
+    // assume gamma 2.0
+    return v * v;
+#endif
+}
+
+half4 gamma2linear( half4 v) {
+    return half4(gamma2linear(v.rgb), v.a);
+}
 #endif

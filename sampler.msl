@@ -17,3 +17,7 @@ license:
 #ifndef SAMPLER_TYPE
 #define SAMPLER_TYPE texture2d<float>
 #endif
+
+#ifndef SAMPLER_PRECISION
+#define SAMPLER_PRECISION float4
+#endif

@@ -18,4 +18,16 @@ float3 blendNegation(float3 base, float3 blend) {
 float3 blendNegation(float3 base, float3 blend, float opacity) {
     return (blendNegation(base, blend) * opacity + base * (1. - opacity));
 }
+
+half blendNegation(half base, half blend) {
+    return 1. - abs(1. - base - blend);
+}
+
+half3 blendNegation(half3 base, half3 blend) {
+    return half3(1.) - abs(half3(1.) - base - blend);
+}
+
+half3 blendNegation(half3 base, half3 blend, half opacity) {
+    return (blendNegation(base, blend) * opacity + base * (1. - opacity));
+}
 #endif

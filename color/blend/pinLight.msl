@@ -11,7 +11,7 @@ license: MIT License (MIT) Copyright (c) 2015 Jamie Owen
 #ifndef FNC_BLENDPINLIGHT
 #define FNC_BLENDPINLIGHT
 float blendPinLight(float base, float blend) {
-    return (blend < .5)? blendDarken(base, (2.*blend)): blendLighten(base, (2. * (blend - .5)));
+    return (blend < .5)? blendDarken(base, float(2.*blend)): blendLighten(base, float(2. * (blend - .5)));
 }
 
 float3 blendPinLight(float3 base, float3 blend) {
@@ -21,6 +21,20 @@ float3 blendPinLight(float3 base, float3 blend) {
 }
 
 float3 blendPinLight(float3 base, float3 blend, float opacity) {
+    return (blendPinLight(base, blend) * opacity + base * (1. - opacity));
+}
+
+half blendPinLight(half base, half blend) {
+    return (blend < .5)? blendDarken(base, half(2.*blend)): blendLighten(base, half(2. * (blend - .5)));
+}
+
+half3 blendPinLight(half3 base, half3 blend) {
+    return half3(blendPinLight(base.r, blend.r),
+                blendPinLight(base.g, blend.g),
+                blendPinLight(base.b, blend.b));
+}
+
+half3 blendPinLight(half3 base, half3 blend, half opacity) {
     return (blendPinLight(base, blend) * opacity + base * (1. - opacity));
 }
 #endif

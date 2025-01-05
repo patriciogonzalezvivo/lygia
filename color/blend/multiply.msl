@@ -18,4 +18,16 @@ float3 blendMultiply(float3 base, float3 blend) {
 float3 blendMultiply(float3 base, float3 blend, float opacity) {
     return (blendMultiply(base, blend) * opacity + base * (1. - opacity));
 }
+
+half blendMultiply(half base, half blend) {
+    return base * blend;
+}
+
+half3 blendMultiply(half3 base, half3 blend) {
+    return base * blend;
+}
+
+half3 blendMultiply(half3 base, half3 blend, half opacity) {
+    return (blendMultiply(base, blend) * opacity + base * (1. - opacity));
+}
 #endif

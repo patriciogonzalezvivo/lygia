@@ -13,16 +13,16 @@ license:
 
 #ifndef FNC_SAMPLECLAMP2EDGE
 #define FNC_SAMPLECLAMP2EDGE
-float4 sampleClamp2edge(SAMPLER_TYPE tex, float2 st, float2 texResolution) {
+SAMPLER_PRECISION sampleClamp2edge(SAMPLER_TYPE tex, float2 st, float2 texResolution) {
     float2 pixel = 1.0/texResolution;
     return SAMPLER_FNC( tex, clamp(st, pixel, 1.0-pixel) );
 }
 
-float4 sampleClamp2edge(SAMPLER_TYPE tex, float2 st) { 
+SAMPLER_PRECISION sampleClamp2edge(SAMPLER_TYPE tex, float2 st) { 
     return SAMPLER_FNC( tex, clamp(st, float2(0.01), float2(0.99) ) ); 
 }
 
-float4 sampleClamp2edge(SAMPLER_TYPE tex, float2 st, float edge) { 
+SAMPLER_PRECISION sampleClamp2edge(SAMPLER_TYPE tex, float2 st, float edge) { 
     return SAMPLER_FNC( tex, clamp(st, float2(edge), float2(1.0 - edge) ) ); 
 }
 #endif

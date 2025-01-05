@@ -11,7 +11,7 @@ license: MIT License (MIT) Copyright (c) 2015 Jamie Owen
 #ifndef FNC_BLENDVIVIDLIGHT
 #define FNC_BLENDVIVIDLIGHT
 float blendVividLight(float base, float blend) {
-    return (blend < .5)? blendColorBurn(base, (2.*blend)): blendColorDodge(base, (2. * (blend - .5)));
+    return (blend < .5)? blendColorBurn(base, float(2.*blend)): blendColorDodge(base, float(2. * (blend - .5)));
 }
 
 float3 blendVividLight(float3 base, float3 blend) {
@@ -21,6 +21,20 @@ float3 blendVividLight(float3 base, float3 blend) {
 }
 
 float3 blendVividLight(float3 base, float3 blend, float opacity) {
+    return (blendVividLight(base, blend) * opacity + base * (1. - opacity));
+}
+
+half blendVividLight(half base, half blend) {
+    return (blend < .5)? blendColorBurn(base, half(2.*blend)): blendColorDodge(base, half(2. * (blend - .5)));
+}
+
+half3 blendVividLight(half3 base, half3 blend) {
+    return half3(blendVividLight(base.r, blend.r),
+                            blendVividLight(base.g, blend.g),
+                            blendVividLight(base.b, blend.b));
+}
+
+half3 blendVividLight(half3 base, half3 blend, half opacity) {
     return (blendVividLight(base, blend) * opacity + base * (1. - opacity));
 }
 #endif

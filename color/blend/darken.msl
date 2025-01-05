@@ -14,4 +14,12 @@ float3  blendDarken(float3 base, float3 blend) {
                 blendDarken(base.b, blend.b));
 }
 float3  blendDarken(float3 base, float3 blend, float opacity) { return (blendDarken(base, blend) * opacity + base * (1. - opacity)); }
+
+half blendDarken(half base, half blend) { return min(blend,base); }
+half3  blendDarken(half3 base, half3 blend) {
+    return half3(blendDarken(base.r, blend.r),
+                blendDarken(base.g, blend.g),
+                blendDarken(base.b, blend.b));
+}
+half3  blendDarken(half3 base, half3 blend, half opacity) { return (blendDarken(base, blend) * opacity + base * (1. - opacity)); }
 #endif

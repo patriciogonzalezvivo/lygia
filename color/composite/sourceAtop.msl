@@ -29,4 +29,24 @@ float4 compositeSourceAtop(float4 srcColor, float4 dstColor)
 
     return result;
 }
+
+half compositeSourceAtop(half src, half dst)
+{
+    return src * dst + dst * (1.0 - src);
+}
+
+half3 compositeSourceAtop(half3 srcColor, half3 dstColor, half srcAlpha, half dstAlpha)
+{
+    return srcColor * dstAlpha + dstColor * (1.0 - srcAlpha);
+}
+
+half4 compositeSourceAtop(half4 srcColor, half4 dstColor) 
+{
+    half4 result;
+
+    result.rgb = compositeSourceAtop(srcColor.rgb, dstColor.rgb, srcColor.a, dstColor.a);
+    result.a = compositeSourceAtop(srcColor.a, dstColor.a);
+
+    return result;
+}
 #endif

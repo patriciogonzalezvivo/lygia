@@ -28,4 +28,20 @@ float4 layerLightenSourceOver(float4 src, float4 dest)
 
     return result;
 }
+
+half4 layerLightenSourceOver(half4 src, half4 dest)
+{    
+    half4 result;
+
+    // Compute lighten for RGB channels
+    half3 blendedColor = blendLighten(src.rgb, dest.rgb);
+
+    // Compute source-over for RGB channels
+    result.rgb =  compositeSourceOver(blendedColor, dest.rgb, src.a, dest.a);
+
+    // Compute source-over for the alpha channel
+    result.a = compositeSourceOver(src.a, dest.a);
+
+    return result;
+}
 #endif

@@ -20,4 +20,15 @@ float3 blendColor(float3 base, float3 blend) {
 float3  blendColor(float3 base, float3 blend, float opacity) { 
     return (blendColor(base, blend) * opacity + base * (1. - opacity)); 
 }
+
+half3 blendColor(half3 base, half3 blend) {
+  half3 baseHSL = rgb2hsv(base);
+  half3 blendHSL = rgb2hsv(blend);
+  return hsv2rgb(
+      half3(blendHSL.x, blendHSL.y, baseHSL.z));
+}
+
+half3  blendColor(half3 base, half3 blend, half opacity) { 
+    return (blendColor(base, blend) * opacity + base * (1. - opacity)); 
+}
 #endif

@@ -7,11 +7,22 @@ license: MIT License (MIT) Copyright (c) 2015 Jamie Owen
 
 #ifndef FNC_BLENDCOLORBURN
 #define FNC_BLENDCOLORBURN
-float blendColorBurn(float base, float blend) { return (blend == 0.)? blend: max((1. - ((1. - base ) / blend)), 0.); }
+float blendColorBurn(float base, float blend) { return (blend == 0.)? blend: max(float(1. - ((1. - base ) / blend)), float(0.0)); }
 float3  blendColorBurn(float3 base, float3 blend) {
     return float3(blendColorBurn(base.r, blend.r),
                 blendColorBurn(base.g, blend.g),
                 blendColorBurn(base.b, blend.b));
 }
 float3  blendColorBurn(float3 base, float3 blend, float opacity) { return (blendColorBurn(base, blend) * opacity + base * (1. - opacity));}
+
+
+
+half blendColorBurn(half base, half blend) { return (blend == 0.)? blend: max(half(1. - ((1. - base ) / blend)), half(0.0)); }
+half3  blendColorBurn(half3 base, half3 blend) {
+    return half3(blendColorBurn(base.r, blend.r),
+                blendColorBurn(base.g, blend.g),
+                blendColorBurn(base.b, blend.b));
+}
+half3  blendColorBurn(half3 base, half3 blend, half opacity) { return (blendColorBurn(base, blend) * opacity + base * (1. - opacity));}
+
 #endif

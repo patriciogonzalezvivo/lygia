@@ -11,4 +11,8 @@ use: <float3|float4> hsv2rgb(<float3|float4> hsv)
 #define FNC_HSV2RGB
 float3 hsv2rgb( float3 hsv) { return ((hue2rgb(hsv.x) - 1.0) * hsv.y + 1.0) * hsv.z; }
 float4 hsv2rgb( float4 hsv) { return float4(hsv2rgb(hsv.rgb), hsv.a); }
+
+half3 hsv2rgb( half3 hsv) { return ((hue2rgb(hsv.x) - 1.0) * hsv.y + 1.0) * hsv.z; }
+half4 hsv2rgb( half4 hsv) { return half4(hsv2rgb(hsv.rgb), hsv.a); }
+
 #endif

@@ -26,6 +26,21 @@ float4 linear2gamma( float4 v) {
     return float4(linear2gamma(v.rgb), v.a);
 }
 
+half3 linear2gamma( half3 v) {
+#ifdef GAMMA
+    return pow(v, half3(1.0/GAMMA));
+#else
+    // assume gamma 2.0
+    return sqrt(v);
+#endif
+}
+
+half4 linear2gamma( half4 v) {
+    return half4(linear2gamma(v.rgb), v.a);
+}
+
+
+
 float linear2gamma( float v) {
 #ifdef GAMMA
     return pow(v, 1.0/GAMMA);

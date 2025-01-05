@@ -7,7 +7,11 @@ license: MIT License (MIT) Copyright (c) 2015 Jamie Owen
 
 #ifndef FNC_BLENDADD
 #define FNC_BLENDADD
-float blendAdd(float base, float blend) { return min(base + blend, 1.); }
+float blendAdd(float base, float blend) { return min(base + blend, float(1.0)); }
 float3  blendAdd(float3 base, float3 blend) { return min(base + blend, float3(1.)); }
 float3  blendAdd(float3 base, float3 blend, float opacity) { return (blendAdd(base, blend) * opacity + base * (1. - opacity)); }
+
+half3  blendAdd(half3 base, half3 blend) { return min(base + blend, half3(1.0)); }
+half3  blendAdd(half3 base, half3 blend, half opacity) { return (blendAdd(base, blend) * opacity + base * (1. - opacity)); }
+
 #endif

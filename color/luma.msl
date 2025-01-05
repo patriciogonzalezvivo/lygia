@@ -11,4 +11,6 @@ use: luma(<float3|float4> color)
 float luma(float v) { return v; }
 float luma(float3 v) { return rgb2luma(v); }
 float luma(float4 v) { return rgb2luma(v.rgb); }
+half luma(half3 v) { return rgb2luma(v); }
+half luma(half4 v) { return rgb2luma(v.rgb); }
 #endif
