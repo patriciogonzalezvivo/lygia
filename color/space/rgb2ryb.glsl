@@ -25,9 +25,7 @@ license:
 #ifndef FNC_RGB2RYB
 #define FNC_RGB2RYB
 
-#ifdef RYB_FAST
-
-vec3 rgb2ryb(vec3 rgb) {
+vec3 rgb2rybFast(vec3 rgb) {
     // Remove the white from the color
     float w = mmin(rgb);
     float bl = mmin(1.0 - rgb);
@@ -54,16 +52,18 @@ vec3 rgb2ryb(vec3 rgb) {
     ryb *= (max_y > 0.) ? max_g / max_y : 1.;
 
     // Add the white back in.
-#ifdef RYB_FAST
+// #ifdef RYB_FAST
     return ryb + w;
-#else
-    return ryb + bl;
-#endif
+// #else
+//     return ryb + bl;
+// #endif
 }
 
-#else
 
 vec3 rgb2ryb(vec3 rgb) {
+#ifdef RYB_FAST
+    return rgb2rybFast(rgb);
+#else
     const vec3 rgb000 = vec3(1., 1., 1.);       // Black
     const vec3 rgb100 = vec3(1., 0., 0.);       // Red          
     const vec3 rgb010 = vec3(0., 1., .483);     // Green
@@ -79,9 +79,8 @@ vec3 rgb2ryb(vec3 rgb) {
         RYB_LERP(rgb100, rgb101, rgb.z),
         RYB_LERP(rgb110, rgb111, rgb.z),
         rgb.y), rgb.x);
-}
-
 #endif
+}
 
 vec4 rgb2ryb(vec4 rgb) { return vec4(rgb2ryb(rgb.rgb), rgb.a); }
 
