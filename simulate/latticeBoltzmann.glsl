@@ -4,7 +4,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: |
-    Simple fluid simlation inspired on Lattice Boltzmann method described in https://wyattflanders.com/MeAndMyNeighborhood.pdf
+    Stable fluid simlation inspired on Lattice Boltzmann method described in https://wyattflanders.com/MeAndMyNeighborhood.pdf
     Where the reading texture is structure as follow
         XY is the ordered energy that (moves the bubble)
         B disordered energy that evaporates
