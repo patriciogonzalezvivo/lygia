@@ -93,9 +93,9 @@ vec4 simpleAndFluid(SAMPLER_TYPE tex, vec2 st, vec2 pixel) {
     d.xy *= smoothstep(0.5, 0.49,abs(st - 0.5));
     #endif
 
-    // // Pack XY, Z and W data
-    // d.xy = clamp(d.xy, -0.999, 0.999);
-    // d.zw = saturate(d.zw);
+    // Pack XY, Z and W data
+    d.xy = clamp(d.xy, -0.999, 0.999);
+    d.zw = saturate(d.zw);
     return d;
 }
 
