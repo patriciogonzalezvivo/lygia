@@ -7,7 +7,7 @@ description: |
     Simple single pass fluid simlation from the book GPU Pro 2, "Simple and Fast Fluids" . https://inria.hal.science/inria-00596050/document
     The algorithm uses a Jacobi iteration method to solve for the density and incorporates semi-Lagrangian advection
 
-use: <vec2> simpleAndFluid(<SAMPLER_TYPE> tex, <vec2> st, <vec2> pixel, <vec2> force)
+use: <vec2> simpleAndFastFluid(<SAMPLER_TYPE> tex, <vec2> st, <vec2> pixel, <vec2> force)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
     - SIMPLEANDFASTFLUID_DT: Default, 0.15
@@ -43,7 +43,7 @@ options:
 #ifndef FNC_SIMPLEANDFASTFLUID
 #define FNC_SIMPLEANDFASTFLUID
 
-vec4 simpleAndFluid(SAMPLER_TYPE tex, vec2 st, vec2 pixel) {
+vec4 simpleAndFastFluid(SAMPLER_TYPE tex, vec2 st, vec2 pixel) {
     const float k = .2;
     const float s = k/SIMPLEANDFASTFLUID_DT;
     const float dx = SIMPLEANDFASTFLUID_DX;
@@ -99,7 +99,7 @@ vec4 simpleAndFluid(SAMPLER_TYPE tex, vec2 st, vec2 pixel) {
     return d;
 }
 
-vec4 simpleAndFluid(SAMPLER_TYPE tex, vec2 st, vec2 pixel, vec2 force) {
+vec4 simpleAndFastFluid(SAMPLER_TYPE tex, vec2 st, vec2 pixel, vec2 force) {
     const float k = .2;
     const float s = k/SIMPLEANDFASTFLUID_DT;
     const float dx = SIMPLEANDFASTFLUID_DX;
