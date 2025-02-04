@@ -35,7 +35,12 @@ Material raymarchCast( in vec3 ro, in vec3 rd ) {
     m.valid = false;
     for (int i = 0; i < RAYMARCH_SAMPLES; i++) {
         Material res = RAYMARCH_MAP_FNC(ro + rd * t);
-        if (res.sdf < RAYMARCH_MIN_HIT_DIST || t > tmax) 
+#ifdef RAYMARCH_ABS_DIST
+        float dist = abs(res.sdf);
+#else
+        float dist = res.sdf;
+#endif
+        if (dist < RAYMARCH_MIN_HIT_DIST || t > tmax) 
             break;
         m = res;
         t += res.sdf;
