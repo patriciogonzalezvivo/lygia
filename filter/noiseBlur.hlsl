@@ -20,7 +20,7 @@ options:
     - NOISEBLUR_TYPE: default to float3
     - NOISEBLUR_GAUSSIAN_K: no gaussian by default
     - NOISEBLUR_RANDOM23_FNC(UV): defaults to random2(UV)
-    - NOISEBLUR_SAMPLER_FNC(UV): defualts to texture2D(tex, UV).rgb
+    - NOISEBLUR_SAMPLER_FNC(UV): defaults to texture2D(tex, UV).rgb
     - NOISEBLUR_SAMPLES: default to 4
     - SAMPLER_FNC(TEX, UV): optional depending the target version of HLSL
 license:

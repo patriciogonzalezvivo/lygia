@@ -1,7 +1,7 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: decimate a value with an specific presicion
-use: <float|vec2|vec3|vec4> decimate(<float|vec2|vec3|vec4> value, <float|vec2|vec3|vec4> presicion)
+description: decimate a value with an specific precision
+use: <float|vec2|vec3|vec4> decimate(<float|vec2|vec3|vec4> value, <float|vec2|vec3|vec4> precision)
 examples:
     - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/math_functions.frag
 license:

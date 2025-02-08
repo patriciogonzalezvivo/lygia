@@ -38,8 +38,8 @@ license:
 #ifndef FNC_SHARPEN
 #define FNC_SHARPEN
 
-SHARPEN_TYPE sharpen(in SAMPLER_TYPE tex, in vec2 st, in vec2 pixel, float strenght) {
-    return SHARPEN_FNC (tex, st, pixel, strenght);
+SHARPEN_TYPE sharpen(in SAMPLER_TYPE tex, in vec2 st, in vec2 pixel, float strength) {
+    return SHARPEN_FNC (tex, st, pixel, strength);
 }
 
 SHARPEN_TYPE sharpen(in SAMPLER_TYPE tex, in vec2 st, in vec2 pixel) {

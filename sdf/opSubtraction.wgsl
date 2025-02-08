@@ -1,6 +1,6 @@
 /*
 contributors: Inigo Quiles
-description: Substraction operation of two SDFs
+description: Subtraction operation of two SDFs
 
 */
 

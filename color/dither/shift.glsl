@@ -50,8 +50,8 @@ float ditherShift(const in float b, const in vec2 st, const int pres) {
     //Calculate how big the shift should be
     float dither_shift = (0.25) * (1.0 / (pow(2.0,dither_bit) - 1.0));
 
-    //modify shift acording to grid position.
-    dither_shift = mix(2.0 * dither_shift, -2.0 * dither_shift, grid_position); //shift acording to grid position.
+    //modify shift according to grid position.
+    dither_shift = mix(2.0 * dither_shift, -2.0 * dither_shift, grid_position); //shift according to grid position.
 
     //shift the color by dither_shift
     return b + 0.5/255.0 + dither_shift; 
@@ -77,8 +77,8 @@ vec3 ditherShift(const in vec3 color, const in vec2 st, const int pres) {
     vec3 ditherPattern = vec3(dither_shift);
     #endif
 
-    //modify shift acording to grid position.
-    ditherPattern = mix(2.0 * ditherPattern, -2.0 * ditherPattern, grid_position); //shift acording to grid position.
+    //modify shift according to grid position.
+    ditherPattern = mix(2.0 * ditherPattern, -2.0 * ditherPattern, grid_position); //shift according to grid position.
 
     //shift the color by dither_shift
 

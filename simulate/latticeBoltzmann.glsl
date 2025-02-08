@@ -4,7 +4,7 @@
 /*
 original_author: Patricio Gonzalez Vivo
 description: |
-    Stable fluid simlation inspired on Lattice Boltzmann method described in https://wyattflanders.com/MeAndMyNeighborhood.pdf
+    Stable fluid simulation inspired on Lattice Boltzmann method described in https://wyattflanders.com/MeAndMyNeighborhood.pdf
     Where the reading texture is structure as follow
         XY is the ordered energy that (moves the bubble)
         B disordered energy that evaporates
@@ -34,14 +34,14 @@ vec4 latticeBoltzmannPrevPosSampler(sampler2D tex, vec2 st, vec2 pixel) {
 vec4 latticeBoltzmann(sampler2D tex, vec2 st, vec2 pixel) {
     vec4 d = latticeBoltzmannPrevPosSampler(tex, st, pixel);
 
-    // Neightbors
+    // Neighbors
     vec4 pX   = latticeBoltzmannPrevPosSampler(tex, st + vec2(pixel.x,0.0), pixel);
     vec4 pY   = latticeBoltzmannPrevPosSampler(tex, st + vec2(0.0,pixel.y), pixel);
     vec4 nX   = latticeBoltzmannPrevPosSampler(tex, st - vec2(pixel.x,0.0), pixel);
     vec4 nY   = latticeBoltzmannPrevPosSampler(tex, st - vec2(0.0,pixel.y), pixel);
     
     // Rule 2: Disordered diffuses completely.
-    //  All of My disordered Energy B comes fromm y neighborhood.
+    //  All of my disordered Energy B comes from my neighborhood.
     //  Exchange disorder symmetrically in all direction
     d.b = (pX.b + pY.b + nX.b + nY.b) * 0.25;
     

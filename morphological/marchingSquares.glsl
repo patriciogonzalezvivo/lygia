@@ -6,7 +6,7 @@
 contributors: Guido Schmidt
 description: |
     The Marching Squares algorithm generates contour lines (isolines) of a given input for a
-    given grid and a threshhold. Is uses a lookup of 16 cases to decide if a cell is inside, outside or
+    given grid and a threshold. Is uses a lookup of 16 cases to decide if a cell is inside, outside or
     a specific corner.
     **References:**
     - [urbanspr1nter.github.io](https://urbanspr1nter.github.io/marchingsquares/)
