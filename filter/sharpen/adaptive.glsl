@@ -4,7 +4,7 @@
 
 /*
 contributors: bacondither
-description: Adaptive sharpening. For strenght values between 0.3 <-> 2.0 are a reasonable range 
+description: Adaptive sharpening. For strength values between 0.3 <-> 2.0 are a reasonable range 
 use: sharpen(<SAMPLER_TYPE> texture, <vec2> st, <vec2> renderSize [, float streanght])
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
@@ -57,7 +57,7 @@ float sharpendAdaptiveControl(in vec4 rgba) { return dot(rgba*rgba, vec4(0.21265
 
 #define SHARPENADAPTIVE_DIFF(pix)   ( abs(blur-c[pix]) )
 
-SHARPENADAPTIVE_TYPE sharpenAdaptive(SAMPLER_TYPE tex, vec2 st, vec2 pixel, float strenght) {
+SHARPENADAPTIVE_TYPE sharpenAdaptive(SAMPLER_TYPE tex, vec2 st, vec2 pixel, float strength) {
 
     //-------------------------------------------------------------------------------------------------
 // Defined values under this row are "optimal" DO NOT CHANGE IF YOU DO NOT KNOW WHAT YOU ARE DOING!
@@ -221,7 +221,7 @@ SHARPENADAPTIVE_TYPE sharpenAdaptive(SAMPLER_TYPE tex, vec2 st, vec2 pixel, floa
     neg_laplace = inversesqrt(weightsum / neg_laplace);
 
     // Compute sharpening magnitude function
-    float sharpen_val = strenght/(strenght*curveslope*pow(edge, 3.5) + 0.625);
+    float sharpen_val = strength/(strength*curveslope*pow(edge, 3.5) + 0.625);
 
     // Calculate sharpening diff and scale
     float sharpdiff = (c0_Y - neg_laplace)*(lowthrsum*sharpen_val + 0.01);

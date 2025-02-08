@@ -50,7 +50,7 @@ Metal support is currently highly experimental and very work in progress.
     
 ## Things not yet done
 
-- `gl_FragCoord` compatibilty. Not sure if there is a nice way to make this work without end users annotating their root Metal shader entry point.
+- `gl_FragCoord` compatibility. Not sure if there is a nice way to make this work without end users annotating their root Metal shader entry point.
     - For now, use the function definitions which pass the [[position]] coords from your main shader.
 - `atan` / `atan2` compatibility. Need to see if there is a nice way to override the function signatures to match.
     

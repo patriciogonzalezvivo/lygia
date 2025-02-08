@@ -10,10 +10,10 @@ use: <float3> raymarchGlass( in <float3> ray, in <float3> pos, in <float> ior, i
 options:
     - RAYMARCH_GLASS_DENSITY: 0.                        [Density of the ray going through the glass]
     - RAYMARCH_GLASS_COLOR: float3(1.0, 1.0, 1.0)       [Color of the glass]
-    - RAYMARCH_GLASS_WAVELENGTH                         [Define this option to enable chromatic abberation effects]
+    - RAYMARCH_GLASS_WAVELENGTH                         [Define this option to enable chromatic aberration effects]
     - RAYMARCH_GLASS_ENABLE_REFLECTION                  [Define this option to enable reflection]
     - RAYMARCH_GLASS_REFLECTION_EFFECT 5.               [The higher the value, the less reflections area from surface view]
-    - RAYMARCH_GLASS_CHROMATIC_ABBERATION .01           [Chromatic Abberation Effects on environment map]
+    - RAYMARCH_GLASS_CHROMATIC_ABBERATION .01           [Chromatic Aberration Effects on environment map]
     - RAYMARCH_GLASS_EDGE_SHARPNESS                     [Optional, to determine the edge sharpness]
     - RAYMARCH_GLASS_FNC_MANUAL                         [Optional, enable this to set glass params manually without using defines]
     - RAYMARCH_GLASS_FNC(RAY,POSITION,IOR,ROUGHNESS)

@@ -1,7 +1,7 @@
 
 /*
 contributors: bacondither
-description: Adaptive sharpening. For strenght values between 0.3 <-> 2.0 are a reasonable range
+description: Adaptive sharpening. For strength values between 0.3 <-> 2.0 are a reasonable range
 use: sharpen(<SAMPLER_TYPE> texture, <vec2> st, <vec2> renderSize [, float streanght])
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))

@@ -6,7 +6,7 @@ description: |
     Spectral mix allows you to achieve realistic color mixing in your projects. 
     It is based on the Kubelka-Munk theory, a proven scientific model that simulates 
     how light interacts with paint to produce lifelike color mixing. 
-    Find more informatiom on Ronald van Wijnen's [original repository](https://github.com/rvanwijnen/spectral.js)
+    Find more information on Ronald van Wijnen's [original repository](https://github.com/rvanwijnen/spectral.js)
 options:
     - MIXSPECTRAL_SRGB: by default A and B are linear RGB. If you want to use sRGB, define this flag.
 examples:

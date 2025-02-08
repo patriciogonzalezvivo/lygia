@@ -1,7 +1,7 @@
 /*
 contributors: Johan Ismael
 description: |
-    Color input range adjustment similar to Levels adjusment tool in Photoshop
+    Color input range adjustment similar to Levels adjustment tool in Photoshop
     Adapted from Romain Dura (http://mouaif.wordpress.com/?p=94)
 use: levelsInputRange(<vec3|vec4> color, <float|vec3> minInput, <float|vec3> maxInput)
 license:

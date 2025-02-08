@@ -12,7 +12,7 @@ use: bilateralBlur(<SAMPLER_TYPE> texture, <vec2> st, <vec2> duv)
 options:
     - JOINTBILATERAL_TYPE: defaults to vec4
     - JOINTBILATERAL_SAMPLE_FNC(TEX, UV): defaults to sampleClamp2edge(tex, UV)
-    - JOINTBILATERAL_TYPEGUIDE: defualts to vec3
+    - JOINTBILATERAL_TYPEGUIDE: defaults to vec3
     - JOINTBILATERAL_SAMPLEGUIDE_FNC(TEX, UV): defaults to sampleClamp2edge(TEX, UV).rgb
     - JOINTBILATERAL_KERNELSIZE: defaults to  9
     - JOINTBILATERAL_INTENSITY_SIGMA: defaults to 0.026

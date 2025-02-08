@@ -35,8 +35,8 @@ float ditherShift(float b, float2 fragcoord, float time) {
     //Calculate how big the shift should be
     float dither_shift = (0.25) * (1.0 / (pow(2.0,dither_bit) - 1.0));
 
-    //modify shift acording to grid position.
-    dither_shift = lerp(2.0 * dither_shift, -2.0 * dither_shift, grid_position); //shift acording to grid position.
+    //modify shift according to grid position.
+    dither_shift = lerp(2.0 * dither_shift, -2.0 * dither_shift, grid_position); //shift according to grid position.
 
     //shift the color by dither_shift
     return b + 0.5/255.0 + dither_shift; 
@@ -62,8 +62,8 @@ float3 ditherShift(float3 rgb, float2 fragcoord, float time) {
     float3 dither_shift_RGB = float3(dither_shift, dither_shift, dither_shift);
     #endif
 
-    //modify shift acording to grid position.
-    dither_shift_RGB = lerp(2.0 * dither_shift_RGB, -2.0 * dither_shift_RGB, grid_position); //shift acording to grid position.
+    //modify shift according to grid position.
+    dither_shift_RGB = lerp(2.0 * dither_shift_RGB, -2.0 * dither_shift_RGB, grid_position); //shift according to grid position.
 
     //shift the color by dither_shift
     return rgb + 0.5/255.0 + dither_shift_RGB; 
