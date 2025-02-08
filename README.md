@@ -2,7 +2,7 @@
 
 # LYGIA Shader Library 
 
-LYGIA is the biggest shader library. Battle proof, cross platform and multi-language. Is made of reusable functions that will let you prototype, port and ship projects in just few minutes. It's very granular, flexible and efficient. Support multiple shading languages and can easily be added to virtually any project. There are already integrations for almost all mayor environments, engines and frameworks.
+LYGIA is the biggest shader library. Battle proof, cross platform and multi-language. Is made of reusable functions that will let you prototype, port and ship projects in just few minutes. It's very granular, flexible and efficient. Support multiple shading languages and can easily be added to virtually any project. There are already integrations for almost all major environments, engines and frameworks.
 
 Best of all, LYGIA grows and improves every day thanks to the support of the community. Become a [Contributor](https://github.com/patriciogonzalezvivo/lygia) or a [![](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub)](https://github.com/sponsors/patriciogonzalezvivo)
 
@@ -108,7 +108,7 @@ If you are concerned about the size of the library you might also be interested 
     python prune.py --all --keep glsl
 ```
 
-Alternatively, if your are working on a `npm` project, there is a [npm bundle](https://www.npmjs.com/package/lygia) you could use.
+Alternatively, if you are working on a `npm` project, there is a [npm bundle](https://www.npmjs.com/package/lygia) you could use.
 
 If you are working on web project you may want to resolve the dependencies using a bundler like [vite glsl plugin (local bundle)](https://github.com/UstymUkhman/vite-plugin-glsl), [esbuild glsl plugin (local bundle)](https://github.com/ricardomatias/esbuild-plugin-glsl-include) or [webpack glsl plugin (local bundle)](https://github.com/grieve/webpack-glsl-loader).
 
@@ -177,7 +177,7 @@ The functions are divided into different categories:
 ### How is it [designed](https://github.com/patriciogonzalezvivo/lygia/blob/main/DESIGN.md)?
 
 LYGIA is designed to be very granular (each file holds one function), multilanguage (each language has its own file extension) and flexible. Flexible how?
-There are some functions whose behavior can be changed using the `#defines` keyword before including it. For example, [gaussian blurs](filter/gaussianBlur.glsl) are usually are done in two passes. By default, these are performed on their 1D version, but if you are interested in using a 2D kernel, all in the same pass, you will need to add the `GAUSSIANBLUR_2D` keyword this way:
+There are some functions whose behavior can be changed using the `#defines` keyword before including it. For example, [gaussian blurs](filter/gaussianBlur.glsl) are usually done in two passes. By default, these are performed on their 1D version, but if you are interested in using a 2D kernel, all in the same pass, you will need to add the `GAUSSIANBLUR_2D` keyword this way:
 
 ```glsl
 
@@ -211,7 +211,7 @@ Learn more about [LYGIAS design principles in the DESIGN.md file](https://github
 LYGIA has a long way to go and welcomes all kinds of contributions. You can help by:
 
 * **Bug fixing**
-* **Translation**, keeping parity between languages (GLSL, HLSL, MSL, WGSL, TSL, CUDA, OSL, etc) is a big part of the challenge. Not all language are the same and we want to make sure make sure each function is optimized and carefully crafted for each environment. This means, the more eyes looking at this, the better. Please make sure to read and understand the [Design Principles](https://github.com/patriciogonzalezvivo/lygia/blob/main/DESIGN.md) before starting.
+* **Translation**, keeping parity between languages (GLSL, HLSL, MSL, WGSL, TSL, CUDA, OSL, etc) is a big part of the challenge. Not all language are the same and we want to make sure each function is optimized and carefully crafted for each environment. This means, the more eyes looking at this, the better. Please make sure to read and understand the [Design Principles](https://github.com/patriciogonzalezvivo/lygia/blob/main/DESIGN.md) before starting.
 * **New functions or improving the current implementations**. Please take a look to the [Contributing Guidelines](https://github.com/patriciogonzalezvivo/lygia/blob/main/CONTRIBUTING.md) before starting.
 * **Documentation**. Each function has a header with some information describing the function. Make sure to fill this information when adding a new function.
 * Adding new **examples** and integrations for new environments like: [Godot](https://godotengine.org/), [ISF](https://isf.video/), [MaxMSP](https://cycling74.com/products/max), etc.
@@ -219,7 +219,7 @@ LYGIA has a long way to go and welcomes all kinds of contributions. You can help
 
 Collaborators and sponsors are automatically added to the [commercial license](https://lygia.xyz/license). Making a PR or subscribing to the github sponsors program is the shortest path to get access to the commercial license. It's all automated, not red taping. LYGIA belongs to those that takes care of it.
 
-## License 
+## License
 
 LYGIA belongs to those that support it. For that it uses a dual-licensed under the [Prosperity License](https://prosperitylicense.com/versions/3.0.0) and the [Patron License](https://lygia.xyz/license) for [sponsors](https://github.com/sponsors/patriciogonzalezvivo) and [contributors](https://github.com/patriciogonzalezvivo/lygia/graphs/contributors).
 
@@ -227,7 +227,7 @@ LYGIA belongs to those that support it. For that it uses a dual-licensed under t
 
 It's also possible to get a permanent commercial license hooked to a single and specific version of LYGIA.
 
-If you have doubts please reaching out to patriciogonzalezvivo at gmail dot com
+If you have doubts please reach out to patriciogonzalezvivo at gmail dot com
 
 ## Credits
 
@@ -236,6 +236,3 @@ Created and maintained by [Patricio Gonzalez Vivo](https://patriciogonzalezvivo.
 This library has been built in many cases on top of the work of brilliant and generous people like: [Inigo Quiles](https://www.iquilezles.org/), [Morgan McGuire](https://casual-effects.com/), [Alan Wolfe](https://blog.demofox.org/), [Matt DesLauriers](https://www.mattdesl.com/), [Bjorn Ottosson](https://github.com/bottosson), [Hugh Kennedy](https://github.com/hughsk), and many others.
 
 Also is being constantly maintain, translated and/or extended by generous contributors like: [Shadi El Hajj](https://github.com/shadielhajj), [Kathy](https://github.com/kfahn22), [Bonsak Schiledrop](https://github.com/bonsak), [Amin Shazrin](https://github.com/ammein), [Guido Schmidt](https://github.com/guidoschmidt), and many others.
-
-
-
