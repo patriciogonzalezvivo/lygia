@@ -5,7 +5,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: sampler the view Positiong from depthmap texture
+description: sample the view Position from depthmap texture
 use: <vec4> sampleViewPosition(<SAMPLER_TYPE> texDepth, <vec2> st [, <float> near, <float> far])
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
