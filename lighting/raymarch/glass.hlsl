@@ -13,7 +13,7 @@ options:
     - RAYMARCH_GLASS_WAVELENGTH                         [Define this option to enable chromatic aberration effects]
     - RAYMARCH_GLASS_ENABLE_REFLECTION                  [Define this option to enable reflection]
     - RAYMARCH_GLASS_REFLECTION_EFFECT 5.               [The higher the value, the less reflections area from surface view]
-    - RAYMARCH_GLASS_CHROMATIC_ABBERATION .01           [Chromatic Aberration Effects on environment map]
+    - RAYMARCH_GLASS_CHROMATIC_ABERRATION .01           [Chromatic Aberration Effects on environment map]
     - RAYMARCH_GLASS_EDGE_SHARPNESS                     [Optional, to determine the edge sharpness]
     - RAYMARCH_GLASS_FNC_MANUAL                         [Optional, enable this to set glass params manually without using defines]
     - RAYMARCH_GLASS_FNC(RAY,POSITION,IOR,ROUGHNESS)
@@ -39,8 +39,8 @@ options:
 #define RAYMARCH_GLASS_FNC(RAY, POSITION, IOR, ROUGHNESS) raymarchDefaultGlass(RAY, POSITION, IOR, ROUGHNESS)
 #endif
 
-#ifndef RAYMARCH_GLASS_CHROMATIC_ABBERATION
-#define RAYMARCH_GLASS_CHROMATIC_ABBERATION .01
+#ifndef RAYMARCH_GLASS_CHROMATIC_ABERRATION
+#define RAYMARCH_GLASS_CHROMATIC_ABERRATION .01
 #endif
 
 #ifndef RAYMARCH_GLASS_SAMPLES
@@ -236,7 +236,7 @@ float3 raymarchDefaultGlass(in float3 ray, in float3 pos, in float ior, in float
             RAYMARCH_GLASS_WAVELENGTH_MAP_FNC(res, rdIn, rdOut, pEnter, pExit, nEnter, nExit, ior, roughness);
         #else
             // Red
-            rdOut = refract(rdIn, nExit, ior - RAYMARCH_GLASS_CHROMATIC_ABBERATION);
+            rdOut = refract(rdIn, nExit, ior - RAYMARCH_GLASS_CHROMATIC_ABERRATION);
 
             if(dot(rdOut, rdOut) == 0.)
                 rdOut = reflect(rdIn, nExit);
@@ -252,7 +252,7 @@ float3 raymarchDefaultGlass(in float3 ray, in float3 pos, in float ior, in float
             res.g = envMap(rdOut, roughness).g;
 
             // Blue
-            rdOut = refract(rdIn, nExit, ior + RAYMARCH_GLASS_CHROMATIC_ABBERATION);
+            rdOut = refract(rdIn, nExit, ior + RAYMARCH_GLASS_CHROMATIC_ABERRATION);
 
             if(dot(rdOut, rdOut) == 0.)
                 rdOut = reflect(rdIn, nExit);
