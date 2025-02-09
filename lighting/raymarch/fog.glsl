@@ -45,7 +45,7 @@ vec3 raymarchColorFog(in vec3 col,      // color of pixel
 }
 
 vec3 raymarchHeightFog( in vec3 col,     // color of pixel
-                        in float t,      // distnace to point
+                        in float t,      // distance to point
                         in vec3 ro,      // camera position
                         in vec3 rd) {    // camera to point vector
     float fogAmount = (FOG_DENSITY / FOG_FALLOFF) * exp(-ro.y * FOG_FALLOFF) * (1.0 - exp(-t * rd.y * FOG_FALLOFF)) / rd.y;

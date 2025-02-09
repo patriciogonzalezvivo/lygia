@@ -2,7 +2,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: Simple one dimentional box blur, to be applied in two passes
+description: Simple one dimensional box blur, to be applied in two passes
 use: boxBlur1D(<SAMPLER_TYPE> texture, <float2> st, <float2> pixel_offset, <int> kernelSize)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of msl (texture2D(...) or texture(...))

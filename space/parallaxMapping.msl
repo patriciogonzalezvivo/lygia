@@ -57,7 +57,7 @@ float2 parallaxMapping_simple(SAMPLER_TYPE tex, float3 V, float2 T, out float pa
     // calculate amount of offset for Parallax Mapping With Offset Limiting
     texCoordOffset = PARALLAXMAPPING_SCALE * V.xy * initialHeight;
 
-    // retunr modified texture coordinates
+    // return modified texture coordinates
     return T - texCoordOffset;
 }
 
@@ -147,7 +147,7 @@ float2 parallaxMapping_relief(SAMPLER_TYPE tex, float3 V, float2 T, out float pa
         // new depth from heightmap
         heightFromTexture = PARALLAXMAPPING_SAMPLER_FNC(tex, currentTextureCoords);
 
-        // shift along or agains vector V
+        // shift along or against vector V
         if(heightFromTexture > currentLayerHeight) // below the surface
         {
             currentTextureCoords -= deltaTexCoord;

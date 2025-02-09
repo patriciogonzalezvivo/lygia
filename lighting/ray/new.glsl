@@ -2,7 +2,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: Creates a new Ray asigning origin and direction
+description: Creates a new Ray assigning origin and direction
 use:
     - rayNew(inout <Ray> ray, [<vec3> origin, <vec3> direction])
     - <Ray> rayNew(<vec3> origin, [<vec3> direction])

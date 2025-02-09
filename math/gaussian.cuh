@@ -1,6 +1,6 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: gaussian coeficient
+description: gaussian coefficient
 use: <float4|float3|float2|float> gaussian(<float> sigma, <float4|float3|float2|float> d)
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0

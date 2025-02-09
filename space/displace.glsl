@@ -39,7 +39,7 @@ vec3 displace(SAMPLER_TYPE tex, vec3 ro, vec3 rd) {
     float dz = ro.z - DISPLACE_DEPTH;
     float t = dz / rd.z;
 
-    // the intersection point between the ray and the hightest point on the plane
+    // the intersection point between the ray and the highest point on the plane
     vec3 prev = vec3(
         ro.x - rd.x * t,
         ro.y - rd.y * t,

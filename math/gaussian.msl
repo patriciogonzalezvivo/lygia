@@ -1,6 +1,6 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: gaussian coeficient
+description: gaussian coefficient
 use: <float4|float3|float2|float> gaussian(<float> sigma, <float4|float3|float2|float> d)
 examples:
     - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/math_gaussian.frag

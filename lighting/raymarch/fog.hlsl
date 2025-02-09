@@ -47,7 +47,7 @@ float3 raymarchColorFog(in float3 col, // color of pixel
 }
 
 float3 raymarchHeightFog(in float3 col, // color of pixel
-                   in float t,    // distnace to point
+                   in float t,    // distance to point
                    in float3 ro,  // camera position
                    in float3 rd)  // camera to point vector
 {

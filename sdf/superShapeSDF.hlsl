@@ -8,10 +8,10 @@ description: |
 
         * `m` determines number of sides/branches
         * `m = 0` yields a circle
-        * `a!=b` results in an assymetrical shape
+        * `a!=b` results in an asymmetrical shape
         * `n1=n2=n3<1` the shape is "pinched"
         * `n1>n2,n3` the shape is "bloated"
-        * `n1!=n2!=n3` the shape is assymetrical
+        * `n1!=n2!=n3` the shape is asymmetrical
 
 use: <float> supershapeSDF(<float2> st, <float> size s, <float> a, <float> b, <float> n1, <float> n2, <float> n3, <float> m)
 */

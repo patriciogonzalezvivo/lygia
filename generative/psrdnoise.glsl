@@ -346,7 +346,7 @@ float psrdnoise(vec3 x, vec3 period, float alpha, out vec3 gradient) {
     vec4 gy = vec4(0.0);
     vec4 gz = vec4(0.0);
 
-    // Rotate gradients by angle alpha around a pseudo-random ortogonal axis
+    // Rotate gradients by angle alpha around a pseudo-random orthogonal axis
 #ifdef PSRDNOISE_FAST_ROTATION
     // Fast algorithm, but without dynamic shortcut for alpha = 0
     vec4 qx = St;         // q' = norm ( cross(s, n) )  on the equator
@@ -541,7 +541,7 @@ float psrdnoise(vec3 x, vec3 period, float alpha, out vec3 gradient, out vec3 dg
 
     vec4 gx, gy, gz;
 
-    // Rotate gradients by angle alpha around a pseudo-random ortogonal axis
+    // Rotate gradients by angle alpha around a pseudo-random orthogonal axis
 #ifdef PSRDNOISE_FAST_ROTATION
     // Fast algorithm, but without dynamic shortcut for alpha = 0
     vec4 qx = St;         // q' = norm ( cross(s, n) )  on the equator

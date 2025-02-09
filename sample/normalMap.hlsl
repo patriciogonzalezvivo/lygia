@@ -2,7 +2,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: Standar way to get normals from a normal map
+description: Standard way to get normals from a normal map
 use: sampleNormal(<SAMPLER_TYPE> tex, <float2> st)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))

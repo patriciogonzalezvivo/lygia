@@ -13,9 +13,9 @@ contributors: Patricio Gonzalez Vivo
 description: Render with a gooch stylistic shading model
 use: <vec4> gooch(<vec4> albedo, <vec3> normal, <vec3> light, <vec3> view, <float> roughness)
 options:
-    - GOOCH_WARM: defualt vec3(0.25, 0.15, 0.0)
-    - GOOCH_COLD: defualt vec3(0.0, 0.0, 0.2)
-    - GOOCH_SPECULAR: defualt vec3(1.0, 1.0, 1.0)
+    - GOOCH_WARM: default vec3(0.25, 0.15, 0.0)
+    - GOOCH_COLD: default vec3(0.0, 0.0, 0.2)
+    - GOOCH_SPECULAR: default vec3(1.0, 1.0, 1.0)
     - DIFFUSE_FNC: diffuseOrenNayar, diffuseBurley, diffuseLambert (default)
     - LIGHT_COORD: in GlslViewer is  v_lightCoord
     - LIGHT_SHADOWMAP: in GlslViewer is u_lightShadowMap
