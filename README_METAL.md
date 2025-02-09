@@ -30,7 +30,7 @@ Metal support is currently highly experimental and very work in progress.
 
 ## Porting Methodology
 
-- dupe `*.glsl` files-> and rename them to  `*.msl`
+- dupe `*.glsl` files -> and rename them to `*.msl`
 - find replace `.glsl` -> `.msl` and ensure you repeat the above for imports
 - find replace `vec2` -> `float2`
 - find replace `vec3` -> `float3`
@@ -44,12 +44,12 @@ Metal support is currently highly experimental and very work in progress.
 
 - Metal does not have the same basic math functions signatures as GLSL. We are adding all the polyfill functions in the `math/` folder.
 - Texture precision and filtering.
-    - Added `SAMPLER_TYPE` which specifies the texture precisions. Defaults to `texture2d<float>`
-    - This means your texture definition must match the default `float` precision, or you will need to override `SAMPLER_TYPE`
-    - Added `SAMPLER` which specifies the Metal sampler object. Defaults to `sampler( min_filter::linear, mag_filter::linear )`
+  - Added `SAMPLER_TYPE` which specifies the texture precisions. Defaults to `texture2d<float>`
+  - This means your texture definition must match the default `float` precision, or you will need to override `SAMPLER_TYPE`
+  - Added `SAMPLER` which specifies the Metal sampler object. Defaults to `sampler( min_filter::linear, mag_filter::linear )`
 
 ## Things not yet done
 
 - `gl_FragCoord` compatibility. Not sure if there is a nice way to make this work without end users annotating their root Metal shader entry point.
-    - For now, use the function definitions which pass the [[position]] coords from your main shader.
+  - For now, use the function definitions which pass the [[position]] coords from your main shader.
 - `atan` / `atan2` compatibility. Need to see if there is a nice way to override the function signatures to match.
