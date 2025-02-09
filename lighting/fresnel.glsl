@@ -6,7 +6,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: Resolve fresnel coeficient
+description: Resolve fresnel coefficient
 use:
     - <float|vec3> fresnel(const <float|vec3> f0, <float> NoV)
     - <float|vec3> fresnel(const <float|vec3> f0, <float> NoV, float roughness)

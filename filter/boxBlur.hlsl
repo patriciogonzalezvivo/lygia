@@ -2,7 +2,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: Given a texture return a simple box blured pixel
+description: Given a texture return a simple box blurred pixel
 use: boxBlur(<SAMPLER_TYPE> texture, <float2> st, <float2> pixel_offset)
 options:
     - BOXBLUR_2D: default to 1D

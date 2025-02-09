@@ -14,7 +14,7 @@ contributors:
     - Patricio Gonzalez Vivo
 description: "Adjust temperature and tint. \nOn mobile does a cheaper algo using Brad\
     \ Larson https://github.com/BradLarson/GPUImage/blob/master/framework/Source/GPUImageWhiteBalanceFilter.m\
-    \ \nOn non mobile deas a more accurate ajustment using https://docs.unity3d.com/Packages/com.unity.shadergraph@6.9/manual/White-Balance-Node.html\n"
+    \ \nOn non mobile deas a more accurate adjustment using https://docs.unity3d.com/Packages/com.unity.shadergraph@6.9/manual/White-Balance-Node.html\n"
 use: <vec3|vec4> whiteBalance(<vec3|vec4> rgb, <float> temperature, <float> tint))
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
@@ -56,7 +56,7 @@ vec3 whiteBalance(in vec3 rgb, in float temp, in float tint) {
     float S = 0.0030 * X + 0.0136 * Y + 0.9834 * Z;
 
     // Calculate the coefficients in the LMS space.
-    const vec3 w = vec3(0.949237, 1.03542, 1.08728); // D65 white poin
+    const vec3 w = vec3(0.949237, 1.03542, 1.08728); // D65 white point
     vec3 balance = w/vec3(L, M, S);
 
     // TODO: use our own rgb to lms to rgb

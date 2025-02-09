@@ -1,6 +1,6 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: make some hexagonal tiles. XY provide coordenates of the tile. While Z provides the distance to the center of the tile
+description: make some hexagonal tiles. XY provide coordinates of the tile. While Z provides the distance to the center of the tile
 use: <float4> hexTile(<float2> st)
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0

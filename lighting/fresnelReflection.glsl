@@ -5,7 +5,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: "Resolve fresnel coeficient and apply it to a reflection. It can apply\
+description: "Resolve fresnel coefficient and apply it to a reflection. It can apply\
     \ iridescence to \nusing a formula based on https://www.alanzucconi.com/2017/07/25/the-mathematics-of-thin-film-interference/\n"
 use:
     - <vec3> fresnelReflection(<vec3> R, <vec3> f0, <float> NoV)

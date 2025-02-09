@@ -2,7 +2,7 @@
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: sample derrivatives
+description: sample derivatives
 use: sampleDerivative(<SAMPLER_TYPE> tex, <vec2> st)
 options:
     - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (tex2D(...) or texture(...))

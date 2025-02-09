@@ -2,7 +2,7 @@
 
 /*
 contributors: Shadi El Hajj
-description: Mutiply material properties by a constant, store result in r
+description: Multiply material properties by a constant, store result in r
 license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 */
 
