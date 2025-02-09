@@ -175,7 +175,7 @@ The functions are divided into different categories:
 ### How is it [designed](https://github.com/patriciogonzalezvivo/lygia/blob/main/DESIGN.md)?
 
 LYGIA is designed to be very granular (each file holds one function), multi-language (each language has its own file extension) and flexible. Flexible how?
-There are some functions whose behavior can be changed using the `#define` keyword before including them. For example, [gaussian blurs](filter/gaussianBlur.glsl) are usually done in two passes. By default, these are performed on their 1D version, but if you are interested in using a 2D kernel, all in the same pass, you will need to add the `GAUSSIANBLUR_2D` keyword, as follows:
+There are some functions whose behavior can be changed using the `#define` keyword before including them. For example, [gaussian blurs](filter/gaussianBlur) are usually done in two passes. By default, these are performed on their 1D version, but if you are interested in using a 2D kernel, all in the same pass, you will need to add the `GAUSSIANBLUR_2D` keyword, as follows:
 
 ```glsl
 
