@@ -2,7 +2,7 @@
 
 /*
 contributors: Inigo Quiles
-description:  Procedural generation of color palette algorithm explained here http://www.iquilezles.org/www/articles/palettes/palettes.htm)
+description:  Procedural generation of color palette algorithm explained here http://www.iquilezles.org/www/articles/palettes/palettes.htm
 use: palette(<float> t, <float3|float4> a, <float3|float4> b, <float3|float4> c, <float3|float4> d)
 */
 
