@@ -210,7 +210,7 @@ LYGIA has a long way to go and welcomes all kinds of contributions. You can help
 
 * **Bug fixing**
 * **Translation**, keeping parity between languages (GLSL, HLSL, MSL, WGSL, TSL, CUDA, OSL, etc.) is a big part of the challenge. Not all languages are the same and we want to make sure each function is optimized and carefully crafted for each environment. This means, the more eyes are looking at this, the better. Please make sure to read and understand the [Design Principles](https://github.com/patriciogonzalezvivo/lygia/blob/main/DESIGN.md) before starting.
-* **New functions or improving the current implementations**. Please take a look to the [Contribution Guidelines](https://github.com/patriciogonzalezvivo/lygia/blob/main/CONTRIBUTING.md) before starting.
+* **New functions or improving the current implementations**. Please take a look to the [Contribution Guidelines](https://github.com/patriciogonzalezvivo/lygia/blob/main/CONTRIBUTE.md) before starting.
 * **Documentation**. Each function has a header with some information describing the function. Make sure to fill this information when adding a new function.
 * Adding new **examples** and integrations for new environments like: [Godot](https://godotengine.org/), [ISF](https://isf.video/), [MaxMSP](https://cycling74.com/products/max), etc.
 * **Financial** [sponsorships](https://github.com/sponsors/patriciogonzalezvivo). Right now, the money that flows in is invested on the server and infrastructure. Long term plan will be to be able to pay lead contributors and maintainers.
