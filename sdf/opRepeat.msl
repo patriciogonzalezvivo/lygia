@@ -1,3 +1,5 @@
+#include "../math/mod.msl"
+
 /*
 contributors:  Inigo Quiles
 description: repeat operation for 2D/3D SDFs 
