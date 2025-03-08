@@ -1,7 +1,7 @@
 /*
-contributors: Patricio Gonzalez Vivo, Anton Marini
-description: mod polyfill
-use: <bool2|bool3|bool4> mod(<float2|float3|float4>, <float2|float3|float4>) 
+contributors: Patricio Gonzalez Vivo, Anton Marini, Mike Hays
+description: An implementation of mod that matches the GLSL mod. Note that MSL's fmod is different.
+use: <bool2|bool3|bool4> mod(<float2|float3|float4>, <float2|float3|float4>)
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
@@ -11,16 +11,16 @@ license:
 #define FNC_MOD
 
 // Scalar mod function (float)
-inline float mod(float x, float y) { return fmod(x, y); }
+inline float mod(float x, float y) { return x - y * floor(x / y); }
 
 // Vector mod functions (float2, float3, float4)
-inline float2 mod(float2 x, float2 y) { return fmod(x, y); }
-inline float3 mod(float3 x, float3 y) { return fmod(x, y); }
-inline float4 mod(float4 x, float4 y) { return fmod(x, y); }
+inline float2 mod(float2 x, float2 y) { return x - y * floor(x / y); }
+inline float3 mod(float3 x, float3 y) { return x - y * floor(x / y); }
+inline float4 mod(float4 x, float4 y) { return x - y * floor(x / y); }
 
 // Scalar mod function with scalar divisor (float2, float3, float4)
-inline float2 mod(float2 x, float y) { return fmod(x, float2(y)); }
-inline float3 mod(float3 x, float y) { return fmod(x, float3(y)); }
-inline float4 mod(float4 x, float y) { return fmod(x, float4(y)); }
+inline float2 mod(float2 x, float y) { return mod(x, float2(y)); }
+inline float3 mod(float3 x, float y) { return mod(x, float3(y)); }
+inline float4 mod(float4 x, float y) { return mod(x, float4(y)); }
 
 #endif
