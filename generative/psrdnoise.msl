@@ -30,7 +30,7 @@ license: |
 #ifndef FNC_PSRFNOISE
 #define FNC_PSRFNOISE
 
-float psrdnoise(float2 x, float2 period, float alpha, out float2 gradient) {
+float psrdnoise(float2 x, float2 period, float alpha, thread float2 &gradient) {
 
     // Transform to simplex space (axis-aligned hexagonal grid)
     float2 uv = float2(x.x + x.y*0.5, x.y);
@@ -116,7 +116,7 @@ float psrdnoise(float2 x, float2 period, float alpha, out float2 gradient) {
 	return 10.9 * n;
 }
 
-float psrdnoise(float2 x, float2 period, float alpha, out float2 gradient, out float3 dg) {
+float psrdnoise(float2 x, float2 period, float alpha, thread float2 &gradient, thread float3 &dg) {
 
 	// Transform to simplex space (axis-aligned hexagonal grid)
 	float2 uv = float2(x.x + x.y*0.5, x.y);
@@ -226,7 +226,7 @@ float psrdnoise(float2 x) {
     return psrdnoise(x, float2(0.0));
 }
 
-float psrdnoise(float3 x, float3 period, float alpha, out float3 gradient) {
+float psrdnoise(float3 x, float3 period, float alpha, thread float3 &gradient) {
 
 #ifndef PSRDNOISE_PERLIN_GRID
     // Transformation matrices for the axis-aligned simplex grid
@@ -426,7 +426,7 @@ float psrdnoise(float3 x, float3 period, float alpha, out float3 gradient) {
     return 39.5 * n; 
 }
 
-float psrdnoise(float3 x, float3 period, float alpha, out float3 gradient, out float3 dg, out float3 dg2) {
+float psrdnoise(float3 x, float3 period, float alpha, thread float3 &gradient, thread float3 &dg, thread float3 &dg2) {
 
 #ifndef PSRDNOISE_PERLIN_GRID
     // Transformation matrices for the axis-aligned simplex grid
