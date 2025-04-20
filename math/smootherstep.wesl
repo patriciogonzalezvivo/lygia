@@ -1,5 +1,5 @@
-#include "saturate.wgsl"
-#include "quintic.wgsl"
+import lygia::math::saturate;
+import lygia::math::quintic;
 
 /*
 contributors: Patricio Gonzalez Vivo

@@ -1,5 +1,5 @@
-#include "quat/mul.wgsl"
-#include "quat/identity.wgsl"
+import lygia::math::quat::mul;
+import lygia::math::quat::identity;
 
 /*
 contributors: Patricio Gonzalez Vivo
