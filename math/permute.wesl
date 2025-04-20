@@ -1,4 +1,4 @@
-#include "mod289.wgsl"
+import lygia::math::mod289;
 
 /*
 contributors: [Stefan Gustavson, Ian McEwan]

@@ -1,4 +1,4 @@
-#include "cubic.wgsl"
+import lygia::math::cubic;
 
 /*
 contributors: Patricio Gonzalez Vivo

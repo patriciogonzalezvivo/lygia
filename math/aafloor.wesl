@@ -1,4 +1,4 @@
-#include "map.wgsl"
+import lygia::math::map;
 
 /*
 contributors: ["dahart", "Fabrice NEYRET"]
