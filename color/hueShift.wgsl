@@ -1,5 +1,5 @@
-#include "space/hsl2rgb.glsl"
-#include "space/rgb2hsl.glsl"
+#include "space/hsl2rgb.wgsl"
+#include "space/rgb2hsl.wgsl"
 
 /*
 contributors:
