@@ -1,5 +1,5 @@
-#include "rgb2lab.glsl"
-#include "srgb2rgb.glsl"
+#include "rgb2lab.wgsl"
+#include "srgb2rgb.wgsl"
 
 /*
 contributors: Patricio Gonzalez Vivo
