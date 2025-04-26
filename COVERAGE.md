@@ -1,5 +1,5 @@
 | Module File | GLSL | HLSL | Metal | WGSL | WESL |
-| ---- | ---- | ----- | ---- | ---- | ---- |
+|:----------- | ---- | ---- | ----- | ---- | ---- |
 | animation/easing | OK | OK | MISSING | MISSING | MISSING |
 | animation/easing/back | OK | OK | MISSING | MISSING | MISSING |
 | animation/easing/backIn | OK | MISSING | MISSING | MISSING | MISSING |
