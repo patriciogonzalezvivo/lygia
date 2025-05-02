@@ -14,32 +14,32 @@ const PackFactors = vec3f( 256. * 256. * 256., 256. * 256.,  256. );
 const UnpackFactors = UnpackDownscale / vec4f( PackFactors, 1. );
 const ShiftRight8: f32 = 1. / 256.;
 
-fn unpack8(vec3 v) -> f32 {
+fn unpack8(v: vec3) -> f32 {
     let f = vec3( 8.0, 8.0 * 8.0, 8.0 * 8.0 * 8.0 );
     return dot(v, f) / 512.0;
 }
 
-fn unpack16(vec3 v) -> f32 {
+fn unpack16(v: vec3) -> f32 {
     let f = vec3( 16.0, 16.0 * 16.0, 16.0 * 16.0 * 16.0 );
     return dot(v, f) / 4096.0;
 }
 
-fn unpack32(vec3 v) -> f32 {
+fn unpack32(v: vec3) -> f32 {
     let f = vec3( 32.0, 32.0 * 32.0, 32.0 * 32.0 * 32.0 );
     return dot(v, f) / 32768.0;
 }
 
-fn unpack64(vec3 v) -> f32 {
+fn unpack64(v: vec3) -> f32 {
     let f = vec3( 64.0, 64.0 * 64.0, 64.0 * 64.0 * 64.0 );
     return dot(v, f) / 262144.0;
 }
 
-fn unpack128(vec3 v) -> f32 {
+fn unpack128(v: vec3) -> f32 {
     let f = vec3( 128.0, 128.0 * 128.0, 128.0 * 128.0 * 128.0 );
     return dot(v, f) / 2097152.0;
 }
 
-fn unpack256(vec3 v) -> f32  {
+fn unpack256(v: vec3) -> f32  {
     let f = vec3( 256.0, 256.0 * 256.0, 256.0 * 256.0 * 256.0 );
     return dot(v, f) / 16581375.0;
 }

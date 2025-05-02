@@ -6,7 +6,7 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-fn rotate3d(a: vec3f, r: f32) > mat3x3<f32> {
+fn rotate3d(a: vec3f, r: f32) -> mat3x3<f32> {
     let s = sin(r);
     let c = cos(r);
     let oc = 1.0 - c;
