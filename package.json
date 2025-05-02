@@ -10,6 +10,7 @@
   "scripts": {
     "build": "rm -rf dist/* && webpack",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build:wesl": "wesl-packager --src \"math/*.wesl\" --projectDir . --rootDir . --updatePackageJson --multiBundle --outDir dist",
     "lint": "eslint --fix --ext .js ."
   },
   "repository": {
@@ -71,5 +72,14 @@
     "semi": false,
     "arrowParens": "always",
     "singleQuote": true
+  },
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    "./*": {
+      "import": "./dist/*/weslBundle.js",
+      "types": "./dist/weslBundle.d.ts"
+    }
   }
 }
