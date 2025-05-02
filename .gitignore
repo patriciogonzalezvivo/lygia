@@ -3,3 +3,4 @@
 *.meta
 assets/*
 node_modules
+dist
