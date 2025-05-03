@@ -216,7 +216,7 @@ ivec4 charLUT( const int index ) {
     #if defined(PLATFORM_WEBGL)
     for (int i = 0; i < CHAR_TOTAL; i++)
         if (i == index) return d[i];
-    return ivec4(0x0, 0x0, 0x0, 0x0);
+    return ivec4(0x700808, 0x8080807, 0x8080808, 0x8700000);
     #else
     return d[ clamp(index, 0, CHAR_TOTAL) ];
     #endif
@@ -243,12 +243,12 @@ float char(vec2 uv, int char_code) {
     #endif
 
     // Now we must pick the correct line
-    #if __VERSION__ >= 130
-    int current_line  = (four_lines >> (8*(3-(char_coord.y)%4))) & 0xff;
-    int current_pixel = (current_line >> (7-char_coord.x)) & 0x01;
-    #else
+    #if __VERSION__ < 130 || defined(PLATFORM_WEBGL)
     int current_line = modi(four_lines / int(pow(256.0, float(3-modi(char_coord.y,4)))),256);
     int current_pixel = modi(current_line / int(pow(2.0, float(7-char_coord.x))),2);
+    #else
+    int current_line  = (four_lines >> (8*(3-(char_coord.y)%4))) & 0xff;
+    int current_pixel = (current_line >> (7-char_coord.x)) & 0x01;
     #endif
     return float(current_pixel);
 }
