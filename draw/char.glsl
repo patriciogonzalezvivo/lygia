@@ -230,7 +230,16 @@ float char(vec2 uv, int char_code) {
     // Pick the correct character bitmap, and then
     // the uint holding covering the four lines that 
     // our y pixel coordinate is in.
+
+    #if defined(PLATFORM_WEBGL)
+    ivec4 col = charLUT(char_code);
+    int four_lines = col.w;
+    if (char_coord.y < 4) four_lines = col.x;
+    else if (char_coord.y < 8) four_lines = col.y;
+    else if (char_coord.y < 12) four_lines = col.z;
+    #else
     int four_lines = charLUT(char_code)[char_coord.y/4];
+    #endif
 
     // Now we must pick the correct line
     #if __VERSION__ >= 130
