@@ -233,7 +233,7 @@ float char(vec2 uv, int char_code) {
     int four_lines = charLUT(char_code)[char_coord.y/4];
 
     // Now we must pick the correct line
-    #if version >= 130
+    #if __VERSION__ >= 130
     int current_line  = (four_lines >> (8*(3-(char_coord.y)%4))) & 0xff;
     int current_pixel = (current_line >> (7-char_coord.x)) & 0x01;
     #else
