@@ -234,9 +234,10 @@ float char(vec2 uv, int char_code) {
     #if defined(PLATFORM_WEBGL)
     ivec4 col = charLUT(char_code);
     int four_lines = col.w;
-    if (char_coord.y < 4) four_lines = col.x;
-    else if (char_coord.y < 8) four_lines = col.y;
-    else if (char_coord.y < 12) four_lines = col.z;
+    int index = char_coord.y/4;
+    if (index == 0) four_lines = col.x;
+    else if (index == 1) four_lines = col.y;
+    else if (index == 2) four_lines = col.z;
     #else
     int four_lines = charLUT(char_code)[char_coord.y/4];
     #endif
