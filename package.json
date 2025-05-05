@@ -10,6 +10,7 @@
   "scripts": {
     "build": "rm -rf dist/* && webpack",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build:wesl": "wesl-packager --src \"**/*.wesl\" --projectDir . --rootDir . --updatePackageJson --multiBundle --outDir dist",
     "lint": "eslint --fix --ext .js ."
   },
   "repository": {
@@ -43,7 +44,8 @@
     "prettier": "^2.2.1",
     "webpack": "^5.36.2",
     "webpack-cli": "^4.6.0",
-    "webpack-glsl-loader": "github:patriciogonzalezvivo/webpack-glsl-loader"
+    "webpack-glsl-loader": "github:patriciogonzalezvivo/webpack-glsl-loader",
+    "wesl-packager": "^0.6.1"
   },
   "eslintConfig": {
     "env": {
@@ -70,5 +72,14 @@
     "semi": false,
     "arrowParens": "always",
     "singleQuote": true
+  },
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    "./*": {
+      "import": "./dist/*/weslBundle.js",
+      "types": "./dist/weslBundle.d.ts"
+    }
   }
 }
