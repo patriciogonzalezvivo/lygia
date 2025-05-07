@@ -1,4 +1,4 @@
-#include "hue2rgb.wgsl"
+import lygia::color::space::hue2rgb;
 
 /*
 contributors: Patricio Gonzalez Vivo

@@ -1,4 +1,4 @@
-#include "reflect.wgsl"
+import lygia::color::blend::reflect::{blendReflect, blendReflect3};
 
 /*
 contributors: Jamie Owen

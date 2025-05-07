@@ -1,4 +1,4 @@
-#include "hue2rgb.wgsl"
+import lygia::color::space::hue2rgb::hue2rgb;
 
 /*
 contributors: Inigo Quiles

@@ -1,8 +1,8 @@
-#include "vividLight.wgsl"
+import lygia::color::blend::vividLight::blendVividLight;
 
 /*
 contributors: Jamie Owen
-description: Photoshop Hard Mix blend mode mplementations sourced from this article on https://mouaif.wordpress.com/2009/01/05/photoshop-math-with-glsl-shaders/
+description: Photoshop Hard Mix blend mode implementations sourced from this article on https://mouaif.wordpress.com/2009/01/05/photoshop-math-with-glsl-shaders/
 use: blendHardMix(<float|vec3> base, <float|vec3> blend [, <float> opacity])
 license: MIT License (MIT) Copyright (c) 2015 Jamie Owen
 */

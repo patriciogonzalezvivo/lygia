@@ -1,6 +1,4 @@
-#include "../../math/mmin.wgsl"
-#include "../../math/mmax.wgsl"
-#include "../../math/cubicMix.wgsl"
+import lygia::math::{mmin, mmax, cubicMix3};
 
 /*
 contributors: Patricio Gonzalez Vivo
@@ -22,11 +20,11 @@ fn rgb2ryb(rgb: vec3f) -> vec3f {
     let rgb101 = vec3f(.309, 0., .469);   // Magenta
     let rgb011 = vec3f(0., .053, .210);   // Turquoise
     let rgb111 = vec3f(0., 0., 0.);       // White
-    return cubeMix3(cubeMix3(
-        cubeMix3(rgb000, rgb001, rgb.z),
-        cubeMix3(rgb010, rgb011, rgb.z),
-        rgb.y), cubeMix3(
-        cubeMix3(rgb100, rgb101, rgb.z),
-        cubeMix3(rgb110, rgb111, rgb.z),
+    return cubicMix3(cubicMix3(
+        cubicMix3(rgb000, rgb001, rgb.z),
+        cubicMix3(rgb010, rgb011, rgb.z),
+        rgb.y), cubicMix3(
+        cubicMix3(rgb100, rgb101, rgb.z),
+        cubicMix3(rgb110, rgb111, rgb.z),
         rgb.y), rgb.x);
 }

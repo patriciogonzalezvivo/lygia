@@ -1,4 +1,4 @@
-#include "space/xyz2srgb.wgsl"
+import lygia::color::space::xyz2srgb::XYZ2RGB;
 
 /*
 contributors: Ronald van Wijnen (@OneDayOfCrypto)

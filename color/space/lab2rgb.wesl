@@ -1,5 +1,4 @@
-#include "lab2xyz.wgsl"
-#include "xyz2rgb.wgsl"
+import lygia::color::space::{lab2xyz::lab2xyz, xyz2rgb::xyz2rgb};
 
 /*
 contributors: Patricio Gonzalez Vivo
@@ -10,5 +9,4 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-
-fn lab2rgb(lab : vec3f) -> vec3f { return xyz2rgb( lab2xyz( lab ) ); }
+fn lab2rgb(lab: vec3f) -> vec3f { return xyz2rgb( lab2xyz( lab ) ); }

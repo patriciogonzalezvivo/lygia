@@ -1,4 +1,4 @@
-#include "../math/rotate2d.wgsl"
+import lygia::math::rotate2d;
 
 /*
 contributors: Patricio Gonzalez Vivo

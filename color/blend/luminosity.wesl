@@ -1,5 +1,4 @@
-#include "../space/rgb2hsv.wgsl"
-#include "../space/hsv2rgb.wgsl"
+import lygia::color::space::{rgb2hsv::rgb2hsv, hsv2rgb::hsv2rgb};
 
 /*
 contributors: Romain Dura

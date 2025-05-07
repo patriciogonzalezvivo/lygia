@@ -1,5 +1,4 @@
-#include "rgb2hcv.wgsl"
-#include "hue2rgb.wgsl"
+import lygia::color::space::{rgb2hcv::rgb2hcv, hue2rgb::hue2rgb};
 
 /*
 contributors:
@@ -13,6 +12,7 @@ license:
     - MIT License (MIT) Copyright (c) 2015 tobspr
 */
 
+const HCY_EPSILON = 1e-10;
 
 fn rgb2hcy(rgb: vec3f) -> vec3f {
     let HCYwts = vec3f(0.299, 0.587, 0.114);

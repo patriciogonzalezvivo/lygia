@@ -1,4 +1,4 @@
-#include "../common/ggx.wgsl"
+import lygia::lighting::common::ggx::GGX;
 
 fn specularCookTorrance(L: vec3f, N: vec3f, V: vec3f, NoV: f32, NoL: f32, roughness: f32, fresnel: f32) -> f32 {
     // Half angle vector

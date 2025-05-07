@@ -1,5 +1,4 @@
-#include "../space/rgb2hsv.wgsl"
-#include "../space/hsv2rgb.wgsl"
+import lygia::color::space::{rgb2hsv::rgb2hsv, hsv2rgb::hsv2rgb};
 
 /*
 contributors: Romain Dura
@@ -9,9 +8,9 @@ license: MIT License (MIT) Copyright (c) 2015 Jamie Owen
 */
 
 fn blendHue(base: vec3f, blend: vec3f) -> vec3f {
-  let baseHSL = rgb2hsv(base);
-  let blendHSL = rgb2hsv(blend);
-  return hsv2rgb(vec3f(blendHSL.x, baseHSL.y, baseHSL.z));
+  let baseHSV = rgb2hsv(base);
+  let blendHSV = rgb2hsv(blend);
+  return hsv2rgb(vec3f(blendHSV.x, baseHSV.y, baseHSV.z));
 }
 
 fn blendHueOpacity(base: vec3f, blend: vec3f, opacity: f32) -> vec3f {

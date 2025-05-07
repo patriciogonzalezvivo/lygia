@@ -1,4 +1,4 @@
-#include "../../math/decimate.wgsl"
+import lygia::math::decimate::decimate3;
 
 /*
 contributors: Patricio Gonzalez Vivo

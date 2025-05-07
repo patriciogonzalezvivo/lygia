@@ -1,6 +1,3 @@
-#include "space/rgb2yiq.wgsl"
-#include "space/yiq2rgb.wgsl"
-
 /*
 contributors:
     - Brad Larson

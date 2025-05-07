@@ -1,4 +1,4 @@
-#include "space/rgb2luma.wgsl"
+import lygia::color::space::rgb2luma;
 
 /*
 contributors: Hugh Kennedy (https://github.com/hughsk)

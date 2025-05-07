@@ -1,6 +1,5 @@
-#include "hueShift.wgsl"
-#include "space/rgb2ryb.wgsl"
-#include "space/ryb2rgb.wgsl"
+import lygia::color::hueShift;
+import lygia::color::space::{rgb2ryb::rgb2ryb, ryb2rgb::ryb2rgb};
 
 /*
 contributors:

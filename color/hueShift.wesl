@@ -1,5 +1,4 @@
-#include "space/hsl2rgb.wgsl"
-#include "space/rgb2hsl.wgsl"
+import lygia::color::space::{hsl2rgb::hsl2rgb, rgb2hsl::rgb2hsl};
 
 /*
 contributors:

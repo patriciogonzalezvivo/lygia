@@ -1,4 +1,4 @@
-#include "overlay.wgsl"
+import lygia::color::blend::overlay::blendOverlay;
 
 /*
 contributors: Jamie Owen

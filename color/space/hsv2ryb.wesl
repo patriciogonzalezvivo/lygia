@@ -1,6 +1,4 @@
-#include "hsv2rgb.wgsl"
-#include "rgb2ryb.wgsl"
-#include "ryb2rgb.wgsl"
+import lygia::color::space::{hsv2rgb::hsv2rgb, ryb2rgb::ryb2rgb};
 
 /*
 contributors: Patricio Gonzalez Vivo
