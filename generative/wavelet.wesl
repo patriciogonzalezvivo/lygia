@@ -1,5 +1,5 @@
-#include "random.wgsl"
-#include "../math/rotate2d.wgsl"
+import lygia::generative::random::random2;
+import lygia::math::rotate2d;
 
 /*
 contributors: Martijn Steinrucken

@@ -1,8 +1,9 @@
-#include "space/rgb2lab.wgsl"
-#include "space/rgb2YCbCr.wgsl"
-#include "space/rgb2YPbPr.wgsl"
-#include "space/rgb2yuv.wgsl"
-#include "space/rgb2oklab.wgsl"
+import lygia::color::space::{
+    rgb2lab::rgb2lab, 
+    rgb2YCbCr::rgb2YCbCr, 
+    rgb2YPbPr::rgb2YPbPr, 
+    rgb2yuv::rgb2yuv, 
+    rgb2oklab::rgb2oklab};
 
 /*
 contributors: Patricio Gonzalez Vivo

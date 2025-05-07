@@ -1,5 +1,5 @@
-#include "srgb2rgb.wgsl"
-#include "rgb2oklab.wgsl"
+import lygia::color::space::srgb2rgb::srgb2rgb;
+import lygia::color::space::rgb2oklab::rgb2oklab;
 
 /*
 contributors: Bjorn Ottosson (@bjornornorn)

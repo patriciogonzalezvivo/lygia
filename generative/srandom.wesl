@@ -1,4 +1,4 @@
-#include "../math/mod.wgsl"
+import lygia::math::mod::{mod2, mod3};
 
 /*
 contributors:

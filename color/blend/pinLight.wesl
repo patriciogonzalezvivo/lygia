@@ -1,5 +1,5 @@
-#include "lighten.wgsl"
-#include "darken.wgsl"
+import lygia::color::blend::lighten::blendLighten;
+import lygia::color::blend::darken::blendDarken;
 
 /*
 contributors: Jamie Owen

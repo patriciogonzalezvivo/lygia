@@ -1,4 +1,4 @@
-#include "../math/const.wgsl"
+import lygia::math::consts::PI;
 
 /*
 contributors: Patricio Gonzalez Vivo

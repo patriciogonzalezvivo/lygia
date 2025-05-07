@@ -1,5 +1,4 @@
-#include "xyz2rgb.wgsl"
-#include "rgb2srgb.wgsl"
+import lygia::color::space::{xyz2rgb::xyz2rgb, rgb2srgb::rgb2srgb};
 
 /*
 contributors: Patricio Gonzalez Vivo

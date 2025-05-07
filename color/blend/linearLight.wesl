@@ -1,10 +1,10 @@
-#include "linearDodge.wgsl"
-#include "linearBurn.wgsl"
+import lygia::color::blend::linearDodge::blendLinearDodge;
+import lygia::color::blend::linearBurn::blendLinearBurn;
 
 /*
 contributors: Jamie Owen
-description: Photoshop Linear Light blend mode mplementations sourced from this article on https://mouaif.wordpress.com/2009/01/05/photoshop-math-with-glsl-shaders/
-use: blendLinearLigth(<float|vec3> base, <float|vec3> blend [, <float> opacity])
+description: Photoshop Linear Light blend mode implementations sourced from this article on https://mouaif.wordpress.com/2009/01/05/photoshop-math-with-glsl-shaders/
+use: blendLinearLight(<float|vec3> base, <float|vec3> blend [, <float> opacity])
 license: MIT License (MIT) Copyright (c) 2015 Jamie Owen
 */
 

@@ -1,4 +1,4 @@
-#include "common/schlick.wgsl"
+import lygia::lighting::common::schlick::schlick;
 
 /*
 contributors: Patricio Gonzalez Vivo

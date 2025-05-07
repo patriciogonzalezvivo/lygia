@@ -1,7 +1,5 @@
-#include "space/srgb2rgb.wgsl"
-#include "space/rgb2srgb.wgsl"
-#include "space/oklab2rgb.wgsl"
-#include "space/rgb2oklab.wgsl"
+import lygia::color::space::rgb2oklab::RGB2OKLAB_B;
+import lygia::color::space::oklab2rgb::OKLAB2RGB_B;
 
 /*
 contributors:
@@ -19,9 +17,6 @@ license:
     - MIT License (MIT) Copyright (c) 2020 Björn Ottosson
     - MIT License (MIT) Copyright (c) 2020 Inigo Quilez
 */
-
-
-
 
 fn mixOklab( colA: vec3f, colB: vec3f, h: f32 ) -> vec3f {
     

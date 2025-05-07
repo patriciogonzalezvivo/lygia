@@ -1,5 +1,4 @@
-#include "fresnel.wgsl"
-#include "envMap.wgsl"
+import lygia::lighting::{fresnel, envMap};
 
 /*
 contributors: Patricio Gonzalez Vivo
@@ -16,7 +15,7 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-fn fresnelReflection(R: vec3f, f0: vec3f, NoV: f32) -> {
+fn fresnelReflection(R: vec3f, f0: vec3f, NoV: f32) -> vec3f {
     let frsnl = fresnel(f0, NoV);
 
     let reflectColor = vec3f(0.0);

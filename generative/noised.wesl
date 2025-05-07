@@ -1,4 +1,4 @@
-#include "srandom.wgsl"
+import lygia::generative::srandom::{srandom22, srandom33};
 
 /*
 contributors:

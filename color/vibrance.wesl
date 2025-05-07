@@ -1,4 +1,4 @@
-#include "luma.wgsl"
+import lygia::color::space::rgb2luma;
 
 /*
 contributors: Christian Cann Schuldt Jensen ~ CeeJay.dk

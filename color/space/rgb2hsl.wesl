@@ -1,4 +1,4 @@
-#include "rgb2hcv.wgsl"
+import lygia::color::space::rgb2hcv::rgb2hcv;
 
 /*
 contributors: Patricio Gonzalez Vivo
