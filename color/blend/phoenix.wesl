@@ -13,6 +13,6 @@ fn blendPhoenix3(base: vec3f, blend: vec3f) -> vec3f {
   return min(base, blend) - max(base, blend) + vec3f(1.0);
 }
 
-vec3 blendPhoenix3Opacity(base: vec3f, blend: vec3f, opacity: f32) -> vec3f {
+fn blendPhoenix3Opacity(base: vec3f, blend: vec3f, opacity: f32) -> vec3f {
   return blendPhoenix3(base, blend) * opacity + base * (1.0 - opacity);
 }

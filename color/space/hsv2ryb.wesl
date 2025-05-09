@@ -12,6 +12,6 @@ license:
 */
 
 fn hsv2ryb(v: vec3f) -> vec3f {
-    vec3 rgb = hsv2rgb(v);
+    let rgb = hsv2rgb(v);
     return ryb2rgb(rgb) - saturate(1.-v.z);
 }

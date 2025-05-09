@@ -15,12 +15,14 @@ fn k2rgb(t : f32) -> vec3f {
         0.7615 * l - 5.681
     );
 
-    if (t > 6500.0) 
+    if (t > 6500.0) {
         color.g = 138039.0 * p + 0.738;
+    }
 
     color = saturate(color);
-    if (t < 1000.0) 
+    if (t < 1000.0) {
         color *= t/1000.0;
+    }
 
     return color;
 }
