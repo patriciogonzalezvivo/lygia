@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "types": ["@webgpu/types"],
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "bundler",
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true
+  },
+  "include": ["test/**/*.ts", "vitest.config.ts"],
+  "exclude": ["node_modules"]
+}
