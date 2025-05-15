@@ -9,7 +9,7 @@
   "type": "module",
   "scripts": {
     "build": "rm -rf dist/* && webpack",
-    "test": "vitest",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "build:wesl": "wesl-packager --src \"**/*.wesl\" --projectDir . --rootDir . --updatePackageJson --multiBundle --outDir dist",
     "lint": "eslint --fix --ext .js ."
   },
@@ -41,21 +41,14 @@
   "homepage": "https://lygia.xyz",
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@webgpu/types": "^0.1.60",
     "eslint": "^7.24.0",
     "eslint-config-prettier": "^8.2.0",
     "eslint-plugin-prettier": "^3.4.0",
     "prettier": "^2.2.1",
-    "typescript": "^5.8.3",
-    "vitest": "^3.1.3",
-    "webgpu": "^0.2.12",
     "webpack": "^5.36.2",
     "webpack-cli": "^4.6.0",
     "webpack-glsl-loader": "github:patriciogonzalezvivo/webpack-glsl-loader",
-    "wesl": "0.6.2",
-    "wesl-packager": "0.6.2",
-    "wesl-plugin": "0.6.2",
-    "wesl-tooling": "0.6.2"
+    "wesl-packager": "^0.6.1"
   },
   "eslintConfig": {
     "env": {
