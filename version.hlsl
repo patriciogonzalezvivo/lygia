@@ -14,5 +14,5 @@ license:
 #endif
 
 #ifndef LYGIA_VERSION_PATCH
-#define LYGIA_VERSION_PATCH 1
+#define LYGIA_VERSION_PATCH 2
 #endif
