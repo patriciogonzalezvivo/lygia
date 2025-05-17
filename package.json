@@ -24,6 +24,8 @@
     "shader-library",
     "glsl",
     "wgsl",
+    "WESL",
+    "WebGPU",
     "hlsl",
     "metal",
     "glsl-shader",

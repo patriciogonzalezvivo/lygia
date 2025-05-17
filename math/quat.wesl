@@ -1,6 +1,3 @@
-import lygia::math::quat::mul;
-import lygia::math::quat::identity;
-
 /*
 contributors: Patricio Gonzalez Vivo
 description: |
