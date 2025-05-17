@@ -30,8 +30,8 @@ importers:
         specifier: github:patriciogonzalezvivo/webpack-glsl-loader
         version: https://codeload.github.com/patriciogonzalezvivo/webpack-glsl-loader/tar.gz/3023b6ce6e56fb779ca305d61de7bc356b7cca35
       wesl-packager:
-        specifier: ^0.6.1
-        version: 0.6.1
+        specifier: ^0.6.2
+        version: 0.6.2
 
 packages:
 
@@ -104,6 +104,15 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
+
+  '@petamoriken/float16@3.9.2':
+    resolution: {integrity: sha512-VgffxawQde93xKxT3qap3OH+meZf7VaSB5Sqd4Rqc+FP5alWbpOyan/7tRbOAvynjpG3GpdtAuGU/NdhQpmrog==}
+
+  '@reactively/core@0.0.8':
+    resolution: {integrity: sha512-5uAnNf2gQSm3gM7z6Lx079H1/MuDQQI+5aYfwyDFGR9nHZj8yblLY/6aOJVWp+NcBwXVBKuWQ28qWHD9F1qN1w==}
+
+  '@reactively/decorate@0.0.4':
+    resolution: {integrity: sha512-hiGsUjns2n1xCBcq6yTEal5TrL1ATcWfHMmbE0M3OxFvEt+WyVGmWwamXlwXUgODpYDya4SCoormGCTjLNr7HA==}
 
   '@types/eslint-scope@3.7.7':
     resolution: {integrity: sha512-MzMFlSLBqNF2gcHWO0G1vP/YQyfvrxZ0bF+u7mzUdZ1/xK4A4sru+nraZz5i3iEIk1l1uyicaDVTB4QbbEkAYg==}
@@ -258,6 +267,9 @@ packages:
 
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
+
+  berry-pretty@0.0.4:
+    resolution: {integrity: sha512-vgzAZsecAZ6MTAUsw2O6QdVDlrqRdnOoouY9V876Tgp1EC3jKE+Xqu9P7uGW0vF7JFGlyLnrVVWKmnPHMczHOQ==}
 
   brace-expansion@1.1.11:
     resolution: {integrity: sha512-iCuPHDFgrHX7H2vEI/5xpz07zSHB00TpugqhmYtVmMO6518mCuRMoOYFldEBl0g187ufozdaHgWKcYFb61qGiA==}
@@ -914,6 +926,9 @@ packages:
   text-table@0.2.0:
     resolution: {integrity: sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==}
 
+  thimbleberry@0.2.10:
+    resolution: {integrity: sha512-sWQIKq9FdqYZbsUfw7l7/HqxNmvze0e6/FUlgjBkwYtfd5A30cjfY2M+mHUGlO0+bGZro5J0c7lfeHJ1Zu7/JQ==}
+
   type-check@0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
     engines: {node: '>= 0.8.0'}
@@ -983,9 +998,12 @@ packages:
       webpack-cli:
         optional: true
 
-  wesl-packager@0.6.1:
-    resolution: {integrity: sha512-xNPWHL9jgnfe8mmptFL1+CGW8kSCDXIvf39+n8TRnXjfwr9TOa1AMCVfIpxZhyA2CYYqWNsO/XvSbQn+ibwgog==}
+  wesl-packager@0.6.2:
+    resolution: {integrity: sha512-mNJ0VC4iCP0DneG11ZteuoLQmq2TkVkmGs+ltRTr09kUljXhPtqOO6iBLDu58SzFjWg4im78tuCUW5OMd8OndA==}
     hasBin: true
+
+  wesl-tooling@0.6.2:
+    resolution: {integrity: sha512-bWLtXymW+NdmVqFE4fg91qttDPjsgdN9JP74NbgDBuFoi7GgGEYvk6urprwZLzAIXDpfRO+luzK9UiWDUFzxeg==}
 
   which@2.0.2:
     resolution: {integrity: sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==}
@@ -1087,6 +1105,14 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
+
+  '@petamoriken/float16@3.9.2': {}
+
+  '@reactively/core@0.0.8': {}
+
+  '@reactively/decorate@0.0.4':
+    dependencies:
+      '@reactively/core': 0.0.8
 
   '@types/eslint-scope@3.7.7':
     dependencies:
@@ -1254,6 +1280,8 @@ snapshots:
   astral-regex@2.0.0: {}
 
   balanced-match@1.0.2: {}
+
+  berry-pretty@0.0.4: {}
 
   brace-expansion@1.1.11:
     dependencies:
@@ -1851,6 +1879,14 @@ snapshots:
 
   text-table@0.2.0: {}
 
+  thimbleberry@0.2.10:
+    dependencies:
+      '@petamoriken/float16': 3.9.2
+      '@reactively/core': 0.0.8
+      '@reactively/decorate': 0.0.4
+      berry-pretty: 0.0.4
+      fast-deep-equal: 3.1.3
+
   type-check@0.4.0:
     dependencies:
       prelude-ls: 1.2.1
@@ -1934,15 +1970,21 @@ snapshots:
       - esbuild
       - uglify-js
 
-  wesl-packager@0.6.1:
+  wesl-packager@0.6.2:
     dependencies:
       '@biomejs/js-api': 0.7.1(@biomejs/wasm-nodejs@1.9.4)
       '@biomejs/wasm-nodejs': 1.9.4
       glob: 11.0.2
       import-meta-resolve: 4.1.0
+      wesl-tooling: 0.6.2
     transitivePeerDependencies:
       - '@biomejs/wasm-bundler'
       - '@biomejs/wasm-web'
+
+  wesl-tooling@0.6.2:
+    dependencies:
+      import-meta-resolve: 4.1.0
+      thimbleberry: 0.2.10
 
   which@2.0.2:
     dependencies:
