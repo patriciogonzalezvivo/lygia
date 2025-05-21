@@ -75,9 +75,6 @@
     "arrowParens": "always",
     "singleQuote": true
   },
-  "files": [
-    "dist"
-  ],
   "exports": {
     "./*": {
       "import": "./dist/*/weslBundle.js",
