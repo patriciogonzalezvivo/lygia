@@ -20,6 +20,10 @@ license:
 #define DILATION_TYPE float
 #endif
 
+#ifndef DILATION_MAX_RADIUS
+#define DILATION_MAX_RADIUS 16
+#endif
+
 #ifndef DILATION_SAMPLE_FNC
 #define DILATION_SAMPLE_FNC(TEX, UV) SAMPLER_FNC(TEX, UV).r
 #endif
@@ -31,17 +35,26 @@ DILATION_TYPE dilation(SAMPLER_TYPE tex, vec2 st, vec2 pixel, int radius) {
     float invKR = 1.0 / float(radius);
     DILATION_TYPE acc = DILATION_TYPE(0.0);
     float w = 0.0;
-    for(int i = -radius; i <= radius; ++i)
-    for(int j = -radius; j <= radius; ++j) {
-        vec2 rxy = vec2(ivec2(i, j));
-        vec2 kst = rxy * invKR * 2.0;
-        vec2 texOffset = st + rxy * pixel;
-        float kernel = saturate(1.0 - dot(kst, kst));
-        DILATION_TYPE t = DILATION_SAMPLE_FNC(tex, texOffset);
-        DILATION_TYPE v = t + kernel;
-        if (sum(v) > sum(acc)) {
-            acc = v;
-            w = kernel;
+
+    #ifdef PLATFORM_WEBGL
+    for(int i = -DILATION_MAX_RADIUS; i <= DILATION_MAX_RADIUS; ++i) {
+        if (i >= radius) break;
+        for(int j = -DILATION_MAX_RADIUS; j <= DILATION_MAX_RADIUS; ++j) {
+            if (j >= radius) break;
+    #else
+    for(int i = -radius; i <= radius; ++i) {
+        for(int j = -radius; j <= radius; ++j) {
+    #endif
+            vec2 rxy = vec2(ivec2(i, j));
+            vec2 kst = rxy * invKR * 2.0;
+            vec2 texOffset = st + rxy * pixel;
+            float kernel = saturate(1.0 - dot(kst, kst));
+            DILATION_TYPE t = DILATION_SAMPLE_FNC(tex, texOffset);
+            DILATION_TYPE v = t + kernel;
+            if (sum(v) > sum(acc)) {
+                acc = v;
+                w = kernel;
+            }
         }
     }
     
