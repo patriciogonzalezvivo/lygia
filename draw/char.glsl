@@ -223,22 +223,30 @@ ivec4 charLUT( const int index ) {
 }
 
 float char(vec2 uv, int char_code) {
-    ivec2 char_coord = ivec2(floor(uv * vec2(8.0, 16.0)));
-    char_coord.x = modi(char_coord.x, 8);
-    char_coord.y = 15 - char_coord.y;
+    ivec2 char_coord = ivec2(7, 15) - ivec2(floor(uv * vec2(8.0, 16.0)));
     
     // Pick the correct character bitmap, and then
     // the uint holding covering the four lines that 
     // our y pixel coordinate is in.
+
+    #if defined(PLATFORM_WEBGL)
+    ivec4 col = charLUT(char_code);
+    int four_lines = col.w;
+    int index = char_coord.y/4;
+    if (index == 0) four_lines = col.x;
+    else if (index == 1) four_lines = col.y;
+    else if (index == 2) four_lines = col.z;
+    #else
     int four_lines = charLUT(char_code)[char_coord.y/4];
+    #endif
 
     // Now we must pick the correct line
-    #if __VERSION__ >= 130
-    int current_line  = (four_lines >> (8*(3-(char_coord.y)%4))) & 0xff;
-    int current_pixel = (current_line >> (7-char_coord.x)) & 0x01;
-    #else
+    #if __VERSION__ < 130 || defined(PLATFORM_WEBGL)
     int current_line = modi(four_lines / int(pow(256.0, float(3-modi(char_coord.y,4)))),256);
-    int current_pixel = modi(current_line / int(pow(2.0, float(7-char_coord.x))),2);
+    int current_pixel = modi(current_line / int(pow(2.0, float(char_coord.x))),2);
+    #else
+    int current_line  = (four_lines >> (8*(3-(char_coord.y)%4))) & 0xff;
+    int current_pixel = (current_line >> (char_coord.x)) & 0x01;
     #endif
     return float(current_pixel);
 }
