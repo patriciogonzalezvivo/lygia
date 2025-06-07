@@ -37,13 +37,13 @@ In your shader just `#include` the functions you need and use them:
     
 </div>
 
-If you just need to resolve the dependencies of a shader file you got, the fastest way would be to drag&drop your shader file in the box below. We can resolve the dependencies for you.
+<!-- If you just need to resolve the dependencies of a shader file you got, the fastest way would be to drag&drop your shader file in the box below. We can resolve the dependencies for you.
 
 <div class="container">
     <div class="file-drop-area">
     <span class="file-msg">Drop your shader file <a href="https://lygia.xyz/">here</a></span>
     </div>
-</div>
+</div> -->
 
 LYGIA have been integrated into the following Engines, Frameworks, Creative Tools and online editors:
 
