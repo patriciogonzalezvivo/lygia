@@ -2,3 +2,5 @@
 */.DS_Store
 *.meta
 assets/*
+node_modules
+dist
