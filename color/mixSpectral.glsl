@@ -159,7 +159,7 @@ vec3 mixSpectral2(vec3 A, float t1, vec3 B, float t2) {
 		
 		float totalConcentration = concentration1 + concentration2;
 		
-        float ksMix = 0;
+        float ksMix = 0.0;
 		
 		ksMix += KS(R1[i]) * concentration1;
 		ksMix += KS(R2[i]) * concentration2;
@@ -218,7 +218,7 @@ vec3 mixSpectral3(vec3 A, float t1, vec3 B, float t2, vec3 C, float t3) {
 		
 		float totalConcentration = concentration1 + concentration2 + concentration3;
 
-        float ksMix = 0;
+        float ksMix = 0.0;
 		
 		ksMix += KS(R1[i]) * concentration1;
 		ksMix += KS(R2[i]) * concentration2;
@@ -281,7 +281,7 @@ vec3 mixSpectral4(vec3 A, float t1, vec3 B, float t2, vec3 C, float t3, vec3 D, 
 		
 		float totalConcentration = concentration1 + concentration2 + concentration3 + concentration4;
 
-        float ksMix = 0;
+        float ksMix = 0.0;
 		
 		ksMix += KS(R1[i]) * concentration1;
 		ksMix += KS(R2[i]) * concentration2;
