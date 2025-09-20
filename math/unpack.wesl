@@ -44,7 +44,7 @@ fn unpack256(v: vec3) -> f32  {
     return dot(v, f) / 16581375.0;
 }
 
-fn unpack(v: vec3f, base: f32) -> f32 {
+fn unpackBase(v: vec3f, base: f32) -> f32 {
     let base3 = base * base * base;
     let f = vec3( base, base * base, base3);
     return dot(v, f) / base3;
