@@ -1,5 +1,6 @@
 import lygia::color::hueShift;
 import lygia::color::space::{rgb2ryb::rgb2ryb, ryb2rgb::ryb2rgb};
+import lygia::math::const::PI;
 
 /*
 contributors:
