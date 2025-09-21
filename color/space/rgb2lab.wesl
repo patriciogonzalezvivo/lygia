@@ -8,5 +8,4 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-
 fn rgb2lab(rgb: vec3f ) -> vec3f { return xyz2lab(rgb2xyz(rgb)); }

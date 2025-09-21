@@ -6,13 +6,13 @@ license: MIT License (MIT) Copyright (c) 2015 Jamie Owen
 */
 
 fn blendSubtract(base: f32, blend: f32) -> f32 {
-  return max(base + blend - 1.0, 0.0);
+    return max(base + blend - 1.0, 0.0);
 }
 
 fn blendSubtract3(base: vec3f, blend: vec3f) -> vec3f {
-  return max(base + blend - vec3f(1.0), vec3f(0.0));
+    return max(base + blend - vec3f(1.0), vec3f(0.0));
 }
 
 fn blendSubtract3Opacity(base: vec3f, blend: vec3f, opacity: f32) -> vec3f {
-  return blendSubtract3(base, blend) * opacity + base * (1.0 - opacity);
+    return blendSubtract3(base, blend) * opacity + base * (1.0 - opacity);
 }

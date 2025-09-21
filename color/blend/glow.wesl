@@ -8,13 +8,13 @@ license: MIT License (MIT) Copyright (c) 2015 Jamie Owen
 */
 
 fn blendGlow(base: f32, blend: f32) -> f32 {
-  return blendReflect(blend, base);
+    return blendReflect(blend, base);
 }
 
 fn blendGlow3(base: vec3f, blend: vec3f) -> vec3f {
-  return blendReflect3(blend, base);
+    return blendReflect3(blend, base);
 }
 
 fn blendGlow3Opacity(base: vec3f, blend: vec3f, opacity: f32) -> vec3f {
-  return blendGlow3(base, blend) * opacity + base * (1.0 - opacity);
+    return blendGlow3(base, blend) * opacity + base * (1.0 - opacity);
 }

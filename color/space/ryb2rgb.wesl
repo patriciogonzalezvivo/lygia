@@ -12,26 +12,26 @@ license:
 */
 
 fn ryb2rgb(ryb: vec3f) -> vec3f {
-  let ryb000 = vec3f(1., 1., 1.);       // White
-  let ryb001 = vec3f(.163, .373, .6);   // Blue
-  let ryb010 = vec3f(1., 1., 0.);       // Yellow
-  let ryb100 = vec3f(1., 0., 0.);       // Red
-  let ryb011 = vec3f(0., .66, .2);      // Green
-  let ryb101 = vec3f(.5, 0., .5);       // Violet
-  let ryb110 = vec3f(1., .5, 0.);       // Orange
-  let ryb111 = vec3f(0., 0., 0.);       // Black
-  return 
-    cubicMix3(
-      cubicMix3(
-        cubicMix3(ryb000, ryb001, vec3f(ryb.z)),
-        cubicMix3(ryb010, ryb011, vec3f(ryb.z)),
-        vec3f(ryb.y)
-      ), 
-      cubicMix3(
-        cubicMix3(ryb100, ryb101, ryb.z),
-        cubicMix3(ryb110, ryb111, ryb.z),
-        vec3f(ryb.y)
-      ), 
-      vec3f(ryb.x)
-    );
+    let ryb000 = vec3f(1., 1., 1.);       // White
+    let ryb001 = vec3f(.163, .373, .6);   // Blue
+    let ryb010 = vec3f(1., 1., 0.);       // Yellow
+    let ryb100 = vec3f(1., 0., 0.);       // Red
+    let ryb011 = vec3f(0., .66, .2);      // Green
+    let ryb101 = vec3f(.5, 0., .5);       // Violet
+    let ryb110 = vec3f(1., .5, 0.);       // Orange
+    let ryb111 = vec3f(0., 0., 0.);       // Black
+    return 
+        cubicMix3(
+            cubicMix3(
+                cubicMix3(ryb000, ryb001, vec3f(ryb.z)),
+                cubicMix3(ryb010, ryb011, vec3f(ryb.z)),
+                vec3f(ryb.y)
+            ), 
+            cubicMix3(
+                cubicMix3(ryb100, ryb101, ryb.z),
+                cubicMix3(ryb110, ryb111, ryb.z),
+                vec3f(ryb.y)
+            ), 
+            vec3f(ryb.x)
+        );
 }

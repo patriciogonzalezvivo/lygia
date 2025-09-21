@@ -6,13 +6,13 @@ license: MIT License (MIT) Copyright (c) 2015 Jamie Owen
 */
 
 fn blendPhoenix(base: f32, blend: f32) -> f32 {
-  return min(base, blend) - max(base, blend) + 1.0;
+    return min(base, blend) - max(base, blend) + 1.0;
 }
 
 fn blendPhoenix3(base: vec3f, blend: vec3f) -> vec3f {
-  return min(base, blend) - max(base, blend) + vec3f(1.0);
+    return min(base, blend) - max(base, blend) + vec3f(1.0);
 }
 
 fn blendPhoenix3Opacity(base: vec3f, blend: vec3f, opacity: f32) -> vec3f {
-  return blendPhoenix3(base, blend) * opacity + base * (1.0 - opacity);
+    return blendPhoenix3(base, blend) * opacity + base * (1.0 - opacity);
 }
