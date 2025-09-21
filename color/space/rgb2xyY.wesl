@@ -1,5 +1,5 @@
-import lygia::color::space::rgb2xyz::rgb2xyz;
-import lygia::color::space::xyz2xyY::xyz2xyY;
+import package::color::space::rgb2xyz::rgb2xyz;
+import package::color::space::xyz2xyY::xyz2xyY;
 
 /*
 contributors: Patricio Gonzalez Vivo

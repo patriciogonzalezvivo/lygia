@@ -1,4 +1,4 @@
-import lygia::color::space::{rgb2hsv::rgb2hsv, hsv2rgb::hsv2rgb};
+import package::color::space::{rgb2hsv::rgb2hsv, hsv2rgb::hsv2rgb};
 
 /*
 contributors: Romain Dura
@@ -8,11 +8,11 @@ license: MIT License (MIT) Copyright (c) 2015 Jamie Owen
 */
 
 fn blendLuminosity(base: vec3f, blend: vec3f) -> vec3f {
-  let baseHSL = rgb2hsv(base);
-  let blendHSL = rgb2hsv(blend);
-  return hsv2rgb(vec3f(baseHSL.x, baseHSL.y, blendHSL.z));
+    let baseHSL = rgb2hsv(base);
+    let blendHSL = rgb2hsv(blend);
+    return hsv2rgb(vec3f(baseHSL.x, baseHSL.y, blendHSL.z));
 }
 
 fn blendLuminosityOpacity(base: vec3f, blend: vec3f, opacity: f32) -> vec3f {
-  return blendLuminosity(base, blend) * opacity + base * (1.0 - opacity);
+    return blendLuminosity(base, blend) * opacity + base * (1.0 - opacity);
 }

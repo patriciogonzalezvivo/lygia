@@ -1,4 +1,4 @@
-import lygia::color::space::rgb2hcv::rgb2hcv;
+import package::color::space::rgb2hcv::rgb2hcv;
 
 /*
 contributors: Patricio Gonzalez Vivo
@@ -7,7 +7,6 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
-
 
 fn rgb2hsl(rgb: vec3f) -> vec3f {
     let HCV = rgb2hcv(rgb);

@@ -1,4 +1,4 @@
-import lygia::lighting::common::schlick::schlick;
+import package::lighting::common::schlick::schlick;
 
 /*
 contributors: Patricio Gonzalez Vivo

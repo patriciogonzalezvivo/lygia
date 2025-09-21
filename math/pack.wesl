@@ -11,7 +11,7 @@ const UnpackFactors = UnpackDownscale / vec4f( PackFactors, 1. );
 const ShiftRight8: f32 = 1. / 256.;
 
 fn pack(v: f32) -> vec4f {
-	var r = vec4( fract( v * PackFactors ), v );
-	r.yzw -= r.xyz * ShiftRight8; // tidy overflow
-	return r * PackUpscale;
+    var r = vec4( fract( v * PackFactors ), v );
+    r.yzw -= r.xyz * ShiftRight8; // tidy overflow
+    return r * PackUpscale;
 }

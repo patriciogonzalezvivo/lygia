@@ -6,7 +6,6 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-
 // #ifdef YUV_SDTV
 // const YUV2RGB = mat3x3<f32>(
 //     vec3f(1.0,       1.0,      1.0),
@@ -21,4 +20,3 @@ const YUV2RGB = mat3x3<f32>(
 );
 // #endif
 fn yuv2rgb(yuv: vec3f) -> vec3f { return YUV2RGB * yuv; }
-

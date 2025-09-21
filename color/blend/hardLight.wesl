@@ -1,4 +1,4 @@
-import lygia::color::blend::overlay::blendOverlay;
+import package::color::blend::overlay::blendOverlay;
 
 /*
 contributors: Jamie Owen

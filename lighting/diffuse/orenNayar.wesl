@@ -6,7 +6,7 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-fn diffuseOrenNayar(L: vec3f, N: vec3f, V: vec3f, NoV: f32, NoL: f32, roughness: f32) -> f32{
+fn diffuseOrenNayar(L: vec3f, N: vec3f, V: vec3f, NoV: f32, NoL: f32, roughness: f32) -> f32 {
     let LoV = dot(L, V);
     
     let s = LoV - NoL * NoV;

@@ -11,8 +11,8 @@ fn blendScreen(base: f32, blend: f32) -> f32 {
 
 fn blendScreen3(base: vec3f, blend: vec3f) -> vec3f {
     return vec3f(blendScreen(base.r, blend.r),
-                blendScreen(base.g, blend.g),
-                blendScreen(base.b, blend.b));
+                 blendScreen(base.g, blend.g),
+                 blendScreen(base.b, blend.b));
 }
 
 fn blendScreenWithOpacity3(base: vec3f, blend: vec3f, opacity: f32) -> vec3f {

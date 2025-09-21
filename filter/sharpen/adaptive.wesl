@@ -1,4 +1,3 @@
-
 /*
 contributors: bacondither
 description: Adaptive sharpening. For strength values between 0.3 <-> 2.0 are a reasonable range
@@ -12,12 +11,11 @@ examples:
     - /shaders/filter_sharpen2D.frag
 */
 
-fn sharpenContrastAdaptive(myTexture
-                           : texture_2d<f32>, mySampler
-                           : sampler, st
-                           : vec2f, pixel
-                           : vec2f, strength
-                           : f32) -> vec3f {
+fn sharpenContrastAdaptive(myTexture: texture_2d<f32>,
+                           mySampler: sampler,
+                           st: vec2f,
+                           pixel: vec2f,
+                           strength: f32) -> vec3f {
     let peak = -1.0 / mix(8.0, 5.0, saturate(strength));
 
     // fetch a 3x3 neighborhood around the pixel 'e',
@@ -103,12 +101,11 @@ const scale_cs = 0.056;  // Compression slope above scale_lim
 const w1 = vec3(0.5, 1.0, 1.41421356237);            // 0.25, 1.0, 2.0
 const w2 = vec3(0.86602540378, 1.0, 0.54772255751);  // 0.75, 1.0, 0.3
 
-fn sharpenAdaptive(myTexture
-                   : texture_2d<f32>, mySampler
-                   : sampler, st
-                   : vec2f, pixel
-                   : vec2f, strength
-                   : f32) -> vec4f {
+fn sharpenAdaptive(myTexture: texture_2d<f32>,
+                   mySampler: sampler,
+                   st: vec2f,
+                   pixel: vec2f,
+                   strength: f32) -> vec4f {
     // [                c22               ]
     // [           c24, c9,  c23          ]
     // [      c21, c1,  c2,  c3, c18      ]

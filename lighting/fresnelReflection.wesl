@@ -1,4 +1,4 @@
-import lygia::lighting::{fresnel, envMap};
+import package::lighting::{fresnel::fresnel, envMap::envMap};
 
 /*
 contributors: Patricio Gonzalez Vivo

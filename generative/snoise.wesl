@@ -1,7 +1,7 @@
-import lygia::math::mod289::{mod289_2, mod289_3, mod289_4};
-import lygia::math::permute::{permute, permute3, permute4};
-import lygia::math::taylorInvSqrt::{taylorInvSqrt, taylorInvSqrt4};
-import lygia::math::grad4::grad4;
+import package::math::mod289::{mod289_2, mod289_3, mod289_4};
+import package::math::permute::{permute, permute3, permute4};
+import package::math::taylorInvSqrt::{taylorInvSqrt, taylorInvSqrt4};
+import package::math::grad4::grad4;
 
 /*
 contributors: [Stefan Gustavson, Ian McEwan]
@@ -13,12 +13,11 @@ license: |
     https://opensource.org/license/mit/
 */
 
-
 fn snoise2(v: vec2f) -> f32 {
     let C = vec4(0.211324865405187,  // (3.0-sqrt(3.0))/6.0
-                        0.366025403784439,  // 0.5*(sqrt(3.0)-1.0)
-                        -0.577350269189626,  // -1.0 + 2.0 * C.x
-                        0.024390243902439); // 1.0 / 41.0
+                 0.366025403784439,  // 0.5*(sqrt(3.0)-1.0)
+                 -0.577350269189626, // -1.0 + 2.0 * C.x
+                 0.024390243902439); // 1.0 / 41.0
     // First corner
     var i  = floor(v + dot(v, C.yy) );
     let x0 = v -   i + dot(i, C.xx);
@@ -133,10 +132,10 @@ fn snoise3(v: vec3f) -> f32 {
 }
 
 fn snoise4(v: vec4f) -> f32 {
-    let C = vec4( 0.138196601125011,  // (5 - sqrt(5))/20  G4
-                        0.276393202250021,  // 2 * G4
-                        0.414589803375032,  // 3 * G4
-                        -0.447213595499958); // -1 + 4 * G4
+    let C = vec4(0.138196601125011,   // (5 - sqrt(5))/20  G4
+                 0.276393202250021,   // 2 * G4
+                 0.414589803375032,   // 3 * G4
+                 -0.447213595499958); // -1 + 4 * G4
 
     // First corner
     var i  = floor(v + dot(v, vec4(.309016994374947451)) ); // (sqrt(5) - 1)/4

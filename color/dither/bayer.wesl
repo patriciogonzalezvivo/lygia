@@ -1,4 +1,4 @@
-import lygia::math::decimate::decimate3;
+import package::math::decimate::decimate3;
 
 /*
 contributors: Patricio Gonzalez Vivo

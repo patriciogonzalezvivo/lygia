@@ -1,4 +1,4 @@
-import lygia::math::cubic::{cubic, cubic2, cubic3, cubic4};
+import package::math::cubic::{cubic, cubic2, cubic3, cubic4};
 
 /*
 contributors: Patricio Gonzalez Vivo

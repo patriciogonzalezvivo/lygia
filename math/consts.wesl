@@ -5,6 +5,7 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
+
 const EIGHTH_PI: f32 = 0.39269908169;
 const QTR_PI: f32 = 0.78539816339;
 const HALF_PI: f32 = 1.5707963267948966192313216916398;
