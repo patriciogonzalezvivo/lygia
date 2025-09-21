@@ -1,3 +1,5 @@
+import package::math::map::map;
+
 /*
 contributors: Inigo Quiles
 description: Calculate normals http://iquilezles.org/www/articles/normalsSDF/normalsSDF.htm
@@ -5,8 +7,6 @@ examples:
     - /shaders/lighting_raymarching.frag
 
 */
-
-// #include "map.wgls"
 
 fn raymarchNormal( pos: vec3f ) -> vec3f {
     let eps = 0.002;
