@@ -1,4 +1,4 @@
-import package::math::map;
+import package::math::map::map;
 
 /*
 contributors: ["dahart", "Fabrice NEYRET"]

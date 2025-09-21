@@ -20,15 +20,15 @@ license:
 */
 
 fn srandom(x: f32) -> f32 {
-  return -1. + 2. * fract(sin(x) * 43758.5453);
+    return -1. + 2. * fract(sin(x) * 43758.5453);
 }
 
 fn srandom2(st: vec2f) -> f32 {
-  return -1. + 2. * fract(sin(dot(st.xy, vec2(12.9898, 78.233))) * 43758.5453);
+    return -1. + 2. * fract(sin(dot(st.xy, vec2(12.9898, 78.233))) * 43758.5453);
 }
 
 fn srandom3(pos: vec3f) -> f32 {
-  return -1. + 2. * fract(sin(dot(pos.xyz, vec3(70.9898, 78.233, 32.4355))) * 43758.5453123);
+    return -1. + 2. * fract(sin(dot(pos.xyz, vec3(70.9898, 78.233, 32.4355))) * 43758.5453123);
 }
 
 fn srandom4(pos: vec4f) -> f32{

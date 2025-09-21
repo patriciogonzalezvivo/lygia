@@ -14,7 +14,6 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-
 fn rotate(st: vec2f, radians: f32) -> vec2f {
     return rotate2d(radians) * (st - 0.5) + 0.5;
 }

@@ -9,17 +9,17 @@ license: MIT License (MIT) Copyright (c) 2015 Jamie Owen
 */
 
 fn blendLinearLight(base: f32, blend: f32) -> f32 {
-  return select(blendLinearDodge(base, (blend - 0.5) * 2.0), blendLinearBurn(base, blend * 2.0), blend < 0.5);
+    return select(blendLinearDodge(base, (blend - 0.5) * 2.0), blendLinearBurn(base, blend * 2.0), blend < 0.5);
 }
 
 fn blendLinearLight3(base: vec3f, blend: vec3f) -> vec3f {
-  return vec3f(
-    blendLinearLight(base.r, blend.r),
-    blendLinearLight(base.g, blend.g),
-    blendLinearLight(base.b, blend.b)
-  );
+    return vec3f(
+      blendLinearLight(base.r, blend.r),
+      blendLinearLight(base.g, blend.g),
+      blendLinearLight(base.b, blend.b)
+    );
 }
 
 fn blendLinearLight3Opacity(base: vec3f, blend: vec3f, opacity: f32) -> vec3f {
-  return blendLinearLight3(base, blend) * opacity + base * (1.0 - opacity);
+    return blendLinearLight3(base, blend) * opacity + base * (1.0 - opacity);
 }

@@ -6,13 +6,13 @@ license: MIT License (MIT) Copyright (c) 2015 Jamie Owen
 */
 
 fn blendNegation(base: f32, blend: f32) -> f32 {
-  return 1.0 - abs(1.0 - base - blend);
+    return 1.0 - abs(1.0 - base - blend);
 }
 
 fn blendNegation3(base: vec3f, blend: vec3f) -> vec3f {
-  return vec3f(1.0) - abs(vec3f(1.0) - base - blend);
+    return vec3f(1.0) - abs(vec3f(1.0) - base - blend);
 }
 
 fn blendNegation3Opacity(base: vec3f, blend: vec3f, opacity: f32) -> vec3f {
-  return blendNegation3(base, blend) * opacity + base * (1.0 - opacity);
+    return blendNegation3(base, blend) * opacity + base * (1.0 - opacity);
 }

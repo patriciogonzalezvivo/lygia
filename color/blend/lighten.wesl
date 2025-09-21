@@ -6,17 +6,17 @@ license: MIT License (MIT) Copyright (c) 2015 Jamie Owen
 */
 
 fn blendLighten(base: f32, blend: f32) -> f32 {
-  return max(blend, base);
+    return max(blend, base);
 }
 
 fn blendLighten3(base: vec3f, blend: vec3f) -> vec3f {
-  return vec3f(
-    blendLighten(base.r, blend.r),
-    blendLighten(base.g, blend.g),
-    blendLighten(base.b, blend.b)
-  );
+    return vec3f(
+        blendLighten(base.r, blend.r),
+        blendLighten(base.g, blend.g),
+        blendLighten(base.b, blend.b)
+    );
 }
 
 fn blendLighten3Opacity(base: vec3f, blend: vec3f, opacity: f32) -> vec3f {
-  return blendLighten3(base, blend) * opacity + base * (1.0 - opacity);
+    return blendLighten3(base, blend) * opacity + base * (1.0 - opacity);
 }

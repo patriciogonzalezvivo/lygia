@@ -8,7 +8,6 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-
 fn hcy2rgb(hcy: vec3f) -> vec3f {
     var rta = hcy;
     let HCYwts = vec3f(0.299, 0.587, 0.114);
