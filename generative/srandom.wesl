@@ -1,4 +1,4 @@
-import lygia::math::mod::{mod2, mod3};
+import package::math::mod::{mod2, mod3};
 
 /*
 contributors:

@@ -1,4 +1,4 @@
-import lygia::color::space::{rgb2xyz::rgb2xyz, xyz2lab::xyz2lab};
+import package::color::space::{rgb2xyz::rgb2xyz, xyz2lab::xyz2lab};
 
 /*
 contributors: Patricio Gonzalez Vivo

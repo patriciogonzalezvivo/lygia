@@ -1,4 +1,4 @@
-import lygia::math::map;
+import package::math::map;
 
 /*
 contributors: dahart (https://www.shadertoy.com/user/dahart)

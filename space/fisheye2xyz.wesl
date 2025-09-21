@@ -1,4 +1,4 @@
-import lygia::math::consts::PI;
+import package::math::consts::PI;
 
 /*
 contributors: Patricio Gonzalez Vivo

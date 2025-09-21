@@ -1,4 +1,4 @@
-import lygia::color::blend::reflect::{blendReflect, blendReflect3};
+import package::color::blend::reflect::{blendReflect, blendReflect3};
 
 /*
 contributors: Jamie Owen

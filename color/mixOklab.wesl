@@ -1,5 +1,5 @@
-import lygia::color::space::rgb2oklab::RGB2OKLAB_B;
-import lygia::color::space::oklab2rgb::OKLAB2RGB_B;
+import package::color::space::rgb2oklab::RGB2OKLAB_B;
+import package::color::space::oklab2rgb::OKLAB2RGB_B;
 
 /*
 contributors:

@@ -1,4 +1,4 @@
-import lygia::math::{mmin, mmax, cubicMix3};
+import package::math::{mmin, mmax, cubicMix3};
 
 /*
 contributors: Patricio Gonzalez Vivo
