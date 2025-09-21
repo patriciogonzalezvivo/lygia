@@ -1,4 +1,4 @@
-import lygia::math::mod289::{mod289, mod289_2, mod289_3, mod289_4};
+import package::math::mod289::{mod289, mod289_2, mod289_3, mod289_4};
 
 /*
 contributors: [Stefan Gustavson, Ian McEwan]

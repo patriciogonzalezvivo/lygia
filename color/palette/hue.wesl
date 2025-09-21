@@ -1,4 +1,4 @@
-import lygia::math::mod::mod3;
+import package::math::mod::mod3;
 
 /*
 contributors: Patricio Gonzalez Vivo

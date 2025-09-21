@@ -1,5 +1,5 @@
-import lygia::color::space::srgb2rgb::srgb2rgb;
-import lygia::color::space::rgb2oklab::rgb2oklab;
+import package::color::space::srgb2rgb::srgb2rgb;
+import package::color::space::rgb2oklab::rgb2oklab;
 
 /*
 contributors: Bjorn Ottosson (@bjornornorn)

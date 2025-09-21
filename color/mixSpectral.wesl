@@ -1,4 +1,4 @@
-import lygia::color::space::xyz2srgb::XYZ2RGB;
+import package::color::space::xyz2srgb::XYZ2RGB;
 
 /*
 contributors: Ronald van Wijnen (@OneDayOfCrypto)

@@ -1,5 +1,5 @@
-import lygia::generative::{random22, random33};
-import lygia::math::dist::{distEuclidean2, distEuclidean3};
+import package::generative::{random22, random33};
+import package::math::dist::{distEuclidean2, distEuclidean3};
 
 /*
 contributors: Patricio Gonzalez Vivo

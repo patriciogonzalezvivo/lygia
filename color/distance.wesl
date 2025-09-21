@@ -1,4 +1,4 @@
-import lygia::color::space::{
+import package::color::space::{
     rgb2lab::rgb2lab, 
     rgb2YCbCr::rgb2YCbCr, 
     rgb2YPbPr::rgb2YPbPr, 

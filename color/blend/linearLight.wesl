@@ -1,5 +1,5 @@
-import lygia::color::blend::linearDodge::blendLinearDodge;
-import lygia::color::blend::linearBurn::blendLinearBurn;
+import package::color::blend::linearDodge::blendLinearDodge;
+import package::color::blend::linearBurn::blendLinearBurn;
 
 /*
 contributors: Jamie Owen
