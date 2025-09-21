@@ -1,4 +1,4 @@
-import lygia::color::space::{xyz2rgb::xyz2rgb, rgb2srgb::rgb2srgb};
+import package::color::space::{xyz2rgb::xyz2rgb, rgb2srgb::rgb2srgb};
 
 /*
 contributors: Patricio Gonzalez Vivo
@@ -7,6 +7,5 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
-
 
 fn xyz2srgb(xyz: vec3f) -> vec3f { return rgb2srgb(xyz2rgb(xyz)); }

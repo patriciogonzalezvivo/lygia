@@ -1,4 +1,4 @@
-import lygia::color::space::{hsl2rgb::hsl2rgb, rgb2hsl::rgb2hsl};
+import package::color::space::{hsl2rgb::hsl2rgb, rgb2hsl::rgb2hsl};
 
 /*
 contributors:

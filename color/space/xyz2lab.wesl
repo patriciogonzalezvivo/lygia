@@ -11,7 +11,7 @@ fn xyz2lab(c: vec3f) -> vec3f {
     let c0 = pow(n, vec3f(1.0 / 3.0));
     let c1 = (7.787 * n) + (16.0 / 116.0);
     let v = mix(c0, c1, step(n, vec3f(0.008856)));
-    return vec3f(   (116.0 * v.y) - 16.0,
-                        500.0 * (v.x - v.y),
-                        200.0 * (v.y - v.z));
+    return vec3f( (116.0 * v.y) - 16.0,
+                   500.0 * (v.x - v.y),
+                   200.0 * (v.y - v.z) );
 }

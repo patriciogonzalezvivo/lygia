@@ -1,4 +1,4 @@
-import lygia::math::consts::PI;
+import package::math::consts::PI;
 
 /*
 contributors: Patricio Gonzalez Vivo
@@ -7,7 +7,6 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
-
 
 fn fisheye2xyz(uv: vec2f) -> vec3f {
     let ndc = uv * 2.0 - 1.0;

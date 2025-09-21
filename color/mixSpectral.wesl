@@ -1,4 +1,4 @@
-import lygia::color::space::xyz2srgb::XYZ2RGB;
+import package::color::space::xyz2srgb::XYZ2RGB;
 
 /*
 contributors: Ronald van Wijnen (@OneDayOfCrypto)
@@ -13,7 +13,6 @@ examples:
     - /shaders/color_mix.frag
 license: MIT License Copyright (c) 2023 Ronald van Wijnen
 */
-
 
 const MIXSPECTRAL_EPSILON = 0.0001;
 
@@ -73,7 +72,6 @@ fn mixSpectral_linear_to_reflectance(rgb: vec3f) -> array<f32,38> {
 
     return R;
 }
-
 
 fn mixSpectral_reflectance_to_xyz(R: array<f32,38>) -> vec3f {
     return  R[ 0] * vec3f(0.00006469, 0.00000184, 0.00030502) +

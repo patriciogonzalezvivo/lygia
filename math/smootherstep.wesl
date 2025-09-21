@@ -1,4 +1,4 @@
-import lygia::math::quintic::{quintic, quintic2, quintic3, quintic4};
+import package::math::quintic::{quintic, quintic2, quintic3, quintic4};
 
 /*
 contributors: Patricio Gonzalez Vivo

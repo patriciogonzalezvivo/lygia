@@ -1,4 +1,4 @@
-import lygia::math::mod::mod3;
+import package::math::mod::mod3;
 
 /*
 contributors: Patricio Gonzalez Vivo
@@ -11,6 +11,6 @@ license:
 */
 
 fn hue(x: f32, r: f32) -> vec3f { 
-    let v = abs( mod3(x + vec3f(0.0,1.0,2.0) * r, vec3f(1.0)) * 2.0 - 1.0); 
+    let v = abs( mod3(x + vec3f(0.0,1.0,2.0) * r, vec3f(1.0)) * 2.0 - 1.0);
     return v * v * (3.0 - 2.0 * v);
 }

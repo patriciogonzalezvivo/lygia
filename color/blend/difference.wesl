@@ -6,13 +6,13 @@ license: MIT License (MIT) Copyright (c) 2015 Jamie Owen
 */
 
 fn blendDifference(base: f32, blend: f32) -> f32 {
-  return abs(base - blend);
+    return abs(base - blend);
 }
 
 fn blendDifference3(base: vec3f, blend: vec3f) -> vec3f {
-  return abs(base - blend);
+    return abs(base - blend);
 }
 
 fn blendDifference3Opacity(base: vec3f, blend: vec3f, opacity: f32) -> vec3f {
-  return blendDifference3(base, blend) * opacity + base * (1.0 - opacity);
+    return blendDifference3(base, blend) * opacity + base * (1.0 - opacity);
 }

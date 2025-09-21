@@ -1,4 +1,4 @@
-import lygia::math::{mmin, mmax, cubicMix3};
+import package::math::cubicMix3::cubicMix3;
 
 /*
 contributors: Patricio Gonzalez Vivo
@@ -13,18 +13,21 @@ license:
 
 fn rgb2ryb(rgb: vec3f) -> vec3f {
     let rgb000 = vec3f(1., 1., 1.);       // Black
-    let rgb100 = vec3f(1., 0., 0.);       // Red          
+    let rgb100 = vec3f(1., 0., 0.);       // Red
     let rgb010 = vec3f(0., 1., .483);     // Green
     let rgb110 = vec3f(0., 1., 0.);       // Yellow
     let rgb001 = vec3f(0., 0., 1.);       // Blue
     let rgb101 = vec3f(.309, 0., .469);   // Magenta
     let rgb011 = vec3f(0., .053, .210);   // Turquoise
     let rgb111 = vec3f(0., 0., 0.);       // White
-    return cubicMix3(cubicMix3(
-        cubicMix3(rgb000, rgb001, rgb.z),
-        cubicMix3(rgb010, rgb011, rgb.z),
-        rgb.y), cubicMix3(
-        cubicMix3(rgb100, rgb101, rgb.z),
-        cubicMix3(rgb110, rgb111, rgb.z),
-        rgb.y), rgb.x);
+    return cubicMix3(
+        cubicMix3(
+            cubicMix3(rgb000, rgb001, vec3f(rgb.z)),
+            cubicMix3(rgb010, rgb011, vec3f(rgb.z)),
+            vec3f(rgb.y)),
+        cubicMix3(
+            cubicMix3(rgb100, rgb101, vec3f(rgb.z)),
+            cubicMix3(rgb110, rgb111, vec3f(rgb.z)),
+            vec3f(rgb.y)),
+        vec3f(rgb.x));
 }

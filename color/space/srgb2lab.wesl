@@ -1,4 +1,4 @@
-import lygia::color::space::{rgb2lab::rgb2lab, srgb2rgb::srgb2rgb};
+import package::color::space::{rgb2lab::rgb2lab, srgb2rgb::srgb2rgb};
 
 /*
 contributors: Patricio Gonzalez Vivo
@@ -8,6 +8,4 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-
 fn srgb2lab(srgb: vec3f) -> vec3f { return rgb2lab(srgb2rgb(srgb));}
-

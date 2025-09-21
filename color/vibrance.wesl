@@ -1,4 +1,4 @@
-import lygia::color::space::rgb2luma;
+import package::color::space::rgb2luma::rgb2luma;
 
 /*
 contributors: Christian Cann Schuldt Jensen ~ CeeJay.dk
