@@ -1,4 +1,4 @@
-import package::color::space::hue2rgb;
+import package::color::space::hue2rgb::hue2rgb;
 
 /*
 contributors: Patricio Gonzalez Vivo

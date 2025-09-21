@@ -1,5 +1,5 @@
 import package::generative::random::random2;
-import package::math::rotate2d;
+import package::math::rotate2d::rotate2d;
 
 /*
 contributors: Martijn Steinrucken

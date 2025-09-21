@@ -1,4 +1,4 @@
-import package::color::space::rgb2luma;
+import package::color::space::rgb2luma::rgb2luma;
 
 /*
 contributors: Hugh Kennedy (https://github.com/hughsk)

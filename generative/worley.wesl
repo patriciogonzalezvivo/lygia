@@ -1,4 +1,4 @@
-import package::generative::{random22, random33};
+import package::generative::random::{random22, random33};
 import package::math::dist::{distEuclidean2, distEuclidean3};
 
 /*

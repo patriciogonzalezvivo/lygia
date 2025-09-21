@@ -3,7 +3,7 @@ contributors: Inigo Quiles
 description: Cast a ray
 */
 
-import package::math::map;
+import package::math::map::map;
 
 fn raymarchCast(ro: vec3f, rd: vec3f ) -> f32 {
     var dist = -1.0;

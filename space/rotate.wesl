@@ -1,4 +1,4 @@
-import package::math::rotate2d;
+import package::math::rotate2d::rotate2d;
 
 /*
 contributors: Patricio Gonzalez Vivo

@@ -1,4 +1,4 @@
-import package::color::hueShift;
+import package::color::hueShift::hueShift;
 import package::color::space::{rgb2ryb::rgb2ryb, ryb2rgb::ryb2rgb};
 import package::math::const::PI;
 
