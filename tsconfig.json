@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ES2024", // we can expect a modern version with WebGPU (but we want stablility, so not "esnext")
+    "lib": ["ES2024"],
+
+    "types": ["@webgpu/types", "vitest"],
+
+    "noEmit": true, // we don't transpile, we just typecheck
+    "module": "nodenext",
+    "skipLibCheck": true, // performance win, also what do we do if a library has an error?
+    "moduleDetection": "force", // always treat files as modules (not scripts)
+    "strict": true,
+
+    "allowImportingTsExtensions": true // allows typechecking wesl core too for wesl devs
+  },
+  "exclude": ["node_modules", "dist"],
+  "include": ["test/**/*"]
+}
