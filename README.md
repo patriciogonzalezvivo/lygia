@@ -8,6 +8,8 @@ Best of all, LYGIA grows and improves every day thanks to the support of the com
 
 ## How to use it?
 
+_For using Lygia with WebGPU, see the [WebGPU README](./README_WebGPU.md)._
+
 In your shader just `#include` the functions you need and use them:
 
 <div class="codeAndCanvas" data="example.frag">
