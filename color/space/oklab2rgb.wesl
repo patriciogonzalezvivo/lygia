@@ -19,3 +19,7 @@ fn oklab2rgb(oklab: vec3f) -> vec3f {
     let lms = OKLAB2RGB_A * oklab;
     return OKLAB2RGB_B * (lms * lms * lms);
 }
+
+fn oklab2rgb4(color: vec4f) -> vec4f {
+    return vec4f(oklab2rgb(color.rgb), color.a);
+}

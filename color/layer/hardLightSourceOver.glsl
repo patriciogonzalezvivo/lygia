@@ -17,7 +17,7 @@ vec4 layerHardLightSourceOver(vec4 src, vec4 dest) {
     vec4 result = vec4(0.0, 0.0, 0.0, 0.0);
 
     // Compute hard light for RGB channels
-    float3 blendedColor = blendHardLight(src.rgb, dest.rgb);
+    vec3 blendedColor = blendHardLight(src.rgb, dest.rgb);
 
     // Compute source-over for RGB channels
     result.rgb = compositeSourceOver(blendedColor, dest.rgb, src.a, dest.a);

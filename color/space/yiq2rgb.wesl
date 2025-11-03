@@ -12,3 +12,7 @@ const YIQ2RGB: mat3x3<f32>  = mat3x3<f32>(
     vec3f(1.0, -1.1085,  1.7020) );
 
 fn yiq2rgb(yiq : vec3f) -> vec3f { return YIQ2RGB * yiq; }
+
+fn yiq2rgb4(color: vec4f) -> vec4f {
+    return vec4f(yiq2rgb(color.rgb), color.a);
+}

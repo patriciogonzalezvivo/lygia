@@ -6,7 +6,7 @@ license: MIT License (MIT) Copyright (c) 2015 Jamie Owen
 */
 
 fn blendScreen(base: f32, blend: f32) -> f32 {
-    return 1. - ((1. - base) * (1. - blend));
+    return 1.0 - ((1.0 - base) * (1.0 - blend));
 }
 
 fn blendScreen3(base: vec3f, blend: vec3f) -> vec3f {
@@ -16,5 +16,5 @@ fn blendScreen3(base: vec3f, blend: vec3f) -> vec3f {
 }
 
 fn blendScreenWithOpacity3(base: vec3f, blend: vec3f, opacity: f32) -> vec3f {
-    return (blendScreen3(base, blend) * opacity + base * (1. - opacity));
+    return (blendScreen3(base, blend) * opacity + base * (1.0 - opacity));
 }

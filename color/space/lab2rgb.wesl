@@ -1,4 +1,4 @@
-import package::color::space::{lab2xyz::lab2xyz, xyz2rgb::xyz2rgb};
+import lygia::color::space::{lab2xyz::lab2xyz, xyz2rgb::xyz2rgb};
 
 /*
 contributors: Patricio Gonzalez Vivo
@@ -10,3 +10,4 @@ license:
 */
 
 fn lab2rgb(lab: vec3f) -> vec3f { return xyz2rgb( lab2xyz( lab ) ); }
+fn lab2rgb4(lab: vec4f) -> vec4f { return vec4f(lab2rgb(lab.rgb), lab.a); }

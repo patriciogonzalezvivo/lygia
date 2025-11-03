@@ -15,3 +15,7 @@ fn YCbCr2rgb(ycbcr: vec3f) -> vec3f {
     let b = 1.772 * cb;
     return vec3f(r, g, b) + y;
 }
+
+fn YCbCr2rgb4(ycbcr: vec4f) -> vec4f {
+    return vec4f(YCbCr2rgb(ycbcr.rgb), ycbcr.a);
+}
