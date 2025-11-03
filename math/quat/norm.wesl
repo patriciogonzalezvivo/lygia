@@ -1,16 +1,13 @@
+import lygia::math::quat::length::{quatLength};
+import lygia::math::quat::div::{quatDiv};
+
 /*
 contributors: Patricio Gonzalez Vivo
-description: returns a 2x2 rotation matrix
+description: returns a normalized quaternion
+use: quatNorm(q: vec4f) -> vec4f
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-fn rotate2d(radians: f32) -> mat2x2<f32> {
-    let c = cos(radians);
-    let s = sin(radians);
-    return mat2x2<f32>(
-        vec2f(c, s),   // column 0
-        vec2f(-s, c)   // column 1
-    );
-}
+fn quatNorm(q: vec4f) -> vec4f { return quatDiv(q, quatLength(q)); }

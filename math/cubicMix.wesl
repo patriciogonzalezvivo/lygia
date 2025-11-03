@@ -1,9 +1,9 @@
-import package::math::cubic::{cubic, cubic2, cubic3, cubic4};
+import lygia::math::cubic::{cubic, cubic2, cubic3, cubic4};
 
 /*
 contributors: Patricio Gonzalez Vivo
 description: cubic polynomial interpolation between two values
-use: <float|vec2|vec3|vec4> cubicMix(<float|vec2|vec3|vec4> A, <float|vec2|vec3|vec4> B, float t)
+use: cubicMix(A: f32, B: f32, t: f32) -> f32 | cubicMix2(A: vec2f, B: vec2f, t: vec2f) -> vec2f | cubicMix3(A: vec3f, B: vec3f, t: vec3f) -> vec3f | cubicMix4(A: vec4f, B: vec4f, t: vec4f) -> vec4f
 examples:
     - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/math_functions.frag
 */
