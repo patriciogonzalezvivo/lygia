@@ -1,16 +1,12 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: returns a 2x2 rotation matrix
+description: given a 4x4 returns a 3x3
+use: toMat3(m: mat4x4f) -> mat3x3f
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-fn rotate2d(radians: f32) -> mat2x2<f32> {
-    let c = cos(radians);
-    let s = sin(radians);
-    return mat2x2<f32>(
-        vec2f(c, s),   // column 0
-        vec2f(-s, c)   // column 1
-    );
+fn toMat3(m: mat4x4f) -> mat3x3f {
+    return mat3x3f(m[0].xyz, m[1].xyz, m[2].xyz);
 }

@@ -1,4 +1,4 @@
-import package::math::map::map;
+import lygia::math::nyquist::nyquist;
 
 /*
 contributors: dahart (https://www.shadertoy.com/user/dahart)
@@ -11,7 +11,8 @@ fn aafract(x: f32) -> f32 {
     let afwidth = 2.0 * fwidth(x);
     let fx = fract(x);
     let idx = 1.0 - afwidth;
-    return select(map(fx, idx, 1., fx, 0.), fx, fx < idx);
+    let v = select((1.0-fx)/afwidth, fx/idx, fx < idx);
+    return nyquist(v, afwidth);
 }
 
 fn aafract2(v: vec2f) -> vec2f { return vec2(aafract(v.x), aafract(v.y)); }
