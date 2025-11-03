@@ -1,16 +1,12 @@
+import lygia::math::quat::lengthSq::{quatLengthSq};
+
 /*
 contributors: Patricio Gonzalez Vivo
-description: returns a 2x2 rotation matrix
+description: 'Returns the length of a quaternion'
+use: quatLength(q: vec4f) -> f32
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-fn rotate2d(radians: f32) -> mat2x2<f32> {
-    let c = cos(radians);
-    let s = sin(radians);
-    return mat2x2<f32>(
-        vec2f(c, s),   // column 0
-        vec2f(-s, c)   // column 1
-    );
-}
+fn quatLength(q: vec4f) -> f32 { return sqrt(quatLengthSq(q)); }
