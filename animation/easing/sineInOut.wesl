@@ -1,4 +1,4 @@
-import lygia::math::consts::{PI, TWO_PI, HALF_PI};
+import lygia::math::consts::PI;
 
 /*
 contributors: Hugh Kennedy (https://github.com/hughsk)
