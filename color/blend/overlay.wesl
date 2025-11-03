@@ -7,9 +7,9 @@ license: MIT License (MIT) Copyright (c) 2015 Jamie Owen
 
 fn blendOverlay(base: f32, blend: f32) -> f32 {
     if (base < 0.5) {
-        return (2.*base*blend);
+        return (2.0*base*blend);
     } else {
-        return (1. - 2. * (1. - base) * (1. - blend));
+        return (1.0 - 2.0 * (1.0 - base) * (1.0 - blend));
     }
 }
 
@@ -20,5 +20,5 @@ fn blendOverlay3(base: vec3f, blend: vec3f) -> vec3f {
 }
 
 fn blendOverlay3Opacity(base: vec3f, blend: vec3f, opacity: f32) -> vec3f {
-    return (blendOverlay3(base, blend) * opacity + base * (1. - opacity));
+    return (blendOverlay3(base, blend) * opacity + base * (1.0 - opacity));
 }

@@ -1,4 +1,4 @@
-import package::color::blend::vividLight::blendVividLight;
+import lygia::color::blend::vividLight::blendVividLight;
 
 /*
 contributors: Jamie Owen
@@ -15,7 +15,7 @@ fn blendHardMix3(base: vec3f, blend: vec3f) -> vec3f {
     return vec3f(
         blendHardMix(base.r, blend.r),
         blendHardMix(base.g, blend.g),
-      blendHardMix(base.b, blend.b)
+        blendHardMix(base.b, blend.b)
     );
 }
 

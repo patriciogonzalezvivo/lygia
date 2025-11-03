@@ -1,5 +1,5 @@
-import package::color::space::lab2xyz::lab2xyz;
-import package::color::space::xyz2srgb::xyz2srgb;
+import lygia::color::space::lab2xyz::lab2xyz;
+import lygia::color::space::xyz2srgb::xyz2srgb;
 
 /*
 contributors: Patricio Gonzalez Vivo
@@ -10,3 +10,4 @@ license:
 */
 
 fn lab2srgb(lab: vec3f) -> vec3f { return xyz2srgb( lab2xyz( lab ) ); }
+fn lab2srgb4(lab: vec4f) -> vec4f { return vec4f(lab2srgb(lab.rgb), lab.a); }

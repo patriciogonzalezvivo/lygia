@@ -1,4 +1,4 @@
-import package::color::space::{oklab2rgb::oklab2rgb, rgb2srgb::rgb2srgb};
+import lygia::color::space::{oklab2rgb::oklab2rgb, rgb2srgb::rgb2srgb};
 
 /*
 contributors: Bjorn Ottosson (@bjornornorn)
@@ -9,3 +9,7 @@ license:
 */
 
 fn oklab2srgb(oklab: vec3f) -> vec3f { return rgb2srgb(oklab2rgb(oklab)); }
+
+fn oklab2srgb4(color: vec4f) -> vec4f {
+    return vec4f(oklab2srgb(color.rgb), color.a);
+}

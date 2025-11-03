@@ -33,8 +33,8 @@ importers:
         specifier: ^4.0.5
         version: 4.0.5(@types/node@24.9.2)(terser@5.44.0)
       vitest-image-snapshot:
-        specifier: ^0.6.22
-        version: 0.6.22(vitest@4.0.5(@types/node@24.9.2)(terser@5.44.0))
+        specifier: ^0.6.23
+        version: 0.6.23(vitest@4.0.5(@types/node@24.9.2)(terser@5.44.0))
       webpack:
         specifier: ^5.102.1
         version: 5.102.1(webpack-cli@6.0.1)
@@ -52,7 +52,7 @@ importers:
         version: 0.6.22
       wesl-test:
         specifier: ^0.6.22
-        version: 0.6.22(vitest-image-snapshot@0.6.22(vitest@4.0.5(@types/node@24.9.2)(terser@5.44.0)))(vitest@4.0.5(@types/node@24.9.2)(terser@5.44.0))
+        version: 0.6.22(vitest-image-snapshot@0.6.23(vitest@4.0.5(@types/node@24.9.2)(terser@5.44.0)))(vitest@4.0.5(@types/node@24.9.2)(terser@5.44.0))
 
 packages:
 
@@ -1356,8 +1356,8 @@ packages:
       yaml:
         optional: true
 
-  vitest-image-snapshot@0.6.22:
-    resolution: {integrity: sha512-gNGpWaOFZcccG10SQf8rJmooXvEbvx+1hCRqy0TVqgh9NKBV71LPZVXnfIN/ZZpMnck1PWvuMD+CL9rB43tb4w==}
+  vitest-image-snapshot@0.6.23:
+    resolution: {integrity: sha512-k3v7/nTXGCrZzQgtudyT9KvoHcR0Of/KJcZLnSyW/iRY4dItQee8WdSe6C9ZzLXxFS/BYei2q6ywOzDgibZD+g==}
     peerDependencies:
       vitest: ^3.2.4
 
@@ -2615,7 +2615,7 @@ snapshots:
       fsevents: 2.3.3
       terser: 5.44.0
 
-  vitest-image-snapshot@0.6.22(vitest@4.0.5(@types/node@24.9.2)(terser@5.44.0)):
+  vitest-image-snapshot@0.6.23(vitest@4.0.5(@types/node@24.9.2)(terser@5.44.0)):
     dependencies:
       pixelmatch: 6.0.0
       pngjs: 7.0.0
@@ -2749,7 +2749,7 @@ snapshots:
       - '@biomejs/wasm-bundler'
       - '@biomejs/wasm-web'
 
-  wesl-test@0.6.22(vitest-image-snapshot@0.6.22(vitest@4.0.5(@types/node@24.9.2)(terser@5.44.0)))(vitest@4.0.5(@types/node@24.9.2)(terser@5.44.0)):
+  wesl-test@0.6.22(vitest-image-snapshot@0.6.23(vitest@4.0.5(@types/node@24.9.2)(terser@5.44.0)))(vitest@4.0.5(@types/node@24.9.2)(terser@5.44.0)):
     dependencies:
       pngjs: 7.0.0
       thimbleberry: 0.2.10
@@ -2757,7 +2757,7 @@ snapshots:
       wesl: 0.6.22
     optionalDependencies:
       vitest: 4.0.5(@types/node@24.9.2)(terser@5.44.0)
-      vitest-image-snapshot: 0.6.22(vitest@4.0.5(@types/node@24.9.2)(terser@5.44.0))
+      vitest-image-snapshot: 0.6.23(vitest@4.0.5(@types/node@24.9.2)(terser@5.44.0))
     transitivePeerDependencies:
       - supports-color
 

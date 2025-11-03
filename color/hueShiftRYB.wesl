@@ -1,15 +1,15 @@
-import package::color::hueShift::hueShift;
-import package::color::space::{rgb2ryb::rgb2ryb, ryb2rgb::ryb2rgb};
-import package::math::consts::PI;
+import lygia::color::hueShift::hueShift;
+import lygia::color::space::{rgb2ryb::rgb2ryb, ryb2rgb::ryb2rgb};
 
 /*
 contributors:
     - Johan Ismael
     - Patricio Gonzalez Vivo
 description: Shifts color hue in the RYB color space
-use: hueShift(<vec3|vec4> color, <float> angle)
-optionas:
-    - HUESHIFT_AMOUNT: if defined, it uses a normalized value instead of an angle
+use: hueShiftRYB(<vec3f|vec4f> color, <f32> angle)
+note: |
+    This function internally uses hueShift, which supports both angle and normalized modes.
+    See hueShift.wesl for the HUESHIFT_AMOUNT conditional implementation.
 examples:
     - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/color_ryb.frag
 license:
@@ -19,6 +19,10 @@ license:
 
 fn hueShiftRYB(color: vec3f, a: f32) -> vec3f {
     var rgb = rgb2ryb(color);
-    rgb = hueShift(rgb, PI);
+    rgb = hueShift(rgb, a);
     return ryb2rgb(rgb);
+}
+
+fn hueShiftRYB4(color: vec4f, a: f32) -> vec4f {
+    return vec4f(hueShiftRYB(color.rgb, a), color.a);
 }
