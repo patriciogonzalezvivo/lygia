@@ -14,7 +14,7 @@ fn quat(axis: vec3f, r: f32) -> vec4f {
     return vec4f(axis * sn, cs);
 }
 
-fn quatFowardUp(f: vec3f, _up: vec3f) -> vec4f {
+fn quatForwardUp(f: vec3f, _up: vec3f) -> vec4f {
     let right = normalize(cross(f, -_up));
     let up = normalize(cross(f, right));
 
@@ -68,3 +68,5 @@ fn quatFowardUp(f: vec3f, _up: vec3f) -> vec4f {
     q.w = (m01 - m10) * num2;
     return q;
 }
+
+fn quatForward(f: vec3f) -> vec4f { return quatForwardUp(f, vec3f(0.0, 1.0, 0.0)); }

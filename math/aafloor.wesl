@@ -1,4 +1,4 @@
-import package::math::map::map;
+import lygia::math::map::map;
 
 /*
 contributors: ["dahart", "Fabrice NEYRET"]
@@ -11,8 +11,8 @@ description: |
 fn aafloor(x: f32) -> f32 {
     let afwidth = 2.0 * fwidth(x);
     let fx = fract(x);
-    let idx = 1. - afwidth;
-    return select(map(fx, idx, 1., x-fx, x), x - fx, fx < idx);
+    let idx = 1.0 - afwidth;
+    return select(map(fx, idx, 1.0, x-fx, x), x - fx, fx < idx);
 }
 
 fn aafloor2(x: vec2f) -> vec2f { return vec2f(aafloor(x.x), aafloor(x.y)); }
