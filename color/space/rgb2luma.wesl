@@ -7,3 +7,7 @@ license:
 */
 
 fn rgb2luma(rgb: vec3f) -> f32 { return dot(rgb, vec3(0.2126, 0.7152, 0.0722)); }
+fn rgb2luma4(color: vec4f) -> vec4f {
+    let luma = rgb2luma(color.rgb);
+    return vec4f(luma, luma, luma, color.a);
+}

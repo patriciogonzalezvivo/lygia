@@ -1,4 +1,4 @@
-import package::color::space::rgb2hue::rgb2hue;
+import lygia::color::space::rgb2hue::rgb2hue;
 
 /*
 contributors: Patricio Gonzalez Vivo
@@ -10,3 +10,8 @@ license:
 
 
 fn rgb2heat(c: vec3f) -> f32 { return 1.025 - rgb2hue(c) * 1.538461538; }
+
+fn rgb2heat4(color: vec4f) -> vec4f {
+    let heat = rgb2heat(color.rgb);
+    return vec4f(heat, heat, heat, color.a);
+}
