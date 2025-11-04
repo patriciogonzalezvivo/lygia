@@ -195,7 +195,7 @@ export async function expectBlend(
   snapshotName: string,
   options: LayerBlendOptions = {},
 ): Promise<void> {
-  const { size = [512, 512], threshold = 0.001 } = options;
+  const { size = [128, 128], threshold = 0.001 } = options;
   const { srcTexture, dstTexture } = options;
   const device = await getGPUDevice();
 
