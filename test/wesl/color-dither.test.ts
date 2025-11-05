@@ -19,6 +19,8 @@ test("ditherBayer3 - gradient with Bayer pattern", async () => {
     import lygia::color::dither::bayer::ditherBayer3Precision;
     import lygia::testing::sampleQuantized::{sampleQuantized3, sampleOriginal3};
 
+    @group(0) @binding(0) var<uniform> u: test::Uniforms;
+
     @fragment
     fn fs_main(@builtin(position) pos: vec4f) -> @location(0) vec4f {
       let levels = 8;
@@ -30,7 +32,7 @@ test("ditherBayer3 - gradient with Bayer pattern", async () => {
       // Right: dithered to same levels (smooth with Bayer pattern)
       let dithered = ditherBayer3Precision(original, pos.xy, levels);
 
-      let result = select(posterized, dithered, pos.x > 256.0);
+      let result = select(posterized, dithered, pos.x > u.resolution.x / 2);
       return vec4f(result, 1.0);
     }
   `,
@@ -44,6 +46,8 @@ test("ditherVlachos3 - gradient with Vlachos noise", async () => {
     import lygia::color::dither::vlachos::ditherVlachos3Precision;
     import lygia::testing::sampleQuantized::{sampleQuantized3, sampleOriginal3};
 
+    @group(0) @binding(0) var<uniform> u: test::Uniforms;
+
     @fragment
     fn fs_main(@builtin(position) pos: vec4f) -> @location(0) vec4f {
       let levels = 8;
@@ -55,7 +59,7 @@ test("ditherVlachos3 - gradient with Vlachos noise", async () => {
       // Right: dithered to same levels (smooth with Vlachos noise)
       let dithered = ditherVlachos3Precision(original, pos.xy, levels);
 
-      let result = select(posterized, dithered, pos.x > 256.0);
+      let result = select(posterized, dithered, pos.x > u.resolution.x / 2);
       return vec4f(result, 1.0);
     }
   `,
@@ -69,6 +73,8 @@ test("ditherBlueNoise3 - gradient with blue noise pattern", async () => {
     import lygia::color::dither::blueNoise::ditherBlueNoise3Precision;
     import lygia::testing::sampleQuantized::{sampleQuantized3, sampleOriginal3};
 
+    @group(0) @binding(0) var<uniform> u: test::Uniforms;
+
     @fragment
     fn fs_main(@builtin(position) pos: vec4f) -> @location(0) vec4f {
       let levels = 8;
@@ -80,7 +86,7 @@ test("ditherBlueNoise3 - gradient with blue noise pattern", async () => {
       // Right: dithered to same levels (smooth with blue noise)
       let dithered = ditherBlueNoise3Precision(original, pos.xy, levels);
 
-      let result = select(posterized, dithered, pos.x > 256.0);
+      let result = select(posterized, dithered, pos.x > u.resolution.x / 2);
       return vec4f(result, 1.0);
     }
   `,

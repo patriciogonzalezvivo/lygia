@@ -242,8 +242,7 @@ export async function expectDither(
   options: DitherOptions = {},
 ): Promise<void> {
   const {
-    size = [512, 512],
-    quantizationLevels = 8,
+    size = [256, 256],
     threshold = 0.001,
   } = options;
   const device = await getGPUDevice();
