@@ -1,7 +1,7 @@
 import { afterAll, beforeAll, test } from "vitest";
 import { imageMatcher } from "vitest-image-snapshot";
 import { destroySharedDevice, getGPUDevice } from "wesl-test";
-import { expectDither, lygiaTestCompute, expectCloseTo } from "./testUtil.ts";
+import { expectCloseTo, expectDither, lygiaTestCompute } from "./testUtil.ts";
 
 imageMatcher();
 
