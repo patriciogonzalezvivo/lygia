@@ -4,7 +4,14 @@ import type {
   FragmentTestParams,
   WgslElementType,
 } from "wesl-test";
-import { getGPUDevice, testCompute, testFragment } from "wesl-test";
+import {
+  createSampler,
+  getGPUDevice,
+  gradientTexture,
+  testCompute,
+  testFragment,
+  testFragmentImage,
+} from "wesl-test";
 
 const projectDir = new URL("../../", import.meta.url).href;
 
@@ -166,4 +173,93 @@ export function expectDistribution(
       );
     }
   }
+}
+
+interface LayerBlendOptions {
+  size?: [number, number];
+  srcTexture?: GPUTexture;
+  dstTexture?: GPUTexture;
+  threshold?: number;
+}
+
+/**
+ * Test a layer blend mode with automatic texture setup and snapshot assertion.
+ * Creates horizontal and vertical gradient textures by default.
+ *
+ * @param shaderSrc - Complete WESL/WGSL shader source code
+ * @param snapshotName - Name for the snapshot file
+ * @param options - Optional configuration
+ */
+export async function expectBlend(
+  shaderSrc: string,
+  snapshotName: string,
+  options: LayerBlendOptions = {},
+): Promise<void> {
+  const { size = [128, 128], threshold = 0.001 } = options;
+  const { srcTexture, dstTexture } = options;
+  const device = await getGPUDevice();
+
+  // Create default gradient textures if not provided
+  const resolvedSrc = srcTexture ??
+    gradientTexture(device, size[0], size[1], "horizontal");
+  const resolvedDest = dstTexture ??
+    gradientTexture(device, size[0], size[1], "vertical");
+  const sampler = createSampler(device);
+
+  const result = await testFragmentImage({
+    projectDir,
+    device,
+    src: shaderSrc,
+    size,
+    inputTextures: [
+      { texture: resolvedSrc, sampler },
+      { texture: resolvedDest, sampler },
+    ],
+  });
+
+  await expect(result).toMatchImage({ name: snapshotName, threshold });
+}
+
+interface DitherOptions {
+  size?: [number, number];
+  inputTexture?: GPUTexture;
+  quantizationLevels?: number;
+  threshold?: number;
+}
+
+/**
+ * Test a dither function with automatic texture setup and snapshot assertion.
+ * Creates a gradient texture by default and shows half-and-half comparison:
+ * left half = undithered (shows banding), right half = dithered (smooth with noise).
+ *
+ * @param shaderSrc - Complete WESL/WGSL shader source code
+ * @param snapshotName - Name for the snapshot file
+ * @param options - Optional configuration
+ */
+export async function expectDither(
+  shaderSrc: string,
+  snapshotName: string,
+  options: DitherOptions = {},
+): Promise<void> {
+  const {
+    size = [256, 256],
+    threshold = 0.001,
+  } = options;
+  const device = await getGPUDevice();
+
+  // Create default gradient texture if not provided
+  // Use vertical gradient so top/bottom split shows full range in each half
+  const inputTexture =
+    options.inputTexture ?? gradientTexture(device, size[0], size[1], "vertical");
+  const sampler = createSampler(device);
+
+  const result = await testFragmentImage({
+    projectDir,
+    device,
+    src: shaderSrc,
+    size,
+    inputTextures: [{ texture: inputTexture, sampler }],
+  });
+
+  await expect(result).toMatchImage({ name: snapshotName, threshold });
 }

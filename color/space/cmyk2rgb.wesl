@@ -6,7 +6,9 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
+import lygia::math::saturate::saturate3;
+
 fn cmyk2rgb(cmyk: vec4f) -> vec3f {
     let invK: f32 = 1.0 - cmyk.w;
-    return saturate(1.0 - min(vec3f(1.0), cmyk.xyz * invK + cmyk.w));
+    return saturate3(1.0 - min(vec3f(1.0), cmyk.xyz * invK + cmyk.w));
 }

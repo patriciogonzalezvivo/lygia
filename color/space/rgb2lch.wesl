@@ -1,5 +1,5 @@
-import package::color::space::rgb2lab::rgb2lab;
-import package::color::space::lab2lch::lab2lch;
+import lygia::color::space::rgb2lab::rgb2lab;
+import lygia::color::space::lab2lch::lab2lch;
 
 /*
 contributors: Patricio Gonzalez Vivo
@@ -10,3 +10,6 @@ license:
 */
 
 fn rgb2lch(rgb: vec3f) -> vec3f { return lab2lch(rgb2lab(rgb)); }
+fn rgb2lch4(color: vec4f) -> vec4f {
+    return vec4f(rgb2lch(color.rgb), color.a);
+}

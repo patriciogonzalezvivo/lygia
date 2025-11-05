@@ -13,3 +13,7 @@ fn lch2lab(lch: vec3f) -> vec3f {
         lch.y * sin(lch.z * 0.01745329251)
     );
 }
+
+fn lch2lab4(lch: vec4f) -> vec4f {
+    return vec4f(lch2lab(lch.xyz), lch.a);
+}

@@ -1,4 +1,4 @@
-import package::math::mod::mod3;
+import lygia::math::fmod::fmod3;
 
 /*
 contributors: Patricio Gonzalez Vivo
@@ -10,7 +10,11 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-fn hue(x: f32, r: f32) -> vec3f { 
-    let v = abs( mod3(x + vec3f(0.0,1.0,2.0) * r, vec3f(1.0)) * 2.0 - 1.0);
+fn hue(x: f32, r: f32) -> vec3f {
+    let v = abs( fmod3(x + vec3f(0.0,1.0,2.0) * r, vec3f(1.0)) * 2.0 - 1.0);
     return v * v * (3.0 - 2.0 * v);
+}
+
+fn hueDefault(x: f32) -> vec3f {
+    return hue(x, 0.33333);
 }

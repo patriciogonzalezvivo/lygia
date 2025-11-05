@@ -22,3 +22,7 @@ const LMS2RGB = mat3x3<f32>(
 );
 
 fn lms2rgb(lms : vec3f) -> vec3f { return LMS2RGB * lms; }
+
+fn lms2rgb4(color: vec4f) -> vec4f {
+    return vec4f(lms2rgb(color.rgb), color.a);
+}

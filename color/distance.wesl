@@ -1,4 +1,4 @@
-import package::color::space::{
+import lygia::color::space::{
     rgb2lab::rgb2lab, 
     rgb2YCbCr::rgb2YCbCr, 
     rgb2YPbPr::rgb2YPbPr, 
@@ -7,12 +7,18 @@ import package::color::space::{
 
 /*
 contributors: Patricio Gonzalez Vivo
-description: Perceptual distance between two color according to CIE94 https://en.wikipedia.org/wiki/Color_difference#CIE94
-use: colorDistance(<vec3|vec4> rgbA, <vec3|vec4> rgbA)
-options:
-    - COLORDISTANCE_FNC: |
-        colorDistanceLABCIE94, colorDistanceLAB, colorDistanceYCbCr,
-        colorDistanceYPbPr, colorDistanceYUV, colorDistanceOKLAB
+description: |
+    Perceptual distance between two colors. The default implementation uses CIE94.
+    See https://en.wikipedia.org/wiki/Color_difference#CIE94
+use: colorDistance(<vec3|vec4> rgbA, <vec3|vec4> rgbB)
+note: |
+    Multiple distance metric functions are available:
+    - colorDistanceLABCIE94 (default)
+    - colorDistanceLAB
+    - colorDistanceYCbCr
+    - colorDistanceYPbPr
+    - colorDistanceYUV
+    - colorDistanceOKLAB
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
@@ -53,4 +59,13 @@ fn colorDistanceYUV(rgb1 : vec3<f32>, rgb2 : vec3<f32>) -> f32 {
 }
 fn colorDistanceOKLAB(rgb1 : vec3<f32>, rgb2 : vec3<f32>) -> f32 {
     return distance(rgb2oklab(rgb1), rgb2oklab(rgb2));
+}
+
+// Default function using CIE94
+fn colorDistance(rgb1: vec3f, rgb2: vec3f) -> f32 {
+    return colorDistanceLABCIE94(rgb1, rgb2);
+}
+
+fn colorDistance4(rgb1: vec4f, rgb2: vec4f) -> f32 {
+    return colorDistanceLABCIE94(rgb1.rgb, rgb2.rgb);
 }

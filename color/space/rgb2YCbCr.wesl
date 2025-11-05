@@ -12,3 +12,7 @@ fn rgb2YCbCr(rgb: vec3f) -> vec3f {
     let cr = 0.5 + dot(rgb, vec3f(0.5, -0.418688, -0.081312));
     return vec3f(y, cb, cr);
 }
+
+fn rgb2YCbCr4(color: vec4f) -> vec4f {
+    return vec4f(rgb2YCbCr(color.rgb), color.a);
+}

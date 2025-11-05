@@ -6,6 +6,9 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
+// LATER make this a @param const when WESL supports that
+const HCV_EPSILON: f32 = 1e-10;
+
 fn rgb2hcv(rgb: vec3f) -> vec3f {
     var P: vec4f;
     if (rgb.g < rgb.b) {
@@ -20,6 +23,10 @@ fn rgb2hcv(rgb: vec3f) -> vec3f {
         Q = vec4f(rgb.r, P.yzx);
     }
     let C = Q.x - min(Q.w, Q.y);
-    let H = abs((Q.w - Q.y) / (6.0 * C + 1e-10) + Q.z);
+    let H = abs((Q.w - Q.y) / (6.0 * C + HCV_EPSILON) + Q.z);
     return vec3f(H, C, Q.x);
+}
+
+fn rgb2hcv4(color: vec4f) -> vec4f {
+    return vec4f(rgb2hcv(color.rgb), color.a);
 }
