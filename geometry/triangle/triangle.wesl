@@ -1,14 +1,13 @@
 /*
 contributors: Patricio Gonzalez Vivo
-description: This file contains the definition of the Triangle struct
+description: Triangle struct definition
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-#ifndef STR_TRIANGLE
-#define STR_TRIANGLE
 struct Triangle {
-    vec3 a, b, c;
+    a: vec3f,
+    b: vec3f,
+    c: vec3f,
 };
-#endif

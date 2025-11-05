@@ -1,14 +1,12 @@
-import package::generative::random::{random22, random33};
-import package::math::dist::{distEuclidean2, distEuclidean3};
+import lygia::generative::random::{random22, random33};
+import lygia::math::dist::{distEuclidean2, distEuclidean3};
 
 /*
 contributors: Patricio Gonzalez Vivo
 description: Worley noise. Returns vec2(F1, F2)
 use: <vec2> worley2(<vec2|vec3> pos)
 notes:
-    - While the GLSL and HLSL versions of this file support other distance functions, WGSL does not have a standard way to do this. As such, the current implementation uses distEuclidean.
-options:
-    - WORLEY_JITTER: amount of pattern randomness. With 1.0 being the default and 0.0 resulting in a perfectly symmetrical pattern.
+    - The current implementation uses distEuclidean for distance calculations.
 examples:
     - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/generative_worley.frag
 license:
@@ -16,6 +14,7 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
+// Amount of pattern randomness. 1.0 is default, 0.0 results in a perfectly symmetrical pattern.
 const WORLEY_JITTER: f32 = 1.0;
 
 fn worley22(p: vec2f) -> vec2f {
