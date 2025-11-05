@@ -133,3 +133,18 @@ test("translate4d", async () => {
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
   expectCloseTo([11.0, 22.0, 33.0, 1.0], result);
 });
+
+test("translate4dXYZ", async () => {
+  const src = `
+    import lygia::math::translate4d::translate4dXYZ;
+    @compute @workgroup_size(1)
+    fn foo() {
+      let mat = translate4dXYZ(5.0, 10.0, 15.0);
+      let v = vec4f(1.0, 2.0, 3.0, 1.0);
+      let result = mat * v;
+      test::results[0] = result;
+    }
+  `;
+  const result = await lygiaTestCompute(src, { elem: "vec4f" });
+  expectCloseTo([6.0, 12.0, 18.0, 1.0], result);
+});
