@@ -10,6 +10,10 @@ fn lab2lch(lab: vec3f) -> vec3f {
     return vec3f(
         lab.x,
         sqrt(dot(lab.yz, lab.yz)),
-        atan(lab.z, lab.y) * 57.2957795131
+        atan2(lab.z, lab.y) * 57.2957795131
     );
+}
+
+fn lab2lch4(lab: vec4f) -> vec4f {
+    return vec4f(lab2lch(lab.xyz), lab.a);
 }

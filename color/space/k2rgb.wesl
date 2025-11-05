@@ -1,10 +1,13 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: Blackbody in kelvin to RGB. Range between 0.0 and 40000.0 Kelvin
+use: <vec3f> k2rgb(<f32> wavelength)
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
+
+import lygia::math::saturate::saturate3;
 
 fn k2rgb(t : f32) -> vec3f {
     let p = pow(t, -1.5);
@@ -19,7 +22,7 @@ fn k2rgb(t : f32) -> vec3f {
         color.g = 138039.0 * p + 0.738;
     }
 
-    color = saturate(color);
+    color = saturate3(color);
     if (t < 1000.0) {
         color *= t/1000.0;
     }

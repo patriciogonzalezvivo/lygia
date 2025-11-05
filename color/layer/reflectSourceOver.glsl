@@ -17,7 +17,7 @@ vec4 layerReflectSourceOver(vec4 src, vec4 dest) {
     vec4 result = vec4(0.0, 0.0, 0.0, 0.0);
 
     // Compute reflect for RGB channels
-    float3 blendedColor = blendReflect(src.rgb, dest.rgb);
+    vec3 blendedColor = blendReflect(src.rgb, dest.rgb);
 
     // Compute source-over for RGB channels
     result.rgb = compositeSourceOver(blendedColor, dest.rgb, src.a, dest.a);

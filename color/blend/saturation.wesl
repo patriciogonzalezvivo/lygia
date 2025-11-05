@@ -1,4 +1,4 @@
-import package::color::space::{rgb2hsv::rgb2hsv, hsv2rgb::hsv2rgb};
+import lygia::color::space::{rgb2hsv::rgb2hsv, hsv2rgb::hsv2rgb};
 
 /*
 contributors: Romain Dura

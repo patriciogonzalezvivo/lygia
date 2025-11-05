@@ -6,9 +6,9 @@ use: blendSoftLight(<float|vec3> base, <float|vec3> blend [, <float> opacity])
 
 fn blendSoftLight(base: f32, blend: f32) -> f32 {
     if (blend < 0.5) {
-        return (2. * base * blend + base * base * (1. - 2.*blend));
+        return (2.0 * base * blend + base * base * (1.0 - 2.0*blend));
     } else {
-        return (sqrt(base) * (2. * blend - 1.) + 2. * base * (1. - blend));
+        return (sqrt(base) * (2.0 * blend - 1.0) + 2.0 * base * (1.0 - blend));
     }
 }
 
@@ -27,5 +27,5 @@ fn blendSoftLight4(base: vec4f, blend: vec4f) -> vec4f {
 }
 
 fn blendSoftLight3Opacity(base: vec3f, blend: vec3f, opacity: f32) -> vec3f {
-    return (blendSoftLight3(base, blend) * opacity + base * (1. - opacity));
+    return (blendSoftLight3(base, blend) * opacity + base * (1.0 - opacity));
 }

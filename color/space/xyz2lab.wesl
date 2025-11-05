@@ -15,3 +15,7 @@ fn xyz2lab(c: vec3f) -> vec3f {
                    500.0 * (v.x - v.y),
                    200.0 * (v.y - v.z) );
 }
+
+fn xyz2lab4(color: vec4f) -> vec4f {
+    return vec4f(xyz2lab(color.xyz), color.a);
+}

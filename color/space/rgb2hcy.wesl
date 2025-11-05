@@ -1,4 +1,4 @@
-import package::color::space::{rgb2hcv::rgb2hcv, hue2rgb::hue2rgb};
+import lygia::color::space::{rgb2hcv::rgb2hcv, hue2rgb::hue2rgb};
 
 /*
 contributors:
@@ -26,4 +26,8 @@ fn rgb2hcy(rgb: vec3f) -> vec3f {
         HCV.y *= (1.0 - Z) / (HCY_EPSILON + 1.0 - Y);
     }
     return vec3f(HCV.x, HCV.y, Y);
+}
+
+fn rgb2hcy4(color: vec4f) -> vec4f {
+    return vec4f(rgb2hcy(color.rgb), color.a);
 }

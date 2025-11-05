@@ -1,5 +1,4 @@
-import package::color::blend::colorBurn::blendColorBurn;
-import package::color::blend::colorDodge::blendColorDodge;
+import lygia::color::blend::{colorBurn::blendColorBurn, colorDodge::blendColorDodge};
 
 /*
 contributors: Jamie Owen

@@ -1,4 +1,4 @@
-import package::color::blend::overlay::blendOverlay;
+import lygia::color::blend::overlay::{blendOverlay, blendOverlay3};
 
 /*
 contributors: Jamie Owen
@@ -12,7 +12,7 @@ fn blendHardLight(base: f32, blend: f32) -> f32 {
 }
 
 fn blendHardLight3(base: vec3f, blend: vec3f) -> vec3f {
-  return blendOverlay(blend, base);
+  return blendOverlay3(blend, base);
 }
 
 fn blendHardLight3Opacity(base: vec3f, blend: vec3f, opacity: f32) -> vec3f {
