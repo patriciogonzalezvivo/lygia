@@ -19,7 +19,7 @@ vec4 rotateZ(in vec4 v, in float r, in vec4 c) {
 
 vec4 rotateZ(in vec4 v, in float r) {
     #ifdef CENTER_4D
-    return rotate4dZ(r) * (v - CENTER_3D) + CENTER_3D;
+    return rotate4dZ(r) * (v - CENTER_4D) + CENTER_4D;
     #else
     return rotate4dZ(r) * v;
     #endif

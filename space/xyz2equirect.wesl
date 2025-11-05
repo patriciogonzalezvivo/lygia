@@ -1,13 +1,14 @@
+import lygia::math::consts::PI;
+
 /*
 contributors: Patricio Gonzalez Vivo
-description: sampling function to make a texture behave like GL_NEAREST
-use: <vec2f> nearest(<vec2f> v, <vec2f> res)
+description: 3D vector to equirect 2D projection
+use: <vec2> xyz2equirect(<vec2> d)
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-fn nearest(v: vec2f, res: vec2f) -> vec2f {
-    let offset = 0.5 / (res - 1.0);
-    return floor(v * res) / res + offset;
+fn xyz2equirect(d: vec3f) -> vec2f {
+    return vec2f(atan2(d.z, d.x) + PI, acos(-d.y)) / vec2f(2.0 * PI, PI);
 }
