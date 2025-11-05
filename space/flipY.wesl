@@ -7,9 +7,6 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-#ifndef FNC_FLIPY
-#define FNC_FLIPY
-vec2 flipY(in vec2 v) { return vec2(v.x, 1.0 - v.y); }
-vec3 flipY(in vec3 v) { return vec3(v.x, 1.0 - v.y, v.z); }
-vec4 flipY(in vec4 v) { return vec4(v.x, 1.0 - v.y, v.z, v.w); }
-#endif
+fn flipY2(v: vec2f) -> vec2f { return vec2f(v.x, 1.0 - v.y); }
+fn flipY3(v: vec3f) -> vec3f { return vec3f(v.x, 1.0 - v.y, v.z); }
+fn flipY4(v: vec4f) -> vec4f { return vec4f(v.x, 1.0 - v.y, v.z, v.w); }
