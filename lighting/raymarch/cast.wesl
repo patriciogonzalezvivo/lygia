@@ -1,20 +1,6 @@
 /*
 contributors: Inigo Quiles
-description: Cast a ray
+description: Cast a ray. Requires a user-defined map(vec3f) -> f32 function that returns the SDF of the scene.
 */
 
-import package::math::map::map;
-
-fn raymarchCast(ro: vec3f, rd: vec3f ) -> f32 {
-    var dist = -1.0;
-    var t = -1.0;
-    for (var i = 0; i < 120 && t < 100.0; i++) {
-        let h = map( ro + rd * t );
-        if (abs(h) < (0.001 * t)) { 
-            dist = t; 
-            break;
-        }
-        t += h;
-    }
-    return dist;
-}
+// Deferred until LATER - WESL doesn't yet support a user defined 'map' function

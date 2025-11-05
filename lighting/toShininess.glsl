@@ -13,6 +13,6 @@ float toShininess(const in float roughness, const in float metallic) {
     float s = .95 - roughness * 0.5;
     s *= s;
     s *= s;
-    return s * (80. + 160. * (1.0-metallic));
+    return s * (80.0 + 160.0 * (1.0-metallic));
 }
 #endif
