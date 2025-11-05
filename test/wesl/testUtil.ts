@@ -1,11 +1,13 @@
 import { expect } from "vitest";
 import type {
   ComputeTestParams,
+  FragmentImageTestParams,
   FragmentTestParams,
   WgslElementType,
 } from "wesl-test";
 import {
   createSampler,
+  expectFragmentImage,
   getGPUDevice,
   gradientTexture,
   testCompute,
@@ -200,10 +202,10 @@ export async function expectBlend(
   const device = await getGPUDevice();
 
   // Create default gradient textures if not provided
-  const resolvedSrc = srcTexture ??
-    gradientTexture(device, size[0], size[1], "horizontal");
-  const resolvedDest = dstTexture ??
-    gradientTexture(device, size[0], size[1], "vertical");
+  const resolvedSrc =
+    srcTexture ?? gradientTexture(device, size[0], size[1], "horizontal");
+  const resolvedDest =
+    dstTexture ?? gradientTexture(device, size[0], size[1], "vertical");
   const sampler = createSampler(device);
 
   const result = await testFragmentImage({
@@ -241,16 +243,14 @@ export async function expectDither(
   snapshotName: string,
   options: DitherOptions = {},
 ): Promise<void> {
-  const {
-    size = [256, 256],
-    threshold = 0.001,
-  } = options;
+  const { size = [256, 256], threshold = 0.001 } = options;
   const device = await getGPUDevice();
 
   // Create default gradient texture if not provided
   // Use vertical gradient so top/bottom split shows full range in each half
   const inputTexture =
-    options.inputTexture ?? gradientTexture(device, size[0], size[1], "vertical");
+    options.inputTexture ??
+    gradientTexture(device, size[0], size[1], "vertical");
   const sampler = createSampler(device);
 
   const result = await testFragmentImage({
@@ -262,4 +262,27 @@ export async function expectDither(
   });
 
   await expect(result).toMatchImage({ name: snapshotName, threshold });
+}
+
+/**
+ * Test a LYGIA shader from test/wesl/shaders/ with visual regression.
+ *
+ * Automatically handles:
+ * - Constructing shader path from name
+ * - Setting projectDir to lygia root
+ * - Using name as snapshot name
+ */
+export async function lygiaExampleImage(
+  device: GPUDevice,
+  name: string,
+  opts: Omit<FragmentImageTestParams, "projectDir" | "snapshotName">,
+): Promise<void> {
+  const projectDir = new URL("../../", import.meta.url).href;
+  const shaderPath = `test/wesl/shaders/${name}.wesl`;
+
+  await expectFragmentImage(device, shaderPath, {
+    projectDir,
+    snapshotName: name,
+    ...opts,
+  });
 }
