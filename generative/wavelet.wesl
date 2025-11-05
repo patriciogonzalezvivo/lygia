@@ -1,18 +1,17 @@
-import package::generative::random::random2;
-import package::math::rotate2d::rotate2d;
+import lygia::generative::random::random2;
+import lygia::math::rotate2d::rotate2d;
 
 /*
 contributors: Martijn Steinrucken
 description: Wavelet noise https://www.shadertoy.com/view/wsBfzK
 use: <vec2> worley(<vec2|vec3> pos)
-options:
-    - WAVELET_VORTICITY: amount of vorticity, i.e. spinning behaviour. With 0.0 (none) being the default, values may exceed 1.0.
 examples:
     - /shaders/generative_worley.frag
 license:
     - The MIT License Copyright 2020 Martijn Steinrucken
 */
 
+// Amount of vorticity (spinning behavior). Default is 0.0 (none), values may exceed 1.0.
 const WAVELET_VORTICITY: f32 = 0.0;
 
 fn wavelet(p: vec2f, phase: f32, scale: f32) -> f32 {

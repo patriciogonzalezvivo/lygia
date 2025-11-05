@@ -4,19 +4,17 @@ contributors:
     - David Hoskins
     - Inigo Quilez
 description: Pass a value and get some random normalize value between 0 and 1
-notes:
-    - While the GLSL and HLSL versions of this file support a RANDOM_HIGHER_RANGE option, the current implementation has this permanently enabled.
-options:
-    - RANDOM_SINLESS: Use sin-less random, which tolerates bigger values before producing pattern. From https://www.shadertoy.com/view/4djSRW
-    - RANDOM_SCALE: by default this scale if for number with a big range. For producing good random between 0 and 1 use bigger range
 examples:
     - /shaders/generative_random.frag
 license:
     - MIT License (MIT) Copyright 2014, David Hoskins
 */
 
+// Use sin-less random, which tolerates bigger values before producing pattern.
+// From https://www.shadertoy.com/view/4djSRW
 const RANDOM_SINLESS: bool = true;
 
+// Scale for number with a big range. For producing good random between 0 and 1 use bigger range.
 const RANDOM_SCALE: vec4f = vec4f(.1031, .1030, .0973, .1099);
 
 fn random(p: f32) -> f32 {
@@ -56,7 +54,7 @@ fn random4(p: vec4f) -> f32 {
     var pos = p;
     if (RANDOM_SINLESS) {
         pos = fract(pos * RANDOM_SCALE);
-        pos += dot(pos, pos.wzxy+33.33);
+        pos += dot(pos, pos.wzxy + 33.33);
         return fract((pos.x + pos.y) * (pos.z + pos.w));
     } else {
         let dot_product = dot(pos, vec4(12.9898,78.233,45.164,94.673));

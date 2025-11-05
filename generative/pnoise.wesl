@@ -1,7 +1,7 @@
-import package::math::mod289::{mod289, mod289_3, mod289_4};
-import package::math::permute::{permute4};
-import package::math::taylorInvSqrt::{taylorInvSqrt4};
-import package::math::quintic::{quintic2, quintic3, quintic4};
+import lygia::math::mod289::{mod289, mod289_3, mod289_4};
+import lygia::math::permute::{permute4};
+import lygia::math::taylorInvSqrt::{taylorInvSqrt4};
+import lygia::math::quintic::{quintic2, quintic3, quintic4};
 
 /*
 contributors: [Stefan Gustavson, Ian McEwan]
@@ -16,7 +16,7 @@ license: |
 fn pnoise2(P: vec2f, rep: vec2f) -> f32 {
     var Pi = floor(P.xyxy) + vec4(0.0, 0.0, 1.0, 1.0);
     let Pf = fract(P.xyxy) - vec4(0.0, 0.0, 1.0, 1.0);
-    Pi = Pi % rep.xyxy; // To create noise with explicit period
+    Pi = Pi - rep.xyxy * floor(Pi / rep.xyxy); // To create noise with explicit period
     Pi = mod289_4(Pi); // To avoid truncation effects in permutation
     let ix = Pi.xzxz;
     let iy = Pi.yyww;
@@ -53,8 +53,8 @@ fn pnoise2(P: vec2f, rep: vec2f) -> f32 {
 }
 
 fn pnoise3(P: vec3f, rep: vec3f)-> f32 {
-    var Pi0 = floor(P) % rep; // Integer part, modulo period
-    var Pi1 = (Pi0 + vec3(1.0)) % rep; // Integer part + 1, mod period
+    var Pi0 = floor(P) - rep * floor(floor(P) / rep); // Integer part, modulo period
+    var Pi1 = (Pi0 + vec3(1.0)) - rep * floor((Pi0 + vec3(1.0)) / rep); // Integer part + 1, mod period
     Pi0 = mod289_3(Pi0);
     Pi1 = mod289_3(Pi1);
     let Pf0 = fract(P); // Fractional part for interpolation
@@ -121,8 +121,8 @@ fn pnoise3(P: vec3f, rep: vec3f)-> f32 {
 }
 
 fn pnoise4(P: vec4f, rep: vec4f) -> f32 {
-    var Pi0 = floor(P) % rep; // Integer part modulo rep
-    var Pi1 = (Pi0 + 1.0) % rep; // Integer part + 1 mod rep
+    var Pi0 = floor(P) - rep * floor(floor(P) / rep); // Integer part modulo rep
+    var Pi1 = (Pi0 + 1.0) - rep * floor((Pi0 + 1.0) / rep); // Integer part + 1 mod rep
     Pi0 = mod289_4(Pi0);
     Pi1 = mod289_4(Pi1);
     let Pf0 = fract(P); // Fractional part for interpolation
