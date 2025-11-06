@@ -18,7 +18,7 @@ test("hardLight blend mode", async () => {
   await expectBlend(
     `
     import lygia::color::layer::hardLightSourceOver::layerHardLightSourceOver4;
-    import lygia::testing::blendInputs::blendInputs;
+    import lygia::test::wesl_util::blendInputs::blendInputs;
 
     @fragment
     fn fs_main(@builtin(position) pos: vec4f) -> @location(0) vec4f {
@@ -34,7 +34,7 @@ test("softLight blend mode", async () => {
   await expectBlend(
     `
     import lygia::color::layer::softLightSourceOver::layerSoftLightSourceOver4;
-    import lygia::testing::blendInputs::blendInputs;
+    import lygia::test::wesl_util::blendInputs::blendInputs;
 
     @fragment
     fn fs_main(@builtin(position) pos: vec4f) -> @location(0) vec4f {
@@ -50,7 +50,7 @@ test("vividLight blend mode", async () => {
   await expectBlend(
     `
     import lygia::color::layer::vividLightSourceOver::layerVividLightSourceOver4;
-    import lygia::testing::blendInputs::blendInputs;
+    import lygia::test::wesl_util::blendInputs::blendInputs;
 
     @fragment
     fn fs_main(@builtin(position) pos: vec4f) -> @location(0) vec4f {
@@ -66,7 +66,7 @@ test("linearLight blend mode", async () => {
   await expectBlend(
     `
     import lygia::color::layer::linearLightSourceOver::layerLinearLightSourceOver4;
-    import lygia::testing::blendInputs::blendInputs;
+    import lygia::test::wesl_util::blendInputs::blendInputs;
 
     @fragment
     fn fs_main(@builtin(position) pos: vec4f) -> @location(0) vec4f {
@@ -82,7 +82,7 @@ test("pinLight blend mode", async () => {
   await expectBlend(
     `
     import lygia::color::layer::pinLightSourceOver::layerPinLightSourceOver4;
-    import lygia::testing::blendInputs::blendInputs;
+    import lygia::test::wesl_util::blendInputs::blendInputs;
 
     @fragment
     fn fs_main(@builtin(position) pos: vec4f) -> @location(0) vec4f {
@@ -98,7 +98,7 @@ test("hardMix blend mode", async () => {
   await expectBlend(
     `
     import lygia::color::layer::hardMixSourceOver::layerHardMixSourceOver4;
-    import lygia::testing::blendInputs::blendInputs;
+    import lygia::test::wesl_util::blendInputs::blendInputs;
 
     @fragment
     fn fs_main(@builtin(position) pos: vec4f) -> @location(0) vec4f {
@@ -115,7 +115,7 @@ test("colorBurn blend mode", async () => {
   await expectBlend(
     `
     import lygia::color::layer::colorBurnSourceOver::layerColorBurnSourceOver4;
-    import lygia::testing::blendInputs::blendInputs;
+    import lygia::test::wesl_util::blendInputs::blendInputs;
 
     @fragment
     fn fs_main(@builtin(position) pos: vec4f) -> @location(0) vec4f {
@@ -131,7 +131,7 @@ test("linearBurn blend mode", async () => {
   await expectBlend(
     `
     import lygia::color::layer::linearBurnSourceOver::layerLinearBurnSourceOver4;
-    import lygia::testing::blendInputs::blendInputs;
+    import lygia::test::wesl_util::blendInputs::blendInputs;
 
     @fragment
     fn fs_main(@builtin(position) pos: vec4f) -> @location(0) vec4f {
@@ -148,7 +148,7 @@ test("colorDodge blend mode", async () => {
   await expectBlend(
     `
     import lygia::color::layer::colorDodgeSourceOver::layerColorDodgeSourceOver4;
-    import lygia::testing::blendInputs::blendInputs;
+    import lygia::test::wesl_util::blendInputs::blendInputs;
 
     @fragment
     fn fs_main(@builtin(position) pos: vec4f) -> @location(0) vec4f {
@@ -164,7 +164,7 @@ test("linearDodge blend mode", async () => {
   await expectBlend(
     `
     import lygia::color::layer::linearDodgeSourceOver::layerLinearDodgeSourceOver4;
-    import lygia::testing::blendInputs::blendInputs;
+    import lygia::test::wesl_util::blendInputs::blendInputs;
 
     @fragment
     fn fs_main(@builtin(position) pos: vec4f) -> @location(0) vec4f {
@@ -181,7 +181,7 @@ test("color blend mode", async () => {
   await expectBlend(
     `
     import lygia::color::layer::colorSourceOver::layerColorSourceOver4;
-    import lygia::testing::blendInputs::blendInputs;
+    import lygia::test::wesl_util::blendInputs::blendInputs;
 
     @fragment
     fn fs_main(@builtin(position) pos: vec4f) -> @location(0) vec4f {
@@ -197,7 +197,7 @@ test("hue blend mode", async () => {
   await expectBlend(
     `
     import lygia::color::layer::hueSourceOver::layerHueSourceOver4;
-    import lygia::testing::blendInputs::blendInputs;
+    import lygia::test::wesl_util::blendInputs::blendInputs;
 
     @fragment
     fn fs_main(@builtin(position) pos: vec4f) -> @location(0) vec4f {
@@ -213,7 +213,7 @@ test("saturation blend mode", async () => {
   await expectBlend(
     `
     import lygia::color::layer::saturationSourceOver::layerSaturationSourceOver4;
-    import lygia::testing::blendInputs::blendInputs;
+    import lygia::test::wesl_util::blendInputs::blendInputs;
 
     @fragment
     fn fs_main(@builtin(position) pos: vec4f) -> @location(0) vec4f {
@@ -229,7 +229,7 @@ test("luminosity blend mode", async () => {
   await expectBlend(
     `
     import lygia::color::layer::luminositySourceOver::layerLuminositySourceOver4;
-    import lygia::testing::blendInputs::blendInputs;
+    import lygia::test::wesl_util::blendInputs::blendInputs;
 
     @fragment
     fn fs_main(@builtin(position) pos: vec4f) -> @location(0) vec4f {
@@ -246,7 +246,7 @@ test("average blend mode", async () => {
   await expectBlend(
     `
     import lygia::color::layer::averageSourceOver::layerAverageSourceOver4;
-    import lygia::testing::blendInputs::blendInputs;
+    import lygia::test::wesl_util::blendInputs::blendInputs;
 
     @fragment
     fn fs_main(@builtin(position) pos: vec4f) -> @location(0) vec4f {
@@ -262,7 +262,7 @@ test("negation blend mode", async () => {
   await expectBlend(
     `
     import lygia::color::layer::negationSourceOver::layerNegationSourceOver4;
-    import lygia::testing::blendInputs::blendInputs;
+    import lygia::test::wesl_util::blendInputs::blendInputs;
 
     @fragment
     fn fs_main(@builtin(position) pos: vec4f) -> @location(0) vec4f {
@@ -278,7 +278,7 @@ test("reflect blend mode", async () => {
   await expectBlend(
     `
     import lygia::color::layer::reflectSourceOver::layerReflectSourceOver4;
-    import lygia::testing::blendInputs::blendInputs;
+    import lygia::test::wesl_util::blendInputs::blendInputs;
 
     @fragment
     fn fs_main(@builtin(position) pos: vec4f) -> @location(0) vec4f {
@@ -294,7 +294,7 @@ test("glow blend mode", async () => {
   await expectBlend(
     `
     import lygia::color::layer::glowSourceOver::layerGlowSourceOver4;
-    import lygia::testing::blendInputs::blendInputs;
+    import lygia::test::wesl_util::blendInputs::blendInputs;
 
     @fragment
     fn fs_main(@builtin(position) pos: vec4f) -> @location(0) vec4f {

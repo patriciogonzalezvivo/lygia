@@ -1,4 +1,4 @@
-import { expect, test } from "vitest";
+import { test } from "vitest";
 import { expectCloseTo, lygiaTestCompute } from "./testUtil.ts";
 
 test("blendOverlay3Opacity", async () => {

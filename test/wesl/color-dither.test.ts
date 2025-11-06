@@ -1,7 +1,7 @@
 import { afterAll, beforeAll, test } from "vitest";
 import { imageMatcher } from "vitest-image-snapshot";
 import { destroySharedDevice, getGPUDevice } from "wesl-test";
-import { expectDither, lygiaTestCompute, expectCloseTo } from "./testUtil.ts";
+import { expectCloseTo, expectDither, lygiaTestCompute } from "./testUtil.ts";
 
 imageMatcher();
 
@@ -17,7 +17,7 @@ test("ditherBayer3 - gradient with Bayer pattern", async () => {
   await expectDither(
     `
     import lygia::color::dither::bayer::ditherBayer3Precision;
-    import lygia::testing::sampleQuantized::{sampleQuantized3, sampleOriginal3};
+    import lygia::test::wesl_util::sampleQuantized::{sampleQuantized3, sampleOriginal3};
 
     @group(0) @binding(0) var<uniform> u: test::Uniforms;
 
@@ -44,7 +44,7 @@ test("ditherVlachos3 - gradient with Vlachos noise", async () => {
   await expectDither(
     `
     import lygia::color::dither::vlachos::ditherVlachos3Precision;
-    import lygia::testing::sampleQuantized::{sampleQuantized3, sampleOriginal3};
+    import lygia::test::wesl_util::sampleQuantized::{sampleQuantized3, sampleOriginal3};
 
     @group(0) @binding(0) var<uniform> u: test::Uniforms;
 
@@ -71,7 +71,7 @@ test("ditherBlueNoise3 - gradient with blue noise pattern", async () => {
   await expectDither(
     `
     import lygia::color::dither::blueNoise::ditherBlueNoise3Precision;
-    import lygia::testing::sampleQuantized::{sampleQuantized3, sampleOriginal3};
+    import lygia::test::wesl_util::sampleQuantized::{sampleQuantized3, sampleOriginal3};
 
     @group(0) @binding(0) var<uniform> u: test::Uniforms;
 
