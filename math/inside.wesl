@@ -19,4 +19,4 @@ fn inside3(_v: vec3f, _min: vec3f, _max: vec3f) -> bool {
              _v.z < _min.z || _v.z > _max.z);
 }
 
-fn insideAABB(_v: vec2f, _aabb: vec4f) -> bool { return inside(_v, _aabb.xy, _aabb.zw); }
+fn insideAABB(_v: vec2f, _aabb: vec4f) -> bool { return inside2(_v, _aabb.xy, _aabb.zw); }
