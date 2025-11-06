@@ -265,24 +265,50 @@ export async function expectDither(
 }
 
 /**
+ * Options for lygiaExampleImage test helper.
+ */
+export type LygiaExampleImageOptions = Omit<
+  FragmentImageTestParams,
+  "projectDir" | "snapshotName"
+> & {
+  shader?: string;
+};
+
+/**
  * Test a LYGIA shader from test/wesl/shaders/ with visual regression.
  *
  * Automatically handles:
- * - Constructing shader path from name
+ * - Constructing shader path from name (if shader not provided inline)
  * - Setting projectDir to lygia root
  * - Using name as snapshot name
+ * - Defaults to 256x256 size (can be overridden in opts)
  */
 export async function lygiaExampleImage(
   device: GPUDevice,
   name: string,
-  opts: Omit<FragmentImageTestParams, "projectDir" | "snapshotName">,
+  opts: LygiaExampleImageOptions = {},
 ): Promise<void> {
   const projectDir = new URL("../../", import.meta.url).href;
-  const shaderPath = `test/wesl/shaders/${name}.wesl`;
+  const { size = [256, 256], shader, ...restOpts } = opts;
 
-  await expectFragmentImage(device, shaderPath, {
-    projectDir,
-    snapshotName: name,
-    ...opts,
-  });
+  if (shader) {
+    // Inline shader provided - use testFragmentImage
+    const imageData = await testFragmentImage({
+      device,
+      src: shader,
+      projectDir,
+      size,
+      ...restOpts,
+    });
+    await expect(imageData).toMatchImage({ name });
+  } else {
+    // Load from file path
+    const shaderPath = `test/wesl/shaders/${name}.wesl`;
+    await expectFragmentImage(device, shaderPath, {
+      projectDir,
+      snapshotName: name,
+      size,
+      ...restOpts,
+    });
+  }
 }
