@@ -73,7 +73,7 @@ export async function lygiaTestFragment(
   options: LygiaTestFragment = {},
 ) {
   const { size, textureFormat = "rgba32float" } = options;
-  const { conditions, constants, inputTextures, uniforms } = options;
+  const { conditions, constants, textures, samplers, uniforms } = options;
 
   const device = await getGPUDevice();
   return await testFragment({
@@ -85,7 +85,8 @@ export async function lygiaTestFragment(
     conditions,
     constants,
     uniforms,
-    inputTextures,
+    textures,
+    samplers,
   });
 }
 
@@ -213,10 +214,8 @@ export async function expectBlend(
     device,
     src: shaderSrc,
     size,
-    inputTextures: [
-      { texture: resolvedSrc, sampler },
-      { texture: resolvedDest, sampler },
-    ],
+    textures: [resolvedSrc, resolvedDest],
+    samplers: [sampler],
   });
 
   await expect(result).toMatchImage({ name: snapshotName, threshold });
@@ -258,7 +257,8 @@ export async function expectDither(
     device,
     src: shaderSrc,
     size,
-    inputTextures: [{ texture: inputTexture, sampler }],
+    textures: [inputTexture],
+    samplers: [sampler],
   });
 
   await expect(result).toMatchImage({ name: snapshotName, threshold });

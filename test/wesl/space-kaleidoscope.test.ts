@@ -26,6 +26,7 @@ test("Kaleidoscope with multiple segment counts (4, 6, 8, 12)", async () => {
 
   await lygiaExampleImage(device, "kaleidoscope", {
     size: [128, 128],
-    inputTextures: [{ texture: inputTex, sampler }],
+    textures: [inputTex],
+    samplers: [sampler],
   });
 });
