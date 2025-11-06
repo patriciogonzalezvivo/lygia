@@ -2,8 +2,8 @@
 // Provides texture bindings and sampling for blend operations
 
 @group(0) @binding(1) var srcTex: texture_2d<f32>;
-@group(0) @binding(2) var smp: sampler;
-@group(0) @binding(3) var dstTex: texture_2d<f32>;
+@group(0) @binding(2) var dstTex: texture_2d<f32>;
+@group(0) @binding(3) var smp: sampler;
 
 struct BlendInputs {
   src: vec4f,
