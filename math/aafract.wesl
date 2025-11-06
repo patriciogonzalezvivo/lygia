@@ -8,7 +8,8 @@ description: |
 */
 
 fn aafract(x: f32) -> f32 {
-    let afwidth = 2.0 * fwidth(x);
+    // Use Euclidean length (L2 norm) to match GLSL, not fwidth (L1 norm)
+    let afwidth = 2.0 * length(vec2f(dpdx(x), dpdy(x)));
     let fx = fract(x);
     let idx = 1.0 - afwidth;
     let v = select((1.0-fx)/afwidth, fx/idx, fx < idx);
