@@ -327,6 +327,12 @@ float psrdnoise(float3 x, float3 period, float alpha, out float3 gradient) {
         i3 = floor(i3 + 0.5);
     }
 
+    // Avoid truncation effects in permutation
+    i0 = mod289(i0);
+    i1 = mod289(i1);
+    i2 = mod289(i2);
+    i3 = mod289(i3);
+
     // Compute one pseudo-random hash value for each corner
     float4 hash = permute( permute( permute( 
                 float4(i0.z, i1.z, i2.z, i3.z ))
@@ -526,6 +532,12 @@ float psrdnoise(float3 x, float3 period, float alpha, out float3 gradient, out f
         i2 = floor(i2 + 0.5);
         i3 = floor(i3 + 0.5);
     }
+
+    // Avoid truncation effects in permutation
+    i0 = mod289(i0);
+    i1 = mod289(i1);
+    i2 = mod289(i2);
+    i3 = mod289(i3);
 
     // Compute one pseudo-random hash value for each corner
     float4 hash = permute( permute( permute( 
