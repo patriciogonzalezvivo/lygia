@@ -1,6 +1,6 @@
-test
+test/
+__image*
 .claude
 biome.jsonc
 tsconfig.json
-wesl.toml
 webpack.config.ts
