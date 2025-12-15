@@ -1,3 +1,4 @@
+// @toy
 import lygia::space::checkerTile::checkerTile2;
 import test::Uniforms;
 

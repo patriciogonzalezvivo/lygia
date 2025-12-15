@@ -1,3 +1,4 @@
+// @toy
 import lygia::generative::worley::worley2;
 
 @group(0) @binding(0) var<uniform> uniforms: test::Uniforms;

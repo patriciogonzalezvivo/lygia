@@ -1,3 +1,4 @@
+// @toy
 import lygia::space::brickTile::brickTile2;
 import lygia::generative::random::random;
 import test::Uniforms;
