@@ -1,3 +1,4 @@
+// @toy
 import lygia::draw::stroke::{stroke, strokeEdge};
 import lygia::math::consts::PI;
 

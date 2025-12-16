@@ -1,3 +1,4 @@
+// @toy
 import lygia::space::triTile::triTile;
 import lygia::generative::random::random;
 import test::Uniforms;

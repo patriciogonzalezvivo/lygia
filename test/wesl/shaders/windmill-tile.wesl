@@ -1,3 +1,4 @@
+// @toy
 import lygia::space::windmillTile::windmillTile2;
 import test::Uniforms;
 

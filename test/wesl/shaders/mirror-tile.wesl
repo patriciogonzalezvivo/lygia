@@ -1,3 +1,4 @@
+// @toy
 import lygia::space::mirrorTile::mirrorTile2;
 import test::Uniforms;
 

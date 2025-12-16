@@ -1,3 +1,4 @@
+// @toy
 import lygia::math::consts::TAU;
 import lygia::math::aastep::aastep;
 import lygia::math::aafract::aafract;
@@ -10,10 +11,10 @@ import lygia::color::space::linear2gamma::linear2gamma;
 // Based on https://www.shadertoy.com/view/wtjGzt by FabriceNeyret2
 //
 // WHAT TO LOOK FOR IN THE IMAGE:
-// - Top-left: fract() showing moire/aliasing artifacts in spiral center
-// - Top-right: aafract() smooth gradient, no aliasing
-// - Bottom-left: step() hard bands with moire/aliasing in center
-// - Bottom-right: aastep() smooth transitions, no aliasing
+// - Top-left: fract() creates continuous gradient with moire/aliasing in spiral center
+// - Top-right: aafract() creates smooth gradient throughout, no aliasing
+// - Bottom-left: step(fract()) creates hard black/white bands with moire/aliasing
+// - Bottom-right: aastep(aafract()) creates smooth black/white transitions, no aliasing
 //
 // The spiral pattern creates increasing frequency toward the center, making
 // aliasing artifacts very visible. The AA versions (right side) should be
@@ -32,25 +33,19 @@ fn fs_main(@builtin(position) pos: vec4f) -> @location(0) vec4f {
   let p = cart2polar2(uv);
 
   // Create spiral field - frequency increases toward center
-  // Add time offset to rotate the pattern (matches GLSL: u_time)
-  // Note: p.x is angle, p.y is radius
   let spiralValue = 20.0 * p.x / TAU + 10.0 / max(p.y, 0.001) + uniforms.time;
 
-  // Step 1: Apply fract/aafract based on left/right
-  let fractValue = fract(spiralValue);
-  let aafractValue = aafract(spiralValue);
-  let rampResult = select(fractValue, aafractValue, uv.x >= 0.0);
+  // Top half: compare fract vs aafract
+  let fractResult = select(fract(spiralValue), aafract(spiralValue), uv.x >= 0.0);
 
-  // Step 2: For bottom half, apply step/aastep to the fract results
-  let stepValue = step(0.5, fractValue);
-  let aastepValue = aastep(0.5, aafractValue);
-  let barResult = select(stepValue, aastepValue, uv.x >= 0.0);
+  // Bottom half: apply step/aastep to the fracted value
+  let stepResult = select(step(0.5, fractResult), aastep(0.5, fractResult), uv.x >= 0.0);
 
-  // Select top (ramps) vs bottom (bars)
-  let result = select(barResult, rampResult, uv.y > 0.0);
+  // Select top vs bottom
+  let v = select(stepResult, fractResult, uv.y > 0.0);
 
   // Convert to sRGB
-  let color = linear2gamma(result);
+  let color = linear2gamma(v);
 
   return vec4f(vec3f(color), 1.0);
 }
