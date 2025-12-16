@@ -1,3 +1,4 @@
+// @toy
 // WESL version of lygia_examples/draw_shapes.frag
 // Displays 14 different 2D SDF shapes in a 4×4 grid for visual comparison with GLSL
 
