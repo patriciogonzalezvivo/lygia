@@ -7,5 +7,5 @@ license:
 */
 
 const LYGIA_VERSION_MAJOR: u32 = 1u;
-const LYGIA_VERSION_MINOR: u32 = 3u;
-const LYGIA_VERSION_PATCH: u32 = 3u;
+const LYGIA_VERSION_MINOR: u32 = 4u;
+const LYGIA_VERSION_PATCH: u32 = 0u;
