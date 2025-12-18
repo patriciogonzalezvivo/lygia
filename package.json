@@ -12,7 +12,7 @@
     "build:wesl": "wesl-packager --multiBundle --outDir dist",
     "ci:check": "pnpm test:once && pnpm test:built",
     "lint": "eslint --fix --ext .js .",
-    "prepublishOnly": "pnpm test:built",
+    "prepublishOnly": "pnpm build:wesl",
     "test": "pnpm vitest",
     "test:built": "pnpm build:wesl && TEST_BUNDLES=true pnpm vitest run",
     "test:once": "pnpm vitest run"
