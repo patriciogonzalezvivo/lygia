@@ -1,0 +1,2 @@
+import { lygiaTestWesl } from "./testUtil.ts";
+await lygiaTestWesl("test/wesl/shaders/color_blend_opacity_test");

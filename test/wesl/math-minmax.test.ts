@@ -1,5 +1,7 @@
 import { test } from "vitest";
-import { expectCloseTo, lygiaTestCompute } from "./testUtil.ts";
+import { expectCloseTo, lygiaTestCompute, lygiaTestWesl } from "./testUtil.ts";
+
+await lygiaTestWesl("test/wesl/shaders/math_minmax_test");
 
 test("mmax2", async () => {
   const src = `
