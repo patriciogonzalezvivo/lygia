@@ -4,7 +4,7 @@ import type {
   FragmentImageTestParams,
   FragmentTestParams,
   WgslElementType,
-} from "wesl-test";
+} from "wgsl-test";
 import {
   createSampler,
   expectFragmentImage,
@@ -13,7 +13,8 @@ import {
   testCompute,
   testFragment,
   testFragmentImage,
-} from "wesl-test";
+  testWesl,
+} from "wgsl-test";
 
 const projectDir = new URL("../../", import.meta.url).href;
 
@@ -90,22 +91,41 @@ export async function lygiaTestFragment(
   });
 }
 
+/** Run a WESL test module (for native WESL tests with @test decorators) */
+export async function lygiaTestWesl(moduleName: string) {
+  const device = await getGPUDevice();
+  return testWesl({
+    device,
+    moduleName,
+    projectDir,
+  });
+}
+
+interface TestDistributionOptions {
+  /** Element type (default "f32") */
+  elem?: WgslElementType;
+
+  /** Additional constants to pass via constants:: namespace */
+  constants?: Record<string, string | number>;
+}
+
 /**
  * Test distribution properties of a random function.
  * Collects multiple samples and returns them for statistical analysis.
  *
+ * Automatically injects SAMPLE_COUNT into constants:: namespace.
+ *
  * @param src - WESL shader source that writes samples to test::results
  * @param sampleCount - Number of samples to collect
- * @param elem - Element type (default "f32")
- * @param constants - Constants to pass via constants:: namespace (e.g., SAMPLE_COUNT)
+ * @param options - Optional elem type and additional constants
  * @returns Array of sample values
  */
 export async function testDistribution(
   src: string,
   sampleCount: number,
-  elem: WgslElementType = "f32",
-  constants?: Record<string, string | number>,
+  options: TestDistributionOptions = {},
 ): Promise<number[]> {
+  const { elem = "f32", constants } = options;
   const device = await getGPUDevice();
 
   return testCompute({
@@ -114,7 +134,7 @@ export async function testDistribution(
     src,
     resultFormat: elem,
     size: sampleCount,
-    constants,
+    constants: { SAMPLE_COUNT: sampleCount, ...constants },
   });
 }
 

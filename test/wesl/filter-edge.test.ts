@@ -1,10 +1,6 @@
 import { test } from "vitest";
 import { imageMatcher } from "vitest-image-snapshot";
-import {
-  createSampler,
-  getGPUDevice,
-  lemurTexture,
-} from "wesl-test";
+import { createSampler, getGPUDevice, lemurTexture } from "wgsl-test";
 import { lygiaExampleImage } from "./testUtil.ts";
 
 imageMatcher();

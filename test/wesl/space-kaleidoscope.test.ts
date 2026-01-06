@@ -5,7 +5,7 @@ import {
   destroySharedDevice,
   getGPUDevice,
   lemurTexture,
-} from "wesl-test";
+} from "wgsl-test";
 import { lygiaExampleImage } from "./testUtil.ts";
 
 imageMatcher();

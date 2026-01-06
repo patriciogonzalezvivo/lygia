@@ -1,4 +1,3 @@
-// @toy
 import lygia::math::consts::TAU;
 import lygia::math::aastep::aastep;
 import lygia::math::aafract::aafract;
@@ -20,7 +19,7 @@ import lygia::color::space::linear2gamma::linear2gamma;
 // aliasing artifacts very visible. The AA versions (right side) should be
 // smooth throughout, while the regular versions (left) show visual noise.
 
-@fragment
+@toy @fragment
 fn fs_main(@builtin(position) pos: vec4f) -> @location(0) vec4f {
   let pixel = 1.0 / uniforms.resolution;
   let st = pos.xy * pixel;
