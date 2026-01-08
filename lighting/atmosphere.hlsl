@@ -24,10 +24,10 @@ description: |
     - [License CC0: Stars and galaxy by mrange](https://www.shadertoy.com/view/stBcW1)
 use: <float3> atmosphere(<float3> eye_dir, <float3> sun_dir)
 OPTIONS:
-    ATMOSPHERE_ORIGIN: Defualt float3(0.0)
+    ATMOSPHERE_ORIGIN: Default float3(0.0)
     ATMOSPHERE_SUN_POWER: sun power. Default 20.0
-    ATMOSPHERE_LIGHT_SAMPLES: Defualt 8 
-    ATMOSPHERE_SAMPLES: Defualt 16
+    ATMOSPHERE_LIGHT_SAMPLES: Default 8 
+    ATMOSPHERE_SAMPLES: Default 16
     ATMOSPHERE_GROUND: Example float3( 0.37, 0.35, 0.34 )
     ATMOSPHERE_STARS_LAYERS: Example 3
     ATMOSPHERE_STARS_ELEVATION: Example u_time * 0.01

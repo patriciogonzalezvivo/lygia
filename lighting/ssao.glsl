@@ -24,6 +24,10 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
+#ifndef SSAO_SAMPLES
+#define SSAO_SAMPLES 60.0
+#endif
+
 #ifndef SSAO_SAMPLES_NUM
 #define SSAO_SAMPLES_NUM 8
 #endif
@@ -46,14 +50,6 @@ uniform vec3 u_ssaoNoise[SSAO_NOISE_NUM];
 #endif
 #endif
 
-#ifndef CAMERA_PROJECTION_MATRIX
-#if defined(GLSLVIEWER)
-#define CAMERA_PROJECTION_MATRIX u_projectionMatrix
-#else
-#define CAMERA_PROJECTION_MATRIX u_projection
-#endif
-#endif
-
 #ifndef SSAO_NOISE2_FNC
 #define SSAO_NOISE2_FNC(ST) random2(ST)
 #endif
@@ -64,6 +60,18 @@ uniform vec3 u_ssaoNoise[SSAO_NOISE_NUM];
 
 #ifndef SSAO_DEPTH_BIAS
 #define SSAO_DEPTH_BIAS 0.05
+#endif
+
+#ifndef SSAO_DEPTH_SAMPLE_FNC
+#define SSAO_DEPTH_SAMPLE_FNC(TEX, UV) SAMPLER_FNC(TEX, UV).r
+#endif
+
+#ifndef SSAO_POS_SAMPLE_FNC
+#define SSAO_POS_SAMPLE_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
+#endif
+
+#ifndef SSAO_NORMAL_SAMPLE_FNC
+#define SSAO_NORMAL_SAMPLE_FNC(TEX, UV) SAMPLER_FNC(TEX, UV).xyz
 #endif
 
 #ifndef FNC_SSAO
@@ -83,7 +91,7 @@ float ssao(SAMPLER_TYPE texDepth, vec2 st, vec2 pixel, float radius) {
     #endif
     noise *= 0.1;
 
-    float depth     = depth2viewZ( SAMPLER_FNC( texDepth, st ).r ) + SSAO_DEPTH_BIAS * 0.5; 
+    float depth     = depth2viewZ( SSAO_DEPTH_SAMPLE_FNC( texDepth, st ) ) + SSAO_DEPTH_BIAS * 0.5; 
     float ao        = 0.0;
 
     // if (depth < 0.99) 
@@ -100,8 +108,8 @@ float ssao(SAMPLER_TYPE texDepth, vec2 st, vec2 pixel, float radius) {
             float pw = cos( l ) * r; 
             float ph = sin( l ) * r; 
             vec2 vv = radius * vec2( pw * w, ph * h);
-            ao += ( step( depth2viewZ( SAMPLER_FNC( texDepth, st + vv).r ), depth) + 
-                    step( depth2viewZ( SAMPLER_FNC( texDepth, st - vv).r ), depth) ) * 0.5;
+            ao += ( step( depth2viewZ( SSAO_DEPTH_SAMPLE_FNC( texDepth, st + vv) ), depth) + 
+                    step( depth2viewZ( SSAO_DEPTH_SAMPLE_FNC( texDepth, st - vv) ), depth) ) * 0.5;
             z = z - dz; 
             l = l + 2.399963229728653; 
         } 
@@ -112,11 +120,29 @@ float ssao(SAMPLER_TYPE texDepth, vec2 st, vec2 pixel, float radius) {
 }
 #endif
 
-#if defined(SSAO_SAMPLES_ARRAY)
+
+float ssao(sampler2D texDepth, vec2 coord) {
+    float cd = SSAO_DEPTH_SAMPLE_FNC(texDepth, coord);
+    float ao_radious = 1.0/100.0;
+    float screenRadius = 0.5 * (ao_radious / cd) / 0.53135;
+    float li = 0.0;
+    float count = 0.0;
+    for(float i=0.0; i< SSAO_SAMPLES; i++) {
+        vec3 p = normalize(SSAO_NOISE3_FNC(vec3(coord, i)) * 2.0 - 1.0);
+        vec2 sp = vec2(coord.x + p.x * screenRadius, coord.y + p.y * screenRadius);
+        float d = SSAO_DEPTH_SAMPLE_FNC(texDepth, sp);
+        float at = pow(length(p)-1.0, 2.0);
+        li += step(cd + p.z * ao_radious, d) * at;
+        count += at;
+    }
+    return 1.0 - li / count;
+}
+
+#if defined(SSAO_SAMPLES_ARRAY) && defined(CAMERA_PROJECTION_MATRIX)
 
 float ssao(SAMPLER_TYPE texPosition, SAMPLER_TYPE texNormal, vec2 st, float radius) {
-    vec4  position  = SAMPLER_FNC(texPosition, st);
-    vec3  normal    = SAMPLER_FNC(texNormal, st).rgb;
+    vec4  position  = SSAO_POS_SAMPLE_FNC(texPosition, st);
+    vec3  normal    = SSAO_NORMAL_SAMPLE_FNC(texNormal, st);
 
     #if defined(SSAO_NOISE_ARRAY) 
     float noiseS    = sqrt(float(SSAO_NOISE_NUM));

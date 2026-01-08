@@ -1,6 +1,6 @@
 {
   "name": "lygia",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "lygia, it's a granular and multi-language shader library designed for performance and flexibility",
   "main": "dist/umd/lygia.main.js",
   "unpkg": "dist/umd/lygia.main.js",
@@ -9,8 +9,13 @@
   "type": "module",
   "scripts": {
     "build": "rm -rf dist/* && webpack",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint --fix --ext .js ."
+    "build:wesl": "wesl-packager --multiBundle --outDir dist",
+    "ci:check": "pnpm test:once && pnpm test:built",
+    "lint": "eslint --fix --ext .js .",
+    "prepublishOnly": "pnpm build:wesl",
+    "test": "pnpm vitest",
+    "test:built": "pnpm build:wesl && TEST_BUNDLES=true pnpm vitest run",
+    "test:once": "pnpm vitest run"
   },
   "repository": {
     "type": "git",
@@ -23,6 +28,8 @@
     "shader-library",
     "glsl",
     "wgsl",
+    "WESL",
+    "WebGPU",
     "hlsl",
     "metal",
     "glsl-shader",
@@ -37,13 +44,21 @@
   },
   "homepage": "https://lygia.xyz",
   "devDependencies": {
-    "eslint": "^7.24.0",
-    "eslint-config-prettier": "^8.2.0",
-    "eslint-plugin-prettier": "^3.4.0",
-    "prettier": "^2.2.1",
-    "webpack": "^5.36.2",
-    "webpack-cli": "^4.6.0",
-    "webpack-glsl-loader": "github:patriciogonzalezvivo/webpack-glsl-loader"
+    "@typescript/native-preview": "7.0.0-dev.20251108.1",
+    "@webgpu/types": "^0.1.66",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "prettier": "^3.6.2",
+    "vite": "^7.2.2",
+    "vitest": "^4.0.8",
+    "vitest-image-snapshot": "^0.6.36",
+    "webpack": "^5.102.1",
+    "webpack-cli": "^6.0.1",
+    "webpack-glsl-loader": "github:patriciogonzalezvivo/webpack-glsl-loader",
+    "wesl-link": "^0.6.36",
+    "wesl-packager": "^0.6.36",
+    "wesl-test": "^0.6.36"
   },
   "eslintConfig": {
     "env": {
@@ -70,5 +85,11 @@
     "semi": false,
     "arrowParens": "always",
     "singleQuote": true
+  },
+  "exports": {
+    "./*": {
+      "import": "./dist/*/weslBundle.js",
+      "types": "./dist/weslBundle.d.ts"
+    }
   }
 }

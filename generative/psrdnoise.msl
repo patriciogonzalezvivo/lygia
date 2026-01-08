@@ -30,7 +30,7 @@ license: |
 #ifndef FNC_PSRFNOISE
 #define FNC_PSRFNOISE
 
-float psrdnoise(float2 x, float2 period, float alpha, out float2 gradient) {
+float psrdnoise(float2 x, float2 period, float alpha, thread float2 &gradient) {
 
     // Transform to simplex space (axis-aligned hexagonal grid)
     float2 uv = float2(x.x + x.y*0.5, x.y);
@@ -116,7 +116,7 @@ float psrdnoise(float2 x, float2 period, float alpha, out float2 gradient) {
 	return 10.9 * n;
 }
 
-float psrdnoise(float2 x, float2 period, float alpha, out float2 gradient, out float3 dg) {
+float psrdnoise(float2 x, float2 period, float alpha, thread float2 &gradient, thread float3 &dg) {
 
 	// Transform to simplex space (axis-aligned hexagonal grid)
 	float2 uv = float2(x.x + x.y*0.5, x.y);
@@ -226,7 +226,7 @@ float psrdnoise(float2 x) {
     return psrdnoise(x, float2(0.0));
 }
 
-float psrdnoise(float3 x, float3 period, float alpha, out float3 gradient) {
+float psrdnoise(float3 x, float3 period, float alpha, thread float3 &gradient) {
 
 #ifndef PSRDNOISE_PERLIN_GRID
     // Transformation matrices for the axis-aligned simplex grid
@@ -329,6 +329,12 @@ float psrdnoise(float3 x, float3 period, float alpha, out float3 gradient) {
         i3 = floor(i3 + 0.5);
     }
 
+    // Avoid truncation effects in permutation
+    i0 = mod289(i0);
+    i1 = mod289(i1);
+    i2 = mod289(i2);
+    i3 = mod289(i3);
+
     // Compute one pseudo-random hash value for each corner
     float4 hash = permute( permute( permute( 
                 float4(i0.z, i1.z, i2.z, i3.z ))
@@ -348,7 +354,7 @@ float psrdnoise(float3 x, float3 period, float alpha, out float3 gradient) {
     float4 gy = float4(0.0);
     float4 gz = float4(0.0);
 
-    // Rotate gradients by angle alpha around a pseudo-random ortogonal axis
+    // Rotate gradients by angle alpha around a pseudo-random orthogonal axis
 #ifdef PSRDNOISE_FAST_ROTATION
     // Fast algorithm, but without dynamic shortcut for alpha = 0
     float4 qx = St;         // q' = norm ( cross(s, n) )  on the equator
@@ -426,7 +432,7 @@ float psrdnoise(float3 x, float3 period, float alpha, out float3 gradient) {
     return 39.5 * n; 
 }
 
-float psrdnoise(float3 x, float3 period, float alpha, out float3 gradient, out float3 dg, out float3 dg2) {
+float psrdnoise(float3 x, float3 period, float alpha, thread float3 &gradient, thread float3 &dg, thread float3 &dg2) {
 
 #ifndef PSRDNOISE_PERLIN_GRID
     // Transformation matrices for the axis-aligned simplex grid
@@ -526,6 +532,12 @@ float psrdnoise(float3 x, float3 period, float alpha, out float3 gradient, out f
         i3 = floor(i3 + 0.5);
     }
 
+    // Avoid truncation effects in permutation
+    i0 = mod289(i0);
+    i1 = mod289(i1);
+    i2 = mod289(i2);
+    i3 = mod289(i3);
+
     // Compute one pseudo-random hash value for each corner
     float4 hash = permute( permute( permute( 
                 float4(i0.z, i1.z, i2.z, i3.z ))
@@ -543,7 +555,7 @@ float psrdnoise(float3 x, float3 period, float alpha, out float3 gradient, out f
 
     float4 gx, gy, gz;
 
-    // Rotate gradients by angle alpha around a pseudo-random ortogonal axis
+    // Rotate gradients by angle alpha around a pseudo-random orthogonal axis
 #ifdef PSRDNOISE_FAST_ROTATION
     // Fast algorithm, but without dynamic shortcut for alpha = 0
     float4 qx = St;         // q' = norm ( cross(s, n) )  on the equator

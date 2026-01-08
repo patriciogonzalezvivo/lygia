@@ -14,7 +14,7 @@ contributors:
     - Patricio Gonzalez Vivo
 description: "Adjust temperature and tint. \nOn mobile does a cheaper algo using Brad\
     \ Larson https://github.com/BradLarson/GPUImage/blob/master/framework/Source/GPUImageWhiteBalanceFilter.m\
-    \ \nOn non mobile deas a more accurate ajustment using https://docs.unity3d.com/Packages/com.unity.shadergraph@6.9/manual/White-Balance-Node.html\n"
+    \ \nOn non mobile deas a more accurate adjustment using https://docs.unity3d.com/Packages/com.unity.shadergraph@6.9/manual/White-Balance-Node.html\n"
 use: <float3|float4> whiteBalance(<float3|float4> rgb, <float> temperature, <float> tint))
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0

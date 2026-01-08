@@ -6,8 +6,8 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-#ifndef STR_TRINAGLE
-#define STR_TRINAGLE
+#ifndef STR_TRIANGLE
+#define STR_TRIANGLE
 struct Triangle {
     vec3 a, b, c;
 };

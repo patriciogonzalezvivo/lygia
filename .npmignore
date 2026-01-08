@@ -1,0 +1,6 @@
+test/
+__image*
+.claude
+biome.jsonc
+tsconfig.json
+webpack.config.ts

@@ -327,6 +327,12 @@ float psrdnoise(vec3 x, vec3 period, float alpha, out vec3 gradient) {
         i3 = floor(i3 + 0.5);
     }
 
+    // Avoid truncation effects in permutation
+    i0 = mod289(i0);
+    i1 = mod289(i1);
+    i2 = mod289(i2);
+    i3 = mod289(i3);
+
     // Compute one pseudo-random hash value for each corner
     vec4 hash = permute( permute( permute( 
                 vec4(i0.z, i1.z, i2.z, i3.z ))
@@ -346,7 +352,7 @@ float psrdnoise(vec3 x, vec3 period, float alpha, out vec3 gradient) {
     vec4 gy = vec4(0.0);
     vec4 gz = vec4(0.0);
 
-    // Rotate gradients by angle alpha around a pseudo-random ortogonal axis
+    // Rotate gradients by angle alpha around a pseudo-random orthogonal axis
 #ifdef PSRDNOISE_FAST_ROTATION
     // Fast algorithm, but without dynamic shortcut for alpha = 0
     vec4 qx = St;         // q' = norm ( cross(s, n) )  on the equator
@@ -524,6 +530,12 @@ float psrdnoise(vec3 x, vec3 period, float alpha, out vec3 gradient, out vec3 dg
         i3 = floor(i3 + 0.5);
     }
 
+    // Avoid truncation effects in permutation
+    i0 = mod289(i0);
+    i1 = mod289(i1);
+    i2 = mod289(i2);
+    i3 = mod289(i3);
+
     // Compute one pseudo-random hash value for each corner
     vec4 hash = permute( permute( permute( 
                 vec4(i0.z, i1.z, i2.z, i3.z ))
@@ -541,7 +553,7 @@ float psrdnoise(vec3 x, vec3 period, float alpha, out vec3 gradient, out vec3 dg
 
     vec4 gx, gy, gz;
 
-    // Rotate gradients by angle alpha around a pseudo-random ortogonal axis
+    // Rotate gradients by angle alpha around a pseudo-random orthogonal axis
 #ifdef PSRDNOISE_FAST_ROTATION
     // Fast algorithm, but without dynamic shortcut for alpha = 0
     vec4 qx = St;         // q' = norm ( cross(s, n) )  on the equator

@@ -7,7 +7,7 @@ options:
     - RESOLUTION: view port resolution
     - BLUENOISE_TEXTURE_RESOLUTION
     - BLUENOISE_TEXTURE
-    - DITHER_TIME: followed with an elipsed secods uniform
+    - DITHER_TIME: followed with an elapsed seconds uniform
     - DITHER_CHROMATIC
     - DITHER_PRECISION
     - SAMPLER_FNC

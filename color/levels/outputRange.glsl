@@ -1,7 +1,7 @@
 /*
 contributors: Johan Ismael
 description: |
-    Color output range adjustment similar to Levels adjusment in Photoshop
+    Color output range adjustment similar to Levels adjustment in Photoshop
     Adapted from Romain Dura (http://mouaif.wordpress.com/?p=94)
 use: levelsOutputRange(<vec3|vec4> color, float minOutput, float maxOutput)
 license:

@@ -23,6 +23,7 @@ options:
     - RAYMARCH_CAMERA_FOV: Filed of view express in degrees. Default 60.0 degrees
     - RAYMARCH_MULTISAMPLE: default 1. If it is greater than 1 it will render multisample
     - RAYMARCH_AOV: return AOVs in a Material structure
+    - RAYMARCH_SPHERICAL: will apply a spherical transformation to the coordinates. Useful for rendering fulldome content. FOV should be greater or equal to 180.
 examples:
     - /shaders/lighting_raymarching.frag
 license:
@@ -49,9 +50,19 @@ license:
 const float RAYMARCH_MULTISAMPLE_FACTOR = 1.0/float(RAYMARCH_MULTISAMPLE);
 #endif
 
+vec3 raymarchModelPosition(vec2 st) {
+#if !defined(RAYMARCH_SPHERICAL)
+    float fov = 1.0 / tan(RAYMARCH_CAMERA_FOV * DEG2RAD * 0.5);
+    return normalize(vec3(st*2.0-1.0, fov));
+#else
+    float theta = length(st) * RAYMARCH_CAMERA_FOV * DEG2RAD * 0.5;
+    float phi = atan(st.y, st.x);
+    return vec3(sin(theta) * cos(phi), sin(theta) * sin(phi), -cos(theta));
+#endif
+}
+
 vec4 raymarch(mat4 viewMatrix, vec2 st, out float eyeDepth, out Material mat) {
 
-    float fov = 1.0 / tan(RAYMARCH_CAMERA_FOV * DEG2RAD * 0.5);
     vec3 camera = viewMatrix[3].xyz;
     vec3 cameraForward = viewMatrix[2].xyz;
     mat3 viewMatrix3 = toMat3(viewMatrix);
@@ -70,7 +81,7 @@ vec4 raymarch(mat4 viewMatrix, vec2 st, out float eyeDepth, out Material mat) {
     vec2 offset = rotate( vec2(0.5, 0.0), EIGHTH_PI);
 
     for (int i = 0; i < RAYMARCH_MULTISAMPLE; i++) {
-        vec3 rayDirection = viewMatrix3 * normalize(vec3((st + offset * pixel)*2.0-1.0, fov));
+        vec3 rayDirection = viewMatrix3 * raymarchModelPosition(st + offset * pixel);
 
         float sampleDepth = 0.0;
         float dist = 0.0;
@@ -101,7 +112,7 @@ vec4 raymarch(mat4 viewMatrix, vec2 st, out float eyeDepth, out Material mat) {
     
 #else // Single sample
 
-    vec3 rayDirection = viewMatrix3 * normalize(vec3(st*2.0-1.0, fov));
+    vec3 rayDirection = viewMatrix3 * raymarchModelPosition(st);
     float dist = 0.0;
 
     vec4 opaque = RAYMARCH_RENDER_FNC( camera, rayDirection, cameraForward, dist, eyeDepth, mat);

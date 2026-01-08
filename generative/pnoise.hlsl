@@ -60,8 +60,8 @@ float pnoise(in float3 P, in float3 rep) {
     float3 Pi1 = (Pi0 + float3(1.0, 1.0, 1.0)) % rep; // Integer part + 1, mod period
     Pi0 = mod289(Pi0);
     Pi1 = mod289(Pi1);
-    float3 Pf0 = frac(P); // Fracional part for interpolation
-    float3 Pf1 = Pf0 - float3(1.0, 1.0, 1.0); // Fracional part - 1.0
+    float3 Pf0 = frac(P); // Fractional part for interpolation
+    float3 Pf1 = Pf0 - float3(1.0, 1.0, 1.0); // Fractional part - 1.0
     float4 ix = float4(Pi0.x, Pi1.x, Pi0.x, Pi1.x);
     float4 iy = float4(Pi0.yy, Pi1.yy);
     float4 iz0 = Pi0.zzzz;
@@ -128,8 +128,8 @@ float pnoise(in float4 P, in float4 rep) {
     float4 Pi1 = (Pi0 + 1.0) % rep; // Integer part + 1 mod rep
     Pi0 = mod289(Pi0);
     Pi1 = mod289(Pi1);
-    float4 Pf0 = frac(P); // Fracional part for interpolation
-    float4 Pf1 = Pf0 - 1.0; // Fracional part - 1.0
+    float4 Pf0 = frac(P); // Fractional part for interpolation
+    float4 Pf1 = Pf0 - 1.0; // Fractional part - 1.0
     float4 ix = float4(Pi0.x, Pi1.x, Pi0.x, Pi1.x);
     float4 iy = float4(Pi0.yy, Pi1.yy);
     float4 iz0 = float4(Pi0.zzzz);

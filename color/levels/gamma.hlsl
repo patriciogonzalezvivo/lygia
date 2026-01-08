@@ -2,7 +2,7 @@
 /*
 contributors: Johan Ismael
 description: |
-    Color gamma correction similar to Levels adjusment in Photoshop
+    Color gamma correction similar to Levels adjustment in Photoshop
     Adapted from Romain Dura (http://mouaif.wordpress.com/?p=94)
 use: levelsGamma(<float3|float4> color, <float|float3> gamma)
 license:
