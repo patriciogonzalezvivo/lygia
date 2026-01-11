@@ -15,6 +15,7 @@
     "prepublishOnly": "pnpm build:wesl",
     "test": "pnpm vitest",
     "test:built": "pnpm build:wesl && TEST_BUNDLES=true pnpm vitest run",
+    "test:deno": "deno run -A --unstable-webgpu npm:vitest run",
     "test:once": "pnpm vitest run"
   },
   "repository": {
