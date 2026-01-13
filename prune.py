@@ -19,6 +19,10 @@ languages = {
         'ext': 'wgsl',
         'frameworks': [ "WebGPU" ],
     },
+    'WESL': {
+        'ext': 'wesl',
+        'frameworks': ["WebGPU"]
+    },
     'CUDA': {
         'ext': 'cuh',
         'frameworks': [ "CUDA" ],
