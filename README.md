@@ -63,6 +63,7 @@ LYGIA have been integrated into the following Engines, Frameworks, Creative Tool
     <a href="https://www.npmjs.com/package/lygia"><img src="https://lygia.xyz/imgs/npm.png" alt="npm" title="npm" width="64" /></a>
     <a href="https://codesandbox.io/s/lygia-react-starter-fftx6p"><img src="https://lygia.xyz/imgs/r3f.png" alt="r3rf" title="r3rf" width="64" /></a>
     <a href="https://cycling74.com/packages/jitlygia"><img src="https://lygia.xyz/imgs/max.png" alt="max" title="max" width="64" /></a>
+    <a href="https://github.com/Fabric-Project/Fabric"><img src="https://lygia.xyz/imgs/fabric.png" alt="fabric" title="fabric" width="64" /></a>
 </p>
 
 <p style="text-align: center;" >
