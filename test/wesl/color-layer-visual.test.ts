@@ -1,6 +1,6 @@
 import { afterAll, beforeAll, test } from "vitest";
 import { imageMatcher } from "vitest-image-snapshot";
-import { destroySharedDevice, getGPUDevice } from "wesl-test";
+import { destroySharedDevice, getGPUDevice } from "wgsl-test";
 import { expectBlend } from "./testUtil.ts";
 
 imageMatcher();

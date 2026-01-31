@@ -1,6 +1,6 @@
 import { afterAll, beforeAll, test } from "vitest";
 import { imageMatcher } from "vitest-image-snapshot";
-import { destroySharedDevice, getGPUDevice } from "wesl-test";
+import { destroySharedDevice, getGPUDevice } from "wgsl-test";
 import { lygiaExampleImage } from "./testUtil.ts";
 import "./shaders/draw-shapes.wesl?raw"; // not used, but nice to trigger watch mode rebuild in vitest
 
@@ -20,7 +20,7 @@ test("stroke and strokeEdge - grid pattern", async () => {
   // Renders a 4x4 grid of circles:
   // Top 2 rows: stroke() with varying widths (0.05 to 0.2)
   // Bottom 2 rows: strokeEdge() with varying edge smoothness (0.001 to 0.051)
-  await lygiaExampleImage(device, "draw-stroke" );
+  await lygiaExampleImage(device, "draw-stroke");
 });
 
 test("2D SDF shapes - 14 shape grid (matches GLSL draw_shapes)", async () => {
@@ -37,7 +37,7 @@ test("2D SDF shapes - 14 shape grid (matches GLSL draw_shapes)", async () => {
   await lygiaExampleImage(device, "draw-shapes", {
     size: [512, 512],
     uniforms: {
-      time: .2155,  // Rotation to match GLSL reference image
-    }
+      time: 0.2155, // Rotation to match GLSL reference image
+    },
   });
 });
