@@ -19,7 +19,7 @@ const FRESNEL_REFLECTION_RGB: vec3f = vec3f(612.0, 549.0, 464.0);
 // This is a stub implementation that will need envMap to be functional
 // Deferred until LATER - envMap, ior, and Material/ShadingData structs not yet available
 
-fn fresnelReflection(R: vec3f, f0: vec3f, NoV: f32) -> vec3f {
+fn fresnelReflectionEnv(R: vec3f, f0: vec3f, NoV: f32) -> vec3f {
     let frsnl = fresnel(f0, NoV);  // Uses fresnel(vec3f, f32)
     // TODO: Replace with actual envMap call when available
     // let reflectColor = envMap(R, 1.0, 0.001);
