@@ -50,3 +50,7 @@ copilot-instructions.md
 
 .junie
 .aiignore
+
+# Rust/Cargo
+/target/
+/test/*/target/
