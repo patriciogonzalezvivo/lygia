@@ -24,8 +24,8 @@ test("cnoise2", async () => {
        }
      }
    `;
-  const result = await testDistribution(src, sampleCount, "f32", {
-    PAIR_COUNT: pairCount,
+  const result = await testDistribution(src, sampleCount, {
+    constants: { PAIR_COUNT: pairCount },
   });
 
   // Continuity: check all 256 pairs
@@ -64,8 +64,8 @@ test("cnoise3", async () => {
        }
      }
    `;
-  const result = await testDistribution(src, sampleCount, "f32", {
-    PAIR_COUNT: pairCount,
+  const result = await testDistribution(src, sampleCount, {
+    constants: { PAIR_COUNT: pairCount },
   });
 
   // Continuity: check all 256 pairs
@@ -105,8 +105,8 @@ test("cnoise4", async () => {
        }
      }
    `;
-  const result = await testDistribution(src, sampleCount, "f32", {
-    PAIR_COUNT: pairCount,
+  const result = await testDistribution(src, sampleCount, {
+    constants: { PAIR_COUNT: pairCount },
   });
 
   // Continuity: check all 256 pairs
@@ -144,8 +144,8 @@ test("snoise2", async () => {
        }
      }
    `;
-  const result = await testDistribution(src, sampleCount, "f32", {
-    PAIR_COUNT: pairCount,
+  const result = await testDistribution(src, sampleCount, {
+    constants: { PAIR_COUNT: pairCount },
   });
 
   // Continuity: check all 256 pairs
@@ -184,8 +184,8 @@ test("snoise3", async () => {
        }
      }
    `;
-  const result = await testDistribution(src, sampleCount, "f32", {
-    PAIR_COUNT: pairCount,
+  const result = await testDistribution(src, sampleCount, {
+    constants: { PAIR_COUNT: pairCount },
   });
 
   // Continuity: check all 256 pairs
@@ -225,8 +225,8 @@ test("snoise4", async () => {
        }
      }
    `;
-  const result = await testDistribution(src, sampleCount, "f32", {
-    PAIR_COUNT: pairCount,
+  const result = await testDistribution(src, sampleCount, {
+    constants: { PAIR_COUNT: pairCount },
   });
 
   // Continuity: check all 256 pairs
@@ -335,8 +335,8 @@ test("pnoise2", async () => {
        }
      }
    `;
-  const result = await testDistribution(src, sampleCount, "f32", {
-    PAIR_COUNT: pairCount,
+  const result = await testDistribution(src, sampleCount, {
+    constants: { PAIR_COUNT: pairCount },
   });
 
   // Continuity: check all 256 pairs
@@ -398,8 +398,8 @@ test("pnoise3", async () => {
        }
      }
    `;
-  const result = await testDistribution(src, sampleCount, "f32", {
-    PAIR_COUNT: pairCount,
+  const result = await testDistribution(src, sampleCount, {
+    constants: { PAIR_COUNT: pairCount },
   });
 
   // Continuity: check all 256 pairs
@@ -462,8 +462,8 @@ test("pnoise4", async () => {
        }
      }
    `;
-  const result = await testDistribution(src, sampleCount, "f32", {
-    PAIR_COUNT: pairCount,
+  const result = await testDistribution(src, sampleCount, {
+    constants: { PAIR_COUNT: pairCount },
   });
 
   // Continuity: check all 256 pairs

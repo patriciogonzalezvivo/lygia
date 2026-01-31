@@ -1,4 +1,3 @@
-// @toy
 // WESL version of lygia_examples/draw_shapes.frag
 // Displays 14 different 2D SDF shapes in a 4×4 grid for visual comparison with GLSL
 
@@ -23,7 +22,7 @@ import lygia::sdf::vesicaSDF::vesicaSDF;
 
 @group(0) @binding(0) var<uniform> uniforms: test::Uniforms;
 
-@fragment
+@toy @fragment
 fn fs_main(@builtin(position) pos: vec4f) -> @location(0) vec4f {
     var color = vec4f(0.0, 0.0, 0.0, 1.0);
     let pixel = 1.0 / uniforms.resolution;

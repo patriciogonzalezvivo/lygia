@@ -5,6 +5,7 @@ import {
   lygiaTestCompute,
   testDistribution,
 } from "./testUtil.ts";
+import "../../generative/random.wesl?raw"; // not used, but nice to trigger watch mode rebuild in vitest
 
 test("random", async () => {
   const src = `
@@ -31,8 +32,8 @@ test("random", async () => {
 test("random - distribution", async () => {
   const sampleCount = 1024;
   const src = `
-    import constants::SAMPLE_COUNT;
     import lygia::generative::random::random;
+    import constants::SAMPLE_COUNT;
 
     @compute @workgroup_size(1)
     fn main() {
@@ -41,9 +42,7 @@ test("random - distribution", async () => {
       }
     }
   `;
-  const samples = await testDistribution(src, sampleCount, "f32", {
-    SAMPLE_COUNT: sampleCount,
-  });
+  const samples = await testDistribution(src, sampleCount);
   expectDistribution(samples, [0.0, 1.0]);
 });
 
@@ -85,9 +84,7 @@ test("random2 - distribution", async () => {
       }
     }
   `;
-  const samples = await testDistribution(src, sampleCount, "f32", {
-    SAMPLE_COUNT: sampleCount,
-  });
+  const samples = await testDistribution(src, sampleCount);
   expectDistribution(samples, [0.0, 1.0]);
 });
 
@@ -130,9 +127,7 @@ test("random3 - distribution", async () => {
       }
     }
   `;
-  const samples = await testDistribution(src, sampleCount, "f32", {
-    SAMPLE_COUNT: sampleCount,
-  });
+  const samples = await testDistribution(src, sampleCount);
   expectDistribution(samples, [0.0, 1.0]);
 });
 
@@ -217,9 +212,7 @@ test("random22 - distribution (x component)", async () => {
       }
     }
   `;
-  const samples = await testDistribution(src, sampleCount, "f32", {
-    SAMPLE_COUNT: sampleCount,
-  });
+  const samples = await testDistribution(src, sampleCount);
   expectDistribution(samples, [0.0, 1.0]);
 });
 
@@ -323,9 +316,7 @@ test("random33 - distribution (x component)", async () => {
       }
     }
   `;
-  const samples = await testDistribution(src, sampleCount, "f32", {
-    SAMPLE_COUNT: sampleCount,
-  });
+  const samples = await testDistribution(src, sampleCount);
   expectDistribution(samples, [0.0, 1.0]);
 });
 
@@ -552,9 +543,7 @@ test("srandom2 - distribution", async () => {
       }
     }
   `;
-  const samples = await testDistribution(src, sampleCount, "f32", {
-    SAMPLE_COUNT: sampleCount,
-  });
+  const samples = await testDistribution(src, sampleCount);
   expectDistribution(samples, [-1.0, 1.0]);
 });
 
@@ -594,9 +583,7 @@ test("srandom - distribution", async () => {
       }
     }
   `;
-  const samples = await testDistribution(src, sampleCount, "f32", {
-    SAMPLE_COUNT: sampleCount,
-  });
+  const samples = await testDistribution(src, sampleCount);
   expectDistribution(samples, [-1.0, 1.0]);
 });
 
@@ -641,9 +628,7 @@ test("srandom22 - distribution (x component)", async () => {
       }
     }
   `;
-  const samples = await testDistribution(src, sampleCount, "f32", {
-    SAMPLE_COUNT: sampleCount,
-  });
+  const samples = await testDistribution(src, sampleCount);
   expectDistribution(samples, [-1.0, 1.0]);
 });
 
