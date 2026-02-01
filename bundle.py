@@ -54,7 +54,20 @@ def generate_bundle(root_dir, output_dir):
     # Write Source
     with open(source_path, 'w') as f:
         f.write('#include "lygia.h"\n')
-        f.write('#include <map>\n\n')
+        f.write('#include <map>\n')
+        f.write('#include <vector>\n')
+        f.write('#include <cstring>\n')
+        f.write('#include <initializer_list>\n\n')
+        
+        f.write('static std::string _join(const std::initializer_list<const char*>& _parts) {\n')
+        f.write('    std::string result;\n')
+        f.write('    size_t len = 0;\n')
+        f.write('    for (const auto* p : _parts) len += std::strlen(p);\n')
+        f.write('    result.reserve(len);\n')
+        f.write('    for (const auto* p : _parts) result += p;\n')
+        f.write('    return result;\n')
+        f.write('}\n\n')
+
         f.write('std::string getLygiaFile(const std::string& _path) {\n')
         f.write('    static const std::map<std::string, std::string> files = {\n')
         
@@ -65,7 +78,19 @@ def generate_bundle(root_dir, output_dir):
             while delimiter in content:
                 delimiter += "_"
             
-            f.write(f'        {{"{key}", R"{delimiter}({content}){delimiter}"}},\n')
+            # Split content into chunks to avoid C2026 on MSVC (limit around 16k-64k)
+            chunk_size = 2048
+            chunks = [content[i:i+chunk_size] for i in range(0, len(content), chunk_size)]
+
+            if len(chunks) == 0:
+                f.write(f'        {{"{key}", ""}},\n')
+            elif len(chunks) == 1:
+                f.write(f'        {{"{key}", R"{delimiter}({chunks[0]}){delimiter}"}},\n')
+            else:
+                f.write(f'        {{"{key}", _join({{ \n')
+                for chunk in chunks:
+                    f.write(f'            R"{delimiter}({chunk}){delimiter}",\n')
+                f.write(f'        }}) }},\n')
             
         f.write('    };\n')
         f.write('    auto it = files.find(_path);\n')
