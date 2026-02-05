@@ -1,7 +1,7 @@
 import { test } from "vitest";
 import { expectCloseTo, lygiaTestCompute, lygiaTestWesl } from "./testUtil.ts";
 
-await lygiaTestWesl("test/wesl/shaders/color_space_roundtrip_test");
+await lygiaTestWesl("test/wesl/shaders/color_space_roundtrip.test");
 
 // xyY roundtrip needs relaxed precision (0.01 tolerance)
 test("rgb2xyY4 -> xyY2rgb4 roundtrip (note: precision issues in xyY)", async () => {

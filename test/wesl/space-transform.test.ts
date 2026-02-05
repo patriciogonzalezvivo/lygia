@@ -1,7 +1,7 @@
 import { test } from "vitest";
 import { expectCloseTo, lygiaTestCompute, lygiaTestWesl } from "./testUtil.ts";
 
-await lygiaTestWesl("test/wesl/shaders/space_transform_test");
+await lygiaTestWesl("test/wesl/shaders/space_transform.test");
 
 // decimateNormal kept inline - uses > and < comparisons not available in wgsl_test
 test("decimateNormal", async () => {
