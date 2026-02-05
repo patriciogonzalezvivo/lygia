@@ -1,3 +1,3 @@
 import { lygiaTestWesl } from "./testUtil.ts";
 
-await lygiaTestWesl("test/wesl/shaders/animation_easing_test");
+await lygiaTestWesl("test/wesl/shaders/animation_easing.test");

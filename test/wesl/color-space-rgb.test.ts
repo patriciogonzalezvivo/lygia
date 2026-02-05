@@ -1,7 +1,7 @@
 import { test } from "vitest";
 import { expectCloseTo, lygiaTestCompute, lygiaTestWesl } from "./testUtil.ts";
 
-await lygiaTestWesl("test/wesl/shaders/color_space_rgb_test");
+await lygiaTestWesl("test/wesl/shaders/color_space_rgb.test");
 
 test("hsv2ryb - FAST mode", async () => {
   const src = `

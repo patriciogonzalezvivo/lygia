@@ -1,2 +1,2 @@
 import { lygiaTestWesl } from "./testUtil.ts";
-await lygiaTestWesl("test/wesl/shaders/color_blend_basic_test");
+await lygiaTestWesl("test/wesl/shaders/color_blend_basic.test");
