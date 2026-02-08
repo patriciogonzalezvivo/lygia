@@ -1,7 +1,7 @@
 //! LYGIA - The biggest shader library for WESL/WGSL
 //!
-//! This crate provides the LYGIA shader library as a WESL package that can be
-//! used in Rust projects with the `wesl` crate.
+//! This crate provides the LYGIA shader library (version 1.4.1)
+//! for use in Rust WebGPU projects.
 //!
 //! # Usage
 //!
@@ -15,7 +15,7 @@
 //!
 //! In your `build.rs`:
 //!
-//! ```ignore
+//! ```no_run
 //! fn main() {
 //!     wesl::Wesl::new("src/shaders")
 //!         .add_package(&lygia::PACKAGE)
