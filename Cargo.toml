@@ -38,3 +38,6 @@ wesl = { path = "../wesl-rs/crates/wesl" }
 [build-dependencies]
 wesl = { path = "../wesl-rs/crates/wesl", features = ["package"] }
 
+[dev-dependencies]
+wesl = { path = "../wesl-rs/crates/wesl", features = ["package"] }
+
