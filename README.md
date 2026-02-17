@@ -4,11 +4,6 @@
 
 LYGIA is the biggest shader library. Battle proof, cross-platform and multi-language. Is made of reusable functions that will let you prototype, port and ship projects in just few minutes. It's very granular, flexible and efficient, supports multiple shading languages and can easily be added to virtually any project. There are already integrations for almost all major environments, engines and frameworks.
 
-Best of all, LYGIA grows and improves every day thanks to the support of the community. Become a [Contributor](https://github.com/patriciogonzalezvivo/lygia) or a [![Sponsor](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub)](https://github.com/sponsors/patriciogonzalezvivo).
-
-
-LYGIA have been integrated into the following Engines, Frameworks, Creative Tools and online editors:
-
 <p style="text-align: center;" >
     <a href="https://github.com/patriciogonzalezvivo/lygia_unity_examples"><img src="https://lygia.xyz/imgs/unity.png" alt="unity" title="unity" width="64" /></a>
     <a href="https://github.com/franklzt/lygia_unreal_engine_examples"><img src="https://lygia.xyz/imgs/unreal.png" alt="unreal" title="unreal" width="64" /></a>
@@ -44,6 +39,7 @@ LYGIA have been integrated into the following Engines, Frameworks, Creative Tool
     <a href="https://dev.shader.app/"><img src="https://dev.shaders.app/apple-touch-icon.png" alt="shaderApp" title="shaderApp" width="64"/></a>
 </p>
 
+Best of all, LYGIA grows and improves every day thanks to the support of the community. Become a [Contributor](https://github.com/patriciogonzalezvivo/lygia) or a [![Sponsor](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub)](https://github.com/sponsors/patriciogonzalezvivo).
 
 
 ## How to use it?
