@@ -47,6 +47,8 @@ In your shader just `#include` the functions you need and use them:
     </div>
 </div> -->
 
+Explore more [examples here](https:lygia.xyz/examples).
+
 LYGIA have been integrated into the following Engines, Frameworks, Creative Tools and online editors:
 
 <p style="text-align: center;" >
