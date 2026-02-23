@@ -20,7 +20,8 @@
     "test:deno:native": "deno run -A --unstable-webgpu npm:wgsl-test run",
     "test:native": "wgsl-test run",
     "test:native:built": "pnpm build:wesl && TEST_BUNDLES=true wgsl-test run",
-    "test:once": "pnpm vitest run && wgsl-test run"
+    "test:once": "pnpm vitest run && wgsl-test run",
+    "snapshot:push": "cd test/wesl/__image_snapshots__ && git add -A && git diff --cached --quiet || git commit -m 'update snapshots' && git push origin HEAD:main"
   },
   "repository": {
     "type": "git",
