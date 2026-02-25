@@ -9,9 +9,10 @@ license-file = "LICENSE.md"
 keywords = ["WGSL", "WESL", "WebGPU", "shader", "graphics"]
 categories = ["graphics", "rendering", "game-development"]
 readme = "README_WebGPU.md"
+build = "rust/build.rs"
 include = [
-    "src/",
-    "build.rs",
+    "rust/",
+    "rust/build.rs",
     "LICENSE.md",
     "README_WebGPU.md",
     # Include only .wesl shader files
@@ -31,6 +32,9 @@ include = [
     "space/**/*.wesl",
     "version.wesl",
 ]
+
+[lib]
+path = "rust/lib.rs"
 
 [dependencies]
 wesl = { path = "../wesl-rs/crates/wesl" }
