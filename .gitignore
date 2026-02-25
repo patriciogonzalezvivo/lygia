@@ -10,6 +10,7 @@ __image_diffs__
 __image_actual__
 __image_diff_report__
 __image_dev__
+__image_snapshots__
 
 # let users experiment with AI, but don't clutter the repo
 .claude
