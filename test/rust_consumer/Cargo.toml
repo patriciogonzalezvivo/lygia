@@ -1,0 +1,11 @@
+[package]
+name = "lygia_consumer_test"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+wesl = { path = "../../../wesl-rs/crates/wesl" }
+
+[build-dependencies]
+lygia = { path = "../.." }
+wesl = { path = "../../../wesl-rs/crates/wesl", features = ["package"] }

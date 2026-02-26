@@ -1,3 +1,4 @@
-edition = "unstable_2025"
-include = [ "**/*.wesl" ]
+edition = "2026_pre"
+include = ["**/*.wesl"]
+exclude = ["node_modules", "test", "target"]
 root = "."
