@@ -17,8 +17,8 @@ pnpm ci:check
 
 Rust projects use Lygia as a cargo crate.
 
-Testing (transpiles only):
+Test the crate (compiles a shader that imports from lygia):
 
 ```sh
-cargo test
+cd test/rust_consumer && cargo test -- --nocapture
 ```
