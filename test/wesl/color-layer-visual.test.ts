@@ -59,6 +59,7 @@ test("vividLight blend mode", async () => {
     }
   `,
     "layer-vividlight",
+    { allowedPixelRatio: 0.01 }, // vividLight rounding varies across GPUs
   );
 });
 
