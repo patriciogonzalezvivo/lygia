@@ -7,7 +7,6 @@ import type {
 } from "wgsl-test";
 import {
   createSampler,
-  expectFragmentImage,
   getGPUDevice,
   gradientTexture,
   testCompute,
@@ -203,6 +202,7 @@ interface LayerBlendOptions {
   srcTexture?: GPUTexture;
   dstTexture?: GPUTexture;
   threshold?: number;
+  allowedPixelRatio?: number;
 }
 
 /**
@@ -218,7 +218,7 @@ export async function expectBlend(
   snapshotName: string,
   options: LayerBlendOptions = {},
 ): Promise<void> {
-  const { size = [128, 128], threshold = 0.001 } = options;
+  const { size = [128, 128], threshold = 0.001, allowedPixelRatio } = options;
   const { srcTexture, dstTexture } = options;
   const device = await getGPUDevice();
 
@@ -238,7 +238,7 @@ export async function expectBlend(
     samplers: [sampler],
   });
 
-  await expect(result).toMatchImage({ name: snapshotName, threshold });
+  await expect(result).toMatchImage({ name: snapshotName, threshold, allowedPixelRatio });
 }
 
 interface DitherOptions {
@@ -246,6 +246,7 @@ interface DitherOptions {
   inputTexture?: GPUTexture;
   quantizationLevels?: number;
   threshold?: number;
+  allowedPixelRatio?: number;
 }
 
 /**
@@ -262,7 +263,7 @@ export async function expectDither(
   snapshotName: string,
   options: DitherOptions = {},
 ): Promise<void> {
-  const { size = [256, 256], threshold = 0.001 } = options;
+  const { size = [256, 256], threshold = 0.001, allowedPixelRatio } = options;
   const device = await getGPUDevice();
 
   // Create default gradient texture if not provided
@@ -281,7 +282,7 @@ export async function expectDither(
     samplers: [sampler],
   });
 
-  await expect(result).toMatchImage({ name: snapshotName, threshold });
+  await expect(result).toMatchImage({ name: snapshotName, threshold, allowedPixelRatio });
 }
 
 /**
@@ -292,6 +293,7 @@ export type LygiaExampleImageOptions = Omit<
   "projectDir" | "snapshotName"
 > & {
   shader?: string;
+  allowedPixelRatio?: number;
 };
 
 /**
@@ -309,7 +311,7 @@ export async function lygiaExampleImage(
   opts: LygiaExampleImageOptions = {},
 ): Promise<void> {
   const projectDir = new URL("../../", import.meta.url).href;
-  const { size = [256, 256], shader, ...restOpts } = opts;
+  const { size = [256, 256], shader, allowedPixelRatio, ...restOpts } = opts;
 
   if (shader) {
     // Inline shader provided - use testFragmentImage
@@ -320,15 +322,17 @@ export async function lygiaExampleImage(
       size,
       ...restOpts,
     });
-    await expect(imageData).toMatchImage({ name });
+    await expect(imageData).toMatchImage({ name, allowedPixelRatio });
   } else {
     // Load from file path
     const shaderPath = `test/wesl/shaders/${name}.wesl`;
-    await expectFragmentImage(device, shaderPath, {
+    const imageData = await testFragmentImage({
+      device,
+      moduleName: shaderPath,
       projectDir,
-      snapshotName: name,
       size,
       ...restOpts,
     });
+    await expect(imageData).toMatchImage({ name, allowedPixelRatio });
   }
 }
