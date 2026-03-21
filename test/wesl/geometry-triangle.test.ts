@@ -16,7 +16,7 @@ test("Triangle struct", async () => {
       let ab = length(tri.b - tri.a);
       let bc = length(tri.c - tri.b);
       let ca = length(tri.a - tri.c);
-      test::results[0] = vec3f(ab, bc, ca);
+      env::results[0] = vec3f(ab, bc, ca);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -36,7 +36,7 @@ test("area", async () => {
       tri.b = vec3f(3.0, 0.0, 1.0);
       tri.c = vec3f(0.0, 4.0, 1.0);
       let result = area(tri);
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src);
@@ -57,7 +57,7 @@ test("barycentric - computes normalized coordinates", async () => {
       let c = vec3f(1.5, -0.5, 2.0);
 
       let coords = barycentric(a, b, c);
-      test::results[0] = coords;
+      env::results[0] = coords;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -90,7 +90,7 @@ test("barycentric2 - Triangle struct wrapper", async () => {
       tri.b = vec3f(-1.0, 3.0, 0.5);
       tri.c = vec3f(1.5, -0.5, 2.0);
       let coords = barycentric2(tri);
-      test::results[0] = coords;
+      env::results[0] = coords;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -124,7 +124,7 @@ test("barycentric3 - point at vertex", async () => {
 
       // Test point at vertex a - coordinate for a should be highest
       let result = barycentric3(tri, tri.a);
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -152,7 +152,7 @@ test("barycentric3 - edge midpoint", async () => {
       // Point at midpoint of edge a-b
       let midpoint = vec3f(1.0, 0.0, 0.0);
       let result = barycentric3(tri, midpoint);
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -174,7 +174,7 @@ test("centroid", async () => {
       tri.b = vec3f(4.0, -1.0, 2.0);
       tri.c = vec3f(-2.0, 3.0, 1.0);
       let result = centroid(tri);
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -194,7 +194,7 @@ test("normal", async () => {
       tri.b = vec3f(1.0, 0.0, 1.0);
       tri.c = vec3f(0.0, 1.0, 1.0);
       let result = normal(tri);
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });

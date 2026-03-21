@@ -9,7 +9,7 @@ test("rgb2heat", async () => {
     fn foo() {
       let x = rgb2heat(vec3f(.8, .7, .5));
 
-      test::results[0] = x;
+      env::results[0] = x;
     }
   `;
 
@@ -25,7 +25,7 @@ test("cmyk2rgb", async () => {
      fn foo() {
        let cmyk = vec4f(0.0, 0.0, 0.0, 0.5); // 50% gray
        let result = cmyk2rgb(cmyk);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -41,7 +41,7 @@ test("rgb2cmyk", async () => {
      fn foo() {
        let rgb = vec3f(1.0, 0.0, 0.0); // Red
        let result = rgb2cmyk(rgb);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -61,10 +61,10 @@ test("k2rgb - color temperature gradient", async () => {
        let cool = k2rgb(8000.0);  // Cool white
 
        // Pack both results into 4 floats: warm.r, warm.b, cool.r, cool.b
-       test::results[0] = warm.r;
-       test::results[1] = warm.b;
-       test::results[2] = cool.r;
-       test::results[3] = cool.b;
+       env::results[0] = warm.r;
+       env::results[1] = warm.b;
+       env::results[2] = cool.r;
+       env::results[3] = cool.b;
      }
    `;
   const result = await lygiaTestCompute(src);
@@ -82,7 +82,7 @@ test("rgb2lms", async () => {
      fn foo() {
        let rgb = vec3f(1.0, 0.0, 0.0); // Red
        let result = rgb2lms(rgb);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -101,7 +101,7 @@ test("lms2rgb", async () => {
      fn foo() {
        let lms = vec3f(0.3, 0.2, 0.1);
        let result = lms2rgb(lms);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -121,7 +121,7 @@ test("lms2rgb4 - alpha preservation", async () => {
      fn foo() {
        let lms = vec4f(0.3, 0.2, 0.1, 0.55);
        let result = lms2rgb4(lms);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -136,7 +136,7 @@ test("rgb2lms4 - alpha preservation", async () => {
      fn foo() {
        let rgb = vec4f(1.0, 0.0, 0.0, 0.3); // Red with alpha
        let result = rgb2lms4(rgb);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -151,7 +151,7 @@ test("rgb2ryb - default mode", async () => {
      fn foo() {
        let rgb = vec3f(1.0, 0.0, 0.0); // Red
        let result = rgb2ryb(rgb);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -166,7 +166,7 @@ test("rgb2ryb4 - alpha preservation", async () => {
      fn foo() {
        let rgb = vec4f(0.0, 1.0, 0.0, 0.5); // Green with alpha
        let result = rgb2ryb4(rgb);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -182,7 +182,7 @@ test("ryb2rgb - default mode", async () => {
      fn foo() {
        let ryb = vec3f(1.0, 0.0, 0.0); // Red in RYB
        let result = ryb2rgb(ryb);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -197,7 +197,7 @@ test("ryb2rgb4 - alpha preservation", async () => {
      fn foo() {
        let ryb = vec4f(0.0, 1.0, 0.0, 0.75); // Yellow in RYB with alpha
        let result = ryb2rgb4(ryb);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -213,7 +213,7 @@ test("rgb2heat4 - vec4 overload with alpha preservation", async () => {
      fn foo() {
        let rgb = vec4f(0.8, 0.7, 0.5, 0.6); // Color with alpha
        let result = rgb2heat4(rgb);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });

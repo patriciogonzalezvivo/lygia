@@ -11,7 +11,7 @@ test("eulerView", async () => {
       let viewMatrix = eulerView(vec3f(0.0, 0.0, 0.0), vec3f(0.0, HALF_PI, 0.0));
       // Transform a point at (1, 0, 0) - should rotate around Y by 90°
       let testPoint = viewMatrix * vec4f(1.0, 0.0, 0.0, 1.0);
-      test::results[0] = testPoint;
+      env::results[0] = testPoint;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -29,7 +29,7 @@ test("lookAt", async () => {
        let viewMatrix = lookAt(vec3f(0.0, 0.0, -1.0), vec3f(0.0, 1.0, 0.0));
        // Transform a vector along the forward direction
        let testVec = viewMatrix * vec3f(0.0, 0.0, 1.0);
-       test::results[0] = vec4f(testVec, 0.0);
+       env::results[0] = vec4f(testVec, 0.0);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -48,7 +48,7 @@ test("lookAtView", async () => {
        let viewMatrix = lookAtView(vec3f(5.0, 0.0, 0.0), vec3f(0.0, 0.0, 0.0), vec3f(0.0, 1.0, 0.0));
        // Transform a point - the position should be embedded in the matrix
        let transformed = viewMatrix * vec4f(0.0, 0.0, 0.0, 1.0);
-       test::results[0] = transformed;
+       env::results[0] = transformed;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -67,7 +67,7 @@ test("lookAtViewRoll", async () => {
        let viewMatrix = lookAtViewRoll(vec3f(0.0, 5.0, 0.0), vec3f(0.0, 0.0, 0.0), HALF_PI);
        // Extract position from the matrix (should be in last column)
        let position = viewMatrix * vec4f(0.0, 0.0, 0.0, 1.0);
-       test::results[0] = position;
+       env::results[0] = position;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -85,7 +85,7 @@ test("lookAtViewFromDirection", async () => {
        let viewMatrix = lookAtViewFromDirection(vec3f(3.0, 0.0, 0.0), vec3f(1.0, 0.0, 0.0));
        // Extract camera position from the matrix
        let position = viewMatrix * vec4f(0.0, 0.0, 0.0, 1.0);
-       test::results[0] = position;
+       env::results[0] = position;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });

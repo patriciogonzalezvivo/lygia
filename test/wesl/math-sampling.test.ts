@@ -19,7 +19,7 @@ test("hammersley", async () => {
       let h3 = hammersley(3u, 8);  // (3/8, 0.75) = (0.375, 0.75)
 
       // Pack first two into result
-      test::results[0] = vec4f(h0.x, h0.y, h1.x, h1.y);
+      env::results[0] = vec4f(h0.x, h0.y, h1.x, h1.y);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -43,7 +43,7 @@ test("hammersley - bit reversal verification", async () => {
       let h2 = hammersley(2u, 8);  // (2/8, 0.25) = (0.25, 0.25)
       let h3 = hammersley(3u, 8);  // (3/8, 0.75) = (0.375, 0.75)
 
-      test::results[0] = vec4f(h2.x, h2.y, h3.x, h3.y);
+      env::results[0] = vec4f(h2.x, h2.y, h3.x, h3.y);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -80,7 +80,7 @@ test("nyquist", async () => {
       // Test 4: Value at midpoint (should always stay at 0.5)
       let v4 = nyquist(0.5, 0.8);  // 0.5 is unaffected by filtering
 
-      test::results[0] = vec4f(v1, v2, v3, v4);
+      env::results[0] = vec4f(v1, v2, v3, v4);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -122,7 +122,7 @@ test("permute", async () => {
        // Verify reproducibility
        let p1_repeat = permute(1.0);
 
-       test::results[0] = vec4f(p1, p2, p3, p1_repeat);
+       env::results[0] = vec4f(p1, p2, p3, p1_repeat);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -149,10 +149,10 @@ test("grad4 - noise gradient helper", async () => {
       let g3 = grad4(123.456, vec4f(0.33, 0.67, 0.89, 1.23));
 
       // Store first gradient for validation
-      test::results[0] = g1a;
-      test::results[1] = g1b;
-      test::results[2] = g2;
-      test::results[3] = g3;
+      env::results[0] = g1a;
+      env::results[1] = g1b;
+      env::results[2] = g2;
+      env::results[3] = g3;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f", size: 4 });
@@ -184,7 +184,7 @@ test("grad4 - gradient range validation", async () => {
       let g2 = grad4(75.0, vec4f(0.2, 0.3, 0.4, 0.5));
 
       // Store y and z components for validation
-      test::results[0] = vec4f(g1.y, g1.z, g2.y, g2.z);
+      env::results[0] = vec4f(g1.y, g1.z, g2.y, g2.z);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -213,7 +213,7 @@ test("hemisphereCosSample - unit vector property", async () => {
       let len2 = length(v2);
       let len3 = length(v3);
 
-      test::results[0] = vec4f(len1, len2, len3, 0.0);
+      env::results[0] = vec4f(len1, len2, len3, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -236,7 +236,7 @@ test("hemisphereCosSample - positive hemisphere", async () => {
       let v3 = hemisphereCosSample(vec2f(0.5, 0.5));
       let v4 = hemisphereCosSample(vec2f(0.25, 0.75));
 
-      test::results[0] = vec4f(v1.z, v2.z, v3.z, v4.z);
+      env::results[0] = vec4f(v1.z, v2.z, v3.z, v4.z);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -258,7 +258,7 @@ test("hemisphereCosSample - known values", async () => {
       let v2 = hemisphereCosSample(vec2f(0.0, 1.0));
 
       // Store z component from v1 and full v2
-      test::results[0] = vec4f(v1.z, v2.x, v2.y, v2.z);
+      env::results[0] = vec4f(v1.z, v2.x, v2.y, v2.z);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -283,7 +283,7 @@ test("hemisphereCosSample - cosine distribution", async () => {
       let v_mid = hemisphereCosSample(vec2f(0.5, 0.5));   // Mid u.y  mid z
       let v_high = hemisphereCosSample(vec2f(0.5, 0.9));  // High u.y  lower z
 
-      test::results[0] = vec4f(v_low.z, v_mid.z, v_high.z, 0.0);
+      env::results[0] = vec4f(v_low.z, v_mid.z, v_high.z, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });

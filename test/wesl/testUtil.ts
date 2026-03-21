@@ -114,7 +114,7 @@ interface TestDistributionOptions {
  *
  * Automatically injects SAMPLE_COUNT into constants:: namespace.
  *
- * @param src - WESL shader source that writes samples to test::results
+ * @param src - WESL shader source that writes samples to env::results
  * @param sampleCount - Number of samples to collect
  * @param options - Optional elem type and additional constants
  * @returns Array of sample values

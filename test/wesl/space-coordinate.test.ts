@@ -9,7 +9,7 @@ test("cart2polar2", async () => {
     @compute @workgroup_size(1)
     fn foo() {
       let result = cart2polar2(vec2f(1.0, 1.0));
-      test::results[0] = result; // vec2f: angle, radius
+      env::results[0] = result; // vec2f: angle, radius
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec2f" });
@@ -23,7 +23,7 @@ test("polar2cart", async () => {
     @compute @workgroup_size(1)
     fn foo() {
       let result = polar2cart(vec2f(QTR_PI, SQRT2));
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec2f" });
@@ -36,7 +36,7 @@ test("equirect2xyz", async () => {
     @compute @workgroup_size(1)
     fn foo() {
       let result = equirect2xyz(vec2f(0.5, 0.5)); // Center of equirect map
-      test::results[0] = vec4f(result, 0.0);
+      env::results[0] = vec4f(result, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -50,7 +50,7 @@ test("xyz2equirect", async () => {
     @compute @workgroup_size(1)
     fn foo() {
       let result = xyz2equirect(vec3f(1.0, 0.0, 0.0)); // +X direction
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec2f" });
@@ -67,7 +67,7 @@ test("fisheye2xyz", async () => {
      fn foo() {
        let uv = vec2f(0.75, 0.5);
        let result = fisheye2xyz(uv);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -84,7 +84,7 @@ test("fisheye2xyz - division by zero at center", async () => {
      fn foo() {
        let uv = vec2f(0.5, 0.5); // Center point: R=0, triggers division by zero at line 14
        let result = fisheye2xyz(uv);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -99,8 +99,8 @@ test("nearest", async () => {
       // Test nearest-neighbor snapping for different UV coordinates
       let result1 = nearest(vec2f(0.7533, 0.2567), vec2f(1920.0, 1080.0));
       let result2 = nearest(vec2f(0.7500, 0.2500), vec2f(1920.0, 1080.0));
-      test::results[0] = result1;
-      test::results[1] = result2;
+      env::results[0] = result1;
+      env::results[1] = result2;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec2f" });

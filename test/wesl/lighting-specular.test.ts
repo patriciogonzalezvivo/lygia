@@ -13,7 +13,7 @@ test("fresnel vec3f", async () => {
        let f0 = vec3f(0.04, 0.04, 0.04);  // Typical dielectric
        let NoV = 1.0;  // View perpendicular to surface (normal incidence)
        let result = fresnel(f0, NoV);
-       test::results[0] = result.x;
+       env::results[0] = result.x;
      }
    `;
   const result = await lygiaTestCompute(src);
@@ -34,7 +34,7 @@ test("fresnelF32", async () => {
        let f0 = 0.04;  // Typical dielectric
        let NoV = 1.0;  // View perpendicular to surface (normal incidence)
        let result = fresnelF32(f0, NoV);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src);
@@ -53,7 +53,7 @@ test("fresnelFromVectors", async () => {
        let normal = vec3f(0.0, 0.0, 1.0);
        let view = vec3f(0.0, 0.0, 1.0);  // View perpendicular to surface
        let result = fresnelFromVectors(f0, normal, view);
-       test::results[0] = result.x;
+       env::results[0] = result.x;
      }
    `;
   const result = await lygiaTestCompute(src);
@@ -85,7 +85,7 @@ test("fresnelRoughness", async () => {
        // Test 3: Mid-angle (NoV=0.5) should show intermediate behavior
        let midSmooth = fresnelRoughness(f0, 0.5, 0.1);
 
-       test::results[0] = vec4f(normalSmooth.x, grazingSmooth.x, grazingRough.x, midSmooth.x);
+       env::results[0] = vec4f(normalSmooth.x, grazingSmooth.x, grazingRough.x, midSmooth.x);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -147,7 +147,7 @@ test("specularCookTorrance", async () => {
        let offSpecSmooth = specularCookTorrance(L3, N, H3, NoV3, NoL3, NoH3, 0.1, specularColor);
        let offSpecRough = specularCookTorrance(L3, N, H3, NoV3, NoL3, NoH3, 0.9, specularColor);
 
-       test::results[0] = vec4f(perfectSmooth.x, perfectRough.x, offSpecSmooth.x, offSpecRough.x);
+       env::results[0] = vec4f(perfectSmooth.x, perfectRough.x, offSpecSmooth.x, offSpecRough.x);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -193,7 +193,7 @@ test("toShininess", async () => {
        let dielectric = toShininess(0.3, 0.0);   // Uses 240 multiplier (80+160*1)
        let metallic = toShininess(0.3, 1.0);     // Uses 80 multiplier (80+160*0)
 
-       test::results[0] = vec4f(verySmooth, veryRough, midRough, metallic);
+       env::results[0] = vec4f(verySmooth, veryRough, midRough, metallic);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });

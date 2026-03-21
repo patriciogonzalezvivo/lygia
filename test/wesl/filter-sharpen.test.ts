@@ -16,7 +16,7 @@ test("sharpenAdaptive - visual", async () => {
     shader: `
       import lygia::filter::sharpen::adaptive::sharpenAdaptive;
 
-      @group(0) @binding(0) var<uniform> uniforms: test::Uniforms;
+      @group(0) @binding(0) var<uniform> uniforms: env::Uniforms;
       @group(0) @binding(1) var input_tex: texture_2d<f32>;
       @group(0) @binding(2) var input_samp: sampler;
 
@@ -41,7 +41,7 @@ test("sharpenAdaptive4 - visual", async () => {
     shader: `
       import lygia::filter::sharpen::adaptive::sharpenAdaptive4;
 
-      @group(0) @binding(0) var<uniform> uniforms: test::Uniforms;
+      @group(0) @binding(0) var<uniform> uniforms: env::Uniforms;
       @group(0) @binding(1) var input_tex: texture_2d<f32>;
       @group(0) @binding(2) var input_samp: sampler;
 
@@ -66,7 +66,7 @@ test("sharpenContrastAdaptive - visual", async () => {
     shader: `
       import lygia::filter::sharpen::adaptive::sharpenContrastAdaptive;
 
-      @group(0) @binding(0) var<uniform> uniforms: test::Uniforms;
+      @group(0) @binding(0) var<uniform> uniforms: env::Uniforms;
       @group(0) @binding(1) var input_tex: texture_2d<f32>;
       @group(0) @binding(2) var input_samp: sampler;
 
@@ -92,7 +92,7 @@ test("sharpenFast - visual", async () => {
     shader: `
       import lygia::filter::sharpen::fast::sharpenFast;
 
-      @group(0) @binding(0) var<uniform> uniforms: test::Uniforms;
+      @group(0) @binding(0) var<uniform> uniforms: env::Uniforms;
       @group(0) @binding(1) var input_tex: texture_2d<f32>;
       @group(0) @binding(2) var input_samp: sampler;
 
@@ -117,7 +117,7 @@ test("sharpenFast4 - visual", async () => {
     shader: `
       import lygia::filter::sharpen::fast::sharpenFast4;
 
-      @group(0) @binding(0) var<uniform> uniforms: test::Uniforms;
+      @group(0) @binding(0) var<uniform> uniforms: env::Uniforms;
       @group(0) @binding(1) var input_tex: texture_2d<f32>;
       @group(0) @binding(2) var input_samp: sampler;
 
@@ -150,7 +150,7 @@ test("sharpendAdaptiveControl4", async () => {
        let black = vec4f(0.0, 0.0, 0.0, 1.0);
        let result3 = sharpendAdaptiveControl4(black);
 
-       test::results[0] = vec3f(result1, result2, result3);
+       env::results[0] = vec3f(result1, result2, result3);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });

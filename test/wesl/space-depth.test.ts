@@ -7,7 +7,7 @@ test("linearizeDepth", async () => {
     @compute @workgroup_size(1)
     fn foo() {
       let result = linearizeDepth(0.5, 0.1, 100.0);
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src);
@@ -23,7 +23,7 @@ test("depth2viewZ perspective", async () => {
     @compute @workgroup_size(1)
     fn foo() {
       let result = depth2viewZ(0.5, 1.0, 100.0);
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src);
@@ -38,7 +38,7 @@ test("viewZ2depth perspective", async () => {
     @compute @workgroup_size(1)
     fn foo() {
       let result = viewZ2depth(-1.9802, 1.0, 100.0);
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src);

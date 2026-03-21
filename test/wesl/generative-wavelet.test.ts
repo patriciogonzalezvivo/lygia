@@ -20,7 +20,7 @@ test("noised2", async () => {
        let dx_numerical = (noised2(p + vec2f(h, 0.0)).x - noised2(p - vec2f(h, 0.0)).x) / (2.0 * h);
        let dy_numerical = (noised2(p + vec2f(0.0, h)).x - noised2(p - vec2f(0.0, h)).x) / (2.0 * h);
 
-       test::results[0] = vec4f(dx_analytical, dx_numerical, dy_analytical, dy_numerical);
+       env::results[0] = vec4f(dx_analytical, dx_numerical, dy_analytical, dy_numerical);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -55,7 +55,7 @@ test("noised3", async () => {
        let dz_numerical = (noised3(p + vec3f(0.0, 0.0, h)).x - noised3(p - vec3f(0.0, 0.0, h)).x) / (2.0 * h);
 
        // Pack all results into a single vec4f (we only have one result slot)
-       test::results[0] = vec4f(dx_analytical, dx_numerical, dy_analytical, dy_numerical);
+       env::results[0] = vec4f(dx_analytical, dx_numerical, dy_analytical, dy_numerical);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -81,7 +81,7 @@ test("wavelet2", async () => {
        let w2 = wavelet2(p2);
        let w3 = wavelet2(p3);
 
-       test::results[0] = vec4f(w1, w2, w3, 0.0);
+       env::results[0] = vec4f(w1, w2, w3, 0.0);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -108,7 +108,7 @@ test("wavelet3", async () => {
        let w2 = wavelet3(vec3f(p, phase2));
        let w3 = wavelet3(vec3f(p, phase1)); // Same as w1
 
-       test::results[0] = vec4f(w1, w2, w3, 0.0);
+       env::results[0] = vec4f(w1, w2, w3, 0.0);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -134,7 +134,7 @@ test("waveletScaled2", async () => {
        let w2 = waveletScaled2(p, phase); // Same
        let w3 = waveletScaled2(p * 2.0, phase); // Different position
 
-       test::results[0] = vec4f(w1, w2, w3, 0.0);
+       env::results[0] = vec4f(w1, w2, w3, 0.0);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -163,7 +163,7 @@ test("waveletScaled3 - with custom scale parameter", async () => {
        let w2 = waveletScaled3(vec3f(p, phase), scale1); // Same
        let w3 = waveletScaled3(vec3f(p, phase), scale2); // Different scale
 
-       test::results[0] = vec4f(w1, w2, w3, 0.0);
+       env::results[0] = vec4f(w1, w2, w3, 0.0);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -190,7 +190,7 @@ test("wavelet - base function with custom phase and scale", async () => {
        let w3 = wavelet(p, 1.0, scale); // Different phase
        let w4 = wavelet(p, phase, 2.0); // Different scale
 
-       test::results[0] = vec4f(w1, w2, w3, w4);
+       env::results[0] = vec4f(w1, w2, w3, w4);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });

@@ -1,6 +1,6 @@
 import lygia::space::triTile::triTile;
 import lygia::generative::random::random;
-import test::Uniforms;
+import env::Uniforms;
 
 @group(0) @binding(0) var<uniform> uniforms: Uniforms;
 

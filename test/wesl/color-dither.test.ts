@@ -19,7 +19,7 @@ test("ditherBayer3 - gradient with Bayer pattern", async () => {
     import lygia::color::dither::bayer::ditherBayer3Precision;
     import lygia::test::wesl_util::sampleQuantized::{sampleQuantized3, sampleOriginal3};
 
-    @group(0) @binding(0) var<uniform> u: test::Uniforms;
+    @group(0) @binding(0) var<uniform> u: env::Uniforms;
 
     @fragment
     fn fs_main(@builtin(position) pos: vec4f) -> @location(0) vec4f {
@@ -46,7 +46,7 @@ test("ditherVlachos3 - gradient with Vlachos noise", async () => {
     import lygia::color::dither::vlachos::ditherVlachos3Precision;
     import lygia::test::wesl_util::sampleQuantized::{sampleQuantized3, sampleOriginal3};
 
-    @group(0) @binding(0) var<uniform> u: test::Uniforms;
+    @group(0) @binding(0) var<uniform> u: env::Uniforms;
 
     @fragment
     fn fs_main(@builtin(position) pos: vec4f) -> @location(0) vec4f {
@@ -73,7 +73,7 @@ test("ditherBlueNoise3 - gradient with blue noise pattern", async () => {
     import lygia::color::dither::blueNoise::ditherBlueNoise3Precision;
     import lygia::test::wesl_util::sampleQuantized::{sampleQuantized3, sampleOriginal3};
 
-    @group(0) @binding(0) var<uniform> u: test::Uniforms;
+    @group(0) @binding(0) var<uniform> u: env::Uniforms;
 
     @fragment
     fn fs_main(@builtin(position) pos: vec4f) -> @location(0) vec4f {
@@ -130,10 +130,10 @@ test("ditherBayer - all wrapper functions", async () => {
        let dithered4 = ditherBayer4(color4, xy);
 
        // Pack results for validation
-       test::results[0] = vec4f(ditheredScalar, 0.0, 0.0, 0.0);
-       test::results[1] = vec4f(dithered3Default, 0.0);
-       test::results[2] = vec4f(dithered3Custom, 0.0);
-       test::results[3] = dithered4;
+       env::results[0] = vec4f(ditheredScalar, 0.0, 0.0, 0.0);
+       env::results[1] = vec4f(dithered3Default, 0.0);
+       env::results[2] = vec4f(dithered3Custom, 0.0);
+       env::results[3] = dithered4;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f", size: 4 });
@@ -176,9 +176,9 @@ test("ditherVlachos - all wrapper functions", async () => {
        let dithered4 = ditherVlachos4(color4, xy);
 
        // Pack results for validation
-       test::results[0] = vec4f(dithered3Default, 0.0);
-       test::results[1] = vec4f(dithered3Custom, 0.0);
-       test::results[2] = dithered4;
+       env::results[0] = vec4f(dithered3Default, 0.0);
+       env::results[1] = vec4f(dithered3Custom, 0.0);
+       env::results[2] = dithered4;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f", size: 3 });
@@ -225,10 +225,10 @@ test("ditherBlueNoise - all wrapper functions", async () => {
        let dithered4 = ditherBlueNoise4(color4, xy);
 
        // Pack results for validation
-       test::results[0] = vec4f(dithered1, 0.0, 0.0, 0.0);
-       test::results[1] = vec4f(dithered3Default, 0.0);
-       test::results[2] = vec4f(dithered3Custom, 0.0);
-       test::results[3] = dithered4;
+       env::results[0] = vec4f(dithered1, 0.0, 0.0, 0.0);
+       env::results[1] = vec4f(dithered3Default, 0.0);
+       env::results[2] = vec4f(dithered3Custom, 0.0);
+       env::results[3] = dithered4;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f", size: 4 });

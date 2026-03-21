@@ -9,7 +9,7 @@ test("oklab2srgb", async () => {
      fn foo() {
        let oklab = vec3f(0.628, 0.225, 0.126); // Red in Oklab
        let result = oklab2srgb(oklab);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -25,7 +25,7 @@ test("srgb2oklab", async () => {
      fn foo() {
        let srgb = vec3f(1.0, 0.0, 0.0); // Red
        let result = srgb2oklab(srgb);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -41,7 +41,7 @@ test("oklab2rgb", async () => {
      fn foo() {
        let oklab = vec3f(0.628, 0.225, 0.126); // Red in Oklab
        let result = oklab2rgb(oklab);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -57,7 +57,7 @@ test("rgb2oklab", async () => {
      fn foo() {
        let rgb = vec3f(1.0, 0.0, 0.0); // Red
        let result = rgb2oklab(rgb);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -73,7 +73,7 @@ test("oklab2rgb4 - alpha preservation", async () => {
      fn foo() {
        let oklab = vec4f(0.628, 0.225, 0.126, 0.45); // Red with alpha
        let result = oklab2rgb4(oklab);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -88,7 +88,7 @@ test("oklab2srgb4 - alpha preservation", async () => {
      fn foo() {
        let oklab = vec4f(0.628, 0.225, 0.126, 0.35); // Red with alpha
        let result = oklab2srgb4(oklab);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -103,7 +103,7 @@ test("rgb2oklab4 - alpha preservation", async () => {
      fn foo() {
        let rgb = vec4f(1.0, 0.0, 0.0, 0.6); // Red with alpha
        let result = rgb2oklab4(rgb);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -118,7 +118,7 @@ test("srgb2oklab4 - alpha preservation", async () => {
      fn foo() {
        let srgb = vec4f(1.0, 0.0, 0.0, 0.85); // Red with alpha
        let result = srgb2oklab4(srgb);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });

@@ -10,7 +10,7 @@ test("blendHardLight3", async () => {
        let base = vec3f(0.4, 0.6, 0.8);
        let blend = vec3f(0.3, 0.5, 0.7);
        let result = blendHardLight3(base, blend);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -27,7 +27,7 @@ test("blendOverlay3", async () => {
        let base = vec3f(0.4, 0.6, 0.8);
        let blend = vec3f(0.3, 0.5, 0.7);
        let result = blendOverlay3(base, blend);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -44,7 +44,7 @@ test("blendSoftLight3", async () => {
        let base = vec3f(0.5, 0.6, 0.4);
        let blend = vec3f(0.3, 0.5, 0.7);
        let result = blendSoftLight3(base, blend);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -65,7 +65,7 @@ test("blendVividLight3", async () => {
        let base = vec3f(0.5, 0.6, 0.4);
        let blend = vec3f(0.3, 0.5, 0.7);
        let result = blendVividLight3(base, blend);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -84,7 +84,7 @@ test("blendPinLight3", async () => {
        let base = vec3f(0.3, 0.7, 0.5);
        let blend = vec3f(0.1, 0.9, 0.5);
        let result = blendPinLight3(base, blend);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -104,7 +104,7 @@ test("blendLinearLight3", async () => {
        let base = vec3f(0.4, 0.5, 0.6);
        let blend = vec3f(0.3, 0.5, 0.7);
        let result = blendLinearLight3(base, blend);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -121,7 +121,7 @@ test("blendHardMix3", async () => {
        let base = vec3f(0.4, 0.6, 0.8);
        let blend = vec3f(0.3, 0.5, 0.2);
        let result = blendHardMix3(base, blend);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -138,7 +138,7 @@ test("blendGlow3", async () => {
        let base = vec3f(0.4, 0.6, 0.2);
        let blend = vec3f(0.5, 0.3, 0.8);
        let result = blendGlow3(base, blend);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -153,7 +153,7 @@ test("blendOverlay - f32", async () => {
      @compute @workgroup_size(1)
      fn foo() {
        let result = blendOverlay(0.4, 0.3);
-       test::results[0] = vec4f(result, 0.0, 0.0, 0.0);
+       env::results[0] = vec4f(result, 0.0, 0.0, 0.0);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -168,7 +168,7 @@ test("blendSoftLight - f32", async () => {
      @compute @workgroup_size(1)
      fn foo() {
        let result = blendSoftLight(0.5, 0.3);
-       test::results[0] = vec4f(result, 0.0, 0.0, 0.0);
+       env::results[0] = vec4f(result, 0.0, 0.0, 0.0);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -183,7 +183,7 @@ test("blendHardLight - f32", async () => {
      @compute @workgroup_size(1)
      fn foo() {
        let result = blendHardLight(0.4, 0.3);
-       test::results[0] = vec4f(result, 0.0, 0.0, 0.0);
+       env::results[0] = vec4f(result, 0.0, 0.0, 0.0);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -198,7 +198,7 @@ test("blendVividLight - f32", async () => {
      @compute @workgroup_size(1)
      fn foo() {
        let result = blendVividLight(0.5, 0.3);
-       test::results[0] = vec4f(result, 0.0, 0.0, 0.0);
+       env::results[0] = vec4f(result, 0.0, 0.0, 0.0);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -216,7 +216,7 @@ test("blendPinLight - f32", async () => {
        // Test values that actually change the output
        let result1 = blendPinLight(0.3, 0.1);  // darken: min(0.3, 0.2) = 0.2
        let result2 = blendPinLight(0.7, 0.9);  // lighten: max(0.7, 0.8) = 0.8
-       test::results[0] = vec4f(result1, result2, 0.0, 0.0);
+       env::results[0] = vec4f(result1, result2, 0.0, 0.0);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -230,7 +230,7 @@ test("blendLinearLight - f32", async () => {
      @compute @workgroup_size(1)
      fn foo() {
        let result = blendLinearLight(0.4, 0.3);
-       test::results[0] = vec4f(result, 0.0, 0.0, 0.0);
+       env::results[0] = vec4f(result, 0.0, 0.0, 0.0);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -245,7 +245,7 @@ test("blendHardMix - f32", async () => {
      @compute @workgroup_size(1)
      fn foo() {
        let result = blendHardMix(0.4, 0.3);
-       test::results[0] = vec4f(result, 0.0, 0.0, 0.0);
+       env::results[0] = vec4f(result, 0.0, 0.0, 0.0);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -260,7 +260,7 @@ test("blendGlow - f32", async () => {
      @compute @workgroup_size(1)
      fn foo() {
        let result = blendGlow(0.4, 0.5);
-       test::results[0] = vec4f(result, 0.0, 0.0, 0.0);
+       env::results[0] = vec4f(result, 0.0, 0.0, 0.0);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });

@@ -1,6 +1,6 @@
 import lygia::generative::snoise::snoise2;
 
-@group(0) @binding(0) var<uniform> uniforms: test::Uniforms;
+@group(0) @binding(0) var<uniform> uniforms: env::Uniforms;
 
 @toy @fragment
 fn fs_main(@builtin(position) pos: vec4f) -> @location(0) vec4f {

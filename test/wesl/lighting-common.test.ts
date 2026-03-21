@@ -19,7 +19,7 @@ test("GGX", async () => {
        // Lower roughness should produce sharper peak (higher value at NoH=1)
        let result3 = GGX(1.0, 0.1);
 
-       test::results[0] = vec3f(result1, result2, result3);
+       env::results[0] = vec3f(result1, result2, result3);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -51,7 +51,7 @@ test("GGXPrecise", async () => {
        let preciseFn = GGXPrecise(N, H, NoH, roughness);
        let standardFn = GGX(NoH, roughness);
 
-       test::results[0] = vec2f(preciseFn, standardFn);
+       env::results[0] = vec2f(preciseFn, standardFn);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec2f" });
@@ -79,7 +79,7 @@ test("importanceSamplingGGX", async () => {
        // Lower roughness should bias samples toward Z axis
        let sample3 = importanceSamplingGGX(vec2f(0.5, 0.5), 0.1);
 
-       test::results[0] = vec3f(sample1.z, length(sample2), sample3.z);
+       env::results[0] = vec3f(sample1.z, length(sample2), sample3.z);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -112,7 +112,7 @@ test("schlick vec3f", async () => {
        // At mid-angle, should be between f0 and f90
        let midFn = schlick(f0, f90, 0.5);
 
-       test::results[0] = vec3f(normalFn.x, grazingFn.x, midFn.x);
+       env::results[0] = vec3f(normalFn.x, grazingFn.x, midFn.x);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -143,7 +143,7 @@ test("schlickVec3", async () => {
        // At grazing angle, should approach f90
        let grazingFn = schlickVec3(f0, f90, 0.0);
 
-       test::results[0] = vec4f(normalFn, grazingFn.x);
+       env::results[0] = vec4f(normalFn, grazingFn.x);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -170,7 +170,7 @@ test("schlickF32", async () => {
        let grazingFn = schlickF32(f0, f90, 0.0);  // VoH=0 -> f90
        let midFn = schlickF32(f0, f90, 0.5);      // VoH=0.5 -> interpolated
 
-       test::results[0] = vec3f(normalFn, grazingFn, midFn);
+       env::results[0] = vec3f(normalFn, grazingFn, midFn);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -202,7 +202,7 @@ test("smithGGXCorrelated", async () => {
        // Perfect alignment (NoV=1, NoL=1) should have high visibility
        let perfectFn = smithGGXCorrelated(1.0, 1.0, 0.5);
 
-       test::results[0] = vec3f(smoothFn, roughFn, perfectFn);
+       env::results[0] = vec3f(smoothFn, roughFn, perfectFn);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -234,7 +234,7 @@ test("smithGGXCorrelated_Fast", async () => {
        let fastSmoothFn = smithGGXCorrelated_Fast(NoV, NoL, 0.1);
        let fastRoughFn = smithGGXCorrelated_Fast(NoV, NoL, 0.9);
 
-       test::results[0] = vec4f(standardFn, fastFn, fastSmoothFn, fastRoughFn);
+       env::results[0] = vec4f(standardFn, fastFn, fastSmoothFn, fastRoughFn);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
