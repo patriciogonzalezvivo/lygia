@@ -1,0 +1,38 @@
+#include "../math/pow2.wgsl"
+
+/*
+contributors: Kathy McGuiness
+description: |
+    Returns the Juia set SDF
+    For more information about the Julia set, check [this article](https://en.wikipedia.org/wiki/Julia_set)
+    Some values for c:
+        * vec2(−0.8, 0.156)
+        * vec2(0.285, 0.0)
+        * vec2(-0.8, 0.156);
+        * vec2(0.27334, 0.00742)
+        * vec2(−0.835, −0.2321)
+use: juliaSDF(<vec2> st, <vec2> c, <float> r)
+examples:
+    - https://gist.githubusercontent.com/kfahn22/246988bac1f346c3112a8ea1cd0b114d/raw/8f3a563e3c88cbbfb267a0277ba9b262a9e63570/julia.frag
+*/
+
+fn juliaSDF2(st: vec2f, center: vec2f, c: vec2f, r: f32) -> f32 {
+    st -= 0.5;
+    st *= 2.0;
+    let z = vec2f(0.0) - (st) * r;
+    let n = 0.0;
+    let I = 500;
+    for (int i = I; i > 0; i--) { 
+        if ( length(z) > 4.0 ) { 
+            n = float(i)/float(I); 
+            break;
+        } 
+        z = vec2f( (pow2(z.x) - pow2(z.y)) + c.x, (2.0*z.x*z.y) + c.y ); 
+    } 
+    return n;
+}
+
+fn juliaSDF2a(st: vec2f, c: vec2f, r: f32) -> f32 {
+        return juliaSDF(st, CENTER_2D, c, r); 
+        return juliaSDF(st, vec2f(0.5), c, r); 
+}

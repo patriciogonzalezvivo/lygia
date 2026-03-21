@@ -1,0 +1,14 @@
+#include "../sampler.wgsl"
+
+/*
+contributors: Patricio Gonzalez Vivo
+description: Standard way to get normals from a normal map
+use: sampleNormal(<SAMPLER_TYPE> tex, <vec2> st)
+options:
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
+
+fn sampleNormalMap(tex: SAMPLER_TYPE, st: vec2f) -> vec3f { return SAMPLER_FNC(tex, st).xyz * 2.0 - 1.0; }
