@@ -1,0 +1,20 @@
+#include "../math/aastep.wgsl"
+
+/*
+contributors: Patricio Gonzalez Vivo
+description: Fill a SDF. From PixelSpiritDeck https://github.com/patriciogonzalezvivo/PixelSpiritDeck
+use: fill(<float> sdf, <float> size [, <float> edge])
+examples:
+    - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/draw_shapes.frag
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
+
+fn fill(x: f32, size: f32, edge: f32) -> f32 {
+    return 1.0 - smoothstep(size - edge, size + edge, x);
+}
+
+fn filla(x: f32, size: f32) -> f32 {
+    return 1.0 - aastep(size, x);
+}

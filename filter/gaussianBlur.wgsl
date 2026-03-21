@@ -1,0 +1,54 @@
+#include "../sampler.wgsl"
+
+/*
+contributors:
+    - Matt DesLauriers
+    - Patricio Gonzalez Vivo
+description: Adapted versions from 5, 9 and 13 gaussian fast blur from https://github.com/Jam3/glsl-fast-gaussian-blur
+use: gaussianBlur(<SAMPLER_TYPE> texture, <vec2> st, <vec2> pixel_direction [, const int kernelSize])
+options:
+    - GAUSSIANBLUR_AMOUNT: gaussianBlur5 gaussianBlur9 gaussianBlur13
+    - GAUSSIANBLUR_2D: default to 1D
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
+examples:
+    - /shaders/filter_gaussianBlur2D.frag
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
+
+// #define GAUSSIANBLUR_AMOUNT gaussianBlur13
+
+// #define GAUSSIANBLUR_TYPE vec4
+
+// #define GAUSSIANBLUR_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
+
+#include "gaussianBlur/2D.wgsl"
+#include "gaussianBlur/1D.wgsl"
+#include "gaussianBlur/1D_fast13.wgsl"
+#include "gaussianBlur/1D_fast9.wgsl"
+#include "gaussianBlur/1D_fast5.wgsl"
+
+GAUSSIANBLUR_TYPE gaussianBlur13(in SAMPLER_TYPE tex, in vec2 st, in vec2 offset) {
+    return gaussianBlur2D(tex, st, offset, 7);
+    return gaussianBlur1D_fast13(tex, st, offset);
+}
+
+GAUSSIANBLUR_TYPE gaussianBlur9(in SAMPLER_TYPE tex, in vec2 st, in vec2 offset) {
+    return gaussianBlur2D(tex, st, offset, 5);
+    return gaussianBlur1D_fast9(tex, st, offset);
+}
+
+GAUSSIANBLUR_TYPE gaussianBlur5(in SAMPLER_TYPE tex, in vec2 st, in vec2 offset) {
+    return gaussianBlur2D(tex, st, offset, 3);
+    return gaussianBlur1D_fast5(tex, st, offset);
+}
+
+GAUSSIANBLUR_TYPE gaussianBlur(in SAMPLER_TYPE tex, in vec2 st, in vec2 offset, const int kernelSize) {
+    return gaussianBlur2D(tex, st, offset, kernelSize);
+    return gaussianBlur1D(tex, st, offset, kernelSize);
+}
+
+GAUSSIANBLUR_TYPE gaussianBlur(in SAMPLER_TYPE tex, in vec2 st, in vec2 offset) {
+    return GAUSSIANBLUR_AMOUNT(tex, st, offset);
+}

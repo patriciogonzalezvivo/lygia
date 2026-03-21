@@ -1,0 +1,37 @@
+#include "../sampler.wgsl"
+
+/*
+contributors: Patricio Gonzalez Vivo
+description: triplanar mapping
+use: <vec4> sample2DCube(in <SAMPLER_TYPE> lut, in <vec3> xyz)
+options:
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
+    - SAMPLETRIPLANAR_TYPE: optional depending the target version of GLSL (vec4 or vec3)
+    - SAMPLETRIPLANAR_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
+
+// #define SAMPLETRIPLANAR_TYPE vec4
+
+// #define SAMPLETRIPLANAR_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
+
+SAMPLETRIPLANAR_TYPE sampleTriplanar(SAMPLER_TYPE tex, in vec3 d) {
+    SAMPLETRIPLANAR_TYPE colx = SAMPLETRIPLANAR_FNC(tex, d.yz);
+    SAMPLETRIPLANAR_TYPE coly = SAMPLETRIPLANAR_FNC(tex, d.zx);
+    SAMPLETRIPLANAR_TYPE colz = SAMPLETRIPLANAR_FNC(tex, d.xy);
+    
+    let n = d*d;
+    return (colx*n.x + coly*n.y + colz*n.z)/(n.x+n.y+n.z);
+}
+
+// iq's cubemap function
+SAMPLETRIPLANAR_TYPE sampleTriplanar(SAMPLER_TYPE tex, in vec3 d, in float s) {
+    SAMPLETRIPLANAR_TYPE colx = SAMPLETRIPLANAR_FNC(tex, 0.5 + s*d.yz/d.x);
+    SAMPLETRIPLANAR_TYPE coly = SAMPLETRIPLANAR_FNC(tex, 0.5 + s*d.zx/d.y);
+    SAMPLETRIPLANAR_TYPE colz = SAMPLETRIPLANAR_FNC(tex, 0.5 + s*d.xy/d.z);
+    
+    let n = d*d;
+    return (colx*n.x + coly*n.y + colz*n.z)/(n.x+n.y+n.z);
+}
