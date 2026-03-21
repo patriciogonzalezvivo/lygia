@@ -10,7 +10,7 @@ test("blendHue", async () => {
        let base = vec3f(0.8, 0.4, 0.2);
        let blend = vec3f(0.2, 0.6, 0.8);
        let result = blendHue(base, blend);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -30,7 +30,7 @@ test("blendSaturation", async () => {
        let base = vec3f(1.0, 0.0, 0.0);  // Pure red (highly saturated)
        let blend = vec3f(0.5, 0.5, 0.5); // Gray (no saturation)
        let result = blendSaturation(base, blend);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -52,7 +52,7 @@ test("blendColor", async () => {
        let base = vec3f(0.8, 0.4, 0.2);
        let blend = vec3f(0.2, 0.6, 0.8);
        let result = blendColor(base, blend);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -72,7 +72,7 @@ test("blendLuminosity", async () => {
        let base = vec3f(1.0, 0.0, 0.0);  // Pure red (bright)
        let blend = vec3f(0.1, 0.1, 0.1); // Dark gray
        let result = blendLuminosity(base, blend);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });

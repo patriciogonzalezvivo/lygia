@@ -7,7 +7,7 @@ test("lengthSq2", async () => {
     @compute @workgroup_size(1)
     fn foo() {
       let result = lengthSq2(vec2f(3.0, 4.0));
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src);
@@ -20,7 +20,7 @@ test("lengthSq3", async () => {
     @compute @workgroup_size(1)
     fn foo() {
       let result = lengthSq3(vec3f(1.0, 2.0, 2.0));
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src);
@@ -33,7 +33,7 @@ test("distEuclidean2", async () => {
     @compute @workgroup_size(1)
     fn foo() {
       let result = distEuclidean2(vec2f(0.0, 0.0), vec2f(3.0, 4.0));
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src);
@@ -46,7 +46,7 @@ test("distManhattan2", async () => {
     @compute @workgroup_size(1)
     fn foo() {
       let result = distManhattan2(vec2f(0.0, 0.0), vec2f(3.0, 4.0));
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src);

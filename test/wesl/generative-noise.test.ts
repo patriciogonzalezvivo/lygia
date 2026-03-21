@@ -19,8 +19,8 @@ test("cnoise2", async () => {
          let x = f32(i % 16u) * 0.2 + 0.5;
          let y = f32(i / 16u) * 0.2 + 0.5;
 
-         test::results[i * 2] = cnoise2(vec2f(x, y));
-         test::results[i * 2 + 1] = cnoise2(vec2f(x + 0.01, y + 0.01));
+         env::results[i * 2] = cnoise2(vec2f(x, y));
+         env::results[i * 2 + 1] = cnoise2(vec2f(x + 0.01, y + 0.01));
        }
      }
    `;
@@ -59,8 +59,8 @@ test("cnoise3", async () => {
          let y = f32((i / 8u) % 8u) * 0.2 + 0.5;
          let z = f32(i / 64u) * 0.2 + 0.5;
 
-         test::results[i * 2] = cnoise3(vec3f(x, y, z));
-         test::results[i * 2 + 1] = cnoise3(vec3f(x + 0.01, y + 0.01, z + 0.01));
+         env::results[i * 2] = cnoise3(vec3f(x, y, z));
+         env::results[i * 2 + 1] = cnoise3(vec3f(x + 0.01, y + 0.01, z + 0.01));
        }
      }
    `;
@@ -100,8 +100,8 @@ test("cnoise4", async () => {
          let z = f32((i / 16u) % 4u) * 0.2 + 0.5;
          let w = f32(i / 64u) * 0.2 + 0.5;
 
-         test::results[i * 2] = cnoise4(vec4f(x, y, z, w));
-         test::results[i * 2 + 1] = cnoise4(vec4f(x + 0.01, y + 0.01, z + 0.01, w + 0.01));
+         env::results[i * 2] = cnoise4(vec4f(x, y, z, w));
+         env::results[i * 2 + 1] = cnoise4(vec4f(x + 0.01, y + 0.01, z + 0.01, w + 0.01));
        }
      }
    `;
@@ -139,8 +139,8 @@ test("snoise2", async () => {
          let x = f32(i % 16u) * 0.2 + 1.0;
          let y = f32(i / 16u) * 0.2 + 2.0;
 
-         test::results[i * 2] = snoise2(vec2f(x, y));
-         test::results[i * 2 + 1] = snoise2(vec2f(x + 0.01, y + 0.01));
+         env::results[i * 2] = snoise2(vec2f(x, y));
+         env::results[i * 2 + 1] = snoise2(vec2f(x + 0.01, y + 0.01));
        }
      }
    `;
@@ -179,8 +179,8 @@ test("snoise3", async () => {
          let y = f32((i / 8u) % 8u) * 0.2 + 2.0;
          let z = f32(i / 64u) * 0.2 + 3.0;
 
-         test::results[i * 2] = snoise3(vec3f(x, y, z));
-         test::results[i * 2 + 1] = snoise3(vec3f(x + 0.01, y + 0.01, z + 0.01));
+         env::results[i * 2] = snoise3(vec3f(x, y, z));
+         env::results[i * 2 + 1] = snoise3(vec3f(x + 0.01, y + 0.01, z + 0.01));
        }
      }
    `;
@@ -220,8 +220,8 @@ test("snoise4", async () => {
          let z = f32((i / 16u) % 4u) * 0.2 + 3.0;
          let w = f32(i / 64u) * 0.2 + 4.0;
 
-         test::results[i * 2] = snoise4(vec4f(x, y, z, w));
-         test::results[i * 2 + 1] = snoise4(vec4f(x + 0.01, y + 0.01, z + 0.01, w + 0.01));
+         env::results[i * 2] = snoise4(vec4f(x, y, z, w));
+         env::results[i * 2 + 1] = snoise4(vec4f(x + 0.01, y + 0.01, z + 0.01, w + 0.01));
        }
      }
    `;
@@ -257,7 +257,7 @@ test("snoise22", async () => {
        let n1 = snoise22(p1);
        let n2 = snoise22(p2);
 
-       test::results[0] = vec4f(n1.x, n1.y, n2.x, n2.y);
+       env::results[0] = vec4f(n1.x, n1.y, n2.x, n2.y);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -280,7 +280,7 @@ test("snoise33", async () => {
        let n3 = snoise33(p3);
 
        // Test continuity by computing difference
-       test::results[0] = vec4f(n1.x, n1.y, n1.z, length(n3 - n1));
+       env::results[0] = vec4f(n1.x, n1.y, n1.z, length(n3 - n1));
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -305,7 +305,7 @@ test("snoise34", async () => {
        let n3 = snoise34(p3);
 
        // Test continuity by computing difference
-       test::results[0] = vec4f(n1.x, n1.y, n1.z, length(n3 - n1));
+       env::results[0] = vec4f(n1.x, n1.y, n1.z, length(n3 - n1));
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -330,8 +330,8 @@ test("pnoise2", async () => {
          let x = f32(i % 16u) * 0.2 + 0.5;
          let y = f32(i / 16u) * 0.2 + 0.5;
 
-         test::results[i * 2] = pnoise2(vec2f(x, y), period);
-         test::results[i * 2 + 1] = pnoise2(vec2f(x + 0.01, y + 0.01), period);
+         env::results[i * 2] = pnoise2(vec2f(x, y), period);
+         env::results[i * 2 + 1] = pnoise2(vec2f(x + 0.01, y + 0.01), period);
        }
      }
    `;
@@ -369,7 +369,7 @@ test("pnoise2 - periodicity", async () => {
        let n2 = pnoise2(p + period, period);
        let n3 = pnoise2(p + period * 2.0, period);
 
-       test::results[0] = vec4f(n1, n2, n3, 0.0);
+       env::results[0] = vec4f(n1, n2, n3, 0.0);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -393,8 +393,8 @@ test("pnoise3", async () => {
          let y = f32((i / 8u) % 8u) * 0.2 + 0.5;
          let z = f32(i / 64u) * 0.2 + 0.5;
 
-         test::results[i * 2] = pnoise3(vec3f(x, y, z), period);
-         test::results[i * 2 + 1] = pnoise3(vec3f(x + 0.01, y + 0.01, z + 0.01), period);
+         env::results[i * 2] = pnoise3(vec3f(x, y, z), period);
+         env::results[i * 2 + 1] = pnoise3(vec3f(x + 0.01, y + 0.01, z + 0.01), period);
        }
      }
    `;
@@ -432,7 +432,7 @@ test("pnoise3 - periodicity", async () => {
        let n2 = pnoise3(p + period, period);
        let n3 = pnoise3(p + period * 2.0, period);
 
-       test::results[0] = vec4f(n1, n2, n3, 0.0);
+       env::results[0] = vec4f(n1, n2, n3, 0.0);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -457,8 +457,8 @@ test("pnoise4", async () => {
          let z = f32((i / 16u) % 4u) * 0.2 + 0.5;
          let w = f32(i / 64u) * 0.2 + 0.5;
 
-         test::results[i * 2] = pnoise4(vec4f(x, y, z, w), period);
-         test::results[i * 2 + 1] = pnoise4(vec4f(x + 0.01, y + 0.01, z + 0.01, w + 0.01), period);
+         env::results[i * 2] = pnoise4(vec4f(x, y, z, w), period);
+         env::results[i * 2 + 1] = pnoise4(vec4f(x + 0.01, y + 0.01, z + 0.01, w + 0.01), period);
        }
      }
    `;
@@ -491,21 +491,21 @@ test("pnoise4 - periodicity", async () => {
      import lygia::generative::pnoise::pnoise4;
      @compute @workgroup_size(1)
      fn foo() {
-       test::results[0] = pnoise4(${p}, ${period});
+       env::results[0] = pnoise4(${p}, ${period});
      }
    `;
   const src2 = `
      import lygia::generative::pnoise::pnoise4;
      @compute @workgroup_size(1)
      fn foo() {
-       test::results[0] = pnoise4(${p} + ${period}, ${period});
+       env::results[0] = pnoise4(${p} + ${period}, ${period});
      }
    `;
   const src3 = `
      import lygia::generative::pnoise::pnoise4;
      @compute @workgroup_size(1)
      fn foo() {
-       test::results[0] = pnoise4(${p} + ${period} * 2.0, ${period});
+       env::results[0] = pnoise4(${p} + ${period} * 2.0, ${period});
      }
    `;
 

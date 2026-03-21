@@ -9,7 +9,7 @@ test("levelsInputRange3", async () => {
      fn foo() {
        let color = vec3f(0.3, 0.5, 0.7);
        let result = levelsInputRange3(color, vec3f(0.2), vec3f(0.8));
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -28,7 +28,7 @@ test("levelsGamma3", async () => {
      fn foo() {
        let color = vec3f(0.25, 0.5, 0.75);
        let result = levelsGamma3(color, vec3f(2.0));
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -45,7 +45,7 @@ test("levels3Float", async () => {
        let color = vec3f(0.3, 0.5, 0.7);
        // Remap input [0.2, 0.8] to output [0.1, 0.9] with gamma 2.0
        let result = levels3Float(color, 0.2, 2.0, 0.8, 0.1, 0.9);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -73,7 +73,7 @@ test("levels3", async () => {
        let color = vec3f(0.4, 0.6, 0.8);
        // Input range [0.2, 0.9], gamma 2.0, output range [0.1, 0.8]
        let result = levels3(color, vec3f(0.2), vec3f(2.0), vec3f(0.9), vec3f(0.1), vec3f(0.8));
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -101,7 +101,7 @@ test("levels4", async () => {
        let color = vec4f(0.4, 0.6, 0.8, 0.75);
        // Same settings as levels3 test
        let result = levels4(color, vec3f(0.2), vec3f(2.0), vec3f(0.9), vec3f(0.1), vec3f(0.8));
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -118,7 +118,7 @@ test("levels4Float", async () => {
        let color = vec4f(0.5, 0.7, 0.3, 0.85);
        // Input [0.3, 0.8], gamma 1.5, output [0.2, 0.9]
        let result = levels4Float(color, 0.3, 1.5, 0.8, 0.2, 0.9);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -147,7 +147,7 @@ test("levelsGamma3Float", async () => {
      fn foo() {
        let color = vec3f(0.16, 0.36, 0.64);
        let result = levelsGamma3Float(color, 2.0);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -164,7 +164,7 @@ test("levelsGamma4", async () => {
      fn foo() {
        let color = vec4f(0.25, 0.5, 0.75, 0.9);
        let result = levelsGamma4(color, vec3f(2.0, 1.5, 3.0));
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -184,7 +184,7 @@ test("levelsGamma4Float", async () => {
      fn foo() {
        let color = vec4f(0.09, 0.25, 0.49, 0.85);
        let result = levelsGamma4Float(color, 2.0);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -203,7 +203,7 @@ test("levelsInputRange3Float", async () => {
      fn foo() {
        let color = vec3f(0.2, 0.5, 0.8);
        let result = levelsInputRange3Float(color, 0.1, 0.9);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -222,7 +222,7 @@ test("levelsInputRange4", async () => {
      fn foo() {
        let color = vec4f(0.3, 0.6, 0.9, 0.75);
        let result = levelsInputRange4(color, vec3f(0.2, 0.4, 0.5), vec3f(0.8, 0.9, 1.0));
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -242,7 +242,7 @@ test("levelsInputRange4Float", async () => {
      fn foo() {
        let color = vec4f(0.15, 0.45, 0.75, 0.95);
        let result = levelsInputRange4Float(color, 0.1, 0.8);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -263,7 +263,7 @@ test("levelsOutputRange3Float", async () => {
      fn foo() {
        let color = vec3f(0.0, 0.5, 1.0);
        let result = levelsOutputRange3Float(color, 0.2, 0.9);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -282,7 +282,7 @@ test("levelsOutputRange4", async () => {
      fn foo() {
        let color = vec4f(0.25, 0.5, 0.75, 0.8);
        let result = levelsOutputRange4(color, vec3f(0.1, 0.2, 0.3), vec3f(0.8, 0.9, 1.0));
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -302,7 +302,7 @@ test("levelsOutputRange4Float", async () => {
      fn foo() {
        let color = vec4f(0.2, 0.6, 0.8, 0.7);
        let result = levelsOutputRange4Float(color, 0.3, 0.95);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });

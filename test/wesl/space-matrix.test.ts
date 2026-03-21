@@ -12,7 +12,7 @@ test("tbn", async () => {
       let mat = tbn(t, b, n);
       // Test that the matrix was created correctly by multiplying with a vector
       let v = mat * vec3f(1.0, 1.0, 1.0);
-      test::results[0] = vec4f(v, 0.0);
+      env::results[0] = vec4f(v, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -27,7 +27,7 @@ test("perspective", async () => {
     fn foo() {
       let mat = perspective(HALF_PI, 16.0/9.0, 0.1, 100.0);
       // Just verify it creates a matrix (check one element)
-      test::results[0] = mat[0][0];
+      env::results[0] = mat[0][0];
     }
   `;
   const result = await lygiaTestCompute(src);
@@ -43,7 +43,7 @@ test("orthographic", async () => {
     fn foo() {
       let mat = orthographic(-1.0, 1.0, -1.0, 1.0, 0.1, 100.0);
       // Check the first element: 2/(r-l) = 2/(1-(-1)) = 2/2 = 1
-      test::results[0] = mat[0][0];
+      env::results[0] = mat[0][0];
     }
   `;
   const result = await lygiaTestCompute(src);
@@ -63,7 +63,7 @@ test("translate", async () => {
       );
       let result = translate(m, vec3f(10.0, 20.0, 30.0));
       // Extract translation component (4th column)
-      test::results[0] = result[3];
+      env::results[0] = result[3];
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
