@@ -10,7 +10,7 @@ test("blendOverlay3Opacity", async () => {
        let base = vec3f(0.4, 0.6, 0.8);
        let blend = vec3f(0.3, 0.5, 0.7);
        let result = blendOverlay3Opacity(base, blend, 0.5);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -28,7 +28,7 @@ test("blendSoftLight3Opacity", async () => {
        let base = vec3f(0.5, 0.6, 0.4);
        let blend = vec3f(0.3, 0.5, 0.7);
        let result = blendSoftLight3Opacity(base, blend, 0.5);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -46,7 +46,7 @@ test("blendHardLight3Opacity", async () => {
        let base = vec3f(0.4, 0.6, 0.8);
        let blend = vec3f(0.3, 0.5, 0.7);
        let result = blendHardLight3Opacity(base, blend, 0.5);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -64,7 +64,7 @@ test("blendVividLight3Opacity", async () => {
        let base = vec3f(0.5, 0.6, 0.4);
        let blend = vec3f(0.3, 0.5, 0.7);
        let result = blendVividLight3Opacity(base, blend, 0.5);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -83,7 +83,7 @@ test("blendPinLight3Opacity", async () => {
        let base = vec3f(0.3, 0.7, 0.5);
        let blend = vec3f(0.1, 0.9, 0.5);
        let result = blendPinLight3Opacity(base, blend, 0.5);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -101,7 +101,7 @@ test("blendLinearLight3Opacity", async () => {
        let base = vec3f(0.4, 0.5, 0.6);
        let blend = vec3f(0.3, 0.5, 0.7);
        let result = blendLinearLight3Opacity(base, blend, 0.5);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -119,7 +119,7 @@ test("blendHardMix3Opacity", async () => {
        let base = vec3f(0.4, 0.6, 0.8);
        let blend = vec3f(0.3, 0.5, 0.2);
        let result = blendHardMix3Opacity(base, blend, 0.5);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });

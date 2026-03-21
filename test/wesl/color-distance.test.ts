@@ -10,7 +10,7 @@ test("colorDistance", async () => {
        let red = vec3f(1.0, 0.0, 0.0);
        let blue = vec3f(0.0, 0.0, 1.0);
        let distance = colorDistance(red, blue);
-       test::results[0] = distance;
+       env::results[0] = distance;
      }
    `;
   const result = await lygiaTestCompute(src);
@@ -27,7 +27,7 @@ test("colorDistance4", async () => {
        let red = vec4f(1.0, 0.0, 0.0, 0.8);
        let blue = vec4f(0.0, 0.0, 1.0, 0.6);
        let distance = colorDistance4(red, blue);
-       test::results[0] = distance;
+       env::results[0] = distance;
      }
    `;
   const result = await lygiaTestCompute(src);
@@ -44,7 +44,7 @@ test("colorDistanceLAB", async () => {
        let color1 = vec3f(1.0, 0.0, 0.0); // Red
        let color2 = vec3f(0.0, 0.0, 1.0); // Blue
        let result = colorDistanceLAB(color1, color2);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src);
@@ -62,7 +62,7 @@ test("colorDistanceLABCIE94", async () => {
        let green = vec3f(0.0, 1.0, 0.0);
        let yellow = vec3f(1.0, 1.0, 0.0);
        let distance = colorDistanceLABCIE94(green, yellow);
-       test::results[0] = distance;
+       env::results[0] = distance;
      }
    `;
   const result = await lygiaTestCompute(src);
@@ -85,7 +85,7 @@ test("colorDistanceOKLAB", async () => {
        let redToOrange = colorDistanceOKLAB(red, orange);
        let redToBlue = colorDistanceOKLAB(red, blue);
 
-       test::results[0] = vec4f(redToOrange, redToBlue, 0.0, 0.0);
+       env::results[0] = vec4f(redToOrange, redToBlue, 0.0, 0.0);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -124,7 +124,7 @@ test("colorDistanceYCbCr", async () => {
        let lightGray = vec3f(0.7, 0.7, 0.7);
        let lumaDist = colorDistanceYCbCr(darkGray, lightGray);
 
-       test::results[0] = vec4f(chromaDist, lumaDist, 0.0, 0.0);
+       env::results[0] = vec4f(chromaDist, lumaDist, 0.0, 0.0);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -163,7 +163,7 @@ test("colorDistanceYPbPr", async () => {
        let dist1 = colorDistanceYPbPr(magenta, cyan);
        let dist2 = colorDistanceYPbPr(cyan, magenta);
 
-       test::results[0] = vec4f(complementaryDist, similarDist, dist1, dist2);
+       env::results[0] = vec4f(complementaryDist, similarDist, dist1, dist2);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -195,7 +195,7 @@ test("colorDistanceYUV", async () => {
        let white = vec3f(1.0, 1.0, 1.0);
        let gray = vec3f(0.5, 0.5, 0.5);
        let distance = colorDistanceYUV(white, gray);
-       test::results[0] = distance;
+       env::results[0] = distance;
      }
    `;
   const result = await lygiaTestCompute(src);

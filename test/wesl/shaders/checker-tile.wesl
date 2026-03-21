@@ -1,5 +1,5 @@
 import lygia::space::checkerTile::checkerTile2;
-import test::Uniforms;
+import env::Uniforms;
 
 @group(0) @binding(0) var<uniform> uniforms: Uniforms;
 

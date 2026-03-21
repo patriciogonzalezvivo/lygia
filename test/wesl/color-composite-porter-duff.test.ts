@@ -10,7 +10,7 @@ test("compositeSourceOver4", async () => {
       let src = vec4f(1.0, 0.0, 0.0, 0.5);
       let dst = vec4f(0.0, 0.0, 1.0, 0.5);
       let result = compositeSourceOver4(src, dst);
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -29,7 +29,7 @@ test("compositeSourceIn4", async () => {
       let src = vec4f(1.0, 0.0, 0.0, 0.8);
       let dst = vec4f(0.0, 0.0, 1.0, 0.5);
       let result = compositeSourceIn4(src, dst);
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -48,7 +48,7 @@ test("compositeSourceOut4", async () => {
       let src = vec4f(1.0, 0.0, 0.0, 0.8);
       let dst = vec4f(0.0, 1.0, 0.0, 0.4);
       let result = compositeSourceOut4(src, dst);
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -67,7 +67,7 @@ test("compositeSourceAtop4", async () => {
       let src = vec4f(1.0, 0.0, 0.0, 0.6);
       let dst = vec4f(0.0, 0.0, 1.0, 0.5);
       let result = compositeSourceAtop4(src, dst);
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -86,7 +86,7 @@ test("compositeDestinationOver4", async () => {
       let src = vec4f(1.0, 0.0, 0.0, 0.5);
       let dst = vec4f(0.0, 0.0, 1.0, 0.6);
       let result = compositeDestinationOver4(src, dst);
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -105,7 +105,7 @@ test("compositeDestinationIn4", async () => {
       let src = vec4f(1.0, 0.0, 0.0, 0.6);
       let dst = vec4f(0.0, 1.0, 0.0, 0.8);
       let result = compositeDestinationIn4(src, dst);
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -124,7 +124,7 @@ test("compositeDestinationOut4", async () => {
       let src = vec4f(1.0, 0.0, 0.0, 0.3);
       let dst = vec4f(0.0, 1.0, 0.0, 0.7);
       let result = compositeDestinationOut4(src, dst);
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -143,7 +143,7 @@ test("compositeDestinationAtop4", async () => {
       let src = vec4f(1.0, 0.0, 0.0, 0.7);
       let dst = vec4f(0.0, 0.0, 1.0, 0.5);
       let result = compositeDestinationAtop4(src, dst);
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -162,7 +162,7 @@ test("compositeXor4", async () => {
       let src = vec4f(1.0, 0.0, 0.0, 0.6);
       let dst = vec4f(0.0, 0.0, 1.0, 0.4);
       let result = compositeXor4(src, dst);
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -185,7 +185,7 @@ test("compositeSourceOver3", async () => {
       let srcAlpha = 0.5;
       let dstAlpha = 0.5;
       let result = compositeSourceOver3(srcColor, dstColor, srcAlpha, dstAlpha);
-      test::results[0] = vec4f(result, 0.0);
+      env::results[0] = vec4f(result, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -205,7 +205,7 @@ test("compositeSourceIn3", async () => {
       let srcAlpha = 0.8;
       let dstAlpha = 0.6;
       let result = compositeSourceIn3(srcColor, dstColor, srcAlpha, dstAlpha);
-      test::results[0] = vec4f(result, 0.0);
+      env::results[0] = vec4f(result, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -224,7 +224,7 @@ test("compositeSourceOut3", async () => {
       let srcAlpha = 0.8;
       let dstAlpha = 0.3;
       let result = compositeSourceOut3(srcColor, dstColor, srcAlpha, dstAlpha);
-      test::results[0] = vec4f(result, 0.0);
+      env::results[0] = vec4f(result, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -243,7 +243,7 @@ test("compositeSourceAtop3", async () => {
       let srcAlpha = 0.6;
       let dstAlpha = 0.5;
       let result = compositeSourceAtop3(srcColor, dstColor, srcAlpha, dstAlpha);
-      test::results[0] = vec4f(result, 0.0);
+      env::results[0] = vec4f(result, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -263,7 +263,7 @@ test("compositeDestinationOver3", async () => {
       let srcAlpha = 0.5;
       let dstAlpha = 0.6;
       let result = compositeDestinationOver3(srcColor, dstColor, srcAlpha, dstAlpha);
-      test::results[0] = vec4f(result, 0.0);
+      env::results[0] = vec4f(result, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -282,7 +282,7 @@ test("compositeDestinationIn3", async () => {
       let srcAlpha = 0.7;
       let dstAlpha = 0.8;
       let result = compositeDestinationIn3(srcColor, dstColor, srcAlpha, dstAlpha);
-      test::results[0] = vec4f(result, 0.0);
+      env::results[0] = vec4f(result, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -301,7 +301,7 @@ test("compositeDestinationOut3", async () => {
       let srcAlpha = 0.4;
       let dstAlpha = 0.7;
       let result = compositeDestinationOut3(srcColor, dstColor, srcAlpha, dstAlpha);
-      test::results[0] = vec4f(result, 0.0);
+      env::results[0] = vec4f(result, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -320,7 +320,7 @@ test("compositeDestinationAtop3", async () => {
       let srcAlpha = 0.7;
       let dstAlpha = 0.5;
       let result = compositeDestinationAtop3(srcColor, dstColor, srcAlpha, dstAlpha);
-      test::results[0] = vec4f(result, 0.0);
+      env::results[0] = vec4f(result, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -340,7 +340,7 @@ test("compositeXor3", async () => {
       let srcAlpha = 0.6;
       let dstAlpha = 0.4;
       let result = compositeXor3(srcColor, dstColor, srcAlpha, dstAlpha);
-      test::results[0] = vec4f(result, 0.0);
+      env::results[0] = vec4f(result, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });

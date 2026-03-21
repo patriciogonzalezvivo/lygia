@@ -1,7 +1,7 @@
 import lygia::draw::stroke::{stroke, strokeEdge};
 import lygia::math::consts::PI;
 
-@group(0) @binding(0) var<uniform> uniforms: test::Uniforms;
+@group(0) @binding(0) var<uniform> uniforms: env::Uniforms;
 
 @toy @fragment
 fn fs_main(@builtin(position) pos: vec4f) -> @location(0) vec4f {

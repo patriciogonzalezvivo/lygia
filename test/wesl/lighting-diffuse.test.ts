@@ -49,7 +49,7 @@ test("diffuseOrenNayar", async () => {
       let NoV2 = dot(N, V2);
       let retroResult = diffuseOrenNayar(L, N, V2, NoV2, NoL, 1.0);
 
-      test::results[0] = vec4f(smoothResult, roughResult, retroResult, 0.0);
+      env::results[0] = vec4f(smoothResult, roughResult, retroResult, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });

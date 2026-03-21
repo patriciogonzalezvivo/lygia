@@ -7,7 +7,7 @@ test("scale2", async () => {
     @compute @workgroup_size(1)
     fn foo() {
       let result = scale2(vec2f(0.75, 0.25), vec2f(2.0, 0.5));
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec2f" });
@@ -23,7 +23,7 @@ test("scale2_f", async () => {
     @compute @workgroup_size(1)
     fn foo() {
       let result = scale2_f(vec2f(0.75, 0.25), 2.0);
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec2f" });
@@ -42,7 +42,7 @@ test("scale2dXY - matrix construction", async () => {
       let mat = scale2dXY(2.0, 3.0);
       let v = vec2f(4.0, 5.0);
       let result = mat * v;
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec2f" });
@@ -56,7 +56,7 @@ test("scale3", async () => {
     @compute @workgroup_size(1)
     fn foo() {
       let result = scale3(vec3f(0.75, 0.25, 0.5), vec3f(2.0, 0.5, 1.0));
-      test::results[0] = vec4f(result, 0.0);
+      env::results[0] = vec4f(result, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -71,7 +71,7 @@ test("scale2 - with custom CENTER_2D via constants", async () => {
     fn foo() {
       // Scale around custom center point (0.3, 0.7)
       let result = scale2(vec2f(0.8, 0.9), vec2f(2.0, 2.0));
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   // Test with custom CENTER_2D set via constants
@@ -93,7 +93,7 @@ test("scale3 - with custom CENTER_3D via constants", async () => {
     fn foo() {
       // Scale around custom center point (0.2, 0.3, 0.4)
       let result = scale3(vec3f(0.7, 0.8, 0.9), vec3f(2.0, 3.0, 0.5));
-      test::results[0] = vec4f(result, 0.0);
+      env::results[0] = vec4f(result, 0.0);
     }
   `;
   // Test with custom CENTER_3D set via constants

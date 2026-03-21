@@ -10,7 +10,7 @@ test("mixOklab", async () => {
        let color1 = vec3f(1.0, 0.0, 0.0); // Red
        let color2 = vec3f(0.0, 0.0, 1.0); // Blue
        let result = mixOklab(color1, color2, 0.5);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -27,7 +27,7 @@ test("mixOklab4", async () => {
        let red = vec4f(1.0, 0.0, 0.0, 0.8);
        let blue = vec4f(0.0, 0.0, 1.0, 0.4);
        let result = mixOklab4(red, blue, 0.5);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -53,7 +53,7 @@ test("mixSpectral", async () => {
        // For comparison, store what linear mix would give
        let linearMix = mix(red, blue, 0.5); // Would be (0.5, 0, 0.5)
 
-       test::results[0] = vec4f(mixed.r, mixed.g, mixed.b, linearMix.r);
+       env::results[0] = vec4f(mixed.r, mixed.g, mixed.b, linearMix.r);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -99,7 +99,7 @@ test("mixSpectral4", async () => {
        let yellow = vec4f(1.0, 1.0, 0.0, 0.9);
        let cyan = vec4f(0.0, 1.0, 1.0, 0.5);
        let result = mixSpectral4(yellow, cyan, 0.5);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -125,7 +125,7 @@ test("mixSpectral_linear_to_reflectance", async () => {
        // Sample a few wavelengths from the reflectance array
        // Red should have high reflectance in long wavelengths (red end of spectrum)
        // and low reflectance in short wavelengths (blue end)
-       test::results[0] = vec4f(
+       env::results[0] = vec4f(
          reflectance[0],   // Short wavelength (blue/violet)
          reflectance[19],  // Mid wavelength (green)
          reflectance[37],  // Long wavelength (red)
@@ -159,7 +159,7 @@ test("mixSpectral_reflectance_to_xyz", async () => {
 
        // For a neutral gray, XYZ values should be roughly equal
        // and Y (luminance) should be around 0.5
-       test::results[0] = vec4f(xyz, 1.0);
+       env::results[0] = vec4f(xyz, 1.0);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });

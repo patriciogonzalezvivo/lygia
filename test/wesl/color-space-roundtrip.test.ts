@@ -13,7 +13,7 @@ test("rgb2xyY4 -> xyY2rgb4 roundtrip (note: precision issues in xyY)", async () 
        let original = vec4f(0.9, 0.8, 0.7, 0.6);
        let xyY = rgb2xyY4(original);
        let back = xyY2rgb4(xyY);
-       test::results[0] = back;
+       env::results[0] = back;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });

@@ -8,7 +8,7 @@ test("rotateX3", async () => {
     @compute @workgroup_size(1)
     fn foo() {
       let result = rotateX3(vec3f(1.0, 1.0, 0.0), HALF_PI); // 90 degrees (π/2)
-      test::results[0] = vec4f(result, 0.0);
+      env::results[0] = vec4f(result, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -23,7 +23,7 @@ test("rotateY3", async () => {
     @compute @workgroup_size(1)
     fn foo() {
       let result = rotateY3(vec3f(1.0, 1.0, 0.0), HALF_PI); // 90 degrees (π/2)
-      test::results[0] = vec4f(result, 0.0);
+      env::results[0] = vec4f(result, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -37,7 +37,7 @@ test("rotateZ3", async () => {
     @compute @workgroup_size(1)
     fn foo() {
       let result = rotateZ3(vec3f(1.0, 0.0, 1.0), HALF_PI); // 90 degrees (π/2)
-      test::results[0] = vec4f(result, 0.0);
+      env::results[0] = vec4f(result, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -53,7 +53,7 @@ test("rotate", async () => {
     fn foo() {
       // Rotate vec2 by 90 degrees (π/2) around center (0.5, 0.5)
       let result = rotate(vec2f(1.0, 0.5), HALF_PI);
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec2f" });
@@ -70,7 +70,7 @@ test("rotate_c", async () => {
     fn foo() {
       // Rotate vec2 by 90 degrees around custom center (0, 0)
       let result = rotate_c(vec2f(1.0, 0.0), HALF_PI, vec2f(0.0));
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec2f" });
@@ -86,7 +86,7 @@ test("rotate3", async () => {
     fn foo() {
       // Rotate vec3 by 90 degrees around Z axis from origin
       let result = rotate3(vec3f(1.0, 0.0, 0.0), HALF_PI, vec3f(0.0, 0.0, 1.0));
-      test::results[0] = vec4f(result, 0.0);
+      env::results[0] = vec4f(result, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -107,7 +107,7 @@ test("rotate - with custom CENTER_2D via constants", async () => {
     fn foo() {
       // Rotate around custom center (0.3, 0.3)
       let result = rotate(vec2f(0.8, 0.3), HALF_PI); // 90 degrees
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, {
@@ -127,7 +127,7 @@ test("rotateX3 - with custom CENTER_3D via constants", async () => {
     @compute @workgroup_size(1)
     fn foo() {
       let result = rotateX3(vec3f(1.0, 1.5, 0.5), HALF_PI); // 90 degrees
-      test::results[0] = vec4f(result, 0.0);
+      env::results[0] = vec4f(result, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, {
@@ -148,7 +148,7 @@ test("rotateY3 - with custom CENTER_3D via constants", async () => {
     @compute @workgroup_size(1)
     fn foo() {
       let result = rotateY3(vec3f(1.5, 1.0, 0.5), HALF_PI); // 90 degrees
-      test::results[0] = vec4f(result, 0.0);
+      env::results[0] = vec4f(result, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, {
@@ -169,7 +169,7 @@ test("rotateZ3 - with custom CENTER_3D via constants", async () => {
     @compute @workgroup_size(1)
     fn foo() {
       let result = rotateZ3(vec3f(1.5, 0.5, 1.0), HALF_PI); // 90 degrees
-      test::results[0] = vec4f(result, 0.0);
+      env::results[0] = vec4f(result, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, {
@@ -197,10 +197,10 @@ test("bracketing", async () => {
       let angle_between = PI / 40.0;
       let r2 = bracketing(vec2f(cos(angle_between), sin(angle_between)));
 
-      test::results[0] = r1.vAxis0.x;  // Expected: 1.0 (canonical axis)
-      test::results[1] = r1.blendAlpha;  // Expected: ~0 (snaps to canonical)
-      test::results[2] = r2.blendAlpha;  // Expected: 0.2-0.8 (between canonical angles)
-      test::results[3] = abs(r2.vAxis0.x - r2.vAxis1.x);  // Expected: > 0 (different axes bracket input)
+      env::results[0] = r1.vAxis0.x;  // Expected: 1.0 (canonical axis)
+      env::results[1] = r1.blendAlpha;  // Expected: ~0 (snaps to canonical)
+      env::results[2] = r2.blendAlpha;  // Expected: 0.2-0.8 (between canonical angles)
+      env::results[3] = abs(r2.vAxis0.x - r2.vAxis1.x);  // Expected: > 0 (different axes bracket input)
     }
   `;
   const result = await lygiaTestCompute(src);

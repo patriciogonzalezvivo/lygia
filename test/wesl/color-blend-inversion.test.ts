@@ -10,7 +10,7 @@ test("blendDifference3", async () => {
        let base = vec3f(0.8, 0.3, 0.6);
        let blend = vec3f(0.5, 0.7, 0.4);
        let result = blendDifference3(base, blend);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -27,7 +27,7 @@ test("blendExclusion3", async () => {
        let base = vec3f(0.6, 0.4, 0.8);
        let blend = vec3f(0.3, 0.7, 0.2);
        let result = blendExclusion3(base, blend);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -44,7 +44,7 @@ test("blendNegation3", async () => {
        let base = vec3f(0.7, 0.5, 0.3);
        let blend = vec3f(0.4, 0.6, 0.8);
        let result = blendNegation3(base, blend);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -61,7 +61,7 @@ test("blendPhoenix3", async () => {
        let base = vec3f(0.7, 0.5, 0.3);
        let blend = vec3f(0.4, 0.6, 0.8);
        let result = blendPhoenix3(base, blend);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -81,7 +81,7 @@ test("blendReflect3", async () => {
        let base = vec3f(0.4, 0.6, 0.2);
        let blend = vec3f(0.5, 0.3, 0.8);
        let result = blendReflect3(base, blend);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -98,7 +98,7 @@ test("blendSubtract3", async () => {
        let base = vec3f(0.8, 0.6, 0.5);
        let blend = vec3f(0.3, 0.4, 0.2);
        let result = blendSubtract3(base, blend);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -116,7 +116,7 @@ test("blendDifference - f32", async () => {
      @compute @workgroup_size(1)
      fn foo() {
        let result = blendDifference(0.8, 0.5);
-       test::results[0] = vec4f(result, 0.0, 0.0, 0.0);
+       env::results[0] = vec4f(result, 0.0, 0.0, 0.0);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -130,7 +130,7 @@ test("blendExclusion - f32", async () => {
      @compute @workgroup_size(1)
      fn foo() {
        let result = blendExclusion(0.6, 0.3);
-       test::results[0] = vec4f(result, 0.0, 0.0, 0.0);
+       env::results[0] = vec4f(result, 0.0, 0.0, 0.0);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -145,7 +145,7 @@ test("blendNegation - f32", async () => {
      @compute @workgroup_size(1)
      fn foo() {
        let result = blendNegation(0.7, 0.4);
-       test::results[0] = vec4f(result, 0.0, 0.0, 0.0);
+       env::results[0] = vec4f(result, 0.0, 0.0, 0.0);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -160,7 +160,7 @@ test("blendPhoenix - f32", async () => {
      @compute @workgroup_size(1)
      fn foo() {
        let result = blendPhoenix(0.7, 0.4);
-       test::results[0] = vec4f(result, 0.0, 0.0, 0.0);
+       env::results[0] = vec4f(result, 0.0, 0.0, 0.0);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -175,7 +175,7 @@ test("blendReflect - f32", async () => {
      @compute @workgroup_size(1)
      fn foo() {
        let result = blendReflect(0.4, 0.5);
-       test::results[0] = vec4f(result, 0.0, 0.0, 0.0);
+       env::results[0] = vec4f(result, 0.0, 0.0, 0.0);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -190,7 +190,7 @@ test("blendSubtract - f32", async () => {
      @compute @workgroup_size(1)
      fn foo() {
        let result = blendSubtract(0.8, 0.3);
-       test::results[0] = vec4f(result, 0.0, 0.0, 0.0);
+       env::results[0] = vec4f(result, 0.0, 0.0, 0.0);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });

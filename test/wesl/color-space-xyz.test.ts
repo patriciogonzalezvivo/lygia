@@ -7,7 +7,7 @@ test("rgb2xyz", async () => {
 
 	@compute @workgroup_size(1)
 	fn foo() {
-		test::results[0] = rgb2xyz(vec3f(.8, .7, .5));
+		env::results[0] = rgb2xyz(vec3f(.8, .7, .5));
 	}
 	`;
 
@@ -30,7 +30,7 @@ test("srgb2xyz", async () => {
      fn foo() {
        let srgb = vec3f(1.0, 0.0, 0.0); // Red
        let result = srgb2xyz(srgb);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -46,7 +46,7 @@ test("xyY2rgb", async () => {
      fn foo() {
        let xyY = vec3f(0.64, 0.33, 21.26); // Red (Y in 0-100 scale)
        let result = xyY2rgb(xyY);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -62,7 +62,7 @@ test("rgb2xyY", async () => {
      fn foo() {
        let rgb = vec3f(1.0, 0.0, 0.0); // Red
        let result = rgb2xyY(rgb);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -78,7 +78,7 @@ test("xyY2srgb", async () => {
      fn foo() {
        let xyY = vec3f(0.64, 0.33, 21.26); // Red (Y in 0-100 scale)
        let result = xyY2srgb(xyY);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -94,7 +94,7 @@ test("xyY2xyz", async () => {
      fn foo() {
        let xyY = vec3f(0.3127, 0.3290, 1.0); // D65 white point
        let result = xyY2xyz(xyY);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -111,7 +111,7 @@ test("xyz2xyY", async () => {
      fn foo() {
        let xyz = vec3f(0.9505, 1.0, 1.089); // D65 white
        let result = xyz2xyY(xyz);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -127,7 +127,7 @@ test("xyz2srgb", async () => {
      fn foo() {
        let xyz = vec3f(41.24, 21.26, 1.93); // Red in XYZ (0-100 scale)
        let result = xyz2srgb(xyz);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -143,7 +143,7 @@ test("xyz2rgb", async () => {
      fn foo() {
        let xyz = vec3f(41.24, 21.26, 1.93); // Red in XYZ (0-100 scale)
        let result = xyz2rgb(xyz);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -160,7 +160,7 @@ test("rgb2xyz4 - alpha preservation", async () => {
      fn foo() {
        let rgb = vec4f(0.8, 0.7, 0.5, 0.2);
        let result = rgb2xyz4(rgb);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -176,7 +176,7 @@ test("xyz2rgb4 - alpha preservation", async () => {
      fn foo() {
        let xyz = vec4f(41.24, 21.26, 1.93, 0.6); // Red with alpha
        let result = xyz2rgb4(xyz);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -191,7 +191,7 @@ test("rgb2xyY4 - alpha preservation", async () => {
      fn foo() {
        let rgb = vec4f(1.0, 0.0, 0.0, 0.4); // Red with alpha
        let result = rgb2xyY4(rgb);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -207,7 +207,7 @@ test("srgb2xyz4 - alpha preservation", async () => {
      fn foo() {
        let srgb = vec4f(1.0, 0.0, 0.0, 0.65); // Red with alpha
        let result = srgb2xyz4(srgb);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -223,7 +223,7 @@ test("xyY2rgb4 - alpha preservation", async () => {
      fn foo() {
        let xyY = vec4f(0.64, 0.33, 21.26, 0.5); // Red with alpha (Y in 0-100 scale)
        let result = xyY2rgb4(xyY);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -239,7 +239,7 @@ test("xyY2srgb4 - alpha preservation", async () => {
      fn foo() {
        let xyY = vec4f(0.64, 0.33, 21.26, 0.85); // Red with alpha (Y in 0-100 scale)
        let result = xyY2srgb4(xyY);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -255,7 +255,7 @@ test("xyY2xyz4 - alpha preservation", async () => {
      fn foo() {
        let xyY = vec4f(0.3127, 0.3290, 1.0, 0.4); // D65 white with alpha
        let result = xyY2xyz4(xyY);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -271,7 +271,7 @@ test("xyz2srgb4 - alpha preservation", async () => {
      fn foo() {
        let xyz = vec4f(41.24, 21.26, 1.93, 0.2); // Red with alpha (0-100 scale)
        let result = xyz2srgb4(xyz);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -287,7 +287,7 @@ test("xyz2xyY4 - alpha preservation", async () => {
      fn foo() {
        let xyz = vec4f(0.9505, 1.0, 1.089, 0.75); // D65 white with alpha
        let result = xyz2xyY4(xyz);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });

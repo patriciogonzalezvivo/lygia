@@ -12,7 +12,7 @@ test("centroid", async () => {
       box.min = vec3f(-2.0, -4.0, -6.0);
       box.max = vec3f(2.0, 4.0, 6.0);
       let result = centroid(box);
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -34,7 +34,7 @@ test("contain", async () => {
       let inside = contain(box, vec3f(0.0, 0.0, 0.0));
       let outside = contain(box, vec3f(2.0, 0.0, 0.0));
 
-      test::results[0] = vec3f(select(0.0, 1.0, inside), select(0.0, 1.0, outside), 0.0);
+      env::results[0] = vec3f(select(0.0, 1.0, inside), select(0.0, 1.0, outside), 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -53,7 +53,7 @@ test("diagonal", async () => {
       box.min = vec3f(-1.0, -2.0, -3.0);
       box.max = vec3f(1.0, 2.0, 3.0);
       let result = diagonal(box);
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -72,7 +72,7 @@ test("expand with scalar", async () => {
       box.min = vec3f(-1.0, -1.0, -1.0);
       box.max = vec3f(1.0, 1.0, 1.0);
       expand(&box, 0.5);
-      test::results[0] = vec3f(box.min.x, box.max.x, 0.0);
+      env::results[0] = vec3f(box.min.x, box.max.x, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -91,7 +91,7 @@ test("expand2 with point", async () => {
       box.min = vec3f(-1.0, -1.0, -1.0);
       box.max = vec3f(1.0, 1.0, 1.0);
       expand2(&box, vec3f(2.0, -2.0, 0.5));
-      test::results[0] = vec3f(box.min.y, box.max.x, 0.0);
+      env::results[0] = vec3f(box.min.y, box.max.x, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -115,7 +115,7 @@ test("expand3 with AABB", async () => {
       box2.max = vec3f(2.0, 0.0, 2.0);
 
       expand3(&box1, box2);
-      test::results[0] = vec3f(box1.min.y, box1.max.x, box1.max.z);
+      env::results[0] = vec3f(box1.min.y, box1.max.x, box1.max.z);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -135,7 +135,7 @@ test("square", async () => {
       box.max = vec3f(1.0, 2.0, 0.5);
       square(&box);
       let diag = box.max - box.min;
-      test::results[0] = diag;
+      env::results[0] = diag;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });

@@ -1,5 +1,5 @@
 import lygia::space::kaleidoscope::kaleidoscope_seg;
-import test::Uniforms;
+import env::Uniforms;
 
 @group(0) @binding(0) var<uniform> uniforms: Uniforms;
 @group(0) @binding(1) var input_tex: texture_2d<f32>;
