@@ -91,6 +91,7 @@ test("ditherBlueNoise3 - gradient with blue noise pattern", async () => {
     }
   `,
     "dither-bluenoise3-gradient",
+    { allowedPixelRatio: 0.05 }, // blue noise dither pattern varies across GPUs
   );
 });
 
