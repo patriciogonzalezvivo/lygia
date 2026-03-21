@@ -11,7 +11,7 @@ test("brightnessContrast3", async () => {
        let brightness = 0.1;
        let contrast = 1.2;
        let result = brightnessContrast3(color, brightness, contrast);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -31,7 +31,7 @@ test("brightnessContrast4", async () => {
        let brightness = 0.1;
        let contrast = 1.2;
        let result = brightnessContrast4(color, brightness, contrast);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -48,7 +48,7 @@ test("exposure3", async () => {
        let color = vec3f(0.5, 0.5, 0.5);
        let amount = 1.0; // +1 stop = 2x brighter
        let result = exposure3(color, amount);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -65,7 +65,7 @@ test("exposure4", async () => {
        let color = vec4f(0.5, 0.5, 0.5, 0.7);
        let amount = 1.0;
        let result = exposure4(color, amount);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -82,7 +82,7 @@ test("hueShiftRYB", async () => {
        let color = vec3f(1.0, 0.0, 0.0); // Red
        let angle = 2.0944; // 120 degrees (1/3 turn) - shift red toward yellow in RYB space
        let result = hueShiftRYB(color, angle);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -101,7 +101,7 @@ test("hueShiftRYB4", async () => {
        let color = vec4f(1.0, 0.0, 0.0, 0.7); // Red with alpha
        let angle = 2.0944; // 120 degrees
        let result = hueShiftRYB4(color, angle);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -119,7 +119,7 @@ test("heatmap", async () => {
      fn foo() {
        let value = 0.5;
        let result = heatmap(value);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -137,7 +137,7 @@ test("paletteHue", async () => {
        let x = 0.5;
        let ratio = 0.333; // neon ratio (1/3)
        let result = hue(x, ratio);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -159,7 +159,7 @@ test("hueDefault", async () => {
        // hueDefault uses default ratio of 1/3 (neon)
        // Test that it matches hue(x, 0.33333)
        let result = hueDefault(0.5);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -182,10 +182,10 @@ test("whiteBalance3", async () => {
        let neutral = whiteBalance3(gray, 0.0, 0.0); // Neutral (unchanged)
        let cool = whiteBalance3(gray, -0.2, 0.0);   // Cool (blue)
 
-       test::results[0] = warm.r;
-       test::results[1] = warm.b;
-       test::results[2] = cool.r;
-       test::results[3] = cool.b;
+       env::results[0] = warm.r;
+       env::results[1] = warm.b;
+       env::results[2] = cool.r;
+       env::results[3] = cool.b;
      }
    `;
   const result = await lygiaTestCompute(src);
@@ -223,10 +223,10 @@ test("whiteBalance4", async () => {
        let tintMagenta = whiteBalance4(gray, 0.0, 0.1);  // Positive = magenta
        let tintGreen = whiteBalance4(gray, 0.0, -0.1);   // Negative = green
 
-       test::results[0] = tempShift.r;
-       test::results[1] = tempShift.b;
-       test::results[2] = tintMagenta.g;
-       test::results[3] = tintGreen.g;
+       env::results[0] = tempShift.r;
+       env::results[1] = tempShift.b;
+       env::results[2] = tintMagenta.g;
+       env::results[3] = tintGreen.g;
      }
    `;
   const result = await lygiaTestCompute(src);
@@ -262,7 +262,7 @@ test("saturationMatrix", async () => {
        // Test matrix by applying to an orange color
        let color = vec3f(0.8, 0.5, 0.3);
        let result = mat * vec4f(color, 1.0);
-       test::results[0] = result.xyz;
+       env::results[0] = result.xyz;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -286,7 +286,7 @@ test("levelsOutputRange3", async () => {
        let minOutput = vec3f(0.2, 0.2, 0.2);
        let maxOutput = vec3f(0.8, 0.8, 0.8);
        let result = levelsOutputRange3(color, minOutput, maxOutput);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -303,7 +303,7 @@ test("hueShift4", async () => {
      fn foo() {
        let color = vec4f(1.0, 0.0, 0.0, 0.85); // Red with alpha
        let shifted = hueShift4(color, TAU * 0.3333); // Shift by 120°
-       test::results[0] = shifted;
+       env::results[0] = shifted;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -320,7 +320,7 @@ test("vibrance4", async () => {
      fn foo() {
        let color = vec4f(0.6, 0.5, 0.4, 0.8); // Muted orange with alpha
        let result = vibrance4(color, 0.5);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });

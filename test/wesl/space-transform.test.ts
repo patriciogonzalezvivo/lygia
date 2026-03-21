@@ -28,10 +28,10 @@ test("decimateNormal", async () => {
       let diff_nearby = abs(d1.x - d2.x) + abs(d1.y - d2.y) + abs(d1.z - d2.z);
       let diff_distant = abs(d1.x - d3.x) + abs(d1.y - d3.y) + abs(d1.z - d3.z);
 
-      test::results[0] = d1.x;  // Expected: ~0.730
-      test::results[1] = len1;  // Expected: 1.0 (unit length)
-      test::results[2] = diff_nearby;  // Expected: <0.2 (nearby normals quantize similarly)
-      test::results[3] = diff_distant;  // Expected: >0.3 (distant normals differ)
+      env::results[0] = d1.x;  // Expected: ~0.730
+      env::results[1] = len1;  // Expected: 1.0 (unit length)
+      env::results[2] = diff_nearby;  // Expected: <0.2 (nearby normals quantize similarly)
+      env::results[3] = diff_distant;  // Expected: >0.3 (distant normals differ)
     }
   `;
   const result = await lygiaTestCompute(src);

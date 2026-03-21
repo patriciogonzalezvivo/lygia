@@ -17,7 +17,7 @@ test("random", async () => {
        let r2 = random(1.0); // Same input
        let r3 = random(2.0); // Different input
 
-       test::results[0] = vec4f(r1, r2, r3, 0.0);
+       env::results[0] = vec4f(r1, r2, r3, 0.0);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -38,7 +38,7 @@ test("random - distribution", async () => {
     @compute @workgroup_size(1)
     fn main() {
       for (var i = 0u; i < SAMPLE_COUNT; i++) {
-        test::results[i] = random(f32(i));
+        env::results[i] = random(f32(i));
       }
     }
   `;
@@ -57,7 +57,7 @@ test("random2", async () => {
        let r2 = random2(p1); // Same input
        let r3 = random2(vec2f(3.0, 4.0)); // Different input
 
-       test::results[0] = vec4f(r1, r2, r3, 0.0);
+       env::results[0] = vec4f(r1, r2, r3, 0.0);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -80,7 +80,7 @@ test("random2 - distribution", async () => {
       for (var i = 0u; i < SAMPLE_COUNT; i++) {
         let x = f32(i % 32u);
         let y = f32(i / 32u);
-        test::results[i] = random2(vec2f(x, y));
+        env::results[i] = random2(vec2f(x, y));
       }
     }
   `;
@@ -99,7 +99,7 @@ test("random3", async () => {
        let r2 = random3(p1); // Same input
        let r3 = random3(vec3f(4.0, 5.0, 6.0)); // Different input
 
-       test::results[0] = vec4f(r1, r2, r3, 0.0);
+       env::results[0] = vec4f(r1, r2, r3, 0.0);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -123,7 +123,7 @@ test("random3 - distribution", async () => {
         let x = f32(i % 16u);
         let y = f32((i / 16u) % 16u);
         let z = f32(i / 256u);
-        test::results[i] = random3(vec3f(x, y, z));
+        env::results[i] = random3(vec3f(x, y, z));
       }
     }
   `;
@@ -142,7 +142,7 @@ test("random4", async () => {
        let r2 = random4(p1); // Same input
        let r3 = random4(vec4f(5.0, 6.0, 7.0, 8.0)); // Different input
 
-       test::results[0] = vec4f(r1, r2, r3, 0.0);
+       env::results[0] = vec4f(r1, r2, r3, 0.0);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -165,7 +165,7 @@ test("random21 - basic output", async () => {
        let r3 = random21(2.0); // Different input
 
        // Test determinism and range
-       test::results[0] = vec4f(r1.x, r1.y, r2.x, r2.y);
+       env::results[0] = vec4f(r1.x, r1.y, r2.x, r2.y);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -186,7 +186,7 @@ test("random22 - basic output", async () => {
        let r2 = random22(p1); // Same input
 
        // Test determinism and range
-       test::results[0] = vec4f(r1.x, r1.y, r2.x, r2.y);
+       env::results[0] = vec4f(r1.x, r1.y, r2.x, r2.y);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -208,7 +208,7 @@ test("random22 - distribution (x component)", async () => {
         let x = f32(i % 32u);
         let y = f32(i / 32u);
         let sample = random22(vec2f(x, y));
-        test::results[i] = sample.x;
+        env::results[i] = sample.x;
       }
     }
   `;
@@ -227,7 +227,7 @@ test("random23 - basic output", async () => {
        let r2 = random23(p1); // Same input
 
        // Test determinism and range
-       test::results[0] = vec4f(r1.x, r1.y, r2.x, r2.y);
+       env::results[0] = vec4f(r1.x, r1.y, r2.x, r2.y);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -247,7 +247,7 @@ test("random31 - basic output", async () => {
        let r2 = random31(1.0); // Same input
 
        // Test determinism and range (can only fit 3 components, test first 3)
-       test::results[0] = vec4f(r1.x, r1.y, r1.z, r2.x);
+       env::results[0] = vec4f(r1.x, r1.y, r1.z, r2.x);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -268,7 +268,7 @@ test("random32 - basic output", async () => {
        let r2 = random32(p1); // Same input
 
        // Test determinism and range (can only fit 3 components, test first 3)
-       test::results[0] = vec4f(r1.x, r1.y, r1.z, r2.x);
+       env::results[0] = vec4f(r1.x, r1.y, r1.z, r2.x);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -289,7 +289,7 @@ test("random33 - basic output", async () => {
        let r2 = random33(p1); // Same input
 
        // Test determinism and range (can only fit 3 components, test first 3)
-       test::results[0] = vec4f(r1.x, r1.y, r1.z, r2.x);
+       env::results[0] = vec4f(r1.x, r1.y, r1.z, r2.x);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -312,7 +312,7 @@ test("random33 - distribution (x component)", async () => {
         let y = f32((i / 16u) % 16u);
         let z = f32(i / 256u);
         let sample = random33(vec3f(x, y, z));
-        test::results[i] = sample.x;
+        env::results[i] = sample.x;
       }
     }
   `;
@@ -326,7 +326,7 @@ test("random41 - determinism and range", async () => {
 
      @compute @workgroup_size(1)
      fn foo() {
-       test::results[0] = random41(1.0);
+       env::results[0] = random41(1.0);
      }
    `;
   const result1 = await lygiaTestCompute(src, { elem: "vec4f", size: 1 });
@@ -352,7 +352,7 @@ test("random42 - hash properties", async () => {
      fn foo() {
        let p1 = vec2f(1.0, 2.0);
        let p2 = vec2f(1.0, 2.0);  // Same input
-       test::results[0] = random42(p1) - random42(p2);
+       env::results[0] = random42(p1) - random42(p2);
      }
    `;
   const determinism = await lygiaTestCompute(src1, { elem: "vec4f", size: 1 });
@@ -364,7 +364,7 @@ test("random42 - hash properties", async () => {
      import lygia::generative::random::random42;
      @compute @workgroup_size(1)
      fn foo() {
-       test::results[0] = random42(vec2f(1.0, 2.0));
+       env::results[0] = random42(vec2f(1.0, 2.0));
      }
    `;
   const result = await lygiaTestCompute(src2, { elem: "vec4f", size: 1 });
@@ -386,7 +386,7 @@ test("random42 - hash properties", async () => {
      fn foo() {
        let r1 = random42(vec2f(1.0, 2.0));
        let r3 = random42(vec2f(1.01, 2.0));  // Tiny 1% change in input
-       test::results[0] = abs(r1 - r3);  // Difference magnitude
+       env::results[0] = abs(r1 - r3);  // Difference magnitude
      }
    `;
   const avalanche = await lygiaTestCompute(src3, { elem: "vec4f", size: 1 });
@@ -405,7 +405,7 @@ test("random43 - hash properties", async () => {
      fn foo() {
        let p1 = vec3f(1.0, 2.0, 3.0);
        let p2 = vec3f(1.0, 2.0, 3.0);  // Same input
-       test::results[0] = random43(p1) - random43(p2);
+       env::results[0] = random43(p1) - random43(p2);
      }
    `;
   const determinism = await lygiaTestCompute(src1, { elem: "vec4f", size: 1 });
@@ -417,7 +417,7 @@ test("random43 - hash properties", async () => {
      import lygia::generative::random::random43;
      @compute @workgroup_size(1)
      fn foo() {
-       test::results[0] = random43(vec3f(1.0, 2.0, 3.0));
+       env::results[0] = random43(vec3f(1.0, 2.0, 3.0));
      }
    `;
   const result = await lygiaTestCompute(src2, { elem: "vec4f", size: 1 });
@@ -439,7 +439,7 @@ test("random43 - hash properties", async () => {
      fn foo() {
        let r1 = random43(vec3f(1.0, 2.0, 3.0));
        let r3 = random43(vec3f(1.01, 2.0, 3.0));
-       test::results[0] = abs(r1 - r3);
+       env::results[0] = abs(r1 - r3);
      }
    `;
   const avalanche = await lygiaTestCompute(src3, { elem: "vec4f", size: 1 });
@@ -458,7 +458,7 @@ test("random44 - hash properties", async () => {
      fn foo() {
        let p1 = vec4f(1.0, 2.0, 3.0, 4.0);
        let p2 = vec4f(1.0, 2.0, 3.0, 4.0);  // Same input
-       test::results[0] = random44(p1) - random44(p2);
+       env::results[0] = random44(p1) - random44(p2);
      }
    `;
   const determinism = await lygiaTestCompute(src1, { elem: "vec4f", size: 1 });
@@ -470,7 +470,7 @@ test("random44 - hash properties", async () => {
      import lygia::generative::random::random44;
      @compute @workgroup_size(1)
      fn foo() {
-       test::results[0] = random44(vec4f(1.0, 2.0, 3.0, 4.0));
+       env::results[0] = random44(vec4f(1.0, 2.0, 3.0, 4.0));
      }
    `;
   const result = await lygiaTestCompute(src2, { elem: "vec4f", size: 1 });
@@ -492,7 +492,7 @@ test("random44 - hash properties", async () => {
      fn foo() {
        let r1 = random44(vec4f(1.0, 2.0, 3.0, 4.0));
        let r3 = random44(vec4f(1.01, 2.0, 3.0, 4.0));
-       test::results[0] = abs(r1 - r3);
+       env::results[0] = abs(r1 - r3);
      }
    `;
   const avalanche = await lygiaTestCompute(src3, { elem: "vec4f", size: 1 });
@@ -513,7 +513,7 @@ test("srandom2 - distribution", async () => {
       for (var i = 0u; i < SAMPLE_COUNT; i++) {
         let x = f32(i % 32u);
         let y = f32(i / 32u);
-        test::results[i] = srandom2(vec2f(x, y));
+        env::results[i] = srandom2(vec2f(x, y));
       }
     }
   `;
@@ -531,7 +531,7 @@ test("srandom - distribution", async () => {
     fn main() {
       for (var i = 0u; i < SAMPLE_COUNT; i++) {
         // Vary inputs more to avoid patterns
-        test::results[i] = srandom(f32(i) * 1.234 + 0.567);
+        env::results[i] = srandom(f32(i) * 1.234 + 0.567);
       }
     }
   `;
@@ -552,7 +552,7 @@ test("srandom22 - distribution (x component)", async () => {
         let x = f32(i % 32u) * 1.1 + 0.3;
         let y = f32(i / 32u) * 1.3 + 0.7;
         let sample = srandom22(vec2f(x, y));
-        test::results[i] = sample.x;
+        env::results[i] = sample.x;
       }
     }
   `;
@@ -574,7 +574,7 @@ test("srandom3", async () => {
        let r2 = srandom3(p2);
        let r3 = srandom3(p3);
 
-       test::results[0] = vec4f(r1, r2, r3, 0.0);
+       env::results[0] = vec4f(r1, r2, r3, 0.0);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -594,7 +594,7 @@ test("srandom33", async () => {
        let r1 = srandom33(p1);
        let r2 = srandom33(p2);
 
-       test::results[0] = vec4f(r1.x, r1.y, r1.z, r2.x);
+       env::results[0] = vec4f(r1.x, r1.y, r1.z, r2.x);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -616,7 +616,7 @@ test("srandom4", async () => {
        let r2 = srandom4(p2);
        let r3 = srandom4(p3);
 
-       test::results[0] = vec4f(r1, r2, r3, 0.0);
+       env::results[0] = vec4f(r1, r2, r3, 0.0);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -640,7 +640,7 @@ test("srandom_tile22", async () => {
        let r1 = srandom_tile22(p1, tileLength);
        let r2 = srandom_tile22(p2, tileLength);
 
-       test::results[0] = vec4f(r1.x, r1.y, r2.x, r2.y);
+       env::results[0] = vec4f(r1.x, r1.y, r2.x, r2.y);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -662,7 +662,7 @@ test("srandom_tile33", async () => {
        let r1 = srandom_tile33(p1, tileLength);
        let r2 = srandom_tile33(p2, tileLength);
 
-       test::results[0] = vec4f(r1.x, r1.y, r1.z, r2.x);
+       env::results[0] = vec4f(r1.x, r1.y, r1.z, r2.x);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });

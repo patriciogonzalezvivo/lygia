@@ -9,7 +9,7 @@ test("hsv2ryb - FAST mode", async () => {
      fn foo() {
        let hsv = vec3f(0.3333, 0.8, 0.9); // Greenish HSV
        let result = hsv2ryb(hsv);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, {

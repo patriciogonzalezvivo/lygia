@@ -5,7 +5,7 @@ test("quatAdd", async () => {
   const src = `
     import lygia::math::quat::add::quatAdd;
     @compute @workgroup_size(1)
-    fn foo() { test::results[0] = quatAdd(vec4f(1.0, 2.0, 3.0, 4.0), vec4f(0.5, 0.5, 0.5, 0.5)); }
+    fn foo() { env::results[0] = quatAdd(vec4f(1.0, 2.0, 3.0, 4.0), vec4f(0.5, 0.5, 0.5, 0.5)); }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
   expectCloseTo([1.5, 2.5, 3.5, 4.5], result);
@@ -15,7 +15,7 @@ test("quatSub", async () => {
   const src = `
     import lygia::math::quat::sub::quatSub;
     @compute @workgroup_size(1)
-    fn foo() { test::results[0] = quatSub(vec4f(1.0, 2.0, 3.0, 4.0), vec4f(0.5, 0.5, 0.5, 0.5)); }
+    fn foo() { env::results[0] = quatSub(vec4f(1.0, 2.0, 3.0, 4.0), vec4f(0.5, 0.5, 0.5, 0.5)); }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
   expectCloseTo([0.5, 1.5, 2.5, 3.5], result);
@@ -28,7 +28,7 @@ test("quatMul", async () => {
     fn foo() {
       let q1 = normalize(vec4f(1.0, 0.0, 0.0, 1.0));
       let q2 = normalize(vec4f(0.0, 1.0, 0.0, 1.0));
-      test::results[0] = quatMul(q1, q2);
+      env::results[0] = quatMul(q1, q2);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -39,7 +39,7 @@ test("quatConj", async () => {
   const src = `
     import lygia::math::quat::conj::quatConj;
     @compute @workgroup_size(1)
-    fn foo() { test::results[0] = quatConj(vec4f(1.0, 2.0, 3.0, 4.0)); }
+    fn foo() { env::results[0] = quatConj(vec4f(1.0, 2.0, 3.0, 4.0)); }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
   expectCloseTo([-1.0, -2.0, -3.0, 4.0], result);
@@ -49,7 +49,7 @@ test("quatNorm", async () => {
   const src = `
     import lygia::math::quat::norm::quatNorm;
     @compute @workgroup_size(1)
-    fn foo() { test::results[0] = quatNorm(vec4f(1.0, 2.0, 3.0, 4.0)); }
+    fn foo() { env::results[0] = quatNorm(vec4f(1.0, 2.0, 3.0, 4.0)); }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
   expectCloseTo([0.1826, 0.3651, 0.5477, 0.7303], result);
@@ -59,7 +59,7 @@ test("quatLength", async () => {
   const src = `
     import lygia::math::quat::length::quatLength;
     @compute @workgroup_size(1)
-    fn foo() { test::results[0] = quatLength(vec4f(1.0, 2.0, 3.0, 4.0)); }
+    fn foo() { env::results[0] = quatLength(vec4f(1.0, 2.0, 3.0, 4.0)); }
   `;
   const result = await lygiaTestCompute(src);
   expectCloseTo([5.47723], result);
@@ -69,7 +69,7 @@ test("quatLengthSq", async () => {
   const src = `
     import lygia::math::quat::lengthSq::quatLengthSq;
     @compute @workgroup_size(1)
-    fn foo() { test::results[0] = quatLengthSq(vec4f(1.0, 2.0, 3.0, 4.0)); }
+    fn foo() { env::results[0] = quatLengthSq(vec4f(1.0, 2.0, 3.0, 4.0)); }
   `;
   const result = await lygiaTestCompute(src);
   expectCloseTo([30.0], result);
@@ -79,7 +79,7 @@ test("quatIdentity", async () => {
   const src = `
     import lygia::math::quat::identity::QUAT_IDENTITY;
     @compute @workgroup_size(1)
-    fn foo() { test::results[0] = QUAT_IDENTITY; }
+    fn foo() { env::results[0] = QUAT_IDENTITY; }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
   expectCloseTo([0.0, 0.0, 0.0, 1.0], result);
@@ -92,7 +92,7 @@ test("quatLerp", async () => {
     fn foo() {
       let q1 = normalize(vec4f(1.0, 0.0, 0.0, 1.0));
       let q2 = normalize(vec4f(0.0, 1.0, 0.0, 1.0));
-      test::results[0] = quatLerp(q1, q2, 0.5);
+      env::results[0] = quatLerp(q1, q2, 0.5);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -107,7 +107,7 @@ test("quat2mat3", async () => {
     fn foo() {
       let q = normalize(vec4f(0.0, 0.0, INV_SQRT2, INV_SQRT2));
       let m = quat2mat3(q);
-      test::results[0] = vec4f(m[0][0], m[1][1], m[2][2], 0.0);
+      env::results[0] = vec4f(m[0][0], m[1][1], m[2][2], 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -122,7 +122,7 @@ test("quat2mat4", async () => {
     fn foo() {
       let q = normalize(vec4f(0.0, 0.0, INV_SQRT2, INV_SQRT2));
       let m = quat2mat4(q);
-      test::results[0] = vec4f(m[0][0], m[1][1], m[2][2], m[3][3]);
+      env::results[0] = vec4f(m[0][0], m[1][1], m[2][2], m[3][3]);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -138,7 +138,7 @@ test("quat - create from axis and angle", async () => {
       let axis = normalize(vec3f(0.0, 1.0, 0.0));
       let angle = HALF_PI; // π/2 radians (90 degrees)
       let result = quat(axis, angle);
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -153,7 +153,7 @@ test("quatDiv - divide quaternion by scalar", async () => {
     fn foo() {
       let q = vec4f(2.0, 4.0, 6.0, 8.0);
       let result = quatDiv(q, 2.0);
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -167,7 +167,7 @@ test("quatNeg - negate quaternion", async () => {
     fn foo() {
       let q = vec4f(1.0, 2.0, 3.0, 4.0);
       let result = quatNeg(q);
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -185,7 +185,7 @@ test("quatInverse", async () => {
       let qInv = quatInverse(q);
       // Multiplying q * qInv should give identity quaternion (0,0,0,1)
       let identity = quatMul(q, qInv);
-      test::results[0] = identity;
+      env::results[0] = identity;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -212,7 +212,7 @@ test("quatForward - create quat from forward vector", async () => {
       // Also verify quaternion is normalized
       let length = sqrt(dot(q, q));
 
-      test::results[0] = vec4f(rotated.x, rotated.y, rotated.z, length);
+      env::results[0] = vec4f(rotated.x, rotated.y, rotated.z, length);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -245,7 +245,7 @@ test("quatForwardUp - create quat from forward and up vectors", async () => {
       // Verify quaternion is normalized
       let length = sqrt(dot(q, q));
 
-      test::results[0] = vec4f(rotatedForward.x, rotatedUp.y, length, 0.0);
+      env::results[0] = vec4f(rotatedForward.x, rotatedUp.y, length, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });

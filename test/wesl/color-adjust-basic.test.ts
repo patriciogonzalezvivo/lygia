@@ -9,7 +9,7 @@ test("desaturate", async () => {
      fn foo() {
        let color = vec3f(1.0, 0.5, 0.0); // Orange color
        let result = desaturate(color, 0.5); // 50% desaturation
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -27,7 +27,7 @@ test("desaturate4", async () => {
      fn foo() {
        let color = vec4f(1.0, 0.5, 0.0, 0.8); // Orange color with alpha
        let result = desaturate4(color, 0.5); // 50% desaturation
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -44,7 +44,7 @@ test("brightnessMatrix", async () => {
        let matrix = brightnessMatrix(0.2); // 20% brightness increase
        // Test that the matrix translates colors correctly
        // Matrix should have brightness offset in the last column
-       test::results[0] = vec4f(matrix[3][0], matrix[3][1], matrix[3][2], matrix[3][3]);
+       env::results[0] = vec4f(matrix[3][0], matrix[3][1], matrix[3][2], matrix[3][3]);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -59,7 +59,7 @@ test("contrast", async () => {
      @compute @workgroup_size(1)
      fn foo() {
        let result = contrast(0.7, 1.5);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src);
@@ -75,7 +75,7 @@ test("contrast3", async () => {
      fn foo() {
        let color = vec3f(0.8, 0.6, 0.4);
        let result = contrast3(color, 2.0);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -94,7 +94,7 @@ test("contrastMatrix", async () => {
      fn foo() {
        let matrix = contrastMatrix(1.5);
        // Test diagonal and translation values
-       test::results[0] = vec4f(matrix[0][0], matrix[1][1], matrix[2][2], matrix[3][0]);
+       env::results[0] = vec4f(matrix[0][0], matrix[1][1], matrix[2][2], matrix[3][0]);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -112,7 +112,7 @@ test("brightnessContrast", async () => {
        let brightness = 0.1;
        let contrast = 1.5;
        let result = brightnessContrast(value, brightness, contrast);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src);
@@ -128,7 +128,7 @@ test("contrast4", async () => {
      fn foo() {
        let color = vec4f(0.8, 0.6, 0.4, 0.9);
        let result = contrast4(color, 1.5);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -149,7 +149,7 @@ test("exposure", async () => {
        let value = 0.25;
        let amount = 2.0; // +2 stops = 4x brighter
        let result = exposure(value, amount);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src);
@@ -166,7 +166,7 @@ test("hueShift", async () => {
      fn foo() {
        let rgb = vec3f(1.0, 0.0, 0.0); // Red
        let shifted = hueShift(rgb, TAU * 0.3333); // Shift by 120° (TAU/3 radians)
-       test::results[0] = shifted;
+       env::results[0] = shifted;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -185,7 +185,7 @@ test("vibrance", async () => {
        let rgb = vec3f(0.6, 0.5, 0.4);
        // Increase vibrance by 0.5 (should increase saturation of muted colors)
        let result = vibrance3(rgb, 0.5);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -222,7 +222,7 @@ test("vibrance - selective saturation boost", async () => {
        let muted_sat_change = (muted_boosted.r - muted_boosted.b) / (muted.r - muted.b);
        let saturated_sat_change = (saturated_boosted.r - saturated_boosted.g) / (saturated.r - saturated.g);
 
-       test::results[0] = vec4f(muted_sat_change, saturated_sat_change, desaturated.r, desaturated.g);
+       env::results[0] = vec4f(muted_sat_change, saturated_sat_change, desaturated.r, desaturated.g);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });

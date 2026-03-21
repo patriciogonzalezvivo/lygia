@@ -15,7 +15,7 @@ test("worley2", async () => {
        let w2 = worley2(p2);
        let w3 = worley2(p3);
 
-       test::results[0] = vec4f(w1, w2, w3, 0.0);
+       env::results[0] = vec4f(w1, w2, w3, 0.0);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -41,7 +41,7 @@ test("worley22", async () => {
        let w2 = worley22(p2);
        let w3 = worley22(p3);
 
-       test::results[0] = vec4f(w1.x, w1.y, w2.x, w2.y);
+       env::results[0] = vec4f(w1.x, w1.y, w2.x, w2.y);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -72,7 +72,7 @@ test("worley3", async () => {
        let w2 = worley3(p2);
        let w3 = worley3(p3);
 
-       test::results[0] = vec4f(w1, w2, w3, 0.0);
+       env::results[0] = vec4f(w1, w2, w3, 0.0);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -96,7 +96,7 @@ test("worley32", async () => {
        let w1 = worley32(p1);
        let w2 = worley32(p2);
 
-       test::results[0] = vec4f(w1.x, w1.y, w2.x, w2.y);
+       env::results[0] = vec4f(w1.x, w1.y, w2.x, w2.y);
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });

@@ -5,7 +5,7 @@ test("saturate", async () => {
   const src = `
     import lygia::math::saturate::saturate;
     @compute @workgroup_size(1)
-    fn foo() { test::results[0] = saturate(-0.5); }
+    fn foo() { env::results[0] = saturate(-0.5); }
   `;
   const result = await lygiaTestCompute(src);
   expectCloseTo([0.0], result);
@@ -15,7 +15,7 @@ test("saturate clamped upper", async () => {
   const src = `
     import lygia::math::saturate::saturate;
     @compute @workgroup_size(1)
-    fn foo() { test::results[0] = saturate(1.5); }
+    fn foo() { env::results[0] = saturate(1.5); }
   `;
   const result = await lygiaTestCompute(src);
   expectCloseTo([1.0], result);
@@ -25,7 +25,7 @@ test("saturate3", async () => {
   const src = `
     import lygia::math::saturate::saturate3;
     @compute @workgroup_size(1)
-    fn foo() { test::results[0] = saturate3(vec3f(-0.5, 0.5, 1.5)); }
+    fn foo() { env::results[0] = saturate3(vec3f(-0.5, 0.5, 1.5)); }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
   expectCloseTo([0.0, 0.5, 1.0], result);
@@ -35,7 +35,7 @@ test("pow2", async () => {
   const src = `
     import lygia::math::pow2::pow2;
     @compute @workgroup_size(1)
-    fn foo() { test::results[0] = pow2(3.0); }
+    fn foo() { env::results[0] = pow2(3.0); }
   `;
   const result = await lygiaTestCompute(src);
   expectCloseTo([9.0], result);
@@ -45,7 +45,7 @@ test("pow22", async () => {
   const src = `
     import lygia::math::pow2::pow22;
     @compute @workgroup_size(1)
-    fn foo() { test::results[0] = pow22(vec2f(2.0, 3.0)); }
+    fn foo() { env::results[0] = pow22(vec2f(2.0, 3.0)); }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec2f" });
   expectCloseTo([4.0, 9.0], result);
@@ -55,7 +55,7 @@ test("pow3", async () => {
   const src = `
     import lygia::math::pow3::pow3;
     @compute @workgroup_size(1)
-    fn foo() { test::results[0] = pow3(2.0); }
+    fn foo() { env::results[0] = pow3(2.0); }
   `;
   const result = await lygiaTestCompute(src);
   expectCloseTo([8.0], result);
@@ -65,7 +65,7 @@ test("pow5", async () => {
   const src = `
     import lygia::math::pow5::pow5;
     @compute @workgroup_size(1)
-    fn foo() { test::results[0] = pow5(2.0); }
+    fn foo() { env::results[0] = pow5(2.0); }
   `;
   const result = await lygiaTestCompute(src);
   expectCloseTo([32.0], result);
@@ -75,7 +75,7 @@ test("pow7", async () => {
   const src = `
     import lygia::math::pow7::pow7;
     @compute @workgroup_size(1)
-    fn foo() { test::results[0] = pow7(2.0); }
+    fn foo() { env::results[0] = pow7(2.0); }
   `;
   const result = await lygiaTestCompute(src);
   expectCloseTo([128.0], result);
@@ -87,7 +87,7 @@ test("absi", async () => {
     @compute @workgroup_size(1)
     fn foo() {
       // Test both positive and negative values
-      test::results[0] = vec4f(
+      env::results[0] = vec4f(
         f32(absi(5)),   // Positive
         f32(absi(-5)),  // Negative
         f32(absi(0)),   // Zero
@@ -103,7 +103,7 @@ test("absi negative", async () => {
   const src = `
     import lygia::math::absi::absi;
     @compute @workgroup_size(1)
-    fn foo() { test::results[0] = f32(absi(-5)); }
+    fn foo() { env::results[0] = f32(absi(-5)); }
   `;
   const result = await lygiaTestCompute(src);
   expectCloseTo([5.0], result);
@@ -118,7 +118,7 @@ test("cubicMix", async () => {
      @compute @workgroup_size(1)
      fn foo() {
        // Test cubic hermite interpolation at multiple points
-       test::results[0] = vec4f(
+       env::results[0] = vec4f(
          cubicMix(0.0, 1.0, 0.0),   // Start: should be 0
          cubicMix(0.0, 1.0, 0.25),  // Quarter: smooth curve
          cubicMix(0.0, 1.0, 0.75),  // Three-quarters
@@ -140,7 +140,7 @@ test("smootherstep", async () => {
      @compute @workgroup_size(1)
      fn foo() {
        // Test smoother step (6t⁵ - 15t⁴ + 10t³) at multiple points
-       test::results[0] = vec4f(
+       env::results[0] = vec4f(
          smootherstep(0.0, 1.0, 0.0),   // Start: should be 0
          smootherstep(0.0, 1.0, 0.25),  // Quarter: smooth acceleration
          smootherstep(0.0, 1.0, 0.75),  // Three-quarters: smooth deceleration
@@ -163,13 +163,13 @@ test("fmod2", async () => {
      fn foo() {
        // Test positive values
        let result1 = fmod2(vec2f(5.0, 7.0), vec2f(3.0, 4.0));
-       test::results[0] = result1.x;
-       test::results[1] = result1.y;
+       env::results[0] = result1.x;
+       env::results[1] = result1.y;
 
        // Test negative values - key difference from % operator
        let result2 = fmod2(vec2f(-5.0, -7.0), vec2f(3.0, 4.0));
-       test::results[2] = result2.x;
-       test::results[3] = result2.y;
+       env::results[2] = result2.x;
+       env::results[3] = result2.y;
      }
    `;
   const result = await lygiaTestCompute(src);
@@ -187,9 +187,9 @@ test("fmod3", async () => {
      fn foo() {
        // Test with negative values to verify floor-based behavior
        let result = fmod3(vec3f(-5.5, 7.3, -2.1), vec3f(3.0, 4.0, 2.0));
-       test::results[0] = result.x;
-       test::results[1] = result.y;
-       test::results[2] = result.z;
+       env::results[0] = result.x;
+       env::results[1] = result.y;
+       env::results[2] = result.z;
      }
    `;
   const result = await lygiaTestCompute(src);
@@ -204,10 +204,10 @@ test("fmod4", async () => {
      @compute @workgroup_size(1)
      fn foo() {
        let result = fmod4(vec4f(10.0, -10.0, 7.5, -7.5), vec4f(3.0, 3.0, 2.5, 2.5));
-       test::results[0] = result.x;
-       test::results[1] = result.y;
-       test::results[2] = result.z;
-       test::results[3] = result.w;
+       env::results[0] = result.x;
+       env::results[1] = result.y;
+       env::results[2] = result.z;
+       env::results[3] = result.w;
      }
    `;
   const result = await lygiaTestCompute(src);
@@ -224,7 +224,7 @@ test("map - remap value between ranges", async () => {
       let result1 = map(0.5, 0.0, 1.0, 0.0, 100.0);
       // Map 5.0 from [0,10] to [100,200]
       let result2 = map(5.0, 0.0, 10.0, 100.0, 200.0);
-      test::results[0] = vec4f(result1, result2, 0.0, 0.0);
+      env::results[0] = vec4f(result1, result2, 0.0, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -237,7 +237,7 @@ test("mirror - triangle wave", async () => {
     @compute @workgroup_size(1)
     fn foo() {
       // mirror creates triangle wave: 0→1→0→1→0
-      test::results[0] = vec4f(mirror(0.5), mirror(1.5), mirror(2.5), mirror(3.5));
+      env::results[0] = vec4f(mirror(0.5), mirror(1.5), mirror(2.5), mirror(3.5));
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -251,7 +251,7 @@ test("decimate - quantize value", async () => {
     fn foo() {
       // Decimate to 10 levels
       let result = decimate(0.567, 10.0);
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src);
@@ -268,7 +268,7 @@ test("taylorInvSqrt", async () => {
     fn foo() {
       // Test Taylor series approximation: 1.79284 - 0.85373 * r
       // This is a first-order approximation, accurate near r=1
-      test::results[0] = vec4f(
+      env::results[0] = vec4f(
         taylorInvSqrt(1.0),   // 1.793 - 0.854 * 1.0 = 0.939
         taylorInvSqrt(4.0),   // 1.793 - 0.854 * 4.0 = -1.622
         taylorInvSqrt(0.25),  // 1.793 - 0.854 * 0.25 = 1.579
@@ -290,7 +290,7 @@ test("adaptiveThreshold", async () => {
       // Test threshold comparison
       let result1 = adaptiveThreshold(0.8, 0.5, 0.1); // v > blur_v + b
       let result2 = adaptiveThreshold(0.4, 0.5, 0.1); // v < blur_v + b
-      test::results[0] = vec4f(result1, result2, 0.0, 0.0);
+      env::results[0] = vec4f(result1, result2, 0.0, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -314,7 +314,7 @@ test("atan2Custom", async () => {
       let angle3 = atan2Custom(-1.0, 0.0);  // atan2(-1,0) = -π/2, +PI = π/2
       let angle4 = atan2Custom(0.0, -1.0);  // atan2(0,-1) = π, +PI = 2π % 2π = 0
 
-      test::results[0] = vec4f(angle1, angle2, angle3, angle4);
+      env::results[0] = vec4f(angle1, angle2, angle3, angle4);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -344,7 +344,7 @@ test("atan2Custom - additional angles", async () => {
       // Test additional angle cases
       let angle5 = atan2Custom(1.0, 1.0);   // atan2(1,1) = π/4, +PI = 5π/4
 
-      test::results[0] = vec4f(angle5, 0.0, 0.0, 0.0);
+      env::results[0] = vec4f(angle5, 0.0, 0.0, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -362,7 +362,7 @@ test("bump", async () => {
       let result1 = bump(0.0, 0.0); // Should be 1.0
       let result2 = bump(1.0, 0.0); // Should be 0.0
       let result3 = bump(0.5, 0.0); // Should be 0.75
-      test::results[0] = vec4f(result1, result2, result3, 0.0);
+      env::results[0] = vec4f(result1, result2, result3, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -375,7 +375,7 @@ test("bump2", async () => {
     @compute @workgroup_size(1)
     fn foo() {
       let result = bump2(vec2f(0.0, 0.5), vec2f(0.0));
-      test::results[0] = vec4f(result.x, result.y, 0.0, 0.0);
+      env::results[0] = vec4f(result.x, result.y, 0.0, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -389,7 +389,7 @@ test("highPass", async () => {
     fn foo() {
       let result1 = highPass(0.8, 0.5); // Above threshold
       let result2 = highPass(0.3, 0.5); // Below threshold
-      test::results[0] = vec4f(result1, result2, 0.0, 0.0);
+      env::results[0] = vec4f(result1, result2, 0.0, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -404,7 +404,7 @@ test("inside - scalar", async () => {
       let result1 = inside(5.0, 0.0, 10.0); // true
       let result2 = inside(-1.0, 0.0, 10.0); // false
       let result3 = inside(11.0, 0.0, 10.0); // false
-      test::results[0] = vec4f(f32(result1), f32(result2), f32(result3), 0.0);
+      env::results[0] = vec4f(f32(result1), f32(result2), f32(result3), 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -418,7 +418,7 @@ test("inside2", async () => {
     fn foo() {
       let result1 = inside2(vec2f(5.0, 5.0), vec2f(0.0), vec2f(10.0)); // true
       let result2 = inside2(vec2f(-1.0, 5.0), vec2f(0.0), vec2f(10.0)); // false
-      test::results[0] = vec4f(f32(result1), f32(result2), 0.0, 0.0);
+      env::results[0] = vec4f(f32(result1), f32(result2), 0.0, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -432,7 +432,7 @@ test("mod2 - mutates pointer", async () => {
     fn foo() {
       var p = vec2f(7.0, 10.0);
       let c = mod2(&p, 3.0);
-      test::results[0] = vec4f(p.x, p.y, c.x, c.y);
+      env::results[0] = vec4f(p.x, p.y, c.x, c.y);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -449,7 +449,7 @@ test("mod289", async () => {
       let result1 = mod289(300.0); // 300 % 289 = 11
       let result2 = mod289(289.0); // 289 % 289 = 0
       let result3 = mod289(100.0); // 100 % 289 = 100
-      test::results[0] = vec4f(result1, result2, result3, 0.0);
+      env::results[0] = vec4f(result1, result2, result3, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -491,7 +491,7 @@ test("powFast", async () => {
       // Test edge case: powFast(1.0, x) should always be 1.0
       let edge1 = powFast(1.0, 0.5);
 
-      test::results[0] = vec4f(fast1, fast2, fast3, edge1);
+      env::results[0] = vec4f(fast1, fast2, fast3, edge1);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -514,7 +514,7 @@ test("round", async () => {
       let result2 = round(2.7);
       let result3 = round(-2.3);
       let result4 = round(-2.7);
-      test::results[0] = vec4f(result1, result2, result3, result4);
+      env::results[0] = vec4f(result1, result2, result3, result4);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -535,7 +535,7 @@ test("saturateMediump", async () => {
       let v3 = saturateMediump(1000.0);    // Below limit passes through
       let v4 = saturateMediump(100000.0);  // Above limit: desktop passes, mobile clamps to 65504
 
-      test::results[0] = vec4f(v1, v2, v3, v4);
+      env::results[0] = vec4f(v1, v2, v3, v4);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -559,7 +559,7 @@ test("sum2", async () => {
     @compute @workgroup_size(1)
     fn foo() {
       // Test multiple cases including negative values
-      test::results[0] = vec4f(
+      env::results[0] = vec4f(
         sum2(vec2f(3.0, 7.0)),      // Positive
         sum2(vec2f(-5.0, 8.0)),     // Mixed
         sum2(vec2f(-2.0, -3.0)),    // Negative
@@ -577,7 +577,7 @@ test("sum3", async () => {
     @compute @workgroup_size(1)
     fn foo() {
       // Test multiple cases including negative and fractional values
-      test::results[0] = vec4f(
+      env::results[0] = vec4f(
         sum3(vec3f(3.0, 7.0, 5.0)),     // Positive
         sum3(vec3f(-2.0, 6.0, -1.0)),   // Mixed signs
         sum3(vec3f(-1.0, -2.0, -3.0)),  // All negative
@@ -597,7 +597,7 @@ test("within - scalar", async () => {
       let result1 = within(5.0, 0.0, 10.0); // true -> 1.0
       let result2 = within(-1.0, 0.0, 10.0); // false -> 0.0
       let result3 = within(11.0, 0.0, 10.0); // false -> 0.0
-      test::results[0] = vec4f(result1, result2, result3, 0.0);
+      env::results[0] = vec4f(result1, result2, result3, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -611,7 +611,7 @@ test("within2", async () => {
     fn foo() {
       let result1 = within2(vec2f(5.0, 5.0), vec2f(0.0), vec2f(10.0)); // true -> 1.0
       let result2 = within2(vec2f(-1.0, 5.0), vec2f(0.0), vec2f(10.0)); // false -> 0.0
-      test::results[0] = vec4f(result1, result2, 0.0, 0.0);
+      env::results[0] = vec4f(result1, result2, 0.0, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });

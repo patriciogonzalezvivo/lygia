@@ -10,7 +10,7 @@ test("rotate2d - 90 degree rotation", async () => {
       let mat = rotate2d(HALF_PI); // /2 radians
       let v = vec2f(1.0, 0.0);
       let result = mat * v;
-      test::results[0] = vec4f(result.x, result.y, 0.0, 0.0);
+      env::results[0] = vec4f(result.x, result.y, 0.0, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -28,7 +28,7 @@ test("rotate3d - rotation around axis", async () => {
       let mat = rotate3d(axis, HALF_PI); // /2 radians
       let v = vec3f(1.0, 0.0, 0.0);
       let result = mat * v;
-      test::results[0] = vec4f(result.x, result.y, result.z, 0.0);
+      env::results[0] = vec4f(result.x, result.y, result.z, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -45,7 +45,7 @@ test("rotate3dX", async () => {
       let mat = rotate3dX(HALF_PI); // /2 radians
       let v = vec3f(0.0, 1.0, 0.0);
       let result = mat * v;
-      test::results[0] = vec4f(result.x, result.y, result.z, 0.0);
+      env::results[0] = vec4f(result.x, result.y, result.z, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -62,7 +62,7 @@ test("rotate3dY", async () => {
       let mat = rotate3dY(HALF_PI); // /2 radians
       let v = vec3f(1.0, 0.0, 0.0);
       let result = mat * v;
-      test::results[0] = vec4f(result.x, result.y, result.z, 0.0);
+      env::results[0] = vec4f(result.x, result.y, result.z, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -79,7 +79,7 @@ test("rotate3dZ", async () => {
       let mat = rotate3dZ(HALF_PI); // /2 radians
       let v = vec3f(1.0, 0.0, 0.0);
       let result = mat * v;
-      test::results[0] = vec4f(result.x, result.y, result.z, 0.0);
+      env::results[0] = vec4f(result.x, result.y, result.z, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -97,7 +97,7 @@ test("rotate4d - axis-angle rotation", async () => {
       let mat = rotate4d(axis, HALF_PI); // /2 radians around Z
       let v = vec4f(1.0, 0.0, 0.0, 1.0);
       let result = mat * v;
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -114,7 +114,7 @@ test("rotate4dX", async () => {
       let mat = rotate4dX(HALF_PI); // /2 radians
       let v = vec4f(0.0, 1.0, 0.0, 1.0);
       let result = mat * v;
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -131,7 +131,7 @@ test("rotate4dY", async () => {
       let mat = rotate4dY(HALF_PI); // /2 radians
       let v = vec4f(1.0, 0.0, 0.0, 1.0);
       let result = mat * v;
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -148,7 +148,7 @@ test("rotate4dZ", async () => {
       let mat = rotate4dZ(HALF_PI); // /2 radians
       let v = vec4f(1.0, 0.0, 0.0, 1.0);
       let result = mat * v;
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });

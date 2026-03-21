@@ -6,7 +6,7 @@ test("cubic", async () => {
     import lygia::math::cubic::cubic;
     @compute @workgroup_size(1)
     fn foo() {
-      test::results[0] = vec4f(cubic(0.0), cubic(0.5), cubic(1.0), 0.0);
+      env::results[0] = vec4f(cubic(0.0), cubic(0.5), cubic(1.0), 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -19,7 +19,7 @@ test("quartic", async () => {
     import lygia::math::quartic::quartic;
     @compute @workgroup_size(1)
     fn foo() {
-      test::results[0] = vec4f(quartic(0.0), quartic(0.5), quartic(1.0), 0.0);
+      env::results[0] = vec4f(quartic(0.0), quartic(0.5), quartic(1.0), 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -32,7 +32,7 @@ test("quintic", async () => {
     import lygia::math::quintic::quintic;
     @compute @workgroup_size(1)
     fn foo() {
-      test::results[0] = vec4f(quintic(0.0), quintic(0.5), quintic(1.0), 0.0);
+      env::results[0] = vec4f(quintic(0.0), quintic(0.5), quintic(1.0), 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -50,7 +50,7 @@ test("invCubic", async () => {
       let x = 0.3;
       let y = cubic(x);
       let xRecovered = invCubic(y);
-      test::results[0] = vec4f(x, xRecovered, 0.0, 0.0);
+      env::results[0] = vec4f(x, xRecovered, 0.0, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -68,7 +68,7 @@ test("invQuartic", async () => {
       let x = 0.7;
       let y = quartic(x);
       let xRecovered = invQuartic(y);
-      test::results[0] = vec4f(x, xRecovered, 0.0, 0.0);
+      env::results[0] = vec4f(x, xRecovered, 0.0, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -82,7 +82,7 @@ test("gain", async () => {
     @compute @workgroup_size(1)
     fn foo() {
       // gain(0.5, k) should always equal 0.5
-      test::results[0] = vec4f(gain(0.5, 2.0), gain(0.25, 2.0), gain(0.75, 2.0), 0.0);
+      env::results[0] = vec4f(gain(0.5, 2.0), gain(0.25, 2.0), gain(0.75, 2.0), 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -99,10 +99,10 @@ test("parabola", async () => {
     @compute @workgroup_size(1)
     fn foo() {
       // Test k=1.0: basic parabola, symmetric values at 0.25 and 0.75
-      test::results[0] = vec4f(parabola(0.0, 1.0), parabola(0.25, 1.0), parabola(0.5, 1.0), parabola(0.75, 1.0));
+      env::results[0] = vec4f(parabola(0.0, 1.0), parabola(0.25, 1.0), parabola(0.5, 1.0), parabola(0.75, 1.0));
 
       // Test k=2.0: sharper curve (narrower peak)
-      test::results[1] = vec4f(parabola(0.25, 2.0), parabola(0.5, 2.0), parabola(0.75, 2.0), 0.0);
+      env::results[1] = vec4f(parabola(0.25, 2.0), parabola(0.5, 2.0), parabola(0.75, 2.0), 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f", size: 2 });
@@ -126,7 +126,7 @@ test("gaussian", async () => {
     fn foo() {
       // gaussian(0, sigma) should be 1.0
       // gaussian(sigma, sigma) should be exp(-0.5) H 0.606
-      test::results[0] = vec4f(gaussian(0.0, 1.0), gaussian(1.0, 1.0), 0.0, 0.0);
+      env::results[0] = vec4f(gaussian(0.0, 1.0), gaussian(1.0, 1.0), 0.0, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });

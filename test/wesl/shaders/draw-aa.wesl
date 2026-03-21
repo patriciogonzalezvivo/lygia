@@ -4,7 +4,7 @@ import lygia::math::aafract::aafract;
 import lygia::space::cart2polar::cart2polar2;
 import lygia::color::space::linear2gamma::linear2gamma;
 
-@group(0) @binding(0) var<uniform> uniforms: test::Uniforms;
+@group(0) @binding(0) var<uniform> uniforms: env::Uniforms;
 
 // Visual test comparing anti-aliased vs regular functions on a complex spiral pattern
 // Based on https://www.shadertoy.com/view/wtjGzt by FabriceNeyret2

@@ -10,7 +10,7 @@ test("pack/unpack roundtrip", async () => {
       let original = 0.12346;
       let packed = pack(original);
       let unpacked = unpack4(packed);
-      test::results[0] = vec4f(original, unpacked, 0.0, 0.0);
+      env::results[0] = vec4f(original, unpacked, 0.0, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -35,7 +35,7 @@ test("pack/unpack roundtrip - multiple values", async () => {
       let r3 = unpack4(pack(v3));
       let r4 = unpack4(pack(v4));
 
-      test::results[0] = vec4f(r1, r2, r3, r4);
+      env::results[0] = vec4f(r1, r2, r3, r4);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -63,7 +63,7 @@ test("unpack256 - default base 256", async () => {
       let r2 = unpack256(v2);
       let r3 = unpack256(v3);
 
-      test::results[0] = vec4f(r1, r2, r3, 0.0);
+      env::results[0] = vec4f(r1, r2, r3, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -84,7 +84,7 @@ test("unpack - alias for unpack256", async () => {
       let v = vec3f(0.5, 0.5, 0.5);
       let r1 = unpack(v);
       let r2 = unpack256(v);
-      test::results[0] = vec4f(r1, r2, 0.0, 0.0);
+      env::results[0] = vec4f(r1, r2, 0.0, 0.0);
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -103,7 +103,7 @@ test("unpack8 - base 8", async () => {
       let v3 = vec3f(0.0, 0.0, 1.0);   // 512 / 512 = 1.0
       let v4 = vec3f(0.5, 0.5, 0.5);   // (4 + 32 + 256) / 512 = 0.5703125
 
-      test::results[0] = vec4f(unpack8(v1), unpack8(v2), unpack8(v3), unpack8(v4));
+      env::results[0] = vec4f(unpack8(v1), unpack8(v2), unpack8(v3), unpack8(v4));
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -121,7 +121,7 @@ test("unpack16 - base 16", async () => {
       let v3 = vec3f(0.0, 0.0, 1.0);   // 4096 / 4096 = 1.0
       let v4 = vec3f(0.5, 0.5, 0.5);   // (8 + 128 + 2048) / 4096 = 0.533203125
 
-      test::results[0] = vec4f(unpack16(v1), unpack16(v2), unpack16(v3), unpack16(v4));
+      env::results[0] = vec4f(unpack16(v1), unpack16(v2), unpack16(v3), unpack16(v4));
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -139,7 +139,7 @@ test("unpack32 - base 32", async () => {
       let v3 = vec3f(0.0, 0.0, 1.0);   // 32768 / 32768 = 1.0
       let v4 = vec3f(0.5, 0.5, 0.5);   // (16 + 512 + 16384) / 32768 = 0.5161
 
-      test::results[0] = vec4f(unpack32(v1), unpack32(v2), unpack32(v3), unpack32(v4));
+      env::results[0] = vec4f(unpack32(v1), unpack32(v2), unpack32(v3), unpack32(v4));
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -157,7 +157,7 @@ test("unpack64 - base 64", async () => {
       let v3 = vec3f(0.0, 0.0, 1.0);   // 262144 / 262144 = 1.0
       let v4 = vec3f(0.5, 0.5, 0.5);   // (32 + 2048 + 131072) / 262144 H 0.507935
 
-      test::results[0] = vec4f(unpack64(v1), unpack64(v2), unpack64(v3), unpack64(v4));
+      env::results[0] = vec4f(unpack64(v1), unpack64(v2), unpack64(v3), unpack64(v4));
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -175,7 +175,7 @@ test("unpack128 - base 128", async () => {
       let v3 = vec3f(0.0, 0.0, 1.0);   // 2097152 / 2097152 = 1.0
       let v4 = vec3f(0.5, 0.5, 0.5);   // (64 + 8192 + 1048576) / 2097152 H 0.503967
 
-      test::results[0] = vec4f(unpack128(v1), unpack128(v2), unpack128(v3), unpack128(v4));
+      env::results[0] = vec4f(unpack128(v1), unpack128(v2), unpack128(v3), unpack128(v4));
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -194,7 +194,7 @@ test("unpackBase - custom base", async () => {
       let v3 = vec3f(0.0, 0.0, 1.0);   // 1000 / 1000 = 1.0
       let v4 = vec3f(0.5, 0.5, 0.5);   // (5 + 50 + 500) / 1000 = 0.555
 
-      test::results[0] = vec4f(
+      env::results[0] = vec4f(
         unpackBase(v1, base),
         unpackBase(v2, base),
         unpackBase(v3, base),
@@ -220,7 +220,7 @@ test("unpack4 - vec4 unpacking (ThreeJS style)", async () => {
       let v3 = vec4f(0.5, 0.5, 0.5, 0.5);  // uniform: 0.5
       let v4 = vec4f(1.0, 1.0, 1.0, 1.0);  // all: 1.0
 
-      test::results[0] = vec4f(unpack4(v1), unpack4(v2), unpack4(v3), unpack4(v4));
+      env::results[0] = vec4f(unpack4(v1), unpack4(v2), unpack4(v3), unpack4(v4));
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });

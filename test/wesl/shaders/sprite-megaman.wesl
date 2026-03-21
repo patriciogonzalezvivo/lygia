@@ -1,7 +1,7 @@
 import lygia::space::ratio::ratio;
 import lygia::animation::spriteLoop::spriteLoop;
 
-@group(0) @binding(0) var<uniform> uniforms: test::Uniforms;
+@group(0) @binding(0) var<uniform> uniforms: env::Uniforms;
 @group(0) @binding(1) var sprite_tex: texture_2d<f32>;
 @group(0) @binding(2) var sprite_samp: sampler;
 

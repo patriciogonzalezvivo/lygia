@@ -10,7 +10,7 @@ test("layerMultiplySourceOver4", async () => {
       let src = vec4f(0.8, 0.6, 0.4, 0.75);
       let dst = vec4f(0.5, 0.7, 0.9, 0.5);
       let result = layerMultiplySourceOver4(src, dst);
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -27,7 +27,7 @@ test("layerScreenSourceOver4", async () => {
       let src = vec4f(0.6, 0.4, 0.2, 0.5);
       let dst = vec4f(0.3, 0.5, 0.7, 0.6);
       let result = layerScreenSourceOver4(src, dst);
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -44,7 +44,7 @@ test("layerAddSourceOver4", async () => {
       let src = vec4f(0.3, 0.4, 0.5, 0.6);
       let dst = vec4f(0.2, 0.3, 0.4, 0.5);
       let result = layerAddSourceOver4(src, dst);
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -61,7 +61,7 @@ test("layerOverlaySourceOver4", async () => {
       let src = vec4f(0.7, 0.3, 0.5, 0.8);
       let dst = vec4f(0.4, 0.6, 0.5, 0.4);
       let result = layerOverlaySourceOver4(src, dst);
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -78,7 +78,7 @@ test("layerDarkenSourceOver4", async () => {
       let src = vec4f(0.3, 0.7, 0.5, 0.5);
       let dst = vec4f(0.6, 0.4, 0.5, 0.5);
       let result = layerDarkenSourceOver4(src, dst);
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -95,7 +95,7 @@ test("layerLightenSourceOver4", async () => {
       let src = vec4f(0.3, 0.7, 0.5, 0.5);
       let dst = vec4f(0.6, 0.4, 0.5, 0.5);
       let result = layerLightenSourceOver4(src, dst);
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -112,7 +112,7 @@ test("layerDifferenceSourceOver4", async () => {
       let src = vec4f(0.8, 0.3, 0.6, 0.7);
       let dst = vec4f(0.5, 0.7, 0.4, 0.6);
       let result = layerDifferenceSourceOver4(src, dst);
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -129,7 +129,7 @@ test("layerExclusionSourceOver4", async () => {
       let src = vec4f(0.6, 0.4, 0.8, 0.5);
       let dst = vec4f(0.3, 0.7, 0.2, 0.5);
       let result = layerExclusionSourceOver4(src, dst);
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -146,7 +146,7 @@ test("layerPhoenixSourceOver4", async () => {
       let src = vec4f(0.7, 0.5, 0.3, 0.6);
       let dst = vec4f(0.4, 0.6, 0.8, 0.4);
       let result = layerPhoenixSourceOver4(src, dst);
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -163,7 +163,7 @@ test("layerSubtractSourceOver4", async () => {
       let src = vec4f(0.8, 0.5, 0.3, 0.5);
       let dst = vec4f(0.4, 0.6, 0.7, 0.5);
       let result = layerSubtractSourceOver4(src, dst);
-      test::results[0] = result;
+      env::results[0] = result;
     }
   `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });

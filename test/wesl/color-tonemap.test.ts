@@ -9,7 +9,7 @@ test("tonemapACES3", async () => {
      fn foo() {
        let hdr = vec3f(2.0, 1.5, 1.0); // HDR color
        let result = tonemapACES3(hdr);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -27,7 +27,7 @@ test("tonemapACES4", async () => {
      fn foo() {
        let hdr = vec4f(2.0, 1.5, 1.0, 0.8);
        let result = tonemapACES4(hdr);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -44,7 +44,7 @@ test("tonemapDebug3", async () => {
      fn foo() {
        let hdr = vec3f(1.5, 1.0, 0.5);
        let result = tonemapDebug3(hdr);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -66,7 +66,7 @@ test("tonemapFilmic3", async () => {
      fn foo() {
        let hdr = vec3f(2.0, 1.5, 1.0);
        let result = tonemapFilmic3(hdr);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -84,7 +84,7 @@ test("tonemapLinear3", async () => {
      fn foo() {
        let hdr = vec3f(2.0, 1.5, 1.0);
        let result = tonemapLinear3(hdr);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -100,7 +100,7 @@ test("tonemapReinhard3", async () => {
      fn foo() {
        let hdr = vec3f(2.0, 1.5, 1.0);
        let result = tonemapReinhard3(hdr);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -119,7 +119,7 @@ test("tonemapReinhardJodie3", async () => {
      fn foo() {
        let hdr = vec3f(2.0, 1.5, 1.0);
        let result = tonemapReinhardJodie3(hdr);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -139,7 +139,7 @@ test("tonemapUncharted3", async () => {
      fn foo() {
        let hdr = vec3f(2.0, 1.5, 1.0);
        let result = tonemapUncharted3(hdr);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -158,7 +158,7 @@ test("tonemapUncharted23", async () => {
      fn foo() {
        let hdr = vec3f(2.0, 1.5, 1.0);
        let result = tonemapUncharted23(hdr);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -176,7 +176,7 @@ test("tonemapUnreal3", async () => {
      fn foo() {
        let hdr = vec3f(2.0, 1.5, 1.0);
        let result = tonemapUnreal3(hdr);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -195,7 +195,7 @@ test("tonemapDebug4", async () => {
      fn foo() {
        let hdr = vec4f(1.5, 1.0, 0.5, 0.7);
        let result = tonemapDebug4(hdr);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -212,7 +212,7 @@ test("tonemapFilmic4", async () => {
      fn foo() {
        let hdr = vec4f(2.0, 1.5, 1.0, 0.8);
        let result = tonemapFilmic4(hdr);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -229,7 +229,7 @@ test("tonemapLinear4", async () => {
      fn foo() {
        let hdr = vec4f(2.0, 1.5, 1.0, 0.5);
        let result = tonemapLinear4(hdr);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -245,7 +245,7 @@ test("tonemapReinhard4", async () => {
      fn foo() {
        let hdr = vec4f(2.0, 1.5, 1.0, 0.6);
        let result = tonemapReinhard4(hdr);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -262,7 +262,7 @@ test("tonemapReinhardJodie4", async () => {
      fn foo() {
        let hdr = vec4f(2.0, 1.5, 1.0, 0.75);
        let result = tonemapReinhardJodie4(hdr);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -279,7 +279,7 @@ test("tonemapUncharted4", async () => {
      fn foo() {
        let hdr = vec4f(2.0, 1.5, 1.0, 0.9);
        let result = tonemapUncharted4(hdr);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -296,7 +296,7 @@ test("uncharted2Tonemap", async () => {
      fn foo() {
        let hdr = vec3f(2.0, 1.5, 1.0);
        let result = uncharted2Tonemap(hdr);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
@@ -315,7 +315,7 @@ test("tonemapUncharted24", async () => {
      fn foo() {
        let hdr = vec4f(2.0, 1.5, 1.0, 0.85);
        let result = tonemapUncharted24(hdr);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
@@ -332,7 +332,7 @@ test("tonemapUnreal4", async () => {
      fn foo() {
        let hdr = vec4f(2.0, 1.5, 1.0, 0.65);
        let result = tonemapUnreal4(hdr);
-       test::results[0] = result;
+       env::results[0] = result;
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
