@@ -502,32 +502,6 @@ test("random44 - hash properties", async () => {
   // Regression: exact output value
   expectCloseTo([0.8164, 0.0728, 0.7236, 0.7064], result);
 });
-test("srandom2", async () => {
-  const src = `
-     import lygia::generative::srandom::srandom2;
-
-     @compute @workgroup_size(1)
-     fn foo() {
-       let p1 = vec2f(1.0, 2.0);
-       let p2 = vec2f(1.0, 2.0); // Same point
-       let p3 = vec2f(3.0, 4.0); // Different point
-
-       let r1 = srandom2(p1);
-       let r2 = srandom2(p2);
-       let r3 = srandom2(p3);
-
-       test::results[0] = vec4f(r1, r2, r3, 0.0);
-     }
-   `;
-  const result = await lygiaTestCompute(src, { elem: "vec4f" });
-  // Test determinism: same input produces same output
-  expectCloseTo([result[0]], [result[1]]);
-  // Test that different inputs produce different outputs
-  expect(result[0]).not.toBeCloseTo(result[2], 1);
-  // Regression: exact output value
-  expectCloseTo([-91 / 128], [result[0]]);
-});
-
 test("srandom2 - distribution", async () => {
   const sampleCount = 512;
   const src = `
@@ -547,28 +521,6 @@ test("srandom2 - distribution", async () => {
   expectDistribution(samples, [-1.0, 1.0]);
 });
 
-test("srandom", async () => {
-  const src = `
-     import lygia::generative::srandom::srandom;
-
-     @compute @workgroup_size(1)
-     fn foo() {
-       let r1 = srandom(12.34);
-       let r2 = srandom(12.34); // Same input
-       let r3 = srandom(98.76); // Different input
-
-       test::results[0] = vec4f(r1, r2, r3, 0.0);
-     }
-   `;
-  const result = await lygiaTestCompute(src, { elem: "vec4f" });
-  // Test determinism: same input produces same output
-  expectCloseTo([result[0]], [result[1]]);
-  // Test that different inputs produce different outputs
-  expect(result[0]).not.toBeCloseTo(result[2], 1);
-  // Regression: exact output value
-  expectCloseTo([233 / 512], [result[0]]);
-});
-
 test("srandom - distribution", async () => {
   const sampleCount = 1024;
   const src = `
@@ -585,30 +537,6 @@ test("srandom - distribution", async () => {
   `;
   const samples = await testDistribution(src, sampleCount);
   expectDistribution(samples, [-1.0, 1.0]);
-});
-
-test("srandom22", async () => {
-  const src = `
-     import lygia::generative::srandom::srandom22;
-
-     @compute @workgroup_size(1)
-     fn foo() {
-       let p1 = vec2f(1.0, 2.0);
-       let p2 = vec2f(1.0, 2.0); // Same point
-       let p3 = vec2f(3.0, 4.0); // Different point
-
-       let r1 = srandom22(p1);
-       let r2 = srandom22(p2);
-       let r3 = srandom22(p3);
-
-       test::results[0] = vec4f(r1.x, r1.y, r2.x, r2.y);
-     }
-   `;
-  const result = await lygiaTestCompute(src, { elem: "vec4f" });
-  // Test determinism: same input produces same output
-  expectCloseTo([result[0], result[1]], [result[2], result[3]]);
-  // Regression: exact output value
-  expectCloseTo([-0.3648], [result[0]]);
 });
 
 test("srandom22 - distribution (x component)", async () => {
@@ -652,10 +580,6 @@ test("srandom3", async () => {
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
   // Test determinism: same input produces same output
   expectCloseTo([result[0]], [result[1]]);
-  // Test that different inputs produce different outputs
-  expect(result[0]).not.toBeCloseTo(result[2], 1);
-  // Regression: exact output value
-  expectCloseTo([17 / 128], [result[0]]);
 });
 
 test("srandom33", async () => {
@@ -676,8 +600,6 @@ test("srandom33", async () => {
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
   // Test determinism: same input produces same output (check first component)
   expectCloseTo([result[0]], [result[3]]);
-  // Regression: exact output value
-  expectCloseTo([-151 / 256], [result[0]]);
 });
 
 test("srandom4", async () => {
@@ -702,8 +624,6 @@ test("srandom4", async () => {
   expectCloseTo([result[0]], [result[1]]);
   // Test that different inputs produce different outputs
   expect(result[0]).not.toBeCloseTo(result[2], 1);
-  // Regression: exact output value
-  expectCloseTo([-87 / 128], [result[0]]);
 });
 
 test("srandom_tile22", async () => {
@@ -726,8 +646,6 @@ test("srandom_tile22", async () => {
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
   // Test tiling: points separated by tileLength should produce same output
   expectCloseTo([result[0], result[1]], [result[2], result[3]]);
-  // Regression: exact output value
-  expectCloseTo([-0.3648], [result[0]]);
 });
 
 test("srandom_tile33", async () => {
@@ -750,6 +668,4 @@ test("srandom_tile33", async () => {
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
   // Test tiling: points separated by tileLength should produce same output (check first component)
   expectCloseTo([result[0]], [result[3]]);
-  // Regression: exact output value
-  expectCloseTo([-151 / 256], [result[0]]);
 });

@@ -13,5 +13,6 @@ test("draw-aa - spiral pattern showing AA quality", async () => {
     uniforms: {
       time: 0.1668, // Tuned to match GLSL snapshot
     },
+    allowedPixelRatio: 0.01, // AA boundary precision varies across GPUs
   });
 });
