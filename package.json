@@ -50,7 +50,7 @@
   },
   "homepage": "https://lygia.xyz",
   "devDependencies": {
-    "@typescript/native-preview": "7.0.0-dev.20260320.1",
+    "@typescript/native-preview": "7.0.0-dev.20260321.1",
     "@webgpu/types": "^0.1.69",
     "eslint": "^10.1.0",
     "eslint-config-prettier": "^10.1.8",
@@ -58,13 +58,13 @@
     "prettier": "^3.8.1",
     "vite": "^8.0.1",
     "vitest": "^4.1.0",
-    "vitest-image-snapshot": "^0.6.47",
+    "vitest-image-snapshot": "^0.6.48",
     "webpack": "^5.105.4",
     "webpack-cli": "^7.0.2",
     "webpack-glsl-loader": "github:patriciogonzalezvivo/webpack-glsl-loader",
-    "wesl-link": "^0.7.21",
-    "wesl-packager": "^0.7.21",
-    "wgsl-test": "^0.2.26"
+    "wesl-link": "^0.7.22",
+    "wesl-packager": "^0.7.22",
+    "wgsl-test": "^0.2.27"
   },
   "eslintConfig": {
     "env": {
