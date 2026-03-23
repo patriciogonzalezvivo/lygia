@@ -4,13 +4,15 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+pnpmfileChecksum: sha256-v22cngUBzDfpCT5ne1NH2gdLP73ta3LcWHCV/dimHqY=
+
 importers:
 
   .:
     devDependencies:
       '@typescript/native-preview':
-        specifier: 7.0.0-dev.20260320.1
-        version: 7.0.0-dev.20260320.1
+        specifier: 7.0.0-dev.20260321.1
+        version: 7.0.0-dev.20260321.1
       '@webgpu/types':
         specifier: ^0.1.69
         version: 0.1.69
@@ -33,8 +35,8 @@ importers:
         specifier: ^4.1.0
         version: 4.1.0(@types/node@25.5.0)(vite@8.0.1(@types/node@25.5.0)(esbuild@0.27.3)(terser@5.46.1))
       vitest-image-snapshot:
-        specifier: ^0.6.47
-        version: 0.6.47(vitest@4.1.0(@types/node@25.5.0)(vite@8.0.1(@types/node@25.5.0)(esbuild@0.27.3)(terser@5.46.1)))
+        specifier: ^0.6.48
+        version: 0.6.48(vitest@4.1.0(@types/node@25.5.0)(vite@8.0.1(@types/node@25.5.0)(esbuild@0.27.3)(terser@5.46.1)))
       webpack:
         specifier: ^5.105.4
         version: 5.105.4(esbuild@0.27.3)(webpack-cli@7.0.2)
@@ -45,14 +47,14 @@ importers:
         specifier: github:patriciogonzalezvivo/webpack-glsl-loader
         version: https://codeload.github.com/patriciogonzalezvivo/webpack-glsl-loader/tar.gz/3023b6ce6e56fb779ca305d61de7bc356b7cca35
       wesl-link:
-        specifier: ^0.7.21
-        version: 0.7.21
+        specifier: ^0.7.22
+        version: 0.7.22
       wesl-packager:
-        specifier: ^0.7.21
-        version: 0.7.21
+        specifier: ^0.7.22
+        version: 0.7.22
       wgsl-test:
-        specifier: ^0.2.26
-        version: 0.2.26(vitest-image-snapshot@0.6.47(vitest@4.1.0(@types/node@25.5.0)(vite@8.0.1(@types/node@25.5.0)(esbuild@0.27.3)(terser@5.46.1))))(vitest@4.1.0(@types/node@25.5.0)(vite@8.0.1(@types/node@25.5.0)(esbuild@0.27.3)(terser@5.46.1)))
+        specifier: ^0.2.27
+        version: 0.2.27(vitest-image-snapshot@0.6.48(vitest@4.1.0(@types/node@25.5.0)(vite@8.0.1(@types/node@25.5.0)(esbuild@0.27.3)(terser@5.46.1))))(vitest@4.1.0(@types/node@25.5.0)(vite@8.0.1(@types/node@25.5.0)(esbuild@0.27.3)(terser@5.46.1)))
 
 packages:
 
@@ -445,43 +447,43 @@ packages:
   '@types/node@25.5.0':
     resolution: {integrity: sha512-jp2P3tQMSxWugkCUKLRPVUpGaL5MVFwF8RDuSRztfwgN1wmqJeMSbKlnEtQqU8UrhTmzEmZdu2I6v2dpp7XIxw==}
 
-  '@typescript/native-preview-darwin-arm64@7.0.0-dev.20260320.1':
-    resolution: {integrity: sha512-9zadqk/wJ+4bCheapoP/wZZxIGbHotKj+QDvwlCeB93LFrcuIYDt8q91xW1tzrc12YrUTgWXqJuYHTNZ9fzyHw==}
+  '@typescript/native-preview-darwin-arm64@7.0.0-dev.20260321.1':
+    resolution: {integrity: sha512-3LQP363bDCF/pmXqzhSCSkKXr1PpNl2elC167YFRPKRyJdrETiIwj3YAB8A6esn9D30pas5VLzfmeK/tUOf+6g==}
     cpu: [arm64]
     os: [darwin]
 
-  '@typescript/native-preview-darwin-x64@7.0.0-dev.20260320.1':
-    resolution: {integrity: sha512-uw3sflQVaIIJhfu6xtFFogE8aC0MQ4xt9yRx2CDngp8/PQ0Qp8xp0LrUigQHbwtt7Y8AKR3YCRaX53rbovj4dg==}
+  '@typescript/native-preview-darwin-x64@7.0.0-dev.20260321.1':
+    resolution: {integrity: sha512-gCoKiv415CROgl0K8hEV8Lw/zvbYriWWmD7VxvpiQiTRqQmHppVXhLtb2OrGaPcsqpoBdYeCJQHN4wnohAkNLA==}
     cpu: [x64]
     os: [darwin]
 
-  '@typescript/native-preview-linux-arm64@7.0.0-dev.20260320.1':
-    resolution: {integrity: sha512-fmi8apETnFd6KhLzcGFLUcPRTZO+6vHnFw0Yz08IT68aX2Vft91LnxlJuuaiKVfzE8w9fxQlU1lAZyTVWARGIg==}
+  '@typescript/native-preview-linux-arm64@7.0.0-dev.20260321.1':
+    resolution: {integrity: sha512-15z7UWt0PG870ktcUbaa0NogAjXIYT4pSFWlsc95u8+1aITrBTMQgqRih5qUH8bHke3eeYwbpjfXaU4gNmexvw==}
     cpu: [arm64]
     os: [linux]
 
-  '@typescript/native-preview-linux-arm@7.0.0-dev.20260320.1':
-    resolution: {integrity: sha512-tCKwcnikt4uvSfHc14A6FJwEQox1yTsKcssTsAhxycH2bYuUr05AQNUdud3W41tr0MySHrcQG4CstzFxE9C86w==}
+  '@typescript/native-preview-linux-arm@7.0.0-dev.20260321.1':
+    resolution: {integrity: sha512-QuAFR9eFQzuqtKTIaJ5XkNR4i5Q55b1SE7fUcIAS528aY9j+5P1cMpvJa8aOBCuRKxfMgV5UtamolZKGWWzaMw==}
     cpu: [arm]
     os: [linux]
 
-  '@typescript/native-preview-linux-x64@7.0.0-dev.20260320.1':
-    resolution: {integrity: sha512-ouNWS+eUHna/mxP0tLQRzBfR5CwldCrG9mi+pTZY1pKnjvvu7b0i6OOFh9em36wIsDCjPGu6dQiv2sfBCCyRwA==}
+  '@typescript/native-preview-linux-x64@7.0.0-dev.20260321.1':
+    resolution: {integrity: sha512-8yuzwkxQnNSpXjXK43Y5Pn6rBfNbJVIcd3Qh9n3Tzhgtr+lcoGgwgMvn8axnqaazkxIUB3PZuiGRcqr6XIq3LA==}
     cpu: [x64]
     os: [linux]
 
-  '@typescript/native-preview-win32-arm64@7.0.0-dev.20260320.1':
-    resolution: {integrity: sha512-fG32mrKJOW8U9pq3VdHNXCfxCN3T7Uh5zkf3beH3mFIRtIv65BUONwW6rh63DCtyGZTeBkF6GTJO2nIIfx3dbA==}
+  '@typescript/native-preview-win32-arm64@7.0.0-dev.20260321.1':
+    resolution: {integrity: sha512-fCUk/VElUjMFmE6iFAtsy5r7kLxeLggEHOTWuR0HGYIUQze6EyAdDFqMPFFxvbzpUyFQFpRfUa0I/Fa5tqKh8g==}
     cpu: [arm64]
     os: [win32]
 
-  '@typescript/native-preview-win32-x64@7.0.0-dev.20260320.1':
-    resolution: {integrity: sha512-iklQlFdDWkV62GbxqVltm7y148vL6TC18BYZRzRaJjf2r+Gd2UGW3FPydNwKViTRfvWWwNx0aU8fnqTaoMBGqw==}
+  '@typescript/native-preview-win32-x64@7.0.0-dev.20260321.1':
+    resolution: {integrity: sha512-CWGyck7+sbNwOhcL+ObHhtKZe2/+Y6OZlEdWX2mHjpv8ef7ohUbPCdS94p+e7jbVY56w8NAce2Xx7ppn/C1Ucg==}
     cpu: [x64]
     os: [win32]
 
-  '@typescript/native-preview@7.0.0-dev.20260320.1':
-    resolution: {integrity: sha512-uLkkdYwvJQ/atPqMW9RUt1j71lcbL53e7a+G/I3AXb5QioMdWkG6nbNfKPM+06RgXwPDyDV9+bI0FT/13BEVgg==}
+  '@typescript/native-preview@7.0.0-dev.20260321.1':
+    resolution: {integrity: sha512-uScJZRWRxyi1l4EWwOtuO88Gh8sUTi0itcI4oKlyNtXkqik4Y7EHfs1sfYPDuAEJO3cvW6bqohHjGx3mcXSZzQ==}
     hasBin: true
 
   '@vitest/expect@4.1.0':
@@ -618,8 +620,8 @@ packages:
     resolution: {integrity: sha512-BLrgEcRTwX2o6gGxGOCNyMvGSp35YofuYzw9h1IMTRmKqttAZZVU67bdb9Pr2vUHA8+j3i2tJfjO6C6+4myGTA==}
     engines: {node: 18 || 20 || >=22}
 
-  baseline-browser-mapping@2.10.9:
-    resolution: {integrity: sha512-OZd0e2mU11ClX8+IdXe3r0dbqMEznRiT4TfbhYIbcRPZkqJ7Qwer8ij3GZAmLsRKa+II9V1v5czCkvmHH3XZBg==}
+  baseline-browser-mapping@2.10.10:
+    resolution: {integrity: sha512-sUoJ3IMxx4AyRqO4MLeHlnGDkyXRoUG0/AI9fjK+vS72ekpV0yWVY7O0BVjmBcRtkNcsAO2QDZ4tdKKGoI6YaQ==}
     engines: {node: '>=6.0.0'}
     hasBin: true
 
@@ -1369,10 +1371,10 @@ packages:
       yaml:
         optional: true
 
-  vitest-image-snapshot@0.6.47:
-    resolution: {integrity: sha512-jz/Evc8/tGoNrTZcuph/FaE4AtwOeLG3koW11X4QzljpbWQgqjWFvVS8F4eWpnfwofVz5DPTpU2Jx1vgJ53JaQ==}
+  vitest-image-snapshot@0.6.48:
+    resolution: {integrity: sha512-YCaIwfRemyS/wfs0g/iS5PpIqFqYqNlw3oac47plP5rRGZG+3fOeMFFFlBqV9HZcK9KyhlKsd/t6GAFQKdhNgA==}
     peerDependencies:
-      vitest: ^4.0.18
+      vitest: ^4.1.0
 
   vitest@4.1.0:
     resolution: {integrity: sha512-YbDrMF9jM2Lqc++2530UourxZHmkKLxrs4+mYhEwqWS97WJ7wOYEkcr+QfRgJ3PW9wz3odRijLZjHEaRLTNbqw==}
@@ -1452,31 +1454,31 @@ packages:
       webpack-cli:
         optional: true
 
-  wesl-gpu@0.1.25:
-    resolution: {integrity: sha512-1xsHZGz6mWNKOUPCkxzb/btTNFARmZLtVaJuqArc52o8EywhxObG2H4koBRaBKD+r+0exHmWD3o9XEhnTzAv8w==}
+  wesl-gpu@0.1.26:
+    resolution: {integrity: sha512-CctmFEKaYlio4ifjVNtD46nqaD9E2YncUXgHrmkoEpx2ciin47vOP2TOM3h3cUIZ1/CBIR8nKh3Vp2tBrWn4SA==}
 
-  wesl-link@0.7.21:
-    resolution: {integrity: sha512-iFb4uqJMD2XbJHl2Rn92imLt46A84nqoTgpAvvZeX/vl+HkMTbL71wo7krW6rjvK7vZYSPKhtGXB0OLuZGEEUQ==}
+  wesl-link@0.7.22:
+    resolution: {integrity: sha512-a52QkZ49w9QF9wxEh7d68vSup/2cqAmsTIT+NemlC4KdcYlD3SGUwfkPOQuHlrBCjKbChQh1bM+4qw0jTCveCw==}
     hasBin: true
 
-  wesl-packager@0.7.21:
-    resolution: {integrity: sha512-cUAMvxTZjCSDd3ufB2ZwCATQgn5uObXKMUokPmaGZwPievqXGBKrcacOAGwSYMuD44qw1aWEil8aap2wodAYAQ==}
+  wesl-packager@0.7.22:
+    resolution: {integrity: sha512-Fr6fY4atYzwhtamuqLYCWumRMVNx82bquHm5Nc8T5DVs7kOx8A08Md/dQDNSXkKQfr5STgyvPW7vIjXa/dvtoQ==}
     hasBin: true
 
-  wesl-tooling@0.6.35:
-    resolution: {integrity: sha512-LbIJZZ8L+WEZMFM56ZUUq8g6OU1SxAHaQYjpXlkvBo7iBZjS1rTTKNNUUj7/Nsq7T+bh3cfKV9Pa2AB/u02m4g==}
+  wesl-tooling@0.6.36:
+    resolution: {integrity: sha512-AwLNXQ97VkLXKA9KvyGbg0/PZAoemY7eEphRvEcHO/oWmLjqgH9riWnsit5rkEvxQBcYvKzPieiDasLQP6SKgg==}
     peerDependencies:
-      wesl: ^0.7.23
+      wesl: ^0.7.24
 
-  wesl@0.7.23:
-    resolution: {integrity: sha512-uEQhUBGFz3tNU4b7MHhHs2BpBhzcrEolJ2xwGrgqeYG5RNWtTHP1JgrU1XMiYNd04H2j35Wf209P6Ze6R/t0Rg==}
+  wesl@0.7.24:
+    resolution: {integrity: sha512-59bd+pMIcqwj5i/eFURx1vmyV6f0hEk5AoLOTvAvwi4IAhf5z1b0PZcMxr4iV1Natf9d4CsJ6ETZWpEDusyULg==}
 
-  wgsl-test@0.2.26:
-    resolution: {integrity: sha512-8T6QWO2Ave3wMDPOcCn0uHpKyI8LCNjr/5LsKT7myOjzSV3r0T2G5iVHDeP35uLCFkntBauUHhwl6ae3b5Da2Q==}
+  wgsl-test@0.2.27:
+    resolution: {integrity: sha512-hqvBF2np7OMKD87ttvrPSruVrauslWKznNPrvRhN/br6FrHhHHsdJDUaZ9SprD3zvFTy7kTWxRTu1xM5GvyWVQ==}
     hasBin: true
     peerDependencies:
-      vitest: ^4.0.18
-      vitest-image-snapshot: ^0.6.47
+      vitest: ^4.1.0
+      vitest-image-snapshot: ^0.6.48
     peerDependenciesMeta:
       vitest:
         optional: true
@@ -1786,36 +1788,36 @@ snapshots:
     dependencies:
       undici-types: 7.18.2
 
-  '@typescript/native-preview-darwin-arm64@7.0.0-dev.20260320.1':
+  '@typescript/native-preview-darwin-arm64@7.0.0-dev.20260321.1':
     optional: true
 
-  '@typescript/native-preview-darwin-x64@7.0.0-dev.20260320.1':
+  '@typescript/native-preview-darwin-x64@7.0.0-dev.20260321.1':
     optional: true
 
-  '@typescript/native-preview-linux-arm64@7.0.0-dev.20260320.1':
+  '@typescript/native-preview-linux-arm64@7.0.0-dev.20260321.1':
     optional: true
 
-  '@typescript/native-preview-linux-arm@7.0.0-dev.20260320.1':
+  '@typescript/native-preview-linux-arm@7.0.0-dev.20260321.1':
     optional: true
 
-  '@typescript/native-preview-linux-x64@7.0.0-dev.20260320.1':
+  '@typescript/native-preview-linux-x64@7.0.0-dev.20260321.1':
     optional: true
 
-  '@typescript/native-preview-win32-arm64@7.0.0-dev.20260320.1':
+  '@typescript/native-preview-win32-arm64@7.0.0-dev.20260321.1':
     optional: true
 
-  '@typescript/native-preview-win32-x64@7.0.0-dev.20260320.1':
+  '@typescript/native-preview-win32-x64@7.0.0-dev.20260321.1':
     optional: true
 
-  '@typescript/native-preview@7.0.0-dev.20260320.1':
+  '@typescript/native-preview@7.0.0-dev.20260321.1':
     optionalDependencies:
-      '@typescript/native-preview-darwin-arm64': 7.0.0-dev.20260320.1
-      '@typescript/native-preview-darwin-x64': 7.0.0-dev.20260320.1
-      '@typescript/native-preview-linux-arm': 7.0.0-dev.20260320.1
-      '@typescript/native-preview-linux-arm64': 7.0.0-dev.20260320.1
-      '@typescript/native-preview-linux-x64': 7.0.0-dev.20260320.1
-      '@typescript/native-preview-win32-arm64': 7.0.0-dev.20260320.1
-      '@typescript/native-preview-win32-x64': 7.0.0-dev.20260320.1
+      '@typescript/native-preview-darwin-arm64': 7.0.0-dev.20260321.1
+      '@typescript/native-preview-darwin-x64': 7.0.0-dev.20260321.1
+      '@typescript/native-preview-linux-arm': 7.0.0-dev.20260321.1
+      '@typescript/native-preview-linux-arm64': 7.0.0-dev.20260321.1
+      '@typescript/native-preview-linux-x64': 7.0.0-dev.20260321.1
+      '@typescript/native-preview-win32-arm64': 7.0.0-dev.20260321.1
+      '@typescript/native-preview-win32-x64': 7.0.0-dev.20260321.1
 
   '@vitest/expect@4.1.0':
     dependencies:
@@ -1981,7 +1983,7 @@ snapshots:
 
   balanced-match@4.0.4: {}
 
-  baseline-browser-mapping@2.10.9: {}
+  baseline-browser-mapping@2.10.10: {}
 
   berry-pretty@0.0.4: {}
 
@@ -1991,7 +1993,7 @@ snapshots:
 
   browserslist@4.28.1:
     dependencies:
-      baseline-browser-mapping: 2.10.9
+      baseline-browser-mapping: 2.10.10
       caniuse-lite: 1.0.30001780
       electron-to-chromium: 1.5.321
       node-releases: 2.0.36
@@ -2633,7 +2635,7 @@ snapshots:
       fsevents: 2.3.3
       terser: 5.46.1
 
-  vitest-image-snapshot@0.6.47(vitest@4.1.0(@types/node@25.5.0)(vite@8.0.1(@types/node@25.5.0)(esbuild@0.27.3)(terser@5.46.1))):
+  vitest-image-snapshot@0.6.48(vitest@4.1.0(@types/node@25.5.0)(vite@8.0.1(@types/node@25.5.0)(esbuild@0.27.3)(terser@5.46.1))):
     dependencies:
       is-ci: 4.1.0
       pixelmatch: 6.0.0
@@ -2736,51 +2738,51 @@ snapshots:
       - esbuild
       - uglify-js
 
-  wesl-gpu@0.1.25:
+  wesl-gpu@0.1.26:
     dependencies:
       thimbleberry: 0.2.10
-      wesl: 0.7.23
+      wesl: 0.7.24
 
-  wesl-link@0.7.21:
+  wesl-link@0.7.22:
     dependencies:
       import-meta-resolve: 4.2.0
-      wesl: 0.7.23
-      wesl-tooling: 0.6.35(wesl@0.7.23)
+      wesl: 0.7.24
+      wesl-tooling: 0.6.36(wesl@0.7.24)
       yargs: 18.0.0
 
-  wesl-packager@0.7.21:
+  wesl-packager@0.7.22:
     dependencies:
       '@biomejs/js-api': 1.0.0(@biomejs/wasm-nodejs@2.4.8)
       '@biomejs/wasm-nodejs': 2.4.8
-      wesl: 0.7.23
-      wesl-tooling: 0.6.35(wesl@0.7.23)
+      wesl: 0.7.24
+      wesl-tooling: 0.6.36(wesl@0.7.24)
       yargs: 18.0.0
     transitivePeerDependencies:
       - '@biomejs/wasm-bundler'
       - '@biomejs/wasm-web'
 
-  wesl-tooling@0.6.35(wesl@0.7.23):
+  wesl-tooling@0.6.36(wesl@0.7.24):
     dependencies:
       glob: 13.0.6
       import-meta-resolve: 4.2.0
       toml: 3.0.0
-      wesl: 0.7.23
+      wesl: 0.7.24
 
-  wesl@0.7.23: {}
+  wesl@0.7.24: {}
 
-  wgsl-test@0.2.26(vitest-image-snapshot@0.6.47(vitest@4.1.0(@types/node@25.5.0)(vite@8.0.1(@types/node@25.5.0)(esbuild@0.27.3)(terser@5.46.1))))(vitest@4.1.0(@types/node@25.5.0)(vite@8.0.1(@types/node@25.5.0)(esbuild@0.27.3)(terser@5.46.1))):
+  wgsl-test@0.2.27(vitest-image-snapshot@0.6.48(vitest@4.1.0(@types/node@25.5.0)(vite@8.0.1(@types/node@25.5.0)(esbuild@0.27.3)(terser@5.46.1))))(vitest@4.1.0(@types/node@25.5.0)(vite@8.0.1(@types/node@25.5.0)(esbuild@0.27.3)(terser@5.46.1))):
     dependencies:
       glob: 13.0.6
       pngjs: 7.0.0
       thimbleberry: 0.2.10
       webgpu: 0.3.10
-      wesl: 0.7.23
-      wesl-gpu: 0.1.25
-      wesl-tooling: 0.6.35(wesl@0.7.23)
+      wesl: 0.7.24
+      wesl-gpu: 0.1.26
+      wesl-tooling: 0.6.36(wesl@0.7.24)
       yargs: 18.0.0
     optionalDependencies:
       vitest: 4.1.0(@types/node@25.5.0)(vite@8.0.1(@types/node@25.5.0)(esbuild@0.27.3)(terser@5.46.1))
-      vitest-image-snapshot: 0.6.47(vitest@4.1.0(@types/node@25.5.0)(vite@8.0.1(@types/node@25.5.0)(esbuild@0.27.3)(terser@5.46.1)))
+      vitest-image-snapshot: 0.6.48(vitest@4.1.0(@types/node@25.5.0)(vite@8.0.1(@types/node@25.5.0)(esbuild@0.27.3)(terser@5.46.1)))
     transitivePeerDependencies:
       - supports-color
 

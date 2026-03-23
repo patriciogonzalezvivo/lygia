@@ -133,32 +133,41 @@ The examples can also be used as starter templates with `degit`.
 
 ## Using Rust
 
-```sh
-cargo add lygia
-```
-
 ### Linking at build time
+
 ```sh
-cargo add --build wesl
+cargo add --build lygia
+cargo add --build wesl --features package
 ```
 
 ```rs
-/// build.rs
+// build.rs
 fn main() {
-    wesl::Wesl::new("src/shaders").build_artifact("main.wesl", "my_shader");
+    wesl::Wesl::new("src/shaders")
+        .add_package(&lygia::PACKAGE)
+        .build_artifact(&"package::main".parse().unwrap(), "my_shader");
 }
+```
+
+Then in your shader files, import from lygia:
+
+```wgsl
+import lygia::math::saturate::saturate;
+import lygia::color::luma::luma;
 ```
 
 ### Linking at run-time
 
 ```sh
+cargo add lygia
 cargo add wesl
 ```
 
 ```rs
-let shader_string = Wesl::new("src/shaders")
-    .compile("main.wesl")
-    .inspect_err(|e| eprintln!("WESL error: {e}")) // pretty errors with `display()`
+let shader_string = wesl::Wesl::new("src/shaders")
+    .add_package(&lygia::PACKAGE)
+    .compile(&"package::main".parse().unwrap())
+    .inspect_err(|e| eprintln!("WESL error: {e}"))
     .unwrap()
     .to_string();
 ```

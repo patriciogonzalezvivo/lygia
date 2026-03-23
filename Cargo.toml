@@ -1,0 +1,47 @@
+[package]
+name = "lygia"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.77"
+description = "LYGIA - the biggest shader library, now for WESL/WGSL"
+repository = "https://github.com/patriciogonzalezvivo/lygia"
+license-file = "LICENSE.md"
+keywords = ["WGSL", "WESL", "WebGPU", "shader", "graphics"]
+categories = ["graphics", "rendering", "game-development"]
+readme = "README_WebGPU.md"
+build = "rust/build.rs"
+include = [
+    "rust/",
+    "rust/build.rs",
+    "LICENSE.md",
+    "README_WebGPU.md",
+    # Include only .wesl shader files
+    "animation/**/*.wesl",
+    "color/**/*.wesl",
+    "distort/**/*.wesl",
+    "draw/**/*.wesl",
+    "filter/**/*.wesl",
+    "generative/**/*.wesl",
+    "geometry/**/*.wesl",
+    "lighting/**/*.wesl",
+    "math/**/*.wesl",
+    "morphological/**/*.wesl",
+    "sample/**/*.wesl",
+    "sdf/**/*.wesl",
+    "simulate/**/*.wesl",
+    "space/**/*.wesl",
+    "version.wesl",
+]
+
+[lib]
+path = "rust/lib.rs"
+
+[dependencies]
+wesl = { path = "../wesl-rs/crates/wesl" }
+
+[build-dependencies]
+wesl = { path = "../wesl-rs/crates/wesl", features = ["package"] }
+
+[dev-dependencies]
+wesl = { path = "../wesl-rs/crates/wesl", features = ["package"] }
+
