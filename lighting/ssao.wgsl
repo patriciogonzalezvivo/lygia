@@ -24,14 +24,8 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-const SSAO_SAMPLES: f32 = 60.0;
-
-const SSAO_SAMPLES_NUM: f32 = 8;
-
 // #define SSAO_SAMPLES_ARRAY u_ssaoSamples
 uniform vec3 u_ssaoSamples[SSAO_SAMPLES_NUM];
-
-const SSAO_NOISE_NUM: f32 = 4;
 
 // #define SSAO_NOISE_ARRAY u_ssaoNoise
 uniform vec3 u_ssaoNoise[SSAO_NOISE_NUM];
@@ -40,8 +34,6 @@ uniform vec3 u_ssaoNoise[SSAO_NOISE_NUM];
 
 // #define SSAO_NOISE3_FNC(POS) random3(POS)
 
-const SSAO_DEPTH_BIAS: f32 = 0.05;
-
 // #define SSAO_DEPTH_SAMPLE_FNC(TEX, UV) SAMPLER_FNC(TEX, UV).r
 
 // #define SSAO_POS_SAMPLE_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
@@ -49,6 +41,9 @@ const SSAO_DEPTH_BIAS: f32 = 0.05;
 // #define SSAO_NORMAL_SAMPLE_FNC(TEX, UV) SAMPLER_FNC(TEX, UV).xyz
 
 fn ssao(texDepth: SAMPLER_TYPE, st: vec2f, pixel: vec2f, radius: f32) -> f32 {
+    const SSAO_SAMPLES_NUM: f32 = 8;
+    const SSAO_NOISE_NUM: f32 = 4;
+    const SSAO_DEPTH_BIAS: f32 = 0.05;
 
     let noiseS = sqrt(float(SSAO_NOISE_NUM));
     let noiseX = int( mod(gl_FragCoord.x - 0.5, noiseS) );
@@ -86,6 +81,7 @@ fn ssao(texDepth: SAMPLER_TYPE, st: vec2f, pixel: vec2f, radius: f32) -> f32 {
 }
 
 fn ssaoa(texDepth: sampler2D, coord: vec2f) -> f32 {
+    const SSAO_SAMPLES: f32 = 60.0;
     let cd = SSAO_DEPTH_SAMPLE_FNC(texDepth, coord);
     let ao_radious = 1.0/100.0;
     let screenRadius = 0.5 * (ao_radious / cd) / 0.53135;
@@ -103,6 +99,9 @@ fn ssaoa(texDepth: sampler2D, coord: vec2f) -> f32 {
 }
 
 fn ssaob(texPosition: SAMPLER_TYPE, texNormal: SAMPLER_TYPE, st: vec2f, radius: f32) -> f32 {
+    const SSAO_SAMPLES_NUM: f32 = 8;
+    const SSAO_NOISE_NUM: f32 = 4;
+    const SSAO_DEPTH_BIAS: f32 = 0.05;
     let position = SSAO_POS_SAMPLE_FNC(texPosition, st);
     let normal = SSAO_NORMAL_SAMPLE_FNC(texNormal, st);
 

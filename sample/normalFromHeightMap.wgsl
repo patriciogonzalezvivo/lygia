@@ -10,10 +10,9 @@ options:
 license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 */
 
-const SAMPLE_CHANNEL: f32 = 0;
-
 fn normalFromHeightMap(heightMap: SAMPLER_TYPE, st: vec2f, strength: f32, offset: f32) -> vec3f
 {
+    const SAMPLE_CHANNEL: f32 = 0;
     offset = pow3(offset) * 0.1;
     
     let p = SAMPLER_FNC(heightMap, st)[SAMPLE_CHANNEL];

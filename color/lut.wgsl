@@ -24,18 +24,11 @@ license:
 // #define SAMPLE2DCUBE_FLIP_Y
 
 // #define SAMPLE2DCUBE_CELLS_PER_SIDE LUT_CELLS_PER_SIDE
-const SAMPLE2DCUBE_CELLS_PER_SIDE: f32 = 8.0;
 
 #include "../sample/2DCube.wgsl"
 fn lut(tex_lut: SAMPLER_TYPE, color: vec4f, offset: i32) -> vec4f {
     return sample2DCube(tex_lut, color.rgb); 
 }
-
-const LUT_N_ROWS: f32 = 1;
-
-const LUT_CELL_SIZE: f32 = 32.0;
-
-const LUT_CELLS_PER_SIDE: f32 = 8.0;
 
 // Data about how the LUTs rows are encoded
 let LUT_WIDTH = LUT_CELL_SIZE*LUT_CELL_SIZE;

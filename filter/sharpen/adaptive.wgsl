@@ -63,8 +63,6 @@ fn sharpenContrastAdaptive(myTexture
     return saturate((window * wRGB + e) / weightRGB);
 }
 
-const SHARPENADAPTIVE_ANIME = false;  // Only darken edges
-
 // Soft limit, modified tanh approx
 fn SHARPENADAPTIVE_SOFT_LIM(v : f32, s : f32) -> f32 {
     return (saturate(abs(v / s) * (27.0 + pow(v / s, 2.0)) / (27.0 + 9.0 * pow(v / s, 2.0))) * s);
@@ -88,20 +86,8 @@ fn sharpendAdaptiveControl4(rgba : vec4f) -> f32 { return dot(rgba * rgba, vec4(
 
 //-------------------------------------------------------------------------------------------------
 // Defined values under this row are "optimal" DO NOT CHANGE IF YOU DO NOT KNOW WHAT YOU ARE DOING!
-const curveslope = 0.5;  // Sharpening curve slope, high edge values
-
-const L_overshoot = 0.003;  // Max light overshoot before compression [>0.001]
-const L_compr_low = 0.167;  // Light compression, default (0.167=~6x)
-
-const D_overshoot = 0.009;  // Max dark overshoot before compression [>0.001]
-const D_compr_low = 0.250;  // Dark compression, default (0.250=4x)
-
-const scale_lim = 0.1;   // Abs max change before compression [>0.01]
-const scale_cs = 0.056;  // Compression slope above scale_lim
 
 // Precalculated default squared kernel weights
-const w1 = vec3(0.5, 1.0, 1.41421356237);            // 0.25, 1.0, 2.0
-const w2 = vec3(0.86602540378, 1.0, 0.54772255751);  // 0.75, 1.0, 0.3
 
 fn sharpenAdaptive(myTexture
                    : texture_2d<f32>, mySampler
@@ -109,6 +95,16 @@ fn sharpenAdaptive(myTexture
                    : vec2f, pixel
                    : vec2f, strength
                    : f32) -> vec4f {
+    const SHARPENADAPTIVE_ANIME = false;  // Only darken edges
+    const curveslope = 0.5;  // Sharpening curve slope, high edge values
+    const L_overshoot = 0.003;  // Max light overshoot before compression [>0.001]
+    const L_compr_low = 0.167;  // Light compression, default (0.167=~6x)
+    const D_overshoot = 0.009;  // Max dark overshoot before compression [>0.001]
+    const D_compr_low = 0.250;  // Dark compression, default (0.250=4x)
+    const scale_lim = 0.1;   // Abs max change before compression [>0.01]
+    const scale_cs = 0.056;  // Compression slope above scale_lim
+    const w1 = vec3(0.5, 1.0, 1.41421356237);            // 0.25, 1.0, 2.0
+    const w2 = vec3(0.86602540378, 1.0, 0.54772255751);  // 0.75, 1.0, 0.3
     // [                c22               ]
     // [           c24, c9,  c23          ]
     // [      c21, c1,  c2,  c3, c18      ]

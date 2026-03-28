@@ -15,11 +15,9 @@ license:
     - MIT License (MIT) Copyright 2014, David Hoskins
 */
 
-const RANDOM_SINLESS: bool = true;
-
-const RANDOM_SCALE: vec4f = vec4f(.1031, .1030, .0973, .1099);
-
 fn random(p: f32) -> f32 {
+    const RANDOM_SINLESS: bool = true;
+    const RANDOM_SCALE: vec4f = vec4f(.1031, .1030, .0973, .1099);
     var x = p;
     if (RANDOM_SINLESS) {
         x = fract(x * RANDOM_SCALE.x);
@@ -32,6 +30,8 @@ fn random(p: f32) -> f32 {
 }
 
 fn random2(st: vec2f) -> f32 {
+    const RANDOM_SINLESS: bool = true;
+    const RANDOM_SCALE: vec4f = vec4f(.1031, .1030, .0973, .1099);
     if (RANDOM_SINLESS) {
         var p3  = fract(vec3(st.xyx) * RANDOM_SCALE.xyz);
         p3 += dot(p3, p3.yzx + 33.33);
@@ -42,6 +42,8 @@ fn random2(st: vec2f) -> f32 {
 }
 
 fn random3(p: vec3f) -> f32 {
+    const RANDOM_SINLESS: bool = true;
+    const RANDOM_SCALE: vec4f = vec4f(.1031, .1030, .0973, .1099);
     var pos = p;
     if (RANDOM_SINLESS) {
         pos  = fract(pos * RANDOM_SCALE.xyz);
@@ -53,6 +55,8 @@ fn random3(p: vec3f) -> f32 {
 }
 
 fn random4(p: vec4f) -> f32 {
+    const RANDOM_SINLESS: bool = true;
+    const RANDOM_SCALE: vec4f = vec4f(.1031, .1030, .0973, .1099);
     var pos = p;
     if (RANDOM_SINLESS) {
         pos = fract(pos * RANDOM_SCALE);
@@ -65,18 +69,21 @@ fn random4(p: vec4f) -> f32 {
 }
 
 fn random21(p: f32) -> vec2f {
+    const RANDOM_SCALE: vec4f = vec4f(.1031, .1030, .0973, .1099);
     var p3 = fract(vec3(p) * RANDOM_SCALE.xyz);
     p3 += dot(p3, p3.yzx + 19.19);
     return fract((p3.xx + p3.yz) * p3.zy);
 }
 
 fn random22(p: vec2f) -> vec2f {
+    const RANDOM_SCALE: vec4f = vec4f(.1031, .1030, .0973, .1099);
     var p3 = fract(p.xyx * RANDOM_SCALE.xyz);
     p3 += dot(p3, p3.yzx + 19.19);
     return fract((p3.xx + p3.yz) * p3.zy);
 }
 
 fn random23(p: vec3f) -> vec2f {
+    const RANDOM_SCALE: vec4f = vec4f(.1031, .1030, .0973, .1099);
     var p3 = p;
     p3 = fract(p3 * RANDOM_SCALE.xyz);
     p3 += dot(p3, p3.yzx + 19.19);
@@ -84,42 +91,49 @@ fn random23(p: vec3f) -> vec2f {
 }
 
 fn random31(p: f32) -> vec3f {
+    const RANDOM_SCALE: vec4f = vec4f(.1031, .1030, .0973, .1099);
     var p3 = fract(vec3(p) * RANDOM_SCALE.xyz);
     p3 += dot(p3, p3.yzx + 19.19);
     return fract((p3.xxy + p3.yzz) * p3.zyx);
 }
 
 fn random32(p: vec2f) -> vec3f {
+    const RANDOM_SCALE: vec4f = vec4f(.1031, .1030, .0973, .1099);
     var p3 = fract(vec3(p.xyx) * RANDOM_SCALE.xyz);
     p3 += dot(p3, p3.yxz + 19.19);
     return fract((p3.xxy + p3.yzz) * p3.zyx);
 }
 
 fn random33(p_: vec3f) -> vec3f {
+    const RANDOM_SCALE: vec4f = vec4f(.1031, .1030, .0973, .1099);
     var p = fract(p_ * RANDOM_SCALE.xyz);
     p += dot(p, p.yxz + 19.19);
     return fract((p.xxy + p.yzz) * p.zyx);
 }
 
 fn random41(p: f32) -> vec4f {
+    const RANDOM_SCALE: vec4f = vec4f(.1031, .1030, .0973, .1099);
     var p4 = fract(p * RANDOM_SCALE);
     p4 += dot(p4, p4.wzxy + 19.19);
     return fract((p4.xxyz + p4.yzzw) * p4.zywx);
 }
 
 fn random42(p: vec2f) -> vec4f {
+    const RANDOM_SCALE: vec4f = vec4f(.1031, .1030, .0973, .1099);
     var p4 = fract(p.xyxy * RANDOM_SCALE);
     p4 += dot(p4, p4.wzxy + 19.19);
     return fract((p4.xxyz + p4.yzzw) * p4.zywx);
 }
 
 fn random43(p: vec3f) -> vec4f {
+    const RANDOM_SCALE: vec4f = vec4f(.1031, .1030, .0973, .1099);
     var p4 = fract(p.xyzx  * RANDOM_SCALE);
     p4 += dot(p4, p4.wzxy + 19.19);
     return fract((p4.xxyz + p4.yzzw) * p4.zywx);
 }
 
 fn random44(p: vec4f) -> vec4f {
+    const RANDOM_SCALE: vec4f = vec4f(.1031, .1030, .0973, .1099);
     var p4 = p;
     p4 = fract(p4  * RANDOM_SCALE);
     p4 += dot(p4, p4.wzxy + 19.19);
