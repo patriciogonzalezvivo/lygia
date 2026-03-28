@@ -39,15 +39,9 @@ examples:
 
 // #define ATMOSPHERE_ORIGIN vec3(0.0)
 
-const ATMOSPHERE_SUN_POWER: f32 = 20.0;
-
 // #define ATMOSPHERE_RAY vec3(55e-7, 13e-6, 22e-6)
 
 // #define ATMOSPHERE_MIE vec3(21e-6)
-
-const ATMOSPHERE_LIGHT_SAMPLES: f32 = 8;
-
-const ATMOSPHERE_SAMPLES: f32 = 16;
 
 fn atmosphere_intersect(ray: Ray, t0: f32, t1: f32) -> bool {
     let L = ATMOSPHERE_ORIGIN - ray.origin;
@@ -80,6 +74,7 @@ fn atmosphere_height(ray: Ray, dist: f32, ds: f32, density: vec2f) -> f32 {
 }
 
 fn atmosphere_light(ray: Ray, depth: vec2f) -> bool {
+    const ATMOSPHERE_LIGHT_SAMPLES: f32 = 8;
     float t0 = 0.0;     // Atmosphere entry point 
     float t1 = 99999.0; // Atmosphere exit point
 
@@ -99,6 +94,8 @@ fn atmosphere_light(ray: Ray, depth: vec2f) -> bool {
 }
 
 fn atmosphere(ray: Ray, sun_dir: vec3f) -> vec3f {
+    const ATMOSPHERE_SUN_POWER: f32 = 20.0;
+    const ATMOSPHERE_SAMPLES: f32 = 16;
     let t0 = 0.0;
     let t1 = 99999.0;
 

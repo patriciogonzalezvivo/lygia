@@ -16,9 +16,8 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-const WORLEY_JITTER: f32 = 1.0;
-
 fn worley22(p: vec2f) -> vec2f {
+    const WORLEY_JITTER: f32 = 1.0;
     let n = floor( p );
     let f = fract( p );
 
@@ -56,6 +55,7 @@ fn worley22(p: vec2f) -> vec2f {
 fn worley2(p: vec2f) -> f32 { return 1.0-worley22(p).x; }
 
 fn worley32(p: vec3f) -> vec2f {
+    const WORLEY_JITTER: f32 = 1.0;
     let n = floor( p );
     let f = fract( p );
 

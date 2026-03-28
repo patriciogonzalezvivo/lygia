@@ -11,8 +11,6 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-const WADA_TOTAL: f32 = 157;
-
 // #define WADA_HERMOSA_PINK vec3(1.000, 0.702, 0.941)
 // #define HERMOSA_PINK WADA_HERMOSA_PINK
 // #define WADA_HERMOSA_PINK_CMYK vec4(0.000, 0.300, 0.060, 0.000)
@@ -798,8 +796,8 @@ const WADA_TOTAL: f32 = 157;
 // #define WADA_BLACK_CMYK vec4(0.200, 0.100, 0.150, 1.000)
 // #define BLACK_CMYK WADA_BLACK_CMYK
 
-    
 fn wada(index: i32) -> vec3f {
+    const WADA_TOTAL: f32 = 157;
     vec3 colors[157];
     colors[0] = WADA_HERMOSA_PINK;
     colors[1] = WADA_CORINTHIAN_PINK;
@@ -965,6 +963,7 @@ fn wada(index: i32) -> vec3f {
 }
 
 fn wadaCMYK(index: i32) -> vec4f {
+    const WADA_TOTAL: f32 = 157;
     vec4 colors[157];
     colors[0] = WADA_HERMOSA_PINK_CMYK;
     colors[1] = WADA_CORINTHIAN_PINK_CMYK;

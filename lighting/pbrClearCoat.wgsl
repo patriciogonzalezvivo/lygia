@@ -39,11 +39,8 @@ license:
 
 // #define LIGHT_COLOR     vec3(0.5, 0.5, 0.5)
 
-const LIGHT_INTENSITY: f32 = 1.0;
-
-const IBL_LUMINANCE: f32 = 1.0;
-
 fn pbrClearCoat(mat: Material, shadingData: ShadingData) -> vec4f {
+    const IBL_LUMINANCE: f32 = 1.0;
     shadingDataNew(mat, shadingData);
 
     let f0 = ior2f0(mat.ior);

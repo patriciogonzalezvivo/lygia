@@ -13,10 +13,8 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-const WADA_TRIAD_TOTAL: f32 = 112;
-
-    
 fn wadaTriad(index: i32) -> vec3i {
+    const WADA_TRIAD_TOTAL: f32 = 112;
     ivec3 t[WADA_TRIAD_TOTAL];
     t[0] = vec3i(2,3,150);
     t[1] = vec3i(54,61,124);

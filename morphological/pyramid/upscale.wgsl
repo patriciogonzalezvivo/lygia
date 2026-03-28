@@ -17,8 +17,6 @@ license: MIT License (MIT C)opyright (c) 2020 Lingdong Huang
 
 // #define PYRAMID_H1 1.0334, 0.6836, 0.1507
 
-const PYRAMID_H2: f32 = 0.0270;
-
 // #define PYRAMID_G 0.7753, 0.0312
 
 // #define PYRAMID_SAMPLE_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
@@ -28,6 +26,7 @@ const PYRAMID_H2: f32 = 0.0270;
 // #define PYRAMID_UPSCALE1_SAMPLE_FNC(TEX, UV) PYRAMID_SAMPLE_FNC(TEX, UV)
 
 fn pyramidUpscale(tex0: SAMPLER_TYPE, tex1: SAMPLER_TYPE, st: vec2f, pixel: vec2f) -> vec4f {
+    const PYRAMID_H2: f32 = 0.0270;
     let h1 = vec3f(PYRAMID_H1);
     let h2 = PYRAMID_H2;
     let g = vec2f(PYRAMID_G);

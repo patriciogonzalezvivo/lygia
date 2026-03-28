@@ -19,10 +19,6 @@ options:
     - SIMPLEANDFASTFLUID_SAMPLER_FNC: sampler function
 */
 
-const SIMPLEANDFASTFLUID_DT: f32 = 0.15;
-
-const SIMPLEANDFASTFLUID_DX: f32 = 1.0;
-
 // higher this threshold, lower the viscosity (max .8)
 // #define SIMPLEANDFASTFLUID_VISCOSITY .16
 
@@ -33,6 +29,8 @@ const SIMPLEANDFASTFLUID_DX: f32 = 1.0;
 // #define SIMPLEANDFASTFLUID_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
 
 fn simpleAndFastFluid(tex: SAMPLER_TYPE, st: vec2f, pixel: vec2f) -> vec4f {
+    const SIMPLEANDFASTFLUID_DT: f32 = 0.15;
+    const SIMPLEANDFASTFLUID_DX: f32 = 1.0;
     let k = .2;
     let s = k/SIMPLEANDFASTFLUID_DT;
     let dx = SIMPLEANDFASTFLUID_DX;
@@ -81,6 +79,8 @@ fn simpleAndFastFluid(tex: SAMPLER_TYPE, st: vec2f, pixel: vec2f) -> vec4f {
 }
 
 fn simpleAndFastFluida(tex: SAMPLER_TYPE, st: vec2f, pixel: vec2f, force: vec2f) -> vec4f {
+    const SIMPLEANDFASTFLUID_DT: f32 = 0.15;
+    const SIMPLEANDFASTFLUID_DX: f32 = 1.0;
     let k = .2;
     let s = k/SIMPLEANDFASTFLUID_DT;
     let dx = SIMPLEANDFASTFLUID_DX;

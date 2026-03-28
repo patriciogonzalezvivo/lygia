@@ -18,17 +18,12 @@ license: MIT License (MIT) Copyright 2014, Morgan McGuire
 // #define ARROWS_LINE_STYLE
 // #endif
 
-const ARROWS_TILE_SIZE: f32 = 32.0;
-
-const ARROWS_HEAD_ANGLE: f32 = 0.5;
-
 // Used for ARROWS_LINE_STYLE
 // #define ARROWS_HEAD_LENGTH ARROWS_TILE_SIZE/5.0
 
-const ARROWS_SHAFT_THICKNESS: f32 = 2.0;
-
 // Computes the center pixel of the tile containing pixel pos
 fn arrowsTileCenterCoord(pos: vec2f) -> vec2f {
+    const ARROWS_TILE_SIZE: f32 = 32.0;
     return (floor(pos / ARROWS_TILE_SIZE) + 0.5) * ARROWS_TILE_SIZE;
 }
 
@@ -36,6 +31,9 @@ fn arrowsTileCenterCoord(pos: vec2f) -> vec2f {
 // desired in pixels for arrows
 // Returns 1.0 where there is an arrow pixel.
 fn arrows2(p: vec2f, v: vec2f, resolution: vec2f) -> f32 {
+    const ARROWS_TILE_SIZE: f32 = 32.0;
+    const ARROWS_HEAD_ANGLE: f32 = 0.5;
+    const ARROWS_SHAFT_THICKNESS: f32 = 2.0;
     p *= resolution;
 
     // Make everything relative to the center, which may be fractional
@@ -55,7 +53,6 @@ fn arrows2(p: vec2f, v: vec2f, resolution: vec2f) -> f32 {
         // Arrow tip location
         v = dir_v * mag_v;
         
-
             // Signed distance from shaft
             let shaft = lineSDF(p, v, -v);
 

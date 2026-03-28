@@ -13,17 +13,12 @@ examples:
     - /shaders/lighting_raymarching.frag
 */
 
-const RAYMARCH_MAX_DIST: f32 = 20.0;
-
-const RAYMARCH_SOFTSHADOW_ITERATIONS: f32 = 64;
-
-const RAYMARCH_SHADOW_MIN_DIST: f32 = 0.005;
-
 // #define RAYMARCH_SHADOW_MAX_DIST RAYMARCH_MAX_DIST
 
-const RAYMARCH_SHADOW_SOLID_ANGLE: f32 = 0.1;
-
 fn raymarchSoftShadow(ro: vec3f, rd: vec3f) -> f32 {
+    const RAYMARCH_SOFTSHADOW_ITERATIONS: f32 = 64;
+    const RAYMARCH_SHADOW_MIN_DIST: f32 = 0.005;
+    const RAYMARCH_SHADOW_SOLID_ANGLE: f32 = 0.1;
     let mint = RAYMARCH_SHADOW_MIN_DIST;
     let maxt = RAYMARCH_SHADOW_MAX_DIST;
     let w = RAYMARCH_SHADOW_SOLID_ANGLE;

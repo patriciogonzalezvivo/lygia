@@ -35,9 +35,8 @@ license:
 
 // #define CAMERA_POSITION vec3(0.0, 0.0, -10.0)
 
-const IBL_LUMINANCE: f32 = 1.0;
-
 fn pbrGlass(mat: Material, shadingData: ShadingData) -> vec4f {
+    const IBL_LUMINANCE: f32 = 1.0;
     // Shading Data
     // ------------
     vec3 No     = normalize(mat.normal - mat.normal_back); // Normal out is the difference between the front and back normals

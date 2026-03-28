@@ -15,15 +15,12 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-const DISPLACE_DEPTH: f32 = 1.;
-
-const DISPLACE_PRECISION: f32 = 0.01;
-
 // #define DISPLACE_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV).r
 
-const DISPLACE_MAX_ITERATIONS: f32 = 120;
-
 fn displace(tex: SAMPLER_TYPE, ro: vec3f, rd: vec3f) -> vec3f {
+    const DISPLACE_DEPTH: f32 = 1.;
+    const DISPLACE_PRECISION: f32 = 0.01;
+    const DISPLACE_MAX_ITERATIONS: f32 = 120;
 
     // the z length of the target vector
     let dz = ro.z - DISPLACE_DEPTH;
