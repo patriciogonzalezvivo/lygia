@@ -20,8 +20,12 @@ license:
 #define DISPLACE_DIRECTIONS 9
 #endif
 
-#ifndef DISPLACE_SAMPLER_FNC
-#define DISPLACE_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
+#ifndef DISPLACE_VEL_SAMPLER_FNC
+#define DISPLACE_VEL_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
+#endif
+
+#ifndef DISPLACE_COLOR_SAMPLER_FNC
+#define DISPLACE_COLOR_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
 #endif
 
 #ifndef DISPLACE_FROM_AMOUNT 
@@ -45,15 +49,15 @@ vec4 displace(sampler2D texVel, sampler2D texCol, vec2 st, vec2 pixel) {
         dir[i] = vec2(cos(a), sin(a));
     }
     
-    vec4 currVel = DISPLACE_SAMPLER_FNC(texVel, st);
-    vec4 currVal = DISPLACE_SAMPLER_FNC(texCol, st - currVel.xy * pixel);
+    vec4 currVel = DISPLACE_VEL_SAMPLER_FNC(texVel, st);
+    vec4 currVal = DISPLACE_COLOR_SAMPLER_FNC(texCol, st - currVel.xy * pixel);
 
     float bestAlignment = 0.0;
     vec4 vel = currVel;
     vec4 val = currVal;
     for (int i = 0; i < iTotal; i++){
-        vec4 sourceVel = DISPLACE_SAMPLER_FNC( texVel, st + dir[i] * pixel);
-        vec4 sourceVal = DISPLACE_SAMPLER_FNC( texCol, st + dir[i] * pixel);
+        vec4 sourceVel = DISPLACE_VEL_SAMPLER_FNC( texVel, st + dir[i] * pixel);
+        vec4 sourceVal = DISPLACE_COLOR_SAMPLER_FNC( texCol, st + dir[i] * pixel);
         float alignment = (dot((sourceVel.xy), (dir[i])));
 
         #if defined(DISPLACE_FROM_CONDITION)
