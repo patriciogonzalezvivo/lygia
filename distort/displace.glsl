@@ -41,9 +41,9 @@ license:
 
 vec4 displace(sampler2D texVel, sampler2D texCol, vec2 st, vec2 pixel) {
     vec2 dir[DISPLACE_DIRECTIONS];
-    int iTotal = DISPLACE_DIRECTIONS;
-    float fTotal = float(DISPLACE_DIRECTIONS);
-    float jump = TAU/fTotal;
+    const int iTotal = DISPLACE_DIRECTIONS;
+    const float fTotal = float(DISPLACE_DIRECTIONS);
+    const float jump = TAU/fTotal;
     for (int i = 0; i < iTotal; i++) {
         float a = float(i) * jump;
         dir[i] = vec2(cos(a), sin(a));
