@@ -23,9 +23,8 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-const FAKECUBE_LIGHT_AMOUNT: f32 = 0.005;
-
 fn fakeCube3(_normal: vec3f, _shininnes: f32) -> vec3f {
+    const FAKECUBE_LIGHT_AMOUNT: f32 = 0.005;
 
     return sampleTriplanar(FAKECUBE_TEXTURE2D, _normal);
 

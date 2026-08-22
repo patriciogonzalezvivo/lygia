@@ -15,9 +15,8 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-const ZORN_TOTAL: f32 = 4;
-
 fn zorn(index: i32) -> vec3f {
+    const ZORN_TOTAL: f32 = 4;
     vec3 colors[4];
     colors[0] = TITANIUM_WHITE;
     colors[1] = YELLOW_OCHRE;

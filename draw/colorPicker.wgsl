@@ -19,11 +19,10 @@ license:
 
 // #define PIXEL_SAMPLER_FNC(TEX, UV) sampleNearest(TEX, UV, texResolution)
 
-const PIXEL_KERNEL_SIZE: f32 = 1;
-
 // #define PIXEL_SIZE vec2(0.025)
 
 fn colorPicker(tex: SAMPLER_TYPE, pos: vec2f, texResolution: vec2f, st: vec2f) -> vec4f {
+    const PIXEL_KERNEL_SIZE: f32 = 1;
     let rta = vec4f(0.0);
 
     let t_size = float(PIXEL_KERNEL_SIZE * 2 + 1) * PIXEL_SIZE;

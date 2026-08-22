@@ -16,12 +16,8 @@ options:
     - RESOLUTION
 */
 
-const SAMPLEDOF_BLUR_SIZE: f32 = 6.;
-
 // Smaller = nicer blur, larger = faster
 // #define SAMPLEDOF_RAD_SCALE .5
-
-const GOLDEN_ANGLE: f32 = 2.39996323;
 
 // #define SAMPLEDOF_DEPTH_SAMPLE_FNC(TEX, UV) SAMPLER_FNC(TEX,UV).r
 
@@ -30,6 +26,7 @@ const GOLDEN_ANGLE: f32 = 2.39996323;
 // #define SAMPLEDOF_TYPE vec3
 
 fn getBlurSize(depth: f32, focusPoint: f32, focusScale: f32) -> f32 {
+    const SAMPLEDOF_BLUR_SIZE: f32 = 6.;
     let coc = clamp((1./focusPoint-1./depth)*focusScale,-1.,1.);
     return abs(coc) * SAMPLEDOF_BLUR_SIZE;
 }

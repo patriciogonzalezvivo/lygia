@@ -19,11 +19,10 @@ license:
 
 // const SAMPLEFXAA_REDUCE_MUL: f32 = 1.0/8.0;  // TODO: verify
 
-const SAMPLEFXAA_SPAN_MAX: f32 = 8.0;
-
 // #define SAMPLEFXAA_SAMPLE_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
 
 fn sampleFXAA(tex: SAMPLER_TYPE, uv: vec2f, pixel: vec2f) -> vec4f {
+    const SAMPLEFXAA_SPAN_MAX: f32 = 8.0;
     let rgbNW = SAMPLEFXAA_SAMPLE_FNC(tex,uv.xy + vec2f( -1.0, -1.0 ) * pixel).xyz;
     let rgbNE = SAMPLEFXAA_SAMPLE_FNC(tex,uv.xy + vec2f( 1.0, -1.0 ) * pixel).xyz;
     let rgbSW = SAMPLEFXAA_SAMPLE_FNC(tex,uv.xy + vec2f( -1.0, 1.0 ) * pixel).xyz;

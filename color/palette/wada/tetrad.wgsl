@@ -13,10 +13,8 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-const WADA_TETRAD_TOTAL: f32 = 99;
-
-                
 fn wadaTetrad(index: i32) -> vec4i {
+    const WADA_TETRAD_TOTAL: f32 = 99;
     ivec4 t[WADA_TETRAD_TOTAL];
     t[0] = vec4i(2,3,115,125);
     t[1] = vec4i(1,114,135,136);

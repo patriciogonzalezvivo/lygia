@@ -34,9 +34,8 @@ license:
 
 // #define SURFACE_POSITION vec3(0.0, 0.0, 0.0)
 
-const RAYMARCH_MAX_DIST: f32 = 20.0;
-
 fn materialNew(_mat: Material) {
+    const RAYMARCH_MAX_DIST: f32 = 20.0;
     // Surface data
     _mat.position           = (SURFACE_POSITION).xyz;
     _mat.normal             = materialNormal();

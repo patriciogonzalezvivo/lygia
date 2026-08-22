@@ -10,10 +10,6 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-const SPHERICALHARMONICS_BANDS: f32 = 1;
-const SPHERICALHARMONICS_BANDS: f32 = 2;
-const SPHERICALHARMONICS_BANDS: f32 = 3;
-
 // #ifndef SCENE_SH_ARRAY
 // #define SCENE_SH_ARRAY u_SH
 // #endif

@@ -8,8 +8,6 @@ options:
 license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 */
 
-const DIST_MINKOWSKI_P: f32 = 2.0; // 1: Manhattan, 2: Euclidean, Infinity: Chebychev
-
 fn distEuclidean2(a: vec2f, b: vec2f) -> f32 { return distance(a, b); }
 fn distEuclidean3(a: vec3f, b: vec3f) -> f32 { return distance(a, b); }
 fn distEuclidean4(a: vec4f, b: vec4f) -> f32 { return distance(a, b); }

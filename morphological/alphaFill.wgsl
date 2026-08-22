@@ -15,11 +15,10 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-const ALPHAFILL_RADIUS: f32 = 2.0;
-
 // #define ALPHAFILL_SAMPLE_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
 
 fn alphaFill(tex: SAMPLER_TYPE, st: vec2f, pixel: vec2f, passes: i32) -> vec4f {
+    const ALPHAFILL_RADIUS: f32 = 2.0;
     let accum = vec4f(0.0, 0.0, 0.0, 0.0);
     let max_dist = sqrt(ALPHAFILL_RADIUS * ALPHAFILL_RADIUS);
 

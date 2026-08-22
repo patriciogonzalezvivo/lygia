@@ -13,9 +13,8 @@ license:
     - The MIT License Copyright 2020 Martijn Steinrucken
 */
 
-const WAVELET_VORTICITY: f32 = 0.0;
-
 fn wavelet(p: vec2f, phase: f32, scale: f32) -> f32 {
+    const WAVELET_VORTICITY: f32 = 0.0;
     var d = 0.0; 
     var s = 1.0;
     var m = 0.0;

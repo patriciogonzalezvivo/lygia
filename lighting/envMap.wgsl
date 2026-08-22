@@ -25,16 +25,14 @@ license:
 // #define SAMPLE_CUBE_FNC(CUBEMAP, NORM, LOD) textureLod(CUBEMAP, NORM, LOD)
 // #define SAMPLE_CUBE_FNC(CUBEMAP, NORM, LOD) textureCube(CUBEMAP, NORM, LOD)
 
-const ENVMAP_MAX_MIP_LEVEL: f32 = 3.0;
-
-const ENVMAP_LOD_OFFSET: f32 = 0;
-
 fn envMapRoughnessToLod(roughness: f32, roughnessOneLevel: f32) -> f32 {
     // quadratic fit for log2(roughness)+roughnessOneLevel
     return roughnessOneLevel * roughness * (2.0 - roughness);
 }
 
 fn envMap3(_normal: vec3f, _roughness: f32, _metallic: f32) -> vec3f {
+    const ENVMAP_MAX_MIP_LEVEL: f32 = 3.0;
+    const ENVMAP_LOD_OFFSET: f32 = 0;
 
 // ENVMAP overwrites cube sampling  
     return ENVMAP_FNC(_normal, _roughness, _metallic);

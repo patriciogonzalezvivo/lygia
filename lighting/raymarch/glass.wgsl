@@ -22,23 +22,13 @@ examples:
     - /shaders/lighting_raymarching_glass_refraction.frag
 */
 
-const RAYMARCH_GLASS_DENSITY: f32 = 0.;
-
 // #define RAYMARCH_GLASS_COLOR vec3(1.,1.,1.)
-
-const RAYMARCH_GLASS_REFLECTION_EFFECT: f32 = 5.;
 
 // #define RAYMARCH_GLASS_WAVELENGTH_MAP_FNC(res, rdIn, rdOut, pEnter, pExit, nEnter, nExit, ior, roughness) RAYMARCH_GLASS_MAP_FNC(res, rdIn, rdOut, pEnter, pExit, nEnter, nExit, ior, roughness)
 
 // #define RAYMARCH_GLASS_FNC(RAY, POSITION, IOR, ROUGHNESS) raymarchDefaultGlass(RAY, POSITION, IOR, ROUGHNESS)
 
 // #define RAYMARCH_GLASS_CHROMATIC_ABERRATION .01
-
-const RAYMARCH_GLASS_SAMPLES: f32 = 50;
-
-const RAYMARCH_GLASS_MIN_DIST: f32 = 0.;
-
-const RAYMARCH_GLASS_MAX_DIST: f32 = 100.;
 
 // #define RAYMARCH_GLASS_MIN_HIT_DIST .0001
 
@@ -161,6 +151,8 @@ fn raymarchDefaultGlass3(ray: vec3f, pos: vec3f, ior: f32, roughness: f32, glass
 }
 
 fn raymarchDefaultGlass3a(ray: vec3f, pos: vec3f, ior: f32, roughness: f32) -> vec4f {
+    const RAYMARCH_GLASS_DENSITY: f32 = 0.;
+    const RAYMARCH_GLASS_REFLECTION_EFFECT: f32 = 5.;
     let color = vec3f(0.);
 
     RAYMARCH_MAP_TYPE marchOutside = raymarchGlassMarching(pos,ray); // Outside of the object

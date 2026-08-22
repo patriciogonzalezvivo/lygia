@@ -9,10 +9,6 @@ options:
     - FOG_COLOR_WARM
 */
 
-const FOG_DENSITY: f32 = 0.0;
-
-const FOG_FALLOFF: f32 = 0.0;
-
 // #define FOG_COLOR_COOL vec3(0.5, 0.6, 0.7)
 
 // #define FOG_COLOR_WARM vec3(1.0, 0.9, 0.7)
@@ -42,6 +38,8 @@ vec3 raymarchHeightFog( in vec3 col,     // color of pixel
 }
 
 fn raymarchFog(col: vec3f, t: f32, ro: vec3f, rd: vec3f) -> vec3f {
+    const FOG_DENSITY: f32 = 0.0;
+    const FOG_FALLOFF: f32 = 0.0;
     if (FOG_DENSITY > 0.0 && FOG_FALLOFF > 0.0) {
         return raymarchHeightFog(col, t, ro, rd);
     }

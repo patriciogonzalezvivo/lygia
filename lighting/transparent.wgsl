@@ -13,10 +13,9 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-const TRANSPARENT_DISPERSION: f32 = 0.05;
-const TRANSPARENT_DISPERSION_PASSES: f32 = 6;
-
 fn transparent3(normal: vec3f, view: vec3f, Fr: vec3f, eta: vec3f, roughness: f32) -> vec3f {
+    const TRANSPARENT_DISPERSION: f32 = 0.05;
+    const TRANSPARENT_DISPERSION_PASSES: f32 = 6;
     let color = vec3f(0.0);
     let T = max(vec3f(0.0), 1.0-Fr);
 
@@ -46,6 +45,8 @@ fn transparent3(normal: vec3f, view: vec3f, Fr: vec3f, eta: vec3f, roughness: f3
 }
 
 fn transparent3a(normal: vec3f, view: vec3f, Fr: f32, eta: vec3f, roughness: f32) -> vec3f {
+    const TRANSPARENT_DISPERSION: f32 = 0.05;
+    const TRANSPARENT_DISPERSION_PASSES: f32 = 6;
     let color = vec3f(0.0);
     let T = max(0.0, 1.0-Fr);
 
