@@ -25,11 +25,9 @@ license:
 
 // #define CAMERA_FAR_CLIP u_cameraFarClip
 
-const SSR_MAX_STEP: f32 = 500;
-
-const SSR_MAX_DISTANCE: f32 = 180.0;
-
 fn ssr(texPosition: SAMPLER_TYPE, texNormal: SAMPLER_TYPE, st: vec2f, pixel: vec2f, op: f32, dist: f32) -> vec2f {
+    const SSR_MAX_STEP: f32 = 500;
+    const SSR_MAX_DISTANCE: f32 = 180.0;
     let viewPosition = SAMPLER_FNC(texPosition, st).xyz;
     // if (-viewPosition.z >= CAMERA_FAR_CLIP)
     //     return st;

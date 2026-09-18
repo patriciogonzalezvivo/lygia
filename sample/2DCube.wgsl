@@ -15,11 +15,10 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-const SAMPLE2DCUBE_CELLS_PER_SIDE: f32 = 8.0;
-
 // #define SAMPLE2DCUBE_FNC(TEX, UV) SAMPLER_FNC(TEX, saturate(UV))
 
 fn sample2DCube(lut: SAMPLER_TYPE, xyz: vec3f) -> vec4f {
+    const SAMPLE2DCUBE_CELLS_PER_SIDE: f32 = 8.0;
 
     let cellsSize = SAMPLE2DCUBE_CELL_SIZE;
     let cellsPerSide = sqrt(cellsSize);

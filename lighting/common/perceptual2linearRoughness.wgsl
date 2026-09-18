@@ -5,9 +5,8 @@ use: <float> perceptual2linearRoughness(<float> perceptualRoughness)
 license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 */
 
-const MIN_PERCEPTUAL_ROUGHNESS: f32 = 0.045;
-
 fn perceptual2linearRoughness(perceptualRoughness: f32) -> f32 {
+    const MIN_PERCEPTUAL_ROUGHNESS: f32 = 0.045;
     perceptualRoughness = clamp(perceptualRoughness, MIN_PERCEPTUAL_ROUGHNESS, 1.0);
     return perceptualRoughness * perceptualRoughness;
 }

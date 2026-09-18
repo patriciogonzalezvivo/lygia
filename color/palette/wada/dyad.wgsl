@@ -13,9 +13,8 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-const WADA_DYAD_TOTAL: f32 = 124;
-
 fn wadaDyad(index: i32) -> vec2i {
+    const WADA_DYAD_TOTAL: f32 = 124;
     ivec2 d[WADA_DYAD_TOTAL];
     d[0] = vec2i(65,115);
     d[1] = vec2i(13,39);

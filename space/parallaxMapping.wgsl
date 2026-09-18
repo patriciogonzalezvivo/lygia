@@ -22,10 +22,6 @@ license:
 // #define PARALLAXMAPPING_FNC parallaxMapping_occlusion
 // #define PARALLAXMAPPING_FNC parallaxMapping_simple
 
-const PARALLAXMAPPING_SCALE: f32 = 0.01;
-
-const PARALLAXMAPPING_NUMSEARCHES: f32 = 10.0;
-
 //////////////////////////////////////////////////////
 //  Implements Parallax Mapping technique
 //  Returns modified texture coordinates, and last used depth
@@ -33,6 +29,7 @@ const PARALLAXMAPPING_NUMSEARCHES: f32 = 10.0;
 //  http://sunandblackcat.com/tipFullView.php?topicid=28
 
 fn parallaxMapping_simple(tex: SAMPLER_TYPE, V: vec3f, T: vec2f, parallaxHeight: f32) -> vec2f {
+    const PARALLAXMAPPING_SCALE: f32 = 0.01;
 
     // get depth for this fragment
     let initialHeight = PARALLAXMAPPING_SAMPLER_FNC(tex, T);
@@ -48,6 +45,8 @@ fn parallaxMapping_simple(tex: SAMPLER_TYPE, V: vec3f, T: vec2f, parallaxHeight:
 }
 
 fn parallaxMapping_steep(tex: SAMPLER_TYPE, V: vec3f, T: vec2f, parallaxHeight: f32) -> vec2f {
+    const PARALLAXMAPPING_SCALE: f32 = 0.01;
+    const PARALLAXMAPPING_NUMSEARCHES: f32 = 10.0;
 
     // determine number of layers from angle between V and N
     let minLayers = PARALLAXMAPPING_NUMSEARCHES * 0.5;
@@ -83,6 +82,8 @@ fn parallaxMapping_steep(tex: SAMPLER_TYPE, V: vec3f, T: vec2f, parallaxHeight: 
 }
 
 fn parallaxMapping_relief(tex: SAMPLER_TYPE, V: vec3f, T: vec2f, parallaxHeight: f32) -> vec2f {
+    const PARALLAXMAPPING_SCALE: f32 = 0.01;
+    const PARALLAXMAPPING_NUMSEARCHES: f32 = 10.0;
     // determine required number of layers
     let minLayers = PARALLAXMAPPING_NUMSEARCHES;
     let maxLayers = 15.0;
@@ -151,6 +152,8 @@ fn parallaxMapping_relief(tex: SAMPLER_TYPE, V: vec3f, T: vec2f, parallaxHeight:
 }
 
 fn parallaxMapping_occlusion(tex: SAMPLER_TYPE, V: vec3f, T: vec2f, parallaxHeight: f32) -> vec2f {
+    const PARALLAXMAPPING_SCALE: f32 = 0.01;
+    const PARALLAXMAPPING_NUMSEARCHES: f32 = 10.0;
     // determine optimal number of layers
     let minLayers = PARALLAXMAPPING_NUMSEARCHES;
     let maxLayers = 15.0;

@@ -8,9 +8,8 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-const TOMETALLIC_MIN_REFLECTANCE: f32 = 0.04;
-
 fn toMetallic3(diffuse: vec3f, specular: vec3f, maxSpecular: f32) -> f32 {
+    const TOMETALLIC_MIN_REFLECTANCE: f32 = 0.04;
     let perceivedDiffuse = sqrt(0.299 * diffuse.r * diffuse.r + 0.587 * diffuse.g * diffuse.g + 0.114 * diffuse.b * diffuse.b);
     let perceivedSpecular = sqrt(0.299 * specular.r * specular.r + 0.587 * specular.g * specular.g + 0.114 * specular.b * specular.b);
     if (perceivedSpecular < TOMETALLIC_MIN_REFLECTANCE) {

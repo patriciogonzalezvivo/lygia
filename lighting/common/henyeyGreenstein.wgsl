@@ -4,9 +4,9 @@
 // represents the average cosine of the scattered directions
 // 0 is isotropic scattering
 // > 1 is forward scattering, < 1 is backwards
-const HENYEYGREENSTEIN_SCATTERING: f32 = 0.76;
 
 fn henyeyGreenstein(mu: f32) -> f32 {
+    const HENYEYGREENSTEIN_SCATTERING: f32 = 0.76;
     return max(0.0, (1.0 - HENYEYGREENSTEIN_SCATTERING*HENYEYGREENSTEIN_SCATTERING) / ((4. + PI) * pow(1.0 + HENYEYGREENSTEIN_SCATTERING*HENYEYGREENSTEIN_SCATTERING - 2.0 * HENYEYGREENSTEIN_SCATTERING * mu, 1.5)));
 }
 

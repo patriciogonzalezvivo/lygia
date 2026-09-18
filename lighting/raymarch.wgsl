@@ -35,11 +35,10 @@ license:
 
 // #define RAYMARCH_VOLUME_RENDER_FNC raymarchVolume
 
-const RAYMARCH_CAMERA_FOV: f32 = 60.0;
-
 let RAYMARCH_MULTISAMPLE_FACTOR = 1.0/float(RAYMARCH_MULTISAMPLE);
 
 fn raymarchModelPosition(st: vec2f) -> vec3f {
+    const RAYMARCH_CAMERA_FOV: f32 = 60.0;
     let fov = 1.0 / tan(RAYMARCH_CAMERA_FOV * DEG2RAD * 0.5);
     return normalize(vec3f(st*2.0-1.0, fov));
     let theta = length(st) * RAYMARCH_CAMERA_FOV * DEG2RAD * 0.5;
@@ -85,7 +84,6 @@ fn raymarch(viewMatrix: mat4x4<f32>, st: vec2f, eyeDepth: f32, mat: Material) ->
     
     return color * RAYMARCH_MULTISAMPLE_FACTOR;
     
-
     let rayDirection = viewMatrix3 * raymarchModelPosition(st);
     let dist = 0.0;
 

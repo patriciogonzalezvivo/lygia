@@ -15,8 +15,6 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-const DISPLACE_DIRECTIONS: f32 = 9;
-
 // #define DISPLACE_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
 
 // #define DISPLACE_FROM_AMOUNT sourceVal.a
@@ -24,6 +22,7 @@ const DISPLACE_DIRECTIONS: f32 = 9;
 // #define DISPLACE_TO_AMOUNT length(vel.xy)
 
 fn displace(texVel: sampler2D, texCol: sampler2D, st: vec2f, pixel: vec2f) -> vec4f {
+    const DISPLACE_DIRECTIONS: f32 = 9;
     vec2 dir[DISPLACE_DIRECTIONS];
     let iTotal = DISPLACE_DIRECTIONS;
     let fTotal = float(DISPLACE_DIRECTIONS);

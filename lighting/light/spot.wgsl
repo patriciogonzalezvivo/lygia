@@ -23,9 +23,8 @@ license:
 
 // #define LIGHT_COLOR vec3(0.5)
 
-const LIGHT_INTENSITY: f32 = 1.0;
-
 fn lightSpot(_diffuseColor: vec3f, _specularColor: vec3f, _N: vec3f, _V: vec3f, _NoV: f32, _roughness: f32, _f0: f32, _diffuse: vec3f, _specular: vec3f) {
+    const LIGHT_INTENSITY: f32 = 1.0;
     let toLight = LIGHT_POSITION - (SURFACE_POSITION).xyz;
     let toLightLength = length(toLight);
     let s = toLight/toLightLength;

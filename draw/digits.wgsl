@@ -16,8 +16,6 @@ license:
 
 // #define DIGITS_SIZE vec2(.02)
 
-const DIGITS_DECIMALS: f32 = 2.0;
-
 // #define DIGITS_VALUE_OFFSET vec2(-6.0, 3.0)
 
 fn digits2(st: vec2f, value: f32, nDecDigit: f32) -> f32 {
@@ -98,11 +96,11 @@ fn digits2(st: vec2f, value: f32, nDecDigit: f32) -> f32 {
 }
 
 fn digits2a(st: vec2f, value: f32, nDecDigit: f32, nIntDigits: f32) -> f32 {
+    const DIGITS_LEADING_INT: f32 = 1.0;
     let st2 = st;
     let result = 0.0;
     let dig = nDecDigit;
 
-const DIGITS_LEADING_INT: f32 = 1.0;
 //     #define DIGITS_LEADING_INT nIntDigits
 
     for (float i = DIGITS_LEADING_INT - 1.0; i > 0.0 ; i--) {
@@ -120,6 +118,7 @@ fn digits2b(st: vec2f, value: i32) -> f32 {
 }
 
 fn digits2c(st: vec2f, value: f32) -> f32 {
+    const DIGITS_DECIMALS: f32 = 2.0;
     return digits(st, value, (DIGITS_DECIMALS));
 }
 

@@ -20,7 +20,6 @@ license:
 // #define DITHER_TRIANGLENOISE_CHROMATIC
 
 // #define DITHER_TRIANGLENOISE_PRECISION DITHER_PRECISION
-const DITHER_TRIANGLENOISE_PRECISION: f32 = 255;
 
 fn triangleNoise(st: HIGHP) -> f32 {
     st = floor(st);

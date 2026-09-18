@@ -14,8 +14,6 @@ examples:
     - https://raw.githubusercontent.com/patriciogonzalezvivo/lygia_examples/main/color_wavelength.frag
 */
 
-const SPECTRAL_ZUCCONI6_ITERATIONS: f32 = 100.0;
-
 fn spectral_zucconi6(x: f32) -> vec3f {
     let c1 = vec3f(3.54585104, 2.93225262, 2.41593945);
     let x1 = vec3f(0.69549072, 0.49228336, 0.27699880);

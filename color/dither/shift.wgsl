@@ -21,7 +21,6 @@ license:
 // #define DITHER_SHIFT_CHROMATIC
 
 // #define DITHER_SHIFT_PRECISION DITHER_PRECISION
-const DITHER_SHIFT_PRECISION: f32 = 256;
 
 fn ditherShift(b: f32, st: vec2f, pres: i32) -> f32 {
     //Bit-depth of display. Normally 8 but some LCD monitors are 7 or even 6-bit.   

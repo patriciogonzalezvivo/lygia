@@ -27,17 +27,11 @@ license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 // #define LIGHT_COLOR u_lightColor
 // #define LIGHT_COLOR vec3(0.5, 0.5, 0.5)
 
-const LIGHT_INTENSITY: f32 = 1.0;
-
-const RAYMARCH_VOLUME_SAMPLES: f32 = 64;
-
-const RAYMARCH_VOLUME_SAMPLES_LIGHT: f32 = 32;
-
 // #define RAYMARCH_VOLUME_MAP_FNC raymarchVolumeMap
 
-const RAYMARCH_VOLUME_DITHER: f32 = 0.1;
-
 fn raymarchVolumeShadowTransmittance(position: vec3f, rayDirectionL: vec3f, stepSizeL: f32) -> vec3f {
+    const RAYMARCH_VOLUME_SAMPLES_LIGHT: f32 = 32;
+    const RAYMARCH_VOLUME_DITHER: f32 = 0.1;
     let transmittanceL = vec3f(1.0, 1.0, 1.0);
     let tL = 0.0;
 
@@ -60,6 +54,10 @@ fn raymarchVolumeShadowTransmittance(position: vec3f, rayDirectionL: vec3f, step
 }
 
 fn raymarchVolume(rayOrigin: vec3f, rayDirection: vec3f, st: vec2f, minDist: f32, background: vec3f) -> vec3f {
+    const LIGHT_INTENSITY: f32 = 1.0;
+    const RAYMARCH_VOLUME_SAMPLES: f32 = 64;
+    const RAYMARCH_VOLUME_SAMPLES_LIGHT: f32 = 32;
+    const RAYMARCH_VOLUME_DITHER: f32 = 0.1;
     let scatteredLuminance = vec3f(0.0, 0.0, 0.0);
     let transmittance = vec3f(1.0, 1.0, 1.0);
     let stepSize = RAYMARCH_MAX_DIST/float(RAYMARCH_VOLUME_SAMPLES);

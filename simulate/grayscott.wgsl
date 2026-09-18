@@ -10,9 +10,8 @@ options:
     - GRAYSCOTT_ITERATIONS
 */
 
-const GRAYSCOTT_ITERATIONS: f32 = 9;
-
 fn grayscott(tex: SAMPLER_TYPE, st: vec2f, pixel: vec2f, src: f32, diffU: f32, diffV: f32, f: f32, k: f32) -> vec3f {
+    const GRAYSCOTT_ITERATIONS: f32 = 9;
     
     float kernel[9];
     kernel[0] = 0.707106781;

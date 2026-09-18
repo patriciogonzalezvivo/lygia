@@ -10,14 +10,13 @@ options:
     - SHARPENFAST_SAMPLER_FNC(TEX, UV): defaults to texture2D(tex, TEX, UV).rgb
 */
 
-const SHARPENFAST_KERNELSIZE = 2;
-
 fn sharpenFast(myTexture
                : texture_2d<f32>, mySampler
                : sampler, coords
                : vec2f, pixel
                : vec2f, strength
                : f32) -> vec4f {
+    const SHARPENFAST_KERNELSIZE = 2;
     var sum = vec4f(0.);
     for (var i = 0; i < SHARPENFAST_KERNELSIZE; i++) {
         var f_size = f32(i) + 1.;

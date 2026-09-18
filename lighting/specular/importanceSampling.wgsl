@@ -14,9 +14,8 @@ use: vec3 specularImportanceSampling(float roughness, vec3 f0, const vec3 n, con
 license: MIT License (MIT) Copyright (c) 2024 Shadi EL Hajj
 */
 
-const IBL_IMPORTANCE_SAMPLING_SAMPLES: f32 = 16;
-
 fn specularImportanceSampling(roughness: f32, f0: vec3f, p: vec3f, n: vec3f, v: vec3f, r: vec3f, NoV: f32, energyCompensation: vec3f) -> vec3f {
+    const IBL_IMPORTANCE_SAMPLING_SAMPLES: f32 = 16;
     let numSamples = IBL_IMPORTANCE_SAMPLING_SAMPLES;
     let invNumSamples = 1.0 / float(IBL_IMPORTANCE_SAMPLING_SAMPLES);
     let up = vec3f(0.0, 0.0, 1.0);

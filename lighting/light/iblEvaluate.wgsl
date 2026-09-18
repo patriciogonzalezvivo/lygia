@@ -14,9 +14,8 @@ license: MIT License (MIT) Copyright (c) 2024 Shadi El Hajj
 #include "../common/envBRDFApprox.wgsl"
 #include "../../color/tonemap.wgsl"
 
-const IBL_LUMINANCE: f32 = 1.0;
-
 fn lightIBLEvaluate(mat: Material, shadingData: ShadingData) {
+    const IBL_LUMINANCE: f32 = 1.0;
 
     let E = envBRDFApprox(shadingData.NoV, shadingData.roughness);
     let specularColorE = shadingData.specularColor * E.x + E.y;
