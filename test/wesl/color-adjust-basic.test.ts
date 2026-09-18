@@ -189,15 +189,15 @@ test("vibrance", async () => {
      }
    `;
   const result = await lygiaTestCompute(src, { elem: "vec3f" });
-  // Vibrance formula: mix(vec3(luma), color, 1.0 + (v * 1.0 - sign(v) * sat))
+  // Vibrance formula: mix(vec3(luma), color, 1.0 + (v * (1.0 - sign(v) * sat)))
   // max_color = 0.6, min_color = 0.4, sat = 0.2
   // luma ≈ 0.6*0.2126 + 0.5*0.7152 + 0.4*0.0722 = 0.5141
-  // mix factor = 1.0 + (0.5 * 1.0 - sign(0.5) * 0.2) = 1.0 + 0.5 - 0.2 = 1.3
-  // mix(0.5141, color, 1.3) means interpolate/extrapolate
-  // r: 0.5141 + (0.6 - 0.5141) * 1.3 = 0.5141 + 0.1117 = 0.6258
-  // g: 0.5141 + (0.5 - 0.5141) * 1.3 = 0.5141 - 0.0183 = 0.4958
-  // b: 0.5141 + (0.4 - 0.5141) * 1.3 = 0.5141 - 0.1483 = 0.3658
-  expectCloseTo([0.6258, 0.4958, 0.3658], result);
+  // mix factor = 1.0 + (0.5 * (1.0 - sign(0.5) * 0.2)) = 1.0 + 0.5 * 0.8 = 1.4
+  // mix(0.5141, color, 1.4) means interpolate/extrapolate
+  // r: 0.5141 + (0.6 - 0.5141) * 1.4 = 0.5141 + 0.1203 = 0.6344
+  // g: 0.5141 + (0.5 - 0.5141) * 1.4 = 0.5141 - 0.0197 = 0.4944
+  // b: 0.5141 + (0.4 - 0.5141) * 1.4 = 0.5141 - 0.1597 = 0.3544
+  expectCloseTo([0.6344, 0.4944, 0.3544], result);
 });
 
 test("vibrance - selective saturation boost", async () => {
@@ -235,5 +235,5 @@ test("vibrance - selective saturation boost", async () => {
   expect(result[0]).toBeGreaterThan(1.0);
 
   // Negative vibrance should move colors toward gray
-  expectCloseTo([0.833, 0.393], [result[2], result[3]]);
+  expectCloseTo([0.5365, 0.4565], [result[2], result[3]]);
 });
