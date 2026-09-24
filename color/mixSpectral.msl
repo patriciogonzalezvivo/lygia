@@ -23,7 +23,7 @@ license: MIT License Copyright (c) 2023 Ronald van Wijnen
 #define MIXSPECTRAL_SIZE 38
 #define MIXSPECTRAL_EPSILON 0.0001
 
-void mixSpectral_linear_to_reflectance(float3 lrgb, inout float R[MIXSPECTRAL_SIZE]) {
+void mixSpectral_linear_to_reflectance(float3 lrgb, thread float (&R)[MIXSPECTRAL_SIZE]) {
     float w = min(lrgb.r, min(lrgb.g, lrgb.b));
     lrgb -= w;
 

@@ -24,7 +24,7 @@ float wavelet(float2 p, float phase, float k) {
         #endif
         q = (fract(q) - 0.5) * rotate2d(a);
         d += sin(q.x * 10.0 + phase) * smoothstep(.25, 0.0, dot(q,q)) / s;
-        p = p * matrix<float, 2, 2>(0.54,-0.84, 0.84, 0.54) + i;
+        p = p * float2x2(0.54,-0.84, 0.84, 0.54) + i;
         m += 1.0 / s;
         s *= k; 
     }

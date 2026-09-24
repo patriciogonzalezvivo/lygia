@@ -1,0 +1,74 @@
+#include "../math/saturate.msl"
+#include "../sampler.msl"
+
+/*
+original_author: Patricio Gonzalez Vivo
+description: Grayscott Reaction-Diffusion
+use: <float3> grayscott(<SAMPLER_TYPE> tex, <float2> st, <float2> pixel, <float> src [, <float> diffU, <float> diffV, <float> f, <float> k ])
+options:
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
+    - GRAYSCOTT_ITERATIONS
+*/
+
+#ifndef GRAYSCOTT_ITERATIONS
+#define GRAYSCOTT_ITERATIONS 9
+#endif
+
+#ifndef FNC_GRAYSCOTT
+#define FNC_GRAYSCOTT
+
+float3 grayscott(SAMPLER_TYPE tex, float2 st, float2 pixel, float src, float diffU, float diffV, float f, float k ) {
+    
+    float kern[9];
+    kern[0] = 0.707106781;
+    kern[1] = 1.0;
+    kern[2] = 0.707106781;
+    kern[3] = 1.0;
+    kern[4] = -6.82842712;
+    kern[5] = 1.0;
+    kern[6] = 0.707106781;
+    kern[7] = 1.0;
+    kern[8] = 0.707106781;
+
+    float2 offset[9];
+    offset[0] = pixel * float2(-1.0,-1.0);
+    offset[1] = pixel * float2( 0.0,-1.0);
+    offset[2] = pixel * float2( 1.0,-1.0);
+
+    offset[3] = pixel * float2(-1.0,0.0);
+    offset[4] = pixel * float2( 0.0,0.0);
+    offset[5] = pixel * float2( 1.0,0.0);
+
+    offset[6] = pixel * float2(-1.0,1.0);
+    offset[7] = pixel * float2( 0.0,1.0);
+    offset[8] = pixel * float2( 1.0,1.0);
+
+    float2 current = SAMPLER_FNC(tex, st).rb;
+
+    float2 lap = float2(0.0);
+    for (int i=0; i < GRAYSCOTT_ITERATIONS; i++){
+        float2 tmp = SAMPLER_FNC(tex, st + offset[i]).rb;
+        lap += tmp * kern[i];
+    }
+
+    float F  = f + src * 0.025 - 0.0005;
+    float K  = k + src * 0.025 - 0.0005;
+
+    float u  = current.r;
+    float v  = current.g + src * 0.5;
+
+    float uvv = u * v * v;
+
+    float du = diffU * lap.r - uvv + F * (1.0 - u);
+    float dv = diffV * lap.g + uvv - (F + K) * v;
+
+    u += du * 0.6;
+    v += dv * 0.6;
+    return float3(saturate(u), 1.0 - u/v, saturate(v));
+}
+
+float3 grayscott(SAMPLER_TYPE tex, float2 st, float2 pixel, float src) {
+    return grayscott(tex, st, pixel, src, 0.25, 0.05, 0.1, 0.063); 
+}
+
+#endif

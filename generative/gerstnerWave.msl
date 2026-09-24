@@ -14,7 +14,7 @@ license:
 #ifndef FNC_GERSTNERWAVE
 #define FNC_GERSTNERWAVE
 
-float3 gerstnerWave (float2 _uv, float2 _dir, float _steepness, float _wavelength, float _time, inout float3 _tangent, inout float3 _binormal) {
+float3 gerstnerWave (float2 _uv, float2 _dir, float _steepness, float _wavelength, float _time, thread float3& _tangent, thread float3& _binormal) {
     float k = 2.0 * PI / _wavelength;
     float c = sqrt(9.8 / k);
     float2 d = normalize(_dir);
@@ -38,7 +38,7 @@ float3 gerstnerWave (float2 _uv, float2 _dir, float _steepness, float _wavelengt
     );
 }
 
-float3 gerstnerWave (float2 _uv, float2 _dir, float _steepness, float _wavelength, float _time, inout float3 _normal) {
+float3 gerstnerWave (float2 _uv, float2 _dir, float _steepness, float _wavelength, float _time, thread float3& _normal) {
     float3 _tangent = float3(0.0);
     float3 _binormal = float3(0.0);
     float3 pos = gerstnerWave (_uv, _dir, _steepness, _wavelength, _time, _tangent, _binormal);

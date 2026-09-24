@@ -1,0 +1,15 @@
+/*
+description: Include all available easing animations
+*/
+
+#include "easing/back.msl"
+#include "easing/bounce.msl"
+#include "easing/circular.msl"
+#include "easing/cubic.msl"
+#include "easing/elastic.msl"
+#include "easing/exponential.msl"
+#include "easing/linear.msl"
+#include "easing/quadratic.msl"
+#include "easing/quartic.msl"
+#include "easing/quintic.msl"
+#include "easing/sine.msl"

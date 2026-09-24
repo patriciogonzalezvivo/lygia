@@ -16,7 +16,7 @@ license:
 #ifndef FNC_DRAW_MATRIX
 #define FNC_DRAW_MATRIX
 
-float4 matrix(in float2 st, in float2x2 M) {
+float4 matrix(float2 st, float2x2 M) {
     float4 rta = float4(0.0, 0.0, 0.0, 0.0);
     float2 size = DIGITS_SIZE * abs(DIGITS_VALUE_OFFSET) * 2.0;
     rta.a = 0.5 * step(-DIGITS_SIZE.x, st.x) * step(st.x, size.x) * step(-DIGITS_SIZE.y, st.y) * step(st.y, size.y);
@@ -24,7 +24,7 @@ float4 matrix(in float2 st, in float2x2 M) {
     return rta;
 }
 
-float4 matrix(in float2 st, in float3x3 M) {
+float4 matrix(float2 st, float3x3 M) {
     float4 rta = float4(0.0, 0.0, 0.0, 0.0);
     float2 size = DIGITS_SIZE * abs(DIGITS_VALUE_OFFSET) * 3.0;
     rta.a = 0.5 * step(-DIGITS_SIZE.x, st.x) * step(st.x, size.x) * step(-DIGITS_SIZE.y, st.y) * step(st.y, size.y);
@@ -32,7 +32,7 @@ float4 matrix(in float2 st, in float3x3 M) {
     return rta;
 }
 
-float4 matrix(in float2 st, in float4x4 M) {
+float4 matrix(float2 st, float4x4 M) {
     float4 rta = float4(0.0, 0.0, 0.0, 0.0);
     float2 size = DIGITS_SIZE * abs(DIGITS_VALUE_OFFSET) * 4.0;
     rta.a = 0.5 * step(-DIGITS_SIZE.x, st.x) * step(st.x, size.x) * step(-DIGITS_SIZE.y, st.y) * step(st.y, size.y);

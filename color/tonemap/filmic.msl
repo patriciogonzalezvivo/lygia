@@ -1,0 +1,16 @@
+/*
+contributors: [Jim Hejl, Richard Burgess-Dawson ]
+description: Haarm-Peter Duikers curve from John Hables presentation "Uncharted 2 HDR Lighting", Page 140, http://www.gdcvault.com/play/1012459/Uncharted_2__HDR_Lighting
+use: <float3|float4> tonemapFilmic(<float3|float4> x)
+*/
+
+#ifndef FNC_TONEMAPFILMIC
+#define FNC_TONEMAPFILMIC
+float3 tonemapFilmic(float3 v) {
+    v = max(float3(0.0), v - 0.004);
+    v = (v * (6.2 * v + 0.5)) / (v * (6.2 * v + 1.7) + 0.06);
+    return v;
+}
+
+float4 tonemapFilmic(float4 x) { return float4( tonemapFilmic(x.rgb), x.a ); }
+#endif

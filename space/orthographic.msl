@@ -9,8 +9,8 @@ license:
 
 #ifndef FNC_ORTHOGRAPHIC
 #define FNC_ORTHOGRAPHIC
-mat4 orthographic(float l, float r, float b, float t, float n, float f) {
-    return mat4(
+float4x4 orthographic(float l, float r, float b, float t, float n, float f) {
+    return float4x4(
         float4(2.0/(r-l),     0.0,          0.0,         0.0),
         float4(0.0,           2.0/(t-b),    0.0,         0.0),
         float4(0.0,           0.0,         -2.0/(f-n),   0.0),

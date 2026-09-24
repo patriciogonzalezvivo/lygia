@@ -1,0 +1,59 @@
+#include "../color/space/linear2gamma.msl"
+#include "../color/space/gamma2linear.msl"
+#include "../sampler.msl"
+
+/*
+contributors:
+    - Xor
+    - Patricio Gonzalez Vivo
+description: Fibonacci Bokeh inspired on Xor's https://www.shadertoy.com/view/fljyWd
+use: <float4> fibonacciBokeh(<SAMPLER_TYPE> tex, <float2> st, <float2> pixel, <float> amount)
+options:
+    - FIBONACCIBOKEH_TYPE: null
+    - FIBONACCIBOKEH_MAXSAMPLES: null
+    - FIBONACCIBOKEH_SAMPLER_FNC(UV): null
+    - SAMPLER_FNC(TEX, UV): optional depending the target version of GLSL (texture2D(...) or texture(...))
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
+
+#ifndef FIBONACCIBOKEH_TYPE
+#define FIBONACCIBOKEH_TYPE float4
+#endif
+
+#ifndef FIBONACCIBOKEH_MAXSAMPLES
+#define FIBONACCIBOKEH_MAXSAMPLES 100
+#endif
+
+#ifndef FIBONACCIBOKEH_SAMPLER_FNC
+#define FIBONACCIBOKEH_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
+#endif
+
+#ifndef FNC_FIBONACCIBOKEH
+#define FNC_FIBONACCIBOKEH
+
+FIBONACCIBOKEH_TYPE fibonacciBokeh(SAMPLER_TYPE tex, float2 st, float2 pixel, float amount) {
+    FIBONACCIBOKEH_TYPE color = FIBONACCIBOKEH_TYPE(0.0);
+    const float2x2 m = float2x2(-0.737, -0.676, 0.676, -0.737) ;
+
+    float2 r = 1.0/pixel;
+    float2 uv = st * r;
+    float f = 1.0 / (1.001 - amount);
+
+    float2 st2 = float2( dot(uv + uv - r, float2(.0002,-0.001)), 0.0 );
+
+    float counter = 0.0;
+    float s = 1.0;
+    for (int i = 0; i < FIBONACCIBOKEH_MAXSAMPLES; i++) {
+        s += 1.0/s;
+        if (s >= 16.0)
+            break;
+        st2 *= m;
+        color += gamma2linear( FIBONACCIBOKEH_SAMPLER_FNC(tex, st + st2 * s * pixel ) * f);
+        counter++;
+    }
+    return linear2gamma(color / counter);
+}
+
+#endif

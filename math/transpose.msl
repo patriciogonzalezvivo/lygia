@@ -1,0 +1,11 @@
+/*
+contributors: Mikola Lysenko
+description: |
+    transpose matrixes. Metal already provides a native transpose() for every matrix type,
+    so redefining it here would make every call ambiguous. Use the native function.
+use: <float3x3|float4x4> transpose(<float3x3|float4x4> m)
+*/
+
+#ifndef FNC_TRANSPOSE
+#define FNC_TRANSPOSE
+#endif

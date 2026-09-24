@@ -20,7 +20,7 @@ float arrowSDF(float3 v, float3 start, float3 end, float baseRadius, float tipRa
         float3 column1 = float3( t.z * t.z * k + t.y, t.x, t.z * -t.x * k );
         float3 column2 = float3( -t.x , t.y , -t.z );
         float3 column3 = float3( -t.x * t.z * k , t.z, t.x * t.x * k + t.y );
-        v = mat3( column1 , column2 , column3 ) * v;
+        v = float3x3( column1 , column2 , column3 ) * v;
     }
     
     float2 q = float2( length(v.xz) , v.y );

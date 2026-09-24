@@ -1,0 +1,4 @@
+#include "wada/value.msl"
+#include "wada/dyad.msl"
+#include "wada/triad.msl"
+#include "wada/tetrad.msl"

@@ -36,3 +36,10 @@ jobs:
       - name: Run CI checks (macOS)
         if: matrix.os == 'macos-latest'
         run: pnpm ci:check
+
+      - name: Compile Metal shaders (macOS)
+        if: matrix.os == 'macos-latest'
+        run: |
+          # Xcode 26+ ships the Metal toolchain as a separate component
+          xcrun -sdk macosx metal --version || xcodebuild -downloadComponent MetalToolchain
+          test/msl/compile.sh

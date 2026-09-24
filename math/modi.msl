@@ -1,0 +1,13 @@
+/*
+contributors: Patricio Gonzalez Vivo
+description: |
+    Integer modulus, returns the remainder of a division of two integers.
+use: <int> modi(<int> x, <int> y)
+*/
+
+#ifndef FNC_MODI
+#define FNC_MODI
+int modi(int x, int y) {
+    return x % y;
+}
+#endif

@@ -13,5 +13,5 @@ license:
 #ifndef FNC_SRGB2LAB
 #define FNC_SRGB2LAB
 float3 srgb2lab( float3 srgb) { return rgb2lab(srgb2rgb(srgb));}
-float4 srgb2lab( float4 srgb) { return float4(srgb2lab(srgb.rgb),rgb.a); }
+float4 srgb2lab( float4 srgb) { return float4(srgb2lab(srgb.rgb), srgb.a); }
 #endif

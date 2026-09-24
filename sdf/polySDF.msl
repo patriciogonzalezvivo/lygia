@@ -22,7 +22,7 @@ float polySDF(float2 st, int V) {
 #else
     st = st * 2.0 - 1.0;
 #endif
-    float a = atan(st.x, st.y) + PI;
+    float a = atan2(st.x, st.y) + PI;
     float r = length(st);
     float v = TAU / float(V);
     return cos(floor(.5 + a / v) * v - a ) * r;

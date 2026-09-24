@@ -130,15 +130,15 @@ float digits(float2 st, float value, float nDecDigit, float nIntDigits) {
     return result; 
 }
 
-float digits(in float2 st, in int value) {
+float digits(float2 st, int value) {
     return digits(st, float(value), 0.0);
 }
 
-float digits(in float2 st, in float value) {
+float digits(float2 st, float value) {
     return digits(st, value, (DIGITS_DECIMALS));
 }
 
-float digits(in float2 st, in float2 v) {
+float digits(float2 st, float2 v) {
     float rta = 0.0;
     for (int i = 0; i < 2; i++) {
         float2 pos = st + float2(float(i), 0.0) * DIGITS_SIZE * DIGITS_VALUE_OFFSET;
@@ -148,7 +148,7 @@ float digits(in float2 st, in float2 v) {
     return rta;
 }
 
-float digits(in float2 st, in float3 v) {
+float digits(float2 st, float3 v) {
     float rta = 0.0;
     for (int i = 0; i < 3; i++) {
         float2 pos = st + float2(float(i), 0.0) * DIGITS_SIZE * DIGITS_VALUE_OFFSET;
@@ -158,7 +158,7 @@ float digits(in float2 st, in float3 v) {
     return rta;
 }
 
-float digits(in float2 st, in float4 v) {
+float digits(float2 st, float4 v) {
     float rta = 0.0;
     for (int i = 0; i < 4; i++) {
         float2 pos = st + float2(float(i), 0.0) * DIGITS_SIZE * DIGITS_VALUE_OFFSET;
@@ -168,7 +168,7 @@ float digits(in float2 st, in float4 v) {
     return rta;
 }
 
-float digits(in float2 st, in float2x2 _matrix) {
+float digits(float2 st, float2x2 _matrix) {
     float rta = 0.0;
     for (int i = 0; i < 2; i++) {
         for (int j = 0; j < 2; j++) {
@@ -180,7 +180,7 @@ float digits(in float2 st, in float2x2 _matrix) {
     return rta;
 }
 
-float digits(in float2 st, in float3x3 _matrix) {
+float digits(float2 st, float3x3 _matrix) {
     float rta = 0.0;
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
@@ -192,7 +192,7 @@ float digits(in float2 st, in float3x3 _matrix) {
     return rta;
 }
 
-float digits(in float2 st, in float4x4 _matrix) {
+float digits(float2 st, float4x4 _matrix) {
     float rta = 0.0;
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {

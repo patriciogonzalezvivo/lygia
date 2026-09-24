@@ -1,7 +1,7 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: Set of dither methods
-use: <float4|float3|float> dither(<float4|float3|float> value[, <float> time])
+use: <float4|float3|float> dither(<float4|float3|float> value, <float2> st)
 options:
     - DITHER_FNC
     - RESOLUTION: view port resolution
@@ -36,8 +36,9 @@ license:
 #ifndef FNC_DITHER
 #define FNC_DITHER
 
-float dither(float v) { return DITHER_FNC(v); }
-float3 dither(float3 v) { return DITHER_FNC(v); }
-float4 dither(float4 v) { return DITHER_FNC(v); }
+// Metal has no gl_FragCoord, so pass the fragment position (e.g. [[position]].xy) as st
+float dither(float v, float2 st) { return DITHER_FNC(float3(v), st).r; }
+float3 dither(float3 v, float2 st) { return DITHER_FNC(v, st); }
+float4 dither(float4 v, float2 st) { return DITHER_FNC(v, st); }
 
 #endif

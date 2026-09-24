@@ -1,0 +1,92 @@
+
+#include "../sampler.msl"
+#include "../math/const.msl"
+#include "../math/saturate.msl"
+
+/*
+contributors: Patricio Gonzalez Vivo
+description: Displace pixels
+use: <float4> displace(<SAMPLER_TYPE> texVel, <SAMPLER_TYPE> texCol, <float2> st, <float2> pixel)
+options:
+    - SAMPLER_FNC(TEX, UV)
+    - DISPLACE_VEL_SAMPLER_FNC(TEX, UV): function used to sample the velocity texture, defaults to SAMPLER_FNC(TEX, UV)
+    - DISPLACE_COLOR_SAMPLER_FNC(TEX, UV): function used to sample the color texture, defaults to SAMPLER_FNC(TEX, UV)
+    - DISPLACE_FROM_CONDITION: condition to use the source of the mix
+    - DISPLACE_FROM_AMOUNT: amount of the source to use
+    - DISPLACE_TO_AMOUNT: amount of the target to use
+license:
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
+    - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
+*/
+
+#ifndef DISPLACE_DIRECTIONS
+#define DISPLACE_DIRECTIONS 9
+#endif
+
+#ifndef DISPLACE_VEL_SAMPLER_FNC
+#define DISPLACE_VEL_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
+#endif
+
+#ifndef DISPLACE_COLOR_SAMPLER_FNC
+#define DISPLACE_COLOR_SAMPLER_FNC(TEX, UV) SAMPLER_FNC(TEX, UV)
+#endif
+
+#ifndef DISPLACE_FROM_AMOUNT 
+#define DISPLACE_FROM_AMOUNT sourceVal.a
+#endif
+
+#ifndef DISPLACE_TO_AMOUNT 
+#define DISPLACE_TO_AMOUNT length(vel.xy)
+#endif
+
+#ifndef FNC_DISPLACE
+#define FNC_DISPLACE
+
+float4 displace(SAMPLER_TYPE texVel, SAMPLER_TYPE texCol, float2 st, float2 pixel) {
+    float2 dir[DISPLACE_DIRECTIONS];
+    const int iTotal = DISPLACE_DIRECTIONS;
+    const float fTotal = float(DISPLACE_DIRECTIONS);
+    const float jump = TAU/fTotal;
+    for (int i = 0; i < iTotal; i++) {
+        float a = float(i) * jump;
+        dir[i] = float2(cos(a), sin(a));
+    }
+    
+    float4 currVel = DISPLACE_VEL_SAMPLER_FNC(texVel, st);
+    float4 currVal = DISPLACE_COLOR_SAMPLER_FNC(texCol, st - currVel.xy * pixel);
+
+    float bestAlignment = 0.0;
+    float4 vel = currVel;
+    float4 val = currVal;
+    for (int i = 0; i < iTotal; i++){
+        float4 sourceVel = DISPLACE_VEL_SAMPLER_FNC( texVel, st + dir[i] * pixel);
+        float4 sourceVal = DISPLACE_COLOR_SAMPLER_FNC( texCol, st + dir[i] * pixel);
+        float alignment = (dot((sourceVel.xy), (dir[i])));
+
+        #if defined(DISPLACE_FROM_CONDITION)
+        if (alignment < bestAlignment && DISPLACE_FROM_CONDITION )
+        #else 
+        if (alignment < bestAlignment)
+        #endif
+        {
+            float from = saturate( DISPLACE_FROM_AMOUNT );
+
+            #if defined(DISPLACE_FNC)
+            val = DISPLACE_FNC(currVal, sourceVal, from);
+            #else
+            val = mix(currVal, sourceVal, from);
+            #endif
+
+            vel = sourceVel;
+            bestAlignment = alignment;
+        }
+    }
+
+    float to = saturate( DISPLACE_TO_AMOUNT );
+    #if defined(DISPLACE_FNC)
+    return DISPLACE_FNC(currVal, val, to);
+    #else
+    return mix(currVal, val, to);
+    #endif
+}
+#endif

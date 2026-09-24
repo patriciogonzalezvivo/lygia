@@ -46,7 +46,7 @@ license:
 //
 //  http://sunandblackcat.com/tipFullView.php?topicid=28
 
-float2 parallaxMapping_simple(SAMPLER_TYPE tex, float3 V, float2 T, out float parallaxHeight) {
+float2 parallaxMapping_simple(SAMPLER_TYPE tex, float3 V, float2 T, thread float& parallaxHeight) {
 
     // get depth for this fragment
     float initialHeight = PARALLAXMAPPING_SAMPLER_FNC(tex, T);
@@ -62,7 +62,7 @@ float2 parallaxMapping_simple(SAMPLER_TYPE tex, float3 V, float2 T, out float pa
 }
 
 
-float2 parallaxMapping_steep(SAMPLER_TYPE tex, float3 V, float2 T, out float parallaxHeight) {
+float2 parallaxMapping_steep(SAMPLER_TYPE tex, float3 V, float2 T, thread float& parallaxHeight) {
 
     // determine number of layers from angle between V and N
     const float minLayers = PARALLAXMAPPING_NUMSEARCHES * 0.5;
@@ -97,7 +97,7 @@ float2 parallaxMapping_steep(SAMPLER_TYPE tex, float3 V, float2 T, out float par
     return currentTextureCoords;
 }
 
-float2 parallaxMapping_relief(SAMPLER_TYPE tex, float3 V, float2 T, out float parallaxHeight) {
+float2 parallaxMapping_relief(SAMPLER_TYPE tex, float3 V, float2 T, thread float& parallaxHeight) {
     // determine required number of layers
     const float minLayers = PARALLAXMAPPING_NUMSEARCHES;
     const float maxLayers = 15.0;
@@ -167,7 +167,7 @@ float2 parallaxMapping_relief(SAMPLER_TYPE tex, float3 V, float2 T, out float pa
 
 
 #if defined(PARALLAXMAPPING_OCCLUSION)
-float2 parallaxMapping_occlusion(SAMPLER_TYPE tex, float3 V, float2 T, out float parallaxHeight) {
+float2 parallaxMapping_occlusion(SAMPLER_TYPE tex, float3 V, float2 T, thread float& parallaxHeight) {
     // determine optimal number of layers
     const float minLayers = PARALLAXMAPPING_NUMSEARCHES;
     const float maxLayers = 15.0;
@@ -222,7 +222,7 @@ float2 parallaxMapping_occlusion(SAMPLER_TYPE tex, float3 V, float2 T, out float
 }
 #endif
 
-float2 parallaxMapping(SAMPLER_TYPE tex, float3 V, float2 T, out float parallaxHeight) {
+float2 parallaxMapping(SAMPLER_TYPE tex, float3 V, float2 T, thread float& parallaxHeight) {
     return PARALLAXMAPPING_FNC(tex, V, T, parallaxHeight);
 }
 

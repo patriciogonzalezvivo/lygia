@@ -10,10 +10,10 @@ license:
 #ifndef FNC_PERSPECTIVE
 #define FNC_PERSPECTIVE
 
-mat4 perspective(float fov, float aspect, float near, float far) {
+float4x4 perspective(float fov, float aspect, float near, float far) {
     float f = 1.0 / tan(fov / 2.0);
     float nf = 1.0 / (near - far);
-    return mat4(
+    return float4x4(
         f / aspect, 0.0, 0.0, 0.0,
         0.0, f, 0.0, 0.0,
         0.0, 0.0, (far + near) * nf, -1.0,

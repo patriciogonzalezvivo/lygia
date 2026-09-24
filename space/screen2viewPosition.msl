@@ -3,31 +3,37 @@
 /*
 contributors: Patricio Gonzalez Vivo
 description: derive view surface position from screen coordinates and depth
-use: <float3> screen2viewPosition( const <float2> screenPosition, const <float> depth, const <float> viewZ )
+use: <float4> screen2viewPosition( const <float2> screenPosition, const <float> depth, const <float> viewZ [, <float4x4> projection [, <float4x4> inverseProjection]] )
 options:
-    - CAMERA_PROJECTION_MATRIX: mat4 matrix with camera projection
-    - INVERSE_CAMERA_PROJECTION_MATRIX: mat4 matrix with the inverse camara projection
+    - CAMERA_PROJECTION_MATRIX: float4x4 matrix with camera projection. Metal has no global uniforms, so the
+      overload without a projection argument only exists when this is defined to something in scope
+    - INVERSE_CAMERA_PROJECTION_MATRIX: float4x4 matrix with the inverse camara projection
 license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Prosperity License - https://prosperitylicense.com/versions/3.0.0
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-#ifndef CAMERA_PROJECTION_MATRIX
-#define CAMERA_PROJECTION_MATRIX u_projectionMatrix
-#endif
-
-#ifndef INVERSE_CAMERA_PROJECTION_MATRIX
-// #define INVERSE_CAMERA_PROJECTION_MATRIX u_inverseProjectionMatrix
-#define INVERSE_CAMERA_PROJECTION_MATRIX inverse(CAMERA_PROJECTION_MATRIX)
-#endif
-
 #ifndef FNC_SCREEN2VIEWPOSITION
 #define FNC_SCREEN2VIEWPOSITION
 
-float4 screen2viewPosition( const float2 screenPosition, const float depth, const float viewZ ) {
-    float clipW = CAMERA_PROJECTION_MATRIX[2][3] * viewZ + CAMERA_PROJECTION_MATRIX[3][3];
+float4 screen2viewPosition( const float2 screenPosition, const float depth, const float viewZ, const float4x4 projection, const float4x4 inverseProjection ) {
+    float clipW = projection[2][3] * viewZ + projection[3][3];
     float4 clipPosition = float4( ( float3(screenPosition, depth ) - 0.5 ) * 2.0, 1.0 ) * clipW;
-    return INVERSE_CAMERA_PROJECTION_MATRIX * clipPosition;
+    return inverseProjection * clipPosition;
 }
+
+float4 screen2viewPosition( const float2 screenPosition, const float depth, const float viewZ, const float4x4 projection ) {
+    return screen2viewPosition(screenPosition, depth, viewZ, projection, inverse(projection));
+}
+
+#ifdef CAMERA_PROJECTION_MATRIX
+float4 screen2viewPosition( const float2 screenPosition, const float depth, const float viewZ ) {
+#ifdef INVERSE_CAMERA_PROJECTION_MATRIX
+    return screen2viewPosition(screenPosition, depth, viewZ, CAMERA_PROJECTION_MATRIX, INVERSE_CAMERA_PROJECTION_MATRIX);
+#else
+    return screen2viewPosition(screenPosition, depth, viewZ, CAMERA_PROJECTION_MATRIX);
+#endif
+}
+#endif
 
 #endif

@@ -1,0 +1,57 @@
+#include "../generative/random.msl"
+
+/*
+contributors: [Morgan McGuire, Chris Wyman]
+description: |
+    hashed alpha testing we aim for quality equivalent to stochastic
+    alpha testing while simultaneously achieving stability equivalent to
+    traditional alpha testing
+    https://cwyman.org/papers/i3d17_hashedAlpha.pdf
+    In Metal it uses dfdx/dfdy and discard_fragment(), so it can only be called from fragment functions.
+use:
+    <float> alphaHashing(<float3> pos[, <float> scale])
+    <void> alphaHashingTest(<float3> pos, <float> alpha[, <float> scale])
+options:
+    - ALPHAHASHING_FNC: haching/random function
+    - ALPHAHASHING_OFFSET: time offset for hashing
+*/
+
+#ifndef ALPHAHASHING_FNC
+#define ALPHAHASHING_FNC random
+#endif
+
+
+#ifndef FNC_ALPHAHASHING
+#define FNC_ALPHAHASHING
+
+float alphaHashing(float3 p, float s) {
+    float maxDeriv = max(length(dfdx(p.xy)), length(dfdy(p.xy)));
+    float pixScale = 1.0 / (s*maxDeriv);
+    float2 pixScales = float2(  exp2(floor(log2(pixScale))),
+                            exp2(ceil(log2(pixScale))));
+    float2 alpha = float2(  ALPHAHASHING_FNC(floor(pixScales.x * p)),
+                        ALPHAHASHING_FNC(floor(pixScales.y * p)));
+    float lerpFactor = fract(log2(pixScale));
+    float x = (1.0 - lerpFactor) * alpha.x + lerpFactor * alpha.y;
+    float t = min(lerpFactor, 1.0 - lerpFactor);
+    float3 cases = float3(  x * x / (2.0 * t * (1.0 - t)),
+                        (x - 0.5 * t) / (1.0 - t),
+                        1.0 - (1.0 - x) * (1.0 - x) / (2.0 * t * (1.0 - t)));
+    float threshold = (x < 1.0 - t) ? ((x < t) ? cases.x : cases.y) : cases.z;
+
+    #ifdef ALPHAHASHING_OFFSET
+    threshold = fract(threshold + ALPHAHASHING_OFFSET);
+    #endif
+
+    return clamp(threshold, 1.0e-6, 1.0);
+}
+
+void  alphaHashingTest(float3 p, float a, float s) {
+    if (a < alphaHashing(p, s))
+        discard_fragment();
+}
+
+float alphaHashing(float3 p) { return alphaHashing(p, 1.0); }
+void  alphaHashingTest(float3 p, float a) { alphaHashingTest(p, a, 1.0); }
+
+#endif
