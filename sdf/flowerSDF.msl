@@ -21,7 +21,7 @@ float flowerSDF(float2 st, int N) {
 #endif
     st *= 4.0;
     float r = length(st) * 2.0;
-    float a = atan(st.y, st.x);
+    float a = atan2(st.y, st.x);
     float v = float(N) * 0.5;
     return 1.0 - (abs(cos(a * v)) *  0.5 + 0.5) / r;
 }

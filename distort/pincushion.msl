@@ -42,7 +42,7 @@ float2 pincushion(float2 st, float2 pixel, float amt) {
     float A = (power > 0.0)? tan(dist * power) : atan(dist * -power * 10.0);
     float B = (power > 0.0)? tan(bind * power) : atan(-power * bind * 10.0);
 
-    float2 uv = m + normalize(d) * A * bind/B;
+    float2 uv = (power == 0.0)? st : m + normalize(d) * A * bind/B; // no distortion when amt is 0 (avoids 0/0)
     return float2(uv.x, uv.y * prop);
 }
 

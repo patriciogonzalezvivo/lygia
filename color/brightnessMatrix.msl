@@ -9,8 +9,8 @@ license:
 
 #ifndef FNC_BRIGHTNESSMATRIX
 #define FNC_BRIGHTNESSMATRIX
-mat4 brightnessMatrix(float a) {
-    return mat4(  1., 0., 0., 0.,
+float4x4 brightnessMatrix(float a) {
+    return float4x4(  1., 0., 0., 0.,
                   0., 1., 0., 0.,
                   0., 0., 1., 0.,
                   a, a, a, 1. );

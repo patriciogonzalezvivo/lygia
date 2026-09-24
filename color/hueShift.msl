@@ -1,5 +1,6 @@
 #include "space/hsl2rgb.msl"
 #include "space/rgb2hsl.msl"
+#include "../math/const.msl"
 
 /*
 contributors:

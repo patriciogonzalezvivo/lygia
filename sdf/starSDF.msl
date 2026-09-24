@@ -21,7 +21,7 @@ float starSDF(float2 st, int V, float s) {
     st -= 0.5;
 #endif
     st *= 2.0;
-    float a = atan(st.y, st.x) / TAU;
+    float a = atan2(st.y, st.x) / TAU;
     float seg = a * float(V);
     a = ((floor(seg) + 0.5) / float(V) +
         mix(s, -s, step(0.5, fract(seg))))

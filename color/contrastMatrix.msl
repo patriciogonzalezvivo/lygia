@@ -9,9 +9,9 @@ license:
 
 #ifndef FNC_CONTRASTMATRIX
 #define FNC_CONTRASTMATRIX
-mat4 contrastMatrix(float a) {
+float4x4 contrastMatrix(float a) {
     float t = ( 1. - a ) * .5;
-    return mat4( a, .0, .0, .0,
+    return float4x4( a, .0, .0, .0,
                 .0, a, .0, .0,
                 .0, .0, a, .0,
                 t,   t, t, 1. );

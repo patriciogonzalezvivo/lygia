@@ -1,5 +1,5 @@
-#include "digits.hlsl"
-#include "../sample/nearest.hlsl"
+#include "digits.msl"
+#include "../sample/nearest.msl"
 
 /*
 contributors: Patricio Gonzalez Vivo
@@ -32,7 +32,7 @@ license:
 
 #ifndef FNC_PIXEL
 #define FNC_PIXEL
-float4 colorPicker(SAMPLER_TYPE tex, in float2 pos, float2 texResolution, in float2 st) {
+float4 colorPicker(SAMPLER_TYPE tex, float2 pos, float2 texResolution, float2 st) {
     float4 rta = float4(0.0, 0.0, 0.0, 0.0);
 
     float2 t_size = float(PIXEL_KERNEL_SIZE * 2 + 1) * PIXEL_SIZE;

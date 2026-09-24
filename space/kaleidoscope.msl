@@ -9,6 +9,9 @@ description: |
     https://danielilett.com/2020-02-19-tut3-8-crazy-kaleidoscopes/
 */
 
+#ifndef FNC_KALEIDOSCOPE
+#define FNC_KALEIDOSCOPE
+
 // Use when when you want to specify the segment count and the phase for animation
 float2 kaleidoscope(float2 coord, float segmentCount, float phase) {    
     float2 uv;
@@ -20,7 +23,7 @@ float2 kaleidoscope(float2 coord, float segmentCount, float phase) {
 #endif
     
     float radius = length(uv);
-    float angle = atan(uv.y, uv.x);
+    float angle = atan2(uv.y, uv.x);
     
     float segmentAngle = TWO_PI / segmentCount;
     angle -= segmentAngle * floor(angle / segmentAngle);
@@ -41,3 +44,5 @@ float2 kaleidoscope(float2 coord) {
 float2 kaleidoscope(float2 coord, float segmentCount) {    
     return kaleidoscope(coord, segmentCount, 0.0);
 }
+
+#endif

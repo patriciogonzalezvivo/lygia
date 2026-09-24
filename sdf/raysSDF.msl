@@ -21,6 +21,6 @@ float raysSDF(float2 st, int N) {
 #else
     st -= 0.5;
 #endif
-    return fract(atan(st.y, st.x) / TAU * float(N));
+    return fract(atan2(st.y, st.x) / TAU * float(N));
 }
 #endif

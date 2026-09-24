@@ -1,0 +1,11 @@
+/*
+contributors: [Erik Reinhard, Michael Stark, Peter Shirley, James Ferwerda]
+description: Photographic Tone Reproduction for Digital Images. http://www.cmap.polytechnique.fr/~peyre/cours/x2005signal/hdr_photographic.pdf
+use: <float3|float4> tonemapReinhard(<float3|float4> x)
+*/
+
+#ifndef FNC_TONEMAPREINHARD
+#define FNC_TONEMAPREINHARD
+float3 tonemapReinhard(float3 v) { return v / (1.0 + dot(v, float3(0.21250175, 0.71537574, 0.07212251))); }
+float4 tonemapReinhard(float4 v) { return float4( tonemapReinhard(v.rgb), v.a ); }
+#endif

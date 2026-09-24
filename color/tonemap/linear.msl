@@ -1,0 +1,11 @@
+/*
+contributors: nan
+description: Linear tonemap (no modifications are applied)
+use: <float3|float4> tonemapLinear(<float3|float4> x)
+*/
+
+#ifndef FNC_TONEMAPLINEAR
+#define FNC_TONEMAPLINEAR
+float3 tonemapLinear(float3 v) { return v; }
+float4 tonemapLinear(float4 v) { return v; }
+#endif

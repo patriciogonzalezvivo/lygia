@@ -5,7 +5,6 @@ contributors: Patricio Gonzalez Vivo
 description: "2016, Banding Games: A Noisy Rant"
 use:
     - <float4|float3|float> ditherTriangleNoise(<float4|float3|float> value, <float2> st, <float> time)
-    - <float4|float3|float> ditherTriangleNoise(<float4|float3|float> value, <float> time)
 examples:
     - /shaders/color_dither.frag
 license:
@@ -13,8 +12,8 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-#ifndef DITHER_TRIANGLENOISE_COORD
-#define DITHER_TRIANGLENOISE_COORD gl_FragCoord.xy
+#ifndef HIGHP
+#define HIGHP
 #endif
 
 #ifdef DITHER_TIME
@@ -69,11 +68,4 @@ float ditherTriangleNoise(const float b, const HIGHP float2 st) { return b + tri
 float3 ditherTriangleNoise(const float3 color, const float2 xy) {  return ditherTriangleNoise(color, xy, DITHER_TRIANGLENOISE_PRECISION); }
 float4 ditherTriangleNoise(const float4 color, const float2 xy) {  return float4(ditherTriangleNoise(color.rgb, xy, DITHER_TRIANGLENOISE_PRECISION), color.a); }
 
-float ditherTriangleNoise(const float val, int pres) { return ditherTriangleNoise(float3(val),DITHER_TRIANGLENOISE_COORD, pres).r; }
-float3 ditherTriangleNoise(const float3 color, int pres) { return ditherTriangleNoise(color, DITHER_TRIANGLENOISE_COORD, pres); }
-float4 ditherTriangleNoise(const float4 color, int pres) { return float4(ditherTriangleNoise(color.rgb, DITHER_TRIANGLENOISE_COORD, pres), color.a); }
-
-float ditherTriangleNoise(const float val) { return ditherTriangleNoise(float3(val), DITHER_TRIANGLENOISE_COORD, DITHER_TRIANGLENOISE_PRECISION).r; }
-float3 ditherTriangleNoise(const float3 color) { return ditherTriangleNoise(color, DITHER_TRIANGLENOISE_COORD, DITHER_TRIANGLENOISE_PRECISION); }
-float4 ditherTriangleNoise(const float4 color) { return float4(ditherTriangleNoise(color.rgb), color.a); }
 #endif
