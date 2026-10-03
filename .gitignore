@@ -19,7 +19,7 @@ CLAUDE.md
 
 .gemini
 GEMINI.md
-.geminiignor 
+.geminiignor
 .aiexclude
 
 AGENTS.md
@@ -27,6 +27,7 @@ AGENT.md
 .agent
 
 .cursor
+.zed
 .aider
 .aider.conf.yml
 

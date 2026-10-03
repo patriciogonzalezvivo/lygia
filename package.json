@@ -10,9 +10,11 @@
   "scripts": {
     "build": "rm -rf dist/* && webpack",
     "build:wesl": "wesl-packager --multiBundle --outDir dist",
+    "build:tsl": "tsgo -p tsconfig.tsl.json",
+    "build:package": "pnpm build:wesl && pnpm build:tsl",
     "ci:check": "pnpm test:once && pnpm test:built",
     "lint": "eslint --fix --ext .js .",
-    "prepublishOnly": "pnpm build:wesl",
+    "prepublishOnly": "pnpm build:package",
     "test": "pnpm vitest",
     "test:built": "pnpm build:wesl && TEST_BUNDLES=true pnpm vitest run && TEST_BUNDLES=true wgsl-test run",
     "test:deno": "pnpm test:deno:vitest && pnpm test:deno:native",
@@ -50,12 +52,14 @@
   },
   "homepage": "https://lygia.xyz",
   "devDependencies": {
+    "@types/three": "^0.186.0",
     "@typescript/native-preview": "7.0.0-dev.20260320.1",
     "@webgpu/types": "^0.1.69",
     "eslint": "^10.1.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.5",
     "prettier": "^3.8.1",
+    "three": "^0.186.1",
     "vite": "^8.0.1",
     "vitest": "^4.1.0",
     "vitest-image-snapshot": "^0.6.47",
@@ -93,9 +97,17 @@
     "singleQuote": true
   },
   "exports": {
+    "./tsl": {
+      "types": "./dist/tsl/tsl.d.ts",
+      "import": "./dist/tsl/tsl.js"
+    },
     "./*": {
       "import": "./dist/*/weslBundle.js",
       "types": "./dist/weslBundle.d.ts"
     }
+  },
+  "peerDependencies": {
+    "@types/three": "^0.186.0",
+    "three": "^0.186.1"
   }
 }

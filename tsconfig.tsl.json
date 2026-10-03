@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "skipLibCheck": true,
+    "types": ["@webgpu/types"],
+    "rootDir": ".",
+    "outDir": "dist/tsl",
+    "declaration": true,
+    "noEmit": false,
+    "noEmitOnError": true,
+    "verbatimModuleSyntax": true,
+  },
+  "include": ["tsl.ts"],
+  "exclude": ["node_modules", "dist", "test"],
+}
