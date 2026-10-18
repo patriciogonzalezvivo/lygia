@@ -12,7 +12,7 @@ fn opElongate3(p: vec3f, h: vec3f) -> vec3f {
     return p-clamp(p,-h,h); 
 }
 
-fn opElongate4(p: vec4f, h: vec4f) -> vec4f {
+fn opElongate4(p: vec3f, h: vec3f) -> vec4f {
     let q = abs(p)-h;
     return vec4f( max(q,0.0), min(max(q.x,max(q.y,q.z)), 0.0) );
 }
