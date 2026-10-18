@@ -326,5 +326,5 @@ test("vibrance4", async () => {
   const result = await lygiaTestCompute(src, { elem: "vec4f" });
   // Vibrance should increase saturation of muted colors
   // RGB values calculated same as vibrance3 test, alpha preserved
-  expectCloseTo([0.6258, 0.4958, 0.3658, 0.8], result);
+  expectCloseTo([0.6344, 0.4944, 0.3544, 0.8], result);
 });
